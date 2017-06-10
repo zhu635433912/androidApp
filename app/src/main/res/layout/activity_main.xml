@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.deguan.xuelema.androidapp.MainActivity">
+    <LinearLayout
+        android:id="@+id/hostlineat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:background="#fdfdfe"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <RelativeLayout
+            android:id="@+id/fabujiaoshi"
+            android:layout_width="160px"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="50px">
+            <ImageView
+                android:layout_marginTop="20px"
+                android:id="@+id/jiaoshitubiao"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/hly10"
+                android:layout_width="55px"
+                android:layout_height="40px" />
+            <TextView
+                android:id="@+id/bianji"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/jiaoshitubiao"
+                android:textSize="30px"
+                android:text="教师"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/host"
+            android:layout_width="160px"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+            <ImageView
+                android:id="@+id/hostimaview"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/hly03"
+                android:layout_width="66px"
+                android:layout_height="66px" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/woder"
+            android:layout_width="160px"
+            android:layout_marginEnd="50px"
+            android:layout_alignParentEnd="true"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true">
+            <ImageView
+                android:layout_marginTop="20px"
+                android:id="@+id/wode"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/hly51"
+                android:layout_width="55px"
+                android:layout_height="40px" />
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/wode"
+                android:textSize="30px"
+                android:text="我的"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageButton
+        android:layout_width="20px"
+        android:layout_height="30px"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:background="@drawable/add19" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20px"
+        android:text="反馈"
+        android:textSize="30px" />
+    <TextView
+        android:id="@+id/xuqiufenggexian"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/neirongtext"
+        android:layout_marginTop="80px"
+        android:background="#d7d7d7" />
+    <EditText
+        android:paddingLeft="20px"
+        android:paddingTop="10px"
+        android:layout_marginTop="20px"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/gerxxkk"
+        android:id="@+id/fankuineirong"
+        android:hint="请简要描述您的问题和意见"
+        android:textSize="30px"
+        android:enabled="true"
+        android:gravity="top"
+        android:minLines="8"
+        android:maxLines="10"
+        android:scrollbars="vertical"
+        android:inputType="textLongMessage"
+        android:layout_below="@+id/xuqiufenggexian"
+        android:layout_width="700px"
+        android:layout_height="400px" />
+    <RelativeLayout
+        android:id="@+id/tianjaitupian"
+        android:background="@drawable/gerxxkk"
+        android:layout_marginTop="40px"
+        android:layout_below="@+id/fankuineirong"
+        android:layout_alignLeft="@+id/fankuineirong"
+        android:layout_width="200px"
+        android:layout_height="200px">
+        <ImageView
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/hly62"
+            android:layout_width="70px"
+            android:layout_height="70px" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/tijiaofankui"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:text="保存"
+        android:background="@drawable/add15"
+        android:layout_marginBottom="20px"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300px"
+        android:layout_below="@+id/tianjaitupian"
+        android:layout_width="500px"
+        android:layout_height="80px" />
+    
+</RelativeLayout>

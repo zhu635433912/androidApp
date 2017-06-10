@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#e0eaf1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:background="@drawable/mianlistview"
+        android:layout_gravity="center"
+        android:layout_width="700px"
+        android:layout_height="340px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+        <modle.toos.CircleImageView
+            android:id="@+id/lognhost"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="14px"
+            android:layout_marginLeft="14px"
+            android:src="@drawable/ox2"
+            android:layout_width="56px"
+            android:layout_height="56px" />
+        <TextView
+            android:layout_marginLeft="25px"
+            android:layout_marginTop="16px"
+            android:layout_alignTop="@+id/lognhost"
+            android:layout_toEndOf="@+id/lognhost"
+            android:textSize="24px"
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginEnd="20px"
+            android:layout_marginTop="16px"
+            android:layout_alignTop="@+id/text3"
+            android:layout_toLeftOf="@+id/text3"
+            android:textColor="#a0d9fe"
+            android:id="@+id/text9"
+            android:textSize="24px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/text3"
+            android:layout_marginEnd="25px"
+            android:layout_marginTop="20px"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="#a0d9fe"
+            android:textSize="40px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tlucahwodjawf"
+            android:layout_marginTop="20px"
+            android:background="#a0d9fe"
+            android:layout_below="@+id/text3"
+            android:layout_width="match_parent"
+            android:layout_height="1px" />
+        <TextView
+            android:layout_marginLeft="20px"
+            android:textColor="#4b4b4b"
+            android:textSize="40px"
+            android:layout_below="@+id/tlucahwodjawf"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="20px"
+            android:textColor="#4b4b4b"
+            android:textSize="40px"
+            android:text=""
+            android:layout_below="@+id/tlucahwodjawf"
+            android:layout_toEndOf="@+id/text4"
+            android:id="@+id/text5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="28px"
+            android:id="@+id/text6"
+            android:layout_marginTop="35px"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/text5"
+            android:layout_width="570px"
+            android:layout_height="70px" />
+        <TextView
+            android:id="@+id/text7"
+            android:layout_marginLeft="14px"
+            android:layout_marginBottom="24px"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:text="14km"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/text8"
+            android:layout_marginEnd="14px"
+            android:layout_marginBottom="24px"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:textSize="26px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_marginEnd="20px"
+            android:layout_alignBottom="@+id/text8"
+            android:layout_toLeftOf="@+id/text8"
+            android:id="@+id/imagehaop"
+            android:layout_width="150px"
+            android:layout_height="20px" />
+    </RelativeLayout>
+</RelativeLayout>

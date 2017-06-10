@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="#111111"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/mydindanlinenarla"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="160px">
+    <LinearLayout
+        android:id="@+id/jinxinzhong"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="187.5px"
+        android:gravity="center"
+        android:layout_height="180px">
+        <ImageView
+            android:background="@drawable/hly29"
+            android:layout_width="60px"
+            android:layout_height="50px" />
+        <TextView
+            android:layout_marginTop="10px"
+            android:text="进行中"
+            android:textColor="#fff"
+            android:textSize="30px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tuikuanzhong"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:layout_width="187.5px"
+    android:gravity="center"
+    android:layout_height="180px">
+    <ImageView
+        android:background="@drawable/hly42"
+        android:layout_width="60px"
+        android:layout_height="50px" />
+    <TextView
+        android:layout_marginTop="10px"
+        android:text="退款中"
+        android:textColor="#fff"
+        android:textSize="30px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/daipingjia"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:layout_width="187.5px"
+    android:gravity="center"
+    android:layout_height="180px">
+    <ImageView
+        android:background="@drawable/hly53"
+        android:layout_width="60px"
+        android:layout_height="50px" />
+    <TextView
+        android:layout_marginTop="10px"
+        android:text="待评价"
+        android:textColor="#fff"
+        android:textSize="30px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_below="@+id/mydindanlinenarla"
+        android:background="#404040"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <modle.toos.MyListview
+        android:layout_marginTop="30px"
+        android:id="@+id/dindanlistview"
+        android:layout_below="@+id/mydindanlinenarla"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </modle.toos.MyListview>
+</RelativeLayout>

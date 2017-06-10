@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/pingjiafanhui"
+        android:layout_width="100px"
+        android:layout_height="80px"></RelativeLayout>
+    <ImageButton
+        android:layout_width="20px"
+        android:layout_height="30px"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:background="@drawable/add19" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20px"
+        android:text="个人信息"
+        android:textSize="30px" />
+
+    <TextView
+        android:id="@+id/xuqiufenggexian"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/neirongtext"
+        android:layout_marginTop="80px"
+        android:background="#d7d7d7" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/xuqiufenggexian"
+        android:background="#e0eaf1">
+
+        <RelativeLayout
+            android:id="@+id/gerxxrelayout"
+            android:layout_width="730px"
+            android:layout_height="1100px"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="34px"
+            android:background="@drawable/mask">
+
+            <TextView
+                android:id="@+id/gerenjianjie"
+                android:layout_width="150px"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="50px"
+                android:layout_marginTop="40px"
+                android:text="个人简介"
+                android:textSize="35px" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/gerenjianjie"
+                android:layout_marginLeft="40px"
+                android:layout_toEndOf="@+id/gerenjianjie"
+                android:text="评价"
+                android:textSize="35px" />
+
+            <TextView
+                android:id="@+id/xuqiufenggexian1"
+                android:layout_width="650px"
+                android:layout_height="1px"
+                android:layout_below="@+id/gerenjianjie"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="26px"
+                android:background="#d7d7d7" />
+
+            <ImageView
+                android:id="@+id/xinyuxinji"
+                android:layout_marginLeft="220px"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="36px"
+                android:layout_below="@+id/xuqiufenggexian1"
+                android:background="@drawable/four"
+                android:layout_width="220px"
+                android:layout_height="30px" />
+            <TextView
+                android:id="@+id/pingjiafenshu"
+                android:layout_marginLeft="20px"
+                android:layout_toEndOf="@+id/xinyuxinji"
+                android:layout_alignTop="@+id/xinyuxinji"
+                android:textSize="27px"
+                android:text="4.0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/wuxin"
+                android:layout_marginTop="36px"
+                android:layout_below="@+id/xinyuxinji"
+                android:layout_toEndOf="@+id/gerenjianjie"
+                android:textSize="25px"
+                android:text="五星"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ProgressBar
+                android:id="@+id/jintutiao"
+                android:layout_marginBottom="5px"
+                android:background="#fff"
+                android:layout_marginLeft="24px"
+                android:layout_toEndOf="@+id/wuxin"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_alignBottom="@+id/wuxin"
+                android:layout_width="250px"
+                android:layout_height="20px" />
+            <TextView
+                android:layout_marginLeft="24px"
+                android:layout_toEndOf="@+id/jintutiao"
+                android:layout_alignBottom="@+id/wuxin"
+                android:textSize="25px"
+                android:text="60%"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/wuxin1"
+                android:layout_marginTop="36px"
+                android:layout_below="@+id/wuxin"
+                android:layout_toEndOf="@+id/gerenjianjie"
+                android:textSize="25px"
+                android:text="五星"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ProgressBar
+                android:id="@+id/jintutiao1"
+                android:layout_marginBottom="5px"
+                android:background="#fff"
+                android:layout_marginLeft="24px"
+                android:layout_toEndOf="@+id/wuxin1"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_alignBottom="@+id/wuxin1"
+                android:layout_width="250px"
+                android:layout_height="20px" />
+            <TextView
+                android:layout_marginLeft="24px"
+                android:layout_toEndOf="@+id/jintutiao"
+                android:layout_alignBottom="@+id/wuxin1"
+                android:textSize="25px"
+                android:text="0%"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/wuxin2"
+                android:layout_marginTop="36px"
+                android:layout_below="@+id/wuxin1"
+                android:layout_toEndOf="@+id/gerenjianjie"
+                android:textSize="25px"
+                android:text="五星"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ProgressBar
+                android:id="@+id/jintutiao2"
+                android:layout_marginBottom="5px"
+                android:background="#fff"
+                android:layout_marginLeft="24px"
+                android:layout_toEndOf="@+id/wuxin2"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_alignBottom="@+id/wuxin2"
+                android:layout_width="250px"
+                android:layout_height="20px" />
+            <TextView
+                android:layout_marginLeft="24px"
+                android:layout_toEndOf="@+id/jintutiao"
+                android:layout_alignBottom="@+id/wuxin2"
+                android:textSize="25px"
+                android:text="0%"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/wuxin3"
+                android:layout_marginTop="36px"
+                android:layout_below="@+id/wuxin2"
+                android:layout_toEndOf="@+id/gerenjianjie"
+                android:textSize="25px"
+                android:text="五星"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ProgressBar
+                android:id="@+id/jintutiao3"
+                android:layout_marginBottom="5px"
+                android:background="#fff"
+                android:layout_marginLeft="24px"
+                android:layout_toEndOf="@+id/wuxin3"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_alignBottom="@+id/wuxin3"
+                android:layout_width="250px"
+                android:layout_height="20px" />
+            <TextView
+                android:layout_marginLeft="24px"
+                android:layout_toEndOf="@+id/jintutiao"
+                android:layout_alignBottom="@+id/wuxin3"
+                android:textSize="25px"
+                android:text="0%"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/wuxin4"
+                android:layout_marginTop="36px"
+                android:layout_below="@+id/wuxin3"
+                android:layout_toEndOf="@+id/gerenjianjie"
+                android:textSize="25px"
+                android:text="五星"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ProgressBar
+                android:id="@+id/jintutiao4"
+                android:layout_marginBottom="5px"
+                android:background="#fff"
+                android:layout_marginLeft="24px"
+                android:layout_toEndOf="@+id/wuxin4"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_alignBottom="@+id/wuxin4"
+                android:layout_width="250px"
+                android:layout_height="20px" />
+            <TextView
+                android:layout_marginLeft="24px"
+                android:layout_toEndOf="@+id/jintutiao"
+                android:layout_alignBottom="@+id/wuxin4"
+                android:textSize="25px"
+                android:text="40%"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/quanbupinglun"
+                android:layout_marginLeft="50px"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="36px"
+                android:layout_below="@+id/wuxin4"
+                android:textColor="#f6bd47"
+                android:textSize="30px"
+                android:text="全部评论"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/xuqiufenggexian2"
+                android:background="#d7d7d7"
+                android:layout_marginTop="12px"
+                android:layout_below="@+id/quanbupinglun"
+                android:layout_width="650px"
+                android:layout_height="1px" />
+            <ListView
+                android:id="@+id/pinlun"
+                android:layout_below="@+id/xuqiufenggexian2"
+                android:layout_centerHorizontal="true"
+                android:layout_width="680px"
+                android:layout_height="380px">
+            </ListView>
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="80px"
+        android:layout_height="80px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="10px"
+        android:layout_marginLeft="20px"
+        android:background="@drawable/hly33" />
+
+    <ImageButton
+        android:layout_width="80px"
+        android:layout_height="80px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="10px"
+        android:layout_marginEnd="20px"
+        android:background="@drawable/hly44" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="320px"
+        android:layout_height="100px"
+        android:layout_alignTop="@+id/imageButton"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/hly02" />
+</RelativeLayout>

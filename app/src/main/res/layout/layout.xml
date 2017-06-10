@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:id="@+id/feehost"
+        android:background="#fdfdfe"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <RelativeLayout
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/qianbaohuitui"
+            android:layout_width="120px"
+            android:layout_height="100px">
+            </RelativeLayout>
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="40px"
+            android:text="钱包"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageButton
+
+            android:layout_marginLeft="34px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/add19"
+            android:layout_width="25px"
+            android:layout_height="35px" />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:background="#9eebda"
+        android:layout_below="@+id/feehost"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <ImageView
+        android:id="@+id/feeimagv"
+        android:layout_marginTop="108px"
+        android:layout_below="@+id/feehost"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/hly17"
+        android:layout_width="160px"
+        android:layout_height="160px" />
+<RelativeLayout
+    android:id="@+id/feechongzhi"
+    android:layout_marginTop="20px"
+    android:layout_below="@+id/feeimagv"
+    android:layout_centerVertical="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/feefenggexian"
+        android:layout_marginTop="200px"
+        android:background="#9eebda"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:orientation="horizontal" />
+
+    <TextView
+        android:layout_marginBottom="24px"
+        android:layout_marginLeft="40px"
+        android:textSize="40px"
+        android:textColor="#808080"
+        android:text="余额"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/feefenggexian"
+        android:layout_alignParentStart="true"
+        android:id="@+id/textView3" />
+    <TextView
+        android:id="@+id/yuer"
+        android:layout_alignBottom="@+id/feefenggexian"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="40px"
+        android:layout_marginBottom="24px"
+        android:textSize="40px"
+        android:textColor="#808080"
+        android:text="$0.00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/feefenggexian1"
+        android:layout_marginTop="100px"
+        android:background="#9eebda"
+        android:layout_below="@+id/feefenggexian"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:orientation="horizontal" />
+
+    <TextView
+        android:paddingTop="25px"
+        android:textSize="40px"
+        android:text="充值"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:layout_alignBottom="@+id/feefenggexian1"
+        android:layout_alignStart="@+id/textView3"
+        android:id="@+id/textView4" />
+    <LinearLayout
+        android:id="@+id/feefenggexian2"
+        android:layout_marginTop="100px"
+        android:background="#9eebda"
+        android:layout_below="@+id/feefenggexian1"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:orientation="horizontal" />
+    <TextView
+        android:id="@+id/tixian"
+        android:paddingTop="25px"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignBottom="@+id/feefenggexian2"
+        android:text="提现"
+        android:textSize="40px"
+        android:layout_width="match_parent"
+        android:layout_height="100px" />
+    <TextView
+        android:paddingTop="25px"
+        android:id="@+id/xianjinjuan"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_below="@+id/feefenggexian2"
+        android:text="现金券"
+        android:textSize="40px"
+        android:layout_width="match_parent"
+        android:layout_height="100px" />
+    <LinearLayout
+        android:id="@+id/feefenggexian3"
+        android:background="#9eebda"
+        android:layout_below="@+id/xianjinjuan"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:orientation="horizontal" />
+    <TextView
+        android:id="@+id/mingofee"
+        android:text="200"
+        android:layout_marginBottom="25px"
+        android:layout_marginEnd="50px"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/xianjinjuan"
+        android:textSize="40px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>
+</RelativeLayout>

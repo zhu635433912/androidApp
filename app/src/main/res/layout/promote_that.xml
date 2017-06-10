@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:background="#f7f7f7"
+    android:layout_height="match_parent">
+    <ImageButton
+        android:id="@+id/tuiguangshuoming"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/add19"
+        android:layout_width="20px"
+        android:layout_height="30px" />
+
+    <TextView
+        android:textSize="35px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="学了么推广说明"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian"
+        android:background="#d7d7d7"
+        android:layout_marginTop="80px"
+        android:layout_below="@+id/neirongtext"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <RelativeLayout
+        android:background="@drawable/add08"
+        android:layout_marginTop="20px"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/xuqiufenggexian"
+        android:layout_width="700px"
+        android:layout_height="1000px">
+        <TextView
+            android:id="@+id/xuelemashuomingwenzi"
+            android:textSize="25px"
+            android:text="@string/shuoming"
+            android:layout_marginTop="50px"
+            android:layout_marginLeft="50px"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/xuelemashuomingwenzi1"
+            android:textSize="25px"
+            android:text="*       分配一级分享奖励收益,参加分享群体奖励1%,如区域+代理商名字或编号,自动生成分享链接结算奖励额度。"
+            android:layout_marginTop="10px"
+            android:layout_below="@+id/xuelemashuomingwenzi"
+            android:layout_alignLeft="@+id/xuelemashuomingwenzi"
+            android:layout_width="630px"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="25px"
+            android:layout_marginTop="10px"
+            android:layout_below="@+id/xuelemashuomingwenzi1"
+            android:layout_alignLeft="@+id/xuelemashuomingwenzi1"
+            android:layout_width="630px"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</RelativeLayout>

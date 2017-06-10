@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/xianjinjbufanhui"
+        android:layout_width="120px"
+        android:layout_height="80px">
+    </RelativeLayout>
+    <ImageButton
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/add19"
+        android:layout_width="20px"
+        android:layout_height="30px" />
+
+    <TextView
+        android:textSize="35px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="现金券"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian"
+        android:background="#d7d7d7"
+        android:layout_marginTop="80px"
+        android:layout_below="@+id/neirongtext"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <RelativeLayout
+        android:id="@+id/zheshituiguanjine"
+        android:layout_marginTop="20px"
+        android:layout_below="@+id/xuqiufenggexian"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/add08"
+        android:layout_width="700px"
+        android:layout_height="420px">
+        <TextView
+            android:id="@+id/tuiguangjine"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="80px"
+            android:text="200"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginBottom="20px"
+            android:layout_marginLeft="20px"
+            android:layout_toEndOf="@+id/tuiguangjine"
+            android:layout_alignBottom="@+id/tuiguangjine"
+            android:text="现金券"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/rogasi"
+            android:layout_marginTop="20px"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tuiguangjine"
+            android:text="共推广了40人"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/xinjinjuantixian"
+            android:textColor="#7a8195"
+            android:text="提现"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/add08"
+            android:layout_width="100px"
+            android:layout_height="50px" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tixianjieshao"
+        android:textSize="30px"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50px"
+        android:text="@string/tuiguangjieshao"
+        android:layout_below="@+id/zheshituiguanjine"
+        android:layout_width="700px"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian1"
+        android:background="#d7d7d7"
+        android:layout_marginTop="40px"
+        android:layout_below="@+id/tixianjieshao"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <TextView
+        android:id="@+id/xinjinxiaofeijilv"
+        android:textSize="30px"
+        android:layout_marginLeft="25px"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="40px"
+        android:layout_below="@+id/xuqiufenggexian1"
+        android:text="现金券消费记录"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ListView
+        android:layout_marginTop="20px"
+        android:layout_below="@+id/xinjinxiaofeijilv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+</RelativeLayout>

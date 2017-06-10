@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.wang.avi.AVLoadingIndicatorView
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:indicator="LineScalePulseOutRapid"
+        android:id="@+id/mydindanjiazai"
+        app:indicator_color="#f7e61c"
+        android:layout_width="200px"
+        android:layout_height="100px" />
+
+    <RelativeLayout
+        android:id="@+id/stuentordentfanhui"
+        android:layout_width="100px"
+        android:layout_height="80px"></RelativeLayout>
+    <ImageButton
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/add19"
+        android:layout_width="20px"
+        android:layout_height="30px" />
+
+    <TextView
+        android:textSize="35px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="我的订单"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian"
+        android:background="#d7d7d7"
+        android:layout_marginTop="80px"
+        android:layout_below="@+id/neirongtext"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <LinearLayout
+        android:id="@+id/xuanzezhuangtai"
+        android:layout_below="@+id/xuqiufenggexian"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/jinxzhong"
+            android:background="@drawable/stutentlistoredet"
+            android:text="未完成"
+            android:gravity="center"
+            android:textSize="30px"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/stuentweiwanc"
+            android:text="进行中"
+            android:gravity="center"
+            android:textSize="30px"
+            android:background="@drawable/stutentlistoredet"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/stuentyiwanc"
+            android:background="@drawable/stutentlistoredet"
+            android:text="已完成"
+            android:gravity="center"
+            android:textSize="30px"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/studentdaipingjia"
+            android:background="@drawable/stutentlistoredet"
+            android:gravity="center"
+            android:textSize="30px"
+            android:text="待评价"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/xuqiufenggexian1"
+        android:background="#d7d7d7"
+        android:layout_below="@+id/xuanzezhuangtai"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <ListView
+        android:divider="#e0eaf1"
+        android:id="@+id/mystudentlist"
+        android:layout_below="@+id/xuqiufenggexian1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+</RelativeLayout>

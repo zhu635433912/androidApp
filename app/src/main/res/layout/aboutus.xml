@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/guanyuwmenfanhui"
+        android:layout_width="120px"
+        android:layout_height="80px">
+    </RelativeLayout>
+    <ImageButton
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/add19"
+        android:layout_width="20px"
+        android:layout_height="30px" />
+    <TextView
+        android:textSize="35px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="关于我们"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian"
+        android:background="#d7d7d7"
+        android:layout_marginTop="80px"
+        android:layout_below="@+id/neirongtext"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_marginTop="70px"
+        android:layout_below="@+id/xuqiufenggexian"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/logo"
+        android:layout_width="360px"
+        android:layout_height="200px" />
+    <TextView
+        android:id="@+id/hanlingyuan"
+        android:layout_marginTop="50px"
+        android:layout_below="@+id/logo"
+        android:layout_centerHorizontal="true"
+        android:textSize="40px"
+        android:text="学了吗"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginLeft="10px"
+        android:layout_toEndOf="@+id/hanlingyuan"
+        android:layout_alignBottom="@+id/hanlingyuan"
+        android:textSize="30px"
+        android:text="v1.1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/zhishigaibianmingyun"
+        android:layout_marginTop="46px"
+        android:layout_below="@+id/hanlingyuan"
+        android:text="知识改变命运,翰林促进成长"
+        android:layout_centerHorizontal="true"
+        android:textSize="40px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/weibo"
+        android:layout_marginLeft="50px"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/hly15"
+        android:layout_below="@+id/zhishigaibianmingyun"
+        android:layout_marginTop="100px"
+        android:layout_width="60px"
+        android:layout_height="60px" />
+    <TextView
+        android:id="@+id/webo"
+        android:textColor="#c6c6c6"
+        android:layout_marginLeft="20px"
+        android:layout_marginBottom="12px"
+        android:layout_toEndOf="@+id/weibo"
+        android:layout_alignBottom="@+id/weibo"
+        android:text="点击关注我们的官方微博"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian1"
+        android:background="#d7d7d7"
+        android:layout_marginTop="10px"
+        android:layout_below="@+id/weibo"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <ImageView
+        android:id="@+id/weixin"
+        android:layout_marginLeft="50px"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/hly13"
+        android:layout_below="@+id/xuqiufenggexian1"
+        android:layout_marginTop="20px"
+        android:layout_width="60px"
+        android:layout_height="60px" />
+    <TextView
+        android:id="@+id/weixiang"
+        android:textColor="#c6c6c6"
+        android:layout_marginLeft="20px"
+        android:layout_marginBottom="12px"
+        android:layout_toEndOf="@+id/weixin"
+        android:layout_alignBottom="@+id/weixin"
+        android:text="官方微信"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian2"
+        android:background="#d7d7d7"
+        android:layout_marginTop="10px"
+        android:layout_below="@+id/weixin"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <ImageView
+        android:id="@+id/dianhua"
+        android:layout_marginLeft="50px"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/hly32"
+        android:layout_below="@+id/xuqiufenggexian2"
+        android:layout_marginTop="20px"
+        android:layout_width="60px"
+        android:layout_height="60px" />
+    <TextView
+        android:id="@+id/kefuxinxi"
+        android:textColor="#c6c6c6"
+        android:layout_marginLeft="20px"
+        android:layout_marginBottom="12px"
+        android:layout_toEndOf="@+id/dianhua"
+        android:layout_alignBottom="@+id/dianhua"
+        android:text="客服电话:  0576-88887777"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian3"
+        android:background="#d7d7d7"
+        android:layout_marginTop="10px"
+        android:layout_below="@+id/dianhua"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <ImageView
+        android:id="@+id/emage"
+        android:layout_marginLeft="50px"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/hly43"
+        android:layout_below="@+id/xuqiufenggexian3"
+        android:layout_marginTop="20px"
+        android:layout_width="60px"
+        android:layout_height="60px" />
+    <TextView
+        android:id="@+id/webwangzhi"
+        android:textColor="#c6c6c6"
+        android:layout_marginLeft="20px"
+        android:layout_marginBottom="12px"
+        android:layout_toEndOf="@+id/emage"
+        android:layout_alignBottom="@+id/emage"
+        android:text="官方网址:  1205615021@qq.com"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian4"
+        android:background="#d7d7d7"
+        android:layout_marginTop="10px"
+        android:layout_below="@+id/emage"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <ImageView
+        android:id="@+id/web"
+        android:layout_marginLeft="50px"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/hly50"
+        android:layout_below="@+id/xuqiufenggexian4"
+        android:layout_marginTop="20px"
+        android:layout_width="60px"
+        android:layout_height="60px" />
+    <TextView
+        android:id="@+id/dizhi"
+        android:textColor="#c6c6c6"
+        android:layout_marginLeft="20px"
+        android:layout_marginBottom="12px"
+        android:layout_toEndOf="@+id/web"
+        android:layout_alignBottom="@+id/web"
+        android:text="官方网址:  www.hly.com"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian5"
+        android:background="#d7d7d7"
+        android:layout_marginTop="10px"
+        android:layout_below="@+id/web"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+
+</RelativeLayout>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<RelativeLayout
+    android:layout_centerHorizontal="true"
+    android:background="@drawable/add08"
+    android:layout_width="750px"
+    android:layout_height="600px">
+    <TextView
+        android:layout_marginTop="34px"
+        android:layout_marginLeft="46px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:text="取消"
+        android:textColor="#b4b4b4"
+        android:textSize="35px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+<TextView
+    android:id="@+id/feequeding"
+    android:textColor="#f8c968"
+    android:layout_marginTop="34px"
+    android:layout_marginEnd="46px"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentEnd="true"
+    android:text="确定"
+    android:textSize="35px"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/feefenggexian3"
+        android:layout_marginTop="24px"
+        android:background="#e6e6e6"
+        android:layout_below="@+id/feequeding"
+        android:layout_centerHorizontal="true"
+        android:layout_width="732px"
+        android:layout_height="1px"
+        android:orientation="horizontal"></LinearLayout>
+    <EditText
+        android:id="@+id/chongzhijine"
+        android:textSize="29px"
+        android:paddingBottom="5px"
+        android:hint="   0.00"
+        android:textColor="#FF1245"
+        android:background="#fff"
+        android:layout_marginTop="32px"
+        android:layout_below="@+id/feefenggexian3"
+        android:layout_centerHorizontal="true"
+        android:layout_width="100px"
+        android:layout_height="40px" />
+    <TextView
+        android:id="@+id/feechongzhifee"
+        android:layout_marginTop="20px"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/chongzhijine"
+        android:textSize="40px"
+        android:text="充值金额"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/feeweixzhifurelayout"
+            android:layout_marginLeft="30px"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="38px"
+            android:layout_below="@+id/feechongzhifee"
+            android:layout_centerVertical="true"
+            android:background="@drawable/feeshape"
+            android:layout_width="220px"
+            android:layout_height="150px">
+            <ImageView
+                android:id="@+id/feeweixzhifu"
+                android:background="@drawable/hly13"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20px"
+                android:layout_centerHorizontal="true"
+                android:layout_width="80px"
+                android:layout_height="80px" />
+            <TextView
+                android:textSize="27px"
+                android:layout_marginTop="10px"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/feeweixzhifu"
+                android:text="微信支付"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:background="@drawable/feeshape"
+            android:layout_alignTop="@+id/feeweixzhifurelayout"
+            android:layout_centerHorizontal="true"
+            android:layout_width="220px"
+            android:layout_height="150px">
+            <ImageView
+                android:id="@+id/feezhifubao"
+                android:layout_marginTop="20px"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/hly08"
+                android:layout_width="80px"
+                android:layout_height="80px" />
+            <TextView
+                android:layout_marginTop="10px"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/feezhifubao"
+                android:textSize="27px"
+                android:text="支付宝"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginEnd="30px"
+            android:background="@drawable/feeshape"
+            android:layout_alignTop="@+id/feeweixzhifurelayout"
+            android:layout_alignParentEnd="true"
+            android:layout_width="220px"
+            android:layout_height="150px">
+            <ImageView
+                android:id="@+id/feeyhkzhifu"
+                android:layout_marginTop="20px"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/hly08"
+                android:layout_width="80px"
+                android:layout_height="80px" />
+            <TextView
+                android:layout_marginTop="10px"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/feeyhkzhifu"
+                android:textSize="27px"
+                android:text="银行卡"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

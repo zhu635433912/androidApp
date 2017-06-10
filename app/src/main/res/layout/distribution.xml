@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/wodeffenxiao"
+        android:layout_width="120px"
+        android:layout_height="80px">
+    </RelativeLayout>
+    <ImageButton
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/add19"
+        android:layout_width="20px"
+        android:layout_height="30px" />
+
+    <TextView
+        android:textSize="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="我的分销"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian"
+        android:background="#d7d7d7"
+        android:layout_marginTop="80px"
+        android:layout_below="@+id/neirongtext"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+     <RelativeLayout
+         android:id="@+id/leijinjinlayout"
+         android:layout_centerHorizontal="true"
+         android:background="@drawable/wodefenxiao"
+         android:layout_below="@+id/xuqiufenggexian"
+         android:layout_width="700px"
+         android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/jiantou"
+            android:layout_marginTop="100px"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="350px"></RelativeLayout>
+         <ImageView
+             android:layout_marginEnd="60px"
+             android:layout_alignParentEnd="true"
+             android:layout_alignBottom="@+id/leijifee"
+             android:background="@drawable/fanxianjiantou"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/leijijine"
+            android:layout_marginTop="200px"
+            android:textSize="30px"
+            android:text="累积金额"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/leijifee"
+            android:textColor="#222328"
+            android:layout_marginTop="20px"
+            android:layout_below="@+id/leijijine"
+            android:layout_centerHorizontal="true"
+            android:textSize="50px"
+            android:text="$198 017"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+         <TextView
+             android:id="@+id/yijifenxiao"
+             android:textSize="25px"
+             android:layout_marginLeft="80px"
+             android:layout_centerVertical="true"
+             android:layout_alignParentLeft="true"
+             android:text="一级分销"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <TextView
+             android:id="@+id/erjifenxiao"
+             android:textSize="25px"
+             android:text="二级分销"
+             android:layout_marginLeft="80px"
+             android:layout_toEndOf="@+id/yijifenxiao"
+             android:layout_alignBottom="@+id/yijifenxiao"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <TextView
+             android:id="@+id/wodeyaoqingma"
+             android:layout_marginLeft="80px"
+             android:layout_toEndOf="@+id/erjifenxiao"
+             android:layout_alignBottom="@+id/yijifenxiao"
+             android:text="我的邀请码"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/yijifee"
+            android:textColor="#363c43"
+            android:textSize="25px"
+            android:layout_marginTop="10px"
+            android:layout_below="@+id/yijifenxiao"
+            android:layout_alignLeft="@+id/yijifenxiao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+         <TextView
+             android:id="@+id/erjifee"
+             android:textColor="#363c43"
+             android:textSize="25px"
+             android:layout_marginTop="10px"
+             android:layout_below="@+id/erjifenxiao"
+             android:layout_alignLeft="@+id/erjifenxiao"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <TextView
+             android:id="@+id/yqm"
+             android:textColor="#363c43"
+             android:textSize="25px"
+             android:layout_marginTop="10px"
+             android:layout_below="@+id/wodeyaoqingma"
+             android:layout_alignLeft="@+id/wodeyaoqingma"
+             android:text="15157269365"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <ImageView
+             android:id="@+id/erweima"
+             android:layout_marginBottom="80px"
+             android:layout_marginLeft="80px"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentBottom="true"
+             android:layout_width="220px"
+             android:layout_height="220px" />
+         <TextView
+             android:id="@+id/saomiaoerweima"
+             android:textSize="30px"
+             android:layout_marginLeft="80px"
+             android:layout_toEndOf="@+id/erweima"
+             android:layout_alignTop="@+id/erweima"
+             android:text="扫描二维码"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <TextView
+             android:layout_marginTop="10px"
+             android:textColor="#31363e"
+             android:textSize="40px"
+             android:text="我的二维码"
+             android:layout_below="@+id/saomiaoerweima"
+             android:layout_alignLeft="@+id/saomiaoerweima"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <TextView
+             android:id="@+id/fenxiang"
+             android:textSize="20px"
+             android:text="分享"
+             android:layout_alignBottom="@+id/erweima"
+             android:layout_alignLeft="@+id/saomiaoerweima"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+
+         <ImageView
+             android:layout_marginLeft="20px"
+             android:layout_toEndOf="@+id/fenxiang"
+             android:layout_alignBottom="@+id/erweima"
+             android:background="@drawable/hly22"
+            android:layout_width="40px"
+            android:layout_height="40px" />
+             <ImageView
+                 android:background="@drawable/hly27"
+                 android:layout_marginLeft="80px"
+                 android:layout_toEndOf="@+id/fenxiang"
+                 android:layout_alignBottom="@+id/erweima"
+                 android:layout_width="40px"
+                 android:layout_height="40px"/>
+             <ImageView
+                 android:background="@drawable/hly38"
+                 android:layout_marginLeft="140px"
+                 android:layout_toEndOf="@+id/fenxiang"
+                 android:layout_alignBottom="@+id/erweima"
+                 android:layout_width="40px"
+                 android:layout_height="40px" />
+             <ImageView
+                 android:background="@drawable/hly52"
+                 android:layout_marginLeft="200px"
+                 android:layout_toEndOf="@+id/fenxiang"
+                 android:layout_alignBottom="@+id/erweima"
+                 android:layout_width="40px"
+                 android:layout_height="40px"/>
+
+     </RelativeLayout>
+
+
+
+</RelativeLayout>

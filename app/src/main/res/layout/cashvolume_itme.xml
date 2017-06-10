@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:background="@drawable/add08"
+        android:layout_centerHorizontal="true"
+        android:layout_width="700px"
+        android:layout_height="170px">
+        <TextView
+            android:textSize="30px"
+            android:layout_marginTop="20px"
+            android:layout_marginLeft="18px"
+            android:layout_alignParentLeft="true"
+            android:text="订单编号 : "
+            android:textColor="#4e4e4e"
+            android:id="@+id/xxibianhaotext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/dindanbianhao"
+            android:text="10001"
+            android:textSize="30px"
+            android:textColor="#4e4e4e"
+            android:layout_toEndOf="@+id/xxibianhaotext"
+            android:layout_alignBottom="@+id/xxibianhaotext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/xiadansjtext"
+            android:layout_marginTop="20px"
+            android:layout_marginEnd="20px"
+            android:textSize="30px"
+            android:textColor="#4e4e4e"
+            android:layout_alignParentEnd="true"
+            android:text="2016-13-12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/xiadanshijian"
+            android:textSize="30px"
+            android:text="下单时间:"
+            android:layout_marginEnd="10px"
+            android:layout_marginTop="20px"
+            android:layout_toLeftOf="@+id/xiadansjtext"
+            android:textColor="#4e4e4e"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/dindannairon"
+            android:layout_marginLeft="25px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:textSize="45px"
+            android:text="初中-英语阅读"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/dikoujine"
+            android:layout_marginEnd="40px"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="#f7c763"
+            android:textSize="30px"
+            android:text="￥5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginEnd="20px"
+            android:layout_toLeftOf="@+id/dikoujine"
+            android:layout_alignBottom="@+id/dikoujine"
+            android:textColor="#f7c763"
+            android:textSize="30px"
+            android:text="抵扣:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#fdfdfe"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/jiaoshiguanlifanhui"
+        android:layout_width="120px"
+        android:layout_height="80px">
+    </RelativeLayout>
+    <ImageButton
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/add19"
+        android:layout_width="20px"
+        android:layout_height="30px" />
+
+
+    <TextView
+        android:textSize="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="教师管理"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian"
+        android:background="#d7d7d7"
+        android:layout_marginTop="80px"
+        android:layout_below="@+id/neirongtext"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <ScrollView
+    android:layout_below="@+id/xuqiufenggexian"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        
+     <RelativeLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/kechenfengmian"
+            android:text="课程封面"
+            android:layout_marginTop="20px"
+            android:layout_marginLeft="60px"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:id="@+id/kechengtupian"
+            android:layout_marginTop="20px"
+            android:layout_below="@+id/kechenfengmian"
+            android:layout_alignLeft="@+id/kechenfengmian"
+            android:background="@drawable/add08"
+            android:layout_width="310px"
+            android:layout_height="188px" >
+           <TextView
+               android:textSize="30px"
+               android:layout_centerVertical="true"
+               android:layout_centerHorizontal="true"
+               android:text="图片"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content" />
+            <TextView
+                android:textColor="#f7c55e"
+                android:textSize="30px"
+                android:layout_marginEnd="10px"
+                android:text="更换"
+                android:layout_marginTop="10px"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/kecheng"
+            android:layout_marginTop="40px"
+            android:layout_alignLeft="@+id/kechengtupian"
+            android:layout_below="@+id/kechengtupian"
+            android:textSize="30px"
+            android:text="课程"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ListView
+            android:id="@+id/kechengitme"
+            android:layout_below="@+id/kecheng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ListView>
+        <RelativeLayout
+            android:id="@+id/viw"
+            android:layout_below="@+id/kechengitme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="20px"
+            android:id="@+id/kechengzhonglei"
+            android:gravity="center"
+            android:textSize="30px"
+            android:background="@drawable/gerxxkk"
+            android:text="课程种类"
+            android:layout_marginLeft="40px"
+            android:layout_alignParentLeft="true"
+            android:layout_width="194px"
+            android:layout_height="76px" />
+        <TextView
+            android:layout_marginLeft="50px"
+            android:layout_toEndOf="@+id/kechengzhonglei"
+            android:layout_alignBottom="@+id/kechengzhonglei"
+            android:gravity="center"
+            android:textSize="30px"
+            android:background="@drawable/gerxxkk"
+            android:text="课程名称"
+            android:layout_width="194px"
+            android:layout_height="76px"
+            android:id="@+id/textView7" />
+        <EditText
+            android:layout_marginLeft="50px"
+            android:gravity="center"
+            android:textSize="30px"
+            android:background="@drawable/gerxxkk"
+            android:hint="课程说明"
+            android:layout_width="194px"
+            android:layout_height="180px"
+            android:layout_alignTop="@+id/textView7"
+            android:layout_toEndOf="@+id/textView7"
+            android:id="@+id/editText2" />
+        <RelativeLayout
+            android:id="@+id/fuwufangshi"
+            android:background="@drawable/gerxxkk"
+            android:layout_marginTop="20px"
+            android:layout_marginLeft="40px"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textView7"
+            android:layout_width="194px"
+            android:layout_height="180px">
+            <TextView
+                android:textSize="30px"
+                android:layout_marginTop="40px"
+                android:layout_alignParentTop="true"
+                android:text="上门服务"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/neibufengexian"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="#d7d7d7"
+            android:layout_width="150px"
+            android:layout_height="1px" />
+            <EditText
+                android:id="@+id/shanggmenfee"
+                android:inputType="number"
+                android:textColor="#747475"
+                android:gravity="center"
+                android:background="@null"
+                android:layout_marginTop="30px"
+                android:textSize="30px"
+                android:layout_below="@+id/neibufengexian"
+                android:hint="课时费"
+                android:layout_centerHorizontal="true"
+                android:layout_width="140px"
+                android:layout_height="50px" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_alignLeft="@+id/textView7"
+            android:layout_alignBottom="@+id/fuwufangshi"
+            android:background="@drawable/gerxxkk"
+            android:layout_width="194px"
+            android:layout_height="180px">
+            <TextView
+                android:textSize="30px"
+                android:layout_marginTop="40px"
+                android:layout_alignParentTop="true"
+                android:text="学生上门"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/neibufengexian1"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="#d7d7d7"
+                android:layout_width="150px"
+                android:layout_height="1px" />
+            <EditText
+                android:id="@+id/xueshengfee"
+                android:inputType="number"
+                android:textColor="#747475"
+                android:gravity="center"
+                android:background="@null"
+                android:layout_marginTop="30px"
+                android:textSize="30px"
+                android:layout_below="@+id/neibufengexian1"
+                android:hint="课时费"
+                android:layout_centerHorizontal="true"
+                android:layout_width="140px"
+                android:layout_height="50px" />
+        </RelativeLayout>
+        <Button
+            android:id="@+id/naxt"
+            android:textColor="#fd1245"
+            android:layout_marginTop="20px"
+            android:layout_below="@+id/editText2"
+            android:layout_alignLeft="@+id/editText2"
+            android:textSize="30px"
+            android:text="完成"
+            android:background="#f3f7f8"
+            android:layout_width="194px"
+            android:layout_height="79px" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/tianjiaxueli"
+            android:background="@drawable/xuxian"
+            android:layout_marginTop="20px"
+            android:layout_below="@+id/viw"
+            android:layout_centerHorizontal="true"
+            android:layout_width="680px"
+            android:layout_height="180px">
+            <Button
+                android:id="@+id/tianjiakecheng"
+                android:layout_marginTop="40px"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/hly62"
+                android:layout_width="66px"
+                android:layout_height="66px" />
+            <TextView
+                android:textSize="30px"
+                android:layout_marginTop="10px"
+                android:layout_below="@+id/tianjiakecheng"
+                android:layout_centerHorizontal="true"
+                android:text="添加课程"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <TextView
+            android:textSize="40px"
+            android:id="@+id/gerjianjie"
+            android:layout_alignLeft="@+id/tianjiaxueli"
+            android:layout_marginTop="50px"
+            android:layout_below="@+id/tianjiaxueli"
+            android:text="个人介绍"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:id="@+id/userxinxi"
+            android:layout_below="@+id/gerjianjie"
+            android:layout_width="match_parent"
+            android:layout_height="400px" >
+            <EditText
+                android:textSize="25px"
+                android:paddingLeft="10px"
+                android:paddingTop="10px"
+                android:gravity="top"
+                android:hint="输入个人简介"
+                android:id="@+id/gerjianjietext_edi"
+                android:background="@drawable/gerxxkk"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20px"
+                android:layout_alignParentTop="true"
+                android:layout_width="680px"
+                android:layout_height="200px" />
+            <EditText
+                android:id="@+id/techang"
+                android:gravity="center"
+                android:textSize="25px"
+                android:hint="输入特长"
+                android:layout_marginTop="20px"
+                android:layout_alignLeft="@+id/gerjianjietext_edi"
+                android:layout_below="@+id/gerjianjietext_edi"
+                android:background="@drawable/gerxxkk"
+                android:layout_width="320px"
+                android:layout_height="70px" />
+            <EditText
+                android:id="@+id/biyexuex"
+                android:gravity="center"
+                android:textSize="25px"
+                android:hint="输入毕业学校"
+                android:layout_marginTop="20px"
+                android:layout_alignEnd="@+id/gerjianjietext_edi"
+                android:layout_below="@+id/gerjianjietext_edi"
+                android:background="@drawable/gerxxkk"
+                android:layout_width="320px"
+                android:layout_height="70px" />
+            <EditText
+                android:paddingLeft="10px"
+                android:textSize="25px"
+                android:hint="一句话介绍自己"
+                android:background="@drawable/gerxxkk"
+                android:layout_marginTop="20px"
+                android:layout_below="@+id/biyexuex"
+                android:layout_centerHorizontal="true"
+                android:layout_width="680px"
+                android:layout_height="150px" />
+            </RelativeLayout>
+        <TextView
+            android:id="@+id/xueli"
+            android:textSize="30px"
+            android:layout_marginTop="20px"
+            android:layout_alignLeft="@+id/gerjianjie"
+            android:layout_below="@+id/userxinxi"
+            android:text="学历"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+         <GridView
+             android:layout_marginTop="20px"
+             android:id="@+id/xuelimage"
+             android:numColumns="2"
+             android:layout_below="@+id/xueli"
+             android:layout_centerHorizontal="true"
+             android:layout_width="680px"
+             android:layout_height="200px"/>
+    <RelativeLayout
+        android:id="@+id/tianjiaxueli1"
+        android:background="@drawable/xuxian"
+        android:layout_marginTop="20px"
+        android:layout_below="@+id/xuelimage"
+        android:layout_centerHorizontal="true"
+        android:layout_width="680px"
+        android:layout_height="180px">
+        <Button
+            android:id="@+id/tianjiaxuelitubiao"
+            android:layout_marginTop="40px"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/hly62"
+            android:layout_width="66px"
+            android:layout_height="66px" />
+        <TextView
+            android:textSize="30px"
+            android:layout_marginTop="10px"
+            android:layout_below="@+id/tianjiaxuelitubiao"
+            android:layout_centerHorizontal="true"
+            android:text="添加学历"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/rongyuzhengshu"
+        android:layout_marginTop="40px"
+        android:layout_below="@+id/tianjiaxueli1"
+        android:layout_alignLeft="@+id/tianjiaxueli1"
+        android:text="荣誉证书"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+         <GridView
+             android:layout_marginTop="20px"
+             android:id="@+id/rongyuimage"
+             android:numColumns="2"
+             android:layout_below="@+id/rongyuzhengshu"
+             android:layout_centerHorizontal="true"
+             android:layout_width="680px"
+             android:layout_height="200px"/>
+        <ListView
+            android:id="@+id/rongyuzhengshulist"
+            android:layout_below="@+id/rongyuzhengshu"
+            android:layout_width="match_parent"
+            android:layout_height="10px"/>
+        <RelativeLayout
+            android:id="@+id/tianjiazhengshu"
+            android:background="@drawable/xuxian"
+            android:layout_marginTop="20px"
+            android:layout_below="@+id/rongyuimage"
+            android:layout_centerHorizontal="true"
+            android:layout_width="680px"
+            android:layout_height="180px">
+            <Button
+                android:id="@+id/tianjiarongyuztubiao"
+                android:layout_marginTop="40px"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/hly62"
+                android:layout_width="66px"
+                android:layout_height="66px" />
+            <TextView
+                android:textSize="30px"
+                android:layout_marginTop="10px"
+                android:layout_below="@+id/tianjiarongyuztubiao"
+                android:layout_centerHorizontal="true"
+                android:text="添加学历"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <Button
+            android:id="@+id/baocunjiaoshi"
+            android:layout_marginTop="30px"
+            android:layout_below="@+id/tianjiazhengshu"
+            android:layout_centerHorizontal="true"
+            android:textSize="40px"
+            android:textColor="#fff"
+            android:text="保存"
+            android:background="@drawable/add15"
+            android:layout_width="600px"
+            android:layout_height="80px" />
+    </RelativeLayout>
+</ScrollView>
+
+</RelativeLayout>

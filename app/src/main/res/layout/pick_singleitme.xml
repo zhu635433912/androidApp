@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/pick_single"
+    android:gravity="center"
+    android:layout_width="325px"
+    android:layout_height="500px">
+
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_width="300px"
+        android:layout_height="500px">
+    <modle.toos.CircleImageView
+        android:id="@+id/liebiaoname"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="40px"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ox2"
+        android:layout_width="100px"
+        android:layout_height="100px" />
+    <TextView
+        android:layout_marginTop="20px"
+        android:id="@+id/listname"
+        android:textSize="30px"
+        android:text="1"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/liebiaoname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tacherxinji"
+        android:textSize="30px"
+        android:textColor="#e2b66a"
+        android:layout_marginTop="10px"
+        android:layout_below="@+id/listname"
+        android:layout_centerHorizontal="true"
+        android:text="一星级教师"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/kecheng"
+        android:layout_marginLeft="20px"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20px"
+        android:layout_below="@+id/tacherxinji"
+        android:text="语文课程"
+        android:textSize="25px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="25px"
+        android:text="40元/时"
+        android:layout_marginEnd="20px"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/kecheng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/kecheng1"
+        android:layout_marginLeft="20px"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20px"
+        android:layout_below="@+id/kecheng"
+        android:text="语文课程"
+        android:textSize="25px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textSize="25px"
+        android:text="40元/时"
+        android:layout_marginEnd="20px"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/kecheng1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </RelativeLayout>
+</RelativeLayout>

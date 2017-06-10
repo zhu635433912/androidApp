@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#fff"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/qianbaofanhui"
+        android:layout_width="120px"
+        android:layout_height="80px">
+    </RelativeLayout>
+    <ImageButton
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/add19"
+        android:layout_width="20px"
+        android:layout_height="30px" />
+
+    <TextView
+        android:textSize="35px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="钱包"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian"
+        android:background="#d7d7d7"
+        android:layout_marginTop="80px"
+        android:layout_below="@+id/neirongtext"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <ImageButton
+        android:id="@+id/xuelematuiguangshuoming"
+        android:layout_marginEnd="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/ddd"
+        android:layout_width="60px"
+        android:layout_height="30px" />
+
+
+    <RelativeLayout
+        android:id="@+id/tuiguangjinelayout"
+        android:layout_below="@+id/xuqiufenggexian"
+        android:layout_width="match_parent"
+        android:background="#f0f1f6"
+        android:layout_height="100px">
+        <TextView
+            android:layout_marginLeft="50px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:textSize="35px"
+            android:text="推广金额"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/jinbifuhao"
+        android:textColor="#222328"
+        android:textSize="50px"
+        android:text="￥"
+        android:layout_marginLeft="50px"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="30px"
+        android:layout_below="@+id/tuiguangjinelayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tuiguanjine"
+        android:textColor="#4a4a4a"
+        android:textSize="80px"
+        android:layout_marginLeft="10px"
+        android:layout_toEndOf="@+id/jinbifuhao"
+        android:layout_alignTop="@+id/jinbifuhao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/luanqibazaodetubiao"
+            android:layout_marginTop="50px"
+            android:layout_below="@+id/jinbifuhao"
+            android:layout_alignLeft="@+id/jinbifuhao"
+            android:background="@drawable/yhkbaise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_toEndOf="@+id/luanqibazaodetubiao"
+            android:layout_alignBottom="@+id/luanqibazaodetubiao"
+            android:text="一级分销金额"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:id="@+id/yiji"
+        android:layout_marginTop="180px"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="220px"></RelativeLayout>
+    <ImageView
+        android:layout_alignBottom="@+id/tuiguanjine"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10px"
+        android:background="@drawable/fanxinjiantou"
+        android:layout_width="50px"
+        android:layout_height="50px" />
+    <TextView
+        android:id="@+id/xuqiufenggexian1"
+        android:background="#d7d7d7"
+        android:layout_marginTop="30px"
+        android:layout_below="@+id/luanqibazaodetubiao"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <TextView
+        android:id="@+id/jinbifuhao1"
+        android:textColor="#222328"
+        android:textSize="50px"
+        android:text="￥"
+        android:layout_marginLeft="50px"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="30px"
+        android:layout_below="@+id/xuqiufenggexian1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/erjifenxiao1"
+        android:textColor="#4a4a4a"
+        android:textSize="80px"
+        android:layout_marginLeft="10px"
+        android:layout_toEndOf="@+id/jinbifuhao1"
+        android:layout_alignTop="@+id/jinbifuhao1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/luanqibazaodetubiao1"
+        android:layout_marginTop="50px"
+        android:layout_below="@+id/jinbifuhao1"
+        android:layout_alignLeft="@+id/jinbifuhao1"
+        android:background="@drawable/yhkbaise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_toEndOf="@+id/luanqibazaodetubiao1"
+        android:layout_alignBottom="@+id/luanqibazaodetubiao1"
+        android:text="二级分销金额"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/erji"
+        android:layout_below="@+id/yiji"
+        android:layout_width="match_parent"
+        android:layout_height="220px"></RelativeLayout>
+    <ImageView
+        android:layout_alignBottom="@+id/erjifenxiao"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10px"
+        android:background="@drawable/fanxinjiantou"
+        android:layout_width="50px"
+        android:layout_height="50px" />
+    <TextView
+        android:id="@+id/xuqiufenggexian2"
+        android:background="#d7d7d7"
+        android:layout_marginTop="30px"
+        android:layout_below="@+id/luanqibazaodetubiao1"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+
+    <RelativeLayout
+        android:id="@+id/tuiguangjinelayout1"
+        android:layout_below="@+id/xuqiufenggexian2"
+        android:layout_width="match_parent"
+        android:background="#f0f1f6"
+        android:layout_height="100px">
+        <TextView
+            android:layout_marginLeft="50px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:textSize="35px"
+            android:text="学了么总推广金额"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/jinbifuhao2"
+        android:textColor="#222328"
+        android:textSize="50px"
+        android:text="￥"
+        android:layout_marginLeft="50px"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="50px"
+        android:layout_below="@+id/tuiguangjinelayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/zongjine"
+        android:textColor="#a6a6a8"
+        android:textSize="80px"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="25px"
+        android:layout_toEndOf="@+id/jinbifuhao2"
+        android:layout_below="@+id/tuiguangjinelayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_alignBottom="@+id/zongjine"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10px"
+        android:background="@drawable/fanxinjiantou"
+        android:layout_width="50px"
+        android:layout_height="50px" />
+    <TextView
+        android:id="@+id/dangqianfeipei"
+        android:textSize="30px"
+        android:layout_marginTop="20px"
+        android:layout_below="@+id/zongjine"
+        android:layout_alignLeft="@+id/jinbifuhao2"
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginLeft="20px"
+        android:layout_toEndOf="@+id/dangqianfeipei"
+        android:layout_alignBottom="@+id/dangqianfeipei"
+        android:text=""
+        android:textSize="30px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian3"
+        android:background="#d7d7d7"
+        android:layout_marginTop="30px"
+        android:layout_below="@+id/dangqianfeipei"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <TextView
+        android:id="@+id/leijijine"
+        android:layout_marginTop="30px"
+        android:layout_below="@+id/xuqiufenggexian3"
+        android:layout_centerHorizontal="true"
+        android:text="累积金额"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/leijifeejin"
+        android:textColor="#2f3034"
+        android:layout_marginTop="10px"
+        android:layout_below="@+id/leijijine"
+        android:layout_centerHorizontal="true"
+        android:textSize="40px"
+        android:text="$198.071"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

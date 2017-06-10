@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/login_backget"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:background="@drawable/ox1"
+        android:layout_width="110px"
+        android:layout_height="150px"
+        android:layout_alignBottom="@+id/pos_relativelayout1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="13px"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/imageView" />
+
+    <RelativeLayout
+        android:id="@+id/pos_relativelayout1"
+        android:background="@drawable/mask"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_width="534px"
+        android:layout_height="782px">
+        <TextView
+            android:id="@+id/pos_textviewxiu"
+            android:layout_marginLeft="102px"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="202px"
+            android:textColor="#4D4D4D"
+            android:textSize="48px"
+            android:text="@string/login_xiugai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15px"
+            android:layout_marginEnd="16px"
+            android:background="@drawable/ox2"
+            android:layout_width="210px"
+            android:layout_height="250px"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15px" />
+        <EditText
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="30px"
+            android:hint="  手机号码"
+            android:layout_alignLeft="@+id/pos_textviewxiu"
+            android:layout_below="@+id/pos_textviewxiu"
+            android:background="@drawable/login_wan_connllat"
+            android:id="@+id/pos_username"
+            android:layout_marginTop="42px"
+            android:layout_width="346px"
+            android:layout_height="68px" />
+        <EditText
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="30px"
+            android:background="@drawable/login_wan_connllat"
+            android:id="@+id/pos_editextyansema"
+            android:layout_width="346px"
+            android:layout_height="68px"
+            android:layout_marginTop="24px"
+            android:hint=" 点击获取验证码"
+            android:layout_below="@+id/pos_username"
+            android:layout_alignLeft="@+id/pos_username"
+            android:layout_alignStart="@+id/pos_username" />
+        <ImageButton
+            android:id="@+id/pos_vicat"
+            android:layout_alignBottom="@+id/pos_editextyansema"
+            android:layout_alignEnd="@+id/pos_editextyansema"
+            android:layout_marginBottom="14px"
+            android:layout_marginEnd="14px"
+            android:background="@drawable/butoon_charex"
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:layout_alignRight="@+id/pos_editextyansema"
+            android:layout_marginRight="14px" />
+        <TextView
+            android:layout_marginLeft="10px"
+            android:layout_toEndOf="@+id/pos_editextyansema"
+            android:text=""
+            android:layout_alignBottom="@+id/pos_editextyansema"
+            android:id="@+id/pos_yzm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/pos_editextyansema" />
+        <EditText
+            android:id="@+id/pos_password"
+            android:textSize="30px"
+            android:password="true"
+            android:hint="  *********"
+            android:background="@drawable/login_wan_connllat"
+            android:layout_marginTop="24px"
+            android:layout_below="@+id/pos_editextyansema"
+            android:layout_alignLeft="@+id/pos_editextyansema"
+            android:layout_width="346px"
+            android:layout_height="68px" />
+        <ImageButton
+            android:id="@+id/pos_chakan"
+            android:layout_marginBottom="16px"
+            android:layout_marginRight="14px"
+            android:layout_alignEnd="@+id/pos_password"
+            android:layout_alignBottom="@+id/pos_password"
+            android:background="@drawable/hly46"
+            android:layout_width="35px"
+            android:layout_height="35px"
+            android:layout_alignRight="@+id/pos_password" />
+        <ImageButton
+            android:id="@+id/pos_login"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/hly60"
+            android:layout_marginBottom="66px"
+            android:layout_width="104px"
+            android:layout_height="104px" />
+        </RelativeLayout>
+    <TextView
+        android:textSize="30px"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/login_xuelema"
+        android:layout_marginBottom="10px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageButton
+        android:id="@+id/pos_imageButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="60px"
+        android:background="@drawable/add07"
+        android:layout_width="70px"
+        android:layout_height="70px" />
+
+</RelativeLayout>

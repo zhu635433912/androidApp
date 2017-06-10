@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageButton
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/add19"
+        android:layout_width="20px"
+        android:layout_height="30px" />
+
+    <TextView
+        android:textSize="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="支付完成"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian"
+        android:background="#d7d7d7"
+        android:layout_marginTop="80px"
+        android:layout_below="@+id/neirongtext"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+<ImageView
+    android:id="@+id/jiaoyizhuangtaitubiao"
+    android:layout_marginTop="50px"
+    android:layout_below="@+id/xuqiufenggexian"
+    android:layout_centerHorizontal="true"
+    android:background="@drawable/hly40"
+    android:layout_width="360px"
+    android:layout_height="80px" />
+
+    <ImageView
+        android:id="@+id/jiaoyiwanchengtubiao"
+        android:layout_marginTop="50px"
+        android:layout_below="@+id/jiaoyizhuangtaitubiao"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/hly601"
+        android:layout_width="360px"
+        android:layout_height="360px" />
+    <TextView
+        android:id="@+id/dindanzhifucgongg"
+        android:layout_marginTop="50px"
+        android:layout_below="@+id/jiaoyiwanchengtubiao"
+        android:layout_centerHorizontal="true"
+        android:textSize="45px"
+        android:textColor="#494949"
+        android:text="您的订单已经支付成功"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="50px"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/dindanzhifucgongg"
+        android:textColor="#c1c1c1"
+        android:textSize="35px"
+        android:text="教师正在备课中,敬请等待~~~~"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/wancheng"
+        android:textSize="35px"
+        android:textColor="#fff"
+        android:text="完成"
+        android:background="@drawable/add15"
+        android:layout_marginBottom="50px"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="600px"
+        android:layout_height="80px" />
+</RelativeLayout>

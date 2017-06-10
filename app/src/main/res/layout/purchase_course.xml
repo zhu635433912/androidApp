@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#fdfdfe"
+     android:layout_width="match_parent"
+    android:layout_height="500px">
+    <TextView
+        android:id="@+id/kechengname"
+        android:layout_marginTop="44px"
+        android:layout_marginLeft="44px"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textColor="#767676"
+        android:textSize="35px"
+        android:text="英语"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:textColor="#767676"
+        android:textSize="35px"
+        android:layout_marginLeft="40px"
+        android:layout_toEndOf="@+id/kechengname"
+        android:layout_alignBottom="@+id/kechengname"
+        android:text="英语阅读理解"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:background="#f2f2f2"
+        android:layout_marginTop="20px"
+        android:layout_below="@+id/kechengname"
+        android:layout_centerHorizontal="true"
+        android:layout_width="706px"
+        android:layout_height="1px" />
+    <TextView
+        android:id="@+id/jieshufee"
+        android:textColor="#45b5fd"
+        android:layout_marginTop="45px"
+        android:layout_marginEnd="44px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="40px"
+        android:text="40元/节"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/shangkefnagshi"
+        android:layout_marginTop="30px"
+        android:layout_below="@+id/kechengname"
+        android:layout_alignLeft="@+id/kechengname"
+        android:text="上课方式"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/shangkefnagshi"
+        android:id="@+id/feeleixinitme"
+        android:layout_marginTop="15px"
+        android:layout_width="706px"
+        android:layout_height="70px">
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/xuessm"
+            android:gravity="center"
+            style="@style/text_flag_03"
+            android:text="学生上门" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/laoshism"
+            android:gravity="center"
+            style="@style/text_flag_03"
+            android:text="助教上门" />
+        </RelativeLayout>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/fengexianfee"
+        android:background="#f2f2f2"
+        android:layout_marginTop="20px"
+        android:layout_below="@+id/feeleixinitme"
+        android:layout_centerHorizontal="true"
+        android:layout_width="706px"
+        android:layout_height="1px" />
+    <TextView
+        android:layout_marginTop="16px"
+        android:layout_alignLeft="@+id/kechengname"
+        android:layout_below="@+id/fengexianfee"
+        android:textSize="30px"
+        android:text="课时数量"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/jia"
+        android:layout_marginEnd="44px"
+        android:gravity="center"
+        android:layout_below="@+id/fengexianfee"
+        android:layout_alignParentEnd="true"
+        android:textSize="30px"
+        android:text="+"
+        android:layout_width="40px"
+        android:layout_height="64px" />
+    <TextView
+        android:id="@+id/fee"
+        android:textColor="#dac11d"
+        android:layout_marginEnd="10px"
+        android:gravity="center"
+        android:textSize="30px"
+        android:text="1"
+        android:layout_toLeftOf="@+id/jia"
+        android:layout_below="@+id/fengexianfee"
+        android:layout_width="wrap_content"
+        android:layout_height="64px" />
+    <TextView
+        android:id="@+id/jian"
+        android:gravity="center"
+        android:textSize="20px"
+        android:text="一"
+        android:layout_marginEnd="10px"
+        android:layout_toLeftOf="@+id/fee"
+        android:layout_below="@+id/fengexianfee"
+        android:layout_width="40px"
+        android:layout_height="64px" />
+    <TextView
+        android:id="@+id/fengexianfee1"
+        android:background="#f2f2f2"
+        android:layout_marginTop="64px"
+        android:layout_below="@+id/fengexianfee"
+        android:layout_centerHorizontal="true"
+        android:layout_width="706px"
+        android:layout_height="1px" />
+    <TextView
+        android:id="@+id/zonggongjine"
+        android:textSize="35px"
+        android:layout_marginTop="24px"
+        android:layout_below="@+id/fengexianfee1"
+        android:layout_alignLeft="@+id/shangkefnagshi"
+        android:text="共计: ￥"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/zongfee"
+        android:layout_marginLeft="10px"
+        android:layout_toEndOf="@+id/zonggongjine"
+        android:layout_alignBottom="@+id/zonggongjine"
+        android:textSize="35px"
+        android:text="00.00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/goumai"
+        android:layout_marginEnd="44px"
+        android:textSize="30px"
+        android:textColor="#fff"
+        android:text="确定"
+        android:layout_alignBottom="@+id/zonggongjine"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/hongse"
+        android:layout_width="160px"
+        android:layout_height="50px" />
+</RelativeLayout>

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">学了吗</string>
+    <string name="login_wan_denglu">登陆</string>
+    <string name="login_zhuce">注册</string>
+    <string name="login_wangjimima">忘记密码?</string>
+    <string name="login_jizhumima">记住密码</string>
+    <string name="login_yanzhenma">点击获取验证码</string>
+    <string name="login_xuelema">学了吗用户协议说明</string>
+    <string name="login_xiugai">修改密码</string>
+    <string name="index_jiaos"> 教师</string>
+    <string name="index_wode"> 我的</string>
+    <string name="index_faxianjiaos">发现优质教师</string>
+    <string name="index_hosttext1">德冠在手</string>
+    <string name="index_hosttext2">学习无忧</string>
+    <string name="tuiguangjieshao">让朋友扫描自己加入后生成的个人推荐二维码，每加入一人，送五元现金，消费时，代金券最多待用10%的金额，学生不得提现代金券，老师可以以最低100元的整数倍数提现。</string>
+    <string name="shuoming">每个用户的上下级关系确定,二级用户消费量奖励1%</string>
+    <string name="chengjiaolv">这是一位充满活力的新老师，赶快去支持她吧~</string>
+</resources>

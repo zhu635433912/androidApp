@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#111111">
+    <modle.toos.MScrollView
+        android:id="@+id/scv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:id="@+id/xingxibutton"
+            android:layout_width="180px"
+            android:layout_height="180px"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"></RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/imagebuttongl"
+            android:layout_width="50px"
+            android:layout_height="44px"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="40px"
+            android:layout_marginTop="64px"
+            android:background="@drawable/hly05" />
+
+        <modle.toos.CircleImageView
+            android:id="@+id/touxiangimg"
+            android:layout_width="220px"
+            android:layout_height="220px"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="144px" />
+
+        <RelativeLayout
+            android:id="@+id/shezhiimabt"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="45px"
+            android:gravity="center"></RelativeLayout>
+
+        <ImageButton
+            android:layout_width="44px"
+            android:layout_height="44px"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="20px"
+            android:layout_marginTop="65px"
+            android:background="@drawable/hly23" />
+
+        <RelativeLayout
+            android:id="@+id/wodeqianbao"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="10px"
+            android:layout_marginTop="45px"
+            android:layout_toLeftOf="@+id/shezhiimabt"
+            android:gravity="center"></RelativeLayout>
+
+        <ImageButton
+            android:layout_width="44px"
+            android:layout_height="44px"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="30px"
+            android:layout_marginTop="65px"
+            android:layout_toLeftOf="@+id/shezhiimabt"
+            android:background="@drawable/hly18" />
+
+        <TextView
+            android:id="@+id/xxitexutview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/touxiangimg"
+            android:layout_marginEnd="120px"
+            android:layout_marginTop="55px"
+            android:layout_toLeftOf="@+id/touxiangimg"
+            android:text="0"
+            android:textColor="#d7d7d7"
+            android:textSize="40px" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/xxitexutview"
+            android:layout_marginEnd="100px"
+            android:layout_toLeftOf="@+id/touxiangimg"
+            android:text="消息"
+            android:textColor="#d7d7d7"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/huihuatext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/touxiangimg"
+            android:layout_marginLeft="120px"
+            android:layout_marginTop="55px"
+            android:layout_toEndOf="@+id/touxiangimg"
+            android:text="32"
+            android:textColor="#d7d7d7"
+            android:textSize="35px" />
+
+        <TextView
+            android:id="@+id/huihua"
+            android:layout_width="200px"
+            android:layout_height="100px"
+            android:layout_below="@+id/huihuatext"
+            android:layout_marginLeft="40px"
+            android:layout_toEndOf="@+id/touxiangimg"
+            android:gravity="center"
+            android:paddingBottom="50px"
+            android:text="会话"
+            android:textColor="#d7d7d7"
+            android:textSize="35px" />
+
+        <TextView
+            android:id="@+id/usernametext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/touxiangimg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="44px"
+            android:text="孺子牛2017"
+            android:textColor="#d7d7d7"
+            android:textSize="50px" />
+
+        <TextView
+            android:id="@+id/neirongtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/usernametext"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60px"
+            android:text="一句话让老师了解你"
+            android:textColor="#d7d7d7"
+            android:textSize="40px" />
+        <RelativeLayout
+            android:layout_marginTop="50px"
+            android:layout_below="@+id/neirongtext"
+            android:id="@+id/fenggexiantext1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/fenggexiantext"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#404040" />
+        <TextView
+            android:id="@+id/tuijianxuqiutext"
+            android:layout_width="250px"
+            android:layout_height="104px"
+            android:layout_below="@+id/fenggexiantext"
+            android:layout_marginLeft="80px"
+            android:gravity="center"
+            android:text="推荐需求"
+            android:textColor="#d7d7d7"
+            android:textSize="35px" />
+
+        <TextView
+            android:id="@+id/wodedingdan"
+            android:layout_width="250px"
+            android:layout_height="104px"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/fenggexiantext"
+            android:layout_marginEnd="80px"
+            android:gravity="center"
+            android:text="我的订单"
+            android:textColor="#d7d7d7"
+            android:textSize="35px" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/tuijianxuqiutext"
+            android:background="#404040" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_below="@+id/fenggexiantext1"
+            android:id="@+id/myindexfagment"
+            android:layout_width="match_parent"
+            android:layout_height="2000px"
+            android:background="#111111"
+            android:orientation="horizontal" />
+    </RelativeLayout>
+    </modle.toos.MScrollView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:layout_alignParentBottom="true"
+        android:background="#fdfdfe">
+        <RelativeLayout
+            android:id="@+id/wodejiaoshi"
+            android:layout_width="160px"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="50px">
+
+            <ImageView
+                android:id="@+id/jiaoshitubiao"
+                android:layout_width="55px"
+                android:layout_height="40px"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20px"
+                android:background="@drawable/hly10" />
+
+            <TextView
+                android:id="@+id/xues"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/jiaoshitubiao"
+                android:layout_centerHorizontal="true"
+                android:text="教师"
+                android:textSize="30px" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/host"
+            android:layout_width="160px"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true">
+            <ImageView
+                android:id="@+id/hostimaview"
+                android:layout_width="66px"
+                android:layout_height="66px"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/hly03" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/wode"
+            android:layout_width="160px"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="50px">
+            <ImageView
+                android:id="@+id/wodegerxx"
+                android:layout_width="55px"
+                android:layout_height="40px"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20px"
+                android:background="@drawable/hly51" />
+            <TextView
+                android:id="@+id/wod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/wodegerxx"
+                android:layout_centerHorizontal="true"
+                android:text="我的"
+                android:textSize="30px" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:gravity="center"
+        android:background="#000000"
+        android:textColor="#ffffff"/>
+
+    <RelativeLayout
+        android:background="#000000"
+        android:id="@+id/sopt"
+        android:visibility="gone"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="108px">
+        <TextView
+            android:id="@+id/fenggexiantext11"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#404040" />
+        <TextView
+            android:id="@+id/tuijianxuqiutext1"
+            android:layout_width="250px"
+            android:layout_height="104px"
+            android:layout_below="@+id/fenggexiantext11"
+            android:layout_marginLeft="80px"
+            android:gravity="center"
+            android:text="推荐需求"
+            android:textColor="#d7d7d7"
+            android:textSize="35px" />
+
+        <TextView
+            android:id="@+id/wodedingdan1"
+            android:layout_width="250px"
+            android:layout_height="104px"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/fenggexiantext11"
+            android:layout_marginEnd="80px"
+            android:gravity="center"
+            android:text="我的订单"
+            android:textColor="#d7d7d7"
+            android:textSize="35px" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/tuijianxuqiutext1"
+            android:background="#404040" />
+    </RelativeLayout>
+
+</RelativeLayout>

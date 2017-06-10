@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/xuqiushuax"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:indicator_color="#f7e61c"
+        app:indicator="LineSpinFadeLoader"
+        android:layout_width="120px"
+        android:layout_height="120px" />
+
+    <RelativeLayout
+        android:id="@+id/xuqiurelayout"
+        android:background="#727272"
+        android:layout_width="match_parent"
+        android:layout_height="540px">
+        <RelativeLayout
+            android:id="@+id/xuqiufanhui"
+            android:layout_width="120px"
+            android:layout_height="120px">
+        </RelativeLayout>
+        <ImageButton
+            android:layout_marginTop="25px"
+            android:layout_marginLeft="35px"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/add19"
+            android:layout_width="20px"
+            android:layout_height="35px" />
+        <TextView
+            android:id="@+id/xuqiuxiangxi"
+            android:layout_marginTop="20px"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="40px"
+            android:textColor="#fff"
+            android:text="需求详细"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/kemuleibie"
+            android:layout_marginTop="54px"
+            android:text="英语"
+            android:textColor="#fff"
+            android:layout_below="@+id/xuqiuxiangxi"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/nianjia"
+            android:textColor="#fff"
+            android:text="一年级"
+            android:layout_marginLeft="20px"
+            android:layout_toEndOf="@+id/kemuleibie"
+            android:layout_alignBottom="@+id/kemuleibie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/xuqiuneirong"
+            android:layout_marginTop="120px"
+            android:layout_below="@+id/xuqiuxiangxi"
+            android:layout_centerHorizontal="true"
+            android:textSize="35px"
+            android:textColor="#fff"
+            android:text="“孩子平时不听话，英语成绩提高不上去,临近期末，希望有老师辅导一下”"
+            android:layout_width="600px"
+            android:layout_height="wrap_content" />
+
+        <modle.toos.CircleImageView
+            android:id="@+id/xuqiuimage"
+            android:layout_marginTop="50px"
+            android:layout_below="@+id/xuqiuneirong"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ox2"
+            android:layout_width="120px"
+            android:layout_height="120px" />
+        <TextView
+            android:id="@+id/xuqiuname"
+            android:layout_marginTop="20px"
+            android:layout_below="@+id/xuqiuimage"
+            android:layout_centerHorizontal="true"
+            android:textSize="35px"
+            android:textColor="#fff"
+            android:text="孺子牛教育"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/fabushijian"
+            android:layout_marginEnd="28px"
+            android:layout_marginBottom="20px"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:textColor="#fff"
+            android:textSize="30px"
+            android:text="2016-7-25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/tadfexuqiu"
+        android:textColor="#f9d385"
+        android:layout_marginLeft="40px"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="30px"
+        android:layout_below="@+id/xuqiurelayout"
+        android:textSize="30px"
+        android:text="他的需求"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/jiequxuqiu"
+        android:textColor="#65c2fe"
+        android:layout_marginTop="30px"
+        android:layout_marginEnd="40px"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/xuqiurelayout"
+        android:textSize="30px"
+        android:text="暂未接取"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/fengexian1"
+        android:layout_marginTop="30px"
+        android:layout_below="@+id/tadfexuqiu"
+        android:layout_centerHorizontal="true"
+        android:background="#e6e6e6"
+        android:layout_width="710px"
+        android:layout_height="2px"
+        android:orientation="horizontal" />
+    <RelativeLayout
+        android:id="@+id/xuqiurelayout1"
+        android:layout_below="@id/fengexian1"
+        android:layout_width="187.5px"
+        android:layout_height="160px">
+        <ImageView
+            android:layout_marginTop="30px"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/xuqiubenke"
+            android:background="@drawable/hly47"
+            android:layout_width="65px"
+            android:layout_height="65px" />
+        <TextView
+            android:textSize="30px"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/xuqiubenke"
+            android:layout_marginTop="30px"
+            android:text="本科"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/fengexian2"
+        android:layout_toEndOf="@+id/xuqiurelayout1"
+        android:layout_below="@id/fengexian1"
+        android:layout_width="187.5px"
+        android:layout_height="160px">
+        <ImageView
+            android:layout_marginTop="30px"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/xuqiushangmen"
+            android:background="@drawable/hly57"
+            android:layout_width="65px"
+            android:layout_height="65px" />
+        <TextView
+            android:id="@+id/fuwufang"
+            android:textSize="30px"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/xuqiushangmen"
+            android:layout_marginTop="30px"
+            android:text="教师上门"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/fengexian3"
+        android:layout_width="187.5px"
+        android:layout_height="160px"
+        android:layout_below="@id/fengexian1"
+        android:layout_toEndOf="@+id/fengexian2">
+        <ImageView
+            android:layout_marginTop="30px"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/xuqiuxinbie"
+            android:background="@drawable/hly61"
+            android:layout_width="65px"
+            android:layout_height="65px" />
+        <TextView
+            android:id="@+id/xingbie"
+            android:layout_marginTop="30px"
+            android:layout_centerHorizontal="true"
+            android:textSize="30px"
+            android:layout_below="@+id/xuqiuxinbie"
+            android:text="女性"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/fengexian4"
+        android:layout_width="187.5px"
+        android:layout_height="160px"
+        android:layout_below="@id/fengexian1"
+        android:layout_toEndOf="@+id/fengexian3">
+        <ImageView
+            android:layout_marginTop="30px"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/xuqiunianl"
+            android:background="@drawable/hly65"
+            android:layout_width="65px"
+            android:layout_height="65px" />
+        <TextView
+            android:id="@+id/nianling"
+            android:layout_marginTop="30px"
+            android:layout_centerHorizontal="true"
+            android:textSize="30px"
+            android:layout_below="@+id/xuqiunianl"
+            android:text="20-30岁"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/fengexianbottton"
+        android:layout_marginTop="30px"
+        android:layout_below="@+id/xuqiurelayout1"
+        android:layout_centerHorizontal="true"
+        android:background="#e6e6e6"
+        android:layout_width="710px"
+        android:layout_height="2px"
+        android:orientation="horizontal" />
+        <TextView
+            android:id="@+id/shijianduan"
+            android:textSize="30px"
+            android:layout_marginLeft="80px"
+            android:layout_marginTop="40px"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/fengexianbottton"
+            android:text="9:30-12:30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/zhongjianfenge"
+        android:background="#e6e6e6"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/fengexianbottton"
+        android:layout_width="2px"
+        android:layout_height="100px"
+        android:orientation="horizontal"/>
+     <TextView
+         android:id="@+id/diqu"
+         android:layout_marginLeft="100px"
+         android:layout_marginTop="40px"
+         android:layout_toEndOf="@id/zhongjianfenge"
+         android:layout_below="@id/fengexianbottton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content" />
+    <LinearLayout
+        android:id="@+id/fengexianbottton1"
+        android:layout_marginTop="30px"
+        android:layout_below="@+id/zhongjianfenge"
+        android:layout_centerHorizontal="true"
+        android:background="#e6e6e6"
+        android:layout_width="710px"
+        android:layout_height="2px"
+        android:orientation="horizontal" />
+    <TextView
+        android:id="@+id/xiangsixuqiu"
+        android:textColor="#f9d385"
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="30px"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/fengexianbottton1"
+        android:text="相似需求"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ListView
+        android:layout_marginTop="20px"
+        android:id="@+id/xiangsixuqiulist"
+        android:layout_below="@+id/xiangsixuqiu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+    <ImageButton
+        android:id="@+id/xuqiuweix"
+        android:layout_marginEnd="50px"
+        android:layout_marginBottom="50px"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/hly49"
+        android:layout_width="80px"
+        android:layout_height="80px" />
+    <ImageButton
+        android:id="@+id/xuqiudianh"
+        android:layout_marginEnd="40px"
+        android:layout_toLeftOf="@+id/xuqiuweix"
+        android:layout_alignBottom="@+id/xuqiuweix"
+        android:background="@drawable/order02"
+        android:layout_width="80px"
+        android:layout_height="80px" />
+    <ImageButton
+        android:layout_marginEnd="40px"
+        android:layout_toLeftOf="@+id/xuqiudianh"
+        android:background="@drawable/hly33"
+        android:layout_alignBottom="@+id/xuqiuweix"
+        android:layout_width="80px"
+        android:layout_height="80px" />
+</RelativeLayout>
