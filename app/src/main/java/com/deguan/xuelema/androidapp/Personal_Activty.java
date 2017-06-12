@@ -1,9 +1,12 @@
 package com.deguan.xuelema.androidapp;
 
+import android.*;
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -13,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
@@ -29,6 +33,8 @@ import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.hyphenate.util.Utils;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import org.simple.eventbus.EventBus;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,6 +48,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.co.namee.permissiongen.PermissionGen;
+import modle.Gaode.Gaode_dinwei;
 import modle.Teacher_Modle.Teacher;
 import modle.Teacher_Modle.Teacher_init;
 import modle.toos.CircleImageView;
@@ -273,7 +281,20 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
             }
             break;
             case R.id.camera_dialog_pick: {
-                dispatchTakePictureIntent();
+                //动态申请权限
+
+                if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED) {
+                    PermissionGen.with(this)
+                            .addRequestCode(200)
+                            .permissions(
+                                    Manifest.permission.CAMERA
+                            )
+                            .request();
+//
+                }else{
+                    dispatchTakePictureIntent();
+                }
+
                 mPickDialog.dismiss();
             }
             break;
@@ -342,7 +363,16 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
 
         }
     }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+//        if (requestCode == 100){
+//            Gaode_dinwei gaode_dinwei=new Gaode_dinwei(this,getActivity());
+//        }
+        Log.d("aa","------requestCode"+requestCode);
+        dispatchTakePictureIntent();
 
+    }
     public void updateuserdata(){
         //获取用户昵称与资料
         user_init.User_Data(uid,this);

@@ -40,7 +40,7 @@
             android:id="@+id/shezhiimabt"
             android:layout_width="80px"
             android:layout_height="80px"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="45px"
             android:gravity="center"></RelativeLayout>
@@ -48,9 +48,9 @@
         <ImageButton
             android:layout_width="44px"
             android:layout_height="44px"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="20px"
+            android:layout_marginRight="20px"
             android:layout_marginTop="65px"
             android:background="@drawable/hly23" />
 
@@ -59,7 +59,7 @@
             android:layout_width="80px"
             android:layout_height="80px"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="10px"
+            android:layout_marginRight="10px"
             android:layout_marginTop="45px"
             android:layout_toLeftOf="@+id/shezhiimabt"
             android:gravity="center"></RelativeLayout>
@@ -68,7 +68,7 @@
             android:layout_width="44px"
             android:layout_height="44px"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="30px"
+            android:layout_marginRight="30px"
             android:layout_marginTop="65px"
             android:layout_toLeftOf="@+id/shezhiimabt"
             android:background="@drawable/hly18" />
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/touxiangimg"
-            android:layout_marginEnd="120px"
+            android:layout_marginRight="120px"
             android:layout_marginTop="55px"
             android:layout_toLeftOf="@+id/touxiangimg"
             android:text="0"
@@ -89,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/xxitexutview"
-            android:layout_marginEnd="100px"
+            android:layout_marginRight="100px"
             android:layout_toLeftOf="@+id/touxiangimg"
             android:text="消息"
             android:textColor="#d7d7d7"
@@ -102,8 +102,8 @@
             android:layout_alignTop="@+id/touxiangimg"
             android:layout_marginLeft="120px"
             android:layout_marginTop="55px"
-            android:layout_toEndOf="@+id/touxiangimg"
-            android:text="32"
+            android:layout_toRightOf="@+id/touxiangimg"
+            android:text="0"
             android:textColor="#d7d7d7"
             android:textSize="35px" />
 
@@ -113,7 +113,7 @@
             android:layout_height="100px"
             android:layout_below="@+id/huihuatext"
             android:layout_marginLeft="40px"
-            android:layout_toEndOf="@+id/touxiangimg"
+            android:layout_toRightOf="@+id/touxiangimg"
             android:gravity="center"
             android:paddingBottom="50px"
             android:text="会话"
@@ -167,9 +167,9 @@
             android:id="@+id/wodedingdan"
             android:layout_width="250px"
             android:layout_height="104px"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/fenggexiantext"
-            android:layout_marginEnd="80px"
+            android:layout_marginRight="80px"
             android:gravity="center"
             android:text="我的订单"
             android:textColor="#d7d7d7"
@@ -240,9 +240,9 @@
             android:id="@+id/wode"
             android:layout_width="160px"
             android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="50px">
+            android:layout_marginRight="50px">
             <ImageView
                 android:id="@+id/wodegerxx"
                 android:layout_width="55px"
@@ -298,9 +298,9 @@
             android:id="@+id/wodedingdan1"
             android:layout_width="250px"
             android:layout_height="104px"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_below="@+id/fenggexiantext11"
-            android:layout_marginEnd="80px"
+            android:layout_marginRight="80px"
             android:gravity="center"
             android:text="我的订单"
             android:textColor="#d7d7d7"

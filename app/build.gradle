@@ -1,21 +1,24 @@
 apply plugin: 'com.android.application'
 
+configurations {
+    all*.exclude group: 'com.android.support', module: 'support-v4'
+}
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.deguan.xuelema.androidapp"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
-        ndk {
-            //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a','x86', 'x86_64', 'mips', 'mips64'
-            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
-        }
+//        ndk {
+//            //选择要添加的对应cpu类型的.so库。
+//            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a','x86', 'x86_64', 'mips', 'mips64'
+//            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+//        }
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
                 JPUSH_APPKEY : "c39edf5b5db99c331a416daa", //JPush上注册的包名对应的appkey.
@@ -29,6 +32,12 @@ android {
         }
     }
     useLibrary 'org.apache.http.legacy'
+    android {
+        lintOptions {
+            checkReleaseBuilds false
+            abortOnError false
+        }
+    }
 }
 
 dependencies {
@@ -37,16 +46,16 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     /*
-                                                        屏幕适配
-                                                        */
+                                                            屏幕适配
+                                                            */
     compile 'com.zhy:autolayout:latest.release'
     /*
-                                                        okHttp
-                                                         */
+                                                            okHttp
+                                                             */
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     /*
-                                                        Retrofit  Rxjava
-                                                        */
+                                                            Retrofit  Rxjava
+                                                            */
     compile 'io.reactivex:rxjava:x.y.z'
     compile 'io.reactivex:rxandroid:1.0.1'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
@@ -55,46 +64,44 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/AMap_Location_V3.3.0_20170118.jar')
     /*
-                                                  高德
-                                                   */
+                                                      高德
+                                                       */
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/android-support-v7-recyclerview.jar')
     compile 'junit:junit:4.12'
     compile files('libs/core-3.2.1.jar')
-    compile 'com.amap.api:location:latest.integration'
+//    compile 'com.amap.api:location:latest.integration'
     /*
-                        支付宝
-                         */
+                            支付宝
+                             */
     compile files('libs/alipaySdk-20170309.jar')
     /*
-                        环信
-                         */
+                            环信
+                             */
     compile project(':easeui')
     /*
-                极光推送
-                 */
+                    极光推送
+                     */
     compile 'cn.jiguang.sdk:jpush:3.0.5'
     // 此处以JPush 3.0.5 版本为例。
-    compile 'cn.jiguang.sdk:jcore:1.1.2'
     // 此处以JCore 1.1.2 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.1.2'
     compile files('libs/okhttputils-2_6_2.jar')
-
     /*
-    三级联动
-     */
+        三级联动
+         */
     compile 'com.contrarywind:Android-PickerView:3.2.5'
-
     /*
-    小Dlog动画http://www.open-open.com/lib/view/open1445846143992.html
-     */
+        小Dlog动画http://www.open-open.com/lib/view/open1445846143992.html
+         */
     compile 'com.wang.avi:library:1.0.0'
     compile 'com.nineoldandroids:library:2.4.0'
-
     /*
-    软键盘收缩
+        软键盘收缩
 
-    compile 'org.loader:autohideime:1.0'*/
-
+        compile 'org.loader:autohideime:1.0'*/
     //动态权限申请
     compile 'com.lovedise:permissiongen:0.0.6'
+    //android EventBus
+    compile 'org.simple:androideventbus:1.0.5.1'
 }

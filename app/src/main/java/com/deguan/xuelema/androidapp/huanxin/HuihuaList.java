@@ -15,6 +15,7 @@ import android.widget.Button;
 
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.SetUp;
+import com.deguan.xuelema.androidapp.entities.UserMessage;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMConversation;
@@ -25,8 +26,12 @@ import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.model.EaseNotifier;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.hyphenate.easeui.utils.EaseUserUtils;
 import com.hyphenate.easeui.widget.EaseTitleBar;
 import com.zhy.autolayout.AutoLayoutActivity;
+
+import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
 
 import java.util.List;
 import java.util.Map;
@@ -52,6 +57,7 @@ public class HuihuaList extends AutoLayoutActivity implements View.OnClickListen
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+        EventBus.getDefault().register(this);
         chat_haoyou = (Button) findViewById(R.id.chat_haoyou);
         chat_haoyou.setOnClickListener(this);
         easeUI = EaseUI.getInstance();
@@ -80,10 +86,12 @@ public class HuihuaList extends AutoLayoutActivity implements View.OnClickListen
             public EaseUser getUser(String username) {
                 Log.e("aa","username="+username);
                 easeUser=new EaseUser(username);
+                easeUser.setAvatar("http://deguanjiaoyu.com/Uploads/AppImg/2017-06-10/593bb3accc2f3.png");
+//                new Getdata().getmobieke(username,HuihuaList.this);
                 return easeUser;
             }
         });
-
+//        EaseUserUtils.setUserAvatar(this,"username","useriamge");
     }
 
     @Override
@@ -97,10 +105,30 @@ public class HuihuaList extends AutoLayoutActivity implements View.OnClickListen
         }
     }
 
-
+    @Subscriber(tag = "image")
+    public void setImageHead(final UserMessage entity){
+        Log.d("aa",entity.getImageUrl());
+        //获取当前页面的聊天id
+        easeUI.setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
+            @Override
+            public EaseUser getUser(String username) {
+                Log.e("aa","username=Event"+username);
+                if (entity.getUserId().equals(username)){
+                    easeUser=new EaseUser(username);
+                    easeUser.setAvatar(entity.getImageUrl());
+                }
+                return easeUser;
+            }
+        });
+    }
     @Override
     public void Updatecontent(final Map<String, Object> map) {
-
+        String imageUrl = (String)map.get("headimg");
+        String userId = (String)map.get("mobile");
+        UserMessage entity = new UserMessage();
+        entity.setImageUrl(imageUrl);
+        entity.setUserId(userId);
+        EventBus.getDefault().post(entity,"image");
     }
 
     @Override
@@ -108,6 +136,9 @@ public class HuihuaList extends AutoLayoutActivity implements View.OnClickListen
 
     }
 
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

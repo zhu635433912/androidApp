@@ -24,9 +24,15 @@ import android.widget.TextView;
 
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import org.simple.eventbus.EventBus;
+
+import kr.co.namee.permissiongen.PermissionGen;
+import kr.co.namee.permissiongen.PermissionSuccess;
 import modle.Basequanxian;
+import modle.Gaode.Gaode_dinwei;
 import modle.user_ziliao.User_id;
 import view.index.Teacher_fragment;
 /*
@@ -43,9 +49,12 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
     private int i=0;
     private ImageView jiaoshitubiao;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         setContentView(R.layout.activity_main);
 
         //进入动画
@@ -104,7 +113,7 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
 
             @Override
             public void onError(int code, String message) {
-                Log.e("aa", "登录聊天服务器失败！");
+                Log.e("aa", code+"登录聊天服务器失败！"+message);
             }
         });
 
@@ -118,7 +127,8 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
                 //需求发布
                 if (i==0) {
                     Intent intent = new Intent(MainActivity.this, Xuqiufabu.class);
-                    startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+//                    startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+                    startActivity(intent);
                 }
                 break;
             case R.id.woder:
@@ -127,15 +137,32 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
                     Intent intentc = new Intent(MainActivity.this, Student_Activty.class);
                     intentc.putExtra("user_id", ids);
                     intentc.putExtra("user_id", roles);
-                    startActivity(intentc,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+//                    startActivity(intentc,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+                    startActivity(intentc);
                 }else {
                     //跳转老师页面
                     Intent intenta = new Intent(MainActivity.this, indexActivty.class);
                     intenta.putExtra("user_id", ids);
                     intenta.putExtra("user_id", roles);
-                    startActivity(intenta, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+                    startActivity(intenta);
+//                    startActivity(intenta, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
                 }
                 break;
         }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+//        if (requestCode == 100){
+//            Gaode_dinwei gaode_dinwei=new Gaode_dinwei(this,getActivity());
+//        }
+        Log.d("aa","------requestCode"+requestCode);
+        EventBus.getDefault().post(requestCode,"requsetPermiss");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

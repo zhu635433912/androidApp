@@ -55,7 +55,7 @@
             android:textColor="#fff"
             android:text="一年级"
             android:layout_marginLeft="20px"
-            android:layout_toEndOf="@+id/kemuleibie"
+            android:layout_toRightOf="@+id/kemuleibie"
             android:layout_alignBottom="@+id/kemuleibie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -90,9 +90,9 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/fabushijian"
-            android:layout_marginEnd="28px"
+            android:layout_marginRight="28px"
             android:layout_marginBottom="20px"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:textColor="#fff"
             android:textSize="30px"
@@ -115,8 +115,8 @@
         android:id="@+id/jiequxuqiu"
         android:textColor="#65c2fe"
         android:layout_marginTop="30px"
-        android:layout_marginEnd="40px"
-        android:layout_alignParentEnd="true"
+        android:layout_marginRight="40px"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/xuqiurelayout"
         android:textSize="30px"
         android:text="暂未接取"
@@ -154,7 +154,7 @@
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/fengexian2"
-        android:layout_toEndOf="@+id/xuqiurelayout1"
+        android:layout_toRightOf="@+id/xuqiurelayout1"
         android:layout_below="@id/fengexian1"
         android:layout_width="187.5px"
         android:layout_height="160px">
@@ -181,7 +181,7 @@
         android:layout_width="187.5px"
         android:layout_height="160px"
         android:layout_below="@id/fengexian1"
-        android:layout_toEndOf="@+id/fengexian2">
+        android:layout_toRightOf="@+id/fengexian2">
         <ImageView
             android:layout_marginTop="30px"
             android:layout_centerHorizontal="true"
@@ -204,7 +204,7 @@
         android:layout_width="187.5px"
         android:layout_height="160px"
         android:layout_below="@id/fengexian1"
-        android:layout_toEndOf="@+id/fengexian3">
+        android:layout_toRightOf="@+id/fengexian3">
         <ImageView
             android:layout_marginTop="30px"
             android:layout_centerHorizontal="true"
@@ -253,7 +253,7 @@
          android:id="@+id/diqu"
          android:layout_marginLeft="100px"
          android:layout_marginTop="40px"
-         android:layout_toEndOf="@id/zhongjianfenge"
+         android:layout_toRightOf="@id/zhongjianfenge"
          android:layout_below="@id/fengexianbottton"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content" />
@@ -285,23 +285,23 @@
         android:layout_height="match_parent"/>
     <ImageButton
         android:id="@+id/xuqiuweix"
-        android:layout_marginEnd="50px"
+        android:layout_marginRight="50px"
         android:layout_marginBottom="50px"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:background="@drawable/hly49"
         android:layout_width="80px"
         android:layout_height="80px" />
     <ImageButton
         android:id="@+id/xuqiudianh"
-        android:layout_marginEnd="40px"
+        android:layout_marginRight="40px"
         android:layout_toLeftOf="@+id/xuqiuweix"
         android:layout_alignBottom="@+id/xuqiuweix"
         android:background="@drawable/order02"
         android:layout_width="80px"
         android:layout_height="80px" />
     <ImageButton
-        android:layout_marginEnd="40px"
+        android:layout_marginRight="40px"
         android:layout_toLeftOf="@+id/xuqiudianh"
         android:background="@drawable/hly33"
         android:layout_alignBottom="@+id/xuqiuweix"

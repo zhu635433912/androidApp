@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -27,6 +28,10 @@ import com.deguan.xuelema.androidapp.Xuqiuxiangx;
 import com.deguan.xuelema.androidapp.init.Gaodehuidiao_init;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
+
+import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -119,6 +124,12 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
 
     private RelativeLayout indeshuax;
     private TextView indeshuaxtext;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
 
     @Nullable
     @Override
@@ -314,13 +325,17 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
 
         return view;
     }
-    //权限申请成功
-    @PermissionSuccess(requestCode = 100)
-    public void doSomething(){
-//        Log.d("123","deviceId"+ DeviceUtil.getDeviceId(this));
-        Gaode_dinwei gaode_dinwei=new Gaode_dinwei(this,getActivity());
-//        Toast.makeText(this, "Contact permission is granted", Toast.LENGTH_SHORT).show();
-    }
+
+
+//    //权限申请成功
+//    @PermissionSuccess(requestCode = 100)
+//    public void successPermission(){
+////        Log.d("123","deviceId"+ DeviceUtil.getDeviceId(this));
+//        Log.d("aa","申请成功");
+//        Gaode_dinwei gaode_dinwei=new Gaode_dinwei(this,getActivity());
+////        Toast.makeText(this, "Contact permission is granted", Toast.LENGTH_SHORT).show();
+//    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -569,5 +584,17 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
             //隐藏加载数据提示
             indeshuax.setVisibility(View.GONE);
         }
+    }
+    @Subscriber(tag = "requsetPermiss")
+    public void requestSuccess(int requestCode){
+        if (requestCode == 100){
+            Gaode_dinwei gaode_dinwei=new Gaode_dinwei(this,getActivity());
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

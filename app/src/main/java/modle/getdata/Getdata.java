@@ -37,7 +37,7 @@ public class Getdata {
 
     //初始化网络访问对象
     public Getdata(){
-        map=new ArrayMap<String,Object>();
+        map=new HashMap<String,Object>();
 
         retrofit=new Retrofit.Builder().baseUrl(MyUrl.URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -213,7 +213,7 @@ public class Getdata {
                 if (error.equals("ok")){
                      Map<String,Object> map=new HashMap<String, Object>();
                     map=response.body().getContent();
-                    Log.e("aa","获取个人资料成功"+map.get("id"));
+                    Log.e("aa",map.get("mobile")+"获取个人资料成功"+map.get("id"));
                     requirdetailed.Updatecontent(map);
                 }
             }

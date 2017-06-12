@@ -20,6 +20,8 @@ import android.widget.ToggleButton;
 
 import com.deguan.xuelema.androidapp.MainActivity;
 import com.deguan.xuelema.androidapp.R;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -29,6 +31,8 @@ import java.util.Map;
 import modle.user_ziliao.User_id;
 import view.login.presenter.S_wan_presenter;
 import view.login.presenter.login_wan_presenter;
+
+import static modle.user_ziliao.User_id.getUsername;
 
 /**
  * 登陆页面
@@ -55,7 +59,7 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
         setContentView(R.layout.logion_wan);
 
         //过渡动画
-        getWindow().setExitTransition(TransitionInflater.from(this).inflateTransition(R.transition.slide));
+//        getWindow().setExitTransition(TransitionInflater.from(this).inflateTransition(R.transition.slide));
         inint();
 
         //从xml里取保存的账号
@@ -108,6 +112,7 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
         switch (v.getId()){
             //登录button
             case R.id.wan_login:
+
                 Log.d("aa","登陆");
                 if (loginLoading.getVisibility()==View.GONE) {
                     loginLoading.setVisibility(View.VISIBLE);

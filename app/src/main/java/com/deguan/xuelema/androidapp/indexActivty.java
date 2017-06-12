@@ -92,15 +92,15 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myindex);
-        Fade fade = (Fade) TransitionInflater.from(this).inflateTransition(R.transition.activity_hold);
-        getWindow().setEnterTransition(fade);
-
-        //进入动画
-        Slide slide=new Slide();
-        slide.setDuration(500);
-        slide.setSlideEdge(Gravity.LEFT);
-        getWindow().setEnterTransition(slide);
-        getWindow().setReenterTransition(new Explode().setDuration(600));
+//        Fade fade = (Fade) TransitionInflater.from(this).inflateTransition(R.transition.activity_hold);
+//        getWindow().setEnterTransition(fade);
+//
+//        //进入动画
+//        Slide slide=new Slide();
+//        slide.setDuration(500);
+//        slide.setSlideEdge(Gravity.LEFT);
+//        getWindow().setEnterTransition(slide);
+//        getWindow().setReenterTransition(new Explode().setDuration(600));
 
 
         //获取用户是教师还是学生展示相应的参数
@@ -255,7 +255,8 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
                 //需求发布
                 if (z != 2) {
                     Intent intentb = new Intent(indexActivty.this, Xuqiufabu.class);
-                    startActivity(intentb, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+                    startActivity(intentb);
+//                    startActivity(intentb, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
                 }
                 break;
             case R.id.shezhiimabt:

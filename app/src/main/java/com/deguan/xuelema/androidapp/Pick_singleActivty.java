@@ -19,6 +19,7 @@ import com.deguan.xuelema.androidapp.init.Student_init;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -65,7 +66,7 @@ public class Pick_singleActivty  extends AutoLayoutActivity implements View.OnCl
         int role=Integer.parseInt(User_id.getRole());
         Order_init order_init=new Order();
         order_init.getOrder_list(uid,role-1,9,1,null,this,this,id,0);
-        map=new ArrayMap<String, Object>();
+        map=new HashMap<String, Object>();
 
 
     }

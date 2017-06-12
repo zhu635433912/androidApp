@@ -125,7 +125,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
 
     private List<Map<String, Object>> Data() {
         for (int i = 0; i < 10; i++) {
-            Map<String, Object> map = new ArrayMap<String, Object>();
+            Map<String, Object> map = new HashMap<String, Object>();
             map.put("text", i + "个");
             listamap.add(map);
         }

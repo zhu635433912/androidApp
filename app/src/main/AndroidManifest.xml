@@ -99,7 +99,6 @@
         <activity android:name=".huanxin.HaoyouActivty" android:launchMode="singleTask"/>
         <activity android:name=".Feedback_Activity" android:launchMode="singleTask" />
 
-
         <!--设置屏幕百分比-->
         <meta-data android:name="design_width" android:value="750"></meta-data>
         <meta-data android:name="design_height" android:value="1334"></meta-data>

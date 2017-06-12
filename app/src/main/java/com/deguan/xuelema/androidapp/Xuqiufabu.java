@@ -130,9 +130,9 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.xuqiufabu);
         //进入动画
-        Fade fade = new Fade();
-        fade.setDuration(1000);
-        getWindow().setEnterTransition(fade);
+//        Fade fade = new Fade();
+//        fade.setDuration(1000);
+//        getWindow().setEnterTransition(fade);
 
         User_id.getInstance().addActivity(this);
         nan = (TextView) findViewById(R.id.nan);

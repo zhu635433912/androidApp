@@ -9,23 +9,23 @@
         android:layout_centerHorizontal="true"
         android:layout_width="300px"
         android:layout_height="300px">
-    <com.wang.avi.AVLoadingIndicatorView
-        android:id="@+id/xiaohuangdou"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        app:indicator="Pacman"
-        app:indicator_color="#f7e61c"
-        android:layout_width="200px"
-        android:layout_height="200px" />
-    <TextView
-        android:id="@+id/indeshuaxtext"
-        android:textColor="#d43414"
-        android:textSize="30px"
-        android:text="加载数据中...."
-        android:layout_below="@+id/xiaohuangdou"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/xiaohuangdou"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            app:indicator="Pacman"
+            app:indicator_color="#f7e61c"
+            android:layout_width="200px"
+            android:layout_height="200px" />
+        <TextView
+            android:id="@+id/indeshuaxtext"
+            android:textColor="#d43414"
+            android:textSize="30px"
+            android:text="加载数据中...."
+            android:layout_below="@+id/xiaohuangdou"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -202,7 +202,7 @@
             android:layout_width="200px"
             android:layout_height="360px"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/listviewhastva">
+            android:layout_toRightOf="@+id/listviewhastva">
         </ListView>
     </RelativeLayout>
 
