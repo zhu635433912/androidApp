@@ -274,7 +274,7 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
                 break;
             case R.id.huihua:
                 //会话列表
-                Intent intent1=new Intent(indexActivty.this,HuihuaList.class);
+                Intent intent1=new Intent(indexActivty.this, modle.Huanxing.ui.MainActivity.class);
                 startActivity(intent1);
                 break;
         }

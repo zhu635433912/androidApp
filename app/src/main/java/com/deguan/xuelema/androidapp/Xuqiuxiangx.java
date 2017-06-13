@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 import modle.Demand_Modle.Demand;
 import modle.Demand_Modle.Demand_init;
+import modle.Huanxing.ui.*;
 import modle.Order_Modle.Order;
 import modle.Order_Modle.Order_init;
 import modle.toos.CircleImageView;
@@ -193,7 +194,8 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
                 break;
             case R.id.xuqiuweix:
                 //聊天
-                Intent intent1=new Intent(Xuqiuxiangx.this, HuihuaActivity.class);
+//                Intent intent1=new Intent(Xuqiuxiangx.this, HuihuaActivity.class);
+                Intent intent1 = new Intent(Xuqiuxiangx.this, modle.Huanxing.ui.ChatActivity.class);
                 intent1.putExtra("userId",username);
                 intent1.putExtra("chatType", EMMessage.ChatType.Chat);
                 startActivity(intent1);

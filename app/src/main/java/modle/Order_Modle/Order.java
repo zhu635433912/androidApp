@@ -41,7 +41,7 @@ public class Order implements Order_init {
 
     //初始化网络访问对象
     public Order(){
-        map=new ArrayMap<String,Object>();
+        map=new HashMap<String,Object>();
         retrofit=new Retrofit.Builder().baseUrl(MyUrl.URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())

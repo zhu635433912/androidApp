@@ -47,6 +47,10 @@ public class User_id extends Application {
     private static String role;
     private static String password;
     private static String username;
+    private static String imageUrl;
+    private static Context applicationContent;
+
+
     private Context appContext;
     EMMessageListener messageListener = null;
     private List<Activity> activityList = new LinkedList<Activity>();
@@ -64,42 +68,45 @@ public class User_id extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        EMOptions options = new EMOptions();
-        // 默认添加好友时，是不需要验证的，改成需要验证
-        options.setAcceptInvitationAlways(true);
+        applicationContent = this;
+        instance = this;
+        DemoHelper.getInstance().init(applicationContent);
         appContext = this;
-        int pid = android.os.Process.myPid();
-        String processAppName = getAppName(pid);
-        // 如果APP启用了远程的service，此application:onCreate会被调用2次
-        // 为了防止环信SDK被初始化2次，加此判断会保证SDK被初始化1次
-        // 默认的APP会在以包名为默认的process name下运行，如果查到的process name不是APP的process name就立即返回
-        if (processAppName == null || !processAppName.equalsIgnoreCase(appContext.getPackageName())) {
-            Log.e("aa", "enter the service process!");
-
-            // 则此application::onCreate 是被service 调用的，直接返回
-            return;
-        }
-        //初始化环形
-        EaseUI.getInstance().init(appContext, options);
-        EMClient.getInstance().setDebugMode(false);
-        easeUI = EaseUI.getInstance();
+//        EMOptions options = new EMOptions();
+//        // 默认添加好友时，是不需要验证的，改成需要验证
+//        options.setAcceptInvitationAlways(true);
+//        int pid = android.os.Process.myPid();
+//        String processAppName = getAppName(pid);
+//        // 如果APP启用了远程的service，此application:onCreate会被调用2次
+//        // 为了防止环信SDK被初始化2次，加此判断会保证SDK被初始化1次
+//        // 默认的APP会在以包名为默认的process name下运行，如果查到的process name不是APP的process name就立即返回
+//        if (processAppName == null || !processAppName.equalsIgnoreCase(appContext.getPackageName())) {
+//            Log.e("aa", "enter the service process!");
+//
+//            // 则此application::onCreate 是被service 调用的，直接返回
+//            return;
+//        }
+//        //初始化环形
+//        EaseUI.getInstance().init(appContext, options);
+//        EMClient.getInstance().setDebugMode(false);
+//        easeUI = EaseUI.getInstance();
 
         //初始化极光推送
         JPushInterface.setDebugMode(false);
         JPushInterface.init(this);
-
-        //注册聊天监听器
-        registerMessageListener();
-        //聊天提示
-        liaotiantishi();
+//
+//        //注册聊天监听器
+//        registerMessageListener();
+//        //聊天提示
+//        liaotiantishi();
 
 
     }
 
     public static User_id getInstance() {
-        if (null == instance) {
-            instance = new User_id();
-        }
+//        if (null == instance) {
+//            instance = new User_id();
+//        }
         return instance;
     }
 
@@ -148,7 +155,13 @@ public class User_id extends Application {
         User_id.role = role;
     }
 
+    public static String getImageUrl() {
+        return imageUrl;
+    }
 
+    public static void setImageUrl(String imageUrl) {
+        User_id.imageUrl = imageUrl;
+    }
     private String getAppName(int pID) {
         String processName = null;
         ActivityManager am = (ActivityManager) this.getSystemService(ACTIVITY_SERVICE);

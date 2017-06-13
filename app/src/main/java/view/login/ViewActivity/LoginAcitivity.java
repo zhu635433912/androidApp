@@ -1,8 +1,11 @@
 package view.login.ViewActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
@@ -20,6 +23,8 @@ import android.widget.ToggleButton;
 
 import com.deguan.xuelema.androidapp.MainActivity;
 import com.deguan.xuelema.androidapp.R;
+import com.deguan.xuelema.androidapp.utils.APPConfig;
+import com.deguan.xuelema.androidapp.utils.SharedPreferencesUtils;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
 import com.wang.avi.AVLoadingIndicatorView;
@@ -118,7 +123,16 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
                     loginLoading.setVisibility(View.VISIBLE);
                     loginLoadingTv.setVisibility(View.VISIBLE);
                 }
+                //判断网络连接
+                if (isNetworkAvailable(this))
+                {
                     swan.getlogin();
+                }
+                else
+                {
+                    Toast.makeText(this, "当前没有可用网络！", Toast.LENGTH_LONG).show();
+                }
+
                 break;
             //返回button
             case  R.id.wan_imagebutton:
@@ -164,7 +178,7 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
         if (rememberBtn.isChecked()){
             rememberPssword();
         }
-
+        SharedPreferencesUtils.setParam(this, APPConfig.USRE_PHONE,getusername());
             SharedPreferences sp = getSharedPreferences("userstate", Context.MODE_PRIVATE);
             SharedPreferences.Editor ddite = sp.edit();
             ddite.putString("state", "1"); //1以登录
@@ -257,6 +271,42 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
                 return false;
             } else {
                 return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * 检查当前网络是否可用
+     * @return
+     */
+
+    public boolean isNetworkAvailable(Activity activity)
+    {
+        Context context = activity.getApplicationContext();
+        // 获取手机所有连接管理对象（包括对wi-fi,net等连接的管理）
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        if (connectivityManager == null)
+        {
+            return false;
+        }
+        else
+        {
+            // 获取NetworkInfo对象
+            NetworkInfo[] networkInfo = connectivityManager.getAllNetworkInfo();
+
+            if (networkInfo != null && networkInfo.length > 0)
+            {
+                for (int i = 0; i < networkInfo.length; i++)
+                {
+                    System.out.println(i + "===状态===" + networkInfo[i].getState());
+                    System.out.println(i + "===类型===" + networkInfo[i].getTypeName());
+                    // 判断当前网络状态是否为连接状态
+                    if (networkInfo[i].getState() == NetworkInfo.State.CONNECTED)
+                    {
+                        return true;
+                    }
+                }
             }
         }
         return false;

@@ -580,6 +580,9 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
     public void setListview1(List<Map<String, Object>> listmap) {
         if (role==2) {
             studentAdapter = new StudentAdapter(listmap, getActivity());
+            for (int i = 0; i < listmap.size(); i++) {
+                listmap.get(i).get("publisher_headimg");
+            }
             listView.setAdapter(studentAdapter);
             //隐藏加载数据提示
             indeshuax.setVisibility(View.GONE);

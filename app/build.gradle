@@ -104,4 +104,11 @@ dependencies {
     compile 'com.lovedise:permissiongen:0.0.6'
     //android EventBus
     compile 'org.simple:androideventbus:1.0.5.1'
+//    ormlite：操作sqlite数据库
+//    gson：json对象转换
+    compile 'com.j256.ormlite:ormlite-android:5.0'
+    compile 'com.google.code.gson:gson:2.8.0'
+
+    compile 'com.parse:parse-android:1.13.1'
+    compile 'com.android.support:multidex:1.0.1'
 }

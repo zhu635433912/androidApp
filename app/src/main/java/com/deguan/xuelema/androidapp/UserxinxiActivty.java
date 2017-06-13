@@ -41,6 +41,7 @@ import java.util.Map;
 
 import modle.Adapter.KechengAdapter;
 import modle.GetBitmap_Url;
+import modle.Huanxing.ui.ChatActivity;
 import modle.Increase_course.Increase_course;
 import modle.Teacher_Modle.Teacher;
 import modle.Teacher_Modle.Teacher_init;
@@ -219,7 +220,8 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 break;
             case R.id.imageButton2:
                 //聊天
-                Intent intent1 = new Intent(UserxinxiActivty.this, HuihuaActivity.class);
+//                Intent intent1 = new Intent(UserxinxiActivty.this, HuihuaActivity.class);
+                Intent intent1 = new Intent(UserxinxiActivty.this, ChatActivity.class);
                 intent1.putExtra(EaseConstant.EXTRA_USER_ID, username);
                 intent1.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
                 startActivity(intent1);

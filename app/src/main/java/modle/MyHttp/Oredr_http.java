@@ -37,7 +37,7 @@ public interface Oredr_http {
     @POST("index.php?s=/Service/Order/delete_order")
     Call<Demtest> DeleteOredr(@Query("uid") int uid, @Query("id") int id);
     /*
-    更新订单状态
+    更新订单状态------------->有问题无返回
      */
     @POST("index.php?s=/Service/Order/update_orderstatus")
     Call<Erre> UpdateOredr(@Query("uid") int uid, @Query("id") int id,@Query("status") float status ,@Query("safeword") String safewprd,@Query("fee") float fee);
@@ -54,7 +54,7 @@ public interface Oredr_http {
         @POST("index.php?s=/Service/Order/update_orderfee")
     Call<Demtest> UpdateOredrfee(@Query("uid") int uid, @Query("id") int id,@Query("fee") float fee);
     /*
-    更新订单课时数
+    更新订单课时数  ----------->更新失败
      */
     @POST("index.php?s=/Service/Order/update_orderduration")
     Call<Demtest> Updatekeshishu(@Query("uid") int uid, @Query("id") int id,@Query("fee") float fee);

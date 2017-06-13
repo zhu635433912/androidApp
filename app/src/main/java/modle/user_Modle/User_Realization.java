@@ -69,7 +69,7 @@ public class User_Realization implements User_init {
 
     //初始化网络访问对象
     public User_Realization(){
-        map=new ArrayMap<String,Object>();
+        map=new HashMap<String,Object>();
         retrofit=new Retrofit.Builder().baseUrl(MyUrl.URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())

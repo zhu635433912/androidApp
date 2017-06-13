@@ -65,9 +65,9 @@ public interface MyOkhttp {
     Call<Demtest> setuserziliao(@Query("id") int id, @Query("content") Map<String, Object> listmap);
 
     /*
-    举报
+    举报------>http://deguanjiaoyu.com/index.php?s=/Service/Accounts/create_tip
      */
-    @POST("index.php?s=/Service/Accounts/update_profile")
+    @POST("index.php?s=/Service/Accounts/create_tip")
     Call<Demtest> ssetjubao(@Query("uid") int uid, @Query("content") String content);
 
     /*

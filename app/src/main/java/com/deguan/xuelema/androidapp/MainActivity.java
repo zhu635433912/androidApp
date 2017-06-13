@@ -22,6 +22,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.APPConfig;
+import com.deguan.xuelema.androidapp.utils.SharedPreferencesUtils;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.exceptions.HyphenateException;
@@ -29,17 +32,22 @@ import com.zhy.autolayout.AutoLayoutActivity;
 
 import org.simple.eventbus.EventBus;
 
+import java.util.List;
+import java.util.Map;
+
 import kr.co.namee.permissiongen.PermissionGen;
 import kr.co.namee.permissiongen.PermissionSuccess;
 import modle.Basequanxian;
 import modle.Gaode.Gaode_dinwei;
+import modle.Huanxing.cache.UserCacheManager;
+import modle.getdata.Getdata;
 import modle.user_ziliao.User_id;
 import view.index.Teacher_fragment;
 /*
 主页列表
  */
 
-public class MainActivity extends AutoLayoutActivity implements View.OnClickListener {
+public class MainActivity extends AutoLayoutActivity implements View.OnClickListener, Requirdetailed {
     private RelativeLayout but1;
     private String ids;
     private String roles;
@@ -89,7 +97,7 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
              hostimaview.setBackgroundResource(R.drawable.logo);
               i=1;
          }
-
+        new Getdata().getmobieke(User_id.getUsername(),this);
         Teacher_fragment teacher_fragment=new Teacher_fragment();
         FragmentManager fragmentManager=getFragmentManager();
         FragmentTransaction beginTransaction=fragmentManager.beginTransaction();
@@ -98,24 +106,24 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
         beginTransaction.commit();
 
 
-        EMClient.getInstance().login(User_id.getUsername(),User_id.getPassword(),new EMCallBack() {//回调
-            @Override
-            public void onSuccess() {
-                EMClient.getInstance().groupManager().loadAllGroups();
-                EMClient.getInstance().chatManager().loadAllConversations();
-                Log.e("aa", "登录聊天服务器成功！");
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-
-            }
-
-            @Override
-            public void onError(int code, String message) {
-                Log.e("aa", code+"登录聊天服务器失败！"+message);
-            }
-        });
+//        EMClient.getInstance().login(User_id.getUsername(),User_id.getPassword(),new EMCallBack() {//回调
+//            @Override
+//            public void onSuccess() {
+//                EMClient.getInstance().groupManager().loadAllGroups();
+//                EMClient.getInstance().chatManager().loadAllConversations();
+//                Log.e("aa", "登录聊天服务器成功！");
+//            }
+//
+//            @Override
+//            public void onProgress(int progress, String status) {
+//
+//            }
+//
+//            @Override
+//            public void onError(int code, String message) {
+//                Log.e("aa", code+"登录聊天服务器失败！"+message);
+//            }
+//        });
 
     }
 
@@ -164,5 +172,42 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void Updatecontent(Map<String, Object> map) {
+        String imageUrl = (String)map.get("headimg");
+        Log.e("aa","头像地址"+imageUrl);
+        SharedPreferencesUtils.setParam(this, APPConfig.USER_HEAD_IMG,imageUrl);
+        getUser_id().setImageUrl(imageUrl);
+        // 登录成功，将用户的环信ID、昵称和头像缓存在本地
+        UserCacheManager.save(User_id.getUsername(), User_id.getUsername(), imageUrl);
+        EMClient.getInstance().login(User_id.getUsername(),User_id.getPassword(),new EMCallBack() {//回调
+            @Override
+            public void onSuccess() {
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
+                Log.e("aa", "登录聊天服务器成功！");
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+
+            @Override
+            public void onError(int code, String message) {
+                Log.e("aa", code+"登录聊天服务器失败！"+message);
+            }
+        });
+    }
+
+    @Override
+    public void Updatefee(List<Map<String, Object>> listmap) {
+
+    }
+    //获取用户参数
+    public User_id getUser_id() {
+        return ((User_id)getApplicationContext());
     }
 }

@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.SetUp;
 import com.deguan.xuelema.androidapp.entities.UserMessage;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.SharedPreferencesUtils;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
@@ -86,12 +88,13 @@ public class HuihuaList extends AutoLayoutActivity implements View.OnClickListen
             public EaseUser getUser(String username) {
                 Log.e("aa","username="+username);
                 easeUser=new EaseUser(username);
-                easeUser.setAvatar("http://deguanjiaoyu.com/Uploads/AppImg/2017-06-10/593bb3accc2f3.png");
-//                new Getdata().getmobieke(username,HuihuaList.this);
+//                String imageUrl = (String) SharedPreferencesUtils.getParam(HuihuaList.this,username,"");
+//                if (!imageUrl.equals("")){
+//                    easeUser.setAvatar(imageUrl);
+//                }
                 return easeUser;
             }
         });
-//        EaseUserUtils.setUserAvatar(this,"username","useriamge");
     }
 
     @Override

@@ -227,7 +227,8 @@ public class Student_Activty extends AutoLayoutActivity implements View.OnClickL
                 break;
             case R.id.studenthost:
                 Intent intentt=new Intent(Student_Activty.this,Xuqiufabu.class);
-                startActivity(intentt,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+//                startActivity(intentt,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+                startActivity(intentt);
                 break;
             case R.id.studentwodejiaoshi:
                 Intent intentz=new Intent(Student_Activty.this,MainActivity.class);
@@ -235,7 +236,8 @@ public class Student_Activty extends AutoLayoutActivity implements View.OnClickL
                 break;
             case R.id.huihua:
                 //会话列表
-                Intent intent1=new Intent(Student_Activty.this,HuihuaList.class);
+//                Intent intent1=new Intent(Student_Activty.this,HuihuaList.class);
+                Intent intent1 = new Intent(Student_Activty.this, modle.Huanxing.ui.MainActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.tuijianjiaoshi:
