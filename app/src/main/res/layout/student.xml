@@ -25,7 +25,7 @@
             android:layout_width="100px"
             android:layout_height="150px"
             android:id="@+id/studentwodeqianbao"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentRight="true"/>
         <RelativeLayout
             android:id="@+id/stidentshezhiimabt"
             android:layout_alignParentTop="true"
@@ -34,14 +34,14 @@
             android:layout_height="150px"/>
         <ImageButton
             android:background="@drawable/hly20"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginTop="64px"
-            android:layout_marginEnd="40px"
+            android:layout_marginRight="40px"
             android:layout_width="44px"
             android:layout_height="44px" />
         <ImageButton
-            android:layout_marginEnd="40px"
+            android:layout_marginRight="40px"
             android:layout_marginTop="65px"
             android:layout_alignTop="@+id/stidentshezhiimabt"
             android:layout_toLeftOf="@+id/studentwodeqianbao"
@@ -211,8 +211,8 @@
         <RelativeLayout
             android:id="@+id/studentwode"
             android:layout_width="160px"
-            android:layout_marginEnd="50px"
-            android:layout_alignParentEnd="true"
+            android:layout_marginRight="50px"
+            android:layout_alignParentRight="true"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true">
             <ImageView

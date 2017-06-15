@@ -3,6 +3,7 @@ package com.deguan.xuelema.androidapp;
 import android.*;
 import android.Manifest;
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +11,8 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,17 +28,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.hyphenate.util.Utils;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import org.simple.eventbus.EventBus;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -50,6 +58,7 @@ import java.util.Map;
 
 import kr.co.namee.permissiongen.PermissionGen;
 import modle.Gaode.Gaode_dinwei;
+import modle.Huanxing.ui.UserProfileActivity;
 import modle.Teacher_Modle.Teacher;
 import modle.Teacher_Modle.Teacher_init;
 import modle.toos.CircleImageView;
@@ -90,8 +99,8 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     private Button baocun;
     private Teacher_init teacher;
     private String mCurrentPhotoPath;
-    private static final int REQUEST_IMAGE_GET = 0;
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_IMAGE_GET = 5;
+    private static final int REQUEST_IMAGE_CAPTURE = 6;
     private Map<String,Object> mapa;
     private File image;
     @Override
@@ -425,7 +434,22 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        switch (requestCode) {
+            case REQUESTCODE_PICK:
+                if (data == null || data.getData() == null) {
+                    return;
+                }
+                startPhotoZoom(data.getData());
+                break;
+            case REQUESTCODE_CUTTING:
+                if (data != null) {
+                    setPicToView(data);
+                }
+                break;
+            default:
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
         // 回调成功
         if (resultCode == RESULT_OK) {
             String filePath = null;
@@ -459,17 +483,100 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     }
 
     /**
+     * save the picture data
+     *
+     * @param picdata
+     */
+    private void setPicToView(Intent picdata) {
+        Bundle extras = picdata.getExtras();
+        if (extras != null) {
+            Bitmap photo = extras.getParcelable("data");
+            Drawable drawable = new BitmapDrawable(getResources(), photo);
+            usertoux.setImageDrawable(drawable);
+//            if(!TextUtils.isEmpty(user.getAvatar())){
+//                Glide.with(UserProfileActivity.this).load(user.getAvatar()).placeholder(R.drawable.em_default_avatar).into(headAvatar);
+//            }else{
+//                Glide.with(UserProfileActivity.this).load(R.drawable.em_default_avatar).into(headAvatar);
+//            }
+
+            String timeStamp = new SimpleDateFormat("yyyy").format(new Date());
+            String imageFileName = "" + timeStamp + "_";
+            File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            setuseryoux(byte2File(Bitmap2Bytes(photo),storageDir.getAbsolutePath(),imageFileName));
+        }
+
+    }
+    public static File byte2File(byte[] buf, String filePath, String fileName)
+    {
+        BufferedOutputStream bos = null;
+        FileOutputStream fos = null;
+        File file = null;
+        try
+        {
+            File dir = new File(filePath);
+            if (!dir.exists() && dir.isDirectory())
+            {
+                dir.mkdirs();
+            }
+            file = new File(filePath + File.separator + fileName);
+            fos = new FileOutputStream(file);
+            bos = new BufferedOutputStream(fos);
+            bos.write(buf);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if (bos != null)
+            {
+                try
+                {
+                    bos.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            if (fos != null)
+            {
+                try
+                {
+                    fos.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return file;
+    }
+    //bitmap转字节流
+    public byte[] Bitmap2Bytes(Bitmap bm){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
+    }
+    private static final int REQUESTCODE_PICK = 1;
+    private static final int REQUESTCODE_CUTTING = 2;
+    /**
      * 从相册中获取
      */
     public void selectImage() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        //判断系统中是否有处理该Intent的Activity
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, REQUEST_IMAGE_GET);
-        } else {
-            showToast("未找到图片查看器");
-        }
+        Intent pickIntent = new Intent(Intent.ACTION_PICK,null);
+        pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+        startActivityForResult(pickIntent, REQUESTCODE_PICK);
+//        Intent intent = new Intent(Intent.ACTION_PICK);
+//        intent.setType("image/*");
+//        //判断系统中是否有处理该Intent的Activity
+//        if (intent.resolveActivity(getPackageManager()) != null) {
+//            startActivityForResult(intent, REQUEST_IMAGE_GET);
+//        } else {
+//            showToast("未找到图片查看器");
+//        }
 
     }
 
@@ -506,7 +613,11 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                 // 异常处理
             }
             if (photoFile != null) {
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                ContentValues contentValues = new ContentValues(1);
+                contentValues.put(MediaStore.Images.Media.DATA, photoFile.getAbsolutePath());
+                Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValues);
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
                 startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
             }
         } else {
@@ -625,11 +736,11 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
      * 裁剪图片方法实现
      *
      */
-    public void startPhotoZoom(String pa) {
+    public void startPhotoZoom(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(Uri.parse(pa), "image/*");
+        intent.setDataAndType(uri, "image/*");
         // 设置裁剪
-        intent.putExtra("crop", "true");
+        intent.putExtra("crop", true);
         // aspectX aspectY 是宽高的比例
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
@@ -637,7 +748,8 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         intent.putExtra("outputX", 340);
         intent.putExtra("outputY", 340);
         intent.putExtra("return-data", true);
-        startActivityForResult(intent,0);
+        intent.putExtra("noFaceDetection", true);
+        startActivityForResult(intent,REQUESTCODE_CUTTING);
     }
 
 }

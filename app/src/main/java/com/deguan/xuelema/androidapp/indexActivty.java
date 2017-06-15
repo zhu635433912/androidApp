@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
@@ -128,7 +129,6 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
         xingxibutton = (RelativeLayout) findViewById(R.id.xingxibutton);
         usernametext = (TextView) findViewById(R.id.usernametext);
         huihua = (TextView) findViewById(R.id.huihua);
-        huihua.setVisibility(View.GONE);
         xues = (TextView) findViewById(R.id.xues);
         hostimaview = (ImageView) findViewById(R.id.hostimaview);
         wodegerxx= (ImageView) findViewById(R.id.wodegerxx);
@@ -141,8 +141,9 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
         setup.bringToFront();
         qianbao.bringToFront();
         scrollView.setMyScrollListener(this);
-
-        uid=Integer.parseInt(User_id.getUid());
+        if (!TextUtils.isEmpty(User_id.getUid())) {
+            uid = Integer.parseInt(User_id.getUid());
+        }
         int role = Integer.parseInt(User_id.getRole());
         if (role == 2) {
             xues.setText("学生");

@@ -42,6 +42,14 @@
         android:src="@drawable/ox2"
         android:layout_width="200px"
         android:layout_height="200px" />
+    <!--<ImageView-->
+        <!--android:id="@+id/usertoux"-->
+        <!--android:layout_marginTop="30px"-->
+        <!--android:layout_below="@+id/xuqiufenggexian"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:src="@drawable/ox2"-->
+        <!--android:layout_width="200px"-->
+        <!--android:layout_height="200px" />-->
 
     <TextView
         android:layout_marginTop="50px"
@@ -63,10 +71,10 @@
     <TextView
         android:id="@+id/userdizhi"
         android:textColor="#1e1e1e"
-        android:layout_marginEnd="50px"
+        android:layout_marginRight="50px"
         android:layout_alignBottom="@+id/xuqiufenggexian1"
         android:textSize="30px"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:gravity="end|center"
         android:layout_width="500px"
         android:layout_height="100px" />
@@ -84,10 +92,10 @@
         android:gravity="end|center"
         android:id="@+id/userage"
         android:textColor="#1e1e1e"
-        android:layout_marginEnd="50px"
+        android:layout_marginRight="50px"
         android:layout_alignBottom="@+id/xuqiufenggexian2"
         android:textSize="30px"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_width="500px"
         android:layout_height="100px" />
     <TextView
@@ -119,10 +127,10 @@
         android:gravity="end|center"
         android:id="@+id/usershenr"
         android:textColor="#1e1e1e"
-        android:layout_marginEnd="50px"
+        android:layout_marginRight="50px"
         android:layout_alignBottom="@+id/xuqiufenggexian3"
         android:textSize="30px"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_width="500px"
         android:layout_height="100px" />
     <TextView
@@ -146,10 +154,10 @@
         android:gravity="end|center"
         android:id="@+id/ziyouzhiye"
         android:textColor="#1e1e1e"
-        android:layout_marginEnd="50px"
+        android:layout_marginRight="50px"
         android:layout_alignBottom="@+id/xuqiufenggexian4"
         android:textSize="30px"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_width="500px"
         android:layout_height="100px" />
 
@@ -174,10 +182,10 @@
         android:gravity="end|center"
         android:id="@+id/emage"
         android:textColor="#1e1e1e"
-        android:layout_marginEnd="50px"
+        android:layout_marginRight="50px"
         android:layout_alignBottom="@+id/xuqiufenggexian5"
         android:textSize="30px"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_width="500px"
         android:layout_height="100px" />
     <RelativeLayout
@@ -205,10 +213,10 @@
             android:gravity="end|center"
             android:id="@+id/biyexuexiao"
             android:textColor="#1e1e1e"
-            android:layout_marginEnd="50px"
+            android:layout_marginRight="50px"
             android:layout_alignBottom="@+id/xuqiufenggexian6"
             android:textSize="30px"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_width="500px"
             android:layout_height="100px" />
     </RelativeLayout>
@@ -237,10 +245,10 @@
             android:gravity="end|center"
             android:id="@+id/shurujiaol"
             android:textColor="#1e1e1e"
-            android:layout_marginEnd="50px"
+            android:layout_marginRight="50px"
             android:layout_alignBottom="@+id/xuqiufenggexian7"
             android:textSize="30px"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_width="500px"
             android:layout_height="100px" />
     </RelativeLayout>

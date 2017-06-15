@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.transition.Explode;
 import android.transition.Fade;
 import android.transition.Slide;
@@ -90,7 +91,9 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
         //获取用户是教师还是学生展示相应的参数
         ids=User_id.getUid();
         roles=User_id.getRole();
-        int id=Integer.parseInt(ids);
+        if (!TextUtils.isEmpty(ids)) {
+            int id = Integer.parseInt(ids);
+        }
         int role=Integer.parseInt(roles);
          if (role==2){
              bianji.setText("学生");
