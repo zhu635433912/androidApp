@@ -72,12 +72,12 @@
         "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_row_received_location.xml"
     },
     {
-        "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ease_alert_dialog.xml",
-        "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_alert_dialog.xml"
-    },
-    {
         "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ease_row_sent_video.xml",
         "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_row_sent_video.xml"
+    },
+    {
+        "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ease_alert_dialog.xml",
+        "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_alert_dialog.xml"
     },
     {
         "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ease_row_chat_history.xml",

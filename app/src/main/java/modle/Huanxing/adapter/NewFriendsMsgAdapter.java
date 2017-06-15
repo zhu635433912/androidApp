@@ -166,8 +166,6 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 	/**
 	 * accept invitation
 	 * 
-	 * @param button
-	 * @param username
 	 */
 	private void acceptInvitation(final Button buttonAgree, final Button buttonRefuse, final InviteMessage msg) {
 		final ProgressDialog pd = new ProgressDialog(context);

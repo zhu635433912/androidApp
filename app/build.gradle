@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.deguan.xuelema.androidapp"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -36,6 +36,12 @@ android {
         lintOptions {
             checkReleaseBuilds false
             abortOnError false
+        }
+    }
+    sourceSets {
+        main {
+// 设置Jni so文件路径如果有jniLibs目录就不需要设置
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
@@ -120,4 +126,6 @@ dependencies {
     compile project(':PullToRefresh')
     //greenDao
     compile 'de.greenrobot:greendao:2.1.0'
+
+
 }

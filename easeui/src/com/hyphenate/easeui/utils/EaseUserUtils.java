@@ -37,16 +37,29 @@ public class EaseUserUtils {
      */
     public static void setUserAvatar(Context context, String username, ImageView imageView){
     	EaseUser user = getUserInfo(username);
+
+        GlideRoundTransform transform = new GlideRoundTransform(context,15);// 把获取到的bitmap转换成圆角图片
         if(user != null && user.getAvatar() != null){
             try {
                 int avatarResId = Integer.parseInt(user.getAvatar());
-                Glide.with(context).load(avatarResId).into(imageView);
+                Glide.with(context)
+                        .load(avatarResId)
+                        .transform(transform)// 设置圆角
+                        .into(imageView);
             } catch (Exception e) {
                 //use default avatar
-                Glide.with(context).load(user.getAvatar()).diskCacheStrategy(DiskCacheStrategy.ALL).placeholder(R.drawable.ease_default_avatar).into(imageView);
+                Glide.with(context)
+                        .load(user.getAvatar())
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .placeholder(R.drawable.ease_default_avatar)
+                        .transform(transform)// 设置圆角
+                        .into(imageView);
             }
         }else{
-            Glide.with(context).load(R.drawable.ease_default_avatar).into(imageView);
+            Glide.with(context)
+                    .load(R.drawable.ease_default_avatar)
+                    .transform(transform)// 设置圆角
+                    .into(imageView);
         }
     }
     
