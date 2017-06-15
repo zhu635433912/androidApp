@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ListView;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.List;
 import java.util.Map;
@@ -31,8 +32,8 @@ public interface Teacher_init {
      * lat    纬度
      * lng    经度
      */
-    public List<Map<String,Object>> Get_Teacher_list(int uid, int role, double lat, double lng, MyListview listView, Context context, int order, String state,
-                                                     int gender, int speciality, int grade_type,int order_rank,Requirdetailed requirdetailed);
+    public List<Map<String,Object>> Get_Teacher_list(int uid, int role, double lat, double lng, PullToRefreshListView listView, Context context, int order, String state,
+                                                     int gender, int speciality, int grade_type, int order_rank, Requirdetailed requirdetailed,int page);
     /**
      *教师资料更新
      */

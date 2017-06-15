@@ -103,8 +103,9 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         String  publisher_id=getIntent().getStringExtra("publisher_id");
         String uds = getIntent().getStringExtra("user_id");
         String feeva= getIntent().getStringExtra("fee");
-
-        fee=Integer.parseInt(feeva);
+//        Integer i
+                fee = Integer.valueOf((Math.round(Float.parseFloat(feeva))));
+//        fee=Integer.parseInt(feeva);
         id = Integer.parseInt(User_id.getUid());
         dindan = Integer.parseInt(uds);
         user_id=Integer.parseInt(publisher_id);

@@ -8,8 +8,12 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.deguan.xuelema.androidapp.R;
+import com.deguan.xuelema.androidapp.viewimpl.TeacherView;
+import com.deguan.xuelema.androidapp.viewimpl.XuqiuView;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,26 +43,35 @@ public class Mycontrol implements Myconteol_init  {
     Teacher_init teacher_init;
     List<Map<String, Object>> listmap;
     String[] jz;
+    XuqiuView xuqiuView;
+    TeacherView teacherView;
 
+    public Mycontrol() {
+
+    }
+
+    public Mycontrol( TeacherView teacherView) {
+        this.teacherView = teacherView;
+    }
     //获取教师列表
     @Override
-    public void setlist_a(final int uid, final int role, final double lat, final double ing, final MyListview listView, final Context context, int order, String state
-            , int gender, int speciality, int grade_type,int order_rank) {
+    public void setlist_a(final int uid, final int role, final double lat, final double ing, final PullToRefreshListView listView, final Context context, int order, String state
+            , int gender, int speciality, int grade_type, int order_rank,int page) {
         Log.e("aa","用户身份为"+role);
         if (role==1) {
             //判断用户是否为学生 为学生展示老师信息
-            teacher_init = new Teacher();
-            listmap = teacher_init.Get_Teacher_list(uid,role, lat, ing, listView, context,order,state,gender,speciality,grade_type,order_rank,null);
+            teacher_init = new Teacher(teacherView);
+            listmap = teacher_init.Get_Teacher_list(uid,role, lat, ing, listView, context,order,state,gender,speciality,grade_type,order_rank,null,page);
 
         }else {
             //判断用户是否为老师，为老师展示学生信息
-            Demand_init demand_init=new Demand();
-            demand_init.getDemand_list(uid,role,0,0,"2016-08-10",0,1,listView,context,null);
+//            Demand_init demand_init=new Demand(xuqiuView);
+//            demand_init.getDemand_list(uid,role,0,0,"2016-08-10",0,page,listView,context,null);
         }
     }
 
     //教师列表回调
-    public void huidiao(final List<Map<String, Object>> listmap, final int role, final MyListview listView, final Context context){
+    public void huidiao(final List<Map<String, Object>> listmap, final int role, final PullToRefreshListView listView, final Context context){
         this.listmap=listmap;
         Observable.create(new Observable.OnSubscribe<List<Map<String, Object>>>() {
             @Override
@@ -75,13 +88,15 @@ public class Mycontrol implements Myconteol_init  {
                             Requirdapter listAdapter=new Requirdapter(listmap,context);
                             listView.setAdapter(listAdapter);
                             //自定义适配器
-                            listView.reflashComplet();
+                            listView.onRefreshComplete();
+//                            listView.reflashComplet();
                         }else {
                             //SimpleAdapter simpleAdapter = new SimpleAdapter(context, maps, R.layout.listview_itme, new String[]{"publisher_id","fee","content","course_name","service_type"}, new int[]{R.id.text1,R.id.text3, R.id.text6, R.id.text4, R.id.text9});
 
                             StudentAdapter simpleAdapte=new StudentAdapter(listmap,context);
                             listView.setAdapter(simpleAdapte);
-                            listView.reflashComplet();
+//                            listView.reflashComplet();
+                            listView.onRefreshComplete();
                         }
 
 
@@ -102,7 +117,7 @@ public class Mycontrol implements Myconteol_init  {
                 jz=map.get(shen);
                 listmap=new ArrayList<Map<String,Object>>();
                 for (int i=0;i<jz.length;i++){
-                    Map<String,Object> map1=new ArrayMap<String,Object>();
+                    Map<String,Object> map1=new HashMap<String,Object>();
                     map1.put("text",jz[i]);
                     listmap.add(map1);
                 }
@@ -136,7 +151,7 @@ public class Mycontrol implements Myconteol_init  {
                 jz=map.get(shi);
                 listmap=new ArrayList<Map<String,Object>>();
                 for (int i=0;i<jz.length;i++){
-                    Map<String,Object> map1=new ArrayMap<String,Object>();
+                    Map<String,Object> map1=new HashMap<String,Object>();
                     map1.put("diqu",jz[i]);
                     listmap.add(map1);
                 }

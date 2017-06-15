@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,7 +68,7 @@ public class StudentAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHoder = new StudentAdapter.MyViewHoder();
             convertView = layoutInflater.inflate(R.layout.listview_itme, null);
-            viewHoder.user_headimg = (CircleImageView) convertView.findViewById(R.id.lognhost);
+//            viewHoder.user_headimg = (SimpleDraweeView) convertView.findViewById(R.id.lognhost);
             viewHoder.nickname = (TextView) convertView.findViewById(R.id.text1);
             viewHoder.service_type = (TextView) convertView.findViewById(R.id.text9);
             viewHoder.fee = (TextView) convertView.findViewById(R.id.text3);
@@ -87,7 +88,8 @@ public class StudentAdapter extends BaseAdapter {
         viewHoder.speciality.setText(""+ listmap.get(position).get("course_name"));
         viewHoder.username.setText(""+listmap.get(position).get("content"));
         viewHoder.haoping_numtext.setText(""+ listmap.get(position).get("created"));
-        setbitmap(listmap.get(position).get("publisher_headimg")+"",viewHoder.user_headimg);
+//        setbitmap(listmap.get(position).get("publisher_headimg")+"",viewHoder.user_headimg);
+//        viewHoder.user_headimg.setImageURI(Uri.parse((String)listmap.get(position).get("publisher_headimg")));
         String dist= (String) listmap.get(position).get("distance");
         Log.e("aa","dist为"+dist);
         if (!dist.equals("")){
@@ -101,7 +103,8 @@ public class StudentAdapter extends BaseAdapter {
     }
 
     class MyViewHoder {
-        private CircleImageView user_headimg;//用户头像
+//        private SimpleDraweeView user_headimg;
+//        private CircleImageView user_headimg;//用户头像
         private TextView nickname;//昵称
         private TextView service_type;//服务类型
         private TextView fee;//课时费

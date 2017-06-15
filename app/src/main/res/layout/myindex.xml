@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#111111">
+
     <modle.toos.MScrollView
         android:id="@+id/scv"
         android:layout_width="match_parent"
@@ -81,7 +82,7 @@
             android:layout_marginRight="120px"
             android:layout_marginTop="55px"
             android:layout_toLeftOf="@+id/touxiangimg"
-            android:text="0"
+            android:text=""
             android:textColor="#d7d7d7"
             android:textSize="40px" />
 
@@ -91,7 +92,7 @@
             android:layout_below="@+id/xxitexutview"
             android:layout_marginRight="100px"
             android:layout_toLeftOf="@+id/touxiangimg"
-            android:text="消息"
+            android:text=""
             android:textColor="#d7d7d7"
             android:textSize="30px" />
 
@@ -103,7 +104,7 @@
             android:layout_marginLeft="120px"
             android:layout_marginTop="55px"
             android:layout_toRightOf="@+id/touxiangimg"
-            android:text="0"
+            android:text=""
             android:textColor="#d7d7d7"
             android:textSize="35px" />
 
@@ -116,7 +117,7 @@
             android:layout_toRightOf="@+id/touxiangimg"
             android:gravity="center"
             android:paddingBottom="50px"
-            android:text="会话"
+            android:text="聊天管理"
             android:textColor="#d7d7d7"
             android:textSize="35px" />
 

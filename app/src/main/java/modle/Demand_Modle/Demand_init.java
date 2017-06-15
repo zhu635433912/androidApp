@@ -6,6 +6,7 @@ import android.widget.ListView;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.List;
 import java.util.Map;
@@ -25,7 +26,7 @@ public interface Demand_init {
      *end_time         如果筛选条件是2, 传入结束时间
      * page             页面数, 做分页处理, 默认填1
      */
-    public List<Map<String,Object>> getDemand_list(int uid, int role, int filter_type, int filter_id, String start_time, int end_time, int page, MyListview listView, Context context, Student_init requirdetailed);
+    public List<Map<String,Object>> getDemand_list(int uid, int role, int filter_type, int filter_id, String start_time, int end_time, int page, PullToRefreshListView listView, Context context, Student_init requirdetailed);
 
     /**获取单一需求
      *uid    用户id

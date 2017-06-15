@@ -8,8 +8,11 @@ import android.widget.ListView;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
+import com.deguan.xuelema.androidapp.viewimpl.XuqiuView;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,10 +39,11 @@ public class Demand implements Demand_init {
     private Map<String,Object> map;
     private Retrofit retrofit;
     private Demand_http demand_http;
+    private XuqiuView xuqiuView;
 
     //初始化网络访问对象
     public Demand(){
-        map=new ArrayMap<String,Object>();
+        map=new HashMap<String,Object>();
 
         retrofit=new Retrofit.Builder().baseUrl(MyUrl.URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -47,12 +51,22 @@ public class Demand implements Demand_init {
                 .build();
         demand_http=retrofit.create(Demand_http.class);
     }
+    //初始化网络访问对象
+    public Demand(XuqiuView xuqiuView){
+        this.xuqiuView = xuqiuView;
+        map=new HashMap<String,Object>();
 
+        retrofit=new Retrofit.Builder().baseUrl(MyUrl.URL)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        demand_http=retrofit.create(Demand_http.class);
+    }
     /*
     获取需求列表
      */
     @Override
-    public List<Map<String, Object>> getDemand_list(int uid, final int role, int filter_type, int filter_id, final String start_time, int end_time, int page, final MyListview listView, final Context context, final Student_init student_init) {
+    public List<Map<String, Object>> getDemand_list(int uid, final int role, int filter_type, int filter_id, final String start_time, int end_time, int page, final PullToRefreshListView listView, final Context context, final Student_init student_init) {
         Call<ContentModle> call=demand_http.getDemandlist(uid,filter_type,filter_id,start_time,end_time,page);
         call.enqueue(new Callback<ContentModle>() {
             @Override
@@ -62,24 +76,26 @@ public class Demand implements Demand_init {
                     List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
                     listmap = response.body().getContent();
                     Log.e("aa", "listmap=" + listmap);
-                    if (student_init == null) {
-                        //回调设置listview
-                        Myconteol_init myconteol_init = new Mycontrol();
-                        myconteol_init.huidiao(listmap, role, listView, context);
-                    }else {
-                        student_init.setListview1(listmap);
-                    }
-
+//                    if (student_init == null) {
+//                        //回调设置listview
+//                        Myconteol_init myconteol_init = new Mycontrol();
+//                        myconteol_init.huidiao(listmap, role, listView, context);
+//                    }else {
+//                        student_init.setListview1(listmap);
+//                    }
+                    xuqiuView.successXuqiu(listmap);
 
                 }else {
                     String errmsg=response.body().getErrmsg();
                     Log.e("aa","获取需求列表失败错误="+errmsg);
+                    xuqiuView.failXuqiu(errmsg);
                 }
             }
 
             @Override
             public void onFailure(Call<ContentModle> call, Throwable t) {
                 Log.e("aa","获取需求列表异常错误"+t.toString());
+                xuqiuView.failXuqiu("网络错误");
             }
         });
 

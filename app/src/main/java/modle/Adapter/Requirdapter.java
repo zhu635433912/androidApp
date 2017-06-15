@@ -65,7 +65,7 @@ public class Requirdapter extends BaseAdapter {
         if (convertView==null){
             viewHoder=new ViewHoder();
             convertView=layoutInflater.inflate(R.layout.listview_itme,null);
-            viewHoder.user_headimg= (CircleImageView) convertView.findViewById(R.id.lognhost);
+//            viewHoder.user_headimg= (CircleImageView) convertView.findViewById(R.id.lognhost);
             viewHoder.nickname= (TextView) convertView.findViewById(R.id.text1);
             viewHoder.service_type= (TextView) convertView.findViewById(R.id.text9);
             viewHoder.fee= (TextView) convertView.findViewById(R.id.text3);

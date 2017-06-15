@@ -11,6 +11,7 @@ public class ContentModle {
     private List<Map<String,Object>> content;
     private String error;
     private String errmsg;
+    private String loadMore;
 
     public List<Map<String, Object>> getContent(){
         return content;
@@ -34,5 +35,13 @@ public class ContentModle {
 
     public void setErrmsg(String errmsg){
         this.errmsg = errmsg;
+    }
+
+    public String getLoadMore() {
+        return loadMore;
+    }
+
+    public void setLoadMore(String loadMore) {
+        this.loadMore = loadMore;
     }
 }

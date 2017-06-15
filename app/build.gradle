@@ -46,16 +46,16 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     /*
-                                                            屏幕适配
-                                                            */
+                                                                    屏幕适配
+                                                                    */
     compile 'com.zhy:autolayout:latest.release'
     /*
-                                                            okHttp
-                                                             */
+                                                                    okHttp
+                                                                     */
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
     /*
-                                                            Retrofit  Rxjava
-                                                            */
+                                                                    Retrofit  Rxjava
+                                                                    */
     compile 'io.reactivex:rxjava:x.y.z'
     compile 'io.reactivex:rxandroid:1.0.1'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
@@ -64,51 +64,60 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/AMap_Location_V3.3.0_20170118.jar')
     /*
-                                                      高德
-                                                       */
+                                                              高德
+                                                               */
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/android-support-v7-recyclerview.jar')
     compile 'junit:junit:4.12'
     compile files('libs/core-3.2.1.jar')
-//    compile 'com.amap.api:location:latest.integration'
+    //    compile 'com.amap.api:location:latest.integration'
     /*
-                            支付宝
-                             */
+                                    支付宝
+                                     */
     compile files('libs/alipaySdk-20170309.jar')
     /*
-                            环信
-                             */
+                                    环信
+                                     */
     compile project(':easeui')
     /*
-                    极光推送
-                     */
+                            极光推送
+                             */
     compile 'cn.jiguang.sdk:jpush:3.0.5'
     // 此处以JPush 3.0.5 版本为例。
     // 此处以JCore 1.1.2 版本为例。
     compile 'cn.jiguang.sdk:jcore:1.1.2'
     compile files('libs/okhttputils-2_6_2.jar')
     /*
-        三级联动
-         */
+                三级联动
+                 */
     compile 'com.contrarywind:Android-PickerView:3.2.5'
     /*
-        小Dlog动画http://www.open-open.com/lib/view/open1445846143992.html
-         */
+                小Dlog动画http://www.open-open.com/lib/view/open1445846143992.html
+                 */
     compile 'com.wang.avi:library:1.0.0'
     compile 'com.nineoldandroids:library:2.4.0'
     /*
-        软键盘收缩
+                软键盘收缩
 
-        compile 'org.loader:autohideime:1.0'*/
+                compile 'org.loader:autohideime:1.0'*/
     //动态权限申请
     compile 'com.lovedise:permissiongen:0.0.6'
     //android EventBus
     compile 'org.simple:androideventbus:1.0.5.1'
-//    ormlite：操作sqlite数据库
-//    gson：json对象转换
+    //    ormlite：操作sqlite数据库
+    //    gson：json对象转换
     compile 'com.j256.ormlite:ormlite-android:5.0'
     compile 'com.google.code.gson:gson:2.8.0'
-
     compile 'com.parse:parse-android:1.13.1'
     compile 'com.android.support:multidex:1.0.1'
+    //图片加载
+
+//    compile 'com.facebook.fresco:fresco:0.9.0'
+//    compile('com.facebook.fresco:fresco:0.9.0') {
+//        exclude group: 'com.parse.bolts',
+//                module: 'bolts-android'
+//    }
+    compile project(':PullToRefresh')
+    //greenDao
+    compile 'de.greenrobot:greendao:2.1.0'
 }

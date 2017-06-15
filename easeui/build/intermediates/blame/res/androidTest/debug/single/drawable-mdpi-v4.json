@@ -2,13 +2,5 @@
     {
         "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\ic_launcher.png",
         "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\ic_launcher.png"
-    },
-    {
-        "merged": "D:\\androidpoject\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\ic_launcher.png",
-        "source": "D:\\androidpoject\\androidApp\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\ic_launcher.png"
-    },
-    {
-        "merged": "E:\\androidpoject\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-mdpi-v4\\ic_launcher.png",
-        "source": "E:\\androidpoject\\androidApp\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-mdpi-v4\\ic_launcher.png"
     }
 ]

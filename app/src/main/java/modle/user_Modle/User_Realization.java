@@ -385,6 +385,7 @@ public class User_Realization implements User_init {
         if (f.exists()) {
             f.delete();
         }
+        //空
         try {
             Log.e("aa","图片压缩前"+bitmap.getHeight());
             FileOutputStream out = new FileOutputStream(f);

@@ -25,22 +25,33 @@ import android.widget.Toast;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.UserxinxiActivty;
 import com.deguan.xuelema.androidapp.Xuqiuxiangx;
+import com.deguan.xuelema.androidapp.entities.TeacherEntity;
+import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
 import com.deguan.xuelema.androidapp.init.Gaodehuidiao_init;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.utils.DbUtil;
+import com.deguan.xuelema.androidapp.viewimpl.TeacherView;
+import com.deguan.xuelema.androidapp.viewimpl.XuqiuView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import control.Myconteol_init;
 import control.Mycontrol;
+import de.greenrobot.dao.DbUtils;
 import kr.co.namee.permissiongen.PermissionGen;
 import kr.co.namee.permissiongen.PermissionSuccess;
 import modle.Adapter.Requirdapter;
 import modle.Adapter.StudentAdapter;
+import modle.Adapter.TeacherListAdapter;
+import modle.Adapter.XuqiuAdapter;
 import modle.Demand_Modle.Demand;
 import modle.Demand_Modle.Demand_init;
 import modle.Gaode.Gaode_dinwei;
@@ -53,9 +64,14 @@ import modle.user_ziliao.User_id;
  * 需求（教师）列表 碎片
  */
 
-public class Teacher_fragment extends Fragment implements View.OnClickListener,MyListview.IReflashListener,
-        Requirdetailed,MyListview.RemoveListener,Gaodehuidiao_init,Student_init {
-    MyListview listView;
+public class Teacher_fragment extends Fragment implements View.OnClickListener,
+//        MyListview.IReflashListener,
+        Requirdetailed,
+        PullToRefreshBase.OnRefreshListener2,
+        XuqiuView,
+//        MyListview.RemoveListener,
+        Gaodehuidiao_init,Student_init, TeacherView {
+    PullToRefreshListView listView;
     Myconteol_init myconteol_init;
     ImageButton quyuBtn;
     ImageButton paixuBtn;
@@ -124,6 +140,16 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
 
     private RelativeLayout indeshuax;
     private TextView indeshuaxtext;
+    private int page = 1;
+    //需求列表数据源
+    private List<XuqiuEntity> datas = new ArrayList<>();
+    private XuqiuAdapter xuqiuAdapter ;
+    //教师列表数据
+    private List<TeacherEntity> teachers = new ArrayList<>();
+    private TeacherListAdapter teacherAdapter;
+    private Demand_init demand_init;
+    private Teacher_init t;
+
 
     @Override
     public void onResume() {
@@ -135,8 +161,10 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragemnt_host,null);
-        myconteol_init=new Mycontrol();
 
+//        myconteol_init=new Mycontrol(this);
+
+//        listView.setAdapter();
         button= (Button) view.findViewById(R.id.quedin);
         nianjibuxianr= (RelativeLayout) view.findViewById(R.id.nianjibuxianr);
         xiaoxuer= (RelativeLayout) view.findViewById(R.id.xiaoxuer);
@@ -173,7 +201,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
         listview1= (ListView) view.findViewById(R.id.listviewhastva);
         listview2= (ListView) view.findViewById(R.id.listviewhastva2);
         linearLayout= (LinearLayout) view.findViewById(R.id.lincavtilint);
-        listView= (MyListview) view.findViewById(R.id.list1);
+        listView= (PullToRefreshListView) view.findViewById(R.id.list1);
         shaixuan= (RelativeLayout) view.findViewById(R.id.shaixuan);
         xinjipaixu= (TextView) view.findViewById(R.id.xinjipaixu);
         jiagepaixu= (TextView) view.findViewById(R.id.jiagepaixu);
@@ -229,9 +257,10 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
 
 
         //下拉刷新
-        listView.setInterface(this);
-        listView.setRemoveListener(this);
-
+//        listView.setInterface(this);
+//        listView.setRemoveListener(this);
+        listView.setMode(PullToRefreshBase.Mode.BOTH);
+        listView.setOnRefreshListener(this);
 
 
 
@@ -245,8 +274,8 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
         suxuer.bringToFront();
 
         //取消listview下拉上啦默认
-        listView.setOverScrollMode(view.OVER_SCROLL_NEVER);
-        listView.setVerticalScrollBarEnabled(false);
+//        listView.setOverScrollMode(view.OVER_SCROLL_NEVER);
+//        listView.setVerticalScrollBarEnabled(false);
         listview1.setOverScrollMode(view.OVER_SCROLL_NEVER);
         listview1.setVerticalScrollBarEnabled(false);
         listview2.setOverScrollMode(view.OVER_SCROLL_NEVER);
@@ -291,7 +320,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
                 Map<String,Object> map= (Map<String, Object>) listview2.getItemAtPosition(position);
                 String aa= (String) map.get("diqu");
 
-                myconteol_init.setlist_a(id_fuzhi,role,lat, lng, listView, getActivity(),0,aa,0,0,0,3);
+                myconteol_init.setlist_a(id_fuzhi,role,lat, lng, listView, getActivity(),0,aa,0,0,0,3,page);
                 lineavitint.setVisibility(View.GONE);
             }
         });
@@ -302,28 +331,57 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (role==1) {
                     //进入老师
-                    String uid = requirdapter.geiuiserid(position-1);
+//                    String uid = requirdapter.geiuiserid(position-1);
                     Intent intent = new Intent(getActivity(), UserxinxiActivty.class);
-                    intent.putExtra("user_id", uid);
+//                    intent.putExtra("user_id", uid);
+                    intent.putExtra("user_id",teachers.get(position-1).getUser_id());
                     startActivity(intent);
                 }else {
                     //进入学生
 
-                    Map<String,Object> map=new HashMap<String, Object>();
-                    map=studentAdapter.geiuiserid(position-1);
+//                    Map<String,Object> map=new HashMap<String, Object>();
+//                    map=studentAdapter.geiuiserid(position-1);
                     Intent intent = new Intent(getActivity(), Xuqiuxiangx.class);
-
-                    intent.putExtra("user_id",(String)map.get("user_id"));
-                    intent.putExtra("fee",(String)map.get("fee"));
-                    intent.putExtra("publisher_id",(String)map.get("publisher_id"));
+                    intent.putExtra("user_id",datas.get(position-1).getId());
+                    intent.putExtra("fee",datas.get(position-1).getFee());
+                    intent.putExtra("publisher_id",datas.get(position-1).getPublisher_id());
+//                    intent.putExtra("user_id",(String)map.get("user_id"));
+//                    intent.putExtra("fee",(String)map.get("fee"));
+//                    intent.putExtra("publisher_id",(String)map.get("publisher_id"));
                     startActivity(intent);
                 }
 
             }
         });
-
-
+        initData();
+        myconteol_init=new Mycontrol(this);
         return view;
+    }
+    //初始化数据
+    private void initData() {
+        if (role == 2){
+            List<XuqiuEntity> listEntities = DbUtil.getSession()
+                    .getXuqiuEntityDao()
+                    .queryBuilder()
+                    .limit(19)
+                    .list();
+            datas.addAll(listEntities);
+            xuqiuAdapter = new XuqiuAdapter(datas, getActivity());
+            listView.setAdapter(xuqiuAdapter);
+        }else if (role == 1){
+            List<TeacherEntity> dbLists = DbUtil.getSession()
+                    .getTeacherEntityDao()
+                    .queryBuilder()
+                    .limit(19)
+                    .list();
+            teachers.addAll(dbLists);
+            teacherAdapter = new TeacherListAdapter(teachers,getActivity());
+            listView.setAdapter(teacherAdapter);
+        }
+
+//        adapter
+        demand_init = new Demand(this);
+        t = new Teacher(this);
     }
 
 
@@ -341,7 +399,8 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
         switch (v.getId()){
             case R.id.quyubut1:
                 Log.e("aa","点击的是地区");
-                listView.reflashComplet();
+//                listView.reflashComplet();
+                listView.onRefreshComplete();
                 //显示筛选布局控件
                 lineavitint.setVisibility(View.VISIBLE);
                 //隐藏排序
@@ -357,6 +416,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
                 break;
             case R.id.paixubut2:
                 Log.e("aa","点击的是排序");
+                page = 1;
                 linearLayout.setBackgroundResource(R.drawable.list02);
                 //显示筛选布局控件
                 lineavitint.setVisibility(View.VISIBLE);
@@ -370,19 +430,19 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
             case R.id.xinjipaixu:
                 //星级排序
                 Log.e("aa","点击的是星级");
-                myconteol_init.setlist_a(id,role,lat, lng, listView, getActivity(),1,"",0,0,0,3);
+                myconteol_init.setlist_a(id,role,lat, lng, listView, getActivity(),1,"",0,0,0,3,page);
                 lineavitint.setVisibility(View.GONE);
                 break;
             case R.id.jiagepaixu:
                 //价格排序
                 Log.e("aa","点击的是价格");
-                myconteol_init.setlist_a(id,role,lat, lng, listView, getActivity(),2,"",0,0,0,3);
+                myconteol_init.setlist_a(id,role,lat, lng, listView, getActivity(),2,"",0,0,0,3,page);
                 lineavitint.setVisibility(View.GONE);
                 break;
             case R.id.renqipaixu:
                 //人气排序
                 Log.e("aa","点击的是人气");
-                myconteol_init.setlist_a(id,role,lat, lng, listView, getActivity(),3,"",0,0,0,3);
+                myconteol_init.setlist_a(id,role,lat, lng, listView, getActivity(),3,"",0,0,0,3,page);
                 lineavitint.setVisibility(View.GONE);
                 break;
             case R.id.shaixuanbut3:
@@ -498,7 +558,8 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
                 break;
 
             case R.id.quedin:
-                myconteol_init.setlist_a(id,role,lat, lng, listView, getActivity(),1,"",xinbie,kemu,xueli,order_rank);
+                page = 1;
+                myconteol_init.setlist_a(id,role,lat, lng, listView, getActivity(),1,"",xinbie,kemu,xueli,order_rank,page);
                 tiaojianshaixuan.setVisibility(View.GONE);
 
                 break;
@@ -507,10 +568,10 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
 
 
     //刷新数据接口
-    @Override
-    public void onReflash() {
-        myconteol_init.setlist_a(id,role,lat,lng, listView, getActivity(),0,"",0,0,0,0);
-    }
+//    @Override
+//    public void onReflash() {
+//        myconteol_init.setlist_a(id,role,lat,lng, listView, getActivity(),0,"",0,0,0,0);
+//    }
 
 
     @Override
@@ -520,19 +581,19 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
 
     @Override
     public void Updatefee(List<Map<String, Object>> listmap) {
-        if (role==1) {
-            requirdapter = new Requirdapter(listmap, getActivity());
-            listView.setAdapter(requirdapter);
-            //隐藏加载数据提示
-            indeshuax.setVisibility(View.GONE);
-        }
+//        if (role==1) {
+//            requirdapter = new Requirdapter(listmap, getActivity());
+//            listView.setAdapter(requirdapter);
+//            //隐藏加载数据提示
+//            indeshuax.setVisibility(View.GONE);
+//        }
     }
 
-    //滑动删除之后回调方法
-    @Override
-    public void removeItem(MyListview.RemoveDirection direction, int position) {
-
-    }
+//    //滑动删除之后回调方法
+//    @Override
+//    public void removeItem(MyListview.RemoveDirection direction, int position) {
+//
+//    }
 
 
     //高德成功回调
@@ -542,12 +603,10 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
         lng= (double) map.get("lng");
         ditutext.setText(map.get("District")+"");
         if (role==1) {
-            Teacher_init t = new Teacher();
-            t.Get_Teacher_list(id, role, lat, lng, listView, getActivity(),0, "", 0, 0, 0, 3, this);
-        }else {
-            Demand_init demand_init=new Demand();
-            demand_init.getDemand_list(id,role,0,0,"2016-08-10",0,1,null,null,this);
 
+            t.Get_Teacher_list(id, role, lat, lng, listView, getActivity(),0, "", 0, 0, 0, 3, this,page);
+        }else {
+            demand_init.getDemand_list(id,role,0,0,"2016-08-10",0,page,null,null,this);
         }
 
     }
@@ -555,8 +614,10 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
     @Override
     public void Updatecuowu(Map<String, Object> map) {
         Toast.makeText(getActivity(),"请开启手机定位!",Toast.LENGTH_LONG).show();
-
-      /*  lat= 125.61750;
+        lat= 125.61750;
+        lng= 25.65471;
+      /*
+      lat= 125.61750;
         lng= 25.65471;
         if (role==1) {
             Teacher_init t = new Teacher();
@@ -588,6 +649,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
             indeshuax.setVisibility(View.GONE);
         }
     }
+
     @Subscriber(tag = "requsetPermiss")
     public void requestSuccess(int requestCode){
         if (requestCode == 100){
@@ -599,5 +661,108 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,M
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void onPullDownToRefresh(PullToRefreshBase refreshView) {
+        page = 1;
+        if (role == 2){
+            demand_init.getDemand_list(id,role,0,0,"2016-08-10",0,page,null,null,this);
+        }else if (role == 1){
+            t.Get_Teacher_list(id, role, lat, lng, listView, getActivity(),0, "", 0, 0, 0, 3, this,page);
+        }
+    }
+
+    @Override
+    public void onPullUpToRefresh(PullToRefreshBase refreshView) {
+        page++;
+        if (role == 2) {
+            demand_init.getDemand_list(id, role, 0, 0, "2016-08-10", 0, page, null, null, this);
+        }else if (role == 1){
+            if (teachers.size() < 19){
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(5000);
+                                    listView.onRefreshComplete();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }).start();
+            }else {
+                t.Get_Teacher_list(id, role, lat, lng, listView, getActivity(), 0, "", 0, 0, 0, 3, this, page);
+            }
+        }
+        listView.onRefreshComplete();
+    }
+
+
+    @Override
+    public void successXuqiu(List<Map<String, Object>> maps) {
+        listView.onRefreshComplete();
+        if (page == 1){
+            datas.clear();
+        }
+        List<XuqiuEntity> lists = new ArrayList<>();
+        for (int i = 0; i < maps.size(); i++) {
+            XuqiuEntity entity = new XuqiuEntity();
+            entity.setPublisher_id((String) maps.get(i).get("publisher_id"));
+            entity.setPublisher_name((String) maps.get(i).get("publisher_name"));
+            entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
+            entity.setCourse_name((String) maps.get(i).get("course_name"));
+            entity.setContent((String) maps.get(i).get("content"));
+            entity.setCreated((String) maps.get(i).get("created"));
+            entity.setId((String) maps.get(i).get("id"));
+            entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
+            entity.setDistance((String) maps.get(i).get("distance"));
+            entity.setFee(String.valueOf(maps.get(i).get("fee")));
+            entity.setGrade_name((String)maps.get(i).get("grade_name"));
+            lists.add(entity);
+        }
+        DbUtil.getSession().getXuqiuEntityDao().insertOrReplaceInTx(lists);
+        datas.addAll(lists);
+        xuqiuAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void failXuqiu(String msg) {
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void successTeacher(List<Map<String, Object>> maps) {
+        listView.onRefreshComplete();
+        if (page == 1){
+            teachers.clear();
+        }
+        if (maps.size() != 0) {
+            List<TeacherEntity> lists = new ArrayList<>();
+            for (int i = 0; i < maps.size(); i++) {
+                TeacherEntity entity = new TeacherEntity();
+                entity.setNickname((String) maps.get(i).get("nickname"));
+                entity.setSpeciality_name((String) maps.get(i).get("speciality_name"));
+                entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
+                entity.setSignature((String) maps.get(i).get("signature"));
+                entity.setOrder_rank((String.valueOf(maps.get(i).get("order_rank"))));
+                entity.setUser_headimg((String) maps.get(i).get("user_headimg"));
+                entity.setUser_id((String) maps.get(i).get("user_id"));
+                entity.setGender((String) maps.get(i).get("gender"));
+//            entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
+                entity.setDistance((String) maps.get(i).get("distance"));
+                entity.setFee(String.valueOf(maps.get(i).get("fee")));
+//            entity.setGrade_name((String)maps.get(i).get("grade_name"));
+                lists.add(entity);
+            }
+            DbUtil.getSession().getTeacherEntityDao().insertOrReplaceInTx(lists);
+            teachers.addAll(lists);
+            teacherAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void failTeacher(String msg) {
+        Toast.makeText(getActivity(), "网络错误", Toast.LENGTH_SHORT).show();
     }
 }

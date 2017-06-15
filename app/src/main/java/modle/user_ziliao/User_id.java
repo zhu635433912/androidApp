@@ -17,6 +17,8 @@ import android.widget.Toast;
 import com.deguan.xuelema.androidapp.huanxin.HuihuaActivity;
 import com.deguan.xuelema.androidapp.huanxin.HuihuaList;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.DbUtil;
+import com.deguan.xuelema.androidapp.utils.TeacherDbUtil;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMCmdMessageBody;
@@ -71,6 +73,12 @@ public class User_id extends Application {
         applicationContent = this;
         instance = this;
         DemoHelper.getInstance().init(applicationContent);
+        //初始化Fresco
+//        FrescoHelper.getInstance().init(this);
+//        Fresco.initialize(this);
+        //初始化数据库类
+        DbUtil.init(this);
+        TeacherDbUtil.init(this);
         appContext = this;
 //        EMOptions options = new EMOptions();
 //        // 默认添加好友时，是不需要验证的，改成需要验证

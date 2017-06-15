@@ -6,8 +6,11 @@ import android.util.Log;
 import android.widget.ListView;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.viewimpl.TeacherView;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,16 +38,28 @@ public class Teacher implements Teacher_init {
     private Retrofit retrofit;
     private Teacher_http teacher_http;
     private List<Map<String,Object>> listmap;
-
+    private TeacherView teacherView;
     //初始化网络访问对象
     public Teacher(){
-        map=new ArrayMap<String,Object>();
+        map=new HashMap<String,Object>();
         retrofit=new Retrofit.Builder().baseUrl(MyUrl.URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         teacher_http=retrofit.create(Teacher_http.class);
     }
+
+    //初始化网络访问对象
+    public Teacher(TeacherView teacherView){
+        this.teacherView = teacherView;
+        map=new HashMap<String,Object>();
+        retrofit=new Retrofit.Builder().baseUrl(MyUrl.URL)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        teacher_http=retrofit.create(Teacher_http.class);
+    }
+
 
     /*
     获取教师个人资料
@@ -115,8 +130,8 @@ public class Teacher implements Teacher_init {
     获取教师列表
      */
     @Override
-    public List<Map<String, Object>> Get_Teacher_list(int uid, final int role, double lat, double lng, final MyListview listView, final Context context, int order, String
-            state, int gender, int speciality, int grade_type, int order_rank, final Requirdetailed requirdetailed) {
+    public List<Map<String, Object>> Get_Teacher_list(int uid, final int role, double lat, double lng, final PullToRefreshListView listView, final Context context, int order, String
+            state, int gender, int speciality, int grade_type, int order_rank, final Requirdetailed requirdetailed,int page) {
         Call<ContentModle> call=teacher_http.getTeacherlist(uid,lat,lng,order,state,gender,speciality,grade_type,order_rank);
         listmap=new ArrayList<Map<String, Object>>();
         call.enqueue(new Callback<ContentModle>() {
@@ -125,21 +140,25 @@ public class Teacher implements Teacher_init {
                 String error=response.body().getError();
                 if (error.equals("ok")){
                     listmap=response.body().getContent();
-                    if (requirdetailed==null) {
-                        Myconteol_init myconteol_init = new Mycontrol();
-                        myconteol_init.huidiao(listmap,role,listView,context);
-                    }else {
-                        requirdetailed.Updatefee(listmap);
-                    }
+//                    if (requirdetailed==null) {
+//                        Myconteol_init myconteol_init = new Mycontrol();
+//                        myconteol_init.huidiao(listmap,role,listView,context);
+
+                        teacherView.successTeacher(listmap);
+//                    }else {
+//                        requirdetailed.Updatefee(listmap);
+//                    }
 
                 }else {
                     String errmsg=response.body().getErrmsg();
                     Log.e("aa","获取教师列表错误="+errmsg);
+                    teacherView.failTeacher(errmsg);
                 }
             }
             @Override
             public void onFailure(Call<ContentModle> call, Throwable t) {
                 Log.e("aa","获取教师列表异常错误="+t.toString());
+                teacherView.failTeacher("网络错误");
             }
         });
         return null;

@@ -45,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageButton
+            android:visibility="gone"
             android:layout_marginLeft="5px"
             android:layout_marginTop="14px"
             android:layout_alignTop="@+id/ditutext"
@@ -64,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageButton
+            android:visibility="gone"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:background="@drawable/add18"
@@ -127,7 +129,8 @@
         android:background="#e0eaf1"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <modle.toos.MyListview
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
             android:layout_centerHorizontal="true"
             android:layout_marginTop="80px"
             android:dividerHeight="40px"
@@ -135,7 +138,7 @@
             android:id="@+id/list1"
             android:layout_width="650px"
             android:layout_height="750px">
-        </modle.toos.MyListview>
+        </com.handmark.pulltorefresh.library.PullToRefreshListView>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/relativelayout"

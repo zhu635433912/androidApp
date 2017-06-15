@@ -128,6 +128,7 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
         xingxibutton = (RelativeLayout) findViewById(R.id.xingxibutton);
         usernametext = (TextView) findViewById(R.id.usernametext);
         huihua = (TextView) findViewById(R.id.huihua);
+        huihua.setVisibility(View.GONE);
         xues = (TextView) findViewById(R.id.xues);
         hostimaview = (ImageView) findViewById(R.id.hostimaview);
         wodegerxx= (ImageView) findViewById(R.id.wodegerxx);
