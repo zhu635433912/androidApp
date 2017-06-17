@@ -13,21 +13,6 @@
  */
 package modle.Huanxing.ui;
 
-import java.util.Hashtable;
-import java.util.Map;
-
-import com.deguan.xuelema.androidapp.R;
-import com.hyphenate.chat.EMClient;
-import modle.Huanxing.db.InviteMessgeDao;
-import modle.Huanxing.db.UserDao;
-import modle.Huanxing.widget.ContactItemView;
-import modle.user_ziliao.DemoHelper;
-
-import com.hyphenate.easeui.domain.EaseUser;
-import com.hyphenate.easeui.ui.EaseContactListFragment;
-import com.hyphenate.util.EMLog;
-import com.hyphenate.util.NetUtils;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -41,6 +26,21 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
+
+import com.deguan.xuelema.androidapp.R;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.domain.EaseUser;
+import com.hyphenate.easeui.ui.EaseContactListFragment;
+import com.hyphenate.util.EMLog;
+import com.hyphenate.util.NetUtils;
+
+import java.util.Hashtable;
+import java.util.Map;
+
+import modle.Huanxing.db.InviteMessgeDao;
+import modle.Huanxing.db.UserDao;
+import modle.Huanxing.widget.ContactItemView;
+import modle.user_ziliao.DemoHelper;
 
 /**
  * contact list

@@ -12,10 +12,10 @@ import modle.user_ziliao.User_id;
 public class EmojiconExampleGroupData {
     
     private static int[] icons = new int[]{
-        R.drawable.icon_002_cover,  
+        R.drawable.icon_002_cover,
         R.drawable.icon_007_cover,  
         R.drawable.icon_010_cover,  
-        R.drawable.icon_012_cover,
+        R.drawable.icon_012_cover,  
         R.drawable.icon_013_cover,  
         R.drawable.icon_018_cover,  
         R.drawable.icon_019_cover,  

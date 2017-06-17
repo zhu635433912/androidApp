@@ -1,15 +1,5 @@
 package modle.Huanxing.ui;
 
-import java.io.ByteArrayOutputStream;
-
-import com.bumptech.glide.Glide;
-import com.deguan.xuelema.androidapp.R;
-import com.hyphenate.EMValueCallBack;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.easeui.domain.EaseUser;
-import com.hyphenate.easeui.utils.EaseUserUtils;
-
-import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -28,6 +18,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.deguan.xuelema.androidapp.R;
+import com.hyphenate.EMValueCallBack;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.domain.EaseUser;
+import com.hyphenate.easeui.utils.EaseUserUtils;
+
+import java.io.ByteArrayOutputStream;
 
 import modle.user_ziliao.DemoHelper;
 
@@ -76,10 +75,16 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 			iconRightArrow.setVisibility(View.INVISIBLE);
 		}
 		if(username != null){
-			tvUsername.setText(username);
-			EaseUserUtils.setUserNick(username, tvNickName);
-			EaseUserUtils.setUserAvatar(this, username, headAvatar);
-//    			asyncFetchUserInfo(username);// 异步获取用户昵称头像
+    		if (username.equals(EMClient.getInstance().getCurrentUser())) {
+    			tvUsername.setText(EMClient.getInstance().getCurrentUser());
+    			EaseUserUtils.setUserNick(username, tvNickName);
+                EaseUserUtils.setUserAvatar(this, username, headAvatar);
+    		} else {
+    			tvUsername.setText(username);
+    			EaseUserUtils.setUserNick(username, tvNickName);
+    			EaseUserUtils.setUserAvatar(this, username, headAvatar);
+    			asyncFetchUserInfo(username);
+    		}
 		}
 	}
 
@@ -110,10 +115,10 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 		}
 
 	}
-	
+
 	public void asyncFetchUserInfo(String username){
 		DemoHelper.getInstance().getUserProfileManager().asyncGetUserInfo(username, new EMValueCallBack<EaseUser>() {
-			
+
 			@Override
 			public void onSuccess(EaseUser user) {
 				if (user != null) {
@@ -129,15 +134,15 @@ public class UserProfileActivity extends BaseActivity implements OnClickListener
 					}
 				}
 			}
-			
+
 			@Override
 			public void onError(int error, String errorMsg) {
 			}
 		});
 	}
-	
-	
-	
+
+
+
 	private void uploadHeadPhoto() {
 		Builder builder = new Builder(this);
 		builder.setTitle(R.string.dl_title_upload_photo);

@@ -105,7 +105,7 @@ public class NewGroupActivity extends BaseActivity {
 						if(publibCheckBox.isChecked()){
 						    option.style = memberCheckbox.isChecked() ? EMGroupStyle.EMGroupStylePublicJoinNeedApproval : EMGroupStyle.EMGroupStylePublicOpenJoin;
 						}else{
-						    option.style = memberCheckbox.isChecked()?EMGroupStyle.EMGroupStylePrivateMemberCanInvite:EMGroupStyle.EMGroupStylePrivateOnlyOwnerInvite;
+						    option.style = memberCheckbox.isChecked()? EMGroupStyle.EMGroupStylePrivateMemberCanInvite: EMGroupStyle.EMGroupStylePrivateOnlyOwnerInvite;
 						}
                         EMClient.getInstance().groupManager().createGroup(groupName, desc, members, reason, option);
 						runOnUiThread(new Runnable() {

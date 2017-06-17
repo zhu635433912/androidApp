@@ -1,5 +1,7 @@
 package modle.MyHttp;
 
+import com.deguan.xuelema.androidapp.entities.TuijianListEntity;
+
 import modle.JieYse.ContentModle;
 import modle.JieYse.Demtest;
 import modle.JieYse.User_Modle;
@@ -68,13 +70,18 @@ public interface Teacher_http {
     @POST("index.php?s=/Service/Teacher/update_information")
     Call<Demtest> getspeciality(@Query("uid") int uid,@Query("speciality") String speciality);
     /*
-教师资料更新个人毕业学校
-*/
+        教师资料更新个人毕业学校
+    */
     @POST("index.php?s=/Service/Teacher/update_information")
     Call<Demtest> getgraduated_school(@Query("uid") int uid,@Query("graduated_school") String graduated_school);
-    /*
-获取推荐教师
-*/
-    @POST("index.php?s=/Service/Teacher/update_information")
-    Call<ContentModle> gettuijianjiaoshi(@Query("course_id") int course_id,@Query("grade_id") int grade_id,@Query("address") String address);
+//    /*
+//        获取推荐教师
+//    */
+//    @POST("index.php?s=/Service/Teacher/recommend_teacher")
+//    Call<ContentModle> gettuijianjiaoshi(@Query("course_id") int course_id,@Query("grade_id") int grade_id,@Query("address") String address,@Query("lat") String lat,@Query("lng") String lng);
+      /*
+        获取推荐教师
+    */
+@POST("index.php?s=/Service/Teacher/recommend_teacher")
+Call<TuijianListEntity> gettuijianjiaoshi();
 }

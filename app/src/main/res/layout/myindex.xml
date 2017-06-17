@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#111111">
+    android:background="@drawable/studentback">
 
     <modle.toos.MScrollView
         android:id="@+id/scv"
@@ -18,7 +17,6 @@
             android:layout_height="180px"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"></RelativeLayout>
-
         <ImageButton
             android:id="@+id/imagebuttongl"
             android:layout_width="50px"
@@ -27,7 +25,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginLeft="40px"
             android:layout_marginTop="64px"
-            android:background="@drawable/hly05" />
+            android:background="@drawable/hly005" />
 
         <modle.toos.CircleImageView
             android:id="@+id/touxiangimg"
@@ -35,7 +33,7 @@
             android:layout_height="220px"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="144px" />
+            android:layout_marginTop="100px" />
 
         <RelativeLayout
             android:id="@+id/shezhiimabt"
@@ -53,7 +51,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginRight="20px"
             android:layout_marginTop="65px"
-            android:background="@drawable/hly23" />
+            android:background="@drawable/hly20" />
 
         <RelativeLayout
             android:id="@+id/wodeqianbao"
@@ -72,8 +70,7 @@
             android:layout_marginRight="30px"
             android:layout_marginTop="65px"
             android:layout_toLeftOf="@+id/shezhiimabt"
-            android:background="@drawable/hly18" />
-
+            android:background="@drawable/hly17" />
         <TextView
             android:id="@+id/xxitexutview"
             android:layout_width="wrap_content"
@@ -118,7 +115,7 @@
             android:gravity="center"
             android:paddingBottom="50px"
             android:text="聊天管理"
-            android:textColor="#d7d7d7"
+            android:textColor="#4D4D4D"
             android:textSize="35px" />
 
         <TextView
@@ -127,9 +124,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/touxiangimg"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="44px"
-            android:text="孺子牛2017"
-            android:textColor="#d7d7d7"
+            android:layout_marginTop="20px"
+            android:text="1111"
+            android:textColor="#4D4D4D"
             android:textSize="50px" />
 
         <TextView
@@ -138,10 +135,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/usernametext"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60px"
-            android:text="一句话让老师了解你"
-            android:textColor="#d7d7d7"
+            android:layout_marginTop="35px"
+            android:text="1111111"
+            android:textColor="#4D4D4D"
             android:textSize="40px" />
+
         <RelativeLayout
             android:layout_marginTop="50px"
             android:layout_below="@+id/neirongtext"
@@ -161,7 +159,7 @@
             android:layout_marginLeft="80px"
             android:gravity="center"
             android:text="推荐需求"
-            android:textColor="#d7d7d7"
+            android:textColor="#4D4D4D"
             android:textSize="35px" />
 
         <TextView
@@ -173,7 +171,7 @@
             android:layout_marginRight="80px"
             android:gravity="center"
             android:text="我的订单"
-            android:textColor="#d7d7d7"
+            android:textColor="#4D4D4D"
             android:textSize="35px" />
         <TextView
             android:layout_width="match_parent"
@@ -186,7 +184,7 @@
             android:id="@+id/myindexfagment"
             android:layout_width="match_parent"
             android:layout_height="2000px"
-            android:background="#111111"
+            android:background="@drawable/studentback"
             android:orientation="horizontal" />
     </RelativeLayout>
     </modle.toos.MScrollView>
@@ -261,6 +259,7 @@
                 android:text="我的"
                 android:textSize="30px" />
         </RelativeLayout>
+
     </RelativeLayout>
 
 
@@ -273,7 +272,7 @@
         android:textColor="#ffffff"/>
 
     <RelativeLayout
-        android:background="#000000"
+        android:background="#e7ebec"
         android:id="@+id/sopt"
         android:visibility="gone"
         android:layout_alignParentTop="true"
@@ -292,7 +291,7 @@
             android:layout_marginLeft="80px"
             android:gravity="center"
             android:text="推荐需求"
-            android:textColor="#d7d7d7"
+            android:textColor="#4d4d4d"
             android:textSize="35px" />
 
         <TextView
@@ -304,13 +303,83 @@
             android:layout_marginRight="80px"
             android:gravity="center"
             android:text="我的订单"
-            android:textColor="#d7d7d7"
+            android:textColor="#4d4d4d"
             android:textSize="35px" />
         <TextView
+            android:id="@+id/buttonsie"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_below="@+id/tuijianxuqiutext1"
             android:background="#404040" />
     </RelativeLayout>
+
+    <LinearLayout
+        android:background="#e7ebec"
+        android:layout_below="@+id/sopt"
+        android:id="@+id/index_dindanlinenarla"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="160px">
+        <LinearLayout
+            android:id="@+id/jinxinzhong"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="187.5px"
+            android:gravity="center"
+            android:layout_height="180px">
+            <ImageView
+                android:background="@drawable/hly30"
+                android:layout_width="60px"
+                android:layout_height="50px" />
+            <TextView
+                android:layout_marginTop="10px"
+                android:text="进行中"
+                android:textColor="#4D4D4D"
+                android:textSize="30px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tuikuanzhong"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="187.5px"
+            android:gravity="center"
+            android:layout_height="180px">
+            <ImageView
+                android:background="@drawable/hly45"
+                android:layout_width="60px"
+                android:layout_height="50px" />
+            <TextView
+                android:layout_marginTop="10px"
+                android:text="退款中"
+                android:textColor="#4D4D4D"
+                android:textSize="30px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/daipingjia"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="187.5px"
+            android:gravity="center"
+            android:layout_height="180px">
+            <ImageView
+                android:background="@drawable/hly54"
+                android:layout_width="60px"
+                android:layout_height="50px" />
+            <TextView
+                android:layout_marginTop="10px"
+                android:text="待评价"
+                android:textColor="#4D4D4D"
+                android:textSize="30px"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
 
 </RelativeLayout>

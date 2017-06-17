@@ -334,6 +334,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
 //                    String uid = requirdapter.geiuiserid(position-1);
                     Intent intent = new Intent(getActivity(), UserxinxiActivty.class);
 //                    intent.putExtra("user_id", uid);
+                    intent.putExtra("head_image",teachers.get(position-1).getUser_headimg());
                     intent.putExtra("user_id",teachers.get(position-1).getUser_id());
                     startActivity(intent);
                 }else {
@@ -341,10 +342,12 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
 
 //                    Map<String,Object> map=new HashMap<String, Object>();
 //                    map=studentAdapter.geiuiserid(position-1);
+
                     Intent intent = new Intent(getActivity(), Xuqiuxiangx.class);
                     intent.putExtra("user_id",datas.get(position-1).getId());
                     intent.putExtra("fee",datas.get(position-1).getFee());
                     intent.putExtra("publisher_id",datas.get(position-1).getPublisher_id());
+
 //                    intent.putExtra("user_id",(String)map.get("user_id"));
 //                    intent.putExtra("fee",(String)map.get("fee"));
 //                    intent.putExtra("publisher_id",(String)map.get("publisher_id"));
@@ -613,7 +616,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
     //高德失败回调
     @Override
     public void Updatecuowu(Map<String, Object> map) {
-        Toast.makeText(getActivity(),"请开启手机定位!",Toast.LENGTH_LONG).show();
+//        Toast.makeText(getActivity(),"请开启手机定位!",Toast.LENGTH_LONG).show();
         lat= 125.61750;
         lng= 25.65471;
       /*

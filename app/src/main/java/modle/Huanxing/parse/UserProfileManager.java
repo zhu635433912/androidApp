@@ -2,7 +2,6 @@ package modle.Huanxing.parse;
 
 import android.content.Context;
 
-import com.deguan.xuelema.androidapp.utils.PreferenceManager;
 import com.hyphenate.EMValueCallBack;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.domain.EaseUser;
@@ -10,6 +9,7 @@ import com.hyphenate.easeui.domain.EaseUser;
 import java.util.ArrayList;
 import java.util.List;
 
+import modle.Huanxing.utils.PreferenceManager;
 import modle.user_ziliao.DemoHelper;
 
 public class UserProfileManager {

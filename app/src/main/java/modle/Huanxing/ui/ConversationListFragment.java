@@ -25,14 +25,14 @@ import com.hyphenate.util.NetUtils;
 import modle.Huanxing.db.InviteMessgeDao;
 import modle.user_ziliao.Constant;
 
-public class ConversationListFragment extends EaseConversationListFragment{
+public class ConversationListFragment extends EaseConversationListFragment {
 
     private TextView errorText;
 
     @Override
     protected void initView() {
         super.initView();
-        View errorView = (LinearLayout) View.inflate(getActivity(), R.layout.em_chat_neterror_item, null);
+        View errorView = (LinearLayout) View.inflate(getActivity(),R.layout.em_chat_neterror_item, null);
         errorItemContainer.addView(errorView);
         errorText = (TextView) errorView.findViewById(R.id.tv_connect_errormsg);
     }
@@ -69,9 +69,9 @@ public class ConversationListFragment extends EaseConversationListFragment{
             }
         });
         //red packet code : 红包回执消息在会话列表最后一条消息的展示
-        conversationListView.setConversationListHelper(new EaseConversationListHelper() {
-            @Override
-            public String onSetItemSecondaryText(EMMessage lastMessage) {
+//        conversationListView.setConversationListHelper(new EaseConversationListHelper() {
+//            @Override
+//            public String onSetItemSecondaryText(EMMessage lastMessage) {
 //                if (lastMessage.getBooleanAttribute(RPConstant.MESSAGE_ATTR_IS_RED_PACKET_ACK_MESSAGE, false)) {
 //                    String sendNick = lastMessage.getStringAttribute(RPConstant.EXTRA_RED_PACKET_SENDER_NAME, "");
 //                    String receiveNick = lastMessage.getStringAttribute(RPConstant.EXTRA_RED_PACKET_RECEIVER_NAME, "");
@@ -87,9 +87,9 @@ public class ConversationListFragment extends EaseConversationListFragment{
 //                    }
 //                    return msg;
 //                }
-                return null;
-            }
-        });
+//                return null;
+//            }
+//        });
         super.setUpView();
         //end of red packet code
     }

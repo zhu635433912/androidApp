@@ -18,10 +18,13 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.huanxin.HuihuaActivity;
 import com.deguan.xuelema.androidapp.init.Bitmap_init;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
@@ -77,6 +80,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private KechengAdapter kechengAdapter;
     private CircleImageView gerxxtoux;
     private AVLoadingIndicatorView jiaoyishuax;
+    private String userHeadUrl = "";
 
 
     @Override
@@ -117,8 +121,9 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         Log.e("aa","UserxinActivyt接收到老师id为"+user_id);
         int id=Integer.parseInt(User_id.getUid());
         Requir_id=Integer.parseInt(user_id);
-
-
+        userHeadUrl = getIntent().getStringExtra("head_image");
+        if (!userHeadUrl.equals(""))
+            Glide.with(this).load(userHeadUrl).transform(new GlideCircleTransform(this)).into(gerxxtoux);
 
         //加载数据
         Teacher_init teacher=new Teacher();
@@ -153,27 +158,42 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 beginTransaction.commit();
             }
         });
-
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            jiaoyishuax.setVisibility(View.GONE);
+                        }
+                    });
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     //更新教师详细资料
     @Override
     public void Updatecontent(Map<String, Object> map) {
-    String nickname= (String) map.get("nickname");
-    String resume= (String) map.get("resume");
-    username= (String) map.get("username");
+        String nickname = (String) map.get("nickname");
+        String resume = (String) map.get("resume");
+        username = (String) map.get("username");
 
 
-        mobile= (String) map.get("mobile");
-        String order_finish= (String) map.get("order_finish");
-        String order_working= (String) map.get("order_working");
-        gerxues.setText(order_working);
-     dindan.setText(order_finish);
-    Requitext.setText(resume);
-    Requiname.setText(nickname);
+            mobile= (String) map.get("mobile");
+            String order_finish= (String) map.get("order_finish");
+            String order_working= (String) map.get("order_working");
+            gerxues.setText(order_working);
+         dindan.setText(order_finish);
+        Requitext.setText(resume);
+        Requiname.setText(nickname);
 
         Log.e("aa","头像地址为"+map.get("user_headimg").toString());
-        setbitmap(map.get("user_headimg").toString());
+//        setbitmap(map.get("user_headimg").toString());
 
     }
 
@@ -202,6 +222,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 //跳转个人简介
                 Intent i = new Intent(UserxinxiActivty.this, Teacher_personal.class);
                 i.putExtra("teacher_id", Requir_id + "");
+                i.putExtra("teacher_image",userHeadUrl);
                 startActivity(i);
                 break;
             case R.id.pingjia:
@@ -227,11 +248,18 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 startActivity(intent1);
                 break;
             case R.id.imageButton:
-                try {
-                    EMClient.getInstance().contactManager().addContact(username, "添加好友");
-                } catch (HyphenateException e) {
-                    e.printStackTrace();
-                }
+                Toast.makeText(this, "已发送好友申请", Toast.LENGTH_SHORT).show();
+                new Thread(new Runnable() {
+                    public void run() {
+                    try {
+                        //demo use a hardcode reason here, you need let user to input if you like
+                        String s = getResources().getString(R.string.Add_a_friend);
+                        EMClient.getInstance().contactManager().addContact(username, s);
+                    } catch (final Exception e) {
+
+                    }
+                    }
+                }).start();
                 break;
         }
     }

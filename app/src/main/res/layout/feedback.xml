@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageButton
+        android:id="@+id/fankui_back"
         android:layout_width="20px"
         android:layout_height="30px"
         android:layout_alignParentLeft="true"

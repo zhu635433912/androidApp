@@ -14,12 +14,13 @@ import android.widget.TextView;
 
 import com.deguan.xuelema.androidapp.R;
 import com.hyphenate.chat.EMClient;
-import modle.Huanxing.utils.PreferenceManager;
 import com.hyphenate.easeui.widget.EaseSwitchButton;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import modle.Huanxing.utils.PreferenceManager;
 
 /**
  * Created by linan on 16/11/29.

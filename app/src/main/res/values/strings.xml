@@ -16,4 +16,7 @@
     <string name="shuoming">每个用户的上下级关系确定,二级用户消费量奖励1%</string>
     <string name="chengjiaolv">这是一位充满活力的新老师，赶快去支持她吧~</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

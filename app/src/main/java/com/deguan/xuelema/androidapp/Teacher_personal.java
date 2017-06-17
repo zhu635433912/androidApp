@@ -5,13 +5,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.io.IOException;
@@ -43,7 +47,7 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
     private TextView teachername;
     private TextView diqu;
     private int teacher_id;
-    private CircleImageView teachertoux;
+    private ImageView teachertoux;
     private ImageButton jianjiebohao;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,9 +57,10 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
         //获取教师id
         String teacher_ida=getIntent().getStringExtra("teacher_id");
         teacher_id=Integer.parseInt(teacher_ida);
+        String headUrl = getIntent().getStringExtra("teacher_image");
 
         jianjiebohao= (ImageButton) findViewById(R.id.jianjiebohao);
-        teachertoux= (CircleImageView) findViewById(R.id.teachertoux);
+        teachertoux= (ImageView) findViewById(R.id.teachertoux);
         pingjia= (TextView) findViewById(R.id.pingjia);
         xinjijiaoshi= (TextView) findViewById(R.id.xinjijiaoshi);
         grfanhui= (RelativeLayout) findViewById(R.id.grfanhui);
@@ -80,8 +85,9 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
 
         //获取教师详细资料
         teacher_init.Get_Teacher_detailed(uid,teacher_id,this,1);
-
-
+        if (!TextUtils.isEmpty(headUrl)) {
+            Glide.with(this).load(headUrl).transform(new GlideCircleTransform(this)).into(teachertoux);
+        }
     }
 
     @Override
@@ -115,8 +121,8 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
 
 
         Log.e("aa","图片地址"+map.get("user_headimg").toString());
-        setbitmap(map.get("user_headimg").toString());
-
+//        setbitmap(map.get("user_headimg").toString());
+//        Glide.with(this).load(map.get("user_headimg").toString()).transform(new GlideCircleTransform(this)).into(teachertoux);
         switch (map.get("order_rank").toString()){
             case "0.0":
                 xinjijiaoshi.setText("一星级教师");

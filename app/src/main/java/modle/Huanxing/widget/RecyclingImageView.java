@@ -22,7 +22,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import modle.Huanxing.video.util.RecyclingBitmapDrawable;
+import modle.Huanxing.util.RecyclingBitmapDrawable;
 
 
 /**

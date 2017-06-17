@@ -364,25 +364,25 @@ public class Teacher implements Teacher_init {
      */
     @Override
     public void gettuijian_Teacher(int course_id, int grade_id, String address, final Requirdetailed requirdetailed) {
-        Call<ContentModle> call=teacher_http.gettuijianjiaoshi(course_id,grade_id,address);
-        call.enqueue(new Callback<ContentModle>() {
-            @Override
-            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
-                String error=response.body().getError();
-                if (error.equals("ok")){
-                    Log.e("aa","获取推荐教师成功");
-                    List<Map<String,Object>> list=new ArrayList<Map<String, Object>>();
-                    list=response.body().getContent();
-                    requirdetailed.Updatefee(list);
-                }else {
-                    Log.e("aa","获取推荐教师失败");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ContentModle> call, Throwable t) {
-                Log.e("aa","获取推荐教师异常错误");
-            }
-        });
+//        Call<ContentModle> call=teacher_http.gettuijianjiaoshi(course_id,grade_id,address);
+//        call.enqueue(new Callback<ContentModle>() {
+//            @Override
+//            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+//                String error=response.body().getError();
+//                if (error.equals("ok")){
+//                    Log.e("aa","获取推荐教师成功");
+//                    List<Map<String,Object>> list=new ArrayList<Map<String, Object>>();
+//                    list=response.body().getContent();
+//                    requirdetailed.Updatefee(list);
+//                }else {
+//                    Log.e("aa","获取推荐教师失败");
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ContentModle> call, Throwable t) {
+//                Log.e("aa","获取推荐教师异常错误");
+//            }
+//        });
     }
 }

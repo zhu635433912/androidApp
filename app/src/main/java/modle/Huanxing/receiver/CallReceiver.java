@@ -36,7 +36,6 @@ public class CallReceiver extends BroadcastReceiver{
 		// 缓存用户昵称头像
 		String ext = EMClient.getInstance().callManager().getCurrentCallSession().getExt();
 		UserCacheManager.save(ext);
-
 		//username
 		String from = intent.getStringExtra("from");
 		//call type

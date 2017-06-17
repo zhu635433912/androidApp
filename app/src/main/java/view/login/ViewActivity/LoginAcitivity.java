@@ -25,14 +25,20 @@ import com.deguan.xuelema.androidapp.MainActivity;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.utils.APPConfig;
 import com.deguan.xuelema.androidapp.utils.SharedPreferencesUtils;
+import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
 import com.hyphenate.exceptions.HyphenateException;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 
 import java.util.Map;
+import java.util.Random;
 
+import modle.Huanxing.cache.UserCacheManager;
+import modle.Huanxing.db.DemoDBManager;
+import modle.user_ziliao.DemoHelper;
 import modle.user_ziliao.User_id;
 import view.login.presenter.S_wan_presenter;
 import view.login.presenter.login_wan_presenter;
@@ -187,6 +193,67 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
             ddite.putString("username", map.get("username") + "");
             ddite.putString("password", map.get("password") + "");
             ddite.commit();
+
+
+
+        // After logout，the DemoDB may still be accessed due to async callback, so the DemoDB will be re-opened again.
+        // close it before login to make sure DemoDB not overlap
+        DemoDBManager.getInstance().closeDB();
+
+        // reset current user name before login
+        DemoHelper.getInstance().setCurrentUserName(map.get("username")+"");
+        final String name = map.get("username")+"";
+        final long start = System.currentTimeMillis();
+        // call login method
+//        Log.d(TAG, "EMClient.getInstance().login");
+        EMClient.getInstance().login(map.get("username")+"", map.get("password")+"", new EMCallBack() {
+
+            @Override
+            public void onSuccess() {
+//                Log.d(TAG, "login: onSuccess");
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
+
+                String nick = "";
+                try {
+                    nick = EMClient.getInstance().pushManager().getPushConfigsFromServer().getDisplayNickname();
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                }
+
+                // update current user's display name for APNs
+                boolean updatenick = EMClient.getInstance().pushManager().updatePushNickname(name);
+                if (!updatenick) {
+                    Log.e("LoginActivity", "update current user nick fail");
+                }
+
+
+                // get user's info (this should be get from App's server or 3rd party service)
+                DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
+
+                Intent intent = new Intent(LoginAcitivity.this,
+                        MainActivity.class);
+                startActivity(intent);
+
+                finish();
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+            }
+
+            @Override
+            public void onError(final int code, final String message) {
+            }
+        });
+
+
+
+
+
+
+
+
 
 
 

@@ -59,8 +59,8 @@ public interface Demand_http {
 
 
     /*
- 获取用户自己的需求列表
-  */
+         获取用户自己的需求列表
+    */
     @POST("index.php?s=/Service/Requirement/gets_requirement")
     Call<ContentModle> getMyDemandlist(@Query("publisher_id") int publisher_id, @Query("filter_type") int filter_type);
 }

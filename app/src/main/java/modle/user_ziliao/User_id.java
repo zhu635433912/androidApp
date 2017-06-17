@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.support.multidex.MultiDex;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -25,7 +26,7 @@ import com.hyphenate.chat.EMCmdMessageBody;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.easeui.EaseConstant;
-import com.hyphenate.easeui.controller.EaseUI;
+import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.model.EaseNotifier;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
@@ -69,6 +70,7 @@ public class User_id extends Application {
 
     @Override
     public void onCreate() {
+        MultiDex.install(this);
         super.onCreate();
         applicationContent = this;
         instance = this;
@@ -110,7 +112,11 @@ public class User_id extends Application {
 
 
     }
-
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
     public static User_id getInstance() {
 //        if (null == instance) {
 //            instance = new User_id();

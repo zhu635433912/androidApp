@@ -18,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -47,6 +48,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import modle.Adapter.KechengAdapter;
 import modle.Adapter.MyGridView_Adapter;
 import modle.Increase_course.Increase_course;
 import modle.Teacher_Modle.Teacher;
@@ -92,6 +94,8 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
     private GridView rongyuimage;
     private int TAGE_ISRONT;
     private File image;
+    private KechengAdapter kechengAdapter;
+    private Increase_course increase_course;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -140,14 +144,37 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
 
         View view = getLayoutInflater().inflate(R.layout.layout_dialog_pick, null);
         mPickDialog = new android.app.AlertDialog.Builder(this).setView(view).create();
+        //获取课程
+        getmCourse();
 
-        //获取教师自己课程
-        Increase_course increase_course=new Increase_course();
-        increase_course.selecouse(uid,null,this);
+        //删除课程
+        kechengitme.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final int course_id=kechengAdapter.getcourse_id(i);
+                Log.e("aa","删除"+course_id);
+                new AlertDialog.Builder(Teacher_management.this).setTitle("学了么提示!").setMessage("确定删除课程吗?")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                increase_course.Delect(uid,course_id,Teacher_management.this);
+                            }
+                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).show();
+            }
+        });
 
 
     }
-
+    public void getmCourse(){
+        //获取教师自己课程
+        increase_course=new Increase_course();
+        increase_course.selecouse(uid,null,this);
+    }
 
     @Override
     public void onClick(View v) {
@@ -198,6 +225,8 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                                     int xuesfee=Integer.parseInt(xueshengfee.getText().toString());
                                     inc.Addcourse(uid,kcid,editText2.getText().toString(),laoshifee,xuesfee);
                                     Toast.makeText(Teacher_management.this,"增加课程成功",Toast.LENGTH_SHORT).show();
+                                    //刷新课程
+                                    getmCourse();
                                     viw.setVisibility(View.GONE);
                                 }
                             }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -471,11 +500,16 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
 
     @Override
     public void setListview(List<Map<String, Object>> listmap) {
-        SimpleAdapter simpleAdapter=new SimpleAdapter(this,listmap,R.layout.purchase_coures_itme,new String[]{"course_id","unvisit_fee"},new int[]{R.id.kechengzhongle,R.id.kechengfeee});
-        kechengitme.setAdapter(simpleAdapter);
+
+        kechengAdapter = new KechengAdapter(listmap, this);
+        kechengitme.setAdapter(kechengAdapter);
+        //动态设置高度
         setListViewHeightBasedOnChildren(kechengitme);
+
         kemuzhonglei.setOverScrollMode(View.OVER_SCROLL_NEVER);
         kemuzhonglei.setVerticalScrollBarEnabled(false);
+
+
     }
 
     @Override

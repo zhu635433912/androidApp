@@ -22,6 +22,9 @@ import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.indexActivty;
 import com.deguan.xuelema.androidapp.init.Student_init;
 
+import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,6 +56,12 @@ public class Dindan_fagment extends Fragment implements View.OnClickListener,MyL
     private int i=1;
     private boolean chushihua=false;
     RelativeLayout relativeLayout;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
 
     @Nullable
     @Override
@@ -101,7 +110,6 @@ public class Dindan_fagment extends Fragment implements View.OnClickListener,MyL
     }
 
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -114,13 +122,28 @@ public class Dindan_fagment extends Fragment implements View.OnClickListener,MyL
                 order_init.getOrder_list(id,role-1,4,1,listView,getActivity(),this,0,3);
                 break;
             case R.id.daipingjia:
+                //待评价
                 order_init.getOrder_list(id,role-1,6,1,listView,getActivity(),this,0,3);
                 break;
-
         }
     }
 
+    @Subscriber(tag = "Orderrefresh")
+    public void Orderrefresh(int i){
+        if (i==1){
+            //进行中
+            order_init.getOrder_list(id,role-1,2,1,listView,getActivity(),this,0,3);
+        }
+        if (i==2){
+            //退款中
+            order_init.getOrder_list(id,role-1,4,1,listView,getActivity(),this,0,3);
+        }
+        if (i==3){
+            //待评价
+            order_init.getOrder_list(id,role-1,6,1,listView,getActivity(),this,0,3);
+        }
 
+    }
 
 
 
@@ -143,6 +166,8 @@ public class Dindan_fagment extends Fragment implements View.OnClickListener,MyL
 
 
 
+
+
     @Override
     public void setListview(List<Map<String, Object>> listmap) {
         indexAdapter=new IndexAdapter(listmap,getActivity());
@@ -153,4 +178,11 @@ public class Dindan_fagment extends Fragment implements View.OnClickListener,MyL
     public void setListview1(List<Map<String, Object>> listmap) {
 
     }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
 }

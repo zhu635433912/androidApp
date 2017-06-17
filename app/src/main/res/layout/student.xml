@@ -19,7 +19,7 @@
         android:id="@+id/batahost"
         android:background="@drawable/studentback"
         android:layout_width="match_parent"
-        android:layout_height="640px"
+        android:layout_height="500px"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -54,7 +54,7 @@
         <modle.toos.CircleImageView
             android:id="@+id/studenttouxiangimg"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="144px"
+            android:layout_marginTop="74px"
             android:src="@drawable/ox2"
             android:layout_centerHorizontal="true"
             android:layout_width="220px"
@@ -115,7 +115,7 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/studentneirongtext"
-            android:layout_marginTop="60px"
+            android:layout_marginTop="10px"
             android:layout_below="@+id/studentusernametext"
             android:textSize="40px"
             android:layout_centerHorizontal="true"
@@ -129,44 +129,56 @@
         android:layout_below="@+id/batahost"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:id="@+id/studentbutton"
+        <android.support.design.widget.TabLayout
+            android:id="@+id/student_tablayout"
+            app:tabTextColor="#8b8b8b"
+            app:tabIndicatorColor="#fd1245"
+            app:tabSelectedTextColor="#fd1245"
             android:layout_width="match_parent"
-            android:layout_height="100px">
-            <TextView
-                android:id="@+id/tuijianjiaoshi"
-                android:textSize="30px"
-                android:gravity="center"
-                android:text="推荐教师"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <TextView
-                android:id="@+id/myfabu"
-                android:textSize="30px"
-                android:gravity="center"
-                android:text="我的发布"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-            <TextView
-                android:id="@+id/mydindan"
-                android:textSize="30px"
-                android:gravity="center"
-                android:text="我的订单"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-        <modle.toos.MyListview
-            android:layout_centerHorizontal="true"
-            android:dividerHeight="0px"
-            android:divider="#e0eaf1"
-            android:id="@+id/wodefabulist"
-            android:layout_below="@+id/studentbutton"
-            android:layout_width="700px"
-            android:layout_height="match_parent">
-        </modle.toos.MyListview>
+            android:layout_height="100px"/>
+        <android.support.v4.view.ViewPager
+            android:layout_below="@id/student_tablayout"
+            android:id="@+id/student_viewpage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <!--<LinearLayout-->
+            <!--android:id="@+id/studentbutton"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="100px">-->
+            <!--<TextView-->
+                <!--android:id="@+id/tuijianjiaoshi"-->
+                <!--android:textSize="30px"-->
+                <!--android:gravity="center"-->
+                <!--android:text="推荐教师"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent" />-->
+            <!--<TextView-->
+                <!--android:id="@+id/myfabu"-->
+                <!--android:textSize="30px"-->
+                <!--android:gravity="center"-->
+                <!--android:text="我的发布"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent" />-->
+            <!--<TextView-->
+                <!--android:id="@+id/mydindan"-->
+                <!--android:textSize="30px"-->
+                <!--android:gravity="center"-->
+                <!--android:text="我的订单"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent" />-->
+        <!--</LinearLayout>-->
+        <!--<modle.toos.MyListview-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:dividerHeight="0px"-->
+            <!--android:divider="#e0eaf1"-->
+            <!--android:id="@+id/wodefabulist"-->
+            <!--android:layout_below="@+id/studentbutton"-->
+            <!--android:layout_width="700px"-->
+            <!--android:layout_height="match_parent">-->
+        <!--</modle.toos.MyListview>-->
     </RelativeLayout>
     <RelativeLayout
         android:background="#fdfdfe"

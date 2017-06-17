@@ -18,9 +18,9 @@
         android:textColor="#767676"
         android:textSize="35px"
         android:layout_marginLeft="40px"
-        android:layout_toEndOf="@+id/kechengname"
+        android:layout_toRightOf="@+id/kechengname"
         android:layout_alignBottom="@+id/kechengname"
-        android:text="英语阅读理解"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -34,9 +34,9 @@
         android:id="@+id/jieshufee"
         android:textColor="#45b5fd"
         android:layout_marginTop="45px"
-        android:layout_marginEnd="44px"
+        android:layout_marginRight="44px"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:textSize="40px"
         android:text="40元/节"
         android:layout_width="wrap_content"

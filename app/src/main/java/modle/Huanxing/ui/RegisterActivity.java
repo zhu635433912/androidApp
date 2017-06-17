@@ -13,17 +13,17 @@
  */
 package modle.Huanxing.ui;
 
-import com.deguan.xuelema.androidapp.R;
-import com.hyphenate.EMError;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.exceptions.HyphenateException;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.deguan.xuelema.androidapp.R;
+import com.hyphenate.EMError;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 
 import modle.user_ziliao.DemoHelper;
 
@@ -92,7 +92,7 @@ public class RegisterActivity extends BaseActivity {
 								if (!RegisterActivity.this.isFinishing())
 									pd.dismiss();
 								int errorCode=e.getErrorCode();
-								if(errorCode==EMError.NETWORK_ERROR){
+								if(errorCode== EMError.NETWORK_ERROR){
 									Toast.makeText(getApplicationContext(), getResources().getString(R.string.network_anomalies), Toast.LENGTH_SHORT).show();
 								}else if(errorCode == EMError.USER_ALREADY_EXIST){
 									Toast.makeText(getApplicationContext(), getResources().getString(R.string.User_already_exists), Toast.LENGTH_SHORT).show();

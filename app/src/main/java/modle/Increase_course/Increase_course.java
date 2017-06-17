@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import com.deguan.xuelema.androidapp.Teacher_management;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.google.gson.Gson;
@@ -51,7 +52,7 @@ public class Increase_course {
 
     //初始化网络访问对象
     public Increase_course(){
-        map=new ArrayMap<String,Object>();
+        map=new HashMap<String,Object>();
 
         retrofit=new Retrofit.Builder().baseUrl(MyUrl.URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -115,14 +116,15 @@ public class Increase_course {
     }
 
     //删除课程
-    public void Delect(int uid,int course_id){
+    public void Delect(int uid, int course_id, final Teacher_management teacher_management){
        Call<Demtest> call=releaseCourseHttp.delect(uid,course_id);
         call.enqueue(new Callback<Demtest>() {
             @Override
             public void onResponse(Call<Demtest> call, Response<Demtest> response) {
                 String error=response.body().getError();
-                if (error.equals("ok")){
+                if (error.equals("no")){
                     Log.e("aa","删除课程成功");
+                    teacher_management.getmCourse();
                 }else {
                     Log.e("aa","删除课程失败"+response.body().getErrmsg());
                 }

@@ -27,6 +27,7 @@ public class Feedback_Activity extends AutoLayoutActivity implements View.OnClic
     private RelativeLayout relativeLayout;
     private Button imageButton;
     private int uid;
+    private ImageButton backBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,13 +37,13 @@ public class Feedback_Activity extends AutoLayoutActivity implements View.OnClic
         editText= (EditText) findViewById(R.id.fankuineirong);
         relativeLayout= (RelativeLayout) findViewById(R.id.tianjaitupian);
         imageButton= (Button) findViewById(R.id.tijiaofankui);
-
-
+        backBtn = (ImageButton) findViewById(R.id.fankui_back);
+        relativeLayout.setVisibility(View.GONE);
         //获取用户id
         uid=Integer.parseInt(User_id.getUid());
 
 
-
+        backBtn.setOnClickListener(this);
         imageButton.setOnClickListener(this);
         editText.setOnClickListener(this);
         relativeLayout.setOnClickListener(this);
@@ -51,6 +52,9 @@ public class Feedback_Activity extends AutoLayoutActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.fankui_back:
+                this.finish();
+                break;
             case R.id.fankuineirong:
 
 

@@ -13,13 +13,13 @@
  */
 package modle.Huanxing.db;
 
-import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 
-import modle.Huanxing.domain.InviteMessage;
 
+import java.util.List;
+
+import modle.Huanxing.domain.InviteMessage;
 
 public class InviteMessgeDao {
 	static final String TABLE_NAME = "new_friends_msgs";

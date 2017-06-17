@@ -254,7 +254,7 @@
             android:id="@+id/userxinxi"
             android:layout_below="@+id/gerjianjie"
             android:layout_width="match_parent"
-            android:layout_height="400px" >
+            android:layout_height="350px" >
             <EditText
                 android:textSize="25px"
                 android:paddingLeft="10px"
@@ -290,17 +290,7 @@
                 android:background="@drawable/gerxxkk"
                 android:layout_width="320px"
                 android:layout_height="70px" />
-            <EditText
-                android:paddingLeft="10px"
-                android:textSize="25px"
-                android:hint="一句话介绍自己"
-                android:background="@drawable/gerxxkk"
-                android:layout_marginTop="20px"
-                android:layout_below="@+id/biyexuex"
-                android:layout_centerHorizontal="true"
-                android:layout_width="680px"
-                android:layout_height="150px" />
-            </RelativeLayout>
+        </RelativeLayout>
         <TextView
             android:id="@+id/xueli"
             android:textSize="30px"

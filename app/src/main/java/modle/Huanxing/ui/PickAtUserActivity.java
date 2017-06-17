@@ -145,7 +145,7 @@ public class PickAtUserActivity extends BaseActivity{
         finish();
     }
 
-    private class PickUserAdapter extends EaseContactAdapter{
+    private class PickUserAdapter extends EaseContactAdapter {
 
         public PickUserAdapter(Context context, int resource, List<EaseUser> objects) {
             super(context, resource, objects);

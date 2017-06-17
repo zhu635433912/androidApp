@@ -101,6 +101,7 @@ public class Pick_singleActivty  extends AutoLayoutActivity implements View.OnCl
                 Intent intent=new Intent(Pick_singleActivty.this,UserxinxiActivty.class);
                 intent.putExtra("user_id",aa);
                 startActivity(intent);
+
             }
         });
     }

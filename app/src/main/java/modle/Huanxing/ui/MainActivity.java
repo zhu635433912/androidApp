@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,16 +37,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deguan.xuelema.androidapp.R;
+import com.deguan.xuelema.androidapp.SetUp;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMContactListener;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMCmdMessageBody;
-import com.hyphenate.chat.EMConversation;
-import com.hyphenate.chat.EMConversation.EMConversationType;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.util.EMLog;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
 
 import java.util.List;
 
@@ -55,6 +57,8 @@ import modle.Huanxing.runtimepermissions.PermissionsManager;
 import modle.Huanxing.runtimepermissions.PermissionsResultAction;
 import modle.user_ziliao.Constant;
 import modle.user_ziliao.DemoHelper;
+import modle.user_ziliao.User_id;
+import view.login.ViewActivity.LoginAcitivity;
 
 @SuppressLint("NewApi")
 public class MainActivity extends BaseActivity {
@@ -90,29 +94,32 @@ public class MainActivity extends BaseActivity {
 		    String packageName = getPackageName();
 		    PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
 		    if (!pm.isIgnoringBatteryOptimizations(packageName)) {
-		        Intent intent = new Intent();
-		        intent.setAction(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
-		        intent.setData(Uri.parse("package:" + packageName));
-		        startActivity(intent);
-		    }
+				try {
+					//some device doesn't has activity to handle this intent
+					//so add try catch
+					Intent intent = new Intent();
+					intent.setAction(android.provider.Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+					intent.setData(Uri.parse("package:" + packageName));
+					startActivity(intent);
+				} catch (Exception e) {
+				}
+			}
 		}
-		
+
 		//make sure activity will not in background if user is logged into another device or removed
 		if (savedInstanceState != null && savedInstanceState.getBoolean(Constant.ACCOUNT_REMOVED, false)) {
 		    DemoHelper.getInstance().logout(false,null);
 			finish();
-			startActivity(new Intent(this, LoginActivity.class));
+			startActivity(new Intent(this, LoginAcitivity.class));
 			return;
 		} else if (savedInstanceState != null && savedInstanceState.getBoolean("isConflict", false)) {
 			finish();
-			startActivity(new Intent(this, LoginActivity.class));
+			startActivity(new Intent(this, LoginAcitivity.class));
 			return;
 		}
 		setContentView(R.layout.em_activity_main);
 		// runtime permission for android 6.0, just require all permissions here for simple
 		requestPermissions();
-
-		initView();
 		ImageView backImage = (ImageView) findViewById(R.id.main_back);
 		backImage.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -120,10 +127,12 @@ public class MainActivity extends BaseActivity {
 				finish();
 			}
 		});
+		initView();
+
 		//umeng api
-//		MobclickAgent.updateOnlineConfig(this);
-//		UmengUpdateAgent.setUpdateOnlyWifi(false);
-//		UmengUpdateAgent.update(this);
+		MobclickAgent.updateOnlineConfig(this);
+		UmengUpdateAgent.setUpdateOnlyWifi(false);
+		UmengUpdateAgent.update(this);
 
 		showExceptionDialogFromIntent(getIntent());
 
@@ -132,8 +141,10 @@ public class MainActivity extends BaseActivity {
 		conversationListFragment = new ConversationListFragment();
 		contactListFragment = new ContactListFragment();
 //		SettingsFragment settingFragment = new SettingsFragment();
-//		fragments = new Fragment[] { conversationListFragment, contactListFragment, settingFragment};
-		fragments = new Fragment[] { conversationListFragment, contactListFragment};
+		fragments = new Fragment[] { conversationListFragment, contactListFragment
+//				, settingFragment
+		};
+
 		getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, conversationListFragment)
 				.add(R.id.fragment_container, contactListFragment).hide(contactListFragment).show(conversationListFragment)
 				.commit();
@@ -168,7 +179,6 @@ public class MainActivity extends BaseActivity {
 	private void initView() {
 		unreadLabel = (TextView) findViewById(R.id.unread_msg_number);
 		unreadAddressLable = (TextView) findViewById(R.id.unread_address_number);
-//		mTabs = new Button[3];
 		mTabs = new Button[2];
 		mTabs[0] = (Button) findViewById(R.id.btn_conversation);
 		mTabs[1] = (Button) findViewById(R.id.btn_address_list);
@@ -224,7 +234,7 @@ public class MainActivity extends BaseActivity {
 			//red packet code : 处理红包回执透传消息
 			for (EMMessage message : messages) {
 				EMCmdMessageBody cmdMsgBody = (EMCmdMessageBody) message.getBody();
-				final String action = cmdMsgBody.action();//获取自定义action
+//				final String action = cmdMsgBody.action();//获取自定义action
 //				if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)) {
 //					RedPacketUtil.receiveRedPacketAckMessage(message);
 //				}
@@ -400,14 +410,7 @@ public class MainActivity extends BaseActivity {
 	 * @return
 	 */
 	public int getUnreadMsgCountTotal() {
-		int unreadMsgCountTotal = 0;
-		int chatroomUnreadMsgCount = 0;
-		unreadMsgCountTotal = EMClient.getInstance().chatManager().getUnreadMessageCount();
-		for(EMConversation conversation:EMClient.getInstance().chatManager().getAllConversations().values()){
-			if(conversation.getType() == EMConversationType.ChatRoom)
-			chatroomUnreadMsgCount=chatroomUnreadMsgCount+conversation.getUnreadMsgCount();
-		}
-		return unreadMsgCountTotal-chatroomUnreadMsgCount;
+		return EMClient.getInstance().chatManager().getUnreadMsgsCount();
 	}
 
 	private InviteMessgeDao inviteMessgeDao;
@@ -493,7 +496,20 @@ public class MainActivity extends BaseActivity {
 						exceptionBuilder = null;
 						isExceptionDialogShow = false;
 						finish();
-						Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+						SharedPreferences userxml=getSharedPreferences("userxml",MODE_PRIVATE);
+						userxml.edit().remove("username").remove("password").commit();
+						SharedPreferences settings = getSharedPreferences("userstate", MODE_PRIVATE);
+						SharedPreferences.Editor editor = settings.edit();
+						editor.remove("id");
+						editor.remove("role");
+						editor.remove("username");
+						editor.remove("password");
+						editor.remove("state");
+						editor.commit();
+//                Intent intent2=new Intent(SetUp.this, LoginAcitivity.class);
+//                startActivity(intent2);
+
+						Intent intent = new Intent(MainActivity.this, LoginAcitivity.class);
 						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 						startActivity(intent);
 					}
@@ -505,12 +521,6 @@ public class MainActivity extends BaseActivity {
 				EMLog.e(TAG, "---------color conflictBuilder error" + e.getMessage());
 			}
 		}
-	}
-
-	@Override
-	public void onBackPressed() {
-		super.onBackPressed();
-		finish();
 	}
 
 	private void showExceptionDialogFromIntent(Intent intent) {
@@ -544,8 +554,21 @@ public class MainActivity extends BaseActivity {
                     public void onSuccess() {
                         runOnUiThread(new Runnable() {
                             public void run() {
+								SharedPreferences userxml=getSharedPreferences("userxml",MODE_PRIVATE);
+								userxml.edit().remove("username").remove("password").commit();
+								SharedPreferences settings = getSharedPreferences("userstate", MODE_PRIVATE);
+								SharedPreferences.Editor editor = settings.edit();
+								editor.remove("id");
+								editor.remove("role");
+								editor.remove("username");
+								editor.remove("password");
+								editor.remove("state");
+								editor.commit();
+//                Intent intent2=new Intent(SetUp.this, LoginAcitivity.class);
+//                startActivity(intent2);
+
                                 finish();
-                                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                                startActivity(new Intent(MainActivity.this, LoginAcitivity.class));
                             }
                         });
                     }

@@ -1,8 +1,5 @@
 package modle.Huanxing.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -36,10 +33,13 @@ import com.hyphenate.util.DateUtils;
 import com.hyphenate.util.EMLog;
 import com.hyphenate.util.TextFormater;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import modle.Huanxing.domain.VideoEntity;
-import modle.Huanxing.video.util.ImageCache;
-import modle.Huanxing.video.util.ImageResizer;
-import modle.Huanxing.video.util.Utils;
+import modle.Huanxing.util.ImageCache;
+import modle.Huanxing.util.ImageResizer;
+import modle.Huanxing.util.Utils;
 import modle.Huanxing.widget.RecyclingImageView;
 
 public class ImageGridFragment extends Fragment implements OnItemClickListener {
@@ -67,7 +67,7 @@ public class ImageGridFragment extends Fragment implements OnItemClickListener {
 		mList=new ArrayList<VideoEntity>();
 		getVideoFile();
 		mAdapter = new ImageAdapter(getActivity());
-
+		
 		ImageCache.ImageCacheParams cacheParams=new ImageCache.ImageCacheParams();
 
 		cacheParams.setMemCacheSizePercent(0.25f); // Set memory cache to 25% of

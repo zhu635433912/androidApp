@@ -33,7 +33,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
 import com.hyphenate.chat.EMCallStateChangeListener;
 import com.hyphenate.chat.EMClient;
@@ -42,8 +41,6 @@ import com.hyphenate.util.EMLog;
 
 import java.util.UUID;
 
-import modle.Huanxing.cache.UserCacheInfo;
-import modle.Huanxing.cache.UserCacheManager;
 import modle.user_ziliao.DemoHelper;
 
 /**
@@ -57,7 +54,6 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
 	private Button answerBtn;
 	private ImageView muteImage;
 	private ImageView handsFreeImage;
-	private ImageView avatarImage;
 
 	private boolean isMuteState;
 	private boolean isHandsfreeState;
@@ -89,7 +85,6 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
 		muteImage = (ImageView) findViewById(R.id.iv_mute);
 		handsFreeImage = (ImageView) findViewById(R.id.iv_handsfree);
 		callStateTextView = (TextView) findViewById(R.id.tv_call_state);
-        avatarImage = (ImageView)findViewById(R.id.swing_card);
         TextView nickTextView = (TextView) findViewById(R.id.tv_nick);
         TextView durationTextView = (TextView) findViewById(R.id.tv_calling_duration);
 		chronometer = (Chronometer) findViewById(R.id.chronometer);
@@ -111,16 +106,7 @@ public class VoiceCallActivity extends CallActivity implements OnClickListener {
 
 		username = getIntent().getStringExtra("username");
 		isInComingCall = getIntent().getBooleanExtra("isComingCall", false);
-
-		// 显示昵称头像
-		UserCacheInfo user = UserCacheManager.get(username);
-		if (user != null){
-            nickTextView.setText(user.getNickName());
-            Glide.with(VoiceCallActivity.this).load(user.getAvatarUrl()).placeholder(R.drawable.em_default_avatar).into(avatarImage);
-        }else {
-            nickTextView.setText(username);
-        }
-
+		nickTextView.setText(username);
 		if (!isInComingCall) {// outgoing call
 			soundPool = new SoundPool(1, AudioManager.STREAM_RING, 0);
 			outgoing = soundPool.load(this, R.raw.em_outgoing, 1);

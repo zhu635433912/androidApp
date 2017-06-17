@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,6 +32,8 @@ import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.autolayout.AutoLayoutActivity;
+
+import org.simple.eventbus.EventBus;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -89,10 +92,16 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
     private ImageView wodegerxx;
     private TextView wod;
     private User_init user_init;
+    private LinearLayout index_dindanlinenarla;
+    private LinearLayout tuikuanzhong;
+    private LinearLayout jinxinzhong;
+    private LinearLayout daipingjia;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myindex);
+        EventBus.getDefault().register(this);
+
 //        Fade fade = (Fade) TransitionInflater.from(this).inflateTransition(R.transition.activity_hold);
 //        getWindow().setEnterTransition(fade);
 //
@@ -109,6 +118,10 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
         LayoutInflater inflater = LayoutInflater.from(indexActivty.this);
         view = inflater.inflate(R.layout.myindex, null);
 
+        daipingjia= (LinearLayout) findViewById(R.id.daipingjia);
+        jinxinzhong= (LinearLayout) findViewById(R.id.jinxinzhong);
+        tuikuanzhong= (LinearLayout) findViewById(R.id.tuikuanzhong);
+        index_dindanlinenarla= (LinearLayout) findViewById(R.id.index_dindanlinenarla);
         neirongtext= (TextView) findViewById(R.id.neirongtext);
         usernametext= (TextView) findViewById(R.id.usernametext);
         stop= (RelativeLayout) findViewById(R.id.sopt);
@@ -137,6 +150,7 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
         wodegerxx.setBackgroundResource(R.drawable.hly48);
         wod.setTextColor(Color.parseColor("#f7e61c"));
 
+        index_dindanlinenarla.setVisibility(View.GONE);
         xingxibutton.bringToFront();
         setup.bringToFront();
         qianbao.bringToFront();
@@ -151,6 +165,9 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
             z = 2;
         }
 
+        jinxinzhong.setOnClickListener(this);
+        tuikuanzhong.setOnClickListener(this);
+        index_dindanlinenarla.setOnClickListener(this);
         huihua.setOnClickListener(this);
         usernametext.setOnClickListener(this);
         wodejiaoshi.setOnClickListener(this);
@@ -177,7 +194,7 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
         beginTransaction.add(R.id.myindexfagment, dindan_fagment);
         beginTransaction.commit();
 
-        textView.setTextColor(android.graphics.Color.parseColor("#fd1245"));
+        textView.setTextColor(Color.parseColor("#fd1245"));
 
     }
 
@@ -199,8 +216,8 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
                 //我的订单
                 if (i != 1) {
                     i = 1;
-                    textView.setTextColor(android.graphics.Color.parseColor("#fd1245"));
-                    tuijianxuqiu.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
+                    textView.setTextColor(Color.parseColor("#fd1245"));
+                    tuijianxuqiu.setTextColor(Color.parseColor("#8b8b8b"));
 
                     dindan_fagment = new Dindan_fagment();
                     fragmentManager = getSupportFragmentManager();
@@ -215,8 +232,8 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
                 //推荐需求
                 if (i != 2) {
                     i = 2;
-                    textView.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
-                    tuijianxuqiu.setTextColor(android.graphics.Color.parseColor("#fd1245"));
+                    textView.setTextColor(Color.parseColor("#8b8b8b"));
+                    tuijianxuqiu.setTextColor(Color.parseColor("#fd1245"));
 
                     FragmentManager fm = getSupportFragmentManager();
                     FragmentTransaction transaction = fm.beginTransaction();
@@ -244,6 +261,7 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
                 //推荐需求
                 if (i != 2) {
                     i = 2;
+                    index_dindanlinenarla.setVisibility(View.GONE);
                     FragmentManager fm = getSupportFragmentManager();
                     FragmentTransaction transaction = fm.beginTransaction();
                     fabu = new Fabuxuqiu_fagment();
@@ -279,6 +297,18 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
                 Intent intent1=new Intent(indexActivty.this, modle.Huanxing.ui.MainActivity.class);
                 startActivity(intent1);
                 break;
+            case R.id.jinxinzhong:
+                //进行中
+                EventBus.getDefault().post(1,"Orderrefresh");
+                break;
+            case R.id.tuikuanzhong:
+                //退款
+                EventBus.getDefault().post(2,"Orderrefresh");
+                break;
+            case R.id.daipingjia:
+                //待评价
+                EventBus.getDefault().post(3,"Orderrefresh");
+                break;
         }
     }
 
@@ -310,8 +340,14 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
         Log.d("aa","crolIY="+scrollY+"---"+(topDistance - height));
         if(scrollY >= topDistance - height){  //如果滑动的距离大于或等于位置3到位置2的距离，那么说明内部绿色的顶部在位置2上面了，我们需要显示外部绿色栏了
             stop.setVisibility(View.VISIBLE);
+            if (i==1) {
+                index_dindanlinenarla.setVisibility(View.VISIBLE);
+            }
         }else {  //反之隐藏
             stop.setVisibility(View.GONE);
+            if (i==1) {
+                index_dindanlinenarla.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -324,10 +360,10 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
                 final Bitmap bitmap=getPicture(pate);
                 //发送一个Runnable对象
                 circleImageView.post(new Runnable(){
-
                     @Override
                     public void run() {
                         circleImageView.setImageBitmap(bitmap);//在ImageView中显示从网络上获取到的图片
+
                     }
 
                 });
@@ -363,5 +399,11 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
     protected void onRestart() {
         super.onRestart();
         user_init.User_Data(uid,this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

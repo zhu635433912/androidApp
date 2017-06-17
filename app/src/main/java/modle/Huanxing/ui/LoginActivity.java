@@ -13,7 +13,6 @@
  */
 package modle.Huanxing.ui;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -33,15 +32,11 @@ import android.widget.Toast;
 import com.deguan.xuelema.androidapp.R;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
-import com.hyphenate.exceptions.HyphenateException;
 
-import java.util.Random;
-
-import modle.Huanxing.cache.UserCacheManager;
 import modle.Huanxing.db.DemoDBManager;
 import modle.user_ziliao.DemoHelper;
+import modle.user_ziliao.User_id;
 
 /**
  * Login screen
@@ -59,6 +54,8 @@ public class LoginActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+
 
 		// enter the main activity if already logged in
 		if (DemoHelper.getInstance().isLoggedIn()) {
@@ -160,42 +157,17 @@ public class LoginActivity extends BaseActivity {
 			public void onSuccess() {
 				Log.d(TAG, "login: onSuccess");
 
-				Random random=new Random();
-
-				// 登录成功，将用户的昵称头像缓存在本地
-				String userId = EMClient.getInstance().getCurrentUser();// 用户环信ID
-				String nickName = String.format("小草%d",random.nextInt(10000));// 用户昵称
-				String avatarUrl = String.format("http://duoroux.com/chat/avatar/%d.jpg",random.nextInt(10));// 用户头像（绝对路径）
-				UserCacheManager.save(userId, nickName, avatarUrl);
-
-				// 登录成功后，如果后端云没有缓存用户信息，则新增一个用户
-//				UserWebManager.createUser(userId, nickName, avatarUrl);
-
-				// 自动加martin为好友，并自动发送一条消息
-				try {
-					EMClient.getInstance().contactManager().addContact("martin","大表哥，我要加你为好友哦~");
-					EMMessage message = EMMessage.createTxtSendMessage("可否到github上给简版demo一个star？ ☺ https://github.com/mengmakies/ChatDemo-UI3.00-Simple", "martin");
-					EMClient.getInstance().chatManager().sendMessage(message);
-				} catch (HyphenateException e) {
-					e.printStackTrace();
-				}
 
 				// ** manually load all local groups and conversation
 			    EMClient.getInstance().groupManager().loadAllGroups();
 			    EMClient.getInstance().chatManager().loadAllConversations();
 
-				String nick = "";
-				try {
-					nick = EMClient.getInstance().pushManager().getPushConfigsFromServer().getDisplayNickname();
-				} catch (HyphenateException e) {
-					e.printStackTrace();
-				}
-
-				// update current user's display name for APNs
-				boolean updatenick = EMClient.getInstance().pushManager().updatePushNickname(nickName);
-				if (!updatenick) {
-					Log.e("LoginActivity", "update current user nick fail");
-				}
+			    // update current user's display name for APNs
+//				boolean updatenick = EMClient.getInstance().pushManager().updatePushNickname(
+//						User_id.currentUserNick.trim());
+//				if (!updatenick) {
+//					Log.e("LoginActivity", "update current user nick fail");
+//				}
 
 				if (!LoginActivity.this.isFinishing() && pd.isShowing()) {
 				    pd.dismiss();

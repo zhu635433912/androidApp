@@ -380,6 +380,18 @@
                         style="@style/text_flag_04"
                         android:text="数学" />
                 </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/otherRl"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/otherTv"
+                        android:gravity="center"
+                        style="@style/text_flag_04"
+                        android:text="其他" />
+                </RelativeLayout>
             </LinearLayout>
             <TextView
                 android:id="@+id/nianjiyaoqiu"

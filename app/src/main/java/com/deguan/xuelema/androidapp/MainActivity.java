@@ -95,6 +95,7 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
             int id = Integer.parseInt(ids);
         }
         int role=Integer.parseInt(roles);
+
          if (role==2){
              bianji.setText("学生");
              hostimaview.setBackgroundResource(R.drawable.logo);

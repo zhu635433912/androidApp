@@ -6,9 +6,10 @@ import android.view.animation.AlphaAnimation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.deguan.xuelema.androidapp.R;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.util.EasyUtils;
-import com.deguan.xuelema.androidapp.R;
+
 import modle.user_ziliao.DemoHelper;
 
 /**

@@ -55,10 +55,11 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="60px"
                 android:layout_marginTop="40px"
-                android:text="个人简介"
+                android:text="详情"
                 android:textSize="35px" />
 
             <TextView
+                android:visibility="gone"
                 android:layout_marginTop="20px"
                 android:layout_alignParentTop="true"
                 android:gravity="center"
@@ -66,7 +67,7 @@
                 android:layout_width="120px"
                 android:layout_height="80px"
                 android:layout_marginLeft="40px"
-                android:layout_toEndOf="@+id/gerenjianjie"
+                android:layout_toRightOf="@+id/gerenjianjie"
                 android:text="评价"
                 android:textSize="35px" />
 
@@ -79,7 +80,15 @@
                 android:layout_marginTop="26px"
                 android:background="#d7d7d7" />
 
-            <modle.toos.CircleImageView
+            <!--<modle.toos.CircleImageView-->
+                <!--android:id="@+id/teachertoux"-->
+                <!--android:layout_width="80px"-->
+                <!--android:layout_height="80px"-->
+                <!--android:layout_below="@+id/xuqiufenggexian1"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_marginTop="40px"-->
+                <!--android:src="@drawable/ox2" />-->
+            <ImageView
                 android:id="@+id/teachertoux"
                 android:layout_width="80px"
                 android:layout_height="80px"
@@ -87,7 +96,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="40px"
                 android:src="@drawable/ox2" />
-
             <TextView
                 android:id="@+id/teachername"
                 android:layout_width="wrap_content"
@@ -115,8 +123,8 @@
                 android:layout_width="200px"
                 android:layout_height="50px"
                 android:layout_below="@+id/teachername"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="80px"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="80px"
                 android:layout_marginTop="5px"
                 android:text="一星级教师"
                 android:textSize="25px" />
@@ -187,7 +195,7 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/linearLayout"
+                android:layout_alignLeft="@+id/linearLayout"
                 android:layout_below="@+id/linearLayout"
                 android:layout_marginLeft="20px"
                 android:layout_marginTop="30px"
@@ -207,7 +215,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/linearLayout"
+                android:layout_alignLeft="@+id/linearLayout"
                 android:layout_below="@+id/techartext"
                 android:layout_marginLeft="20px"
                 android:layout_marginTop="10px"
@@ -226,7 +234,7 @@
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/linearLayout"
+                android:layout_alignLeft="@+id/linearLayout"
                 android:layout_below="@+id/techaertec"
                 android:layout_marginLeft="20px"
                 android:layout_marginTop="10px"
@@ -246,6 +254,7 @@
 
 
         <ImageButton
+            android:visibility="gone"
             android:id="@+id/imageButton"
             android:layout_width="80px"
             android:layout_height="80px"
@@ -256,16 +265,19 @@
             android:background="@drawable/hly33" />
 
         <ImageButton
+            android:visibility="gone"
+
             android:id="@+id/jianjiebohao"
             android:layout_width="80px"
             android:layout_height="80px"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_marginBottom="10px"
-            android:layout_marginEnd="20px"
+            android:layout_marginRight="20px"
             android:background="@drawable/hly44" />
 
         <ImageButton
+            android:visibility="gone"
             android:id="@+id/imageButton2"
             android:layout_width="320px"
             android:layout_height="100px"

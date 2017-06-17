@@ -56,7 +56,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import modle.Huanxing.video.util.Utils;
+import modle.Huanxing.util.Utils;
 
 public class RecorderVideoActivity extends BaseActivity implements
 		OnClickListener, SurfaceHolder.Callback, OnErrorListener,
@@ -310,7 +310,7 @@ public class RecorderVideoActivity extends BaseActivity implements
 
 	@Override
 	public void surfaceDestroyed(SurfaceHolder arg0) {
-		EMLog.v("video", "surfaceDestroyed");  
+		EMLog.v("video", "surfaceDestroyed");
 	}
 
 	public boolean startRecording(){

@@ -3,11 +3,12 @@ package modle.Huanxing.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import modle.Huanxing.runtimepermissions.PermissionsManager;
 
 import com.deguan.xuelema.androidapp.R;
 import com.hyphenate.easeui.ui.EaseChatFragment;
 import com.hyphenate.util.EasyUtils;
+
+import modle.Huanxing.runtimepermissions.PermissionsManager;
 
 /**
  *

@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import com.deguan.xuelema.androidapp.R;
 import com.hyphenate.chat.EMClient;
-import com.hyphenate.exceptions.HyphenateException;
 
 import modle.user_ziliao.DemoHelper;
 
@@ -33,15 +32,6 @@ public class OfflinePushNickActivity extends BaseActivity {
 		inputNickName = (EditText) findViewById(R.id.et_input_nickname);
 		Button saveNickName = (Button) findViewById(R.id.btn_save);
 		nicknameDescription = (TextView) findViewById(R.id.tv_nickname_description);
-
-		String pushNick = null;
-		try {
-			pushNick = EMClient.getInstance().pushManager().getPushConfigsFromServer().getDisplayNickname();
-			inputNickName.setText(pushNick);
-		} catch (HyphenateException e) {
-			e.printStackTrace();
-		}
-
 
 		saveNickName.setOnClickListener(new OnClickListener() {
 
@@ -68,7 +58,6 @@ public class OfflinePushNickActivity extends BaseActivity {
 						} else {
 							runOnUiThread(new Runnable() {
 								public void run() {
-									EMClient.getInstance().pushManager().updatePushNickname(inputNickName.getText().toString());
 									boolean updatenick = DemoHelper.getInstance().getUserProfileManager().updateCurrentUserNickName(inputNickName.getText().toString());
 									if (!updatenick) {
 										Toast.makeText(OfflinePushNickActivity.this, "update nickname failed!",

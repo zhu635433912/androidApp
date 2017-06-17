@@ -223,7 +223,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 if (User_id.getRole().equals("1")) {
                     if (xuqiuneirong.getText().toString() != null) {
                         if (Gender == 66 || age == 66 || xueli == 66 || Servicetype.equals("")) {
-                            Toast.makeText(Xuqiufabu.this, "请选择按钮！", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Xuqiufabu.this, "请选择性别年龄要求类型！", Toast.LENGTH_SHORT).show();
                         } else {
                             if (Subject.getText().toString().equals("年级") || grade.getText().toString().equals("科目")) {
                                 Toast.makeText(Xuqiufabu.this, "请选择年级和科目！", Toast.LENGTH_SHORT).show();
@@ -296,8 +296,13 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 TimePickerDialog timePickerDialog = new TimePickerDialog(Xuqiufabu.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        kaishishijian.setText("起始时间:" + hourOfDay + ":" + minute);
-                        qishi = hourOfDay + ":" + minute + ":00";
+                        if (minute == 0){
+                            kaishishijian.setText("起始时间:" + hourOfDay + ":0" + minute);
+                            qishi = hourOfDay + ":0" + minute + ":00";
+                        }else {
+                            kaishishijian.setText("起始时间:" + hourOfDay + ":" + minute);
+                            qishi = hourOfDay + ":" + minute + ":00";
+                        }
                     }
                 }, hourOfDay, minute, true);
                 timePickerDialog.show();
@@ -308,8 +313,13 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 TimePickerDialog timePickerDialogz = new TimePickerDialog(Xuqiufabu.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        jieshushijian.setText("结束时间:" + hourOfDay + ":" + minute);
-                        jieshu = hourOfDay + ":" + minute + ":00";
+                        if (minute == 0) {
+                            jieshushijian.setText("结束时间:" + hourOfDay + ":0" + minute);
+                            jieshu = hourOfDay + ":0" + minute + ":00";
+                        }else {
+                            jieshushijian.setText("结束时间:" + hourOfDay + ":" + minute);
+                            jieshu = hourOfDay + ":" + minute + ":00";
+                        }
                     }
                 }, hourOfDay, minute, true);
                 timePickerDialogz.show();
@@ -420,6 +430,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 Student.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 Thirdparty.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 Servicetype = type.getText().toString();
+                //------------------------>不限的类型0吗
                 fuwfangshi = 1;
                 break;
             case R.id.shangmen:

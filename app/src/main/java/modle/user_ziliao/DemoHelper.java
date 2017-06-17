@@ -25,12 +25,11 @@ import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessage.ChatType;
 import com.hyphenate.chat.EMMessage.Status;
 import com.hyphenate.chat.EMMessage.Type;
+import com.hyphenate.chat.EMMucSharedFile;
 import com.hyphenate.chat.EMOptions;
 import com.hyphenate.chat.EMTextMessageBody;
-import com.hyphenate.easeui.controller.EaseUI;
-import com.hyphenate.easeui.controller.EaseUI.EaseEmojiconInfoProvider;
-import com.hyphenate.easeui.controller.EaseUI.EaseSettingsProvider;
-import com.hyphenate.easeui.controller.EaseUI.EaseUserProfileProvider;
+import com.hyphenate.easeui.EaseUI;
+import com.hyphenate.easeui.domain.EaseAvatarOptions;
 import com.hyphenate.easeui.domain.EaseEmojicon;
 import com.hyphenate.easeui.domain.EaseEmojiconGroupEntity;
 import com.hyphenate.easeui.domain.EaseUser;
@@ -149,12 +148,16 @@ public class DemoHelper {
 	public void init(Context context) {
 	    demoModel = new DemoModel(context);
 	    EMOptions options = initChatOptions();
+//        options.setRestServer("103.241.230.122:31111");
+//        options.setIMServer("103.241.230.122");
+//        options.setImPort(31097);
+
 	    //use default options if options is null
 		if (EaseUI.getInstance().init(context, options)) {
 		    appContext = context;
 		    
 		    //debug mode, you'd better set it to false, if you want release your App officially.
-		    EMClient.getInstance().setDebugMode(true);
+		    EMClient.getInstance().setDebugMode(false);
 		    //get easeui instance
 		    easeUI = EaseUI.getInstance();
 		    //to set user's profile and avatar
@@ -163,6 +166,8 @@ public class DemoHelper {
 			PreferenceManager.init(context);
 			//initialize profile manager
 			getUserProfileManager().init(context);
+            //set Call options
+            setCallOptions();
 
             // TODO: set Call options
             // min video kbps
@@ -225,8 +230,8 @@ public class DemoHelper {
 		}
 	}
 
-	
-	private EMOptions initChatOptions(){
+
+    private EMOptions initChatOptions(){
         Log.d(TAG, "init HuanXin Options");
         
         EMOptions options = new EMOptions();
@@ -265,9 +270,70 @@ public class DemoHelper {
         return options;
     }
 
+    private void setCallOptions() {
+        // min video kbps
+        int minBitRate = PreferenceManager.getInstance().getCallMinVideoKbps();
+        if (minBitRate != -1) {
+            EMClient.getInstance().callManager().getCallOptions().setMinVideoKbps(minBitRate);
+        }
+
+        // max video kbps
+        int maxBitRate = PreferenceManager.getInstance().getCallMaxVideoKbps();
+        if (maxBitRate != -1) {
+            EMClient.getInstance().callManager().getCallOptions().setMaxVideoKbps(maxBitRate);
+        }
+
+        // max frame rate
+        int maxFrameRate = PreferenceManager.getInstance().getCallMaxFrameRate();
+        if (maxFrameRate != -1) {
+            EMClient.getInstance().callManager().getCallOptions().setMaxVideoFrameRate(maxFrameRate);
+        }
+
+        // audio sample rate
+        int audioSampleRate = PreferenceManager.getInstance().getCallAudioSampleRate();
+        if (audioSampleRate != -1) {
+            EMClient.getInstance().callManager().getCallOptions().setAudioSampleRate(audioSampleRate);
+        }
+
+        /**
+         * This function is only meaningful when your app need recording
+         * If not, remove it.
+         * This function need be called before the video stream started, so we set it in onCreate function.
+         * This method will set the preferred video record encoding codec.
+         * Using default encoding format, recorded file may not be played by mobile player.
+         */
+        //EMClient.getInstance().callManager().getVideoCallHelper().setPreferMovFormatEnable(true);
+
+        // resolution
+        String resolution = PreferenceManager.getInstance().getCallBackCameraResolution();
+        if (resolution.equals("")) {
+            resolution = PreferenceManager.getInstance().getCallFrontCameraResolution();
+        }
+        String[] wh = resolution.split("x");
+        if (wh.length == 2) {
+            try {
+                EMClient.getInstance().callManager().getCallOptions().setVideoResolution(new Integer(wh[0]).intValue(), new Integer(wh[1]).intValue());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        // enabled fixed sample rate
+        boolean enableFixSampleRate = PreferenceManager.getInstance().isCallFixedVideoResolution();
+        EMClient.getInstance().callManager().getCallOptions().enableFixedVideoResolution(enableFixSampleRate);
+
+        // Offline call push
+        EMClient.getInstance().callManager().getCallOptions().setIsSendPushIfOffline(getModel().isPushCall());
+    }
+
     protected void setEaseUIProviders() {
+        //set user avatar to circle shape
+        EaseAvatarOptions avatarOptions = new EaseAvatarOptions();
+        avatarOptions.setAvatarShape(1);
+        easeUI.setAvatarOptions(avatarOptions);
+
     	// set profile provider if you want easeUI to handle avatar and nickname
-        easeUI.setUserProfileProvider(new EaseUserProfileProvider() {
+        easeUI.setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
             
             @Override
             public EaseUser getUser(String username) {
@@ -276,7 +342,7 @@ public class DemoHelper {
         });
 
         //set options 
-        easeUI.setSettingsProvider(new EaseSettingsProvider() {
+        easeUI.setSettingsProvider(new EaseUI.EaseSettingsProvider() {
             
             @Override
             public boolean isSpeakerOpened() {
@@ -321,8 +387,8 @@ public class DemoHelper {
             }
         });
         //set emoji icon provider
-        easeUI.setEmojiconInfoProvider(new EaseEmojiconInfoProvider() {
-
+        easeUI.setEmojiconInfoProvider(new EaseUI.EaseEmojiconInfoProvider() {
+            
             @Override
             public EaseEmojicon getEmojiconInfo(String emojiconIdentityCode) {
                 EaseEmojiconGroupEntity data = EmojiconExampleGroupData.getData();
@@ -469,7 +535,7 @@ public class DemoHelper {
         //register incoming call receiver
         appContext.registerReceiver(callReceiver, callFilter);    
         //register connection listener
-        EMClient.getInstance().addConnectionListener(connectionListener);       
+        EMClient.getInstance().addConnectionListener(connectionListener);
         //register group and contact event listener
         registerGroupAndContactListener();
         //register message event listener
@@ -641,7 +707,7 @@ public class DemoHelper {
             msg.setTo(groupId);
             msg.setMsgId(UUID.randomUUID().toString());
             msg.addBody(new EMTextMessageBody(inviter + " " +st3));
-            msg.setStatus(Status.SUCCESS);
+            msg.setStatus(EMMessage.Status.SUCCESS);
             // save invitation as messages
             EMClient.getInstance().chatManager().saveMessage(msg);
             // notify invitation message
@@ -685,17 +751,32 @@ public class DemoHelper {
         public void onOwnerChanged(String groupId, String newOwner, String oldOwner) {
             showToast("onOwnerChanged new:" + newOwner + " old:" + oldOwner);
         }
-
+        
         @Override
         public void onMemberJoined(String groupId, String member) {
             EMLog.d(TAG, "onMemberJoined");
             showToast("onMemberJoined: " + member);
         }
-
+        
         @Override
         public void onMemberExited(String groupId, String member) {
             EMLog.d(TAG, "onMemberJoined");
             showToast("onMemberExited: " + member);
+        }
+
+        @Override
+        public void onAnnouncementChanged(String groupId, String announcement) {
+
+        }
+
+        @Override
+        public void onSharedFileAdded(String groupId, EMMucSharedFile sharedFile) {
+
+        }
+
+        @Override
+        public void onSharedFileDeleted(String groupId, String fileId) {
+
         }
         // ============================= group_reform new add api end
     }
@@ -822,17 +903,15 @@ public class DemoHelper {
 	private EaseUser getUserInfo(String username){
 		// To get instance of EaseUser, here we get it from the user list in memory
 		// You'd better cache it if you get it from your server
-
-        // 从本地缓存中获取用户昵称头像
-        EaseUser user = UserCacheManager.getEaseUser(username);
-
+//        EaseUser user = null;
 //        if(username.equals(EMClient.getInstance().getCurrentUser()))
 //            return getUserProfileManager().getCurrentUserInfo();
 //        user = getContactList().get(username);
 //        if(user == null && getRobotList() != null){
 //            user = getRobotList().get(username);
 //        }
-
+        // 从本地缓存中获取用户昵称头像
+        EaseUser user = UserCacheManager.getEaseUser(username);
         // if user is not in your contacts, set inital letter for him/her
         if(user == null){
             user = new EaseUser(username);
@@ -853,16 +932,13 @@ public class DemoHelper {
 			@Override
 			public void onMessageReceived(List<EMMessage> messages) {
 			    for (EMMessage message : messages) {
-			        EMLog.d(TAG, "onMessageReceived id : " + message.getMsgId());
-			        // in background, do not refresh UI, notify it in notification bar
-
-                    // 从消息的扩展属性里获取昵称头像
+                    EMLog.d(TAG, "onMessageReceived id : " + message.getMsgId());
+                    // in background, do not refresh UI, notify it in notification bar
                     UserCacheManager.save(message.ext());
-
-			        if(!easeUI.hasForegroundActivies()){
-			            getNotifier().onNewMsg(message);
-			        }
-			    }
+                    if(!easeUI.hasForegroundActivies()){
+                        getNotifier().onNewMsg(message);
+                    }
+                }
 			}
 			
 			@Override
@@ -1228,18 +1304,18 @@ public class DemoHelper {
                    //notify sync success
                    notifyContactsSyncListener(true);
                    
-//                   getUserProfileManager().asyncFetchContactInfosFromServer(usernames,new EMValueCallBack<List<EaseUser>>() {
-//
-//                       @Override
-//                       public void onSuccess(List<EaseUser> uList) {
-//                           updateContactList(uList);
-//                           getUserProfileManager().notifyContactInfosSyncListener(true);
-//                       }
-//
-//                       @Override
-//                       public void onError(int error, String errorMsg) {
-//                       }
-//                   });
+                   getUserProfileManager().asyncFetchContactInfosFromServer(usernames,new EMValueCallBack<List<EaseUser>>() {
+
+                       @Override
+                       public void onSuccess(List<EaseUser> uList) {
+                           updateContactList(uList);
+                           getUserProfileManager().notifyContactInfosSyncListener(true);
+                       }
+
+                       @Override
+                       public void onError(int error, String errorMsg) {
+                       }
+                   });
                    if(callback != null){
                        callback.onSuccess(usernames);
                    }

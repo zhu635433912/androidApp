@@ -38,7 +38,8 @@ public class Purchase_figment extends Fragment implements View.OnClickListener {
     private int visit_fee;
     private TextView xuessm;
     private TextView laoshism;
-
+    private String Requir_name;
+    private TextView kechengname;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,10 +52,11 @@ public class Purchase_figment extends Fragment implements View.OnClickListener {
         goumai= (Button) view.findViewById(R.id.goumai);
         xuessm= (TextView) view.findViewById(R.id.xuessm);
         laoshism= (TextView) view.findViewById(R.id.laoshism);
+        kechengname= (TextView) view.findViewById(R.id.kechengname);
 
         unvisit_fee= (int) getArguments().get("unvisit_fee");
         visit_fee = (int) getArguments().get("visit_fee");
-
+        Requir_name=getArguments().getString("Requir_name");
         fee= (int) getArguments().get("visit_fee");
         jiaoshiid= (int) getArguments().get("Requir_id");
         setfee();
@@ -92,7 +94,6 @@ public class Purchase_figment extends Fragment implements View.OnClickListener {
                                     Order_init order_init=new Order();
                                     //创建订单
                                     order_init.Establish_Order(uid,jiaoshiid,739,fee,i);
-
                                     Toast.makeText(getActivity(),"购买课程成功",Toast.LENGTH_SHORT).show();
                                     Intent intent=new Intent(getActivity(), Student_Activty.class);
                                     startActivity(intent);
@@ -122,5 +123,6 @@ public class Purchase_figment extends Fragment implements View.OnClickListener {
     public void setfee(){
         jieshufee.setText(fee+"");
         zongfee.setText(fee+"");
+        kechengname.setText(Requir_name+" ");
     }
 }

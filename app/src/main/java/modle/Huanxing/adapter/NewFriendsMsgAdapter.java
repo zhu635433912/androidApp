@@ -33,6 +33,7 @@ import com.hyphenate.chat.EMClient;
 
 import java.util.List;
 
+
 import modle.Huanxing.db.InviteMessgeDao;
 import modle.Huanxing.domain.InviteMessage;
 
@@ -222,8 +223,6 @@ public class NewFriendsMsgAdapter extends ArrayAdapter<InviteMessage> {
 	/**
      * decline invitation
      * 
-     * @param button
-     * @param username
      */
     private void refuseInvitation(final Button buttonAgree, final Button buttonRefuse, final InviteMessage msg) {
         final ProgressDialog pd = new ProgressDialog(context);

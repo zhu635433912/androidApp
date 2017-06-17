@@ -16,10 +16,13 @@ public interface Oredr_http {
     /*
     获取订单列表
      */
-
     @POST("index.php?s=/Service/Order/gets_order")
     Call<ContentModle> getOredrlist(@Query("uid") int uid, @Query("filter_type") int filter_type,
                                     @Query("status") int status, @Query("page") int page,@Query(" ") int requirement_id,@Query("order_rank") int order_rank);
+
+    //    @POST("index.php?s=/Service/Order/gets_order")
+//    Call<ContentModle> getOredrlist(@Query("uid") int uid, @Query("filter_type") int filter_type,
+//                                    @Query("status") int status, @Query("page") int page,@Query(" ") int requirement_id,@Query("order_rank") int order_rank);
     /*
     获取单一订单
      */

@@ -1,5 +1,6 @@
 package com.deguan.xuelema.androidapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,8 +10,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hyphenate.EMCallBack;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import java.util.Set;
+
+import modle.Huanxing.cache.UserCacheManager;
+import modle.user_ziliao.DemoHelper;
 import modle.user_ziliao.User_id;
 import view.login.ViewActivity.RevisePsdActivity;
 import view.login.ViewActivity.LoginAcitivity;
@@ -97,8 +103,10 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
                 editor.remove("password");
                 editor.remove("state");
                 editor.commit();
+                logout();
                 Intent intent2=new Intent(SetUp.this, LoginAcitivity.class);
                 startActivity(intent2);
+
                 Toast.makeText(SetUp.this,"退出成功！",Toast.LENGTH_LONG).show();
                 User_id.getInstance().exit();
 
@@ -115,4 +123,45 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
                 break;
         }
     }
+
+    void logout() {
+        final ProgressDialog pd = new ProgressDialog(this);
+        String st = getResources().getString(R.string.Are_logged_out);
+        pd.setMessage(st);
+        pd.setCanceledOnTouchOutside(false);
+        pd.show();
+        DemoHelper.getInstance().logout(false,new EMCallBack() {
+
+            @Override
+            public void onSuccess() {
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        pd.dismiss();
+                        // show login screen
+                        finish();
+//                        startActivity(new Intent(SetUp.this, LoginAcitivity.class));
+                    }
+                });
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+
+            @Override
+            public void onError(int code, String message) {
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        // TODO Auto-generated method stub
+                        pd.dismiss();
+                        Toast.makeText(SetUp.this, "unbind devicetokens failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+    }
+
 }

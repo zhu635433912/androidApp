@@ -22,11 +22,8 @@ import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMMessage.Status;
 import com.hyphenate.chat.EMTextMessageBody;
 import com.hyphenate.exceptions.EMServiceNotReadyException;
-import com.hyphenate.media.EMLocalSurfaceView;
-import com.hyphenate.media.EMOppositeSurfaceView;
 import com.hyphenate.util.EMLog;
 
-import modle.Huanxing.cache.UserCacheManager;
 import modle.user_ziliao.Constant;
 
 @SuppressLint("Registered")
@@ -51,8 +48,6 @@ public class CallActivity extends BaseActivity {
     protected Ringtone ringtone;
     protected int outgoing;
     protected EMCallStateChangeListener callStateListener;
-    protected EMLocalSurfaceView localSurface;
-    protected EMOppositeSurfaceView oppositeSurface;
     protected boolean isAnswered = false;
     protected int streamID = -1;
     
@@ -82,7 +77,7 @@ public class CallActivity extends BaseActivity {
                 //this function should exposed & move to Demo
                 EMLog.d(TAG, "onRemoteOffline, to:" + to);
                 
-                final EMMessage message = EMMessage.createTxtSendMessage("You have an incoming call", to);         
+                final EMMessage message = EMMessage.createTxtSendMessage("You have an incoming call", to);
                 // set the user-defined extension field
                 message.setAttribute("em_apns_ext", true);
                 
@@ -161,14 +156,10 @@ public class CallActivity extends BaseActivity {
             case MSG_CALL_MAKE_VIDEO:
             case MSG_CALL_MAKE_VOICE:
                 try {
-                    // 通过扩展属性将昵称头像传给对方
-                    String ext = UserCacheManager.getMyInfoStr();
                     if (msg.what == MSG_CALL_MAKE_VIDEO) {
-//                        EMClient.getInstance().callManager().makeVideoCall(username);
-                        EMClient.getInstance().callManager().makeVideoCall(username,ext);
+                        EMClient.getInstance().callManager().makeVideoCall(username);
                     } else { 
-//                        EMClient.getInstance().callManager().makeVoiceCall(username);
-                        EMClient.getInstance().callManager().makeVoiceCall(username,ext);
+                        EMClient.getInstance().callManager().makeVoiceCall(username);
                     }
                 } catch (final EMServiceNotReadyException e) {
                     e.printStackTrace();
