@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.deguan.xuelema.androidapp.MyOrderActivity;
 import com.deguan.xuelema.androidapp.Order_state;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.presenter.OrderPresenter;
@@ -64,7 +65,7 @@ public class OrderFragment extends BaseFragment implements PullToRefreshBase.OnR
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     //跳转我的订单页面
-                    Intent intent=new Intent(getActivity(),Order_state.class);
+                    Intent intent=new Intent(getActivity(),MyOrderActivity.class);
                     startActivity(intent);
             }
         });
@@ -75,7 +76,12 @@ public class OrderFragment extends BaseFragment implements PullToRefreshBase.OnR
     public void successOrder(List<Map<String, Object>> maps) {
         listView.onRefreshComplete();
         list.clear();
-        list.addAll(maps);
+        for (int i = 0; i < maps.size(); i++) {
+            if (!maps.get(i).get("status").equals("9")){
+                list.add(maps.get(i));
+            }
+        }
+//        list.addAll(maps);
 //        for (int i = 0; i < maps.size(); i++) {
 //            TuijianEntity entity = new TuijianEntity();
 //            entity.setNickname((String) maps.get(i).get("nickname"));

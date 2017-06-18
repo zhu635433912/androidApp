@@ -223,5 +223,10 @@ public class Demand implements Demand_init {
         });
     }
 
+    @Override
+    public void getTuijianDemand_list(int course_id, int grade_id, int lat, int lng, String province, String city, String state, PullToRefreshListView listView, Context context, Student_init requirdetailed) {
+
+    }
+
 
 }

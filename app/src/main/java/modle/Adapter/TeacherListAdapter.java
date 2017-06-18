@@ -80,8 +80,9 @@ public class TeacherListAdapter extends ListBaseAdapter {
         holder = (ViewHolder) convertView.getTag();
         holder.nickname.setText("" + list.get(position).getNickname());
         holder.service_type.setText("" + list.get(position).getService_type_txt());
-        holder.fee.setText("" + list.get(position).getFee());
-        holder.speciality.setText("" + list.get(position).getSpeciality_name());
+//        holder.fee.setText("" + list.get(position).getFee());
+        holder.fee.setText("");
+        holder.speciality.setText("" + list.get(position).getSpeciality());
         holder.username.setText("" + list.get(position).getSignature());
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
         Glide.with(context).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);

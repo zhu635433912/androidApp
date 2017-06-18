@@ -2,12 +2,15 @@ package view.index;
 
 import android.Manifest;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +27,7 @@ import android.widget.Toast;
 
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.UserxinxiActivty;
+import com.deguan.xuelema.androidapp.Xuqiufabu;
 import com.deguan.xuelema.androidapp.Xuqiuxiangx;
 import com.deguan.xuelema.androidapp.entities.TeacherEntity;
 import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
@@ -31,6 +35,7 @@ import com.deguan.xuelema.androidapp.init.Gaodehuidiao_init;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.utils.DbUtil;
+import com.deguan.xuelema.androidapp.utils.SubjectUtil;
 import com.deguan.xuelema.androidapp.viewimpl.TeacherView;
 import com.deguan.xuelema.androidapp.viewimpl.XuqiuView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -149,7 +154,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
     private TeacherListAdapter teacherAdapter;
     private Demand_init demand_init;
     private Teacher_init t;
-
+    private TextView otherTv;
 
     @Override
     public void onResume() {
@@ -165,6 +170,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
 //        myconteol_init=new Mycontrol(this);
 
 //        listView.setAdapter();
+        otherTv = (TextView) view.findViewById(R.id.otherTv);
         button= (Button) view.findViewById(R.id.quedin);
         nianjibuxianr= (RelativeLayout) view.findViewById(R.id.nianjibuxianr);
         xiaoxuer= (RelativeLayout) view.findViewById(R.id.xiaoxuer);
@@ -213,7 +219,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
         //显示控件
        // indeshuax.bringToFront();
 
-
+        otherTv.setOnClickListener(this);
         pinfenbuxian.setOnClickListener(this);
         gaodaodi.setOnClickListener(this);
         didaogao.setOnClickListener(this);
@@ -477,13 +483,27 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
                 break;
             case R.id.kemubuxianr:
                 //科目不限
+                otherTv.setText("其他");
+                otherTv.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 yuwen.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 suxue.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 kemubuxian.setTextColor(android.graphics.Color.parseColor("#f7e61c"));
                 kemu=0;
                 break;
+            case R.id.otherTv:
+                yuwen.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
+                suxue.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
+                kemubuxian.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
+                otherTv.setTextColor(android.graphics.Color.parseColor("#f7e61c"));
+                showSubject();
+
+
+
+                break;
             case R.id.yuwenr:
                 //语文
+                otherTv.setText("其他");
+                otherTv.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 yuwen.setTextColor(android.graphics.Color.parseColor("#f7e61c"));
                 suxue.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 kemubuxian.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
@@ -491,6 +511,8 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
                 break;
             case R.id.suxuer:
                 //数学
+                otherTv.setText("其他");
+                otherTv.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 yuwen.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 suxue.setTextColor(android.graphics.Color.parseColor("#f7e61c"));
                 kemubuxian.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
@@ -562,11 +584,49 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
 
             case R.id.quedin:
                 page = 1;
+//                if (role == 1){
+//                    t.Get_Teacher_list(id, role, lat, lng, listView, getActivity(),0, "", 0, 0, 0, 3, this,page);
+//                }else if (role == 2){
+//                    demand_init.getDemand_list(id,role,0,0,"2016-08-10",0,page,null,null,this);
+//                }
                 myconteol_init.setlist_a(id,role,lat, lng, listView, getActivity(),1,"",xinbie,kemu,xueli,order_rank,page);
                 tiaojianshaixuan.setVisibility(View.GONE);
 
                 break;
         }
+    }
+
+    private void showSubject() {
+        //课程种类
+        final AlertDialog.Builder subjectDialog = new AlertDialog.Builder(getActivity());
+        subjectDialog.setIcon(R.drawable.add04);
+        subjectDialog.setTitle("请选择一个科目");
+        //    指定下拉列表的显示数据
+        final String[] subjectIds = new String[79];
+        final String[] cities = new String[79];
+        for (int i = 0; i < SubjectUtil.getSubjects().size() + 1; i++) {
+            int z = 206 + i;
+//            if (!TextUtils.isEmpty(SubjectUtil.getSubjects().get(z+"")))
+//                continue;
+            String a =  SubjectUtil.getSubjects().get(z + "");
+//            if (!TextUtils.isEmpty(a))
+//                continue;
+            if (z == 285) {
+                break;
+            }
+            subjectIds[i] = z+"";
+            cities[i] = a;
+        }
+        //    设置一个下拉的列表选择项
+        subjectDialog.setItems(cities, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getActivity(), "选择的科目为：" + cities[which], Toast.LENGTH_SHORT).show();
+                otherTv.setText(cities[which]);
+                kemu = Integer.parseInt(subjectIds[which]);
+            }
+        });
+        subjectDialog.show();
     }
 
 
@@ -745,6 +805,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
             for (int i = 0; i < maps.size(); i++) {
                 TeacherEntity entity = new TeacherEntity();
                 entity.setNickname((String) maps.get(i).get("nickname"));
+                entity.setSpeciality((String)maps.get(i).get("speciality"));
                 entity.setSpeciality_name((String) maps.get(i).get("speciality_name"));
                 entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
                 entity.setSignature((String) maps.get(i).get("signature"));

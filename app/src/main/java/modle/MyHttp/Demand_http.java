@@ -63,4 +63,9 @@ public interface Demand_http {
     */
     @POST("index.php?s=/Service/Requirement/gets_requirement")
     Call<ContentModle> getMyDemandlist(@Query("publisher_id") int publisher_id, @Query("filter_type") int filter_type);
+
+
+    @POST("index.php?s=/Service/Requirement/recommend_requirement_commend")
+    Call<ContentModle> getTuijianDemandList(@Query("course_id") int course_id, @Query("grade_id") int grade_id
+    ,@Query("lat") int lat, @Query("lng") int lng,@Query("province") int province, @Query("city") int city,@Query("state") int state);
 }

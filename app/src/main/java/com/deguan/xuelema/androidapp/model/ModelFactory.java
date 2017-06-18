@@ -2,6 +2,7 @@ package com.deguan.xuelema.androidapp.model;
 
 
 import com.deguan.xuelema.androidapp.model.impl.OrderModelImpl;
+import com.deguan.xuelema.androidapp.model.impl.PublishModelImpl;
 import com.deguan.xuelema.androidapp.model.impl.TuijianModelImpl;
 
 /**
@@ -31,5 +32,9 @@ public class ModelFactory {
 
     public OrderModelImpl getOrderModelImpl(){
         return OrderModelImpl.getInstance();
+    }
+
+    public PublishModelImpl getPublishMdelImpl(){
+        return PublishModelImpl.getInstance();
     }
 }

@@ -31,12 +31,14 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.deguan.xuelema.androidapp.fragment.MyPublishFragment_;
 import com.deguan.xuelema.androidapp.fragment.OrderFragment;
 import com.deguan.xuelema.androidapp.fragment.OrderFragment_;
 import com.deguan.xuelema.androidapp.fragment.TuijianFragment_;
 import com.deguan.xuelema.androidapp.huanxin.HuihuaList;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.viewimpl.MyPublishView;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -207,7 +209,7 @@ public class Student_Activty extends AutoLayoutActivity implements View.OnClickL
         titles.add("我的发布");
         titles.add("我的订单");
         fragments.add(TuijianFragment_.builder().build());
-        fragments.add(OrderFragment_.builder().build());
+        fragments.add(MyPublishFragment_.builder().build());
         fragments.add(OrderFragment_.builder().build());
         HomeTitleAdapter adapter = new HomeTitleAdapter(getSupportFragmentManager(),fragments,titles);
         viewPager.setAdapter(adapter);

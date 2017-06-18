@@ -97,8 +97,18 @@ public class Order_StudionAdabt extends BaseAdapter {
                 hode.querenshouhuo.setText("去评价");
                 break;
             case "4":
-                hode.studentkechengzhuangtai.setText("申请退款");
+                hode.studentkechengzhuangtai.setText("申请退款中");
+                hode.querenshouhuo.setText("申请退款");
                 break;
+            case "5":
+                hode.studentkechengzhuangtai.setText("同意退款");
+                hode.querenshouhuo.setText("退款成功");
+                break;
+            case "6":
+                hode.studentkechengzhuangtai.setText("拒绝退款");
+                hode.querenshouhuo.setText("退款失败");
+                break;
+
         }
         hode.kechengfee.setText(zongfee+"");
         hode.kechengjieshua.setText("x"+duration+"节");

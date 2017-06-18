@@ -7,10 +7,14 @@
     android:orientation="vertical"
     tools:context="com.deguan.xuelema.androidapp.MyOrderActivity">
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80px">
+    <RelativeLayout
         android:id="@+id/stuentordentfanhui"
         android:layout_width="100px"
         android:layout_height="80px"></RelativeLayout>
     <ImageButton
+        android:id="@+id/my_order_back"
         android:layout_marginLeft="30px"
         android:layout_marginTop="20px"
         android:layout_alignParentTop="true"
@@ -34,6 +38,7 @@
         android:layout_below="@+id/neirongtext"
         android:layout_width="match_parent"
         android:layout_height="1px" />
+    </RelativeLayout>
     <android.support.design.widget.TabLayout
         android:id="@+id/my_order_tablayout"
         app:tabTextColor="#8b8b8b"
@@ -45,4 +50,5 @@
         android:id="@+id/my_order_vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 </LinearLayout>

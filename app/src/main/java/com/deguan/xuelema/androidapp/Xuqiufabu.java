@@ -296,7 +296,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 TimePickerDialog timePickerDialog = new TimePickerDialog(Xuqiufabu.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        if (minute == 0){
+                        if (minute <= 10){
                             kaishishijian.setText("起始时间:" + hourOfDay + ":0" + minute);
                             qishi = hourOfDay + ":0" + minute + ":00";
                         }else {
@@ -313,7 +313,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 TimePickerDialog timePickerDialogz = new TimePickerDialog(Xuqiufabu.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        if (minute == 0) {
+                        if (minute <= 10) {
                             jieshushijian.setText("结束时间:" + hourOfDay + ":0" + minute);
                             jieshu = hourOfDay + ":0" + minute + ":00";
                         }else {

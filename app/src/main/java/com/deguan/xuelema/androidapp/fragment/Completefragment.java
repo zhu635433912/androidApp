@@ -1,22 +1,11 @@
 package com.deguan.xuelema.androidapp.fragment;
 
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.deguan.xuelema.androidapp.Order_state;
-import com.deguan.xuelema.androidapp.Payment_Activty;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.init.Student_init;
-import com.deguan.xuelema.androidapp.viewimpl.TuijianView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -33,10 +22,10 @@ import modle.Order_Modle.Order_init;
 import modle.user_ziliao.User_id;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Created by Administrator on 2017/6/17 0017.
  */
 @EFragment(R.layout.fragment_tuijian)
-public class NotFinishFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener,Student_init {
+public class Completefragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener,Student_init {
 
     @ViewById(R.id.tuijian_listview)
     PullToRefreshListView listView;
@@ -44,6 +33,7 @@ public class NotFinishFragment extends BaseFragment implements PullToRefreshBase
     private List<Map<String,Object>> list=new ArrayList<>();
     private Order_init orderInit;
     private int uid;
+
 
     @Override
     public void initView() {
@@ -53,31 +43,20 @@ public class NotFinishFragment extends BaseFragment implements PullToRefreshBase
         listView.setAdapter(studionAdabt);
         uid=Integer.parseInt(User_id.getUid());
         orderInit=new Order();
-        orderInit.getOrder_list(uid,0,1,1,null,null,this,0,3);
+        orderInit.getOrder_list(uid,0,3,1,null,null,this,0,3);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-               Map<String,Object> map=studionAdabt.getmap(i-1);
-                String status= (String) map.get("status");
-                String ida = (String) map.get("id");
-                String duration = (String) map.get("duration");
-                String fee = (String) map.get("fee");
-                Intent intent = new Intent(getActivity(), Payment_Activty.class);
-                intent.putExtra("id", ida);
-                intent.putExtra("fee", fee);
-                intent.putExtra("duration", duration);
-                startActivity(intent);
-                Toast.makeText(getActivity(), "进入支付环节", Toast.LENGTH_SHORT).show();
+                Log.e("aa","aa点击了");
             }
         });
     }
 
     @Override
     public void onRefresh(PullToRefreshBase refreshView) {
-        //下拉刷新
-        orderInit.getOrder_list(uid,0,1,1,null,null,this,0,3);
+        orderInit.getOrder_list(uid,0,3,1,null,null,this,0,3);
     }
-
 
     @Override
     public void setListview(List<Map<String, Object>> listmap) {

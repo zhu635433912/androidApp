@@ -99,6 +99,7 @@ public class Pick_singleActivty  extends AutoLayoutActivity implements View.OnCl
                 map=listmap.get(position);
                 String aa= (String) map.get("teacher_id");
                 Intent intent=new Intent(Pick_singleActivty.this,UserxinxiActivty.class);
+                intent.putExtra("head_image","");
                 intent.putExtra("user_id",aa);
                 startActivity(intent);
 

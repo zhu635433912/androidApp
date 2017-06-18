@@ -17,9 +17,14 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
 import com.deguan.xuelema.androidapp.huanxin.HuihuaActivity;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
+import com.deguan.xuelema.androidapp.viewimpl.XuqiuView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.hyphenate.chat.EMMessage;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.autolayout.AutoLayoutActivity;
@@ -33,6 +38,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import modle.Adapter.XuqiuAdapter;
 import modle.Demand_Modle.Demand;
 import modle.Demand_Modle.Demand_init;
 import modle.Huanxing.ui.*;
@@ -46,8 +53,8 @@ import modle.user_ziliao.User_id;
  * 需求详细
  */
 
-public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,View.OnClickListener,Requirdetailed{
-    private ListView listview;
+public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,View.OnClickListener,Requirdetailed,PullToRefreshBase.OnRefreshListener, Student_init, XuqiuView {
+    private PullToRefreshListView listview;
     private List<Map<String, Object>> listamap;
     private TextView textView;
     private TextView Requirname;
@@ -70,6 +77,13 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     private int user_id;
     private TextView kemuleibie;
     private TextView nianjia;
+    private XuqiuAdapter xuqiuAdapter;
+    private List<XuqiuEntity> datas = new ArrayList<>();
+    private Demand_init demand_init;
+    private int filter_type = 0;
+    private int filter_id = 0;
+    private int course_id ;
+    private int grade_id  ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,7 +93,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
 
         kemuleibie= (TextView) findViewById(R.id.kemuleibie);
         nianjia= (TextView) findViewById(R.id.nianjia);
-        listview = (ListView) findViewById(R.id.xiangsixuqiulist);
+        listview = (PullToRefreshListView) findViewById(R.id.xiangsixuqiulist);
         textView = (TextView) findViewById(R.id.jiequxuqiu);
         Requirname= (TextView) findViewById(R.id.xuqiuname);
         Demandcontent= (TextView) findViewById(R.id.xuqiuneirong);
@@ -113,14 +127,16 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         Log.e("aa", "需求详细接收到需求编号为" + dindan + "发布者id为"+user_id+"金额为"+feeva);
 
         //相似需求
+        listview.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         listamap = new ArrayList<Map<String, Object>>();
-        SimpleAdapter simpleAdapter = new SimpleAdapter(this, Data(), R.layout.myindex_list, new String[]{"text"}, new int[]{R.id.myindeusername});
-        listview.setAdapter(simpleAdapter);
+        xuqiuAdapter = new XuqiuAdapter(datas,this);
+//        SimpleAdapter simpleAdapter = new SimpleAdapter(this, Data(), R.layout.myindex_list, new String[]{"text"}, new int[]{R.id.myindeusername});
+        listview.setAdapter(xuqiuAdapter);
 
         //需求详细信息展示
-        Demand_init demand_init=new Demand();
+        demand_init=new Demand(this);
         demand_init.getDemand_danyi(id,dindan,this);
-
+        demand_init.getDemand_list(user_id,Integer.parseInt(User_id.getRole()),filter_type,filter_id,"2016-08-10",0,1,null,null,this);
         xuqiudianh.setOnClickListener(this);
     }
 
@@ -145,7 +161,8 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         String service_type = (String) map.get("service_type");
         String start = (String) map.get("start");
         String end = (String) map.get("end");
-
+        course_id = Integer.parseInt((String)map.get("course_id"));
+        grade_id = Integer.parseInt((String)map.get("grade_id"));
         String state = (String) map.get("state");
 
         diqu.setText(state+"");
@@ -167,7 +184,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         }
 
         shijianduan.setText(desc);
-        userage.setText(age);
+        userage.setText(age+"岁");
         Relasetime.setText(created);
         Demandcontent.setText(content);
         Requirname.setText(publisher_name);
@@ -264,5 +281,49 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
             e.printStackTrace();//输出异常信息
         }
         return bm;
+    }
+
+    @Override
+    public void onRefresh(PullToRefreshBase refreshView) {
+        demand_init.getDemand_list(user_id,Integer.parseInt(User_id.getRole()),filter_type,filter_id,"2016-08-10",0,1,null,null,this);
+    }
+
+    @Override
+    public void setListview(List<Map<String, Object>> listmap) {
+
+    }
+
+    @Override
+    public void setListview1(List<Map<String, Object>> listmap) {
+
+    }
+
+    @Override
+    public void successXuqiu(List<Map<String, Object>> maps) {
+        listview.onRefreshComplete();
+            datas.clear();
+        List<XuqiuEntity> lists = new ArrayList<>();
+        for (int i = 0; i < maps.size(); i++) {
+            XuqiuEntity entity = new XuqiuEntity();
+            entity.setPublisher_id((String) maps.get(i).get("publisher_id"));
+            entity.setPublisher_name((String) maps.get(i).get("publisher_name"));
+            entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
+            entity.setCourse_name((String) maps.get(i).get("course_name"));
+            entity.setContent((String) maps.get(i).get("content"));
+            entity.setCreated((String) maps.get(i).get("created"));
+            entity.setId((String) maps.get(i).get("id"));
+            entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
+            entity.setDistance((String) maps.get(i).get("distance"));
+            entity.setFee(String.valueOf(maps.get(i).get("fee")));
+            entity.setGrade_name((String)maps.get(i).get("grade_name"));
+            lists.add(entity);
+        }
+        datas.addAll(lists);
+        xuqiuAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void failXuqiu(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

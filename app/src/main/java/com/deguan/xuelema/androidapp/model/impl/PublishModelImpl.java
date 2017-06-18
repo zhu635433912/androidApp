@@ -1,9 +1,10 @@
-package com.deguan.xuelema.androidapp.model;
+package com.deguan.xuelema.androidapp.model.impl;
 
-import modle.MyHttp.Demand_http;
-import modle.MyUrl;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import com.deguan.xuelema.androidapp.model.BasePublishModel;
+import com.deguan.xuelema.androidapp.model.PublishModel;
+
+import modle.JieYse.ContentModle;
+import retrofit2.Callback;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓
@@ -30,20 +31,29 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * ━━━━━━神兽出没━━━━━━
  * <p>
  * 项目名称：androidApp
- * 类描述：获取自己的需求
+ * 类描述：
  * 创建人：zhuyunjian
- * 创建时间：2017-06-16 16:46
+ * 创建时间：2017-06-17 13:51
  * 修改人：zhuyunjian
- * 修改时间：2017-06-16 16:46
+ * 修改时间：2017-06-17 13:51
  * 修改备注：
  */
-public class BasePublishModel {
-    public Demand_http service;
-    public BasePublishModel(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(MyUrl.URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        service = retrofit.create(Demand_http.class);
+public class PublishModelImpl extends BasePublishModel implements PublishModel {
+
+    private static volatile PublishModelImpl instance = null;
+
+    public static PublishModelImpl getInstance() {
+        if (instance == null) {
+            synchronized (PublishModelImpl.class) {
+                if (instance == null) {
+                    instance = new PublishModelImpl();
+                }
+            }
+        }
+        return instance;
+    }
+    @Override
+    public void getPublishData(Callback<ContentModle> callback, int uid, int filter_type) {
+        service.getMyDemandlist(uid,filter_type).enqueue(callback);
     }
 }

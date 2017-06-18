@@ -83,4 +83,10 @@ public interface Demand_init {
     获取用户自己的需求
      */
     public void getMyDemand_list(int publisher_iint,int filter_type, Student_init student_init);
+
+    /*
+        相似需求
+     */
+    public void getTuijianDemand_list(int course_id, int grade_id, int lat, int lng, String province, String city, String state, PullToRefreshListView listView, Context context, Student_init requirdetailed);
+
 }

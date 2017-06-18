@@ -82,7 +82,8 @@ public class TuijianAdapter extends ListBaseAdapter {
         holder.nickname.setText(""+list.get(position).getNickname());
         holder.service_type.setText(""+list.get(position).getService_type_txt());
 //        holder.service_type.setVisibility(View.GONE);
-        holder.fee.setText(""+list.get(position).getFee());
+//        holder.fee.setText(""+list.get(position).getFee());
+        holder.fee.setText("");
 //        holder.speciality.setText(""+SubjectUtil.getSubjects().get(list.get(position).getSpeciality()));
         holder.speciality.setText(""+list.get(position).getSpeciality());
         holder.username.setText(""+list.get(position).getUsername());

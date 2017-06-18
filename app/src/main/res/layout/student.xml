@@ -92,6 +92,14 @@
             android:layout_toRightOf="@+id/studenttouxiangimg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/chat_icon"
+            android:layout_marginLeft="95px"
+            android:layout_below="@+id/studenthuihuatext"
+            android:src="@mipmap/chat_icon"
+            android:layout_width="100px"
+            android:layout_toRightOf="@+id/studenttouxiangimg"
+            android:layout_height="100px" />
         <TextView
             android:id="@+id/huihua"
             android:gravity="center"
@@ -101,7 +109,7 @@
             android:layout_toRightOf="@+id/studenttouxiangimg"
             android:text="聊天管理"
             android:paddingBottom="50px"
-            android:layout_below="@+id/studenthuihuatext"
+            android:layout_below="@+id/chat_icon"
             android:layout_width="200px"
             android:layout_height="100px" />
         <TextView
@@ -124,53 +132,58 @@
             android:layout_width="600px"
             android:layout_height="100px" />
     </RelativeLayout>
-    <RelativeLayout
-        android:background="#e0eaf1"
+    <LinearLayout
         android:layout_below="@+id/batahost"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.design.widget.TabLayout
-            android:id="@+id/student_tablayout"
-            app:tabTextColor="#8b8b8b"
-            app:tabIndicatorColor="#fd1245"
-            app:tabSelectedTextColor="#fd1245"
+        <RelativeLayout
+            android:background="#e0eaf1"
             android:layout_width="match_parent"
-            android:layout_height="100px"/>
-        <android.support.v4.view.ViewPager
-            android:layout_below="@id/student_tablayout"
-            android:id="@+id/student_viewpage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <!--<LinearLayout-->
+            android:layout_weight="1"
+            android:layout_height="0dp">
+            <android.support.design.widget.TabLayout
+                android:id="@+id/student_tablayout"
+                app:tabTextColor="#8b8b8b"
+                app:tabIndicatorColor="#fd1245"
+                app:tabSelectedTextColor="#fd1245"
+                android:layout_width="match_parent"
+                android:layout_height="100px"/>
+            <android.support.v4.view.ViewPager
+                android:layout_below="@id/student_tablayout"
+                android:id="@+id/student_viewpage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <!--<LinearLayout-->
             <!--android:id="@+id/studentbutton"-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="100px">-->
             <!--<TextView-->
-                <!--android:id="@+id/tuijianjiaoshi"-->
-                <!--android:textSize="30px"-->
-                <!--android:gravity="center"-->
-                <!--android:text="推荐教师"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent" />-->
+            <!--android:id="@+id/tuijianjiaoshi"-->
+            <!--android:textSize="30px"-->
+            <!--android:gravity="center"-->
+            <!--android:text="推荐教师"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
             <!--<TextView-->
-                <!--android:id="@+id/myfabu"-->
-                <!--android:textSize="30px"-->
-                <!--android:gravity="center"-->
-                <!--android:text="我的发布"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent" />-->
+            <!--android:id="@+id/myfabu"-->
+            <!--android:textSize="30px"-->
+            <!--android:gravity="center"-->
+            <!--android:text="我的发布"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
             <!--<TextView-->
-                <!--android:id="@+id/mydindan"-->
-                <!--android:textSize="30px"-->
-                <!--android:gravity="center"-->
-                <!--android:text="我的订单"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent" />-->
-        <!--</LinearLayout>-->
-        <!--<modle.toos.MyListview-->
+            <!--android:id="@+id/mydindan"-->
+            <!--android:textSize="30px"-->
+            <!--android:gravity="center"-->
+            <!--android:text="我的订单"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
+            <!--</LinearLayout>-->
+            <!--<modle.toos.MyListview-->
             <!--android:layout_centerHorizontal="true"-->
             <!--android:dividerHeight="0px"-->
             <!--android:divider="#e0eaf1"-->
@@ -178,77 +191,79 @@
             <!--android:layout_below="@+id/studentbutton"-->
             <!--android:layout_width="700px"-->
             <!--android:layout_height="match_parent">-->
-        <!--</modle.toos.MyListview>-->
-    </RelativeLayout>
-    <RelativeLayout
-        android:background="#fdfdfe"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:layout_height="100px">
+            <!--</modle.toos.MyListview>-->
+        </RelativeLayout>
         <RelativeLayout
-            android:id="@+id/studentwodejiaoshi"
-            android:layout_width="160px"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="50px">
-            <ImageView
-                android:layout_marginTop="20px"
-                android:id="@+id/jiaoshitubiaostudent"
+            android:background="#fdfdfe"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="100px">
+            <RelativeLayout
+                android:id="@+id/studentwodejiaoshi"
+                android:layout_width="160px"
+                android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/hly10"
-                android:layout_width="55px"
-                android:layout_height="40px" />
-            <TextView
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/jiaoshitubiaostudent"
-                android:textSize="30px"
-                android:text="教师"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="50px">
+                <ImageView
+                    android:layout_marginTop="20px"
+                    android:id="@+id/jiaoshitubiaostudent"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/hly10"
+                    android:layout_width="55px"
+                    android:layout_height="40px" />
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/jiaoshitubiaostudent"
+                    android:textSize="30px"
+                    android:text="教师"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/studenthost"
-            android:layout_width="160px"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true">
-            <ImageView
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/hly03"
-                android:layout_width="66px"
-                android:layout_height="66px" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/studentwode"
-            android:layout_width="160px"
-            android:layout_marginRight="50px"
-            android:layout_alignParentRight="true"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true">
-            <ImageView
-                android:layout_marginTop="20px"
-                android:id="@+id/wodegerxxstudent"
+            <RelativeLayout
+                android:id="@+id/studenthost"
+                android:layout_width="160px"
+                android:layout_height="match_parent"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:background="@drawable/hly51"
-                android:layout_width="55px"
-                android:layout_height="40px" />
+                android:layout_centerHorizontal="true">
+                <ImageView
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/hly03"
+                    android:layout_width="66px"
+                    android:layout_height="66px" />
+            </RelativeLayout>
 
-            <TextView
-                android:id="@+id/wodegerxxstudenttext"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/wodegerxxstudent"
-                android:textSize="30px"
-                android:text="我的"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/studentwode"
+                android:layout_width="160px"
+                android:layout_marginRight="50px"
+                android:layout_alignParentRight="true"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true">
+                <ImageView
+                    android:layout_marginTop="20px"
+                    android:id="@+id/wodegerxxstudent"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/hly51"
+                    android:layout_width="55px"
+                    android:layout_height="40px" />
+
+                <TextView
+                    android:id="@+id/wodegerxxstudenttext"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/wodegerxxstudent"
+                    android:textSize="30px"
+                    android:text="我的"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
         </RelativeLayout>
 
+
+    </LinearLayout>
 
 </RelativeLayout>

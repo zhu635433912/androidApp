@@ -38,8 +38,8 @@ import java.util.Map;
 public class SubjectUtil {
 
 
-    public static Map<String,Object> getSubjects(){
-        Map<String,Object> map = new HashMap<>();
+    public static Map<String,String> getSubjects(){
+        Map<String,String> map = new HashMap<>();
                 map.put("206" , "基础知识");
                 map.put("207" , "乐器");
                 map.put("208" , "语文");
