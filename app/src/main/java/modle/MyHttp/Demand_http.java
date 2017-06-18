@@ -67,5 +67,5 @@ public interface Demand_http {
 
     @POST("index.php?s=/Service/Requirement/recommend_requirement_commend")
     Call<ContentModle> getTuijianDemandList(@Query("course_id") int course_id, @Query("grade_id") int grade_id
-    ,@Query("lat") int lat, @Query("lng") int lng,@Query("province") int province, @Query("city") int city,@Query("state") int state);
+    ,@Query("lat") String lat, @Query("lng") String lng,@Query("province") String province, @Query("city") String city,@Query("state") String state);
 }

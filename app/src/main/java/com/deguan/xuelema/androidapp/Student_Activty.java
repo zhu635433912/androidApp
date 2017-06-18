@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -111,6 +112,7 @@ public class Student_Activty extends AutoLayoutActivity implements View.OnClickL
     private User_init user_init;
 //    private TextView tuijianjiaoshi;
     private int TAGE_IRONG=0;
+    private ImageView chatImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -124,9 +126,11 @@ public class Student_Activty extends AutoLayoutActivity implements View.OnClickL
         slide.setSlideEdge(Gravity.LEFT);
         getWindow().setEnterTransition(slide);
         getWindow().setReenterTransition(new Explode().setDuration(600));*/
+
         tableLayout = (TabLayout) findViewById(R.id.student_tablayout);
         viewPager = (ViewPager) findViewById(R.id.student_viewpage);
 //        tuijianjiaoshi= (TextView) findViewById(R.id.tuijianjiaoshi);
+        chatImage = (ImageView) findViewById(R.id.chat_icon);
         huihua= (TextView) findViewById(R.id.huihua);
         studentwodeqianbao= (RelativeLayout) findViewById(R.id.studentwodeqianbao);
         stidentshezhiimabt= (RelativeLayout) findViewById(R.id.stidentshezhiimabt);
@@ -155,6 +159,7 @@ public class Student_Activty extends AutoLayoutActivity implements View.OnClickL
         host.setOnClickListener(this);
 //        mydindan.setOnClickListener(this);
 //        myfabu.setOnClickListener(this);
+        chatImage.setOnClickListener(this);
         studenttouxiangimg.setOnClickListener(this);
         studentwodeqianbao.setOnClickListener(this);
         stidentshezhiimabt.setOnClickListener(this);
@@ -267,6 +272,13 @@ public class Student_Activty extends AutoLayoutActivity implements View.OnClickL
             case R.id.studentwodejiaoshi:
                 Intent intentz=new Intent(Student_Activty.this,MainActivity.class);
                 startActivity(intentz);
+                break;
+            case R.id.chat_icon:
+                //会话列表
+//                Intent intent1=new Intent(Student_Activty.this,HuihuaList.class);
+                Intent intent2 = new Intent(Student_Activty.this, modle.Huanxing.ui.MainActivity.class);
+                startActivity(intent2);
+
                 break;
             case R.id.huihua:
                 //会话列表

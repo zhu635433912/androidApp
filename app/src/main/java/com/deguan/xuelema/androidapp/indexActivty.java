@@ -96,6 +96,7 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
     private LinearLayout tuikuanzhong;
     private LinearLayout jinxinzhong;
     private LinearLayout daipingjia;
+    private ImageView chatImage;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,6 +119,7 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
         LayoutInflater inflater = LayoutInflater.from(indexActivty.this);
         view = inflater.inflate(R.layout.myindex, null);
 
+        chatImage = (ImageView) findViewById(R.id.my_chat_icon);
         daipingjia= (LinearLayout) findViewById(R.id.daipingjia);
         jinxinzhong= (LinearLayout) findViewById(R.id.jinxinzhong);
         tuikuanzhong= (LinearLayout) findViewById(R.id.tuikuanzhong);
@@ -165,6 +167,7 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
             z = 2;
         }
 
+        chatImage.setOnClickListener(this);
         jinxinzhong.setOnClickListener(this);
         tuikuanzhong.setOnClickListener(this);
         index_dindanlinenarla.setOnClickListener(this);
@@ -291,6 +294,11 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
             case R.id.xingxibutton:
                 Intent intena = new Intent(indexActivty.this, Teacher_management.class);
                 startActivity(intena);
+                break;
+            case R.id.my_chat_icon:
+                //会话列表
+                Intent intent2=new Intent(indexActivty.this, modle.Huanxing.ui.MainActivity.class);
+                startActivity(intent2);
                 break;
             case R.id.huihua:
                 //会话列表

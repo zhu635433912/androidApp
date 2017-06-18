@@ -22,6 +22,7 @@ import com.deguan.xuelema.androidapp.huanxin.HuihuaActivity;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
+import com.deguan.xuelema.androidapp.viewimpl.SimilarXuqiuView;
 import com.deguan.xuelema.androidapp.viewimpl.XuqiuView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -53,7 +54,7 @@ import modle.user_ziliao.User_id;
  * 需求详细
  */
 
-public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,View.OnClickListener,Requirdetailed,PullToRefreshBase.OnRefreshListener, Student_init, XuqiuView {
+public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,View.OnClickListener,Requirdetailed,PullToRefreshBase.OnRefreshListener, Student_init, SimilarXuqiuView {
     private PullToRefreshListView listview;
     private List<Map<String, Object>> listamap;
     private TextView textView;
@@ -136,7 +137,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         //需求详细信息展示
         demand_init=new Demand(this);
         demand_init.getDemand_danyi(id,dindan,this);
-        demand_init.getDemand_list(user_id,Integer.parseInt(User_id.getRole()),filter_type,filter_id,"2016-08-10",0,1,null,null,this);
+//        demand_init.getDemand_list(user_id,Integer.parseInt(User_id.getRole()),filter_type,filter_id,"2016-08-10",0,1,null,null,this);
         xuqiudianh.setOnClickListener(this);
     }
 
@@ -163,6 +164,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         String end = (String) map.get("end");
         course_id = Integer.parseInt((String)map.get("course_id"));
         grade_id = Integer.parseInt((String)map.get("grade_id"));
+        demand_init.getTuijianDemand_list(course_id,grade_id,null,null,null,null,null,listview,this,null);
         String state = (String) map.get("state");
 
         diqu.setText(state+"");
@@ -285,7 +287,8 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
 
     @Override
     public void onRefresh(PullToRefreshBase refreshView) {
-        demand_init.getDemand_list(user_id,Integer.parseInt(User_id.getRole()),filter_type,filter_id,"2016-08-10",0,1,null,null,this);
+        demand_init.getTuijianDemand_list(course_id,grade_id,null,null,null,null,null,listview,this,null);
+//        demand_init.getDemand_list(user_id,Integer.parseInt(User_id.getRole()),filter_type,filter_id,"2016-08-10",0,1,null,null,this);
     }
 
     @Override
@@ -299,7 +302,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     }
 
     @Override
-    public void successXuqiu(List<Map<String, Object>> maps) {
+    public void successSimilarXuqiu(List<Map<String, Object>> maps) {
         listview.onRefreshComplete();
             datas.clear();
         List<XuqiuEntity> lists = new ArrayList<>();
@@ -323,7 +326,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     }
 
     @Override
-    public void failXuqiu(String msg) {
+    public void failSimilarXuqiu(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }
