@@ -61,8 +61,8 @@ public class Increase_course {
         releaseCourseHttp=retrofit.create(Release_course_http.class);
     }
     //增加课程
-    public void Addcourse(int uid,int course_id,String text,int visit_fee,int unvisit_fee){
-        Call<Demtest> call=releaseCourseHttp.Addcourse(uid,course_id,text,visit_fee,unvisit_fee);
+    public void Addcourse(int uid,int course_id,String text,int visit_fee,int unvisit_fee,int kechentType){
+        Call<Demtest> call=releaseCourseHttp.Addcourse(uid,course_id,text,visit_fee,unvisit_fee,kechentType);
         call.enqueue(new Callback<Demtest>() {
             @Override
             public void onResponse(Call<Demtest> call, Response<Demtest> response) {

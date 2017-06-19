@@ -38,7 +38,7 @@ public interface Order_init {
      * requirement_id   需求id
      * fee              金额
      */
-    public Map<String,Object> Establish_Order(int uid,int teacher_id,int requirement_id,float fee,int duration);
+    public Map<String,Object> Establish_Order(int uid,int teacher_id,int requirement_id,float fee,int duration,int course_Id,int grade_id);
     /**
      * 删除订单
      * uid      用户id

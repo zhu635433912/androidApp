@@ -12,6 +12,16 @@ public class XuqiuEntity {
     private String publisher_gender;
     private String id;
     private String content;
+    private String service_type;
+
+    public String getService_type() {
+        return service_type;
+    }
+
+    public void setService_type(String service_type) {
+        this.service_type = service_type;
+    }
+
     private String service_type_txt;
     private String grade_id;
     private String grade_name;

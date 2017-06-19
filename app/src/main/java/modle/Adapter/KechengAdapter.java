@@ -58,14 +58,17 @@ public class KechengAdapter extends BaseAdapter{
             madbt.gerxxyiduiyi= (TextView) convertView.findViewById(R.id.gerxxyiduiyi);
             madbt.kechengzhongle= (TextView) convertView.findViewById(R.id.kechengzhongle);
             madbt.kechengfeee= (TextView) convertView.findViewById(R.id.kechengfeee);
+            madbt.kechengType = (TextView) convertView.findViewById(R.id.kecheng_type);
             convertView.setTag(madbt);
         }else {
             madbt= (Madbt) convertView.getTag();
         }
                     String course_id=listmap.get(position).get("course_name").toString();
                     madbt.kechengzhongle.setText(course_id);
-
-                madbt.gerxxyiduiyi.setText("一对一");
+//                madbt.kechengType.setText(listmap.get(position).get("service_type_txt")+"");
+        madbt.kechengType.setVisibility(View.GONE);
+                madbt.gerxxyiduiyi.setText(listmap.get(position).get("service_type_txt")+"");
+//        madbt.gerxxyiduiyi.setVisibility(View.GONE);
                 madbt.kechengfeee.setText(listmap.get(position).get("visit_fee")+"￥/课时费");
         return convertView;
     }
@@ -74,6 +77,7 @@ public class KechengAdapter extends BaseAdapter{
         private TextView gerxxyiduiyi;//服务方式
        private TextView kechengzhongle;//课程种类
        private TextView kechengfeee;//服务金额
+        private TextView kechengType;//课程服务方式
    }
 
     //返回用户点击的课程id

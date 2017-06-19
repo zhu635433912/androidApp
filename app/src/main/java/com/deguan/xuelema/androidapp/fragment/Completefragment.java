@@ -1,9 +1,11 @@
 package com.deguan.xuelema.androidapp.fragment;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.deguan.xuelema.androidapp.Order_details;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -23,6 +25,7 @@ import modle.user_ziliao.User_id;
 
 /**
  * Created by Administrator on 2017/6/17 0017.
+ * 已完成
  */
 @EFragment(R.layout.fragment_tuijian)
 public class Completefragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener,Student_init {
@@ -48,7 +51,16 @@ public class Completefragment extends BaseFragment implements PullToRefreshBase.
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.e("aa","aa点击了");
+                Map<String,Object> map=studionAdabt.getmap(i-1);
+                String status= (String) map.get("status");
+                String ida = (String) map.get("id");
+                String duration = (String) map.get("duration");
+
+                Intent intent = new Intent(getActivity(), Order_details.class);
+                intent.putExtra("oredr_id", ida);
+                intent.putExtra("duration", duration);
+                intent.putExtra("status", 4+"");
+                startActivity(intent);
             }
         });
     }

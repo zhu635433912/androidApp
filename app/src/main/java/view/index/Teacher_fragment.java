@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deguan.xuelema.androidapp.R;
+import com.deguan.xuelema.androidapp.SearchActivity_;
 import com.deguan.xuelema.androidapp.UserxinxiActivty;
 import com.deguan.xuelema.androidapp.Xuqiufabu;
 import com.deguan.xuelema.androidapp.Xuqiuxiangx;
@@ -155,6 +156,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
     private Demand_init demand_init;
     private Teacher_init t;
     private TextView otherTv;
+    private ImageButton searchBtn;
 
     @Override
     public void onResume() {
@@ -170,6 +172,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
 //        myconteol_init=new Mycontrol(this);
 
 //        listView.setAdapter();
+        searchBtn = (ImageButton) view.findViewById(R.id.main_search_btn);
         otherTv = (TextView) view.findViewById(R.id.otherTv);
         button= (Button) view.findViewById(R.id.quedin);
         nianjibuxianr= (RelativeLayout) view.findViewById(R.id.nianjibuxianr);
@@ -219,6 +222,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
         //显示控件
        // indeshuax.bringToFront();
 
+        searchBtn.setOnClickListener(this);
         otherTv.setOnClickListener(this);
         pinfenbuxian.setOnClickListener(this);
         gaodaodi.setOnClickListener(this);
@@ -252,7 +256,8 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.ACCESS_COARSE_LOCATION,
                             Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.READ_PHONE_STATE
+                            Manifest.permission.READ_PHONE_STATE,
+                            Manifest.permission.CAMERA
                             )
                     .request();
 //
@@ -406,6 +411,10 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.main_search_btn:
+                startActivity(SearchActivity_.intent(this).get());
+
+                break;
             case R.id.quyubut1:
                 Log.e("aa","点击的是地区");
 //                listView.reflashComplet();
@@ -665,6 +674,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
         lat= (double) map.get("lat");
         lng= (double) map.get("lng");
         ditutext.setText(map.get("District")+"");
+        EventBus.getDefault().post(map.get("District")+"","status");
         if (role==1) {
 
             t.Get_Teacher_list(id, role, lat, lng, listView, getActivity(),0, "", 0, 0, 0, 3, this,page);
@@ -773,6 +783,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
             XuqiuEntity entity = new XuqiuEntity();
             entity.setPublisher_id((String) maps.get(i).get("publisher_id"));
             entity.setPublisher_name((String) maps.get(i).get("publisher_name"));
+            entity.setService_type((String)maps.get(i).get("service_type"));
             entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
             entity.setCourse_name((String) maps.get(i).get("course_name"));
             entity.setContent((String) maps.get(i).get("content"));

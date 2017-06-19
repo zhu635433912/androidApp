@@ -38,6 +38,7 @@ public interface Teacher_init {
      *教师资料更新
      */
     public Map<String,Object> Teacher_update(int uid,String others);
+    public Map<String,Object> Teacher_update2(int uid,String others);
     /**
      * 教师列表显示状态更改
      * uid    用户id
@@ -71,6 +72,10 @@ public interface Teacher_init {
      *教师资料更新毕业学校
      */
     public void Teacher_graduated_school(int uid,String graduated_school);
+    /*
+        更新教师个人签名
+     */
+    public void Teacher_signature(int uid,String signature);
     /*
     获取推荐教师
      */

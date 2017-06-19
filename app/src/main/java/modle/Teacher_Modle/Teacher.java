@@ -163,7 +163,32 @@ public class Teacher implements Teacher_init {
         });
         return null;
     }
+    /*
+       教师资料更新
+        */
+    @Override
+    public Map<String, Object> Teacher_update2(int uid,String others) {
+        Call<Demtest> call=teacher_http.getTeachergenxin2(uid,others);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                Log.e("aa","error"+error);
+                if (error.equals("ok")){
+                    Log.e("aa","更新教师资料成功");
+                }else {
+                    String errmsg=response.body().getErrmsg();
+                    Log.e("aa","更新教师资料错误="+errmsg);
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                Log.e("aa","更新教师资料异常错误="+t.toString());
+            }
+        });
+        return null;
+    }
     /*
     教师资料更新
      */
@@ -355,6 +380,26 @@ public class Teacher implements Teacher_init {
             @Override
             public void onFailure(Call<Demtest> call, Throwable t) {
                 Log.e("aa","更新教师个人毕业学校异常失败"+t.toString());
+            }
+        });
+    }
+
+    @Override
+    public void Teacher_signature(int uid, String signature) {
+        Call<Demtest> call=teacher_http.getsignature(uid,signature);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    Log.e("aa","更新教师个人签名成功");
+                }else {
+                    Log.e("aa","更新教师个人签名失败");
+                }
+            }
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                Log.e("aa","更新教师个人签名异常失败"+t.toString());
             }
         });
     }

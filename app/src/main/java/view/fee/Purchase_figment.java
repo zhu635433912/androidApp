@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.Student_Activty;
+import com.deguan.xuelema.androidapp.utils.SubjectUtil;
 
 import modle.Order_Modle.Order;
 import modle.Order_Modle.Order_init;
@@ -40,6 +41,8 @@ public class Purchase_figment extends Fragment implements View.OnClickListener {
     private TextView laoshism;
     private String Requir_name;
     private TextView kechengname;
+    private String course_id;
+    private String grade_id;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +62,8 @@ public class Purchase_figment extends Fragment implements View.OnClickListener {
         Requir_name=getArguments().getString("Requir_name");
         fee= (int) getArguments().get("visit_fee");
         jiaoshiid= (int) getArguments().get("Requir_id");
+        course_id = getArguments().getString("course_id");
+        grade_id  = getArguments().getString("course_name");
         setfee();
 
         xuessm.setOnClickListener(this);
@@ -93,7 +98,7 @@ public class Purchase_figment extends Fragment implements View.OnClickListener {
                                     int uid=Integer.parseInt(User_id.getUid());
                                     Order_init order_init=new Order();
                                     //创建订单
-                                    order_init.Establish_Order(uid,jiaoshiid,739,fee,i);
+                                    order_init.Establish_Order(uid,jiaoshiid,739,fee,i,Integer.parseInt(course_id),0);
                                     Toast.makeText(getActivity(),"购买课程成功",Toast.LENGTH_SHORT).show();
                                     Intent intent=new Intent(getActivity(), Student_Activty.class);
                                     startActivity(intent);
@@ -123,6 +128,7 @@ public class Purchase_figment extends Fragment implements View.OnClickListener {
     public void setfee(){
         jieshufee.setText(fee+"");
         zongfee.setText(fee+"");
-        kechengname.setText(Requir_name+" ");
+//        kechengname.setText(Requir_name+" ");
+        kechengname.setText(grade_id);
     }
 }

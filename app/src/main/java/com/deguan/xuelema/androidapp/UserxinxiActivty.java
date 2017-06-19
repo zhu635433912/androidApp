@@ -81,6 +81,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private CircleImageView gerxxtoux;
     private AVLoadingIndicatorView jiaoyishuax;
     private String userHeadUrl = "";
+    private TextView jubaoTv;
 
 
     @Override
@@ -88,6 +89,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jiaoyi);
         User_id.getInstance().addActivity(this);
+        jubaoTv = (TextView) findViewById(R.id.jiaoyi_jubao);
         imageButton= (ImageButton) findViewById(R.id.imageButton);
         gerxues= (TextView) findViewById(R.id.gerxues);
         dindan= (TextView) findViewById(R.id.dindan);
@@ -109,6 +111,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         jiaoyi.bringToFront();
         grfanhui.bringToFront();
 
+        jubaoTv.setOnClickListener(this);
         imageButton.setOnClickListener(this);
         imageButton2.setOnClickListener(this);
         bohao.setOnClickListener(this);
@@ -142,6 +145,9 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 map = listmap.get(position);
                 String fee= (String) map.get("visit_fee");
                 String fee1= (String) map.get("unvisit_fee");
+                String course_id = (String) map.get("course_id");
+                String course_name = (String)map.get("course_name") ;
+                String grade_id = (String)map.get("grade_id");
 
                 int unvisit_fee=Integer.parseInt(fee1);
                 int visit_fee=Integer.parseInt(fee);
@@ -154,6 +160,8 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 bundle.putInt("unvisit_fee",unvisit_fee);
                 bundle.putInt("visit_fee",visit_fee);
                 bundle.putInt("Requir_id",Requir_id);
+                bundle.putString("course_id",course_id);
+                bundle.putString("course_name",course_name);
                 purchase_fagment.setArguments(bundle);
                 beginTransaction.commit();
             }
@@ -210,6 +218,10 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.jiaoyi_jubao:
+                startActivity(JubaoActivity_.intent(this).extra("teacher_id","612").get());
+
+                break;
             case R.id.grfanhui:
                 UserxinxiActivty.this.finish();
                 break;

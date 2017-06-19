@@ -15,6 +15,9 @@ import android.widget.Toast;
 import com.deguan.xuelema.androidapp.init.Ordercontent_init;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
+
 import java.util.Map;
 
 import modle.Order_Modle.Order;
@@ -47,12 +50,15 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
     private TextView gender;
     private TextView fuwufan;
     private RelativeLayout ycang;
+    private String status;
+    private TextView statuse;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dindanxxi);
         User_id.getInstance().addActivity(this);
         name = (TextView) findViewById(R.id.name);
+        statuse= (TextView) findViewById(R.id.statuse);
         order_status = (TextView) findViewById(R.id.kechengzhuangtai);
         dizhi = (TextView) findViewById(R.id.dizhi);
         closingtime = (TextView) findViewById(R.id.closingtime);
@@ -70,24 +76,39 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         fuwufan= (TextView) findViewById(R.id. fuwufan);
         ycang= (RelativeLayout) findViewById(R.id.ycang);
         dindanxiangxihuitui.bringToFront();
+        ordettuikuan.setOnClickListener(this);
+        xuqiufenggexian7.setOnClickListener(this);
+        dindanxiangxihuitui.setOnClickListener(this);
 
         if(User_id.getRole().equals("2")){
             ycang.setVisibility(View.GONE);
             xuqiufenggexian7.setVisibility(View.GONE);
         }
-
-        ordettuikuan.setOnClickListener(this);
-        xuqiufenggexian7.setOnClickListener(this);
-        dindanxiangxihuitui.setOnClickListener(this);
-
         //获取订单id与用户id
         String order_ida = getIntent().getStringExtra("oredr_id");
         String durationa=getIntent().getStringExtra("duration");
+        status=getIntent().getStringExtra("status");
         String uida = User_id.getUid();
         duration=Integer.parseInt(durationa);
-
         order_id = Integer.parseInt(order_ida);
         uid = Integer.parseInt(uida);
+        switch (status){
+            case "1":
+                statuse.setText("去支付");
+                break;
+            case "2":
+                statuse.setText("确认收货");
+                break;
+            case "3":
+                statuse.setText("去评价");
+                break;
+            case "4":
+                if(!User_id.getRole().equals("2")) {
+                    ycang.setVisibility(View.GONE);
+                    xuqiufenggexian7.setVisibility(View.GONE);
+                }
+                break;
+        }
 
         Log.e("aa", "订单详细收到的订单id为" + order_id + "与用户id为" + uida);
 
@@ -109,7 +130,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
 
 
         fee=Integer.parseInt(feae);
-       int duration=Integer.parseInt(map.get("duration").toString());
+        int duration=Integer.parseInt(map.get("duration").toString());
         kechengjieshu.setText("x"+duration+"节");
         keshishufee.setText("￥"+fee+"/节");
 
@@ -118,6 +139,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         closingtime.setText(created);
         dizhi.setText(requirement_address);
         zongjijine.setText("￥"+(fee*duration));
+
         switch (status){
             case "1":
                 order_status.setText("未付款");
@@ -174,24 +196,44 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
             Order_details.this.finish();
             break;
         case R.id.querenwanc:
-            new AlertDialog.Builder(Order_details.this).setTitle("学了么提示!").setMessage("确定完成交易?")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Order_init order_init=new Order();
-                            String password=User_id.getPassword();
-                            order_init.Update_Order(uid,order_id,3,password,duration*fee);
-                            Intent intent=new Intent(Order_details.this,Student_Activty.class);
-                            startActivity(intent);
-                            Toast.makeText(Order_details.this,"赶快去评价这位老师吧~",Toast.LENGTH_LONG).show();
+            if (status.equals("1")) {
+                //未完成
+                Intent intent = new Intent(Order_details.this, Payment_Activty.class);
+                intent.putExtra("id", order_id+"");
+                intent.putExtra("fee", fee+"");
+                intent.putExtra("duration", duration+"");
+                startActivity(intent);
+                Toast.makeText(Order_details.this, "进入支付环节", Toast.LENGTH_SHORT).show();
 
-                        }
-                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            }
+            if (status.equals("2")){
+                //进行中
+                new AlertDialog.Builder(Order_details.this).setTitle("学了么提示!").setMessage("确定完成交易?")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Order_init order_init = new Order();
+                                String password = User_id.getPassword();
+                                order_init.Update_Order(uid, order_id, 3, password, duration * fee);
+                                Intent intent = new Intent(Order_details.this, Student_Activty.class);
+                                startActivity(intent);
+                                Toast.makeText(Order_details.this, "赶快去评价这位老师吧~", Toast.LENGTH_LONG).show();
 
-                }
-            }).show();
+                            }
+                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).show();
+            }
+            if (status.equals("3")){
+                //待评价
+                Intent intent2=new Intent(Order_details.this,Student_assessment.class);
+                intent2.putExtra("oredr_id", order_id+"");
+                startActivity(intent2);
+            }
+
             break;
         case R.id.ordettuikuan:
           //订单退款

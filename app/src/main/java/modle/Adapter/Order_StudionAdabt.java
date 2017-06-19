@@ -79,8 +79,8 @@ public class Order_StudionAdabt extends BaseAdapter {
 
         hode.studentlistname.setText(listmap.get(position).get("teacher_name")+"");
         hode.xdsj.setText(listmap.get(position).get("created")+"");
-        hode.nianji.setText(listmap.get(position).get("requirement_grade")+"");
-        hode.yaoqiukemu.setText(listmap.get(position).get("requirement_course")+"");
+        hode.nianji.setText(listmap.get(position).get("grade_name")+"");
+        hode.yaoqiukemu.setText(listmap.get(position).get("course_name")+"");
         hode.keshifei.setText("￥"+keshifee+"/节");
 
         switch (listmap.get(position).get("status").toString()){

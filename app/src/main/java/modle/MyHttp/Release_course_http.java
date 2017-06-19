@@ -20,7 +20,7 @@ public interface Release_course_http  {
     //增加教师课程
     @POST("index.php?s=/Service/Teacher/add_course")
     Call<Demtest> Addcourse(@Query("uid") int uid, @Query("course_id") int course_id, @Query("course_remark") String course_remark, @Query("visit_fee") int visit_fee
-    , @Query("unvisit_fee") int unvisit_fee);
+    , @Query("unvisit_fee") int unvisit_fee,@Query("service_type")int service_type);
 
     //查询教师课程
     @POST("index.php?s=/Service/Teacher/query_course")

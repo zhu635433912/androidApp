@@ -31,15 +31,12 @@
         android:layout_width="match_parent"
         android:layout_height="1px" />
 
-    <android.support.v7.widget.RecyclerView
-        android:background="#fdfdfe"
-        android:layout_below="@+id/xuqiufenggexian"
-        android:id="@+id/id_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-    </android.support.v7.widget.RecyclerView>
+   <GridView
+       android:id="@+id/girdeviewlist"
+        android:numColumns="2"
+       android:layout_below="@+id/xuqiufenggexian"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"></GridView>
 
 
 </RelativeLayout>

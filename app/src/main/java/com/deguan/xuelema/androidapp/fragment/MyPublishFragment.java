@@ -66,8 +66,10 @@ public class MyPublishFragment extends BaseFragment implements PullToRefreshBase
                 //跳转接单列表
 //                    String uid=adapter.getuid(position-1);
                     String uid = (String)list.get(position-1).get("id");
+                    String headUrl = (String) list.get(position-1).get("teacher_headimg");
                     Intent intent=new Intent(getContext(),Pick_singleActivty.class);
                     intent.putExtra("id",uid);
+                    intent.putExtra("teacher_headimg",headUrl);
                     startActivity(intent);
             }
         });

@@ -37,6 +37,11 @@ public interface Teacher_http {
     @POST("index.php?s=/Service/Teacher/update_information")
     Call<Demtest> getTeachergenxin(@Query("uid") int uid,@Query("others_1") String others_1);
     /*
+   教师资料更新荣誉证书
+    */
+    @POST("index.php?s=/Service/Teacher/update_information")
+    Call<Demtest> getTeachergenxin2(@Query("uid") int uid,@Query("others_2") String others_2);
+    /*
     教师列表显示状态更改
      */
     @POST("index.php?s=/Service/Teacher/update_status1")
@@ -69,6 +74,11 @@ public interface Teacher_http {
     */
     @POST("index.php?s=/Service/Teacher/update_information")
     Call<Demtest> getspeciality(@Query("uid") int uid,@Query("speciality") String speciality);
+    /*
+         教师资料更新个人签名
+   */
+    @POST("index.php?s=/Service/Teacher/update_information")
+    Call<Demtest> getsignature(@Query("uid") int uid,@Query("signature") String signature);
     /*
         教师资料更新个人毕业学校
     */

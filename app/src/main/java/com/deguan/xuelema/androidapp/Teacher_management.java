@@ -1,8 +1,11 @@
 package com.deguan.xuelema.androidapp;
 
+import android.*;
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +14,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
@@ -48,6 +52,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.co.namee.permissiongen.PermissionGen;
 import modle.Adapter.KechengAdapter;
 import modle.Adapter.MyGridView_Adapter;
 import modle.Increase_course.Increase_course;
@@ -68,7 +73,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
     private TextView kemuzhonglei;
     private EditText editText2;
     private EditText shanggmenfee;
-    private EditText xueshengfee;
+//    private EditText xueshengfee;
     private Button naxt;
     private int kcid=206;
     private EditText gerjianjietext_edi;
@@ -79,6 +84,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
     private RelativeLayout tianjiaxueli1;
     private int uid;
     private android.app.AlertDialog mPickDialog;
+    private AlertDialog zhengshuDialog;
     private String mCurrentPhotoPath;
     private static final int REQUEST_IMAGE_GET = 0;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -96,6 +102,10 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
     private File image;
     private KechengAdapter kechengAdapter;
     private Increase_course increase_course;
+    private TextView serviceTv;
+    private int kechengType = 1;
+    private EditText signEdit;
+    private int flag = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -103,6 +113,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         setContentView(R.layout.teachers_management);
         User_id.getInstance().addActivity(this);
 
+        signEdit = (EditText) findViewById(R.id.person_sign);
         rongyuimage= (GridView) findViewById(R.id.rongyuimage);
         xuelimage= (GridView) findViewById(R.id.xuelimage);
         jiaoshiguanlifanhui= (RelativeLayout) findViewById(R.id.jiaoshiguanlifanhui);
@@ -110,7 +121,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         kemuzhonglei= (TextView) findViewById(R.id.textView7);
         editText2= (EditText) findViewById(R.id.editText2);
         shanggmenfee= (EditText) findViewById(R.id.shanggmenfee);
-        xueshengfee= (EditText) findViewById(R.id.xueshengfee);
+//        xueshengfee= (EditText) findViewById(R.id.xueshengfee);
         tianjiaxueli1= (RelativeLayout) findViewById(R.id.tianjiaxueli1);
         tianjiazhengshu= (RelativeLayout) findViewById(R.id.tianjiazhengshu);
         gerjianjietext_edi= (EditText) findViewById(R.id.gerjianjietext_edi);
@@ -122,15 +133,16 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         tianjiaxueli= (RelativeLayout) findViewById(R.id.tianjiaxueli);
         kechengitme= (ListView) findViewById(R.id.kechengitme);
         jiaoshiguanlifanhui.bringToFront();
+        serviceTv = (TextView) findViewById(R.id.kecheng_service_type);
         viw.setVisibility(View.GONE);
 
-
+        serviceTv.setOnClickListener(this);
         tianjiaxueli.setOnClickListener(this);
         tianjiazhengshu.setOnClickListener(this);
         tianjiaxueli1.setOnClickListener(this);
         baocunjiaoshi.setOnClickListener(this);
         naxt.setOnClickListener(this);
-        xueshengfee.setOnClickListener(this);
+//        xueshengfee.setOnClickListener(this);
         shanggmenfee.setOnClickListener(this);
         editText2.setOnClickListener(this);
         kemuzhonglei.setOnClickListener(this);
@@ -144,6 +156,8 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
 
         View view = getLayoutInflater().inflate(R.layout.layout_dialog_pick, null);
         mPickDialog = new android.app.AlertDialog.Builder(this).setView(view).create();
+        View view2 = getLayoutInflater().inflate(R.layout.dialog_zhengshu,null);
+        zhengshuDialog = new AlertDialog.Builder(this).setView(view2).create();
         //获取课程
         getmCourse();
 
@@ -187,6 +201,25 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 Getdata getdata=new Getdata();
                 getdata.getGrade(this);
                 break;
+            case R.id.kecheng_service_type:
+
+                AlertDialog.Builder serviceTypeDialog = new AlertDialog.Builder(Teacher_management.this);
+                serviceTypeDialog.setIcon(R.drawable.add04);
+                serviceTypeDialog.setTitle("请选择服务类型");
+                //    指定下拉列表的显示数据
+                final String[] fuwuType = {"一对一", "一对多", "不限"};
+                //    设置一个下拉的列表选择项
+                serviceTypeDialog.setItems(fuwuType, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(Teacher_management.this, "选择的科目为：" + fuwuType[which], Toast.LENGTH_SHORT).show();
+                        serviceTv.setText(fuwuType[which]);
+                        kechengType = which + 1;
+                    }
+                });
+                serviceTypeDialog.show();
+
+                break;
             case R.id.textView7:
                 //科目
                 AlertDialog.Builder kemuza = new AlertDialog.Builder(Teacher_management.this);
@@ -207,9 +240,9 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 break;
             case R.id.naxt:
                 //增加课程
-                if (zhonglei.getText().toString().equals("课程种类")||kemuzhonglei.getText().toString().equals("课程名称")
+                if (zhonglei.getText().toString().equals("课程种类")||kemuzhonglei.getText().toString().equals("选择年级")
                         ||editText2.getText().toString().equals("课程说明")||shanggmenfee.getText().toString().equals("课时费")
-                        ||xueshengfee.getText().toString().equals("课时费")||xueshengfee.getText().toString().equals("")
+                        ||serviceTv.getText().toString().equals("服务类型")
                         ||shanggmenfee.getText().toString().equals("")){
                     Toast.makeText(Teacher_management.this,"请填写正确的课程资料",Toast.LENGTH_SHORT).show();
 
@@ -222,8 +255,9 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                                     int uid=Integer.parseInt(User_id.getUid());
                                     Increase_course inc=new Increase_course();
                                     int laoshifee=Integer.parseInt(shanggmenfee.getText().toString());
-                                    int xuesfee=Integer.parseInt(xueshengfee.getText().toString());
-                                    inc.Addcourse(uid,kcid,editText2.getText().toString(),laoshifee,xuesfee);
+//                                    int xuesfee=Integer.parseInt(xueshengfee.getText().toString());
+                                    int xuesfee = 0;
+                                    inc.Addcourse(uid,kcid,editText2.getText().toString(),laoshifee,xuesfee,kechengType);
                                     Toast.makeText(Teacher_management.this,"增加课程成功",Toast.LENGTH_SHORT).show();
                                     //刷新课程
                                     getmCourse();
@@ -241,6 +275,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 String dei=gerjianjietext_edi.getText().toString();
                 String tec=techang.getText().toString();
                 String biy=biyexuex.getText().toString();
+                String signText = signEdit.getText().toString()+"";
 
                 if (dei.equals("")||tec.equals("")||biy.equals("")){
                     Toast.makeText(Teacher_management.this,"个人介绍不能为空!",Toast.LENGTH_LONG).show();
@@ -248,6 +283,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                     teacher_init.Teacher_resume(uid,dei);
                     teacher_init.Teacher_speciality(uid,tec);
                     teacher_init.Teacher_graduated_school(uid,biy);
+                    teacher_init.Teacher_signature(uid,signText);
                     Toast.makeText(Teacher_management.this,"更新个人信息成功!",Toast.LENGTH_LONG).show();
                 }
 
@@ -262,13 +298,40 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 TAGE_ISRONT=1;
                 mPickDialog.show();
                 break;
+            case R.id.zhengshu_dialog_pick:
+                flag = 1 ;
+                new User_Realization().setuserbitmap(image,this);
+                zhengshuDialog.dismiss();
+                break;
+            case R.id.zhengshu2_dialog_pick:
+                flag = 2;
+                new User_Realization().setuserbitmap(image,this);
+                zhengshuDialog.dismiss();
+                break;
             case R.id.picture_dialog_pick: {
                 selectImage();
                 mPickDialog.dismiss();
             }
             break;
             case R.id.camera_dialog_pick: {
-                dispatchTakePictureIntent();
+                if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED) {
+                    PermissionGen.with(this)
+                            .addRequestCode(100)
+                            .permissions(
+                                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                                    Manifest.permission.ACCESS_FINE_LOCATION,
+                                    Manifest.permission.READ_PHONE_STATE,
+                                    android.Manifest.permission.CAMERA
+                            )
+                            .request();
+//
+                }else{
+//  定位
+                    dispatchTakePictureIntent();
+                }
+//                dispatchTakePictureIntent();
                 mPickDialog.dismiss();
             }
             break;
@@ -316,6 +379,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
     public void Updatefee(List<Map<String, Object>> listmap) {
         Map<String,Object> map=new HashMap<String,Object>();
         map=listmap.get(0);
+        signEdit.setText(map.get("signature")+"");
         techang.setText(map.get("speciality")+"");
         gerjianjietext_edi.setText(map.get("resume")+"");
         biyexuex.setText(map.get("graduated_school")+"");
@@ -371,7 +435,8 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 Log.e("aa","路劲为"+filePath);
                 User_init user_init=new User_Realization();
                 if (TAGE_ISRONT==1){
-                user_init.setuserbitmap(image,this);
+                    zhengshuDialog.show();
+//                    user_init.setuserbitmap(image,this);
                 }else {
 
                 }
@@ -512,11 +577,16 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
 
     }
 
+
     @Override
     public void setListview1(List<Map<String, Object>> listmap) {
         //更新用户证书
         Map<String,Object> map=listmap.get(0);
-        teacher_init.Teacher_update(uid,map.get("imageurl").toString());
+        if (flag == 1 ) {
+            teacher_init.Teacher_update(uid, map.get("imageurl").toString());
+        }else if (flag == 2){
+            teacher_init.Teacher_update2(uid, map.get("imageurl").toString());
+        }
         Toast.makeText(this,"更新成功",Toast.LENGTH_LONG).show();
     }
 

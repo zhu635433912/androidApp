@@ -10,60 +10,112 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.deguan.xuelema.androidapp.R;
+import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
+import com.deguan.xuelema.androidapp.viewimpl.SimilarXuqiuView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
+import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import modle.Adapter.XuqiuAdapter;
+import modle.Demand_Modle.Demand;
+import modle.Demand_Modle.Demand_init;
 import modle.toos.MyListview;
 
 /**
  * 推荐需求 我的发布 碎片
  */
 
-public class Fabuxuqiu_fagment extends Fragment implements MyListview.IReflashListener,MyListview.RemoveListener {
-    List<Map<String,Object>> listmap;
-    MyListview listView;
+public class Fabuxuqiu_fagment extends Fragment implements
+//        PullToRefreshBase.OnRefreshListener,
+        SimilarXuqiuView{
+    private List<XuqiuEntity> listmap = new ArrayList<>();
+    ListView listView;
+    private XuqiuAdapter xuqiuAdapter;
+    private Demand_init demand_init;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-         View view=inflater.inflate(R.layout.myindex_list_foagment,null);
-        listView= (MyListview)view.findViewById(R.id.listmapsi);
-        listView.setInterface(this);
-        listmap=new ArrayList<Map<String, Object>>();
+
+         View view=inflater.inflate(R.layout.fragment_tuijian_xuqiu,null);
+        listView= (ListView) view.findViewById(R.id.xuqiu_tuijian_listview);
+
 
         //取消listview下拉上啦默认
-        listView.setOverScrollMode(view.OVER_SCROLL_NEVER);
-        listView.setVerticalScrollBarEnabled(false);
-        listView.setRemoveListener(this);
+        //相似需求
+//        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+//        listView.setOnRefreshListener(this);
+//        SimpleAdapter simpleAdapter = new SimpleAdapter(this, Data(), R.layout.myindex_list, new String[]{"text"}, new int[]{R.id.myindeusername});
+        xuqiuAdapter = new XuqiuAdapter(listmap,getActivity());
+        listView.setAdapter(xuqiuAdapter);
 
-
-
-        SimpleAdapter simpleAdapter=new SimpleAdapter(getActivity(),Data(),R.layout.myindex_list,new String[]{"text"},new int[]{R.id.myindeusername});
-        listView.setAdapter(simpleAdapter);
-
+        //需求详细信息展示
+        demand_init=new Demand(this);
+        demand_init.getTuijianDemand_list(0,0,null,null,null,null,null,null,getContext(),null);
         return view;
     }
 
-    private List<Map<String,Object>> Data() {
-        for (int i=0;i<5;i++){
-            Map<String,Object> map=new ArrayMap<>();
-            map.put("text",i+"玩家");
-            listmap.add(map);
+    private String status;
+    @Subscriber(tag = "status")
+    public void getTuijian(String stats){
+        status = stats;
+        demand_init.getTuijianDemand_list(0,0,null,null,null,null,status,null,getContext(),null);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void successSimilarXuqiu(List<Map<String, Object>> maps) {
+//        listView.onRefreshComplete();
+        listmap.clear();
+        List<XuqiuEntity> lists = new ArrayList<>();
+        for (int i = 0; i < maps.size(); i++) {
+            XuqiuEntity entity = new XuqiuEntity();
+            entity.setPublisher_id((String) maps.get(i).get("publisher_id"));
+            entity.setPublisher_name((String) maps.get(i).get("publisher_name"));
+            entity.setService_type((String)maps.get(i).get("service_type"));
+            entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
+            entity.setCourse_name((String) maps.get(i).get("course_name"));
+            entity.setContent((String) maps.get(i).get("content"));
+            entity.setCreated((String) maps.get(i).get("created"));
+            entity.setId((String) maps.get(i).get("id"));
+            entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
+            entity.setDistance((String) maps.get(i).get("distance"));
+            entity.setFee(String.valueOf(maps.get(i).get("fee")));
+            entity.setGrade_name((String)maps.get(i).get("grade_name"));
+            lists.add(entity);
         }
-        return listmap;
+        listmap.addAll(lists);
+        xuqiuAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onReflash() {
-        listView.reflashComplet();
+    public void failSimilarXuqiu(String msg) {
+        Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void removeItem(MyListview.RemoveDirection direction, int position) {
-
-    }
+//    @Override
+//    public void onRefresh(PullToRefreshBase refreshView) {
+//        demand_init.getTuijianDemand_list(0,0,null,null,null,null,status,listView,getContext(),null);
+//    }
 }

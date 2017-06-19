@@ -26,6 +26,7 @@ import modle.user_ziliao.User_id;
 
 /**
  * Created by Administrator on 2017/6/17 0017.
+ * 进行中
  */
 
 @EFragment(R.layout.fragment_tuijian)
@@ -51,16 +52,16 @@ public class ConductFragment extends BaseFragment implements PullToRefreshBase.O
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.e("aa","aa点击了");
                 Map<String,Object> map=studionAdabt.getmap(i-1);
                 String status= (String) map.get("status");
                 String ida = (String) map.get("id");
                 String duration = (String) map.get("duration");
-                String fee = (String) map.get("fee");
-                Intent intent1=new Intent(getActivity(),Order_details.class);
-                intent1.putExtra("oredr_id", ida);
-                intent1.putExtra("duration", duration);
-                startActivity(intent1);
+
+                Intent intent = new Intent(getActivity(), Order_details.class);
+                intent.putExtra("oredr_id", ida);
+                intent.putExtra("duration", duration);
+                intent.putExtra("status", status);
+                startActivity(intent);
 
             }
         });

@@ -196,7 +196,9 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="ecaa47f0e6d599a46f925867564a2e36" />
-
+        <!-- <meta-data -->
+        <!-- android:name="com.amap.api.v2.apikey" -->
+        <!-- android:value="f948e8588e4a15fbf997a97f9038ea40" /> -->
         <service android:name="com.amap.api.location.APSService" />
         <!-- 设置环信应用的AppKey -->
         <meta-data
@@ -238,12 +240,12 @@
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind"></activity>
+            android:screenOrientation="behind" />
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind"></activity>
+            android:screenOrientation="behind" />
 
         <!-- 傻逼极光这么多东西 -->
 
@@ -326,7 +328,7 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <!-- Required SDK核心功能 -->
         <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
@@ -797,7 +799,10 @@
             android:enabled="true"
             android:process=":remote" />
 
-        <activity android:name=".MyOrderActivity"></activity>
+        <activity android:name=".MyOrderActivity" />
+        <activity android:name=".utils.MyBaseActivity_" />
+        <activity android:name=".SearchActivity_" />
+        <activity android:name=".JubaoActivity_"></activity>
     </application>
 
 </manifest>

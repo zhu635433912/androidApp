@@ -122,8 +122,8 @@ public class Order implements Order_init {
      */
 
     @Override
-    public Map<String, Object> Establish_Order(int uid, int teacher_id, int requirement_id, float fee,int duration) {
-        Call<Erre> call=oredr_http.setOredr(uid,teacher_id,requirement_id,fee,duration);
+    public Map<String, Object> Establish_Order(int uid, int teacher_id, int requirement_id, float fee,int duration,int course_Id,int grade_Id) {
+        Call<Erre> call=oredr_http.setOredr(uid,teacher_id,requirement_id,fee,duration,course_Id);
         call.enqueue(new Callback<Erre>() {
             @Override
             public void onResponse(Call<Erre> call, Response<Erre> response) {

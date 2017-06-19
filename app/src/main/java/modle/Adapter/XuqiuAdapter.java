@@ -85,9 +85,21 @@ public class XuqiuAdapter extends ListBaseAdapter {
         }
         holder = (ViewHolder) convertView.getTag();
         holder.nickname.setText(""+list.get(position).getPublisher_name());
-        holder.service_type.setText(""+list.get(position).getService_type_txt());
-        holder.service_type.setVisibility(View.GONE);
-        holder.fee.setText(""+list.get(position).getFee());
+        String serviceType = ""+list.get(position).getService_type();
+         if (serviceType.equals("1")){
+            holder.service_type.setText("老师上门");
+        }else if (serviceType.equals("2")){
+            holder.service_type.setText("学生上门");
+        }else if (serviceType.equals("3")){
+            holder.service_type.setText("第三方");
+        }else {
+            holder.service_type.setText("不限");
+        }
+//        holder.service_type.setVisibility(View.GONE);
+        holder.fee.setText(""
+//                +list.get(position).getFee()
+        );
+//        holder.fee.setVisibility(View.GONE);
         holder.speciality.setText(""+list.get(position).getCourse_name());
         holder.username.setText(""+list.get(position).getContent());
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
