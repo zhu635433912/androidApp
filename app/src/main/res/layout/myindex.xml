@@ -8,6 +8,12 @@
         android:id="@+id/scv"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -186,14 +192,18 @@
             android:layout_below="@+id/tuijianxuqiutext"
             android:background="#404040" />
         </RelativeLayout>
-        <LinearLayout
-            android:layout_below="@+id/fenggexiantext1"
-            android:id="@+id/myindexfagment"
-            android:layout_width="match_parent"
-            android:layout_height="2000px"
-            android:background="@drawable/studentback"
-            android:orientation="horizontal" />
+
     </RelativeLayout>
+            <!--android:layout_below="@+id/fenggexiantext1"-->
+
+            <LinearLayout
+                android:id="@+id/myindexfagment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/studentback"
+                android:orientation="horizontal" />
+        </LinearLayout>
     </modle.toos.MScrollView>
 
 

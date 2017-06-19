@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,7 @@ public class MyPublishFragment extends BaseFragment implements PullToRefreshBase
     private int filter_type;
     private PublishPresenter publishPresenter;
 
+
     @Override
     public void before() {
     }
@@ -73,6 +75,7 @@ public class MyPublishFragment extends BaseFragment implements PullToRefreshBase
                     startActivity(intent);
             }
         });
+
     }
 
 
@@ -86,7 +89,7 @@ public class MyPublishFragment extends BaseFragment implements PullToRefreshBase
     public void successMyPublish(List<Map<String, Object>> maps) {
         listView.onRefreshComplete();
         list.clear();
-       list.addAll(maps);
+        list.addAll(maps);
         adapter.notifyDataSetChanged();
     }
 

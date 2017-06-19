@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#e0eaf1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_marginTop="20px"
+        android:background="@drawable/mianlistview"
+        android:layout_gravity="center"
+        android:layout_width="700px"
+        android:layout_height="340px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+        <!--<modle.toos.CircleImageView-->
+        <!--android:id="@+id/lognhost"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_marginTop="14px"-->
+        <!--android:layout_marginLeft="14px"-->
+        <!--android:src="@drawable/ox2"-->
+        <!--android:layout_width="56px"-->
+        <!--android:layout_height="56px" />-->
+
+        <TextView
+            android:layout_marginLeft="25px"
+            android:layout_marginTop="26px"
+            android:layout_alignTop="@+id/lognhost"
+            android:layout_toRightOf="@+id/lognhost"
+            android:textSize="24px"
+            android:id="@+id/text1"
+            android:text="订单id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginRight="20px"
+            android:layout_alignTop="@+id/text9"
+            android:layout_toLeftOf="@+id/text9"
+            android:id="@+id/text2"
+            android:textSize="24px"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginRight="20px"
+            android:layout_marginTop="16px"
+            android:layout_alignTop="@+id/text3"
+            android:layout_toLeftOf="@+id/text3"
+            android:textColor="#a0d9fe"
+            android:id="@+id/turn_status_tv"
+            android:textSize="24px"
+            android:text="订单状态"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/text3"
+            android:layout_marginRight="25px"
+            android:layout_marginTop="20px"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#a0d9fe"
+            android:textSize="40px"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tlucahwodjawf"
+            android:layout_marginTop="20px"
+            android:background="#a0d9fe"
+            android:layout_below="@+id/text3"
+            android:layout_width="match_parent"
+            android:layout_height="1px" />
+        <TextView
+            android:layout_marginLeft="20px"
+            android:textColor="#4b4b4b"
+            android:textSize="40px"
+            android:layout_below="@+id/tlucahwodjawf"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="20px"
+            android:textColor="#4b4b4b"
+            android:textSize="40px"
+            android:text=""
+            android:layout_below="@+id/tlucahwodjawf"
+            android:layout_toRightOf="@+id/text4"
+            android:id="@+id/text5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="28px"
+            android:id="@+id/text6"
+            android:layout_marginTop="35px"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/text5"
+            android:layout_width="570px"
+            android:layout_height="70px" />
+        <ImageView
+            android:layout_marginLeft="50px"
+            android:src="@drawable/ox2"
+            android:id="@+id/turn_head_image"
+            android:layout_centerVertical="true"
+            android:layout_width="100px"
+            android:layout_height="100px" />
+        <TextView
+            android:layout_centerInParent="true"
+            android:text="名字"
+            android:id="@+id/turn_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/text7"
+            android:layout_marginLeft="14px"
+            android:layout_marginBottom="24px"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/turn_time_tv"
+            android:layout_marginRight="14px"
+            android:layout_marginBottom="24px"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:textSize="26px"
+            android:text="2011-06-17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+</RelativeLayout>

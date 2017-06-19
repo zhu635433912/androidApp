@@ -1,9 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.deguan.xuelema.androidapp.JubaoActivity">
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/jubaoclos"
+        android:layout_width="150px"
+        android:layout_height="80px"></RelativeLayout>
+    <ImageButton
+        android:id="@+id/jubao_back"
+        android:layout_width="20px"
+        android:layout_height="30px"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:background="@drawable/add19" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20px"
+        android:text="举报"
+        android:textSize="30px" />
+    <TextView
+        android:id="@+id/xuqiufenggexian"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/neirongtext"
+        android:layout_marginTop="80px"
+        android:background="#d7d7d7" />
+    <EditText
+        android:paddingLeft="20px"
+        android:paddingTop="10px"
+        android:layout_marginTop="20px"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/gerxxkk"
+        android:id="@+id/jubaoneirong"
+        android:hint="请详细描述你要举报的内容"
+        android:textSize="30px"
+        android:enabled="true"
+        android:gravity="top"
+        android:minLines="8"
+        android:maxLines="10"
+        android:scrollbars="vertical"
+        android:inputType="textLongMessage"
+        android:layout_below="@+id/xuqiufenggexian"
+        android:layout_width="700px"
+        android:layout_height="400px" />
+
+    <Button
+        android:id="@+id/tijiaojubao"
+        android:textColor="#fff"
+        android:text="保存"
+        android:background="@drawable/add15"
+        android:layout_marginBottom="50px"
+        android:layout_centerHorizontal="true"
+       android:layout_alignParentBottom="true"
+        android:layout_width="500px"
+        android:layout_height="80px" />
+
+</RelativeLayout>

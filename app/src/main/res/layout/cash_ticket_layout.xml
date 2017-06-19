@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/add08"
+        android:layout_width="750px"
+        android:layout_height="300px">
+
+        <TextView
+            android:layout_marginTop="34px"
+            android:layout_marginLeft="46px"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:text="取消"
+            android:id="@+id/cash_back"
+            android:textColor="#b4b4b4"
+            android:textSize="35px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/cash_sure"
+            android:textColor="#f8c968"
+            android:layout_marginTop="34px"
+            android:layout_marginRight="46px"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:text="确定"
+            android:textSize="35px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:id="@+id/feefenggexian4"
+            android:layout_marginTop="24px"
+            android:background="#e6e6e6"
+            android:layout_below="@+id/cash_back"
+            android:layout_centerHorizontal="true"
+            android:layout_width="732px"
+            android:layout_height="1px"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/feekaihuyh"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="30px"
+            android:layout_below="@+id/feefenggexian4"
+            android:layout_alignParentLeft="true"
+            android:textSize="40px"
+            android:text="提现金额"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/cash_name"
+            android:layout_marginLeft="40px"
+            android:layout_alignBottom="@+id/feekaihuyh"
+            android:layout_toRightOf="@+id/feekaihuyh"
+            android:layout_width="match_parent"
+            android:layout_height="100px" />
+     </RelativeLayout>
+</RelativeLayout>

@@ -141,6 +141,9 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
                     Intent intent = new Intent(MainActivity.this, Xuqiufabu.class);
 //                    startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
                     startActivity(intent);
+                }else if (i == 1){
+                    Intent intentTeacher = new Intent(MainActivity.this,Teacher_management.class);
+                    startActivity(intentTeacher);
                 }
                 break;
             case R.id.woder:

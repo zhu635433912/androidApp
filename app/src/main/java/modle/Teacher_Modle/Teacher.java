@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.ListView;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.viewimpl.TeacherView;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -430,4 +431,29 @@ public class Teacher implements Teacher_init {
 //            }
 //        });
     }
+
+    //获取教师评价接口
+    @Override
+    public void setEvaluation_Teacher(int uid, final Student_init student_init) {
+        Call<ContentModle> call=teacher_http.getEvluation(uid);
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                if (response.equals("ok")){
+                    List<Map<String,Object>> listmap=new ArrayList<Map<String, Object>>();
+                    listmap=response.body().getContent();
+                    student_init.setListview(listmap);
+                }else {
+                    Log.e("aa","获取教师列表错误"+response.body().getErrmsg());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                Log.e("aa","获取教师评价异常错误");
+            }
+        });
+    }
+
 }

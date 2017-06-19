@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#e0eaf1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_marginTop="20px"
+        android:background="@drawable/mianlistview"
+        android:layout_gravity="center"
+        android:layout_width="700px"
+        android:layout_height="340px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+        <!--<modle.toos.CircleImageView-->
+        <!--android:id="@+id/lognhost"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_marginTop="14px"-->
+        <!--android:layout_marginLeft="14px"-->
+        <!--android:src="@drawable/ox2"-->
+        <!--android:layout_width="56px"-->
+        <!--android:layout_height="56px" />-->
+        <TextView
+            android:layout_marginLeft="25px"
+            android:layout_marginTop="35px"
+            android:layout_alignTop="@+id/lognhost"
+            android:layout_toRightOf="@+id/lognhost"
+            android:textSize="24px"
+            android:id="@+id/order_id_tv"
+            android:text="订单id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginRight="20px"
+            android:layout_alignTop="@+id/text9"
+            android:layout_toLeftOf="@+id/text9"
+            android:textSize="24px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginRight="20px"
+            android:layout_marginTop="16px"
+            android:layout_alignTop="@+id/text3"
+            android:layout_toLeftOf="@+id/text3"
+            android:textColor="#a0d9fe"
+            android:id="@+id/text9"
+            android:textSize="24px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/text3"
+            android:layout_marginRight="25px"
+            android:layout_marginTop="20px"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#a0d9fe"
+            android:textSize="40px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tlucahwodjawf"
+            android:layout_marginTop="20px"
+            android:background="#a0d9fe"
+            android:layout_below="@+id/text3"
+            android:layout_width="match_parent"
+            android:layout_height="1px" />
+
+        <TextView
+            android:layout_marginLeft="20px"
+            android:textColor="#4b4b4b"
+            android:textSize="40px"
+            android:text="提现"
+            android:layout_below="@+id/tlucahwodjawf"
+            android:layout_toRightOf="@+id/text4"
+            android:id="@+id/order_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="40px"
+            android:id="@+id/order_money_tv"
+            android:text="100元"
+            android:layout_marginTop="35px"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/order_type_tv"
+            android:layout_width="570px"
+            android:layout_height="70px" />
+        <TextView
+            android:layout_alignParentRight="true"
+            android:id="@+id/order_time_tv"
+            android:layout_marginRight="14px"
+            android:layout_marginBottom="24px"
+            android:layout_alignParentBottom="true"
+            android:text="2017-06-18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+</RelativeLayout>

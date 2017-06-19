@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
+import com.deguan.xuelema.androidapp.FeeqianbaoActivty;
 import com.deguan.xuelema.androidapp.Payment_Activty;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
@@ -126,6 +127,9 @@ public class  Feechongzhi_fagment extends Fragment implements Requirdetailed ,Vi
                 float flfee=fee;
                 Getdata getdata=new Getdata();
                 getdata.getsizechongzhi(uid,flfee,1,this);
+                break;
+            case R.id.recharge_back:
+//                getFragmentManager().popBackStack();
                 break;
         }
     }

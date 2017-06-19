@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ListView;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.init.Student_init;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.List;
@@ -80,4 +81,11 @@ public interface Teacher_init {
     获取推荐教师
      */
     public void gettuijian_Teacher(int course_id,int grade_id,String address,Requirdetailed requirdetailed);
+
+
+    /*
+   获取对教师的评价接口
+    */
+    public void setEvaluation_Teacher(int uid,Student_init student_init);
+
 }

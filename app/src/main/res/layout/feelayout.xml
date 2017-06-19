@@ -6,7 +6,7 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/add08"
         android:layout_width="750px"
-        android:layout_height="500px">
+        android:layout_height="600px">
 
         <TextView
             android:layout_marginTop="34px"
@@ -14,18 +14,19 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:text="取消"
+            android:id="@+id/cash_back"
             android:textColor="#b4b4b4"
             android:textSize="35px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/feequeding1"
+            android:id="@+id/cash_sure"
             android:textColor="#f8c968"
             android:layout_marginTop="34px"
-            android:layout_marginEnd="46px"
+            android:layout_marginRight="46px"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:text="确定"
             android:textSize="35px"
             android:layout_width="wrap_content"
@@ -34,7 +35,7 @@
             android:id="@+id/feefenggexian4"
             android:layout_marginTop="24px"
             android:background="#e6e6e6"
-            android:layout_below="@+id/feequeding1"
+            android:layout_below="@+id/cash_back"
             android:layout_centerHorizontal="true"
             android:layout_width="732px"
             android:layout_height="1px"
@@ -49,35 +50,37 @@
             android:layout_below="@+id/feefenggexian4"
             android:layout_alignParentLeft="true"
             android:textSize="40px"
-            android:text="开户银行"
+            android:text="用户名称"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
+            android:id="@+id/cash_name"
             android:background="@null"
             android:layout_marginLeft="40px"
             android:layout_alignBottom="@+id/feekaihuyh"
-            android:layout_toEndOf="@+id/feekaihuyh"
+            android:layout_toRightOf="@+id/feekaihuyh"
             android:layout_width="match_parent"
             android:layout_height="60px" />
         <TextView
             android:id="@+id/feeyhzhanghao"
-            android:layout_marginTop="86px"
+            android:layout_marginTop="46px"
             android:layout_below="@+id/feekaihuyh"
             android:layout_alignLeft="@+id/feekaihuyh"
             android:textSize="40px"
-            android:text="银行账号"
+            android:text="提现账号"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
             android:background="@null"
+            android:id="@+id/cash_id"
             android:layout_marginLeft="40px"
             android:layout_alignBottom="@+id/feeyhzhanghao"
-            android:layout_toEndOf="@+id/feeyhzhanghao"
+            android:layout_toRightOf="@+id/feeyhzhanghao"
             android:layout_width="match_parent"
             android:layout_height="60px" />
         <TextView
             android:id="@+id/zhuanchufeee"
-            android:layout_marginTop="86px"
+            android:layout_marginTop="46px"
             android:layout_below="@+id/feeyhzhanghao"
             android:layout_alignLeft="@+id/feeyhzhanghao"
             android:textSize="40px"
@@ -86,11 +89,72 @@
             android:layout_height="wrap_content" />
         <EditText
             android:background="@null"
+            android:id="@+id/cash_fee"
             android:layout_marginLeft="40px"
             android:layout_alignBottom="@+id/zhuanchufeee"
-            android:layout_toEndOf="@+id/zhuanchufeee"
+            android:layout_toRightOf="@+id/zhuanchufeee"
             android:layout_width="match_parent"
             android:layout_height="60px" />
+        <RelativeLayout
+            android:id="@+id/feeweixzhifurelayout"
+            android:layout_marginLeft="30px"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="38px"
+            android:layout_below="@+id/zhuanchufeee"
+            android:layout_centerVertical="true"
+            android:background="@drawable/feeshape"
+            android:layout_width="220px"
+            android:layout_height="150px">
+            <ImageView
+                android:id="@+id/cash_wechat"
+                android:background="@drawable/hly13"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="20px"
+                android:layout_centerHorizontal="true"
+                android:layout_width="80px"
+                android:layout_height="80px" />
+            <TextView
+                android:textSize="27px"
+                android:layout_marginTop="10px"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/cash_wechat"
+                android:text="微信支付"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:background="@drawable/feeshape"
+            android:layout_alignTop="@+id/feeweixzhifurelayout"
+            android:layout_centerHorizontal="true"
+            android:layout_width="220px"
+            android:layout_height="150px">
+            <ImageView
+                android:id="@+id/cash_alpay"
+                android:layout_marginTop="20px"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/hly08"
+                android:layout_width="80px"
+                android:layout_height="80px" />
+            <TextView
+                android:layout_marginTop="10px"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/cash_alpay"
+                android:textSize="27px"
+                android:text="支付宝"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/cash_type"
+            android:layout_margin="80px"
+            android:layout_below="@+id/cash_fee"
+            android:textSize="40px"
+            android:layout_alignParentRight="true"
+            android:text="支付宝"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 </RelativeLayout>

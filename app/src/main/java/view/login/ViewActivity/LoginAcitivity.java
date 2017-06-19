@@ -264,7 +264,7 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
             loginLoadingTv.setVisibility(View.GONE);
         }
         startActivity(intent,activityOptionsCompat.toBundle());
-      //  LoginAcitivity.this.finish();
+        finish();
     }
     //获取用户参数
     public User_id getUser_id() {

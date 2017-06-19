@@ -94,4 +94,9 @@ public interface Teacher_http {
     */
 @POST("index.php?s=/Service/Teacher/recommend_teacher")
 Call<TuijianListEntity> gettuijianjiaoshi();
+
+    @POST("index.php?s=/Service/Teacher/get_teacher_comment")
+    Call<ContentModle> getEvluation(@Query("teacher_id") int teacher_id);
+
+
 }

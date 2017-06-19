@@ -246,25 +246,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
         paixuBtn.setOnClickListener(this);
         chooseBtn.setOnClickListener(this);
 
-        //动态申请权限
 
-        if(ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
-            PermissionGen.with(getActivity())
-                    .addRequestCode(100)
-                    .permissions(
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.ACCESS_COARSE_LOCATION,
-                            Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.READ_PHONE_STATE,
-                            Manifest.permission.CAMERA
-                            )
-                    .request();
-//
-        }else{
-//  定位
-            Gaode_dinwei gaode_dinwei=new Gaode_dinwei(this,getActivity());
-        }
 
 
         //下拉刷新
@@ -367,7 +349,27 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
 
             }
         });
-        initData();
+        //动态申请权限
+
+        if(ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
+            PermissionGen.with(getActivity())
+                    .addRequestCode(100)
+                    .permissions(
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.READ_PHONE_STATE,
+                            Manifest.permission.CAMERA
+                    )
+                    .request();
+//
+        }else{
+//  定位
+            Gaode_dinwei gaode_dinwei=new Gaode_dinwei(this,getActivity());
+            initData();
+        }
+
         myconteol_init=new Mycontrol(this);
         return view;
     }
@@ -671,6 +673,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
     //高德成功回调
     @Override
     public void Updategaode(Map<String, Object> map) {
+
         lat= (double) map.get("lat");
         lng= (double) map.get("lng");
         ditutext.setText(map.get("District")+"");
@@ -725,6 +728,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
 
     @Subscriber(tag = "requsetPermiss")
     public void requestSuccess(int requestCode){
+        initData();
         if (requestCode == 100){
             Gaode_dinwei gaode_dinwei=new Gaode_dinwei(this,getActivity());
         }

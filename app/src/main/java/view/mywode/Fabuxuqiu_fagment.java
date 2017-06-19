@@ -1,6 +1,7 @@
 package view.mywode;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,11 +9,14 @@ import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.deguan.xuelema.androidapp.R;
+import com.deguan.xuelema.androidapp.UserxinxiActivty;
+import com.deguan.xuelema.androidapp.Xuqiuxiangx;
 import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
 import com.deguan.xuelema.androidapp.viewimpl.SimilarXuqiuView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -68,6 +72,20 @@ public class Fabuxuqiu_fagment extends Fragment implements
         //需求详细信息展示
         demand_init=new Demand(this);
         demand_init.getTuijianDemand_list(0,0,null,null,null,null,null,null,getContext(),null);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity(), Xuqiuxiangx.class);
+                intent.putExtra("user_id",listmap.get(position).getId());
+                intent.putExtra("fee",listmap.get(position).getFee());
+                intent.putExtra("publisher_id",listmap.get(position).getPublisher_id());
+//                Intent intent = new Intent(getActivity(), UserxinxiActivty.class);
+////                    intent.putExtra("user_id", uid);
+//                intent.putExtra("head_image",listmap.get(position).getPublisher_headimg());
+//                intent.putExtra("user_id",listmap.get(position).getPublisher_id());
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

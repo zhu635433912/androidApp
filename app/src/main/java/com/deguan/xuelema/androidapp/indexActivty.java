@@ -30,6 +30,7 @@ import android.widget.TextView;
 import com.deguan.xuelema.androidapp.huanxin.HuihuaList;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
+import com.hyphenate.chat.EMClient;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -97,12 +98,20 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
     private LinearLayout jinxinzhong;
     private LinearLayout daipingjia;
     private ImageView chatImage;
+    private int number = 0;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myindex);
         EventBus.getDefault().register(this);
-
+//        number = EMClient.getInstance().chatManager().getConversation(User_id.getUsername()).getUnreadMsgCount();
 //        Fade fade = (Fade) TransitionInflater.from(this).inflateTransition(R.transition.activity_hold);
 //        getWindow().setEnterTransition(fade);
 //
@@ -148,7 +157,11 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
         hostimaview = (ImageView) findViewById(R.id.hostimaview);
         wodegerxx= (ImageView) findViewById(R.id.wodegerxx);
         wod= (TextView) findViewById(R.id.wod);
-
+        if (number != 0){
+            chatImage.setImageResource(R.mipmap.chat_icon_new);
+        }else {
+            chatImage.setImageResource(R.mipmap.chat_icon);
+        }
         wodegerxx.setBackgroundResource(R.drawable.hly48);
         wod.setTextColor(Color.parseColor("#f7e61c"));
 

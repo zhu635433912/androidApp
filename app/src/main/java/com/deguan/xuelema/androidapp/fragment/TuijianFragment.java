@@ -24,6 +24,9 @@ import java.util.Map;
 
 import modle.Adapter.TuijianAdapter;
 
+/**
+ * 推荐
+ */
 @EFragment(R.layout.fragment_tuijian)
 public class TuijianFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener, TuijianView{
 

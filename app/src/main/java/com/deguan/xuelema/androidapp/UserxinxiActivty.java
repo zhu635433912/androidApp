@@ -23,8 +23,12 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.huanxin.HuihuaActivity;
 import com.deguan.xuelema.androidapp.init.Bitmap_init;
+import com.deguan.xuelema.androidapp.init.Ordercontent_init;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.deguan.xuelema.androidapp.viewimpl.Baseinit;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
@@ -59,7 +63,7 @@ import static android.R.attr.alpha;
  * 老师个人信息
  */
 
-public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetailed,View.OnClickListener{
+public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetailed,View.OnClickListener,Baseinit {
     private TextView Requiname;
     private TextView Requitext;
     private TextView Teachergerjianjie;
@@ -131,6 +135,10 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         //加载数据
         Teacher_init teacher=new Teacher();
         teacher.Get_Teacher_detailed(id,Requir_id,this,0);
+
+        //获取成交率
+        Getdata getdata=new Getdata();
+        getdata.getdelt_info(Requir_id,this);
 
         //加载课程数据
         Increase_course increaseCourse=new Increase_course();
@@ -228,6 +236,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
             case R.id.gerxxxuexiquan:
                 //跳转成交率
                 Intent intent = new Intent(UserxinxiActivty.this, Closing.class);
+                intent.putExtra("Requir_id",Requir_id+"");
                 startActivity(intent);
                 break;
             case R.id.gerjianjie:
@@ -342,4 +351,8 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         return bm;
     }
 
+    @Override
+    public void upcontent(Map<String,Object> map) {
+        gerxxxuexiquan.setText(map.get("comp_rate")+"");
+    }
 }

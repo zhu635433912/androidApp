@@ -6,11 +6,17 @@ import android.util.Log;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
+import com.deguan.xuelema.androidapp.viewimpl.Baseinit;
+import com.deguan.xuelema.androidapp.viewimpl.CashListView;
+import com.deguan.xuelema.androidapp.viewimpl.CashView;
+import com.deguan.xuelema.androidapp.viewimpl.TurnoverView;
+import com.deguan.xuelema.androidapp.viewimpl.UpReportView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import modle.JieYse.ContentModle;
 import modle.JieYse.Courses_Modle;
@@ -91,6 +97,7 @@ public class Getdata {
             }
         });
     }
+
     //获取现金卷
     public void getmianfofee(int uid, final Requirdetailed requirdetailed){
         final Call<User_Modle> call=data.getminfofee(uid);
@@ -225,5 +232,114 @@ public class Getdata {
         });
 
     }
+    //提现
+    public void getCash(int uid , String bank_name, String back_number, int type, float fee, final CashView cashView){
+        Call<User_Modle> call = data.getcash(uid,bank_name,back_number,type,fee);
+        call.enqueue(new Callback<User_Modle>() {
+            @Override
+            public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    Map<String,Object> map=new HashMap<String, Object>();
+//                    map=response.body().getContent();
+//                    Log.e("aa",map.get("mobile")+"获取个人资料成功"+map.get("id"));
+//                    requirdetailed.Updatecontent(map);
+                    cashView.successCash(response.body().getErrmsg());
+                }else {
+                    cashView.failCash(response.body().getErrmsg());
+                }
+            }
 
+            @Override
+            public void onFailure(Call<User_Modle> call, Throwable t) {
+                cashView.failCash("网络错误");
+            }
+        });
+    }
+
+    public void getCashList(int uid, int page, final CashListView cashListView ){
+        Call<ContentModle> call = data.getcashList(uid,page);
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    List<Map<String,Object>> map=new ArrayList<Map<String, Object>>();
+                    map=response.body().getContent();
+                    Log.e("aa","获取个人资料成功");
+                    cashListView.successCashList(map);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                Log.e("aa","获取个人资料异常错误");
+                cashListView.failCashList();
+            }
+        });
+    }
+    public void upReport(int uid, String content, final UpReportView upReportView){
+        Call<User_Modle> call  = data.upReport(uid,content);
+        call.enqueue(new Callback<User_Modle>() {
+            @Override
+            public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    Log.e("aa","获取个人资料成功");
+                    upReportView.successUpReport("举报成功");
+                }else {
+                    upReportView.successUpReport("举报失败");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User_Modle> call, Throwable t) {
+                upReportView.failUpReport("网络错误");
+            }
+        });
+    }
+
+
+    //获取成交率
+    public void getdelt_info(int id, final Baseinit baseinit){
+        Call<User_Modle> call=data.getdea_info(id);
+        call.enqueue(new Callback<User_Modle>() {
+            @Override
+            public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {
+                if (response.body().getError().equals("ok")){
+                    Map<String,Object> map=new HashMap<String, Object>();
+                    map=response.body().getContent();
+                    baseinit.upcontent(map);
+                }else {
+                    Log.e("aa","获取成交率失败"+response.body().getErrmsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User_Modle> call, Throwable t) {
+                Log.e("aa","获取成交率异常错误");
+            }
+        });
+    }
+
+
+    //获取成交率
+    public void getTurnoverData(int teacher_id, int page, final TurnoverView turnoverView){
+        Call<ContentModle> call = data.getTurnover(teacher_id,page);
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                if (response.body().getError().equals("ok")){
+                    turnoverView.successTurnover(response.body().getContent());
+                }else {
+                    turnoverView.failTurnover("获取失败");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                turnoverView.failTurnover("网络错误");
+            }
+        });
+    }
 }

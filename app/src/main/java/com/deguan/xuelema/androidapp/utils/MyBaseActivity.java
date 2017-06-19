@@ -5,13 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.deguan.xuelema.androidapp.R;
+import com.zhy.autolayout.AutoLayoutActivity;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 
 @EActivity(R.layout.activity_base)
-public class MyBaseActivity extends AppCompatActivity {
+public class MyBaseActivity extends AutoLayoutActivity {
 
     @AfterInject
     public void before(){

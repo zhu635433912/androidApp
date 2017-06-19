@@ -40,6 +40,7 @@ import com.deguan.xuelema.androidapp.huanxin.HuihuaList;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.viewimpl.MyPublishView;
+import com.hyphenate.chat.EMClient;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -113,6 +114,13 @@ public class Student_Activty extends AutoLayoutActivity implements View.OnClickL
 //    private TextView tuijianjiaoshi;
     private int TAGE_IRONG=0;
     private ImageView chatImage;
+    private int number = 0;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -148,8 +156,13 @@ public class Student_Activty extends AutoLayoutActivity implements View.OnClickL
 
         wodegerxxstudent.setBackgroundResource(R.drawable.hly48);
         wodegerxxstudenttext.setTextColor(Color.parseColor("#f7e61c"));
+//        number = EMClient.getInstance().chatManager().getConversation(User_id.getUsername()).getUnreadMsgCount();
 
-
+        if (number != 0){
+            chatImage.setImageResource(R.mipmap.chat_icon_new);
+        }else {
+            chatImage.setImageResource(R.mipmap.chat_icon);
+        }
         xuesshuax.bringToFront();
         studentwodeqianbao.bringToFront();
         stidentshezhiimabt.bringToFront();
