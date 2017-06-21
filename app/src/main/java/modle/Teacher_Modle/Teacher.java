@@ -164,6 +164,86 @@ public class Teacher implements Teacher_init {
         });
         return null;
     }
+
+    /*
+       教师课程封面更新
+        */
+    @Override
+    public Map<String, Object> Teacher_updateSubjectBg(int uid,String others) {
+        Call<Demtest> call=teacher_http.getsubjectBackgroud(uid,others);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                Log.e("aa","error"+error);
+                if (error.equals("ok")){
+                    Log.e("aa","更新教师资料成功");
+                }else {
+                    String errmsg=response.body().getErrmsg();
+                    Log.e("aa","更新教师资料错误="+errmsg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                Log.e("aa","更新教师资料异常错误="+t.toString());
+            }
+        });
+        return null;
+    }
+    /*
+      教师资料更新
+       */
+    @Override
+    public Map<String, Object> Teacher_update4(int uid,String others) {
+        Call<Demtest> call=teacher_http.getTeachergenxin4(uid,others);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                Log.e("aa","error"+error);
+                if (error.equals("ok")){
+                    Log.e("aa","更新教师资料成功");
+                }else {
+                    String errmsg=response.body().getErrmsg();
+                    Log.e("aa","更新教师资料错误="+errmsg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                Log.e("aa","更新教师资料异常错误="+t.toString());
+            }
+        });
+        return null;
+    }
+
+    /*
+  教师资料更新
+   */
+    @Override
+    public Map<String, Object> Teacher_update3(int uid,String others) {
+        Call<Demtest> call=teacher_http.getTeachergenxin3(uid,others);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                Log.e("aa","error"+error);
+                if (error.equals("ok")){
+                    Log.e("aa","更新教师资料成功");
+                }else {
+                    String errmsg=response.body().getErrmsg();
+                    Log.e("aa","更新教师资料错误="+errmsg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                Log.e("aa","更新教师资料异常错误="+t.toString());
+            }
+        });
+        return null;
+    }
     /*
        教师资料更新
         */

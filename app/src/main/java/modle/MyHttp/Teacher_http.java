@@ -42,6 +42,17 @@ public interface Teacher_http {
     @POST("index.php?s=/Service/Teacher/update_information")
     Call<Demtest> getTeachergenxin2(@Query("uid") int uid,@Query("others_2") String others_2);
     /*
+  教师资料更新荣誉证书
+   */
+    @POST("index.php?s=/Service/Teacher/update_information")
+    Call<Demtest> getTeachergenxin3(@Query("uid") int uid,@Query("others_3") String others_3);
+    /*
+  教师资料更新荣誉证书
+   */
+    @POST("index.php?s=/Service/Teacher/update_information")
+    Call<Demtest> getTeachergenxin4(@Query("uid") int uid,@Query("others_4") String others_4);
+
+    /*
     教师列表显示状态更改
      */
     @POST("index.php?s=/Service/Teacher/update_status1")
@@ -98,5 +109,6 @@ Call<TuijianListEntity> gettuijianjiaoshi();
     @POST("index.php?s=/Service/Teacher/get_teacher_comment")
     Call<ContentModle> getEvluation(@Query("teacher_id") int teacher_id);
 
-
+    @POST("index.php?s=/Service/Teacher/update_information")
+    Call<Demtest> getsubjectBackgroud(@Query("uid") int uid,@Query("class_img") String class_img);
 }

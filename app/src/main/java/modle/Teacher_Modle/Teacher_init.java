@@ -40,6 +40,10 @@ public interface Teacher_init {
      */
     public Map<String,Object> Teacher_update(int uid,String others);
     public Map<String,Object> Teacher_update2(int uid,String others);
+    public Map<String,Object> Teacher_update3(int uid,String others);
+    public Map<String,Object> Teacher_update4(int uid,String others);
+    public Map<String,Object> Teacher_updateSubjectBg(int uid,String class_img);
+
     /**
      * 教师列表显示状态更改
      * uid    用户id
@@ -88,4 +92,7 @@ public interface Teacher_init {
     */
     public void setEvaluation_Teacher(int uid,Student_init student_init);
 
+
+    //更新教师课程封面
+//    public void setSubjectBackgroud(int uid,)
 }

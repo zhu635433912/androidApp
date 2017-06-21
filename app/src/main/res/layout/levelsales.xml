@@ -17,11 +17,12 @@
         android:layout_width="20px"
         android:layout_height="30px" />
     <TextView
+        android:id="@+id/myleve_name"
         android:textSize="35px"
         android:layout_marginTop="20px"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="一级分销"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -55,7 +56,7 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:textSize="80px"
-            android:text="25 191"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -64,7 +65,7 @@
             android:layout_marginEnd="10px"
             android:layout_below="@+id/yijifenxiaofee"
             android:layout_alignEnd="@+id/yijifenxiaofee"
-            android:text="共完成了1120单"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -74,15 +75,17 @@
             android:layout_marginEnd="40px"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:text="111人"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
-<ListView
+<com.handmark.pulltorefresh.library.PullToRefreshListView
+    android:layout_marginTop="50px"
+    android:id="@+id/myfenxiaolistview"
     android:layout_below="@+id/yijifenxiaolayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
-</ListView>
+</com.handmark.pulltorefresh.library.PullToRefreshListView>
 </RelativeLayout>

@@ -22,7 +22,7 @@ public interface Demand_http {
      */
     @POST("index.php?s=/Service/Requirement/gets_requirement")
     Call<ContentModle> getDemandlist(@Query("uid") int uid, @Query("filter_type") int filter_type, @Query("filter_id") int filter_id, @Query("start_time") String start_time,
-                                     @Query("end_time") int end_time, @Query("page") int page);
+                                     @Query("end_time") int end_time, @Query("page") int page,@Query("lat")double lat,@Query("lng")double lng);
     /*
     获取单一需求
      */

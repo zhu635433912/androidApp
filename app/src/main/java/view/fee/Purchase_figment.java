@@ -98,7 +98,7 @@ public class Purchase_figment extends Fragment implements View.OnClickListener {
                                     int uid=Integer.parseInt(User_id.getUid());
                                     Order_init order_init=new Order();
                                     //创建订单
-                                    order_init.Establish_Order(uid,jiaoshiid,739,fee,i,Integer.parseInt(course_id),0);
+                                    order_init.Establish_Order(uid,jiaoshiid,739,fee,i,Integer.parseInt(course_id),Integer.parseInt(grade_id));
                                     Toast.makeText(getActivity(),"购买课程成功",Toast.LENGTH_SHORT).show();
                                     Intent intent=new Intent(getActivity(), Student_Activty.class);
                                     startActivity(intent);

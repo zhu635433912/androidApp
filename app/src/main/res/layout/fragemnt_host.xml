@@ -136,6 +136,7 @@
             android:dividerHeight="40px"
             android:divider="#e0eaf1"
             android:id="@+id/list1"
+            android:scrollbars="none"
             android:layout_width="650px"
             android:layout_height="750px">
         </com.handmark.pulltorefresh.library.PullToRefreshListView>

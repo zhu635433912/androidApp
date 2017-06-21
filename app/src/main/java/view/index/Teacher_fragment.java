@@ -64,6 +64,7 @@ import modle.Gaode.Gaode_dinwei;
 import modle.Teacher_Modle.Teacher;
 import modle.Teacher_Modle.Teacher_init;
 import modle.toos.MyListview;
+import modle.user_Modle.User_Realization;
 import modle.user_ziliao.User_id;
 
 /**
@@ -157,6 +158,8 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
     private Teacher_init t;
     private TextView otherTv;
     private ImageButton searchBtn;
+    private User_Realization user_init;
+    private Gaode_dinwei gaode_dinwei;
 
     @Override
     public void onResume() {
@@ -351,14 +354,20 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
         });
         //动态申请权限
 
-        if(ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
+        if(ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED
+             ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.READ_PHONE_STATE)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED
+                ) {
             PermissionGen.with(getActivity())
                     .addRequestCode(100)
                     .permissions(
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.ACCESS_COARSE_LOCATION,
                             Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.READ_PHONE_STATE,
                             Manifest.permission.CAMERA
                     )
@@ -366,10 +375,92 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
 //
         }else{
 //  定位
-            Gaode_dinwei gaode_dinwei=new Gaode_dinwei(this,getActivity());
-            initData();
+            if (gaode_dinwei == null)
+                gaode_dinwei = new Gaode_dinwei(this,getActivity());
         }
 
+        //动态申请权限
+
+        if(ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.READ_PHONE_STATE)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED
+                ) {
+            PermissionGen.with(getActivity())
+                    .addRequestCode(100)
+                    .permissions(
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_PHONE_STATE,
+                            Manifest.permission.CAMERA
+                    )
+                    .request();
+//
+        }else{
+//  定位
+            if (gaode_dinwei == null)
+                gaode_dinwei = new Gaode_dinwei(this,getActivity());
+        }
+        //动态申请权限
+
+        if(ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.READ_PHONE_STATE)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED
+                ) {
+            PermissionGen.with(getActivity())
+                    .addRequestCode(100)
+                    .permissions(
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_PHONE_STATE,
+                            Manifest.permission.CAMERA
+                    )
+                    .request();
+//
+        }else{
+//  定位
+            if (gaode_dinwei == null)
+                gaode_dinwei = new Gaode_dinwei(this,getActivity());
+        }
+        //动态申请权限
+
+        if(ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.READ_PHONE_STATE)!= PackageManager.PERMISSION_GRANTED
+                ||   ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED
+                ) {
+            PermissionGen.with(getActivity())
+                    .addRequestCode(100)
+                    .permissions(
+                            Manifest.permission.ACCESS_COARSE_LOCATION,
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_PHONE_STATE,
+                            Manifest.permission.CAMERA
+                    )
+                    .request();
+//
+        }else{
+//  定位
+            if (gaode_dinwei == null)
+            gaode_dinwei = new Gaode_dinwei(this,getActivity());
+        }
+        initData();
+//        if (role == 2){
+//            paixuBtn.setVisibility(View.GONE);
+//        }
         myconteol_init=new Mycontrol(this);
         return view;
     }
@@ -677,12 +768,19 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
         lat= (double) map.get("lat");
         lng= (double) map.get("lng");
         ditutext.setText(map.get("District")+"");
+        if (user_init !=null){
+
+        }else {
+            user_init = new User_Realization();
+            user_init.setlan_lng(id, lat,lng);
+        }
+
         EventBus.getDefault().post(map.get("District")+"","status");
         if (role==1) {
 
             t.Get_Teacher_list(id, role, lat, lng, listView, getActivity(),0, "", 0, 0, 0, 3, this,page);
         }else {
-            demand_init.getDemand_list(id,role,0,0,"2016-08-10",0,page,null,null,this);
+            demand_init.getDemand_list(id,role,0,0,"2016-08-10",0,page,lat,lng,null,null,this);
         }
 
     }
@@ -730,7 +828,8 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
     public void requestSuccess(int requestCode){
         initData();
         if (requestCode == 100){
-            Gaode_dinwei gaode_dinwei=new Gaode_dinwei(this,getActivity());
+            if (gaode_dinwei == null)
+                gaode_dinwei = new Gaode_dinwei(this,getActivity());
         }
     }
 
@@ -744,7 +843,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
     public void onPullDownToRefresh(PullToRefreshBase refreshView) {
         page = 1;
         if (role == 2){
-            demand_init.getDemand_list(id,role,0,0,"2016-08-10",0,page,null,null,this);
+            demand_init.getDemand_list(id,role,0,0,"2016-08-10",0,page,lat,lng,null,null,this);
         }else if (role == 1){
             t.Get_Teacher_list(id, role, lat, lng, listView, getActivity(),0, "", 0, 0, 0, 3, this,page);
         }
@@ -754,7 +853,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
     public void onPullUpToRefresh(PullToRefreshBase refreshView) {
         page++;
         if (role == 2) {
-            demand_init.getDemand_list(id, role, 0, 0, "2016-08-10", 0, page, null, null, this);
+            demand_init.getDemand_list(id, role, 0, 0, "2016-08-10", 0, page, lat,lng,null, null, this);
         }else if (role == 1){
             if (teachers.size() < 19){
                         new Thread(new Runnable() {
@@ -797,6 +896,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
             entity.setDistance((String) maps.get(i).get("distance"));
             entity.setFee(String.valueOf(maps.get(i).get("fee")));
             entity.setGrade_name((String)maps.get(i).get("grade_name"));
+
             lists.add(entity);
         }
         DbUtil.getSession().getXuqiuEntityDao().insertOrReplaceInTx(lists);
@@ -831,6 +931,12 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
 //            entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
                 entity.setDistance((String) maps.get(i).get("distance"));
                 entity.setFee(String.valueOf(maps.get(i).get("fee")));
+                List<Map<String,Object>> listmap = ((List<Map<String,Object>>)maps.get(i).get("information_temp"));
+                String course_name = "";
+                for (int j = 0; j < listmap.size(); j++) {
+                    course_name = course_name + listmap.get(j).get("course_name")+"  ";
+                }
+                entity.setStatus2(course_name);
 //            entity.setGrade_name((String)maps.get(i).get("grade_name"));
                 lists.add(entity);
             }

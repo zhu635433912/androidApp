@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -139,6 +140,20 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         demand_init.getDemand_danyi(id,dindan,this);
 //        demand_init.getDemand_list(user_id,Integer.parseInt(User_id.getRole()),filter_type,filter_id,"2016-08-10",0,1,null,null,this);
         xuqiudianh.setOnClickListener(this);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(Xuqiuxiangx.this, Xuqiuxiangx.class);
+                intent.putExtra("user_id",datas.get(position).getId());
+                intent.putExtra("fee",datas.get(position).getFee());
+                intent.putExtra("publisher_id",datas.get(position).getPublisher_id());
+//                Intent intent = new Intent(getActivity(), UserxinxiActivty.class);
+////                    intent.putExtra("user_id", uid);
+//                intent.putExtra("head_image",listmap.get(position).getPublisher_headimg());
+//                intent.putExtra("user_id",listmap.get(position).getPublisher_id());
+                startActivity(intent);
+            }
+        });
     }
 
 

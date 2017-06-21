@@ -376,6 +376,28 @@ public class User_Realization implements User_init {
             }
         });
     }
+    //更新经纬度
+    @Override
+    public void setlan_lng(int uid, double lat, double lng) {
+        Call<Demtest> call=myOkhttp.setlat_lng(uid,lat,lng);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")) {
+                    Log.e("aa", "用户资料位置更新成功");
+                }else {
+                    String errmsg=response.body().getErrmsg();
+                    Log.e("aa","更新用户位置资料错误="+errmsg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                Log.e("aa","获取用户位置资料异常错误="+t.toString());
+            }
+        });
+    }
 
     //上传图片
     @Override
@@ -446,8 +468,8 @@ public class User_Realization implements User_init {
         newOpts.inJustDecodeBounds = false;
         int w = newOpts.outWidth;
         int h = newOpts.outHeight;
-        float hh = 100f;//
-        float ww = 80f;//
+        float hh = 300f;//
+        float ww = 240f;//
         int be = 1;
         if (w > h && w > ww) {
             be = (int) (newOpts.outWidth / ww);
@@ -458,7 +480,7 @@ public class User_Realization implements User_init {
             be = 1;
         newOpts.inSampleSize = be;//设置采样率
 
-        newOpts.inPreferredConfig = Bitmap.Config.ARGB_4444;//该模式是默认的,可不设
+        newOpts.inPreferredConfig = Bitmap.Config.ARGB_8888;//该模式是默认的,可不设
         newOpts.inPurgeable = true;// 同时设置才会有效
         newOpts.inInputShareable = true;//。当系统内存不够时候图片自动被回收
 

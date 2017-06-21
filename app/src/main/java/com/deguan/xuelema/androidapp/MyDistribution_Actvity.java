@@ -5,11 +5,16 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.viewimpl.CashListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,13 +25,20 @@ import modle.user_ziliao.User_id;
  * 一级二级分销
  */
 
-public class MyDistribution_Actvity extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed {
+public class MyDistribution_Actvity extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed,PullToRefreshListView.OnRefreshListener2 ,CashListView {
     private RelativeLayout fenxiaofanhui;
     Getdata getdata;
     private TextView zongordet;
     private TextView zongrogin;
     int uid;
     private TextView yijifenxiaofee;
+    private TextView myleve_name;
+    private PullToRefreshListView pullToRefreshListView;
+    private int level;
+    private int page=1;
+    private List<Map<String,Object>> listmap=new ArrayList<>();
+    private SimpleAdapter simpleAdapter;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,12 +48,25 @@ public class MyDistribution_Actvity extends AutoLayoutActivity implements View.O
         yijifenxiaofee= (TextView) findViewById(R.id.yijifenxiaofee);
         zongordet= (TextView) findViewById(R.id.zongordet);
         zongrogin= (TextView) findViewById(R.id.zongrogin);
-
-        int level=Integer.parseInt(getIntent().getStringExtra("level"));
+        myleve_name= (TextView) findViewById(R.id.myleve_name);
+        pullToRefreshListView= (PullToRefreshListView) findViewById(R.id.myfenxiaolistview);
+        level=Integer.parseInt(getIntent().getStringExtra("level"));
         uid=Integer.parseInt(User_id.getUid());
+
+        if (level==1){
+            myleve_name.setText("一级分销");
+        }else {
+            myleve_name.setText("二级分销");
+        }
+
+        simpleAdapter=new SimpleAdapter(this,listmap,R.layout.distibution_itme,new String[]{"level","fee"},new int[]{R.id.fenxiaostatus,R.id.fenxiaofee});
+        pullToRefreshListView.setMode(PullToRefreshBase.Mode.BOTH);
+        pullToRefreshListView.setOnRefreshListener(this);
+        pullToRefreshListView.setAdapter(simpleAdapter);
+
         getdata=new Getdata();
         getdata.getinfo(uid,level,this);
-
+        getdata.getCashList(uid,page,this);
 
         fenxiaofanhui.bringToFront();
         fenxiaofanhui.setOnClickListener(this);
@@ -56,7 +81,6 @@ public class MyDistribution_Actvity extends AutoLayoutActivity implements View.O
                 MyDistribution_Actvity.this.finish();
                 break;
         }
-
     }
 
     @Override
@@ -72,6 +96,34 @@ public class MyDistribution_Actvity extends AutoLayoutActivity implements View.O
 
     @Override
     public void Updatefee(List<Map<String, Object>> listmap) {
+
+    }
+
+    @Override
+    public void onPullDownToRefresh(PullToRefreshBase refreshView) {
+        page=1;
+        getdata.getCashList(uid,page,this);
+
+    }
+
+    @Override
+    public void onPullUpToRefresh(PullToRefreshBase refreshView) {
+        page++;
+        getdata.getCashList(uid,page,this);
+    }
+
+    @Override
+    public void successCashList(List<Map<String, Object>> map) {
+        pullToRefreshListView.onRefreshComplete();
+        if (page==1) {
+            listmap.clear();
+        }
+        listmap.addAll(map);
+        simpleAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void failCashList() {
 
     }
 }

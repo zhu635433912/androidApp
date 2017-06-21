@@ -65,7 +65,7 @@ public class KechengAdapter extends BaseAdapter{
         }
                     String course_id=listmap.get(position).get("course_name").toString();
                     madbt.kechengzhongle.setText(course_id);
-//                madbt.kechengType.setText(listmap.get(position).get("service_type_txt")+"");
+                madbt.kechengType.setText(listmap.get(position).get("grade_name")+"");
         madbt.kechengType.setVisibility(View.GONE);
                 madbt.gerxxyiduiyi.setText(listmap.get(position).get("service_type_txt")+"");
 //        madbt.gerxxyiduiyi.setVisibility(View.GONE);

@@ -56,11 +56,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
-            android:background="@drawable/add11"
             android:id="@+id/gerxxTob"
+            android:background="@drawable/texttexiao"
             android:layout_centerHorizontal="true"
             android:layout_width="705px"
             android:layout_height="400px">
+
+            <ImageView
+                android:scaleType="fitXY"
+                android:id="@+id/curr_backe"
+                android:src="@drawable/add11"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
          <modle.toos.CircleImageView
          android:id="@+id/gerxxtoux"
          android:layout_marginTop="58px"
@@ -149,8 +156,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
-
-
         <RelativeLayout
             android:id="@+id/gerxxyiduiyi"
             android:layout_marginTop="20px"

@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -86,7 +87,8 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private AVLoadingIndicatorView jiaoyishuax;
     private String userHeadUrl = "";
     private TextView jubaoTv;
-
+    private ImageView iamgeview;
+    private RelativeLayout gerxxTob;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,7 +111,10 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         imageButton2= (ImageButton) findViewById(R.id.imageButton2);
         gerxxtoux= (CircleImageView) findViewById(R.id.gerxxtoux);
         jiaoyishuax= (AVLoadingIndicatorView) findViewById(R.id.jiaoyishuax);
+        iamgeview= (ImageView) findViewById(R.id.curr_backe);
+        gerxxTob= (RelativeLayout) findViewById(R.id.gerxxTob);
 
+        gerxxTob.bringToFront();
         jiaoyishuax.bringToFront();
         gerxxxuexiquan.bringToFront();
         jiaoyi.bringToFront();
@@ -168,6 +173,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 bundle.putInt("unvisit_fee",unvisit_fee);
                 bundle.putInt("visit_fee",visit_fee);
                 bundle.putInt("Requir_id",Requir_id);
+                bundle.putString("grade_id",grade_id);
                 bundle.putString("course_id",course_id);
                 bundle.putString("course_name",course_name);
                 purchase_fagment.setArguments(bundle);
@@ -203,6 +209,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
             mobile= (String) map.get("mobile");
             String order_finish= (String) map.get("order_finish");
             String order_working= (String) map.get("order_working");
+        Glide.with(this).load((String)map.get("class_img")).into(iamgeview);
             gerxues.setText(order_working);
          dindan.setText(order_finish);
         Requitext.setText(resume);

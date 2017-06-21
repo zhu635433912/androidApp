@@ -2,10 +2,12 @@ package com.deguan.xuelema.androidapp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -51,12 +53,13 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
     private TextView fuwufan;
     private RelativeLayout ycang;
     private String status;
-    private TextView statuse;
+    private TextView statuse,telTv;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dindanxxi);
         User_id.getInstance().addActivity(this);
+        telTv = (TextView) findViewById(R.id.dianhuahaoma);
         name = (TextView) findViewById(R.id.name);
         statuse= (TextView) findViewById(R.id.statuse);
         order_status = (TextView) findViewById(R.id.kechengzhuangtai);
@@ -116,6 +119,17 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         Order_init order_init = new Order();
         order_init.getOrder_danyilist(uid, order_id, this);
 
+        telTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //拨号
+                Log.e("aa", "拨号成功");
+                Intent inte = new Intent(Intent.ACTION_DIAL);
+                inte.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                inte.setData(Uri.parse("tel:" + telTv.getText().toString()));
+                startActivity(inte);
+            }
+        });
 
     }
 
@@ -128,7 +142,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         String requirement_course = (String) map.get("requirement_course");
         String feae= (String) map.get("fee");
 
-
+        telTv.setText(Html.fromHtml("<u>"+(String)map.get("teacher_mobile")+""+"</u>"));
         fee=Integer.parseInt(feae);
         int duration=Integer.parseInt(map.get("duration").toString());
         kechengjieshu.setText("x"+duration+"节");

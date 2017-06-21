@@ -87,6 +87,7 @@ public class TeacherListAdapter extends ListBaseAdapter {
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
         Glide.with(context).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
         String dist = list.get(position).getDistance();
+        holder.stats.setText(""+list.get(position).getStatus2());
         int myDist = 0;
         if (!dist.equals("")) {
             myDist = Integer.parseInt(dist) / 1000;
@@ -139,12 +140,14 @@ public class TeacherListAdapter extends ListBaseAdapter {
             private ImageView haoping_num;//好评数
             private TextView haoping_numtext;//好评分
             private TextView nianji;
+            private TextView stats;
 
             public ViewHolder(View itemView) {
                 user_headimg = (ImageView) itemView.findViewById(R.id.lognhost);
                 nickname = (TextView) itemView.findViewById(R.id.text1);
                 service_type = (TextView) itemView.findViewById(R.id.text9);
                 fee = (TextView) itemView.findViewById(R.id.text3);
+                stats = (TextView) itemView.findViewById(R.id.text5);
                 speciality = (TextView) itemView.findViewById(R.id.text4);
                 username = (TextView) itemView.findViewById(R.id.text6);
                 distance = (TextView) itemView.findViewById(R.id.text7);

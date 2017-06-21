@@ -24,6 +24,7 @@ import android.widget.ToggleButton;
 import com.deguan.xuelema.androidapp.MainActivity;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.utils.APPConfig;
+import com.deguan.xuelema.androidapp.utils.PermissUtil;
 import com.deguan.xuelema.androidapp.utils.SharedPreferencesUtils;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
@@ -73,6 +74,7 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
 //        getWindow().setExitTransition(TransitionInflater.from(this).inflateTransition(R.transition.slide));
         inint();
 
+        PermissUtil.startPermiss(this);
         //从xml里取保存的账号
         sharedPreferences=getSharedPreferences("userxml",MODE_PRIVATE);
         String ksy=sharedPreferences.getString("username","no");

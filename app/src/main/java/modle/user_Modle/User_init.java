@@ -72,4 +72,7 @@ public interface User_init {
 
     public void setuserbitmap(File file,Student_init student_init);
 
+    public void setlan_lng(int uid,double lat,double lng);
+
+
 }

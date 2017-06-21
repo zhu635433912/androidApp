@@ -79,8 +79,8 @@ public class Demand implements Demand_init {
     获取需求列表
      */
     @Override
-    public List<Map<String, Object>> getDemand_list(int uid, final int role, int filter_type, int filter_id, final String start_time, int end_time, int page, final PullToRefreshListView listView, final Context context, final Student_init student_init) {
-        Call<ContentModle> call=demand_http.getDemandlist(uid,filter_type,filter_id,start_time,end_time,page);
+    public List<Map<String, Object>> getDemand_list(int uid, final int role, int filter_type, int filter_id, final String start_time, int end_time, int page, double lat,double lng,final PullToRefreshListView listView, final Context context, final Student_init student_init) {
+        Call<ContentModle> call=demand_http.getDemandlist(uid,filter_type,filter_id,start_time,end_time,page,lat,lng);
         call.enqueue(new Callback<ContentModle>() {
             @Override
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {

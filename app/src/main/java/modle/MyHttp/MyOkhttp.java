@@ -111,6 +111,12 @@ public interface MyOkhttp {
     @POST("index.php?s=/Service/Accounts/update_profile")
     Call<Demtest> setheadimg(@Query("id") int id, @Query("headimg") String headimg);
 
+    /*
+用户资料金纬度
+*/
+    @POST("index.php?s=/Service/Accounts/update_profile")
+    Call<Demtest> setlat_lng(@Query("id") int id, @Query("lat") double lat,@Query("lng") double lng);
+
 
     /**
      * 上传一张图片

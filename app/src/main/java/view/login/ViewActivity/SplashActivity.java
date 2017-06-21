@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 
 import com.deguan.xuelema.androidapp.MainActivity;
 import com.deguan.xuelema.androidapp.R;
+import com.deguan.xuelema.androidapp.utils.PermissUtil;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class SplashActivity extends AutoLayoutActivity implements View.OnClickLi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inde);
+        PermissUtil.startPermiss(this);
         //判断用户是否第一次进入
         sp = getSharedPreferences("ydy", MODE_PRIVATE);
         //判断记录是第一次就是"t",不是就是"1"
