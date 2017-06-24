@@ -160,7 +160,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         ImageView wechatRl = (ImageView) view.findViewById(R.id.feeweixzhifu);
         ImageView alpayRl = (ImageView) view.findViewById(R.id.feezhifubao);
         rechargePopwindow = new PopupWindow(view);
-        rechargePopwindow.setFocusable(true);
+        rechargePopwindow.setFocusable(false);
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         int height = wm.getDefaultDisplay().getHeight();
         int width = wm.getDefaultDisplay().getWidth();

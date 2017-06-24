@@ -15,12 +15,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
+        android:id="@+id/course_explain"
         android:textColor="#767676"
-        android:textSize="35px"
+        android:textSize="25px"
         android:layout_marginLeft="40px"
+        android:maxEms="14"
+        android:maxLines="1"
+        android:ellipsize="end"
         android:layout_toRightOf="@+id/kechengname"
         android:layout_alignBottom="@+id/kechengname"
-        android:text=""
+        android:text="课程说明111111111111e22222222222eeeeeeeee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -64,6 +68,7 @@
             android:id="@+id/xuessm"
             android:gravity="center"
             style="@style/text_flag_03"
+            android:textColor="#fd1245"
             android:text="学生上门" />
         </RelativeLayout>
         <RelativeLayout
@@ -73,8 +78,13 @@
         <TextView
             android:id="@+id/laoshism"
             android:gravity="center"
-            style="@style/text_flag_03"
-            android:text="助教上门" />
+            android:textSize= "30px"
+            android:background="@drawable/xuqiufabuitme"
+            android:layout_width="175px"
+            android:layout_height="50px"
+            android:layout_margin="10px"
+            android:textColor="#8b8b8b"
+            android:text="老师上门" />
         </RelativeLayout>
     </LinearLayout>
     <TextView
@@ -144,7 +154,7 @@
     <TextView
         android:id="@+id/zongfee"
         android:layout_marginLeft="10px"
-        android:layout_toEndOf="@+id/zonggongjine"
+        android:layout_toRightOf="@+id/zonggongjine"
         android:layout_alignBottom="@+id/zonggongjine"
         android:textSize="35px"
         android:text="00.00"

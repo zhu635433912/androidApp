@@ -22,7 +22,10 @@ import android.widget.ToggleButton;
 
 
 import com.deguan.xuelema.androidapp.MainActivity;
+import com.deguan.xuelema.androidapp.NewMainActivity_;
+//import com.deguan.xuelema.androidapp.New_StudentActivity_;
 import com.deguan.xuelema.androidapp.R;
+import com.deguan.xuelema.androidapp.SetUp;
 import com.deguan.xuelema.androidapp.utils.APPConfig;
 import com.deguan.xuelema.androidapp.utils.PermissUtil;
 import com.deguan.xuelema.androidapp.utils.SharedPreferencesUtils;
@@ -73,6 +76,38 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
         //过渡动画
 //        getWindow().setExitTransition(TransitionInflater.from(this).inflateTransition(R.transition.slide));
         inint();
+        DemoHelper.getInstance().logout(true,new EMCallBack() {
+
+            @Override
+            public void onSuccess() {
+//                runOnUiThread(new Runnable() {
+//                    public void run() {
+//                        pd.dismiss();
+//                        // show login screen
+//                        finish();
+////                        startActivity(new Intent(SetUp.this, LoginAcitivity.class));
+//                    }
+//                });
+            }
+
+            @Override
+            public void onProgress(int progress, String status) {
+
+            }
+
+            @Override
+            public void onError(int code, String message) {
+//                runOnUiThread(new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//                        // TODO Auto-generated method stub
+//                        pd.dismiss();
+//                        Toast.makeText(SetUp.this, "unbind devicetokens failed", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+            }
+        });
 
         PermissUtil.startPermiss(this);
         //从xml里取保存的账号
@@ -176,11 +211,14 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
 
     @Override
     public void loginture(Map<String,Object> map) {
-        intent=new Intent(LoginAcitivity.this,MainActivity.class);
+
+//        intent= New_StudentActivity_.intent(this).extra("id",id).extra("role",role).get();
+//                new Intent(LoginAcitivity.this,MainActivity.class);
         String role= (String) map.get("role");
         String id= (String) map.get("id");
-        intent.putExtra("id",id);
-        intent.putExtra("role",role);
+//        intent.putExtra("id",id);
+//        intent.putExtra("role",role);
+        intent= NewMainActivity_.intent(this).extra("id",id).extra("role",role).get();
         getUser_id().setRole(role);
         getUser_id().setUid(id);
         if (rememberBtn.isChecked()){
@@ -233,10 +271,10 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
                 // get user's info (this should be get from App's server or 3rd party service)
                 DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
 
-                Intent intent = new Intent(LoginAcitivity.this,
-                        MainActivity.class);
-                startActivity(intent);
-
+//                Intent intent = new Intent(LoginAcitivity.this,
+//                        MainActivity.class);
+//                startActivity(intent);
+                startActivity(NewMainActivity_.intent(LoginAcitivity.this).get());
                 finish();
             }
 

@@ -472,7 +472,7 @@ public class Teacher implements Teacher_init {
             @Override
             public void onResponse(Call<Demtest> call, Response<Demtest> response) {
                 String error=response.body().getError();
-                if (error.equals("ok")){
+                if (error.equals("no")){
                     Log.e("aa","更新教师个人签名成功");
                 }else {
                     Log.e("aa","更新教师个人签名失败");

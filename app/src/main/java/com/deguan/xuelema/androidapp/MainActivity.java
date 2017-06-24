@@ -1,20 +1,13 @@
 package com.deguan.xuelema.androidapp;
 
 
-import android.*;
 import android.app.ActivityOptions;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
-import android.transition.Explode;
-import android.transition.Fade;
-import android.transition.Slide;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -103,10 +96,9 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
          }
         new Getdata().getmobieke(User_id.getUsername(),this);
         Teacher_fragment teacher_fragment=new Teacher_fragment();
-        FragmentManager fragmentManager=getFragmentManager();
+        FragmentManager fragmentManager=getSupportFragmentManager();
         FragmentTransaction beginTransaction=fragmentManager.beginTransaction();
         beginTransaction.add(R.id.hostlineat,teacher_fragment);
-
         beginTransaction.commit();
 
 
@@ -152,8 +144,10 @@ public class MainActivity extends AutoLayoutActivity implements View.OnClickList
                     Intent intentc = new Intent(MainActivity.this, Student_Activty.class);
                     intentc.putExtra("user_id", ids);
                     intentc.putExtra("user_id", roles);
-//                    startActivity(intentc,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
                     startActivity(intentc);
+//                    startActivity(intentc, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+//                    startActivity(New_StudentActivity_.intent(MainActivity.this).extra("user_id", ids)
+//                    .extra("user_id", roles).get());
                 }else {
                     //跳转老师页面
                     Intent intenta = new Intent(MainActivity.this, indexActivty.class);

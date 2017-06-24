@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 
 
 import com.deguan.xuelema.androidapp.MainActivity;
+import com.deguan.xuelema.androidapp.NewMainActivity_;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.utils.PermissUtil;
 import com.zhy.autolayout.AutoLayoutActivity;
@@ -114,9 +115,10 @@ public class SplashActivity extends AutoLayoutActivity implements View.OnClickLi
                 String role = sp1.getString("role", "t");
                 String username = sp1.getString("username", "t");
                 String password = sp1.getString("password", "t");
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                intent.putExtra("id", id);
-                intent.putExtra("role", role);
+//                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+//                intent.putExtra("id", id);
+//                intent.putExtra("role", role);
+                Intent intent = NewMainActivity_.intent(this).extra("id",id).extra("role",role).get();
                 User_id.setRole(role);
                 User_id.setUid(id);
                 User_id.setPassword(password);

@@ -1,6 +1,7 @@
 package modle.Adapter;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,23 +51,13 @@ public class Order_StudionAdabt extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        Hode hode;
         if (convertView==null){
-            hode=new Hode();
             convertView=layoutInflater.inflate(R.layout.wodeorder_itme,null);
-            hode.studentlistname= (TextView) convertView.findViewById(R.id.studentlistname);
-            hode.xdsj= (TextView) convertView.findViewById(R.id.xdsj);
-            hode.nianji= (TextView) convertView.findViewById(R.id.nianji);
-            hode.yaoqiukemu= (TextView) convertView.findViewById(R.id.yaoqiukemu);
-            hode.keshifei= (TextView) convertView.findViewById(R.id.keshifei);
-            hode.studentkechengzhuangtai= (TextView) convertView.findViewById(R.id.studentkechengzhuangtai);
-            hode.kechengfee= (TextView) convertView.findViewById(R.id.kechengfee);
-            hode.kechengjieshua= (TextView) convertView.findViewById(R.id.kechengjieshua);
-            hode.orde_id= (TextView) convertView.findViewById(R.id.orde_id);
-            hode.querenshouhuo= (TextView) convertView.findViewById(R.id.querenshouhuo);
+            hode=new Hode(convertView);
             convertView.setTag(hode);
         }else {
-            convertView.getTag();
+            hode = (Hode) convertView.getTag();
         }
 
         //课时费
@@ -126,6 +117,19 @@ public class Order_StudionAdabt extends BaseAdapter {
         private TextView kechengjieshua;//课程节数
         private TextView orde_id;//订单id
         private TextView querenshouhuo;//付款状态
+
+        public Hode(View itemView){
+           studentlistname= (TextView) itemView.findViewById(R.id.studentlistname);
+           xdsj= (TextView) itemView.findViewById(R.id.xdsj);
+           nianji= (TextView) itemView.findViewById(R.id.nianji);
+           yaoqiukemu= (TextView) itemView.findViewById(R.id.yaoqiukemu);
+           keshifei= (TextView) itemView.findViewById(R.id.keshifei);
+           studentkechengzhuangtai= (TextView) itemView.findViewById(R.id.studentkechengzhuangtai);
+           kechengfee= (TextView) itemView.findViewById(R.id.kechengfee);
+           kechengjieshua= (TextView) itemView.findViewById(R.id.kechengjieshua);
+           orde_id= (TextView) itemView.findViewById(R.id.orde_id);
+           querenshouhuo= (TextView) itemView.findViewById(R.id.querenshouhuo);
+        }
 }
 
 

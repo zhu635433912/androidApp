@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.deguan.xuelema.androidapp.OrderTeacherActivity;
 import com.deguan.xuelema.androidapp.Order_details;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.init.Student_init;
@@ -48,7 +49,11 @@ public class ConductFragment extends BaseFragment implements PullToRefreshBase.O
         listView.setAdapter(studionAdabt);
         uid=Integer.parseInt(User_id.getUid());
         orderInit=new Order();
-        orderInit.getOrder_list(uid,0,2,1,null,null,this,0,3);
+        if (User_id.getRole().equals("1")) {
+            orderInit.getOrder_list(uid, 0, 2, 1, null, null, this, 0, 3);
+        }else {
+            orderInit.getOrder_list(uid, 1, 2, 1, null, null, this, 0, 3);
+        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -56,8 +61,13 @@ public class ConductFragment extends BaseFragment implements PullToRefreshBase.O
                 String status= (String) map.get("status");
                 String ida = (String) map.get("id");
                 String duration = (String) map.get("duration");
-
-                Intent intent = new Intent(getActivity(), Order_details.class);
+                Intent intent = null;
+                if (User_id.getRole().equals("1")) {
+                    intent = new Intent(getActivity(), Order_details.class);
+                }else {
+                    intent = new Intent(getActivity(), OrderTeacherActivity.class);
+                }
+//                Intent intent = new Intent(getActivity(), Order_details.class);
                 intent.putExtra("oredr_id", ida);
                 intent.putExtra("duration", duration);
                 intent.putExtra("status", status);

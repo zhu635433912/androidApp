@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:background="#e0eaf1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="400px">
 
     <RelativeLayout
         android:layout_marginTop="20px"
@@ -70,7 +70,7 @@
             android:layout_alignParentRight="true"
             android:textColor="#a0d9fe"
             android:textSize="40px"
-            android:text="价格"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView

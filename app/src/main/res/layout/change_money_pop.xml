@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/add08"
+        android:layout_width="750px"
+        android:layout_height="300px">
+
+
+        <TextView
+            android:id="@+id/change_tv"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="100px"
+            android:layout_alignParentLeft="true"
+            android:textSize="40px"
+            android:text="修改价格"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/change_edittv"
+            android:layout_marginTop="100px"
+            android:layout_marginLeft="40px"
+            android:layout_toRightOf="@+id/change_tv"
+            android:layout_width="match_parent"
+            android:layout_height="100px" />
+
+        <LinearLayout
+            android:id="@+id/change_line"
+            android:layout_marginTop="24px"
+            android:background="#e6e6e6"
+            android:layout_below="@+id/change_edittv"
+            android:layout_centerHorizontal="true"
+            android:layout_width="732px"
+            android:layout_height="1px"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+        <TextView
+            android:layout_marginBottom="34px"
+            android:layout_marginLeft="46px"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="取消"
+            android:id="@+id/change_back"
+            android:textColor="#b4b4b4"
+            android:textSize="35px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/change_sure"
+            android:textColor="#f8c968"
+            android:layout_marginBottom="34px"
+            android:layout_marginRight="46px"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:text="确定"
+            android:textSize="35px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</LinearLayout>

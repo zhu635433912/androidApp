@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="login_backget">#f7e61c</color>
     <color name="login_zitiyanse">#9b9b9b</color><!--字体颜色-->
+    <color name="home_tab_backgroud">#ffffff</color>
+    <color name="bottom_radio_checked_text">#f57e17</color>
+    <color name="bottom_radio_text">#ada7a7</color>
 </resources>

@@ -272,12 +272,12 @@
         "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_screen_content_include.xml"
     },
     {
-        "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ease_fragment_conversation_list.xml",
-        "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_fragment_conversation_list.xml"
-    },
-    {
         "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_list_menu_item_icon.xml",
         "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\layout\\abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ease_fragment_conversation_list.xml",
+        "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\bundles\\debug\\res\\layout\\ease_fragment_conversation_list.xml"
     },
     {
         "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\ease_conversation_item.xml",

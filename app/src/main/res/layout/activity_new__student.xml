@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="800px"
+        android:background="@drawable/studentback"
+        >
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:titleEnabled="false"
+            app:contentScrim="#9fe7f4"
+            app:statusBarScrim="#a2e6f2"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            >
+
+            <!--android:minHeight="?attr/actionBarSize"-->
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="120px"
+                app:layout_collapseMode="pin" />
+
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/new_student_tablayout"
+                app:tabTextColor="#8b8b8b"
+                android:layout_marginTop="20px"
+                app:tabIndicatorColor="#fd1245"
+                app:tabSelectedTextColor="#fd1245"
+                android:layout_width="match_parent"
+                android:layout_height="120px"
+                android:layout_gravity="bottom" />
+
+            <RelativeLayout
+                android:id="@+id/batahost"
+                android:layout_width="match_parent"
+                android:layout_height="800px"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/studentback">
+
+                <RelativeLayout
+                    android:id="@+id/studentwodeqianbao"
+                    android:layout_width="100px"
+                    android:layout_height="150px"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true" />
+
+                <RelativeLayout
+                    android:id="@+id/stidentshezhiimabt"
+                    android:layout_width="100px"
+                    android:layout_height="150px"
+                    android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/studentwodeqianbao" />
+
+                <ImageButton
+                    android:layout_width="44px"
+                    android:layout_height="44px"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="40px"
+                    android:layout_marginTop="64px"
+                    android:background="@drawable/hly20" />
+
+                <ImageButton
+                    android:layout_width="44px"
+                    android:layout_height="44px"
+                    android:layout_alignTop="@+id/stidentshezhiimabt"
+                    android:layout_marginRight="40px"
+                    android:layout_marginTop="65px"
+                    android:layout_toLeftOf="@+id/studentwodeqianbao"
+                    android:background="@drawable/hly17" />
+
+                <modle.toos.CircleImageView
+                    android:id="@+id/studenttouxiangimg"
+                    android:layout_width="220px"
+                    android:layout_height="220px"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="74px"
+                    android:src="@drawable/ox2" />
+
+                <TextView
+                    android:id="@+id/studentxxitexutview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/studenttouxiangimg"
+                    android:layout_marginRight="120px"
+                    android:layout_marginTop="55px"
+                    android:layout_toLeftOf="@+id/studenttouxiangimg"
+                    android:text="0"
+                    android:textColor="#8c9193"
+                    android:textSize="40px"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/studentxxitexutview"
+                    android:layout_marginRight="100px"
+                    android:layout_toLeftOf="@+id/studenttouxiangimg"
+                    android:text="消息"
+                    android:textColor="#6c7070"
+                    android:textSize="30px"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/studenthuihuatext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/studenttouxiangimg"
+                    android:layout_marginLeft="120px"
+                    android:layout_marginTop="55px"
+                    android:layout_toRightOf="@+id/studenttouxiangimg"
+                    android:text=""
+                    android:textColor="#6c7070"
+                    android:textSize="35px" />
+
+                <ImageView
+                    android:id="@+id/chat_icon"
+                    android:layout_width="80px"
+                    android:layout_height="100px"
+                    android:layout_below="@+id/studenthuihuatext"
+                    android:layout_marginLeft="95px"
+                    android:layout_toRightOf="@+id/studenttouxiangimg"
+                    android:src="@mipmap/chat_icon" />
+
+                <TextView
+                    android:id="@+id/huihua"
+                    android:layout_width="200px"
+                    android:layout_height="100px"
+                    android:layout_below="@+id/chat_icon"
+                    android:layout_marginLeft="45px"
+                    android:layout_toRightOf="@+id/studenttouxiangimg"
+                    android:gravity="center"
+                    android:paddingBottom="50px"
+                    android:text="聊天管理"
+                    android:textColor="#6c7070"
+                    android:textSize="35px" />
+
+                <TextView
+                    android:id="@+id/studentusernametext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/studenttouxiangimg"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="24px"
+                    android:textColor="#6c7070"
+                    android:textSize="50px" />
+
+                <TextView
+                    android:id="@+id/studentneirongtext"
+                    android:layout_width="600px"
+                    android:layout_height="60px"
+                    android:layout_below="@+id/studentusernametext"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10px"
+                    android:gravity="center"
+                    android:textColor="#6c7070"
+                    android:textSize="40px" />
+            </RelativeLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/new_student_viewpage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    </android.support.v4.view.ViewPager>
+
+</android.support.design.widget.CoordinatorLayout>

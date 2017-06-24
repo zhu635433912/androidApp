@@ -52,6 +52,8 @@ public class User_id extends Application {
     private static String username;
     private static String imageUrl;
     private static Context applicationContent;
+    private static double lat,lng;
+    private static String status;
 
 
     private Context appContext;
@@ -135,6 +137,20 @@ public class User_id extends Application {
             activity.finish();
         }
         System.exit(0);
+    }
+
+    public static double getLat(){return lat;}
+
+    public static void setLat(double lat){User_id.lat = lat;}
+
+    public static double getLng(){return lng;};
+
+    public static void setLng(double lng){User_id.lng = lng;}
+
+    public static String getStatus(){return status;}
+
+    public static void setStatus(String status){
+        User_id.status = status;
     }
 
     public static String getUsername() {

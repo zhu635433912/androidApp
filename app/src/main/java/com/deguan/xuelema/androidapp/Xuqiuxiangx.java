@@ -125,6 +125,8 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         id = Integer.parseInt(User_id.getUid());
         dindan = Integer.parseInt(uds);
         user_id=Integer.parseInt(publisher_id);
+        course_id = Integer.parseInt(getIntent().getStringExtra("course_id"));
+        grade_id = Integer.parseInt(getIntent().getStringExtra("grade_id"));
 
         Log.e("aa", "需求详细接收到需求编号为" + dindan + "发布者id为"+user_id+"金额为"+feeva);
 
@@ -144,9 +146,12 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(Xuqiuxiangx.this, Xuqiuxiangx.class);
-                intent.putExtra("user_id",datas.get(position).getId());
-                intent.putExtra("fee",datas.get(position).getFee());
-                intent.putExtra("publisher_id",datas.get(position).getPublisher_id());
+                intent.putExtra("user_id",datas.get(position-1).getId());
+                intent.putExtra("fee",datas.get(position-1).getFee());
+                intent.putExtra("publisher_id",datas.get(position-1).getPublisher_id());
+                intent.putExtra("course_id",datas.get(position-1).getCourse_id());
+                intent.putExtra("grade_id",datas.get(position-1).getGrade_id());
+
 //                Intent intent = new Intent(getActivity(), UserxinxiActivty.class);
 ////                    intent.putExtra("user_id", uid);
 //                intent.putExtra("head_image",listmap.get(position).getPublisher_headimg());
@@ -179,7 +184,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         String end = (String) map.get("end");
         course_id = Integer.parseInt((String)map.get("course_id"));
         grade_id = Integer.parseInt((String)map.get("grade_id"));
-        demand_init.getTuijianDemand_list(course_id,grade_id,null,null,null,null,null,listview,this,null);
+        demand_init.getTuijianDemand_list(course_id,grade_id,User_id.getLat()+"",""+User_id.getLng(),null,null,null,listview,this,null);
         String state = (String) map.get("state");
 
         diqu.setText(state+"");
@@ -241,7 +246,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Order_init order_init = new Order();
-                                order_init.CreateOrder(user_id,id,dindan,fee,Xuqiuxiangx.this);
+                                order_init.CreateOrder(user_id,id,dindan,fee,course_id,grade_id,Xuqiuxiangx.this);
                                 Intent intent=new Intent(Xuqiuxiangx.this,indexActivty.class);
                                 startActivity(intent);
                             }
@@ -302,7 +307,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
 
     @Override
     public void onRefresh(PullToRefreshBase refreshView) {
-        demand_init.getTuijianDemand_list(course_id,grade_id,null,null,null,null,null,listview,this,null);
+        demand_init.getTuijianDemand_list(course_id,grade_id,""+User_id.getLat(),""+User_id.getLng(),null,null,null,listview,this,null);
 //        demand_init.getDemand_list(user_id,Integer.parseInt(User_id.getRole()),filter_type,filter_id,"2016-08-10",0,1,null,null,this);
     }
 
@@ -334,6 +339,8 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
             entity.setDistance((String) maps.get(i).get("distance"));
             entity.setFee(String.valueOf(maps.get(i).get("fee")));
             entity.setGrade_name((String)maps.get(i).get("grade_name"));
+            entity.setCourse_id((String)maps.get(i).get("course_id"));
+            entity.setGrade_id((String)maps.get(i).get("grade_id"));
             lists.add(entity);
         }
         datas.addAll(lists);

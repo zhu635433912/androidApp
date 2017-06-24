@@ -99,9 +99,7 @@
         <activity
             android:name=".UserxinxiActivty"
             android:launchMode="singleTask" />
-        <activity
-            android:name=".Xuqiuxiangx"
-            android:launchMode="singleTask" />
+        <activity android:name=".Xuqiuxiangx" />
         <activity
             android:name=".Xuqiufabu"
             android:launchMode="singleTask" />
@@ -802,7 +800,10 @@
         <activity android:name=".MyOrderActivity" />
         <activity android:name=".utils.MyBaseActivity_" />
         <activity android:name=".SearchActivity_" />
-        <activity android:name=".JubaoActivity_"></activity>
+        <activity android:name=".JubaoActivity_" />
+        <!-- <activity android:name=".New_StudentActivity_" /> -->
+        <activity android:name=".NewMainActivity_" />
+        <activity android:name=".OrderTeacherActivity"></activity>
     </application>
 
 </manifest>

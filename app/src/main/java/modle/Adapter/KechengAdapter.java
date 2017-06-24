@@ -68,7 +68,7 @@ public class KechengAdapter extends BaseAdapter{
                 madbt.kechengType.setText(listmap.get(position).get("grade_name")+"");
         madbt.kechengType.setVisibility(View.GONE);
                 madbt.gerxxyiduiyi.setText(listmap.get(position).get("service_type_txt")+"");
-//        madbt.gerxxyiduiyi.setVisibility(View.GONE);
+        madbt.gerxxyiduiyi.setVisibility(View.GONE);
                 madbt.kechengfeee.setText(listmap.get(position).get("visit_fee")+"￥/课时费");
         return convertView;
     }

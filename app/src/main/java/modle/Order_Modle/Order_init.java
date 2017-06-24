@@ -6,6 +6,7 @@ import android.widget.ListView;
 import com.deguan.xuelema.androidapp.init.Ordercontent_init;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
 
 import java.util.Map;
 
@@ -68,7 +69,7 @@ public interface Order_init {
      * id       订单id
      * fee      金额
      */
-    public Map<String,Object> UpdateOrder_Amount(int uid,int id,int fee);
+    public Map<String,Object> UpdateOrder_Amount(int uid,int id,int fee,ChangeOrderView changeOrderView);
     /**
      * 更新订单课时数费用
      * uid      用户id
@@ -93,5 +94,6 @@ public interface Order_init {
      */
     public Map<String,Object> Order_refund(int uid,int id,int status,float refund_fee);
 
-    public void CreateOrder(int uid,int teacher_id,int requirement_id,float fee,Requirdetailed requirdetailed);
+    //创建订单
+    public void CreateOrder(int uid,int teacher_id,int requirement_id,float fee,int course_id,int grade_id,Requirdetailed requirdetailed);
 }

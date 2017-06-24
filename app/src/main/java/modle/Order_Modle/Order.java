@@ -8,6 +8,7 @@ import android.widget.ListView;
 import com.deguan.xuelema.androidapp.init.Ordercontent_init;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -233,7 +234,7 @@ public class Order implements Order_init {
     更新订单金额
      */
     @Override
-    public Map<String, Object> UpdateOrder_Amount(int uid, int id, int fee) {
+    public Map<String, Object> UpdateOrder_Amount(int uid, int id, int fee, final ChangeOrderView changeOrderView) {
         Call<Demtest> call=oredr_http.UpdateOredrfee(uid,id,fee);
         call.enqueue(new Callback<Demtest>() {
             @Override
@@ -241,14 +242,17 @@ public class Order implements Order_init {
             String error=response.body().getError();
             if (error.equals("ok")){
                 Log.e("aa","更新金额订单成功");
+                changeOrderView.successOrder("更新金额订单成功");
             }else {
                 String errmsg=response.body().getErrmsg();
                 Log.e("aa","更新订单金额失败="+errmsg);
+                changeOrderView.failOrder("更新订单金额失败");
             }
         }
         @Override
         public void onFailure(Call<Demtest> call, Throwable t) {
             Log.e("aa","更新订单金额异常错误="+t.toString());
+            changeOrderView.failOrder("更新订单金额异常错误");
          }
          });
         return null;
@@ -332,8 +336,8 @@ public class Order implements Order_init {
 
     //创建临时订单
     @Override
-    public void  CreateOrder(int uid, int teacher_id , int requirement_id, float fee, final Requirdetailed requirdetailed){
-        Call<Demtest> call=oredr_http.Createorder(uid,teacher_id,requirement_id,fee);
+    public void  CreateOrder(int uid, int teacher_id , int requirement_id, float fee,int course_id,int grade_id, final Requirdetailed requirdetailed){
+        Call<Demtest> call=oredr_http.Createorder(uid,teacher_id,requirement_id,fee,course_id,grade_id);
         call.enqueue(new Callback<Demtest>() {
             @Override
             public void onResponse(Call<Demtest> call, Response<Demtest> response) {

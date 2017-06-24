@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.deguan.xuelema.androidapp.OrderTeacherActivity;
 import com.deguan.xuelema.androidapp.Order_details;
 import com.deguan.xuelema.androidapp.Order_state;
 import com.deguan.xuelema.androidapp.Payment_Activty;
@@ -56,7 +57,11 @@ public class NotFinishFragment extends BaseFragment implements PullToRefreshBase
         listView.setAdapter(studionAdabt);
         uid=Integer.parseInt(User_id.getUid());
         orderInit=new Order();
-        orderInit.getOrder_list(uid,0,1,1,null,null,this,0,3);
+        if (User_id.getRole().equals("1")) {
+            orderInit.getOrder_list(uid, 0, 1, 1, null, null, this, 0, 3);
+        }else {
+            orderInit.getOrder_list(uid, 1, 1, 1, null, null, this, 0, 3);
+        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -64,11 +69,17 @@ public class NotFinishFragment extends BaseFragment implements PullToRefreshBase
                 String status= (String) map.get("status");
                 String ida = (String) map.get("id");
                 String duration = (String) map.get("duration");
-
-                Intent intent = new Intent(getActivity(), Order_details.class);
+                String teacherImage = (String) map.get("teacher_headimg");
+                Intent intent = null;
+                if (User_id.getRole().equals("1")) {
+                     intent = new Intent(getActivity(), Order_details.class);
+                }else {
+                     intent = new Intent(getActivity(), OrderTeacherActivity.class);
+                }
                 intent.putExtra("oredr_id", ida);
                 intent.putExtra("duration", duration);
                 intent.putExtra("status", status);
+                intent.putExtra("teacher_headimg",teacherImage);
                 startActivity(intent);
 
 
@@ -85,8 +96,13 @@ public class NotFinishFragment extends BaseFragment implements PullToRefreshBase
 
     @Override
     public void onRefresh(PullToRefreshBase refreshView) {
+        if (User_id.getRole().equals("1")) {
+            orderInit.getOrder_list(uid, 0, 1, 1, null, null, this, 0, 3);
+        }else {
+            orderInit.getOrder_list(uid, 1, 1, 1, null, null, this, 0, 3);
+        }
         //下拉刷新
-        orderInit.getOrder_list(uid,0,1,1,null,null,this,0,3);
+//        orderInit.getOrder_list(uid,0,1,1,null,null,this,0,3);
     }
     @Override
     public void setListview(List<Map<String, Object>> listmap) {

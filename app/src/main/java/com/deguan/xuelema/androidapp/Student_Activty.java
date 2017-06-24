@@ -113,8 +113,8 @@ public class Student_Activty extends AutoLayoutActivity implements View.OnClickL
     private User_init user_init;
 //    private TextView tuijianjiaoshi;
     private int TAGE_IRONG=0;
-    private ImageView chatImage;
     private int number = 0;
+    private ImageView chatImage;
 
     @Override
     protected void onResume() {

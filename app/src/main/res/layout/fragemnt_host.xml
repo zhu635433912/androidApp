@@ -3,6 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:gravity="top"
+        android:title="我的"
+        app:layout_collapseMode="pin"
+        android:background="#00000000"
+        app:titleMarginTop="25px"
+        />
+
     <RelativeLayout
         android:id="@+id/indeshuax"
         android:layout_centerVertical="true"

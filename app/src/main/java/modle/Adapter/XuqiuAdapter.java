@@ -109,8 +109,8 @@ public class XuqiuAdapter extends ListBaseAdapter {
         if (!dist.equals("")){
             myDist = Integer.parseInt(dist)/1000;
         }
-        int lat = myDist/1000;
-        holder.distance.setText(lat+"km");
+//        int lat = myDist/1000;
+        holder.distance.setText(myDist+"km");
         holder.haoping_numtext.setText(""+list.get(position).getCreated());
         holder.nianji.setText(""+list.get(position).getGrade_name());
         return convertView;

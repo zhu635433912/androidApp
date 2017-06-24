@@ -2,20 +2,31 @@ package com.deguan.xuelema.androidapp;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -51,6 +62,8 @@ import modle.Adapter.KechengAdapter;
 import modle.GetBitmap_Url;
 import modle.Huanxing.ui.ChatActivity;
 import modle.Increase_course.Increase_course;
+import modle.Order_Modle.Order;
+import modle.Order_Modle.Order_init;
 import modle.Teacher_Modle.Teacher;
 import modle.Teacher_Modle.Teacher_init;
 import modle.getdata.Getdata;
@@ -89,6 +102,14 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private TextView jubaoTv;
     private ImageView iamgeview;
     private RelativeLayout gerxxTob;
+    private PopupWindow buyPopWindow;
+    private TextView courseMoney;
+    private TextView zongfee;
+    private TextView keshi;
+    private Button buyBtn;
+    private TextView courseExplain;
+    private TextView courseType;
+    private TextView courseNametV;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -133,6 +154,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         Log.e("aa","UserxinActivyt接收到老师id为"+user_id);
         int id=Integer.parseInt(User_id.getUid());
         Requir_id=Integer.parseInt(user_id);
+        teacherId = Requir_id;
         userHeadUrl = getIntent().getStringExtra("head_image");
         if (!userHeadUrl.equals(""))
             Glide.with(this).load(userHeadUrl).transform(new GlideCircleTransform(this)).into(gerxxtoux);
@@ -149,7 +171,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         Increase_course increaseCourse=new Increase_course();
         increaseCourse.selecouse(Requir_id,this,null);
 
-
+        showBuyPop();
 
         gerrxxedintext.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -157,6 +179,20 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 Map<String, Object> map = new HashMap<String, Object>();
                 map = listmap.get(position);
                 String fee= (String) map.get("visit_fee");
+                teacherfee = Integer.parseInt((String)map.get("visit_fee"));
+                studentfee = Integer.parseInt((String)map.get("unvisit_fee"));
+                coursefee = studentfee;
+                courseId = (String) map.get("course_id");
+                gradeId = (String)map.get("grade_id");
+                courseName =  (String)map.get("course_name") ;
+                courseNumber = 1;
+
+                keshi.setText(courseNumber+"");
+                courseMoney.setText(coursefee+"元/节");
+                courseNametV.setText(courseName);
+//                courseType.setText((String)map.get("service_type_txt"));
+                courseExplain.setText((String)map.get("course_remark"));
+                zongfee.setText(coursefee*courseNumber+"");
                 String fee1= (String) map.get("unvisit_fee");
                 String course_id = (String) map.get("course_id");
                 String course_name = (String)map.get("course_name") ;
@@ -164,20 +200,22 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
 
                 int unvisit_fee=Integer.parseInt(fee1);
                 int visit_fee=Integer.parseInt(fee);
+                buyPopWindow.showAtLocation(imageButton2, Gravity.BOTTOM,0,0);
+
                 //购买课程
-                Purchase_figment purchase_fagment=new Purchase_figment();
-                FragmentManager fragmentManager=getFragmentManager();
-                FragmentTransaction beginTransaction=fragmentManager.beginTransaction();
-                beginTransaction.add(R.id.jiaoyi,purchase_fagment);
-                Bundle bundle = new Bundle();
-                bundle.putInt("unvisit_fee",unvisit_fee);
-                bundle.putInt("visit_fee",visit_fee);
-                bundle.putInt("Requir_id",Requir_id);
-                bundle.putString("grade_id",grade_id);
-                bundle.putString("course_id",course_id);
-                bundle.putString("course_name",course_name);
-                purchase_fagment.setArguments(bundle);
-                beginTransaction.commit();
+//                Purchase_figment purchase_fagment=new Purchase_figment();
+//                FragmentManager fragmentManager=getFragmentManager();
+//                FragmentTransaction beginTransaction=fragmentManager.beginTransaction();
+//                beginTransaction.add(R.id.jiaoyi,purchase_fagment);
+//                Bundle bundle = new Bundle();
+//                bundle.putInt("unvisit_fee",unvisit_fee);
+//                bundle.putInt("visit_fee",visit_fee);
+//                bundle.putInt("Requir_id",Requir_id);
+//                bundle.putString("grade_id",grade_id);
+//                bundle.putString("course_id",course_id);
+//                bundle.putString("course_name",course_name);
+//                purchase_fagment.setArguments(bundle);
+//                beginTransaction.commit();
             }
         });
         new Thread(new Runnable() {
@@ -196,6 +234,103 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 }
             }
         }).start();
+    }
+
+
+    private TextView studentShangmen,teacherShangmen;
+    private int coursefee,teacherId,courseNumber,servicetype,studentfee,teacherfee;
+    private String courseId,gradeId,serviceType,courseName;
+    private void showBuyPop() {
+
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.purchase_course,null);
+        courseMoney = (TextView) view.findViewById(R.id.jieshufee);
+        zongfee = (TextView) view.findViewById(R.id.zongfee);
+        TextView jia= (TextView) view.findViewById(R.id.jia);
+        TextView jian= (TextView) view.findViewById(R.id.jian);
+        keshi = (TextView) view.findViewById(R.id.fee);
+        buyBtn = (Button) view.findViewById(R.id.goumai);
+        courseExplain = (TextView) view.findViewById(R.id.course_explain);
+        courseType = (TextView) view.findViewById(R.id.xuessm);
+        courseNametV = (TextView) view.findViewById(R.id.kechengname);
+        studentShangmen  = (TextView) view.findViewById(R.id.xuessm);
+        teacherShangmen = (TextView) view.findViewById(R.id.laoshism);
+        studentShangmen.setTextColor(Color.parseColor("#fd1245"));
+        buyPopWindow = new PopupWindow(view);
+        buyPopWindow.setFocusable(true);
+        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        int height = wm.getDefaultDisplay().getHeight();
+        int width = wm.getDefaultDisplay().getWidth();
+        buyPopWindow.setWidth(width);
+        buyPopWindow.setHeight(height/3);
+        buyPopWindow.setBackgroundDrawable(new BitmapDrawable());
+        buyPopWindow.setOutsideTouchable(true);
+        servicetype = 2;
+
+        studentShangmen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                studentShangmen.setTextColor(0xfffd1245);
+                teacherShangmen.setTextColor(0xff8b8b8b);
+                servicetype = 2;
+                coursefee = studentfee;
+//                studentShangmen.setTextColor(Color.parseColor("#fd1245"));
+//                teacherShangmen.setTextColor(Color.parseColor("#8b8b8b"));
+                courseMoney.setText(coursefee+"元/节");
+                zongfee.setText(coursefee*courseNumber+"元");
+            }
+        });
+        teacherShangmen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                coursefee = teacherfee;
+                teacherShangmen.setTextColor(0xfffd1245);
+                studentShangmen.setTextColor(0xff8b8b8b);
+                servicetype = 1;
+                courseMoney.setText(coursefee+"元/节");
+                zongfee.setText(coursefee*courseNumber+"元");
+            }
+        });
+        jia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                courseNumber ++;
+                keshi.setText(courseNumber+"");
+                zongfee.setText(coursefee*courseNumber+"元");
+            }
+        });
+        jian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                courseNumber --;
+                keshi.setText(courseNumber+"");
+                zongfee.setText(coursefee*courseNumber+"元");
+            }
+        });
+        buyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(UserxinxiActivty.this).setTitle("学了么提示!").setMessage("是否确定下单?")
+                        .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                int uid=Integer.parseInt(User_id.getUid());
+                                Order_init order_init=new Order();
+                                //创建订单
+                                order_init.Establish_Order(uid,teacherId,739,coursefee,courseNumber,Integer.parseInt(courseId),Integer.parseInt(gradeId));
+                                Toast.makeText(UserxinxiActivty.this,"购买课程成功",Toast.LENGTH_SHORT).show();
+                                Intent intent=new Intent(UserxinxiActivty.this, Student_Activty.class);
+                                startActivity(intent);
+                            }
+                        }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(UserxinxiActivty.this,"在看看别的老师吧~",Toast.LENGTH_SHORT).show();
+                    }
+                }).show();
+            }
+        });
+
     }
 
     //更新教师详细资料

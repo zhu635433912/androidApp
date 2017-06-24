@@ -34,6 +34,7 @@ import modle.Adapter.XuqiuAdapter;
 import modle.Demand_Modle.Demand;
 import modle.Demand_Modle.Demand_init;
 import modle.toos.MyListview;
+import modle.user_ziliao.User_id;
 
 /**
  * 推荐需求 我的发布 碎片
@@ -71,7 +72,7 @@ public class Fabuxuqiu_fagment extends Fragment implements
 
         //需求详细信息展示
         demand_init=new Demand(this);
-        demand_init.getTuijianDemand_list(0,0,null,null,null,null,null,null,getContext(),null);
+        demand_init.getTuijianDemand_list(0,0, User_id.getLat()+"",User_id.getLng()+"",null,null,null,null,getContext(),null);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -93,7 +94,7 @@ public class Fabuxuqiu_fagment extends Fragment implements
     @Subscriber(tag = "status")
     public void getTuijian(String stats){
         status = stats;
-        demand_init.getTuijianDemand_list(0,0,null,null,null,null,status,null,getContext(),null);
+        demand_init.getTuijianDemand_list(0,0,User_id.getLat()+"",User_id.getLng()+"",null,null,status,null,getContext(),null);
     }
 
     @Override
@@ -121,6 +122,9 @@ public class Fabuxuqiu_fagment extends Fragment implements
             entity.setDistance((String) maps.get(i).get("distance"));
             entity.setFee(String.valueOf(maps.get(i).get("fee")));
             entity.setGrade_name((String)maps.get(i).get("grade_name"));
+            if ((maps.get(i).get("status")).equals("1")){
+                continue;
+            }
             lists.add(entity);
         }
         listmap.addAll(lists);

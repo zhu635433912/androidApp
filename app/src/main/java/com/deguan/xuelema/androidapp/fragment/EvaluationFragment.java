@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
+import com.deguan.xuelema.androidapp.OrderTeacherActivity;
 import com.deguan.xuelema.androidapp.Order_details;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.Student_assessment;
@@ -46,7 +47,12 @@ public class EvaluationFragment extends BaseFragment implements PullToRefreshBas
         listView.setAdapter(studionAdabt);
         uid=Integer.parseInt(User_id.getUid());
         orderInit=new Order();
-        orderInit.getOrder_list(uid,0,3,1,null,null,this,0,1);
+        if (User_id.getRole().equals("1")){
+
+            orderInit.getOrder_list(uid,0,3,1,null,null,this,0,1);
+        }else {
+            orderInit.getOrder_list(uid,1,3,1,null,null,this,0,1);
+        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -60,8 +66,13 @@ public class EvaluationFragment extends BaseFragment implements PullToRefreshBas
                 String status= (String) map.get("status");
                 String ida = (String) map.get("id");
                 String duration = (String) map.get("duration");
-
-                Intent intent = new Intent(getActivity(), Order_details.class);
+                Intent intent = null;
+                if (User_id.getRole().equals("1")) {
+                    intent = new Intent(getActivity(), Order_details.class);
+                }else {
+                    intent = new Intent(getActivity(), OrderTeacherActivity.class);
+                }
+//                Intent intent = new Intent(getActivity(), Order_details.class);
                 intent.putExtra("oredr_id", ida);
                 intent.putExtra("duration", duration);
                 intent.putExtra("status", status);

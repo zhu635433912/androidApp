@@ -10,11 +10,14 @@ import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Ordercontent_init;
+import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import org.simple.eventbus.EventBus;
@@ -53,12 +56,16 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
     private TextView fuwufan;
     private RelativeLayout ycang;
     private String status;
+    private ImageView headImage;
     private TextView statuse,telTv;
+    private String teacherImage;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dindanxxi);
         User_id.getInstance().addActivity(this);
+        headImage = (ImageView) findViewById(R.id.order_detail_headimg);
         telTv = (TextView) findViewById(R.id.dianhuahaoma);
         name = (TextView) findViewById(R.id.name);
         statuse= (TextView) findViewById(R.id.statuse);
@@ -82,6 +89,8 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         ordettuikuan.setOnClickListener(this);
         xuqiufenggexian7.setOnClickListener(this);
         dindanxiangxihuitui.setOnClickListener(this);
+        headImage.setOnClickListener(this);
+        name.setOnClickListener(this);
 
         if(User_id.getRole().equals("2")){
             ycang.setVisibility(View.GONE);
@@ -90,6 +99,10 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         //获取订单id与用户id
         String order_ida = getIntent().getStringExtra("oredr_id");
         String durationa=getIntent().getStringExtra("duration");
+        teacherImage = getIntent().getStringExtra("teacher_headimg");
+
+
+
         status=getIntent().getStringExtra("status");
         String uida = User_id.getUid();
         duration=Integer.parseInt(durationa);
@@ -133,6 +146,8 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
 
     }
 
+    private String teacherId;
+
     @Override
     public void Updatecontent(Map<String, Object> map) {
         String status = (String) map.get("status");
@@ -141,6 +156,9 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         String requirement_grade = (String) map.get("requirement_grade");
         String requirement_course = (String) map.get("requirement_course");
         String feae= (String) map.get("fee");
+        teacherImage = (String) map.get("teacher_headimg");
+        Glide.with(this).load(teacherImage).transform(new GlideCircleTransform(this)).into(headImage);
+        teacherId = (String) map.get("teacher_id");
 
         telTv.setText(Html.fromHtml("<u>"+(String)map.get("teacher_mobile")+""+"</u>"));
         fee=Integer.parseInt(feae);
@@ -206,6 +224,24 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
     @Override
     public void onClick(View v) {
     switch (v.getId()){
+        case R.id.name :
+            //跳转老师详情
+            Intent intentTeacher = new Intent(this, UserxinxiActivty.class);
+//                    intent.putExtra("user_id", uid);
+            intentTeacher.putExtra("head_image",teacherImage);
+            intentTeacher.putExtra("user_id",teacherId);
+            startActivity(intentTeacher);
+
+
+            break;
+        case R.id.order_detail_headimg:
+            //跳转老师详情
+            Intent intentTeacher2 = new Intent(this, UserxinxiActivty.class);
+//                    intent.putExtra("user_id", uid);
+            intentTeacher2.putExtra("head_image",teacherImage);
+            intentTeacher2.putExtra("user_id",teacherId);
+            startActivity(intentTeacher2);
+            break;
         case R.id.dindanxiangxihuitui:
             Order_details.this.finish();
             break;

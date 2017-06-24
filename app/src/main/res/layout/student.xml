@@ -97,7 +97,7 @@
             android:layout_marginLeft="95px"
             android:layout_below="@+id/studenthuihuatext"
             android:src="@mipmap/chat_icon"
-            android:layout_width="100px"
+            android:layout_width="80px"
             android:layout_toRightOf="@+id/studenttouxiangimg"
             android:layout_height="100px" />
         <TextView

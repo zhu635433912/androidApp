@@ -4,6 +4,8 @@ package com.deguan.xuelema.androidapp.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import com.deguan.xuelema.androidapp.MyOrderActivity;
 import com.deguan.xuelema.androidapp.Pick_singleActivty;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.entities.TuijianEntity;
+import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
 import com.deguan.xuelema.androidapp.presenter.PublishPresenter;
 import com.deguan.xuelema.androidapp.presenter.impl.PublishPresenterImpl;
 import com.deguan.xuelema.androidapp.presenter.impl.TuijianPresenterImpl;
@@ -32,23 +35,29 @@ import java.util.List;
 import java.util.Map;
 
 import modle.Adapter.MfabuAdpter;
+import modle.Adapter.MyPublishNewAdapter;
 import modle.Adapter.TuijianAdapter;
+import modle.Adapter.XuqiuAdapter;
 import modle.user_ziliao.User_id;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-@EFragment(R.layout.fragment_tuijian)
-public class MyPublishFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener, MyPublishView {
+@EFragment(R.layout.tuijian_new_fragment)
+public class MyPublishFragment extends BaseFragment implements  MyPublishView, MyPublishNewAdapter.OnTopClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @ViewById(R.id.tuijian_listview)
-    PullToRefreshListView listView;
+    RecyclerView listView;
+    @ViewById(R.id.tuijian_swipe)
+    SwipeRefreshLayout swipeRefreshLayout;
 
-    private MfabuAdpter adapter;
-    private List<Map<String,Object>> list = new ArrayList<>();
+
+    private MyPublishNewAdapter adapter;
+    private List<XuqiuEntity> list = new ArrayList<>();
     private int filter_type;
     private PublishPresenter publishPresenter;
-
+    private boolean isLoading = false;
+    private int page = 0;
 
     @Override
     public void before() {
@@ -56,45 +65,109 @@ public class MyPublishFragment extends BaseFragment implements PullToRefreshBase
 
     @Override
     public void initView() {
-        adapter = new MfabuAdpter(list,getContext());
-        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-        listView.setOnRefreshListener(this);
+        adapter = new MyPublishNewAdapter(list,getContext());
+//        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+//        listView.setOnRefreshListener(this);
+//        listView.setAdapter(adapter);
+        adapter.setOnTopClickListener(this);
+
+        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (!isLoading) {
+                    RecyclerView.Adapter adapter1 = recyclerView.getAdapter();
+                    View childAt = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
+                    int position = recyclerView.getChildAdapterPosition(childAt);
+                    if (adapter1.getItemCount() - position < 5) {
+                        isLoading = true;
+                        page++;
+//                        NetworkUtil.getService().getTopList(id, ++page, 20).enqueue(TopListFragment.this);
+                    }
+                }
+            }
+        });
+        swipeRefreshLayout.setOnRefreshListener(this);
         listView.setAdapter(adapter);
         publishPresenter =  new PublishPresenterImpl(this, Integer.parseInt(User_id.getUid()),4);
         publishPresenter.getPublishEntity();
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //跳转接单列表
-//                    String uid=adapter.getuid(position-1);
-                    String uid = (String)list.get(position-1).get("id");
-                    String headUrl = (String) list.get(position-1).get("teacher_headimg");
-                    Intent intent=new Intent(getContext(),Pick_singleActivty.class);
-                    intent.putExtra("id",uid);
-                    intent.putExtra("teacher_headimg",headUrl);
-                    startActivity(intent);
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                //跳转接单列表
+////                    String uid=adapter.getuid(position-1);
+//                    String uid = (String)list.get(position-1).getId();
+//                    String headUrl = (String) list.get(position-1).getPublisher_headimg();
+//                    Intent intent=new Intent(getContext(),Pick_singleActivty.class);
+//                    intent.putExtra("id",uid);
+//                    intent.putExtra("teacher_headimg",headUrl);
+//                    startActivity(intent);
+//            }
+//        });
 
     }
 
 
 
-    @Override
-    public void onRefresh(PullToRefreshBase refreshView) {
-        new PublishPresenterImpl(this,Integer.parseInt(User_id.getUid()),4).getPublishEntity();
-    }
+//    @Override
+//    public void onRefresh() {
+//        new PublishPresenterImpl(this,Integer.parseInt(User_id.getUid()),4).getPublishEntity();
+//    }
 
     @Override
     public void successMyPublish(List<Map<String, Object>> maps) {
-        listView.onRefreshComplete();
-        list.clear();
-        list.addAll(maps);
-        adapter.notifyDataSetChanged();
+        if (maps != null) {
+            if (page == 1) {
+                adapter.clear();
+                list.clear();
+            }
+            List<XuqiuEntity> lists = new ArrayList<>();
+            for (int i = 0; i < maps.size(); i++) {
+                XuqiuEntity entity = new XuqiuEntity();
+                entity.setPublisher_id((String) maps.get(i).get("publisher_id"));
+                entity.setPublisher_name((String) maps.get(i).get("publisher_name"));
+                entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
+                entity.setCourse_name((String) maps.get(i).get("course_name"));
+                entity.setContent((String) maps.get(i).get("content"));
+                entity.setCreated((String) maps.get(i).get("created"));
+                entity.setId((String) maps.get(i).get("id"));
+                entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
+                entity.setDistance((String) maps.get(i).get("distance"));
+                entity.setFee(String.valueOf(maps.get(i).get("fee")));
+                entity.setGrade_name((String) maps.get(i).get("grade_name"));
+                if ((maps.get(i).get("status")).equals("1")) {
+                    continue;
+                }
+                lists.add(entity);
+            }
+            list.addAll(lists);
+            adapter.addAll(lists);
+//        adapter.notifyDataSetChanged();
+            swipeRefreshLayout.setRefreshing(false);
+            isLoading = false;
+        }
     }
 
     @Override
     public void failMyPublish(String msg) {
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onTopClick(XuqiuEntity entity) {
+//跳转接单列表
+//                    String uid=adapter.getuid(position-1);
+                    String uid = entity.getId();
+                    String headUrl = entity.getPublisher_headimg();
+                    Intent intent=new Intent(getContext(),Pick_singleActivty.class);
+                    intent.putExtra("id",uid);
+                    intent.putExtra("teacher_headimg",headUrl);
+                    startActivity(intent);
+    }
+
+    @Override
+    public void onRefresh() {
+        page = 1;
+        new PublishPresenterImpl(this, Integer.parseInt(User_id.getUid()),4).getPublishEntity();
     }
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup android:orientation="horizontal"
+    android:id="@+id/main_bottom_radiogp"
+    android:layout_width="match_parent"
+    android:layout_height="100px"
+    android:gravity="bottom"
+    android:layout_gravity="bottom"
+    android:background="@color/home_tab_backgroud"
+    android:layout_alignParentBottom="true"
+    android:layout_marginTop="15px"
+    android:layout_marginBottom="10px"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RadioButton
+        android:id="@+id/main_bottom_name"
+        style="@style/bottom_radio_btn"
+        android:text="教师"
+        android:drawableTop="@drawable/bottom_home_icon"
+        />
+    <RadioButton
+        style="@style/bottom_radio_btn"
+
+        />
+    <RadioButton
+        android:id="@+id/main_bottom_mine"
+        style="@style/bottom_radio_btn"
+        android:text="我的"
+        android:drawableTop="@drawable/bottom_follow_icon"
+        />
+
+</RadioGroup>

@@ -4,6 +4,8 @@ package com.deguan.xuelema.androidapp.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import modle.Adapter.OrderNewAdapter;
 import modle.Adapter.Order_StudionAdabt;
 import modle.Adapter.StudentAdapter;
 import modle.user_ziliao.User_id;
@@ -35,13 +38,15 @@ import modle.user_ziliao.User_id;
  * 我的订单
  * A simple {@link Fragment} subclass.
  */
-@EFragment(R.layout.fragment_tuijian)
-public class OrderFragment extends BaseFragment implements PullToRefreshBase.OnRefreshListener,OrderView{
+@EFragment(R.layout.tuijian_new_fragment)
+public class OrderFragment extends BaseFragment implements OrderView , SwipeRefreshLayout.OnRefreshListener, OrderNewAdapter.OnTopClickListener {
 
     @ViewById(R.id.tuijian_listview)
-    PullToRefreshListView listView;
+    RecyclerView listView;
+    @ViewById(R.id.tuijian_swipe)
+    SwipeRefreshLayout swipeRefreshLayout;
 
-    private Order_StudionAdabt adapter;
+    private OrderNewAdapter adapter;
     private List<Map<String,Object>> list = new ArrayList<>();
     private int courseid =1;
     private int grade_id = 1;
@@ -50,38 +55,69 @@ public class OrderFragment extends BaseFragment implements PullToRefreshBase.OnR
     private String lng = "0";
     private OrderPresenterImpl tuijianPresenter;
     private int page = 1;
+    private boolean isLoading = false;
+
     @Override
     public void before() {
     }
 
     @Override
     public void initView() {
-        adapter = new Order_StudionAdabt(list,getContext());
-        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-        listView.setOnRefreshListener(this);
+        adapter = new OrderNewAdapter(list,getContext());
+
+        adapter.setOnTopClickListener(this);
+//        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
+//        listView.setOnRefreshListener(this);
         listView.setAdapter(adapter);
-        tuijianPresenter =  new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()),0,page);
-        tuijianPresenter.getOrderEntity();
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    //跳转我的订单页面
-                    Intent intent=new Intent(getActivity(),MyOrderActivity.class);
-                    startActivity(intent);
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (!isLoading) {
+                    RecyclerView.Adapter adapter1 = recyclerView.getAdapter();
+                    View childAt = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
+                    int position = recyclerView.getChildAdapterPosition(childAt);
+                    if (adapter1.getItemCount() - position < 5) {
+                        isLoading = true;
+                        page++;
+//                        NetworkUtil.getService().getTopList(id, ++page, 20).enqueue(TopListFragment.this);
+                    }
+                }
             }
         });
+        swipeRefreshLayout.setOnRefreshListener(this);
+
+
+        tuijianPresenter =  new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()),0,page);
+        tuijianPresenter.getOrderEntity();
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                    //跳转我的订单页面
+//                    Intent intent=new Intent(getActivity(),MyOrderActivity.class);
+//                    startActivity(intent);
+//            }
+//        });
     }
 
 
     @Override
     public void successOrder(List<Map<String, Object>> maps) {
-        listView.onRefreshComplete();
-        list.clear();
-        for (int i = 0; i < maps.size(); i++) {
-            if (!maps.get(i).get("status").equals("9")){
-                list.add(maps.get(i));
+//        listView.onRefreshComplete();
+        if (maps != null) {
+            if (page == 1) {
+                adapter.clear();
+                list.clear();
             }
-        }
+            for (int i = 0; i < maps.size(); i++) {
+                if (!maps.get(i).get("status").equals("9")) {
+                    list.add(maps.get(i));
+                }
+            }
+            adapter.addAll(list);
+            swipeRefreshLayout.setRefreshing(false);
+            isLoading = false;
 //        list.addAll(maps);
 //        for (int i = 0; i < maps.size(); i++) {
 //            TuijianEntity entity = new TuijianEntity();
@@ -101,7 +137,8 @@ public class OrderFragment extends BaseFragment implements PullToRefreshBase.OnR
 //            entity.setHaoping_num(String.valueOf(maps.get(i).get("haoping_num")));
 //            list.add(entity);
 //        }
-        adapter.notifyDataSetChanged();
+//        adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -110,9 +147,15 @@ public class OrderFragment extends BaseFragment implements PullToRefreshBase.OnR
     }
 
     @Override
-    public void onRefresh(PullToRefreshBase refreshView) {
+    public void onRefresh() {
         new OrderPresenterImpl(this,Integer.parseInt(User_id.getUid()),0,1).getOrderEntity();
     }
 
 
+    @Override
+    public void onTopClick(Map<String, Object> entity) {
+        //跳转我的订单页面
+                    Intent intent=new Intent(getActivity(),MyOrderActivity.class);
+                    startActivity(intent);
+    }
 }

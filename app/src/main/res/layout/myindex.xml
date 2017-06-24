@@ -15,6 +15,7 @@
 
 
     <RelativeLayout
+        android:background="@drawable/studentback"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
@@ -22,7 +23,7 @@
             android:layout_width="180px"
             android:layout_height="180px"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"></RelativeLayout>
+            android:layout_alignParentTop="true"/>
         <ImageButton
             android:id="@+id/imagebuttongl"
             android:layout_width="50px"
@@ -115,7 +116,7 @@
             android:layout_marginLeft="95px"
             android:layout_below="@+id/huihuatext"
             android:src="@mipmap/chat_icon"
-            android:layout_width="100px"
+            android:layout_width="80px"
             android:layout_toRightOf="@+id/touxiangimg"
             android:layout_height="100px" />
         <TextView

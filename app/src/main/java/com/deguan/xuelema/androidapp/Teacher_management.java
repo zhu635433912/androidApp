@@ -77,7 +77,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
     private TextView kemuzhonglei;
     private EditText editText2;
     private EditText shanggmenfee;
-//    private EditText xueshengfee;
+    private EditText xueshengfee;
     private Button naxt;
     private int kcid=206;
     private EditText gerjianjietext_edi;
@@ -135,7 +135,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         kemuzhonglei= (TextView) findViewById(R.id.textView7);
         editText2= (EditText) findViewById(R.id.editText2);
         shanggmenfee= (EditText) findViewById(R.id.shanggmenfee);
-//        xueshengfee= (EditText) findViewById(R.id.xueshengfee);
+        xueshengfee= (EditText) findViewById(R.id.xueshengfee);
         tianjiaxueli1= (RelativeLayout) findViewById(R.id.tianjiaxueli1);
         tianjiazhengshu= (RelativeLayout) findViewById(R.id.tianjiazhengshu);
         gerjianjietext_edi= (EditText) findViewById(R.id.gerjianjietext_edi);
@@ -147,17 +147,17 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         tianjiaxueli= (RelativeLayout) findViewById(R.id.tianjiaxueli);
         kechengitme= (ListView) findViewById(R.id.kechengitme);
         jiaoshiguanlifanhui.bringToFront();
-        serviceTv = (TextView) findViewById(R.id.kecheng_service_type);
+//        serviceTv = (TextView) findViewById(R.id.kecheng_service_type);
         viw.setVisibility(View.GONE);
 
         classImageChange.setOnClickListener(this);
-        serviceTv.setOnClickListener(this);
+//        serviceTv.setOnClickListener(this);
         tianjiaxueli.setOnClickListener(this);
         tianjiazhengshu.setOnClickListener(this);
         tianjiaxueli1.setOnClickListener(this);
         baocunjiaoshi.setOnClickListener(this);
         naxt.setOnClickListener(this);
-//        xueshengfee.setOnClickListener(this);
+        xueshengfee.setOnClickListener(this);
         shanggmenfee.setOnClickListener(this);
         editText2.setOnClickListener(this);
         kemuzhonglei.setOnClickListener(this);
@@ -222,25 +222,25 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 Getdata getdata=new Getdata();
                 getdata.getGrade(this);
                 break;
-            case R.id.kecheng_service_type:
-
-                AlertDialog.Builder serviceTypeDialog = new AlertDialog.Builder(Teacher_management.this);
-                serviceTypeDialog.setIcon(R.drawable.add04);
-                serviceTypeDialog.setTitle("请选择服务类型");
-                //    指定下拉列表的显示数据
-                final String[] fuwuType = {"一对一", "一对多", "学生上门" ,"老师上门", "第三方","不限"};
-                //    设置一个下拉的列表选择项
-                serviceTypeDialog.setItems(fuwuType, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(Teacher_management.this, "选择的科目为：" + fuwuType[which], Toast.LENGTH_SHORT).show();
-                        serviceTv.setText(fuwuType[which]);
-                        kechengType = which + 1;
-                    }
-                });
-                serviceTypeDialog.show();
-
-                break;
+//            case R.id.kecheng_service_type:
+//
+//                AlertDialog.Builder serviceTypeDialog = new AlertDialog.Builder(Teacher_management.this);
+//                serviceTypeDialog.setIcon(R.drawable.add04);
+//                serviceTypeDialog.setTitle("请选择服务类型");
+//                //    指定下拉列表的显示数据
+//                final String[] fuwuType = {"一对一", "一对多", "学生上门" ,"老师上门", "第三方","不限"};
+//                //    设置一个下拉的列表选择项
+//                serviceTypeDialog.setItems(fuwuType, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        Toast.makeText(Teacher_management.this, "选择的科目为：" + fuwuType[which], Toast.LENGTH_SHORT).show();
+//                        serviceTv.setText(fuwuType[which]);
+//                        kechengType = which + 1;
+//                    }
+//                });
+//                serviceTypeDialog.show();
+//
+//                break;
             case R.id.textView7:
                 //科目
                 AlertDialog.Builder kemuza = new AlertDialog.Builder(Teacher_management.this);
@@ -263,7 +263,8 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 //增加课程
                 if (zhonglei.getText().toString().equals("课程种类")||kemuzhonglei.getText().toString().equals("选择年级")
                         ||editText2.getText().toString().equals("课程说明")||shanggmenfee.getText().toString().equals("课时费")
-                        ||serviceTv.getText().toString().equals("服务类型")
+//                        ||serviceTv.getText().toString().equals("服务类型")
+                        ||xueshengfee.getText().toString().equals("")
                         ||shanggmenfee.getText().toString().equals("")){
                     Toast.makeText(Teacher_management.this,"请填写正确的课程资料",Toast.LENGTH_SHORT).show();
 
@@ -276,9 +277,9 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                                     int uid=Integer.parseInt(User_id.getUid());
                                     Increase_course inc=new Increase_course();
                                     int laoshifee=Integer.parseInt(shanggmenfee.getText().toString());
-//                                    int xuesfee=Integer.parseInt(xueshengfee.getText().toString());
-                                    int xuesfee = 0;
-                                    inc.Addcourse(uid,kcid,editText2.getText().toString(),laoshifee,xuesfee,kechengType,grade_id);
+                                    int xuesfee=Integer.parseInt(xueshengfee.getText().toString());
+//                                    int xuesfee = 0;
+                                    inc.Addcourse(uid,kcid,editText2.getText().toString(),laoshifee,xuesfee,6,grade_id);
                                     Toast.makeText(Teacher_management.this,"增加课程成功",Toast.LENGTH_SHORT).show();
                                     //刷新课程
                                     getmCourse();
