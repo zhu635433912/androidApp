@@ -9,7 +9,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="800px"
+        android:layout_height="@dimen/y200"
         android:background="@drawable/studentback"
         >
 
@@ -28,7 +28,7 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="120px"
+                android:layout_height="@dimen/y30"
                 app:layout_collapseMode="pin" />
 
 
@@ -39,13 +39,13 @@
                 app:tabIndicatorColor="#fd1245"
                 app:tabSelectedTextColor="#fd1245"
                 android:layout_width="match_parent"
-                android:layout_height="120px"
+                android:layout_height="@dimen/y30"
                 android:layout_gravity="bottom" />
 
             <RelativeLayout
                 android:id="@+id/batahost"
                 android:layout_width="match_parent"
-                android:layout_height="800px"
+                android:layout_height="@dimen/y200"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"

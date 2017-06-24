@@ -201,7 +201,7 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
 
         //获取用户昵称与资料
         user_init=new User_Realization();
-        user_init.User_Data(uid,this);
+        user_init.User_Data(uid,User_id.getLat()+"",User_id.getLng()+"",this);
 
         //加载我的订单
         dindan_fagment = new Dindan_fagment();
@@ -419,7 +419,7 @@ public class indexActivty extends AutoLayoutActivity implements View.OnClickList
     @Override
     protected void onRestart() {
         super.onRestart();
-        user_init.User_Data(uid,this);
+        user_init.User_Data(uid,User_id.getLat()+"",User_id.getLng()+"",this);
     }
 
     @Override

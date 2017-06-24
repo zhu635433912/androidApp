@@ -186,7 +186,7 @@ public class Student_Activty extends AutoLayoutActivity implements View.OnClickL
 
         //获取用户资料
         user_init=new User_Realization();
-        user_init.User_Data(id,this);
+        user_init.User_Data(id,User_id.getLat()+"",User_id.getLng()+"",this);
 
 
         //获取用户自己的需求 这里开始
@@ -485,6 +485,6 @@ public class Student_Activty extends AutoLayoutActivity implements View.OnClickL
     @Override
     protected void onRestart() {
         super.onRestart();
-        user_init.User_Data(id,this);
+        user_init.User_Data(id,User_id.getLat()+"",User_id.getLng()+"",this);
     }
 }

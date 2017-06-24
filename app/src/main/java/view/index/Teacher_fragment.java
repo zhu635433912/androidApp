@@ -787,9 +787,11 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
         User_id.setStatus(map.get("District")+"");
         if (user_init !=null){
             user_init.setlan_lng(id,lat,lng);
+            user_init.User_Data(id,User_id.getLat()+"",User_id.getLng()+"",this);
         }else {
             user_init = new User_Realization();
             user_init.setlan_lng(id, lat,lng);
+            user_init.User_Data(id,User_id.getLat()+"",User_id.getLng()+"",this);
         }
 
         EventBus.getDefault().post(map.get("District")+"","status");

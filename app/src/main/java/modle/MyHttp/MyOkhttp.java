@@ -56,7 +56,7 @@ public interface MyOkhttp {
     获取用户资料
      */
     @POST("index.php?s=/Service/Accounts/get_profile")
-    Call<User_Modle> getuserziliao(@Query("id") int id);
+    Call<User_Modle> getuserziliao(@Query("id") int id,@Query("lat")String lat,@Query("lng")String lng);
 
     /*
     用户资料更新

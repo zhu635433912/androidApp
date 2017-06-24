@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.Xuqiuxiangx;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -78,6 +79,8 @@ public class StudentAdapter extends BaseAdapter {
             viewHoder.haoping_numtext = (TextView) convertView.findViewById(R.id.text8);
             viewHoder.haoping_num = (ImageView) convertView.findViewById(R.id.imagehaop);
             convertView.setTag(viewHoder);
+            //对于listview，注意添加这一行，即可在item上使用高度
+            AutoUtils.autoSize(convertView);
         } else {
             viewHoder = (StudentAdapter.MyViewHoder) convertView.getTag();
         }

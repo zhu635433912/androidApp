@@ -61,15 +61,15 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed {
     @Override
     public void initView() {
         //定义底部标签图片大小
-        Drawable drawableFirst = getResources().getDrawable(R.drawable.bottom_home_icon);
-        drawableFirst.setBounds(0, 0, 60, 60);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
-        radioButton1.setCompoundDrawables(null, drawableFirst, null, null);//只放上面
-        radioButton1.setPadding(0,0,0,0);
-
-        Drawable drawableSearch = getResources().getDrawable(R.drawable.bottom_follow_icon);
-        drawableSearch.setBounds(0, 0, 60, 60);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
-        radioButton2.setCompoundDrawables(null, drawableSearch, null, null);//只放上面
-        radioButton2.setPadding(0,0,0,0);
+//        Drawable drawableFirst = getResources().getDrawable(R.drawable.bottom_home_icon);
+//        drawableFirst.setBounds(0, 0, 60, 60);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+//        radioButton1.setCompoundDrawables(null, drawableFirst, null, null);//只放上面
+//        radioButton1.setPadding(0,0,0,0);
+//
+//        Drawable drawableSearch = getResources().getDrawable(R.drawable.bottom_follow_icon);
+//        drawableSearch.setBounds(0, 0, 60, 60);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
+//        radioButton2.setCompoundDrawables(null, drawableSearch, null, null);//只放上面
+//        radioButton2.setPadding(0,0,0,0);
 
 
 

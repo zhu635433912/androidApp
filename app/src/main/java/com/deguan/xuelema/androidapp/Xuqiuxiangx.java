@@ -247,7 +247,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
                             public void onClick(DialogInterface dialog, int which) {
                                 Order_init order_init = new Order();
                                 order_init.CreateOrder(user_id,id,dindan,fee,course_id,grade_id,Xuqiuxiangx.this);
-                                Intent intent=new Intent(Xuqiuxiangx.this,indexActivty.class);
+                                Intent intent= NewMainActivity_.intent(Xuqiuxiangx.this).get();
                                 startActivity(intent);
                             }
                         }).setNegativeButton("否", new DialogInterface.OnClickListener() {

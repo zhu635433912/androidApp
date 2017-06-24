@@ -107,6 +107,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_data);
+        EventBus.getDefault().register(this);
         User_id.getInstance().addActivity(this);
         gerxxhuitui= (RelativeLayout) findViewById(R.id.gerxxhuitui);
         usertoux= (CircleImageView) findViewById(R.id.usertoux);
@@ -309,7 +310,8 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
             break;
 
             case R.id.baocun:
-            Personal_Activty.this.finish();
+                EventBus.getDefault().post(image,"headUrl");
+                finish();
                 Toast.makeText(this,"更新资料成功！",Toast.LENGTH_SHORT).show();
 
                 break;
@@ -384,7 +386,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     }
     public void updateuserdata(){
         //获取用户昵称与资料
-        user_init.User_Data(uid,this);
+        user_init.User_Data(uid,User_id.getLat()+"",User_id.getLng()+"",this);
         usertoux.setOnClickListener(this);
         userdizhi.setOnClickListener(this);
         gerxxhuitui.setOnClickListener(this);
@@ -406,7 +408,6 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
             } else {
                 userage.setText("女");
             }
-
 
             userdizhi.setText((String) map.get("address"));
             emage.setText((String) map.get("nickname"));
@@ -752,4 +753,9 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         startActivityForResult(intent,REQUESTCODE_CUTTING);
     }
 
+    @Override
+    protected void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
 }

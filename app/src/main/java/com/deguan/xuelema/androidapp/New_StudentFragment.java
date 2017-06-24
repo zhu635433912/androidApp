@@ -30,7 +30,10 @@ import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -92,7 +95,7 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         String rolea=User_id.getRole();
         id=Integer.parseInt(ida);
         role=Integer.parseInt(rolea);
-
+        EventBus.getDefault().register(this);
         //获取用户资料
         user_init=new User_Realization();
 
@@ -141,7 +144,7 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
 
         demand_init.getMyDemand_list(id,4,this);
-        user_init.User_Data(id,this);
+        user_init.User_Data(id,User_id.getLat()+"",User_id.getLng()+"",this);
     }
 
     @Override
@@ -200,7 +203,10 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     public void setListview1(List<Map<String, Object>> listmap) {
 
     }
-
+    @Subscriber(tag = "headUrl")
+    public void updateHead(File msg){
+        Glide.with(this).load(msg).transform(new GlideCircleTransform(getActivity())).into(studenttouxiangimg);
+    }
     @Override
     public void Updatecontent(Map<String, Object> map) {
         if(map.get("nickname").toString()!=null) {
@@ -220,7 +226,12 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void onResume() {
         super.onResume();
-        user_init.User_Data(id,this);
+        user_init.User_Data(id,User_id.getLat()+"",User_id.getLng()+"",this);
     }
 
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
 }

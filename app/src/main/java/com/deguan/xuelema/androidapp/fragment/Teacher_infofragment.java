@@ -19,7 +19,10 @@ import com.deguan.xuelema.androidapp.Teacher_management;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -66,6 +69,7 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
     public void before() {
         uid = Integer.parseInt(User_id.getUid());
         role = Integer.parseInt(User_id.getRole());
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -83,7 +87,7 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
     @Override
     public void initData() {
         User_init user_init = new User_Realization();
-        user_init.User_Data(uid, this);
+        user_init.User_Data(uid,User_id.getLat()+"",User_id.getLng()+"", this);
 
         tlebat.add("推荐需求");
         tlebat.add("我的订单");
@@ -125,6 +129,12 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
         }
     }
 
+    @Subscriber(tag = "headUrl")
+    private void updateHead(File msg){
+//        Glide.with(this).load(msg).into(teacher_loc);
+        Glide.with(this).load(msg).into(teacher_loc);
+    }
+
     /**
      * 获取用户资料成功回调并设置
      * @param map
@@ -139,5 +149,11 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
     @Override
     public void Updatefee(List<Map<String, Object>> listmap) {
 
+    }
+
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 }

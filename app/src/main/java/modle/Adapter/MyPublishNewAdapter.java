@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -160,6 +161,7 @@ public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapte
 
         public MyPublishNewViewHolder(View itemView) {
             super(itemView);
+            AutoUtils.autoSize(itemView);
             user_headimg = (ImageView) itemView.findViewById(R.id.lognhost);
             nickname = (TextView) itemView.findViewById(R.id.text1);
             service_type = (TextView) itemView.findViewById(R.id.text9);

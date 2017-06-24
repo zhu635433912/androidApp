@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:background="#e0eaf1"
     android:layout_width="match_parent"
-    android:layout_height="400px">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_marginTop="20px"

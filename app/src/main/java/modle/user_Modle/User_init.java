@@ -50,7 +50,7 @@ public interface User_init {
      获取用户资料
      user_id    用户id
      */
-    public Map<String,Object> User_Data(int user_id, Requirdetailed requirdetailed);
+    public Map<String,Object> User_Data(int user_id,String lat,String lng, Requirdetailed requirdetailed);
 
     /**
      用户资料更新

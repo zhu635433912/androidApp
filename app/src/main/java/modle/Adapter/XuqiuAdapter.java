@@ -17,6 +17,7 @@ import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.util.List;
 
@@ -82,6 +83,8 @@ public class XuqiuAdapter extends ListBaseAdapter {
             convertView = inflater.inflate(R.layout.listview_itme, parent, false);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
+            //对于listview，注意添加这一行，即可在item上使用高度
+            AutoUtils.autoSize(convertView);
         }
         holder = (ViewHolder) convertView.getTag();
         holder.nickname.setText(""+list.get(position).getPublisher_name());

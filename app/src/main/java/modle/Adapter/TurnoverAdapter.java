@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,6 +37,8 @@ public class TurnoverAdapter extends ListBaseAdapter {
             convertView = inflater.inflate(R.layout.item_turnover_list, parent, false);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
+            //对于listview，注意添加这一行，即可在item上使用高度
+            AutoUtils.autoSize(convertView);
         }
         holder = (ViewHolder) convertView.getTag();
         holder.turnIdTv.setText(list.get(position).get("id")+"");

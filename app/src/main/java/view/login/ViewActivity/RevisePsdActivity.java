@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deguan.xuelema.androidapp.MainActivity;
+import com.deguan.xuelema.androidapp.NewMainActivity_;
 import com.deguan.xuelema.androidapp.R;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -116,7 +117,8 @@ public class RevisePsdActivity extends AutoLayoutActivity implements Pos_inint,V
     @Override
     public void xiuture(Map<String,Object> map) {
         Toast.makeText(RevisePsdActivity.this,"修改成功",Toast.LENGTH_LONG).show();
-        Intent intin=new Intent(RevisePsdActivity.this,MainActivity.class);
+//        Intent intin=new Intent(RevisePsdActivity.this,MainActivity.class);
+        Intent intin = NewMainActivity_.intent(this).get();
         String role= (String) map.get("role");
         String id= (String) map.get("id");
         intin.putExtra("id",id);

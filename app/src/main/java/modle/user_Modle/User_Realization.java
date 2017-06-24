@@ -190,8 +190,8 @@ public class User_Realization implements User_init {
     获取用户资料
      */
     @Override
-    public Map<String, Object> User_Data(int user_id, final Requirdetailed requirdetailed) {
-        Call<User_Modle> call=myOkhttp.getuserziliao(user_id);
+    public Map<String, Object> User_Data(int user_id,String lat,String lng, final Requirdetailed requirdetailed) {
+        Call<User_Modle> call=myOkhttp.getuserziliao(user_id,lat,lng);
         call.enqueue(new Callback<User_Modle>() {
             @Override
             public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {

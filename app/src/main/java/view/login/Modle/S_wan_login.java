@@ -148,7 +148,7 @@ public class S_wan_login implements Modle_wan_login {
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     myOkhttp=retrofit.create(MyOkhttp.class);
-                    Call<User_Modle> call=myOkhttp.getuserziliao(user_id);
+                    Call<User_Modle> call=myOkhttp.getuserziliao(user_id,"","");
                     call.enqueue(new Callback<User_Modle>() {
                         @Override
                         public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {
@@ -332,7 +332,7 @@ public class S_wan_login implements Modle_wan_login {
                             .addConverterFactory(GsonConverterFactory.create())
                             .build();
                     myOkhttp=retrofit.create(MyOkhttp.class);
-                    Call<User_Modle> call=myOkhttp.getuserziliao(user_id);
+                    Call<User_Modle> call=myOkhttp.getuserziliao(user_id,"","");
                     call.enqueue(new Callback<User_Modle>() {
                         @Override
                         public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {

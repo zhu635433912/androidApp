@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 
 import com.deguan.xuelema.androidapp.MainActivity;
+import com.deguan.xuelema.androidapp.NewMainActivity_;
 import com.deguan.xuelema.androidapp.R;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -147,7 +148,8 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
     @Override
     public void setReatture(Map<String,Object> map) {
         Toast.makeText(this,"注册成功",Toast.LENGTH_LONG).show();
-        Intent intent=new Intent(RegisterActivity.this,MainActivity.class);
+//        Intent intent=new Intent(RegisterActivity.this,MainActivity.class);
+        Intent intent = NewMainActivity_.intent(this).get();
         String role= (String) map.get("role");
         String id= (String) map.get("id");
         intent.putExtra("id",id);

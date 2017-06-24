@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -174,6 +175,7 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
 
         public OrderNewViewHolder(View itemView) {
             super(itemView);
+            AutoUtils.autoSize(itemView);
             studentlistname= (TextView) itemView.findViewById(R.id.studentlistname);
             xdsj= (TextView) itemView.findViewById(R.id.xdsj);
             nianji= (TextView) itemView.findViewById(R.id.nianji);

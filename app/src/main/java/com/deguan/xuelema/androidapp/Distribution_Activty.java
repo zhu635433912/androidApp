@@ -61,7 +61,7 @@ public class Distribution_Activty extends AutoLayoutActivity implements View.OnC
 
         //设置生成二维码
         User_init user=new User_Realization();
-        user.User_Data(uid,this);
+        user.User_Data(uid,User_id.getLat()+"",User_id.getLng()+"",this);
 
 
 

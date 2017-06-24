@@ -247,7 +247,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                                                 Gaode_dinwei gaode_dinwei = new Gaode_dinwei(Xuqiufabu.this, Xuqiufabu.this);
 
                                                 Toast.makeText(Xuqiufabu.this, "发布需求成功！", Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(Xuqiufabu.this, MainActivity.class);
+                                                Intent intent = NewMainActivity_.intent(Xuqiufabu.this).get();
                                                 startActivity(intent);
                                             }
                                         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {

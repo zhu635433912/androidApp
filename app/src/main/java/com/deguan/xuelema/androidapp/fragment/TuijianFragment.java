@@ -107,6 +107,7 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
             for (int i = 0; i < maps.size(); i++) {
                 TuijianEntity entity = new TuijianEntity();
                 entity.setNickname((String) maps.get(i).get("nickname"));
+                entity.setSpeciality((String)maps.get(i).get("speciality"));
                 entity.setSpeciality_name((String) maps.get(i).get("speciality_name"));
                 entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
                 entity.setSignature((String) maps.get(i).get("signature"));
@@ -117,9 +118,13 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
 //            entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
                 entity.setDistance((String) maps.get(i).get("distance"));
                 entity.setFee(String.valueOf(maps.get(i).get("fee")));
-                entity.setSpeciality(String.valueOf(maps.get(i).get("speciality")));
-                entity.setUsername(String.valueOf(maps.get(i).get("username")));
-                entity.setHaoping_num(String.valueOf(maps.get(i).get("haoping_num")));
+                List<Map<String,Object>> listmap = ((List<Map<String,Object>>)maps.get(i).get("information_temp"));
+//                String course_name = "";
+//                for (int j = 0; j < listmap.size(); j++) {
+//                    course_name = course_name + listmap.get(j).get("course_name")+"  ";
+//                }
+//                entity.setStatus2(course_name);
+//            entity.setGrade_name((String)maps.get(i).get("grade_name"));
 
                 list.add(entity);
             }

@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.entities.TuijianEntity;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.zhy.autolayout.utils.AutoUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -81,24 +82,22 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
     @Override
     public void onBindViewHolder(TuijianNewViewHolder holder, int position) {
         TuijianEntity entity = list.get(position);
-        holder.nickname.setText(""+list.get(position).getNickname());
-        holder.service_type.setText(""+list.get(position).getService_type_txt());
-//        holder.service_type.setVisibility(View.GONE);
-//        holder.fee.setText(""+list.get(position).getFee());
+        holder.nickname.setText("" + list.get(position).getNickname());
+        holder.service_type.setText("" + list.get(position).getService_type_txt());
+//        holder.fee.setText("" + list.get(position).getFee());
         holder.fee.setText("");
-//        holder.speciality.setText(""+SubjectUtil.getSubjects().get(list.get(position).getSpeciality()));
-        holder.speciality.setText(""+list.get(position).getSpeciality());
-        holder.username.setText(""+list.get(position).getUsername());
+        holder.speciality.setText("" + list.get(position).getSpeciality());
+        holder.username.setText("" + list.get(position).getSignature());
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
         Glide.with(context).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
         String dist = list.get(position).getDistance();
+//        holder.stats.setText(""+list.get(position).getStatus2());
         int myDist = 0;
-        if (!dist.equals("")){
-            myDist = Integer.parseInt(dist)/1000;
+        if (!dist.equals("")) {
+            myDist = Integer.parseInt(dist) / 1000;
         }
-        int lat = myDist;
-        holder.distance.setText(lat+"km");
-        holder.haoping_numtext.setText("好评:"+list.get(position).getHaoping_num());
+        int lat = myDist / 1000;
+        holder.distance.setText(lat + "km");
         if (!TextUtils.isEmpty(list.get(position).getGender())){
             String gender = list.get(position).getGender();
             if (gender.equals("1")) {
@@ -109,6 +108,27 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
         }else {
             holder.nianji.setText("未知");
         }
+        switch (list.get(position).getOrder_rank().toString()){
+            case "0.0":
+                holder.haoping_num.setBackgroundResource(R.drawable.five);
+                break;
+            case "1.0":
+                holder.haoping_num.setBackgroundResource(R.drawable.one);
+                break;
+            case "2.0":
+                holder.haoping_num.setBackgroundResource(R.drawable.two);
+                break;
+            case "3.0":
+                holder.haoping_num.setBackgroundResource(R.drawable.three);
+                break;
+            case "4.0":
+                holder.haoping_num.setBackgroundResource(R.drawable.four);
+                break;
+            case "5.0":
+                holder.haoping_num.setBackgroundResource(R.drawable.five);
+                break;
+        }
+
     }
 
     @Override
@@ -156,13 +176,16 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
         private ImageView haoping_num;//好评数
         private TextView haoping_numtext;//好评分
         private TextView nianji;
+        private TextView stats;
 
         public TuijianNewViewHolder(View itemView) {
             super(itemView);
+            AutoUtils.autoSize(itemView);
             user_headimg = (ImageView) itemView.findViewById(R.id.lognhost);
             nickname = (TextView) itemView.findViewById(R.id.text1);
             service_type = (TextView) itemView.findViewById(R.id.text9);
             fee = (TextView) itemView.findViewById(R.id.text3);
+            stats = (TextView) itemView.findViewById(R.id.text5);
             speciality = (TextView) itemView.findViewById(R.id.text4);
             username = (TextView) itemView.findViewById(R.id.text6);
             distance = (TextView) itemView.findViewById(R.id.text7);
