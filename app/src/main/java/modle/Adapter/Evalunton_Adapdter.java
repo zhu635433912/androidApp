@@ -18,6 +18,7 @@ import modle.toos.CircleImageView;
  * Created by Administrator on 2017/6/19 0019.
  */
 
+
 public class Evalunton_Adapdter extends ListBaseAdapter {
 
     private final List<Map<String, Object>> listmap;
