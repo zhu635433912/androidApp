@@ -9,7 +9,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="800px"
+        android:layout_height="@dimen/y200"
         android:background="@drawable/studentback"
         >
 
@@ -25,7 +25,7 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="120px"
+                android:layout_height="@dimen/y30"
                 app:layout_collapseMode="pin" />
             <android.support.design.widget.TabLayout
                 android:id="@+id/new_teacher_tablayout"
@@ -33,11 +33,11 @@
                 app:tabIndicatorColor="#fd1245"
                 app:tabSelectedTextColor="#fd1245"
                 android:layout_width="match_parent"
-                android:layout_height="120px"
+                android:layout_height="@dimen/y30"
                 android:layout_gravity="bottom" />
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="800px">
+                android:layout_height="@dimen/y200">
                 <ImageView
                     android:id="@+id/techaer_massge"
                     android:padding="35px"

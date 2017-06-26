@@ -90,7 +90,7 @@ public class ConductFragment extends BaseFragment implements PullToRefreshBase.O
         //清空list数据
         list.clear();
         for (int i = 0; i < listmap.size(); i++) {
-            if (!listmap.get(i).get("status").equals("9")){
+            if (listmap.get(i).get("status").equals("2")||listmap.get(i).get("status").equals("4")){
                 list.add(listmap.get(i));
             }
         }

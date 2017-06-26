@@ -132,7 +132,7 @@
         android:layout_marginBottom="12px"
         android:layout_toEndOf="@+id/dianhua"
         android:layout_alignBottom="@+id/dianhua"
-        android:text="客服电话:  0576-88887777"
+        android:text="客服电话:  0576-82073666"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView

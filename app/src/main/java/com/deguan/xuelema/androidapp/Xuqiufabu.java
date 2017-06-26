@@ -154,6 +154,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
         Assistant = (TextView) findViewById(R.id.shangmen);
         Student = (TextView) findViewById(R.id.xuessmen);
         Thirdparty = (TextView) findViewById(R.id.disanf);
+        Thirdparty.setVisibility(View.GONE);
         userweizhi = (EditText) findViewById(R.id.userweizhi);
         fabu = (Button) findViewById(R.id.fabu);
         xuqiufabufanhui = (RelativeLayout) findViewById(R.id.xuqiufabufanhui);
@@ -298,10 +299,10 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         if (minute < 10){
                             kaishishijian.setText("起始时间:" + hourOfDay + ":0" + minute);
-                            qishi = hourOfDay + ":0" + minute + ":00";
+                            qishi = hourOfDay + ":0" + minute ;
                         }else {
                             kaishishijian.setText("起始时间:" + hourOfDay + ":" + minute);
-                            qishi = hourOfDay + ":" + minute + ":00";
+                            qishi = hourOfDay + ":" + minute ;
                         }
                     }
                 }, hourOfDay, minute, true);
@@ -315,10 +316,10 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         if (minute <= 10) {
                             jieshushijian.setText("结束时间:" + hourOfDay + ":0" + minute);
-                            jieshu = hourOfDay + ":0" + minute + ":00";
+                            jieshu = hourOfDay + ":0" + minute ;
                         }else {
                             jieshushijian.setText("结束时间:" + hourOfDay + ":" + minute);
-                            jieshu = hourOfDay + ":" + minute + ":00";
+                            jieshu = hourOfDay + ":" + minute ;
                         }
                     }
                 }, hourOfDay, minute, true);
@@ -431,7 +432,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 Thirdparty.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 Servicetype = type.getText().toString();
                 //------------------------>不限的类型0吗
-                fuwfangshi = 1;
+                fuwfangshi = 5;
                 break;
             case R.id.shangmen:
                 //助教上门
@@ -449,7 +450,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 Student.setTextColor(android.graphics.Color.parseColor("#f7e61c"));
                 Thirdparty.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 Servicetype = Student.getText().toString();
-                fuwfangshi = 1;
+                fuwfangshi = 3;
                 break;
             case R.id.disanf:
                 //第三方
@@ -506,7 +507,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
         double lat = (double) map.get("lat");
         double lng = (double) map.get("lng");
         Demand_init demand_init = new Demand();
-        float i = 30;
+        float i = 0;
         demand_init.ReleaseDemand(id, xuqiuneirong.getText().toString(), i, zuigrade + 1, kcid, Gender, age, xueli, provinc, location, caty, fuwfangshi - 1, start, end, lat, lng);
 
 

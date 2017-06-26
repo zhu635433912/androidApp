@@ -88,8 +88,12 @@ public class OrderFragment extends BaseFragment implements OrderView , SwipeRefr
         });
         swipeRefreshLayout.setOnRefreshListener(this);
 
+        if (User_id.getRole().equals("1")){
 
-        tuijianPresenter =  new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()),0,page);
+            tuijianPresenter =  new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()),0,page);
+        }else {
+            tuijianPresenter = new OrderPresenterImpl(this,Integer.parseInt(User_id.getUid()),1,page);
+        }
         tuijianPresenter.getOrderEntity();
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -148,7 +152,11 @@ public class OrderFragment extends BaseFragment implements OrderView , SwipeRefr
 
     @Override
     public void onRefresh() {
-        new OrderPresenterImpl(this,Integer.parseInt(User_id.getUid()),0,1).getOrderEntity();
+        if (User_id.getRole().equals("1")) {
+            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 0, 1).getOrderEntity();
+        }else {
+            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 1, 1).getOrderEntity();
+        }
     }
 
 

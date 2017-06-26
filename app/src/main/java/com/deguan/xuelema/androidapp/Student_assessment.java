@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zhy.autolayout.AutoLayoutActivity;
@@ -39,6 +40,7 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
     private LinearLayout pingfenxinji;
     private int rantoke=2;//评分
     private EditText pingjiatext;
+    private TextView pingfenTv;
 
 
     @Override
@@ -48,6 +50,7 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
         User_id.getInstance().addActivity(this);
      //   HideIMEUtil.wrap(this);
 
+        pingfenTv = (TextView) findViewById(R.id.pingfen_tv);
         pingjiafanhui= (RelativeLayout) findViewById(R.id.pingjiafanhui);
         but1= (Button) findViewById(R.id.but1);
         but2= (Button) findViewById(R.id.but2);
@@ -101,23 +104,28 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
                 break;
             case R.id.but1:
                 pingfenxinji.setBackgroundResource(R.drawable.one);
-                rantoke=3;
+                rantoke=1;
+                pingfenTv.setText("1.0");
                 break;
             case R.id.but2:
                 pingfenxinji.setBackgroundResource(R.drawable.two);
-                rantoke=3;
+                rantoke=2;
+                pingfenTv.setText("2.0");
                 break;
             case R.id.but3:
                 pingfenxinji.setBackgroundResource(R.drawable.three);
-                rantoke=2;
+                rantoke=3;
+                pingfenTv.setText("3.0");
                 break;
             case R.id.but4:
                 pingfenxinji.setBackgroundResource(R.drawable.four);
-                rantoke=2;
+                rantoke=4;
+                pingfenTv.setText("4.0");
                 break;
             case R.id.but5:
                 pingfenxinji.setBackgroundResource(R.drawable.five);
-                rantoke=1;
+                rantoke=5;
+                pingfenTv.setText("5.0");
                 break;
         }
     }

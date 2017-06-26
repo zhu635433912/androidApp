@@ -124,6 +124,9 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                     xuqiufenggexian7.setVisibility(View.GONE);
                 }
                 break;
+            case "7":
+                statuse.setText("交易完成");
+                break;
         }
 
         Log.e("aa", "订单详细收到的订单id为" + order_id + "与用户id为" + uida);
@@ -182,6 +185,8 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
             case "3":
                 order_status.setText("交易完成");
                 break;
+            case "7":
+                order_status.setText("交易完成");
         }
 
         if (User_id.getRole().equals("1")) {
@@ -265,7 +270,8 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                                 Order_init order_init = new Order();
                                 String password = User_id.getPassword();
                                 order_init.Update_Order(uid, order_id, 3, password, duration * fee);
-                                Intent intent = new Intent(Order_details.this, Student_Activty.class);
+//                                Intent intent = new Intent(Order_details.this, Student_Activty.class);
+                                Intent intent = NewMainActivity_.intent(Order_details.this).get();
                                 startActivity(intent);
                                 Toast.makeText(Order_details.this, "赶快去评价这位老师吧~", Toast.LENGTH_LONG).show();
 

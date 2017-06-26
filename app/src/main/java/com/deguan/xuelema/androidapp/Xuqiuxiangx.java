@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
@@ -186,7 +187,10 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         grade_id = Integer.parseInt((String)map.get("grade_id"));
         demand_init.getTuijianDemand_list(course_id,grade_id,User_id.getLat()+"",""+User_id.getLng(),null,null,null,listview,this,null);
         String state = (String) map.get("state");
-
+        if (!TextUtils.isEmpty(map.get("ordernum").toString())){
+            String ordernum =  map.get("ordernum").toString();
+            textView.setText("已有"+ordernum+"人接取");
+        }
         diqu.setText(state+"");
         username = (String) map.get("publisher_mobile");
 

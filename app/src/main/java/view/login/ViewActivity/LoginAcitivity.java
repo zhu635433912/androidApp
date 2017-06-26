@@ -214,8 +214,8 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
 
 //        intent= New_StudentActivity_.intent(this).extra("id",id).extra("role",role).get();
 //                new Intent(LoginAcitivity.this,MainActivity.class);
-        String role= (String) map.get("role");
-        String id= (String) map.get("id");
+        final String role= (String) map.get("role");
+        final String id= (String) map.get("id");
 //        intent.putExtra("id",id);
 //        intent.putExtra("role",role);
         intent= NewMainActivity_.intent(this).extra("id",id).extra("role",role).get();
@@ -274,7 +274,7 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
 //                Intent intent = new Intent(LoginAcitivity.this,
 //                        MainActivity.class);
 //                startActivity(intent);
-                startActivity(NewMainActivity_.intent(LoginAcitivity.this).get());
+                startActivity(NewMainActivity_.intent(LoginAcitivity.this).extra("id",id).extra("role",role).get());
                 finish();
             }
 

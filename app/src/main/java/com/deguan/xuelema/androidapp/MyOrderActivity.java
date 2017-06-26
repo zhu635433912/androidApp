@@ -46,12 +46,12 @@ public class MyOrderActivity extends AutoLayoutActivity {
     private void initData() {
         titles.add("未完成");
         titles.add("进行中");
-        titles.add("已完成");
         titles.add("待评价");
+        titles.add("已完成");
         fragments.add(NotFinishFragment_.builder().build());
         fragments.add(ConductFragment_.builder().build());
-        fragments.add(Completefragment_.builder().build());
         fragments.add(EvaluationFragment_.builder().build());
+        fragments.add(Completefragment_.builder().build());
         HomeTitleAdapter adapter = new HomeTitleAdapter(getSupportFragmentManager(),fragments,titles);
         viewPager.setAdapter(adapter);
         tableLayout.setupWithViewPager(viewPager);

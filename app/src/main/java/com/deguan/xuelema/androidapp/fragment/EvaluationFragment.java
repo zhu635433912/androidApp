@@ -94,7 +94,10 @@ public class EvaluationFragment extends BaseFragment implements PullToRefreshBas
         //清空list数据
         list.clear();
         for (int i = 0; i < listmap.size(); i++) {
-            if (!listmap.get(i).get("status").equals("9")){
+            if (listmap.get(i).get("status").equals("3")
+                    ||listmap.get(i).get("status").equals("5")
+                    ||listmap.get(i).get("status").equals("6")
+                    ){
                 list.add(listmap.get(i));
             }
         }

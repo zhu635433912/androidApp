@@ -42,7 +42,6 @@
         android:orientation="horizontal"></LinearLayout>
     <EditText
         android:id="@+id/chongzhijine"
-        android:textSize="25px"
         android:paddingBottom="5px"
         android:inputType="numberDecimal"
         android:hint="请输入充值金额"
@@ -51,8 +50,8 @@
         android:layout_marginTop="32px"
         android:layout_below="@+id/feefenggexian3"
         android:layout_centerHorizontal="true"
-        android:layout_width="200px"
-        android:layout_height="60px" />
+        android:layout_width="300px"
+        android:layout_height="100px" />
     <TextView
         android:id="@+id/feechongzhifee"
         android:layout_marginTop="20px"

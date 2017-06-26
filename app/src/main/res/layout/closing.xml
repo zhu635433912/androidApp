@@ -88,7 +88,7 @@
         android:layout_below="@+id/chengjiaolvlayout"
         android:layout_centerHorizontal="true"
         android:layout_width="680px"
-        android:layout_height="380px">
+        android:layout_height="match_parent">
     </com.handmark.pulltorefresh.library.PullToRefreshListView>
 
 </RelativeLayout>

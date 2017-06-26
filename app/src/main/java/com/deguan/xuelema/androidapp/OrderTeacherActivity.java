@@ -378,7 +378,6 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
 //                    intent2.putExtra("oredr_id", order_id+"");
 //                    startActivity(intent2);
 //                }
-
                 break;
             case R.id.ordettuikuan:
                 //订单退款

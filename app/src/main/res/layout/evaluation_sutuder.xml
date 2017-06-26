@@ -76,8 +76,9 @@
     <TextView
         android:textSize="30px"
         android:text="4.0"
+        android:id="@+id/pingfen_tv"
         android:layout_marginLeft="20px"
-        android:layout_toEndOf="@+id/pingfenxinji"
+        android:layout_toRightOf="@+id/pingfenxinji"
         android:layout_alignBottom="@+id/pingfenxinji"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

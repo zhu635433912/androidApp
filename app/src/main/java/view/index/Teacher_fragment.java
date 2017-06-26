@@ -917,7 +917,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
             entity.setDistance((String) maps.get(i).get("distance"));
             entity.setFee(String.valueOf(maps.get(i).get("fee")));
             entity.setGrade_name((String)maps.get(i).get("grade_name"));
-            if ((maps.get(i).get("status")).equals("1")){
+            if ((maps.get(i).get("status")).equals("1")||maps.get(i).get("status").equals("2")){
                 continue;
             }
             lists.add(entity);

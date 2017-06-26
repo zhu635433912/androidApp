@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import modle.Adapter.CompleteAdapter;
 import modle.Adapter.Order_StudionAdabt;
 import modle.Order_Modle.Order;
 import modle.Order_Modle.Order_init;
@@ -33,7 +34,7 @@ public class Completefragment extends BaseFragment implements PullToRefreshBase.
 
     @ViewById(R.id.tuijian_listview)
     PullToRefreshListView listView;
-    private Order_StudionAdabt studionAdabt;
+    private CompleteAdapter studionAdabt;
     private List<Map<String,Object>> list=new ArrayList<>();
     private Order_init orderInit;
     private int uid;
@@ -41,7 +42,7 @@ public class Completefragment extends BaseFragment implements PullToRefreshBase.
 
     @Override
     public void initView() {
-        studionAdabt=new Order_StudionAdabt(list,getContext());
+        studionAdabt=new CompleteAdapter(list,getContext());
         listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
         listView.setOnRefreshListener(this);
         listView.setAdapter(studionAdabt);
@@ -63,6 +64,7 @@ public class Completefragment extends BaseFragment implements PullToRefreshBase.
                 String duration = (String) map.get("duration");
                 Intent intent = null;
                 if (User_id.getRole().equals("1")) {
+
                     intent = new Intent(getActivity(), Order_details.class);
                 }else {
                     intent = new Intent(getActivity(), OrderTeacherActivity.class);
@@ -70,7 +72,7 @@ public class Completefragment extends BaseFragment implements PullToRefreshBase.
 //                Intent intent = new Intent(getActivity(), Order_details.class);
                 intent.putExtra("oredr_id", ida);
                 intent.putExtra("duration", duration);
-                intent.putExtra("status", 4+"");
+                intent.putExtra("status", 7+"");
                 startActivity(intent);
             }
         });
@@ -88,7 +90,10 @@ public class Completefragment extends BaseFragment implements PullToRefreshBase.
         //清空list数据
         list.clear();
         for (int i = 0; i < listmap.size(); i++) {
-            if (!listmap.get(i).get("status").equals("9")){
+            if (listmap.get(i).get("status").equals("3")
+                    ||listmap.get(i).get("status").equals("5")
+                    ||listmap.get(i).get("status").equals("6")
+                    ){
                 list.add(listmap.get(i));
             }
         }
