@@ -60,7 +60,7 @@ public class Pick_singleActivty  extends AutoLayoutActivity implements View.OnCl
         jiedanliebiaofanhui.bringToFront();
         jiedanliebiaofanhui.setOnClickListener(this);
 
-        String myid=getIntent().getStringExtra("id");
+        final String myid=getIntent().getStringExtra("id");
         Log.e("aa","接收到的参数为"+myid);
         id=Integer.parseInt(myid);
 
@@ -83,6 +83,7 @@ public class Pick_singleActivty  extends AutoLayoutActivity implements View.OnCl
                 Intent intent=new Intent(Pick_singleActivty.this,UserxinxiActivty.class);
                 intent.putExtra("user_id",teacher_id);
                 intent.putExtra("head_image",head_image);
+                intent.putExtra("myid",myid);
                 startActivity(intent);
 
             }

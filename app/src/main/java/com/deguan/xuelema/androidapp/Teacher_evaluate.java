@@ -17,6 +17,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -37,6 +38,8 @@ public class Teacher_evaluate extends AutoLayoutActivity implements View.OnClick
     private TextView pingjiafenshu;
     private PullToRefreshListView pullToRefreshListView;
     private  Teacher_init teacher_init;
+    private Evalunton_Adapdter adapdter;
+    private List<Map<String,Object>>  datas = new ArrayList<>();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,13 +58,15 @@ public class Teacher_evaluate extends AutoLayoutActivity implements View.OnClick
 //        listView.setRemoveListener(this);
         pullToRefreshListView.setMode(PullToRefreshBase.Mode.BOTH);
         pullToRefreshListView.setOnRefreshListener(this);
+        adapdter = new Evalunton_Adapdter(datas,this);
+        pullToRefreshListView.setAdapter(adapdter);
 
         //获取教师id
         String teacher_ida=getIntent().getStringExtra("teacher_id");
         teacher_id=Integer.parseInt(teacher_ida);
         int uid=Integer.parseInt(User_id.getUid());
 
-        Teacher_init teacher_init=new Teacher();
+        teacher_init=new Teacher();
         teacher_init.Get_Teacher_detailed(uid,teacher_id,this,1);
 
         teacher_init.setEvaluation_Teacher(teacher_id,this);
@@ -124,7 +129,7 @@ public class Teacher_evaluate extends AutoLayoutActivity implements View.OnClick
 
     @Override
     public void onPullDownToRefresh(PullToRefreshBase refreshView) {
-    //加载更多
+        //加载更多
 
     }
 
@@ -137,9 +142,10 @@ public class Teacher_evaluate extends AutoLayoutActivity implements View.OnClick
 
     @Override
     public void setListview(List<Map<String, Object>> listmap) {
-        Evalunton_Adapdter evalunton_adapdter=new Evalunton_Adapdter(listmap,this);
-        pullToRefreshListView.setAdapter(evalunton_adapdter);
-
+        pullToRefreshListView.onRefreshComplete();
+        datas.clear();
+        datas.addAll(listmap);
+        adapdter.notifyDataSetChanged();
     }
 
     @Override

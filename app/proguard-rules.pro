@@ -52,3 +52,9 @@
     -keep class com.amap.api.location.**{*;}
     -keep class com.amap.api.fence.**{*;}
     -keep class com.autonavi.aps.amapapi.model.**{*;}
+
+    #微信支付
+    -libraryjars libs/libammsdk.jar
+   -keep class com.tencent.mm.sdk.** {
+      *;
+   }

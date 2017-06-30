@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import modle.user_ziliao.User_id;
+
 /**
  * 　　　　　　　　┏┓　　　┏┓
  * 　　　　　　　┏┛┻━━━┛┻┓
@@ -89,8 +91,14 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
         int zongfee=keshifee*duration;
         //订单id
         String  orderid=listmap.get(position).get("id").toString();
+        if (User_id.getRole().equals("1")) {
+            hode.studentlistname.setText(listmap.get(position).get("teacher_name") + "");
+            Glide.with(context).load(listmap.get(position).get("teacher_headimg")).transform(new GlideCircleTransform(context)).into(hode.headImage);
+        }else {
+            hode.studentlistname.setText(listmap.get(position).get("placer_name")+"");
+//            Glide.with(context).load(listmap.get(position).get("teacher_headimg")).transform(new GlideCircleTransform(context)).into(hode.headImage);
 
-        hode.studentlistname.setText(listmap.get(position).get("teacher_name")+"");
+        }
         hode.xdsj.setText(listmap.get(position).get("created")+"");
         hode.nianji.setText(listmap.get(position).get("grade_name")+"");
         hode.yaoqiukemu.setText(listmap.get(position).get("course_name")+"");
@@ -120,6 +128,10 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
             case "6":
                 hode.studentkechengzhuangtai.setText("拒绝退款");
                 hode.querenshouhuo.setText("退款失败");
+                break;
+            case "7":
+                hode.studentkechengzhuangtai.setText("交易完成");
+                hode.querenshouhuo.setText("完成评价");
                 break;
 
         }
@@ -172,10 +184,12 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
         private TextView kechengjieshua;//课程节数
         private TextView orde_id;//订单id
         private TextView querenshouhuo;//付款状态
+        private ImageView headImage;//头像图片
 
         public OrderNewViewHolder(View itemView) {
             super(itemView);
             AutoUtils.autoSize(itemView);
+            headImage = (ImageView) itemView.findViewById(R.id.dianputubiao1);
             studentlistname= (TextView) itemView.findViewById(R.id.studentlistname);
             xdsj= (TextView) itemView.findViewById(R.id.xdsj);
             nianji= (TextView) itemView.findViewById(R.id.nianji);

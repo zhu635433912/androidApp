@@ -95,4 +95,11 @@ public interface Teacher_init {
 
     //更新教师课程封面
 //    public void setSubjectBackgroud(int uid,)
+
+
+    /*
+    获取推荐教师
+     */
+    public void gettuijian_Teacher1(String name);
+
 }

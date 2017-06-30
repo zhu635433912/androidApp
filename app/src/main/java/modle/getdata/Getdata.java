@@ -148,16 +148,21 @@ public class Getdata {
         });
     }
 
+
         //获取订单详细
-        public void getzfbordet(int id, int paytype, final Requirdetailed requirdetailed){
-            Call<User_Modle> call=data.getordetsiz(id,paytype);
+        public void getzfbordet(int id, final int paytype,int reward_fee , final Requirdetailed requirdetailed){
+            Call<User_Modle> call=data.getordetsiz(id,paytype,reward_fee);
 
             call.enqueue(new Callback<User_Modle>() {
                 @Override
                 public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {
-                    Map<String,Object> map=new HashMap<String, Object>();
-                    map.put("info",response.body().getContent().toString());
-                    requirdetailed.Updatecontent(map);
+                    Map<String,Object> maps=new HashMap<String, Object>();
+                    if (paytype == 1) {
+                        maps = response.body().getContent();
+                    }else if (paytype == 0){
+                        maps.put("info", response.body().getContent().toString());
+                    }
+                    requirdetailed.Updatecontent(maps);
                 }
 
                 @Override
@@ -190,16 +195,23 @@ public class Getdata {
     }
 
     //获取充值订单
-    public void getsizechongzhi(int id, float fee, int paytype, final Requirdetailed requirdetailed){
+    public void getsizechongzhi(int id, float fee, final int paytype, final Requirdetailed requirdetailed){
         Call<User_Modle> call=data.getzisdin(id,fee,paytype);
 
         call.enqueue(new Callback<User_Modle>() {
             @Override
             public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {
                 Log.e("aa","获取支付宝订单成功");
-                Map<String,Object> map=new HashMap<String, Object>();
-                map.put("info",response.body().getContent().toString());
-                requirdetailed.Updatecontent(map);
+                Map<String,Object> maps=new HashMap<String, Object>();
+                if (paytype == 2) {
+                    maps = response.body().getContent();
+                }else if (paytype == 1){
+                    maps.put("info", response.body().getContent().toString());
+                }
+                requirdetailed.Updatecontent(maps);
+//                Map<String,Object> map=new HashMap<String, Object>();
+//                map.put("info",response.body().getContent().toString());
+//                requirdetailed.Updatecontent(map);
 
             }
 

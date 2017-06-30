@@ -77,7 +77,7 @@
     <EditText
         android:id="@+id/xuqiutext"
         android:background="@null"
-        android:hint="详细说点什么"
+        android:hint="说说你的问题,想要得到怎样的帮助"
         android:textSize="30px"
         android:enabled="true"
         android:gravity="top"

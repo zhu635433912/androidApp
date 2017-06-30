@@ -24,7 +24,6 @@ public class Evalunton_Adapdter extends ListBaseAdapter {
     private final List<Map<String, Object>> listmap;
     private final Context context;
     private LayoutInflater layoutInflater;
-    private Viewhod viewhod;
 
     public Evalunton_Adapdter(List<Map<String,Object>> listmap, Context context){
         super(listmap,context);
@@ -41,17 +40,13 @@ public class Evalunton_Adapdter extends ListBaseAdapter {
 
     @Override
     public View getItemView(int position, View convertView, ViewGroup parent) {
+        Viewhod viewhod;
         if (convertView==null){
-            viewhod=new Viewhod();
-            convertView=layoutInflater.inflate(R.layout.evalunton_listview_itme,null);
-            viewhod.evalunton_name= (CircleImageView) convertView.findViewById(R.id.evaluaton_name);
-            viewhod.evalunton_username= (TextView) convertView.findViewById(R.id.evalunaton_username);
-            viewhod.evalunton_time= (TextView) convertView.findViewById(R.id.evalunaton_time);
-            viewhod.evalunton_text= (TextView) convertView.findViewById(R.id.evaluaton_text);
+            convertView=layoutInflater.inflate(R.layout.evalunton_listview_itme,parent,false);
+            viewhod=new Viewhod(convertView);
             convertView.setTag(viewhod);
-        }else {
-            viewhod= (Viewhod) convertView.getTag();
         }
+            viewhod= (Viewhod) convertView.getTag();
         Glide.with(context)
                 .load(listmap.get(position).get("headimg").toString())
                 .into(viewhod.evalunton_name);
@@ -66,6 +61,12 @@ public class Evalunton_Adapdter extends ListBaseAdapter {
         TextView evalunton_username;
         TextView evalunton_time;
         TextView evalunton_text;
+        public Viewhod(View itemView){
+            evalunton_name = (CircleImageView) itemView.findViewById(R.id.evaluaton_name);
+            evalunton_username = (TextView) itemView.findViewById(R.id.evalunaton_username);
+            evalunton_time = (TextView) itemView.findViewById(R.id.evalunaton_time);
+            evalunton_text = (TextView) itemView.findViewById(R.id.evaluaton_text);
+        }
     }
 
 }

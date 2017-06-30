@@ -135,6 +135,8 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
             case "6":
                 statuse.setText("已拒绝退款");
                 break;
+            case "7":
+                statuse.setText("已完成");
         }
 
         Log.e("aa", "订单详细收到的订单id为" + order_id + "与用户id为" + uida);
@@ -238,7 +240,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
                 order_status.setText("进行中");
                 break;
             case "3":
-                statuse.setText("待评价");
+//                statuse.setText("待评价");
                 order_status.setText("交易完成");
                 break;
             case "4":
@@ -258,6 +260,8 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
                 order_status.setText("已拒绝退款");
                 statuse.setText("已拒绝退款");
                 break;
+            case "7":
+                order_status.setText("交易完成");
         }
 
         if (User_id.getRole().equals("1")) {

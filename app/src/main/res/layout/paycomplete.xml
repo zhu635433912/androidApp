@@ -9,8 +9,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:background="@drawable/add19"
-        android:layout_width="20px"
-        android:layout_height="30px" />
+        android:layout_width="40px"
+        android:layout_height="60px" />
 
     <TextView
         android:textSize="30px"

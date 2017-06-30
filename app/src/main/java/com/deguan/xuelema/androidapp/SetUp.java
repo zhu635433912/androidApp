@@ -1,10 +1,12 @@
 package com.deguan.xuelema.androidapp;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,6 +18,8 @@ import com.zhy.autolayout.AutoLayoutActivity;
 import java.util.Set;
 
 import modle.Huanxing.cache.UserCacheManager;
+import modle.Order_Modle.Order;
+import modle.Order_Modle.Order_init;
 import modle.user_ziliao.DemoHelper;
 import modle.user_ziliao.User_id;
 import view.login.ViewActivity.RevisePsdActivity;
@@ -91,24 +95,36 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
                 startActivity(intent1);
                 break;
             case R.id.wodezhaop:
-                //清空数据登录状态数据
-                //从xml里取保存的账号
-                SharedPreferences userxml=getSharedPreferences("userxml",MODE_PRIVATE);
-                userxml.edit().remove("username").remove("password").commit();
-                SharedPreferences settings = getSharedPreferences("userstate", MODE_PRIVATE);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.remove("id");
-                editor.remove("role");
-                editor.remove("username");
-                editor.remove("password");
-                editor.remove("state");
-                editor.commit();
-                logout();
-                Intent intent2=new Intent(SetUp.this, LoginAcitivity.class);
-                startActivity(intent2);
+                new AlertDialog.Builder(SetUp.this).setTitle("学了么提示!").setMessage("确定退出?")
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //清空数据登录状态数据
+                                //从xml里取保存的账号
+                                SharedPreferences userxml=getSharedPreferences("userxml",MODE_PRIVATE);
+                                userxml.edit().remove("username").remove("password").commit();
+                                SharedPreferences settings = getSharedPreferences("userstate", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = settings.edit();
+                                editor.remove("id");
+                                editor.remove("role");
+                                editor.remove("username");
+                                editor.remove("password");
+                                editor.remove("state");
+                                editor.commit();
+                                logout();
+                                Intent intent2=new Intent(SetUp.this, LoginAcitivity.class);
+                                startActivity(intent2);
 
-                Toast.makeText(SetUp.this,"退出成功！",Toast.LENGTH_LONG).show();
-                User_id.getInstance().exit();
+                                Toast.makeText(SetUp.this,"退出成功！",Toast.LENGTH_LONG).show();
+                                User_id.getInstance().exit();
+                            }
+                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).show();
+
 
                 break;
             case R.id.jiaoshirenzheng:

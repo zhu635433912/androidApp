@@ -11,7 +11,10 @@
         android:layout_weight="1"
         android:layout_height="0dp"/>
 
-
+<View
+    android:background="#837474"
+    android:layout_width="match_parent"
+    android:layout_height="1px"/>
     <RelativeLayout
         android:background="@color/home_tab_backgroud"
         android:layout_width="match_parent"

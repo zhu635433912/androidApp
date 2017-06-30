@@ -15,16 +15,23 @@ import modle.user_ziliao.User_id;
 
 public class Hepl extends AutoLayoutActivity implements View.OnClickListener{
     private RelativeLayout bangzhufanhui;
+    private RelativeLayout xuqiuRl;
+    private RelativeLayout howToPlaceRl;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hepl);
         User_id.getInstance().addActivity(this);
 
+        xuqiuRl = (RelativeLayout) findViewById(R.id.xuqiuwenti);
+        howToPlaceRl = (RelativeLayout) findViewById(R.id.howto_place);
         bangzhufanhui= (RelativeLayout) findViewById(R.id.bangzhufanhui);
         bangzhufanhui.bringToFront();
 
         bangzhufanhui.setOnClickListener(this);
+        xuqiuRl.setOnClickListener(this);
+        howToPlaceRl.setOnClickListener(this);
     }
 
     @Override
@@ -33,6 +40,13 @@ public class Hepl extends AutoLayoutActivity implements View.OnClickListener{
             case R.id.bangzhufanhui:
                 Hepl.this.finish();
                 break;
+            case R.id.xuqiuwenti:
+                startActivity(HowToPublishActivity_.intent(this).get());
+                break;
+            case R.id.howto_place:
+                startActivity(PlaceActivity_.intent(this).get());
+                break;
+
         }
     }
 }

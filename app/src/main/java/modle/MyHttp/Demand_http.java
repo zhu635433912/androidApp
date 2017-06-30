@@ -34,7 +34,7 @@ public interface Demand_http {
      */
     @POST("index.php?s=/Service/Requirement/create_requirement")
     Call<Demtest> setDemand(@Query("uid") int uid, @Query("content") String content, @Query("fee") float fee, @Query("grade_id") int grade_id, @Query("course_id") int course_id,
-                            @Query("gender") int gender, @Query("age") int age, @Query("education_id") int education_id, @Query("province") String province, @Query("cty") String cty,
+                            @Query("gender") int gender, @Query("age") String age, @Query("education_id") int education_id, @Query("province") String province, @Query("cty") String cty,
                             @Query("state") String state, @Query("service_type") int service_type,
                             @Query("start") String start,@Query("end") String end,@Query("lat") double lat, @Query("lng") double lng);
 
@@ -68,4 +68,9 @@ public interface Demand_http {
     @POST("index.php?s=/Service/Requirement/recommend_requirement_commend")
     Call<ContentModle> getTuijianDemandList(@Query("course_id") int course_id, @Query("grade_id") int grade_id
     ,@Query("lat") String lat, @Query("lng") String lng,@Query("province") String province, @Query("city") String city,@Query("state") String state);
+
+    @POST("index.php?s=/Service/Requirement/recommend_requirement_commend")
+    Call<ContentModle> getTuijianDemandList1(@Query("name") String name);
+
+
 }

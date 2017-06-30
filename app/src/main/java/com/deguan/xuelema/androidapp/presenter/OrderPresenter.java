@@ -34,4 +34,6 @@ package com.deguan.xuelema.androidapp.presenter;
  */
 public interface OrderPresenter {
     void getOrderEntity();
+    void getNofinishOrderEntity(int status);
+    void getEvaluateOrderEntity(int status,int order_rank);
 }

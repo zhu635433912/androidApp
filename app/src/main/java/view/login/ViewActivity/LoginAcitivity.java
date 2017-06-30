@@ -274,8 +274,8 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
 //                Intent intent = new Intent(LoginAcitivity.this,
 //                        MainActivity.class);
 //                startActivity(intent);
-                startActivity(NewMainActivity_.intent(LoginAcitivity.this).extra("id",id).extra("role",role).get());
-                finish();
+//                startActivity(NewMainActivity_.intent(LoginAcitivity.this).extra("id",id).extra("role",role).get());
+//                finish();
             }
 
             @Override

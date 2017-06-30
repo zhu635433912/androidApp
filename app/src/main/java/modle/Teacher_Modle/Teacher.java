@@ -536,4 +536,32 @@ public class Teacher implements Teacher_init {
         });
     }
 
+    /*
+  获取推荐教师
+   */
+    @Override
+    public void gettuijian_Teacher1(String name) {
+        Call<ContentModle> call=teacher_http.gettuijianjiaoshi1(name);
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    Log.e("aa","获取推荐教师成功");
+                    List<Map<String,Object>> list=new ArrayList<Map<String, Object>>();
+                    list=response.body().getContent();
+                    teacherView.successTeacher(list);
+                }else {
+                    Log.e("aa","获取推荐教师失败");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                Log.e("aa","获取推荐教师异常错误");
+            }
+        });
+    }
+
+
 }

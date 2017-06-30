@@ -114,4 +114,8 @@ Call<TuijianListEntity> gettuijianjiaoshi(
 
     @POST("index.php?s=/Service/Teacher/update_information")
     Call<Demtest> getsubjectBackgroud(@Query("uid") int uid,@Query("class_img") String class_img);
+    //搜索老师
+    @POST("index.php?s=/Service/Teacher/recommend_teacher")
+    Call<ContentModle> gettuijianjiaoshi1(  @Query("name") String name);
+
 }

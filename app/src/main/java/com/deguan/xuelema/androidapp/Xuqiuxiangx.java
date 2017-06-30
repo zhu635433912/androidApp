@@ -87,6 +87,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     private int filter_id = 0;
     private int course_id ;
     private int grade_id  ;
+    private TextView xueliTv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,6 +95,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         setContentView(R.layout.xuqiulayout);
         User_id.getInstance().addActivity(this);
 
+        xueliTv = (TextView) findViewById(R.id.xuqiu_xueli_tv);
         kemuleibie= (TextView) findViewById(R.id.kemuleibie);
         nianjia= (TextView) findViewById(R.id.nianjia);
         listview = (PullToRefreshListView) findViewById(R.id.xiangsixuqiulist);
@@ -203,19 +205,22 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
             xingbie.setText("女性");
         }
 
-        if (service_type.equals("1")) {
-            fuwufang.setText("教师上门");
-        }else {
-            fuwufang.setText("学生上门");
-        }
-
+//        if (service_type.equals("1")) {
+//            fuwufang.setText("教师上门");
+//        }else {
+//            fuwufang.setText("学生上门");
+//        }
+//        if (!TextUtils.isEmpty(map.get("education_name").toString())){
+//            xueliTv.setText((String)map.get("education_name"));
+//        }
+        fuwufang.setText((String)map.get("service_type_txt"));
         shijianduan.setText(desc);
         userage.setText(age+"岁");
         Relasetime.setText(created);
         Demandcontent.setText(content);
         Requirname.setText(publisher_name);
         kemuleibie.setText(map.get("course_name")+"");
-        nianjia.setText(map.get("grade_id")+"");
+        nianjia.setText(map.get("grade_name")+"");
         setbitmap(map.get("publisher_headimg")+"");
 
     }

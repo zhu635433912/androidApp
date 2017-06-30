@@ -46,4 +46,21 @@ public interface OrderApi {
                                      @Query("page") int page);
 
     //
+    /*
+   获取未完成 已完成 进行中订单列表
+    */
+    @POST("index.php?s=/Service/Order/gets_order")
+    Call<ContentModle> getNofinishOredrlist(@Query("uid") int uid, @Query("filter_type") int filter_type,
+                                    @Query("page") int page,@Query("status")int status);
+
+    //
+    //
+    /*
+   获取未完成 已完成 进行中订单列表
+    */
+    @POST("index.php?s=/Service/Order/gets_order")
+    Call<ContentModle> getEvaluateOredrlist(@Query("uid") int uid, @Query("filter_type") int filter_type,
+                                            @Query("page") int page,@Query("status")int status,@Query("order_rank")int order_rank);
+
+    //
 }

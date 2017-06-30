@@ -30,6 +30,8 @@ import com.hyphenate.easeui.EaseUI;
 import com.hyphenate.easeui.domain.EaseUser;
 import com.hyphenate.easeui.model.EaseNotifier;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -83,6 +85,8 @@ public class User_id extends Application {
         //初始化数据库类
         DbUtil.init(this);
         TeacherDbUtil.init(this);
+        IWXAPI iwxapi = WXAPIFactory.createWXAPI(this,"wx3815ad6bb05c5aca");
+        iwxapi.registerApp("wx3815ad6bb05c5aca");
         appContext = this;
 //        EMOptions options = new EMOptions();
 //        // 默认添加好友时，是不需要验证的，改成需要验证

@@ -28,6 +28,7 @@ import com.amap.api.location.AMapLocationListener;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.deguan.xuelema.androidapp.init.Gaodehuidiao_init;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.SubjectUtil;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 
@@ -63,7 +64,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
     private TextView Twenty;
     private TextView Thirty;
     private TextView Forty;
-    private int age = 66;//最终年龄
+    private String age = "不限";//最终年龄
     private TextView Education;//学历不限
     private TextView doctor;//博士
     private TextView master;//硕士
@@ -223,7 +224,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 //发布
                 if (User_id.getRole().equals("1")) {
                     if (xuqiuneirong.getText().toString() != null) {
-                        if (Gender == 66 || age == 66 || xueli == 66 || Servicetype.equals("")) {
+                        if (Gender == 66  || xueli == 66 || Servicetype.equals("")) {
                             Toast.makeText(Xuqiufabu.this, "请选择性别年龄要求类型！", Toast.LENGTH_SHORT).show();
                         } else {
                             if (Subject.getText().toString().equals("年级") || grade.getText().toString().equals("科目")) {
@@ -287,9 +288,29 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 builder.show();
                 break;
             case R.id.xuanzekemu:
-                //获取科目数据
-                Getdata getdata = new Getdata();
-                getdata.getGrade(this);
+//                //获取科目数据
+//                Getdata getdata = new Getdata();
+//                getdata.getGrade(this);
+                //课程种类
+                AlertDialog.Builder kemu = new AlertDialog.Builder(Xuqiufabu.this);
+                kemu.setIcon(R.drawable.add04);
+                kemu.setTitle("请选择一个科目");
+                //    指定下拉列表的显示数据
+                final String[] subjects = new String[SubjectUtil.getSubjectList().size()];
+                for (int i = 0; i < subjects.length ; i++) {
+                    subjects[i] = SubjectUtil.getSubjectList().get(i).getSubjectName();
+                }
+                //    设置一个下拉的列表选择项
+                kemu.setItems(subjects, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(Xuqiufabu.this, "选择的科目为：" + SubjectUtil.getSubjectList().get(which).getSubjectName(), Toast.LENGTH_SHORT).show();
+                        grade.setText(SubjectUtil.getSubjectList().get(which).getSubjectName());
+                        kcid = Integer.parseInt(SubjectUtil.getSubjectList().get(which).getSubjectId());
+                    }
+                });
+                kemu.show();
+                kemu.setCancelable(true);
                 break;
 
             case R.id.kaishishijian:
@@ -353,7 +374,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 Thirty.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 Twenty.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 Forty.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
-                age = 0;
+                age = "不限";
                 break;
             case R.id.er_san:
                 //20-30
@@ -361,7 +382,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 Thirty.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 Twenty.setTextColor(android.graphics.Color.parseColor("#f7e61c"));
                 Forty.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
-                age = 25;
+                age = "20-30";
                 break;
             case R.id.san_si:
                 //30-40
@@ -369,7 +390,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 Thirty.setTextColor(android.graphics.Color.parseColor("#f7e61c"));
                 Twenty.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 Forty.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
-                age = 35;
+                age = "30-40";
                 break;
             case R.id.sijia:
                 //40+
@@ -377,7 +398,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 Thirty.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 Twenty.setTextColor(android.graphics.Color.parseColor("#8b8b8b"));
                 Forty.setTextColor(android.graphics.Color.parseColor("#f7e61c"));
-                age = 40;
+                age = "40+";
                 break;
             case R.id.xuelibuxian:
                 //学历不限
@@ -462,8 +483,8 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 fuwfangshi = 3;
                 break;
             case R.id.userweizhi:
-                pvoptions();
-                break;
+//                pvoptions();
+//                break;
 
         }
     }
@@ -485,12 +506,12 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
             cities[i] = a;
         }
         //    设置一个下拉的列表选择项
-        kemu.setItems(cities, new DialogInterface.OnClickListener() {
+        kemu.setItems(SubjectUtil.getSubjectList().size(), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(Xuqiufabu.this, "选择的科目为：" + cities[which], Toast.LENGTH_SHORT).show();
-                grade.setText(cities[which]);
-                kcid = kcid + which;
+                Toast.makeText(Xuqiufabu.this, "选择的科目为：" + SubjectUtil.getSubjectList().get(which).getSubjectName(), Toast.LENGTH_SHORT).show();
+                grade.setText(SubjectUtil.getSubjectList().get(which).getSubjectName());
+                kcid = Integer.parseInt(SubjectUtil.getSubjectList().get(which).getSubjectId());
             }
         });
         kemu.show();

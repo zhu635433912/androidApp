@@ -45,9 +45,9 @@
             android:id="@+id/kemuleibie"
             android:layout_marginTop="14px"
             android:text="英语"
+            android:layout_marginLeft="260px"
             android:textColor="#fff"
             android:layout_below="@+id/xuqiuxiangxi"
-            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -144,6 +144,7 @@
             android:layout_width="65px"
             android:layout_height="65px" />
         <TextView
+            android:id="@+id/xuqiu_xueli_tv"
             android:textSize="30px"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/xuqiubenke"

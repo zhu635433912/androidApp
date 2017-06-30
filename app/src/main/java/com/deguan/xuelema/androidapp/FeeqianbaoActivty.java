@@ -28,6 +28,9 @@ import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
 import com.deguan.xuelema.androidapp.viewimpl.CashView;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.List;
@@ -53,7 +56,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
     private TextView mingofee;
     private TextView textView4;
     private PopupWindow rechargePopwindow,cashPopwindow;
-    private int flag = 1;
+    private int flag = 0;
     private Getdata getdata;
     private int uid;
 
@@ -174,11 +177,13 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(rechargeFee.getText().toString())){
                     Float money = Float.parseFloat(rechargeFee.getText().toString());
-                    flag = 2;
                     if (rechargeFlag == 1){
+                        flag = 2;
                         getdata.getsizechongzhi(Integer.parseInt(User_id.getUid()),money,1,FeeqianbaoActivty.this);
                     }else {
-                        Toast.makeText(FeeqianbaoActivty.this, "暫不可用", Toast.LENGTH_SHORT).show();
+                        flag = 1;
+                        getdata.getsizechongzhi(Integer.parseInt(User_id.getUid()),money,2,FeeqianbaoActivty.this);
+//                        Toast.makeText(FeeqianbaoActivty.this, "暫不可用", Toast.LENGTH_SHORT).show();
                     }
                 }else {
                     Toast.makeText(FeeqianbaoActivty.this, "请输入充值金额", Toast.LENGTH_SHORT).show();
@@ -281,7 +286,22 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
     private double myBalance =0 ;
     @Override
     public void Updatecontent(Map<String, Object> map) {
-        if (flag == 2){
+        if (flag == 1){
+            IWXAPI iwxapi = WXAPIFactory.createWXAPI(this,Payment_Activty.APP_ID);
+            iwxapi.registerApp(Payment_Activty.APP_ID);
+            PayReq payReq = new PayReq();
+            payReq.appId = Payment_Activty.APP_ID;
+            payReq.partnerId = map.get("partnerid").toString();
+            payReq.nonceStr = map.get("noncestr").toString();
+            payReq.packageValue = map.get("package").toString();
+            payReq.prepayId = map.get("prepayid").toString();
+            payReq.timeStamp = ""+map.get("timestamp").toString();
+            Log.d("aa","timestamp---------"+payReq.timeStamp);
+            payReq.sign = map.get("sign").toString();
+            Log.d("aa",payReq.appId+"----"+payReq.partnerId+"----"+payReq.nonceStr+"----"+payReq.packageValue+"----"+payReq.prepayId+"----"+payReq.sign+"----");
+            iwxapi.sendReq(payReq);
+            flag = 0;
+        }else if (flag == 2){
             //获取去服务器返回的支付宝订单信息再去唤起支付宝
             String info=(String) map.get("info");
             String ordert=info.substring(13);
@@ -307,7 +327,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
             // 必须异步调用
             Thread payThread = new Thread(payRunnable);
             payThread.start();
-            flag = 1;
+            flag = 0;
         }else {
             if (map.get("fee") != null) {
                 myBalance = (double) map.get("fee");

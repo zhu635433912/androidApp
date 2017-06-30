@@ -110,6 +110,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private TextView courseExplain;
     private TextView courseType;
     private TextView courseNametV;
+    private String myid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -150,6 +151,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         gerxxxuexiquan.setOnClickListener(this);
         grfanhui.setOnClickListener(this);
 
+        myid = getIntent().getStringExtra("myid");
         final String user_id=getIntent().getStringExtra("user_id");
         Log.e("aa","UserxinActivyt接收到老师id为"+user_id);
         int id=Integer.parseInt(User_id.getUid());
@@ -317,7 +319,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                                 int uid=Integer.parseInt(User_id.getUid());
                                 Order_init order_init=new Order();
                                 //创建订单
-                                order_init.Establish_Order(uid,teacherId,739,coursefee,courseNumber,Integer.parseInt(courseId),Integer.parseInt(gradeId));
+                                order_init.Establish_Order(uid,teacherId,Integer.parseInt(myid),coursefee,courseNumber,Integer.parseInt(courseId),Integer.parseInt(gradeId),servicetype);
                                 Toast.makeText(UserxinxiActivty.this,"购买课程成功",Toast.LENGTH_SHORT).show();
                                 Intent intent=new Intent(UserxinxiActivty.this, Student_Activty.class);
                                 startActivity(intent);

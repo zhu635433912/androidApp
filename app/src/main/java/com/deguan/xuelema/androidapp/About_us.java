@@ -62,10 +62,10 @@ public class About_us extends AutoLayoutActivity implements View.OnClickListener
     @Override
     public void Updatecontent(Map<String, Object> map) {
 
-        webo.setText(map.get("weibo")+"");
-        kefuxinxi.setText(map.get("tel")+"");
-        webwangzhi.setText(map.get("web")+"");
-        dizhi.setText(map.get("email")+"");
+//        webo.setText(map.get("weibo")+"");
+//        kefuxinxi.setText(map.get("tel")+"");
+//        webwangzhi.setText(map.get("web")+"");
+//        dizhi.setText(map.get("email")+"");
 
     }
 

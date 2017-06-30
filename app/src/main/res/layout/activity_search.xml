@@ -1,12 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.deguan.xuelema.androidapp.SearchActivity">
-    <TextView
-        android:text="搜索页面"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/search_back"
+            android:layout_width="120px"
+            android:layout_height="80px">
+        </RelativeLayout>
+        <ImageButton
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="20px"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/add19"
+            android:layout_width="20px"
+            android:layout_height="30px" />
+        <TextView
+            android:textSize="35px"
+            android:layout_marginTop="20px"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="搜搜搜"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:background="#d7d7d7"
+            android:layout_marginTop="80px"
+            android:layout_below="@+id/neirongtext"
+            android:layout_width="match_parent"
+            android:layout_height="1px" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/myrelayout"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="80px">
+    <ImageView
+        android:id="@+id/naxte"
+        android:layout_alignParentRight="true"
+        android:layout_width="110px"
+        android:layout_marginRight="20px"
+        android:layout_height="80px"
+        android:src="@drawable/sousuo" />
+
+    <EditText
+        android:background="@drawable/yuanjiao"
+        android:paddingLeft="25px"
+        android:textSize="25px"
+        android:layout_marginLeft="30px"
+        android:textColor="#c16767"
+        android:hint="输入你要查询的内容"
+        android:id="@+id/text_search"
+        android:layout_width="550px"
+        android:layout_height="80px"
+        />
+
+    </RelativeLayout>
+<ListView
+    android:divider="@null"
+    android:id="@+id/searlist"
+    android:layout_below="@+id/myrelayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"></ListView>
+
+
 </LinearLayout>

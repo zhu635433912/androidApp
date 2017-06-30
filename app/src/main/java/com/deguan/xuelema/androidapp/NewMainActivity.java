@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.deguan.xuelema.androidapp.fragment.BaseFragment_;
 import com.deguan.xuelema.androidapp.fragment.Teacher_infofragment;
 import com.deguan.xuelema.androidapp.fragment.Teacher_infofragment_;
 import com.deguan.xuelema.androidapp.fragment.TestFragment;
@@ -81,7 +82,7 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed {
             imageView.setImageResource(R.drawable.logo);
         }
         fragments.add(new Teacher_fragment());
-        fragments.add(new Teacher_fragment());
+        fragments.add(BaseFragment_.builder().build());
 //        fragments.add(new Teacher_fragment());
         if (User_id.getRole().equals("1")) {
             fragments.add(New_StudentFragment_.builder().build());

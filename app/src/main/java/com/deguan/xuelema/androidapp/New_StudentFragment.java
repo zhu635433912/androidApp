@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.fragment.BaseFragment;
 import com.deguan.xuelema.androidapp.fragment.MyPublishFragment_;
+import com.deguan.xuelema.androidapp.fragment.NewOrderFragment;
+import com.deguan.xuelema.androidapp.fragment.NewOrderFragment_;
 import com.deguan.xuelema.androidapp.fragment.OrderFragment_;
 import com.deguan.xuelema.androidapp.fragment.TestFragment;
 import com.deguan.xuelema.androidapp.fragment.TuijianFragment_;
@@ -129,12 +131,13 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
 
     @Override
     public void initData() {
-        titles.add("推荐教师");
         titles.add("我的发布");
         titles.add("我的订单");
-        fragments.add(TuijianFragment_.builder().build());
+        titles.add("推荐教师");
         fragments.add(MyPublishFragment_.builder().build());
-        fragments.add(OrderFragment_.builder().build());
+        fragments.add(NewOrderFragment_.builder().build());
+        fragments.add(TuijianFragment_.builder().build());
+//        fragments.add(OrderFragment_.builder().build());
 //        fragments.add(TuijianFragment_.builder().build());
 //        fragments.add(new TestFragment());
 //        fragments.add(new TestFragment());

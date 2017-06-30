@@ -339,6 +339,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
 //                    intent.putExtra("user_id", uid);
                     intent.putExtra("head_image",teachers.get(position-1).getUser_headimg());
                     intent.putExtra("user_id",teachers.get(position-1).getUser_id());
+                    intent.putExtra("myid","1");
                     startActivity(intent);
                 }else {
                     //进入学生
@@ -719,31 +720,21 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
         subjectDialog.setIcon(R.drawable.add04);
         subjectDialog.setTitle("请选择一个科目");
         //    指定下拉列表的显示数据
-        final String[] subjectIds = new String[79];
-        final String[] cities = new String[79];
-        for (int i = 0; i < SubjectUtil.getSubjects().size() + 1; i++) {
-            int z = 206 + i;
-//            if (!TextUtils.isEmpty(SubjectUtil.getSubjects().get(z+"")))
-//                continue;
-            String a =  SubjectUtil.getSubjects().get(z + "");
-//            if (!TextUtils.isEmpty(a))
-//                continue;
-            if (z == 285) {
-                break;
-            }
-            subjectIds[i] = z+"";
-            cities[i] = a;
+        final String[] subjects = new String[SubjectUtil.getSubjectList().size()];
+        for (int i = 0; i < subjects.length ; i++) {
+            subjects[i] = SubjectUtil.getSubjectList().get(i).getSubjectName();
         }
         //    设置一个下拉的列表选择项
-        subjectDialog.setItems(cities, new DialogInterface.OnClickListener() {
+        subjectDialog.setItems(subjects, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getActivity(), "选择的科目为：" + cities[which], Toast.LENGTH_SHORT).show();
-                otherTv.setText(cities[which]);
-                kemu = Integer.parseInt(subjectIds[which]);
+                Toast.makeText(getActivity(), "选择的科目为：" + SubjectUtil.getSubjectList().get(which).getSubjectName(), Toast.LENGTH_SHORT).show();
+                otherTv.setText(SubjectUtil.getSubjectList().get(which).getSubjectName());
+                kemu = Integer.parseInt(SubjectUtil.getSubjectList().get(which).getSubjectId());
             }
         });
         subjectDialog.show();
+        subjectDialog.setCancelable(true);
     }
 
 

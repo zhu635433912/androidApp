@@ -83,4 +83,51 @@ public class OrderPresenterImpl implements OrderPresenter {
             }
         },uid,filter_type,page);
     }
+    @Override
+    public void getNofinishOrderEntity(int status) {
+        ModelFactory.getInstance().getOrderModelImpl().getNoFinishOrderData(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    Log.e("aa","获取推荐教师成功");
+                    List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
+                    list=response.body().getContent();
+                    orderView.successOrder(list);
+                }else {
+                    orderView.failOrder("获取推荐教师失败");
+                    Log.e("aa","获取推荐教师失败");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                orderView.failOrder("网络错误");
+            }
+        },uid,filter_type,page,status);
+    }
+
+    @Override
+    public void getEvaluateOrderEntity(int status, int order_rank) {
+        ModelFactory.getInstance().getOrderModelImpl().getEvaluateOrderData(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    Log.e("aa","获取推荐教师成功");
+                    List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
+                    list=response.body().getContent();
+                    orderView.successOrder(list);
+                }else {
+                    orderView.failOrder("获取推荐教师失败");
+                    Log.e("aa","获取推荐教师失败");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                orderView.failOrder("网络错误");
+            }
+        },uid,filter_type,page,status,order_rank);
+    }
 }

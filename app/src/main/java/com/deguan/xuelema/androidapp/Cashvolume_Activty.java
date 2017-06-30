@@ -132,8 +132,6 @@ public class Cashvolume_Activty extends AutoLayoutActivity implements PullToRefr
                 Cashvolume_Activty.this.finish();
                 break;
         }
-//        EMConversation conversation = EMChatManager.getInstance().getConversation(User_id.getUsername());
-//        conversation.getUnreadMsgCount();
     }
 
     private int cashTicket;

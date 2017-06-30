@@ -146,7 +146,7 @@ public class Demand implements Demand_init {
        发布需求
        */
     @Override
-    public Map<String, Object> ReleaseDemand(int id, String content, float fee, int grade_id, int course_id, int gender, int age, int education_id,
+    public Map<String, Object> ReleaseDemand(int id, String content, float fee, int grade_id, int course_id, int gender, String age, int education_id,
                                              String province, String cty, String state, int serice_type,String start,String ent,double lat,double lng) {
      Call<Demtest> call=demand_http.setDemand(id,content,fee,grade_id,course_id,gender,age,education_id,province,cty,state,serice_type,start,ent,lat,lng);
         call.enqueue(new Callback<Demtest>() {
@@ -239,6 +239,41 @@ public class Demand implements Demand_init {
     @Override
     public void getTuijianDemand_list(int course_id, int grade_id, String lat, String lng, String province, String city, String state, PullToRefreshListView listView, Context context, Student_init requirdetailed) {
         Call<ContentModle> call=demand_http.getTuijianDemandList(course_id,grade_id,lat,lng,province,city,state);
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                String errpr=response.body().getError();
+                if (errpr.equals("ok")) {
+                    List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
+                    listmap = response.body().getContent();
+                    Log.e("aa", "listmap=" + listmap);
+//                    if (student_init == null) {
+//                        //回调设置listview
+//                        Myconteol_init myconteol_init = new Mycontrol();
+//                        myconteol_init.huidiao(listmap, role, listView, context);
+//                    }else {
+//                        student_init.setListview1(listmap);
+//                    }
+                    similarXuqiuView.successSimilarXuqiu(listmap);
+
+                }else {
+                    String errmsg=response.body().getErrmsg();
+                    Log.e("aa","获取需求列表失败错误="+errmsg);
+                    similarXuqiuView.failSimilarXuqiu(errmsg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                Log.e("aa","获取需求列表异常错误"+t.toString());
+                similarXuqiuView.failSimilarXuqiu("网络错误");
+            }
+        });
+    }
+
+    @Override
+    public void getTuijianDemand_list1(String name) {
+        Call<ContentModle> call=demand_http.getTuijianDemandList1(name);
         call.enqueue(new Callback<ContentModle>() {
             @Override
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {

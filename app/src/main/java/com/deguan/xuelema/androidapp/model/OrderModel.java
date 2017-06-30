@@ -38,4 +38,7 @@ import retrofit2.Callback;
 public interface OrderModel {
     void getOrderData(Callback<ContentModle> callback, int uid, int filter_type, int page);
 
+     void getNoFinishOrderData(Callback<ContentModle> callback, int uid, int filter_type, int page,int status);
+
+     void getEvaluateOrderData(Callback<ContentModle> callback, int uid, int filter_type, int page,int status,int order_rank);
 }

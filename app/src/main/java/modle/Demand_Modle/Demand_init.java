@@ -49,7 +49,7 @@ public interface Demand_init {
      * service_type   服务方式
      * items          时间段
      */
-    public Map<String,Object> ReleaseDemand(int id,String content,float fee,int grade_id,int course_id,int gender,int age,int education_id,String province,String
+    public Map<String,Object> ReleaseDemand(int id,String content,float fee,int grade_id,int course_id,int gender,String age,int education_id,String province,String
                                             cty,String state,int serice_type,String start,String ent,double lng,double lat);
     /**更新需求
      * uid            用户id
@@ -88,5 +88,7 @@ public interface Demand_init {
         相似需求
      */
     public void getTuijianDemand_list(int course_id, int grade_id, String lat, String lng, String province, String city, String state, PullToRefreshListView listView, Context context, Student_init requirdetailed);
+    //搜索
+    public void getTuijianDemand_list1(String name);
 
 }

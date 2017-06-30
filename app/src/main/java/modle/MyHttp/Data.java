@@ -1,5 +1,7 @@
 package modle.MyHttp;
 
+import com.deguan.xuelema.androidapp.entities.PayEntity;
+
 import modle.JieYse.ContentModle;
 import modle.JieYse.Courses_Modle;
 import modle.JieYse.Demtest;
@@ -40,10 +42,14 @@ public interface Data {
 
 
     //获取支付宝订单
-    @GET("index.php?s=/Service/Order/dopay")
-    Call<User_Modle> getordetsiz(@Query("id") int id,@Query("paytype") int paytype);
+    @POST("index.php?s=/Service/Order/dopay")
+    Call<User_Modle> getordetsiz(@Query("id") int id,@Query("paytype") int paytype
+            ,@Query("reward_fee")int reward_fee);
 
-
+    //获取支付宝订单
+    @POST("index.php?s=/Service/Order/dopay")
+    Call<PayEntity> getpayMsg(@Query("id") int id, @Query("paytype") int paytype
+            ,@Query("reward_fee")int reward_fee);
     //关于我们
     @POST("index.php?s=/Service/Setup/aboutus")
     Call<User_Modle> getabotuse();

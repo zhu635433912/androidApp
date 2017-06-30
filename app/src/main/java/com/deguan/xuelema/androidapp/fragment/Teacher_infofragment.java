@@ -38,23 +38,23 @@ import modle.user_ziliao.User_id;
  */
 @EFragment(R.layout.teacher_fragmengt)
 public class Teacher_infofragment extends BaseFragment implements Requirdetailed ,View.OnClickListener{
-    @ViewById
+    @ViewById(R.id.techaer_massge)
     ImageView techaer_massge;
-    @ViewById
+    @ViewById(R.id.teacher_setup)
     ImageView teacher_setup;
-    @ViewById
+    @ViewById(R.id.myfee)
     ImageView myfee;
-    @ViewById
+    @ViewById(R.id.teacher_loc)
     CircleImageView teacher_loc;
-    @ViewById
+    @ViewById(R.id.huanxin_but)
     ImageView huanxin_but;
-    @ViewById
+    @ViewById(R.id.teacher_name)
     TextView teacher_name;
-    @ViewById
+    @ViewById(R.id.teacher_autograph)
     TextView teacher_autograph;
-    @ViewById
+    @ViewById(R.id.new_teacher_tablayout)
     TabLayout new_teacher_tablayout;
-    @ViewById
+    @ViewById(R.id.new_techaer_viewpage)
     ViewPager new_techaer_viewpage;
     @ViewById(R.id.toolbar)
     Toolbar toolbar;
@@ -92,7 +92,8 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
         tlebat.add("推荐需求");
         tlebat.add("我的订单");
         fragments.add(DmadFragmengt_.builder().build());
-        fragments.add(OrderFragment_.builder().build());
+//        fragments.add(OrderFragment_.builder().build());
+        fragments.add(NewOrderFragment_.builder().build());
         HomeTitleAdapter adapter = new HomeTitleAdapter(getFragmentManager(),fragments,tlebat);
         new_techaer_viewpage.setAdapter(adapter);
         new_teacher_tablayout.setupWithViewPager(new_techaer_viewpage);
