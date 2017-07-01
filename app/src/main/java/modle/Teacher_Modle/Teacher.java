@@ -131,7 +131,7 @@ public class Teacher implements Teacher_init {
     获取教师列表
      */
     @Override
-    public List<Map<String, Object>> Get_Teacher_list(int uid, final int role, double lat, double lng, final PullToRefreshListView listView, final Context context, int order, String
+    public List<Map<String, Object>> Get_Teacher_list(int uid, final int role, String lat, String lng, final PullToRefreshListView listView, final Context context, int order, String
             state, int gender, int speciality, int grade_type, int order_rank, final Requirdetailed requirdetailed,int page) {
         Call<ContentModle> call=teacher_http.getTeacherlist(uid,lat,lng,order,state,gender,speciality,grade_type,order_rank);
         listmap=new ArrayList<Map<String, Object>>();
@@ -519,9 +519,9 @@ public class Teacher implements Teacher_init {
         call.enqueue(new Callback<ContentModle>() {
             @Override
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
-                if (response.equals("ok")){
+                if (response.body().getError().equals("ok")){
                     List<Map<String,Object>> listmap=new ArrayList<Map<String, Object>>();
-                    listmap=response.body().getContent();
+                    listmap.addAll(response.body().getContent());
                     student_init.setListview(listmap);
                 }else {
                     Log.e("aa","获取教师列表错误"+response.body().getErrmsg());
@@ -540,8 +540,8 @@ public class Teacher implements Teacher_init {
   获取推荐教师
    */
     @Override
-    public void gettuijian_Teacher1(String name) {
-        Call<ContentModle> call=teacher_http.gettuijianjiaoshi1(name);
+    public void gettuijian_Teacher1(String name,String lat,String lng) {
+        Call<ContentModle> call=teacher_http.gettuijianjiaoshi1(name,lat,lng);
         call.enqueue(new Callback<ContentModle>() {
             @Override
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {

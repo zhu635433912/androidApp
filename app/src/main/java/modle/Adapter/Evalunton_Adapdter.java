@@ -9,6 +9,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +55,12 @@ public class Evalunton_Adapdter extends ListBaseAdapter {
                 .load(listmap.get(position).get("headimg").toString())
                 .into(viewhod.evalunton_name);
         viewhod.evalunton_username.setText(listmap.get(position).get("nickname")+"");
-        viewhod.evalunton_time.setText(listmap.get(position).get("created")+"");
+
+
+        Date d = new Date(Long.parseLong(listmap.get(position).get("created")+"")*1000);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        viewhod.evalunton_time.setText(sdf.format(d));
+//        viewhod.evalunton_time.setText(listmap.get(position).get("created")+"");
         viewhod.evalunton_text.setText(listmap.get(position).get("content")+"");
         return convertView;
     }

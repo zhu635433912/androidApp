@@ -310,7 +310,9 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
             break;
 
             case R.id.baocun:
-                EventBus.getDefault().post(image,"headUrl");
+                if (image != null) {
+                    EventBus.getDefault().post(image, "headUrl");
+                }
                 finish();
                 Toast.makeText(this,"更新资料成功！",Toast.LENGTH_SHORT).show();
 
@@ -466,7 +468,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
             if (!TextUtils.isEmpty(filePath)) {
 
                 // 自定义大小，防止OOM
-                Bitmap bitmap = getSmallBitmap(filePath, 200, 200);
+                Bitmap bitmap = getSmallBitmap(filePath, 400, 400);
                 //获取图片
                 usertoux.setImageBitmap(bitmap);
                 Log.e("aa","路劲为"+filePath);

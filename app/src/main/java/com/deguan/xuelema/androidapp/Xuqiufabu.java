@@ -107,6 +107,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
 
                 if (aMapLocation.getErrorCode() == 0) {
                     //可在其中解析amapLocation获取相应内容。
+
                     userweizhi.setText(aMapLocation.getProvince().toString() + aMapLocation.getCity().toString()
                             + aMapLocation.getDistrict().toString() + aMapLocation.getStreet().toString() +
                             aMapLocation.getStreetNum().toString());
@@ -529,7 +530,10 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
         double lng = (double) map.get("lng");
         Demand_init demand_init = new Demand();
         float i = 0;
-        demand_init.ReleaseDemand(id, xuqiuneirong.getText().toString(), i, zuigrade + 1, kcid, Gender, age, xueli, provinc, location, caty, fuwfangshi - 1, start, end, lat, lng);
+        if (userweizhi.getText() ==null){
+            userweizhi.setText(User_id.getAddress());
+        }
+        demand_init.ReleaseDemand(id, xuqiuneirong.getText().toString(), i, zuigrade + 1, kcid, Gender, age, xueli, provinc, location, caty, fuwfangshi - 1, start, end, lat, lng,userweizhi.getText().toString());
 
 
     }

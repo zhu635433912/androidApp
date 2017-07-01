@@ -73,9 +73,11 @@ public class DmadAdapter extends RecyclerView.Adapter<DmadAdapter.MyViewHolder> 
         }
         Glide.with(context).load(listmap.get(position).get("publisher_headimg").toString())
                 .transform(new GlideCircleTransform(context)).into(holder.lognhost);
-        holder.text2.setText(listmap.get(position).get("grade_name").toString());
-        holder.text4.setText(listmap.get(position).get("course_name").toString());
-        holder.text6.setText(listmap.get(position).get("content").toString());
+        if (listmap.get(position).get("grade_name")!=null) {
+            holder.text2.setText(listmap.get(position).get("grade_name").toString() + "");
+        }
+        holder.text4.setText(listmap.get(position).get("course_name").toString()+"");
+        holder.text6.setText(listmap.get(position).get("content").toString()+"");
 //        holder.text7.setText(listmap.get(position).get("distance").toString());
         String dist = listmap.get(position).get("distance").toString();
         int myDist = 0;
@@ -83,7 +85,7 @@ public class DmadAdapter extends RecyclerView.Adapter<DmadAdapter.MyViewHolder> 
             myDist = Integer.parseInt(dist)/1000;
         }
 //        int lat = myDist/1000;
-        holder.text7.setText(myDist+"km");
+        holder.text7.setText(myDist+"km       "+listmap.get(position).get("address"));
         holder.itemView.setTag(position);
     }
 

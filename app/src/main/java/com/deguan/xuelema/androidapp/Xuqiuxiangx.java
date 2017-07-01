@@ -28,7 +28,9 @@ import com.deguan.xuelema.androidapp.viewimpl.SimilarXuqiuView;
 import com.deguan.xuelema.androidapp.viewimpl.XuqiuView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.EaseConstant;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -88,6 +90,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     private int course_id ;
     private int grade_id  ;
     private TextView xueliTv;
+    private ImageButton addFriend;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -95,6 +98,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         setContentView(R.layout.xuqiulayout);
         User_id.getInstance().addActivity(this);
 
+        addFriend = (ImageButton) findViewById(R.id.add_friend);
         xueliTv = (TextView) findViewById(R.id.xuqiu_xueli_tv);
         kemuleibie= (TextView) findViewById(R.id.kemuleibie);
         nianjia= (TextView) findViewById(R.id.nianjia);
@@ -117,6 +121,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         xuqiufanhui.bringToFront();
         xuqiuweix.setOnClickListener(this);
         xuqiufanhui.setOnClickListener(this);
+        addFriend.setOnClickListener(this);
 
         //获取需求id与用户id
         String  publisher_id=getIntent().getStringExtra("publisher_id");
@@ -188,7 +193,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         course_id = Integer.parseInt((String)map.get("course_id"));
         grade_id = Integer.parseInt((String)map.get("grade_id"));
         demand_init.getTuijianDemand_list(course_id,grade_id,User_id.getLat()+"",""+User_id.getLng(),null,null,null,listview,this,null);
-        String state = (String) map.get("state");
+        String state = (String) map.get("address");
         if (!TextUtils.isEmpty(map.get("ordernum").toString())){
             String ordernum =  map.get("ordernum").toString();
             textView.setText("已有"+ordernum+"人接取");
@@ -238,15 +243,30 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.add_friend:
+                Toast.makeText(this, "已发送好友申请", Toast.LENGTH_SHORT).show();
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            //demo use a hardcode reason here, you need let user to input if you like
+                            String s = getResources().getString(R.string.Add_a_friend);
+                            EMClient.getInstance().contactManager().addContact(username, s);
+                        } catch (final Exception e) {
+
+                        }
+                    }
+                }).start();
+                break;
+
             case R.id.xuqiufanhui:
                 Xuqiuxiangx.this.finish();
                 break;
             case R.id.xuqiuweix:
                 //聊天
 //                Intent intent1=new Intent(Xuqiuxiangx.this, HuihuaActivity.class);
-                Intent intent1 = new Intent(Xuqiuxiangx.this, modle.Huanxing.ui.ChatActivity.class);
-                intent1.putExtra("userId",username);
-                intent1.putExtra("chatType", EMMessage.ChatType.Chat);
+                Intent intent1 = new Intent(Xuqiuxiangx.this, ChatActivity.class);
+                intent1.putExtra(EaseConstant.EXTRA_USER_ID, username);
+                intent1.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
                 startActivity(intent1);
                 break;
             case R.id.xuqiudianh:
@@ -255,7 +275,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Order_init order_init = new Order();
-                                order_init.CreateOrder(user_id,id,dindan,fee,course_id,grade_id,Xuqiuxiangx.this);
+                                order_init.CreateOrder(user_id,id,dindan,fee,course_id,grade_id,Xuqiuxiangx.this,User_id.getAddress());
                                 Intent intent= NewMainActivity_.intent(Xuqiuxiangx.this).get();
                                 startActivity(intent);
                             }
@@ -350,6 +370,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
             entity.setGrade_name((String)maps.get(i).get("grade_name"));
             entity.setCourse_id((String)maps.get(i).get("course_id"));
             entity.setGrade_id((String)maps.get(i).get("grade_id"));
+            entity.setAddress((String)maps.get(i).get("address"));
             lists.add(entity);
         }
         datas.addAll(lists);

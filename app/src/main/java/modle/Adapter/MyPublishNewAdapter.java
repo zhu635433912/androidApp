@@ -53,12 +53,13 @@ import java.util.Locale;
  * 修改时间：2017-06-23 13:41
  * 修改备注：
  */
-public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapter.MyPublishNewViewHolder> implements View.OnClickListener {
+public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapter.MyPublishNewViewHolder> implements View.OnClickListener ,View.OnLongClickListener{
 
     private static final String TAG = MyPublishNewAdapter.class.getSimpleName();
     private Context context;
     private List<XuqiuEntity> list;
     private MyPublishNewAdapter.OnTopClickListener listener;
+    private MyPublishNewAdapter.OnTopLongClickListener longListener;
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss", Locale.CHINA);
     private RecyclerView recyclerView;
 
@@ -71,11 +72,16 @@ public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapte
     public void setOnTopClickListener(MyPublishNewAdapter.OnTopClickListener listener) {
         this.listener = listener;
     }
+    /*设置长按事件*/
+    public void setOnItemLongClickListener(OnTopLongClickListener onItemLongClickListener) {
+        this.longListener = onItemLongClickListener;
+    }
 
     @Override
     public MyPublishNewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.listview_itme, parent, false);
         view.setOnClickListener(this);
+        view.setOnLongClickListener(this);
         return new MyPublishNewViewHolder(view);
     }
 
@@ -145,6 +151,12 @@ public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapte
         }
     }
 
+    @Override
+    public boolean onLongClick(View v) {
+        int position = recyclerView.getChildAdapterPosition(v);
+        return longListener != null && longListener.onItemLongClickListener(v, list.get(position));
+    }
+
     public static class MyPublishNewViewHolder extends RecyclerView.ViewHolder{
 
         private ImageView user_headimg;
@@ -178,5 +190,9 @@ public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapte
 
     public interface OnTopClickListener{
         void onTopClick(XuqiuEntity entity);
+    }
+
+    public interface OnTopLongClickListener{
+        boolean onItemLongClickListener(View view,XuqiuEntity entity);
     }
 }

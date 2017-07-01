@@ -120,9 +120,9 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
                 String aa = text_search.getText().toString();
                 if (!aa.equals("")) {
                     if (role == 1) {
-                        teacher_init.gettuijian_Teacher1(aa);
+                        teacher_init.gettuijian_Teacher1(aa,User_id.getLat()+"",""+User_id.getLng());
                     } else {
-                        demand_init.getTuijianDemand_list1(aa);
+                        demand_init.getTuijianDemand_list1(aa,User_id.getLat()+"",""+User_id.getLng());
                     }
                 }else {
                     Toast.makeText(SearchActivity.this, "请输入搜索内容", Toast.LENGTH_SHORT).show();
@@ -157,6 +157,8 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
             entity.setGrade_name((String)maps.get(i).get("grade_name"));
             entity.setCourse_id((String)maps.get(i).get("course_id"));
             entity.setGrade_id((String)maps.get(i).get("grade_id"));
+            entity.setAddress((String)maps.get(i).get("address"));
+
             lists.add(entity);
         }
         listamap.addAll(lists);
@@ -184,6 +186,7 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
                 entity.setUser_headimg((String) maps.get(i).get("user_headimg"));
                 entity.setUser_id((String) maps.get(i).get("user_id"));
                 entity.setGender((String) maps.get(i).get("gender"));
+                entity.setHaoping_num((String)maps.get(i).get("haoping_num"));
 //            entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
                 entity.setDistance((String) maps.get(i).get("distance"));
                 entity.setFee(String.valueOf(maps.get(i).get("fee")));

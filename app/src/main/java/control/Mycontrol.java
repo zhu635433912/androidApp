@@ -55,7 +55,7 @@ public class Mycontrol implements Myconteol_init  {
     }
     //获取教师列表
     @Override
-    public void setlist_a(final int uid, final int role, final double lat, final double ing, final PullToRefreshListView listView, final Context context, int order, String state
+    public void setlist_a(final int uid, final int role, final String lat, final String ing, final PullToRefreshListView listView, final Context context, int order, String state
             , int gender, int speciality, int grade_type, int order_rank,int page) {
         Log.e("aa","用户身份为"+role);
         if (role==1) {

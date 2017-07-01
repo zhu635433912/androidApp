@@ -28,7 +28,7 @@ public interface Teacher_http {
     获取教师列表
      */
     @POST("index.php?s=/Service/Teacher/gets_teacher")
-    Call<ContentModle> getTeacherlist(@Query("uid") int uid, @Query("lat") double lat, @Query("lng") double lng,
+    Call<ContentModle> getTeacherlist(@Query("uid") int uid, @Query("lat") String lat, @Query("lng") String lng,
                                       @Query("order") int order,@Query("state") String state,@Query("gender") int gender,@Query("speciality") int speciality,
                                       @Query("grade_type") int grade_type,@Query("order_rank") int order_rank);
     /*
@@ -116,6 +116,6 @@ Call<TuijianListEntity> gettuijianjiaoshi(
     Call<Demtest> getsubjectBackgroud(@Query("uid") int uid,@Query("class_img") String class_img);
     //搜索老师
     @POST("index.php?s=/Service/Teacher/recommend_teacher")
-    Call<ContentModle> gettuijianjiaoshi1(  @Query("name") String name);
+    Call<ContentModle> gettuijianjiaoshi1(  @Query("name") String name,@Query("lat")String lat,@Query("lng")String lng);
 
 }

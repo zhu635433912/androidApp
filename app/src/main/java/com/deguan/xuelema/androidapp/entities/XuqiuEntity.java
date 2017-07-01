@@ -38,6 +38,15 @@ public class XuqiuEntity {
     private String lat;
     private String distance;
     private String status;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public XuqiuEntity() {
     }

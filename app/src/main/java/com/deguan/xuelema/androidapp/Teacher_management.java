@@ -40,6 +40,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.utils.SubjectUtil;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 
@@ -219,8 +220,26 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 break;
             case R.id.kechengzhonglei:
                 //获取数据
-                Getdata getdata=new Getdata();
-                getdata.getGrade(this);
+//                Getdata getdata=new Getdata(); //课程种类
+                final AlertDialog.Builder subjectDialog = new AlertDialog.Builder(Teacher_management.this);
+                subjectDialog.setIcon(R.drawable.add04);
+                subjectDialog.setTitle("请选择一个科目");
+                //    指定下拉列表的显示数据
+                final String[] subjects = new String[SubjectUtil.getSubjectList().size()];
+                for (int i = 0; i < subjects.length ; i++) {
+                    subjects[i] = SubjectUtil.getSubjectList().get(i).getSubjectName();
+                }
+                //    设置一个下拉的列表选择项
+                subjectDialog.setItems(subjects, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(Teacher_management.this, "选择的科目为：" + SubjectUtil.getSubjectList().get(which).getSubjectName(), Toast.LENGTH_SHORT).show();
+                        zhonglei.setText(SubjectUtil.getSubjectList().get(which).getSubjectName());
+                        kcid = Integer.parseInt(SubjectUtil.getSubjectList().get(which).getSubjectId());
+                    }
+                });
+                subjectDialog.show();
+//                getdata.getGrade(this);
                 break;
 //            case R.id.kecheng_service_type:
 //
@@ -242,12 +261,15 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
 //
 //                break;
             case R.id.textView7:
-                //科目
+
+//                科目
                 AlertDialog.Builder kemuza = new AlertDialog.Builder(Teacher_management.this);
                 kemuza.setIcon(R.drawable.add04);
                 kemuza.setTitle("请选择一个年级");
                 //    指定下拉列表的显示数据
-                final String[] kemucities = {"一年级", "二年级", "三年级","四年级", "五年级", "六年级","初一", "初二", "初三"};
+                final String[] kemucities = {"小学", "初中", "高中","大学"
+//                        ,                        "五年级", "六年级","初一", "初二", "初三"
+                };
                 //    设置一个下拉的列表选择项
                 kemuza.setItems(kemucities, new DialogInterface.OnClickListener() {
                     @Override
@@ -458,7 +480,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
             if (!TextUtils.isEmpty(filePath)) {
                 //文件路劲是有的
                 // 自定义大小，防止OOM
-                Bitmap bitmap = getSmallBitmap(filePath, 200, 200);
+                Bitmap bitmap = getSmallBitmap(filePath, 500, 500);
                 //获取图片
                 //image空
                 Log.e("aa","路劲为"+filePath);

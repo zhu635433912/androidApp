@@ -49,6 +49,11 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
     private int teacher_id;
     private ImageView teachertoux;
     private ImageButton jianjiebohao;
+    private ImageView xueliImage;
+    private ImageView zhengshuImage;
+    private String xueliUrl ;
+    private String zhengshuUrl;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +64,12 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
         teacher_id=Integer.parseInt(teacher_ida);
         String headUrl = getIntent().getStringExtra("teacher_image");
 
+        xueliImage = (ImageView) findViewById(R.id.xueli_imageview);
+        zhengshuImage = (ImageView) findViewById(R.id.zhengshu_imageview);
         jianjiebohao= (ImageButton) findViewById(R.id.jianjiebohao);
         teachertoux= (ImageView) findViewById(R.id.teachertoux);
         pingjia= (TextView) findViewById(R.id.pingjia);
+        techaertec = (TextView) findViewById(R.id.techaertec);
         xinjijiaoshi= (TextView) findViewById(R.id.xinjijiaoshi);
         grfanhui= (RelativeLayout) findViewById(R.id.grfanhui);
         techartext= (TextView) findViewById(R.id.techartext);
@@ -77,6 +85,8 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
         grfanhui.setOnClickListener(this);
         xinjijiaoshi.setOnClickListener(this);
         pingjia.setOnClickListener(this);
+        xueliImage.setOnClickListener(this);
+        zhengshuImage.setOnClickListener(this);
 
         //获取教师个人资料
         int uid=Integer.parseInt(User_id.getUid());
@@ -84,7 +94,7 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
         teacher_init.Get_Teacher(teacher_id,this);
 
         //获取教师详细资料
-        teacher_init.Get_Teacher_detailed(uid,teacher_id,this,1);
+        teacher_init.Get_Teacher_detailed(uid,teacher_id,this,0);
         if (!TextUtils.isEmpty(headUrl)) {
             Glide.with(this).load(headUrl).transform(new GlideCircleTransform(this)).into(teachertoux);
         }
@@ -93,6 +103,21 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.xueli_imageview:
+                if (xueliUrl != null) {
+                    Intent intent = new Intent(Teacher_personal.this, PictureZoo.class);
+                    intent.putExtra("hide",xueliUrl);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.zhengshu_imageview:
+                if (zhengshuUrl != null) {
+                    Intent intent2 = new Intent(Teacher_personal.this, PictureZoo.class);
+                    intent2.putExtra("hide",zhengshuUrl);
+                    startActivity(intent2);
+                }
+
+                break;
             case R.id.pingjia:
                 //评价
                 Intent i=new Intent(Teacher_personal.this,Teacher_evaluate.class);
@@ -117,7 +142,7 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
     @Override
     public void Updatecontent(Map<String, Object> map) {
         teachername.setText(map.get("nickname").toString());
-        diqu.setText(map.get("address").toString());
+        diqu.setText(map.get("address").toString()+"");
 
 
         Log.e("aa","图片地址"+map.get("user_headimg").toString());
@@ -143,16 +168,27 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
                 xinjijiaoshi.setText("五星级教师");
                 break;
         }
+        techaertec.setText(map.get("speciality").toString());
+//        teachername.setText(map.get("nickname").toString()+"");
+        if (map.get("others_1")!=null) {
+            xueliUrl = map.get("others_1").toString() + "";
+            Glide.with(this).load(xueliUrl).into(xueliImage);
+        }
+        if (map.get("others_3")!=null) {
+            zhengshuUrl = map.get("others_3").toString() + "";
+            Glide.with(this).load(zhengshuUrl).into(zhengshuImage);
+        }
     }
 
     @Override
     public void Updatefee(List<Map<String, Object>> listmap) {
         map = listmap.get(0);
 
-        techartext.setText(map.get("resume").toString());
-        techaertec.setText(map.get("speciality_name").toString());
-        techaerxue.setText(map.get("graduated_school").toString());
+        techartext.setText(map.get("resume").toString()+"");
+//        techaertec.setText(map.get("speciality_name").toString());
+        techaerxue.setText(map.get("graduated_school").toString()+"");
         jiaoling.setText(map.get("years").toString()+"年");
+
 
 
 

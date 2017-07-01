@@ -64,22 +64,22 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
         adapter.setOnTopClickListener(this);
         listView.setAdapter(adapter);
 
-        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (!isLoading) {
-                    RecyclerView.Adapter adapter1 = recyclerView.getAdapter();
-                    View childAt = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
-                    int position = recyclerView.getChildAdapterPosition(childAt);
-                    if (adapter1.getItemCount() - position < 5) {
-                        isLoading = true;
-                        page++;
-//                        NetworkUtil.getService().getTopList(id, ++page, 20).enqueue(TopListFragment.this);
-                    }
-                }
-            }
-        });
+//        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                if (!isLoading) {
+//                    RecyclerView.Adapter adapter1 = recyclerView.getAdapter();
+//                    View childAt = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
+//                    int position = recyclerView.getChildAdapterPosition(childAt);
+//                    if (adapter1.getItemCount() - position < 5) {
+//                        isLoading = true;
+//                        page++;
+////                        NetworkUtil.getService().getTopList(id, ++page, 20).enqueue(TopListFragment.this);
+//                    }
+//                }
+//            }
+//        });
         swipeRefreshLayout.setOnRefreshListener(this);
 
         tuijianPresenter =  new TuijianPresenterImpl(this,courseid,grade_id,User_id.getStatus(), User_id.getLat()+"",User_id.getLng()+"");
@@ -118,6 +118,7 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
 //            entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
                 entity.setDistance((String) maps.get(i).get("distance"));
                 entity.setFee(String.valueOf(maps.get(i).get("fee")));
+                entity.setHaoping_num((String)maps.get(i).get("haoping_num"));
                 List<Map<String,Object>> listmap = ((List<Map<String,Object>>)maps.get(i).get("information_temp"));
 //                String course_name = "";
 //                for (int j = 0; j < listmap.size(); j++) {

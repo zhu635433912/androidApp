@@ -34,9 +34,10 @@ public interface Oredr_http {
      */
     @POST("index.php?s=/Service/Order/create_order")
     Call<Erre> setOredr(@Query("uid") int uid, @Query("teacher_id") int teacher_id, @Query("requirement_id") int requirement_id, @Query("fee") float fee,@Query("duration") int duration,
-                       @Query("service_type")int service_type,
                         @Query("course_id")int course_id
             ,@Query("grade_id")int grade_id
+                       ,@Query("service_type")int service_type
+                        ,@Query("address")String address
     );
     /*
     删除订单
@@ -79,7 +80,7 @@ public interface Oredr_http {
     创建临时订单
      */
     @POST("index.php?s=/Service/Order/create_temp_order")
-    Call<Demtest> Createorder(@Query("uid") int uid,@Query("teacher_id") int eacher_id,@Query("requirement_id") int requirement_id,@Query("fee") float fee,@Query("course_id")int course_Id,@Query("grade_id")int grade_id);
+    Call<Demtest> Createorder(@Query("uid") int uid,@Query("teacher_id") int eacher_id,@Query("requirement_id") int requirement_id,@Query("fee") float fee,@Query("course_id")int course_Id,@Query("grade_id")int grade_id,@Query("address")String address);
 
 
 

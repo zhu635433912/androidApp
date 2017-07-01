@@ -39,7 +39,7 @@ public interface Order_init {
      * requirement_id   需求id
      * fee              金额
      */
-    public Map<String,Object> Establish_Order(int uid,int teacher_id,int requirement_id,float fee,int duration,int course_Id,int grade_id,int service_type);
+    public Map<String,Object> Establish_Order(int uid,int teacher_id,int requirement_id,float fee,int duration,int course_Id,int grade_id,int service_type,String address);
     /**
      * 删除订单
      * uid      用户id
@@ -95,5 +95,5 @@ public interface Order_init {
     public Map<String,Object> Order_refund(int uid,int id,int status,float refund_fee);
 
     //创建订单
-    public void CreateOrder(int uid,int teacher_id,int requirement_id,float fee,int course_id,int grade_id,Requirdetailed requirdetailed);
+    public void CreateOrder(int uid,int teacher_id,int requirement_id,float fee,int course_id,int grade_id,Requirdetailed requirdetailed,String address);
 }

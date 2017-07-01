@@ -41,7 +41,7 @@ import modle.user_ziliao.User_id;
 
 public class Payment_Activty extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed, PayView {
     private Button querenzhifu;
-    private TextView zhifufee;
+    private TextView zhifufeeTv;
     private TextView ordetbianhao;
     private RelativeLayout querendindanfanhui;
     private RelativeLayout payWeixin,payAlipay,payQianbao;
@@ -106,7 +106,7 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
         iwxapi.registerApp(APP_ID);
         User_id.getInstance().addActivity(this);
         querenzhifu= (Button) findViewById(R.id.querenzhifu);
-        zhifufee= (TextView) findViewById(R.id.zhifufee);
+        zhifufeeTv= (TextView) findViewById(R.id.zhifufee);
         ordetbianhao= (TextView) findViewById(R.id.ordetbianhao);
         querendindanfanhui= (RelativeLayout) findViewById(R.id.querendindanfanhui);
         payWeixin = (RelativeLayout) findViewById(R.id.feeweixzhifurelayout);
@@ -129,7 +129,7 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
         order_fee=Integer.parseInt(fee);
         durationa=Integer.parseInt(duration);
         ordetbianhao.setText(id);
-        zhifufee.setText(fee);
+        zhifufeeTv.setText(order_fee * durationa+"");
         getdata = new Getdata();
 
         payWeixin .setOnClickListener(this);

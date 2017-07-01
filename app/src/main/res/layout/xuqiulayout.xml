@@ -302,6 +302,7 @@
         android:layout_width="80px"
         android:layout_height="80px" />
     <ImageButton
+        android:id="@+id/add_friend"
         android:layout_marginRight="40px"
         android:layout_toLeftOf="@+id/xuqiudianh"
         android:background="@drawable/hly33"

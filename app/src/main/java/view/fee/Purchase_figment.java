@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.deguan.xuelema.androidapp.NewMainActivity;
+import com.deguan.xuelema.androidapp.NewMainActivity_;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.Student_Activty;
 import com.deguan.xuelema.androidapp.utils.SubjectUtil;
@@ -98,9 +100,9 @@ public class Purchase_figment extends Fragment implements View.OnClickListener {
                                     int uid=Integer.parseInt(User_id.getUid());
                                     Order_init order_init=new Order();
                                     //创建订单
-                                    order_init.Establish_Order(uid,jiaoshiid,739,fee,i,Integer.parseInt(course_id),Integer.parseInt(grade_id),1);
+                                    order_init.Establish_Order(uid,jiaoshiid,739,fee,i,Integer.parseInt(course_id),Integer.parseInt(grade_id),1,User_id.getAddress());
                                     Toast.makeText(getActivity(),"购买课程成功",Toast.LENGTH_SHORT).show();
-                                    Intent intent=new Intent(getActivity(), Student_Activty.class);
+                                    Intent intent= NewMainActivity_.intent(getActivity()).get();
                                     startActivity(intent);
                                 }
                             }).setNegativeButton("否", new DialogInterface.OnClickListener() {

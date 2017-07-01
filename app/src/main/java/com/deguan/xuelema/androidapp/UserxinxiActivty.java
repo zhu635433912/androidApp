@@ -319,9 +319,9 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                                 int uid=Integer.parseInt(User_id.getUid());
                                 Order_init order_init=new Order();
                                 //创建订单
-                                order_init.Establish_Order(uid,teacherId,Integer.parseInt(myid),coursefee,courseNumber,Integer.parseInt(courseId),Integer.parseInt(gradeId),servicetype);
+                                order_init.Establish_Order(uid,teacherId,Integer.parseInt(myid),coursefee,courseNumber,Integer.parseInt(courseId),Integer.parseInt(gradeId),servicetype,User_id.getAddress());
                                 Toast.makeText(UserxinxiActivty.this,"购买课程成功",Toast.LENGTH_SHORT).show();
-                                Intent intent=new Intent(UserxinxiActivty.this, Student_Activty.class);
+                                Intent intent=NewMainActivity_.intent(UserxinxiActivty.this).get();
                                 startActivity(intent);
                             }
                         }).setNegativeButton("否", new DialogInterface.OnClickListener() {
@@ -347,8 +347,8 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
             String order_finish= (String) map.get("order_finish");
             String order_working= (String) map.get("order_working");
         Glide.with(this).load((String)map.get("class_img")).into(iamgeview);
-            gerxues.setText(order_working);
-         dindan.setText(order_finish);
+        gerxues.setText(order_working);
+        dindan.setText(order_finish);
         Requitext.setText(resume);
         Requiname.setText(nickname);
 

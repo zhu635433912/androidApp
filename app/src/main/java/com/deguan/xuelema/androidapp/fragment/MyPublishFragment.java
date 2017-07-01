@@ -1,10 +1,12 @@
 package com.deguan.xuelema.androidapp.fragment;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,13 +40,14 @@ import modle.Adapter.MfabuAdpter;
 import modle.Adapter.MyPublishNewAdapter;
 import modle.Adapter.TuijianAdapter;
 import modle.Adapter.XuqiuAdapter;
+import modle.Demand_Modle.Demand;
 import modle.user_ziliao.User_id;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 @EFragment(R.layout.tuijian_new_fragment)
-public class MyPublishFragment extends BaseFragment implements  MyPublishView, MyPublishNewAdapter.OnTopClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class MyPublishFragment extends BaseFragment implements  MyPublishView, MyPublishNewAdapter.OnTopClickListener, SwipeRefreshLayout.OnRefreshListener, MyPublishNewAdapter.OnTopLongClickListener {
 
     @ViewById(R.id.tuijian_listview)
     RecyclerView listView;
@@ -70,23 +73,23 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
 //        listView.setOnRefreshListener(this);
 //        listView.setAdapter(adapter);
         adapter.setOnTopClickListener(this);
-
-        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (!isLoading) {
-                    RecyclerView.Adapter adapter1 = recyclerView.getAdapter();
-                    View childAt = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
-                    int position = recyclerView.getChildAdapterPosition(childAt);
-                    if (adapter1.getItemCount() - position < 5) {
-                        isLoading = true;
-                        page++;
-//                        NetworkUtil.getService().getTopList(id, ++page, 20).enqueue(TopListFragment.this);
-                    }
-                }
-            }
-        });
+        adapter.setOnItemLongClickListener(this);
+//        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                if (!isLoading) {
+//                    RecyclerView.Adapter adapter1 = recyclerView.getAdapter();
+//                    View childAt = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
+//                    int position = recyclerView.getChildAdapterPosition(childAt);
+//                    if (adapter1.getItemCount() - position < 5) {
+//                        isLoading = true;
+//                        page++;
+////                        NetworkUtil.getService().getTopList(id, ++page, 20).enqueue(TopListFragment.this);
+//                    }
+//                }
+//            }
+//        });
         swipeRefreshLayout.setOnRefreshListener(this);
         listView.setAdapter(adapter);
         publishPresenter =  new PublishPresenterImpl(this, Integer.parseInt(User_id.getUid()),4);
@@ -169,5 +172,26 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
     public void onRefresh() {
         page = 1;
         new PublishPresenterImpl(this, Integer.parseInt(User_id.getUid()),4).getPublishEntity();
+    }
+
+    @Override
+    public boolean onItemLongClickListener(View view, final XuqiuEntity entity) {
+        new AlertDialog.Builder(getContext()).setTitle("学了么提示!").setMessage("是否确定删除需求?")
+                .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new Demand().Delete_Demand(Integer.parseInt(entity.getPublisher_id()),Integer.parseInt(entity.getId()));
+                        Toast.makeText(getContext(), "已删除请刷新", Toast.LENGTH_SHORT).show();
+                        publishPresenter.getPublishEntity();
+                    }
+                }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getContext(), "取消删除", Toast.LENGTH_SHORT).show();
+            }
+        }).show();
+
+
+        return true;
     }
 }

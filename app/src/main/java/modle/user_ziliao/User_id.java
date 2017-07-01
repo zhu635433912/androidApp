@@ -56,6 +56,8 @@ public class User_id extends Application {
     private static Context applicationContent;
     private static double lat,lng;
     private static String status;
+    public static String APP_URL = "http://deguanjiaoyu.com/index.php?s=/Service/Public/downUrl";
+    private static String address;
 
 
     private Context appContext;
@@ -141,6 +143,14 @@ public class User_id extends Application {
             activity.finish();
         }
         System.exit(0);
+    }
+
+    public static String getAddress() {
+        return address;
+    }
+
+    public static void setAddress(String address) {
+        User_id.address = address;
     }
 
     public static double getLat(){return lat;}

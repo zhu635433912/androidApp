@@ -32,12 +32,12 @@
         "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ease_chat_video_call_self.png"
     },
     {
-        "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
-        "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
-    },
-    {
         "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\abc_ic_star_half_black_48dp.png",
         "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable-xhdpi-v4\\abc_ic_star_half_black_48dp.png"
+    },
+    {
+        "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
+        "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable-xhdpi-v4\\abc_btn_check_to_on_mtrl_015.png"
     },
     {
         "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png",
@@ -276,12 +276,12 @@
         "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ease_chat_video_call_receive.png"
     },
     {
-        "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ease_chatting_biaoqing_btn_enable.png",
-        "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ease_chatting_biaoqing_btn_enable.png"
-    },
-    {
         "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png",
         "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ease_chatting_biaoqing_btn_enable.png",
+        "source": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\ease_chatting_biaoqing_btn_enable.png"
     },
     {
         "merged": "E:\\deguan\\androidApp\\easeui\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\ease_new_friends_icon.png",

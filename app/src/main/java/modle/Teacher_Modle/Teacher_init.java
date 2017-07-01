@@ -33,7 +33,7 @@ public interface Teacher_init {
      * lat    纬度
      * lng    经度
      */
-    public List<Map<String,Object>> Get_Teacher_list(int uid, int role, double lat, double lng, PullToRefreshListView listView, Context context, int order, String state,
+    public List<Map<String,Object>> Get_Teacher_list(int uid, int role, String lat, String lng, PullToRefreshListView listView, Context context, int order, String state,
                                                      int gender, int speciality, int grade_type, int order_rank, Requirdetailed requirdetailed,int page);
     /**
      *教师资料更新
@@ -100,6 +100,6 @@ public interface Teacher_init {
     /*
     获取推荐教师
      */
-    public void gettuijian_Teacher1(String name);
+    public void gettuijian_Teacher1(String name,String lat,String lng);
 
 }

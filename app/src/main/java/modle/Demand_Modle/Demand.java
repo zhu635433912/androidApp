@@ -147,8 +147,8 @@ public class Demand implements Demand_init {
        */
     @Override
     public Map<String, Object> ReleaseDemand(int id, String content, float fee, int grade_id, int course_id, int gender, String age, int education_id,
-                                             String province, String cty, String state, int serice_type,String start,String ent,double lat,double lng) {
-     Call<Demtest> call=demand_http.setDemand(id,content,fee,grade_id,course_id,gender,age,education_id,province,cty,state,serice_type,start,ent,lat,lng);
+                                             String province, String cty, String state, int serice_type,String start,String ent,double lat,double lng,String address) {
+     Call<Demtest> call=demand_http.setDemand(id,content,fee,grade_id,course_id,gender,age,education_id,province,cty,state,serice_type,start,ent,lat,lng,address);
         call.enqueue(new Callback<Demtest>() {
             @Override
             public void onResponse(Call<Demtest> call, Response<Demtest> response) {
@@ -272,8 +272,8 @@ public class Demand implements Demand_init {
     }
 
     @Override
-    public void getTuijianDemand_list1(String name) {
-        Call<ContentModle> call=demand_http.getTuijianDemandList1(name);
+    public void getTuijianDemand_list1(String name,String lat,String lng) {
+        Call<ContentModle> call=demand_http.getTuijianDemandList1(name,lat,lng);
         call.enqueue(new Callback<ContentModle>() {
             @Override
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {

@@ -108,26 +108,27 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
         }else {
             holder.nianji.setText("未知");
         }
-        switch (list.get(position).getOrder_rank().toString()){
-            case "0.0":
-                holder.haoping_num.setBackgroundResource(R.drawable.five);
-                break;
-            case "1.0":
-                holder.haoping_num.setBackgroundResource(R.drawable.one);
-                break;
-            case "2.0":
-                holder.haoping_num.setBackgroundResource(R.drawable.two);
-                break;
-            case "3.0":
-                holder.haoping_num.setBackgroundResource(R.drawable.three);
-                break;
-            case "4.0":
-                holder.haoping_num.setBackgroundResource(R.drawable.four);
-                break;
-            case "5.0":
-                holder.haoping_num.setBackgroundResource(R.drawable.five);
-                break;
-        }
+        holder.haoping_numtext.setText("好评:"+list.get(position).getHaoping_num());
+//        switch (list.get(position).getOrder_rank().toString()){
+//            case "0.0":
+//                holder.haoping_num.setBackgroundResource(R.drawable.five);
+//                break;
+//            case "1.0":
+//                holder.haoping_num.setBackgroundResource(R.drawable.one);
+//                break;
+//            case "2.0":
+//                holder.haoping_num.setBackgroundResource(R.drawable.two);
+//                break;
+//            case "3.0":
+//                holder.haoping_num.setBackgroundResource(R.drawable.three);
+//                break;
+//            case "4.0":
+//                holder.haoping_num.setBackgroundResource(R.drawable.four);
+//                break;
+//            case "5.0":
+//                holder.haoping_num.setBackgroundResource(R.drawable.five);
+//                break;
+//        }
 
     }
 

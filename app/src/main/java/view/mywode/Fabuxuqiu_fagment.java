@@ -122,6 +122,7 @@ public class Fabuxuqiu_fagment extends Fragment implements
             entity.setDistance((String) maps.get(i).get("distance"));
             entity.setFee(String.valueOf(maps.get(i).get("fee")));
             entity.setGrade_name((String)maps.get(i).get("grade_name"));
+            entity.setAddress((String)maps.get(i).get("address"));
             if ((maps.get(i).get("status")).equals("1")){
                 continue;
             }

@@ -207,10 +207,23 @@
                 android:id="@+id/techartext"
                 android:layout_marginTop="20px"
                 android:layout_below="@+id/textView5"
-                android:layout_centerHorizontal="true"
-                android:layout_width="600px"
+                android:layout_width="400px"
                 android:textSize="30px"
+                android:text="个人简介"
+                android:layout_marginLeft="40px"
                 android:layout_height="150px" />
+            <ImageView
+                android:id="@+id/xueli_imageview"
+                android:layout_below="@+id/textView5"
+                android:layout_width="200px"
+                android:layout_toRightOf="@id/techartext"
+                android:layout_height="200px" />
+            <ImageView
+                android:id="@+id/zhengshu_imageview"
+                android:layout_below="@+id/xueli_imageview"
+                android:layout_toRightOf="@id/techartext"
+                android:layout_width="200px"
+                android:layout_height="200px" />
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
@@ -224,10 +237,10 @@
                 android:textSize="35px" />
             <TextView
                 android:id="@+id/techaertec"
+                android:layout_marginLeft="40px"
                 android:layout_marginTop="20px"
                 android:layout_below="@+id/textView6"
-                android:layout_centerHorizontal="true"
-                android:layout_width="600px"
+                android:layout_width="400px"
                 android:textSize="30px"
                 android:layout_height="50px" />
             <TextView
@@ -245,9 +258,9 @@
                 android:id="@+id/techaerxue"
                 android:layout_marginTop="20px"
                 android:layout_below="@+id/textView7"
-                android:layout_centerHorizontal="true"
-                android:layout_width="600px"
+                android:layout_width="400px"
                 android:textSize="30px"
+                android:layout_marginLeft="40px"
                 android:layout_height="50px" />
 
         </RelativeLayout>

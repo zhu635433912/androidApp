@@ -1,6 +1,8 @@
 package com.deguan.xuelema.androidapp;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.deguan.xuelema.androidapp.entities.DownloadEntity;
 import com.deguan.xuelema.androidapp.fragment.BaseFragment_;
 import com.deguan.xuelema.androidapp.fragment.Teacher_infofragment;
 import com.deguan.xuelema.androidapp.fragment.Teacher_infofragment_;
@@ -21,8 +24,10 @@ import com.deguan.xuelema.androidapp.utils.APPConfig;
 import com.deguan.xuelema.androidapp.utils.FragmentTabUtils;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.utils.SharedPreferencesUtils;
+import com.deguan.xuelema.androidapp.viewimpl.DownloadView;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.loveplusplus.update.UpdateChecker;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
@@ -38,7 +43,7 @@ import modle.user_ziliao.User_id;
 import view.index.Teacher_fragment;
 
 @EActivity(R.layout.activity_new_main)
-public class NewMainActivity extends MyBaseActivity implements Requirdetailed {
+public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,DownloadView{
     @ViewById(R.id.main_bottom_radiogp)
     RadioGroup radioGroup;
     private ArrayList<Fragment> fragments = new ArrayList<>();
@@ -73,7 +78,7 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed {
 //        radioButton2.setPadding(0,0,0,0);
 
 
-
+        new Getdata().getDownloadUrl(this);
         if (User_id.getRole().equals("1")){
             radioButton1.setText("老师");
             imageView.setImageResource(R.drawable.hly03);
@@ -163,4 +168,27 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+    private PackageManager manager;
+
+    private PackageInfo info = null;
+    @Override
+    public void successDownload(DownloadEntity entity) {
+//        if (entity.getError())
+        manager = this.getPackageManager();
+
+        try {
+            info = manager.getPackageInfo(this.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        int  versionCode = info.versionCode;
+        String versionname = entity.getVersion();
+        String versionName = info.versionName;
+        Log.d("123","versionName"+versionName+"versionname"+versionname);
+        if (!versionname.equals(versionName)){
+            UpdateChecker.checkForDialog(NewMainActivity.this, entity.getContent());
+        }
+    }
+
 }

@@ -23,6 +23,8 @@ import com.zhy.autolayout.AutoLayoutActivity;
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import modle.Order_Modle.Order;
@@ -59,6 +61,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
     private ImageView headImage;
     private TextView statuse,telTv;
     private String teacherImage;
+    private int duration1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -154,8 +157,10 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
     @Override
     public void Updatecontent(Map<String, Object> map) {
         String status = (String) map.get("status");
-        String requirement_address = (String) map.get("requirement_address");
-        String created = (String) map.get("created");
+        String requirement_address = (String) map.get("address");
+        Date d = new Date(Long.parseLong(map.get("created")+"")*1000);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        String created = sdf.format(d);
         String requirement_grade = (String) map.get("grade_name");
         String requirement_course = (String) map.get("course_name");
         String feae= (String) map.get("fee");
@@ -165,15 +170,16 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
 
         telTv.setText(Html.fromHtml("<u>"+(String)map.get("teacher_mobile")+""+"</u>"));
         fee=Integer.parseInt(feae);
-        int duration=Integer.parseInt(map.get("duration").toString());
-        kechengjieshu.setText("x"+duration+"节");
+        duration1 = Integer.parseInt(map.get("duration").toString());
+        kechengjieshu.setText("x"+ duration1 +"节");
         keshishufee.setText("￥"+fee+"/节");
 
         course.setText(requirement_course);
         grade.setText(requirement_grade);
+
         closingtime.setText(created);
         dizhi.setText(requirement_address);
-        zongjijine.setText("￥"+(fee*duration));
+        zongjijine.setText("￥"+(fee* duration1));
 
         switch (status){
             case "1":
@@ -194,7 +200,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         }else {
             name.setText(""+map.get("placer_name"));
         }
-        dizhi.setText(""+map.get("requirement_address"));
+//        dizhi.setText(""+map.get("address"));
         xuqiuneiro.setText(""+map.get("requirement_content"));
         dindan_id.setText(""+map.get("id"));
 
@@ -287,6 +293,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                 //待评价
                 Intent intent2=new Intent(Order_details.this,Student_assessment.class);
                 intent2.putExtra("oredr_id", order_id+"");
+                intent2.putExtra("teacher_id",teacherId);
                 startActivity(intent2);
             }
 
@@ -300,7 +307,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                             Order_init order_init=new Order();
                             String password=User_id.getPassword();
                             order_init.Update_Order(uid,order_id,4,password,duration*fee);
-                            Intent intent=new Intent(Order_details.this,Student_Activty.class);
+                            Intent intent=NewMainActivity_.intent(Order_details.this).get();
                             startActivity(intent);
                             Toast.makeText(Order_details.this,"退款成功!~",Toast.LENGTH_LONG).show();
 

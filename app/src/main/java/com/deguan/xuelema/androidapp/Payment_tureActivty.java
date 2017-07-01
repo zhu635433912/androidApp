@@ -40,7 +40,7 @@ public class Payment_tureActivty extends AutoLayoutActivity implements View.OnCl
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.wancheng:
-                Intent intent=new Intent(Payment_tureActivty.this,MyOrderActivity.class);
+                Intent intent=NewMainActivity_.intent(this).get();
                 startActivity(intent);
                 Toast.makeText(this,"赶快去学习吧~",Toast.LENGTH_SHORT).show();
                 break;

@@ -123,8 +123,8 @@ public class Order implements Order_init {
      */
 
     @Override
-    public Map<String, Object> Establish_Order(int uid, int teacher_id, int requirement_id, float fee,int duration,int course_Id,int grade_Id,int service_type) {
-        Call<Erre> call=oredr_http.setOredr(uid,teacher_id,requirement_id,fee,duration,course_Id,grade_Id,service_type);
+    public Map<String, Object> Establish_Order(int uid, int teacher_id, int requirement_id, float fee,int duration,int course_Id,int grade_Id,int service_type,String address) {
+        Call<Erre> call=oredr_http.setOredr(uid,teacher_id,requirement_id,fee,duration,course_Id,grade_Id,service_type,address);
         call.enqueue(new Callback<Erre>() {
             @Override
             public void onResponse(Call<Erre> call, Response<Erre> response) {
@@ -187,14 +187,14 @@ public class Order implements Order_init {
         call.enqueue(new Callback<Erre>() {
             @Override
             public void onResponse(Call<Erre> call, Response<Erre> response) {
-                String error=response.body().getError();
-                if (error.equals("ok")){
-                    Log.e("aa","更新订单状态成功");
-
-                }else {
-                    String errmsg=response.body().getErrmsg();
-                    Log.e("aa","更新订单状态失败="+errmsg);
-                }
+//                String error=response.body().getError();
+//                if (error.equals("ok")){
+//                    Log.e("aa","更新订单状态成功");
+//
+//                }else {
+//                    String errmsg=response.body().getErrmsg();
+//                    Log.e("aa","更新订单状态失败="+errmsg);
+//                }
             }
 
             @Override
@@ -336,8 +336,8 @@ public class Order implements Order_init {
 
     //创建临时订单
     @Override
-    public void  CreateOrder(int uid, int teacher_id , int requirement_id, float fee,int course_id,int grade_id, final Requirdetailed requirdetailed){
-        Call<Demtest> call=oredr_http.Createorder(uid,teacher_id,requirement_id,fee,course_id,grade_id);
+    public void  CreateOrder(int uid, int teacher_id , int requirement_id, float fee,int course_id,int grade_id, final Requirdetailed requirdetailed,String address){
+        Call<Demtest> call=oredr_http.Createorder(uid,teacher_id,requirement_id,fee,course_id,grade_id,address);
         call.enqueue(new Callback<Demtest>() {
             @Override
             public void onResponse(Call<Demtest> call, Response<Demtest> response) {

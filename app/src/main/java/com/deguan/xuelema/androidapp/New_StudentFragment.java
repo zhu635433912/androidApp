@@ -179,10 +179,10 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
                 Intent intentt=new Intent(getActivity(),Xuqiufabu.class);
                 startActivity(intentt);
                 break;
-            case R.id.studentwodejiaoshi:
-                Intent intentz=new Intent(getActivity(),MainActivity.class);
-                startActivity(intentz);
-                break;
+//            case R.id.studentwodejiaoshi:
+//                Intent intentz=new Intent(getActivity(),MainActivity.class);
+//                startActivity(intentz);
+//                break;
             case R.id.chat_icon:
                 //会话列表
                 Intent intent2 = new Intent(getActivity(), modle.Huanxing.ui.MainActivity.class);

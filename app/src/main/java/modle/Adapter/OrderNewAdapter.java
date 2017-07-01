@@ -17,6 +17,7 @@ import com.zhy.autolayout.utils.AutoUtils;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -55,12 +56,13 @@ import modle.user_ziliao.User_id;
  * 修改时间：2017-06-23 14:41
  * 修改备注：
  */
-public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderNewViewHolder> implements View.OnClickListener {
+public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderNewViewHolder> implements View.OnClickListener ,View.OnLongClickListener{
 
     private static final String TAG = OrderNewAdapter.class.getSimpleName();
     private Context context;
     private List<Map<String,Object>> listmap;
     private OrderNewAdapter.OnTopClickListener listener;
+    private OrderNewAdapter.OnTopLongClickListener longListener;
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss", Locale.CHINA);
     private RecyclerView recyclerView;
 
@@ -73,11 +75,15 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
     public void setOnTopClickListener(OrderNewAdapter.OnTopClickListener listener) {
         this.listener = listener;
     }
-
+    /*设置长按事件*/
+    public void setOnItemLongClickListener(OnTopLongClickListener onItemLongClickListener) {
+        this.longListener = onItemLongClickListener;
+    }
     @Override
     public OrderNewAdapter.OrderNewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.wodeorder_itme, parent, false);
         view.setOnClickListener(this);
+        view.setOnLongClickListener(this);
         return new OrderNewAdapter.OrderNewViewHolder(view);
     }
 
@@ -96,10 +102,14 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
             Glide.with(context).load(listmap.get(position).get("teacher_headimg")).transform(new GlideCircleTransform(context)).into(hode.headImage);
         }else {
             hode.studentlistname.setText(listmap.get(position).get("placer_name")+"");
-//            Glide.with(context).load(listmap.get(position).get("teacher_headimg")).transform(new GlideCircleTransform(context)).into(hode.headImage);
+            Glide.with(context).load(listmap.get(position).get("placer_headimg")).transform(new GlideCircleTransform(context)).into(hode.headImage);
 
         }
-        hode.xdsj.setText(listmap.get(position).get("created")+"");
+//        hode.xdsj.setText(listmap.get(position).get("created")+"");
+        Date d = new Date(Long.parseLong(listmap.get(position).get("created")+"")*1000);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        hode.xdsj.setText(sdf.format(d));
+
         hode.nianji.setText(listmap.get(position).get("grade_name")+"");
         hode.yaoqiukemu.setText(listmap.get(position).get("course_name")+"");
         hode.keshifei.setText("￥"+keshifee+"/节");
@@ -171,6 +181,11 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
             listener.onTopClick(listmap.get(position));
         }
     }
+    @Override
+    public boolean onLongClick(View v) {
+        int position = recyclerView.getChildAdapterPosition(v);
+        return longListener != null && longListener.onItemLongClickListener(v, listmap.get(position));
+    }
 
     public static class OrderNewViewHolder extends RecyclerView.ViewHolder{
 
@@ -205,5 +220,8 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
 
     public interface OnTopClickListener{
         void onTopClick(Map<String,Object> entity);
+    }
+    public interface OnTopLongClickListener{
+        boolean onItemLongClickListener(View view,Map<String,Object> entity);
     }
 }

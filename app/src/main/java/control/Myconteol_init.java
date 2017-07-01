@@ -23,7 +23,7 @@ public interface Myconteol_init {
      * @param int   $lat    纬度
      * @param int   $lng    经度
      */
-    public void setlist_a(int uid, int role , double lat, double ing, PullToRefreshListView listView,
+    public void setlist_a(int uid, int role , String lat, String ing, PullToRefreshListView listView,
                           Context context, int order, String state, int gender, int speciality, int grade_type,int order_rank,int page);
 
     public void huidiao(List<Map<String,Object>> listmap,int role, PullToRefreshListView listView,Context context);

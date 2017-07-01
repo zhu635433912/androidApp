@@ -16,18 +16,24 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 
+import java.text.DecimalFormat;
+import java.util.List;
+import java.util.Map;
+
 import modle.Order_Modle.Order;
 import modle.Order_Modle.Order_init;
+import modle.Teacher_Modle.Teacher;
 import modle.user_ziliao.User_id;
 
 /**
  * 学生评价老师
  */
 
-public class Student_assessment extends AutoLayoutActivity implements View.OnClickListener {
+public class Student_assessment extends AutoLayoutActivity implements View.OnClickListener, Requirdetailed {
     private RelativeLayout pingjiafanhui;
     private int oredr_id;
     private Button jieinteun;
@@ -41,6 +47,8 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
     private int rantoke=2;//评分
     private EditText pingjiatext;
     private TextView pingfenTv;
+    private TextView goodTv;
+    private TextView midTv;
 
 
     @Override
@@ -50,6 +58,9 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
         User_id.getInstance().addActivity(this);
      //   HideIMEUtil.wrap(this);
 
+
+        midTv = (TextView) findViewById(R.id.mid_percent);
+        goodTv = (TextView) findViewById(R.id.good_percent);
         pingfenTv = (TextView) findViewById(R.id.pingfen_tv);
         pingjiafanhui= (RelativeLayout) findViewById(R.id.pingjiafanhui);
         but1= (Button) findViewById(R.id.but1);
@@ -61,8 +72,10 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
         pingjiatext= (EditText) findViewById(R.id.pingjiatext);
 
         String oredr_ida=getIntent().getStringExtra("oredr_id");
+        String teacherId = getIntent().getStringExtra("teacher_id");
         uid=Integer.parseInt(User_id.getUid());
         oredr_id=Integer.parseInt(oredr_ida);
+        new Teacher().Get_Teacher(Integer.parseInt(teacherId),this);
         jieinteun= (Button) findViewById(R.id.jieinteun);
 
         but1.setOnClickListener(this);
@@ -91,7 +104,7 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
                                 order_init.Comment_Order(uid,oredr_id,pingjiatext.getText().toString(),ac);
                                 order_init.UpdateOrder_score(uid,oredr_id,1,1,1,rantoke);
 
-                                Intent intent=new Intent(Student_assessment.this,Student_Activty.class);
+                                Intent intent=NewMainActivity_.intent(Student_assessment.this).get();
                                 startActivity(intent);
                                 Toast.makeText(Student_assessment.this,"评论订单成功!",Toast.LENGTH_LONG).show();
                             }
@@ -104,27 +117,27 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
                 break;
             case R.id.but1:
                 pingfenxinji.setBackgroundResource(R.drawable.one);
-                rantoke=1;
+                rantoke=3;
                 pingfenTv.setText("1.0");
                 break;
             case R.id.but2:
                 pingfenxinji.setBackgroundResource(R.drawable.two);
-                rantoke=2;
+                rantoke=3;
                 pingfenTv.setText("2.0");
                 break;
             case R.id.but3:
                 pingfenxinji.setBackgroundResource(R.drawable.three);
-                rantoke=3;
+                rantoke=2;
                 pingfenTv.setText("3.0");
                 break;
             case R.id.but4:
                 pingfenxinji.setBackgroundResource(R.drawable.four);
-                rantoke=4;
+                rantoke=2;
                 pingfenTv.setText("4.0");
                 break;
             case R.id.but5:
                 pingfenxinji.setBackgroundResource(R.drawable.five);
-                rantoke=5;
+                rantoke=1;
                 pingfenTv.setText("5.0");
                 break;
         }
@@ -168,5 +181,20 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
             }
         }
         return false;
+    }
+
+    @Override
+    public void Updatecontent(Map<String, Object> map) {
+        DecimalFormat df   = new DecimalFormat("######0.00");
+        double haopingNum = Double.parseDouble((String)map.get("haoping_num"));
+        double order_rank = Double.parseDouble((String)map.get("order_rank"));
+
+        goodTv.setText(df.format(haopingNum/order_rank)+"%");
+        midTv.setText(df.format(1-haopingNum/order_rank)+"%");
+    }
+
+    @Override
+    public void Updatefee(List<Map<String, Object>> listmap) {
+
     }
 }

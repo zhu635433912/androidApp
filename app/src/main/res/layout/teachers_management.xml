@@ -463,7 +463,7 @@
                 android:layout_marginTop="10px"
                 android:layout_below="@+id/tianjiarongyuztubiao"
                 android:layout_centerHorizontal="true"
-                android:text="添加学历"
+                android:text="添加荣誉证书"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>

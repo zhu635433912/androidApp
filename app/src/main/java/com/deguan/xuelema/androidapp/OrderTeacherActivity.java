@@ -203,10 +203,10 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
     @Override
     public void Updatecontent(Map<String, Object> map) {
         String status = (String) map.get("status");
-        String requirement_address = (String) map.get("requirement_address");
+        String requirement_address = (String) map.get("address");
         String created = (String) map.get("created");
-        String requirement_grade = (String) map.get("requirement_grade");
-        String requirement_course = (String) map.get("requirement_course");
+        String requirement_grade = (String) map.get("grade_name");
+        String requirement_course = (String) map.get("course_name");
         String feae= (String) map.get("fee");
         teacherImage = (String) map.get("placer_headimg");
         Glide.with(this).load(teacherImage).transform(new GlideCircleTransform(this)).into(headImage);

@@ -1,5 +1,6 @@
 package modle.MyHttp;
 
+import com.deguan.xuelema.androidapp.entities.DownloadEntity;
 import com.deguan.xuelema.androidapp.entities.PayEntity;
 
 import modle.JieYse.ContentModle;
@@ -18,6 +19,9 @@ import retrofit2.http.Query;
  */
 
 public interface Data {
+
+    @POST("index.php?s=/Service/Public/downUrl")
+    Call<DownloadEntity> getDownload(@Query("type")String type);
     //年级
     @POST("index.php?s=/Service/Setup/grades")
     Call<Grades_Modle> getgrade();

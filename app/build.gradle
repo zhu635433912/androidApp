@@ -12,7 +12,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
 //        ndk {
@@ -57,44 +57,44 @@ dependencies {
     //        exclude group: 'com.android.support', module: 'support-annotations'
     //    })
     /*
-                                                                                                        屏幕适配
-                                                                                                        */
+                                                                                                            屏幕适配
+                                                                                                            */
     /*
-                                                                                                        okHttp
-                                                                                                         */
+                                                                                                            okHttp
+                                                                                                             */
     /*
-                                                                                                        Retrofit  Rxjava
-                                                                                                        */
+                                                                                                            Retrofit  Rxjava
+                                                                                                            */
     compile files('libs/AMap_Location_V3.3.0_20170118.jar')
     /*
-                                                                                                  高德
-                                                                                                   */
+                                                                                                      高德
+                                                                                                       */
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/core-3.2.1.jar')
     //    compile 'com.amap.api:location:latest.integration'
     /*
-                                                                        支付宝
-                                                                         */
+                                                                            支付宝
+                                                                             */
     compile files('libs/alipaySdk-20170309.jar')
     /*
-                                                                        环信
-                                                                         */
+                                                                            环信
+                                                                             */
     /*
-                                                                极光推送
-                                                                 */
+                                                                    极光推送
+                                                                     */
     // 此处以JPush 3.0.5 版本为例。
     // 此处以JCore 1.1.2 版本为例。
     compile files('libs/okhttputils-2_6_2.jar')
     /*
-                                                    三级联动
-                                                     */
+                                                        三级联动
+                                                         */
     /*
-                                                    小Dlog动画http://www.open-open.com/lib/view/open1445846143992.html
-                                                     */
+                                                        小Dlog动画http://www.open-open.com/lib/view/open1445846143992.html
+                                                         */
     /*
-                                                    软键盘收缩
+                                                        软键盘收缩
 
-                                                    compile 'org.loader:autohideime:1.0'*/
+                                                        compile 'org.loader:autohideime:1.0'*/
     //动态权限申请
     //android EventBus
     //    ormlite：操作sqlite数据库
@@ -139,7 +139,7 @@ dependencies {
     compile files('libs/libammsdk.jar')
     //photoView
     compile 'com.bm.photoview:library:1.4.1'
-
+    compile project(':update')
 }
 apt {
     arguments {

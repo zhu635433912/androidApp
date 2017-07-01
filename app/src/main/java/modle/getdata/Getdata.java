@@ -3,12 +3,14 @@ package modle.getdata;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import com.deguan.xuelema.androidapp.entities.DownloadEntity;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
 import com.deguan.xuelema.androidapp.viewimpl.Baseinit;
 import com.deguan.xuelema.androidapp.viewimpl.CashListView;
 import com.deguan.xuelema.androidapp.viewimpl.CashView;
+import com.deguan.xuelema.androidapp.viewimpl.DownloadView;
 import com.deguan.xuelema.androidapp.viewimpl.TurnoverView;
 import com.deguan.xuelema.androidapp.viewimpl.UpReportView;
 
@@ -51,6 +53,22 @@ public class Getdata {
                 .build();
         data=retrofit.create(Data.class);
     }
+
+    public void getDownloadUrl(final DownloadView downloadView){
+        Call<DownloadEntity> call = data.getDownload("andriod");
+        call.enqueue(new Callback<DownloadEntity>() {
+            @Override
+            public void onResponse(Call<DownloadEntity> call, Response<DownloadEntity> response) {
+                downloadView.successDownload(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<DownloadEntity> call, Throwable t) {
+
+            }
+        });
+    }
+
     //获取k科目
    public void getGrade(final Requirdetailed requirdetailed){
        Call<Courses_Modle> call=data.getSubject();

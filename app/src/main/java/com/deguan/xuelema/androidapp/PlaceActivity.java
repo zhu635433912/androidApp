@@ -38,7 +38,7 @@ public class PlaceActivity extends MyBaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PlaceActivity.this,PictureZoo.class);
-                intent.putExtra("hiemag",R.mipmap.how_to_place+"");
+                intent.putExtra("hide",R.mipmap.how_to_place+"");
                 startActivity(intent);
             }
         });

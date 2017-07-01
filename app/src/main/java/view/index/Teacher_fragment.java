@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Region;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SearchView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,9 @@ import com.deguan.xuelema.androidapp.SearchActivity_;
 import com.deguan.xuelema.androidapp.UserxinxiActivty;
 import com.deguan.xuelema.androidapp.Xuqiufabu;
 import com.deguan.xuelema.androidapp.Xuqiuxiangx;
+import com.deguan.xuelema.androidapp.entities.EntityCity;
+import com.deguan.xuelema.androidapp.entities.EntityProvince;
+import com.deguan.xuelema.androidapp.entities.EntityRegion;
 import com.deguan.xuelema.androidapp.entities.TeacherEntity;
 import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
 import com.deguan.xuelema.androidapp.init.Gaodehuidiao_init;
@@ -39,6 +44,7 @@ import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.utils.DbUtil;
 import com.deguan.xuelema.androidapp.utils.SubjectUtil;
+import com.deguan.xuelema.androidapp.utils.XmlUits;
 import com.deguan.xuelema.androidapp.viewimpl.TeacherView;
 import com.deguan.xuelema.androidapp.viewimpl.XuqiuView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -56,6 +62,9 @@ import control.Mycontrol;
 import de.greenrobot.dao.DbUtils;
 import kr.co.namee.permissiongen.PermissionGen;
 import kr.co.namee.permissiongen.PermissionSuccess;
+import modle.Adapter.CityAdapter;
+import modle.Adapter.ProvinceAdapter;
+import modle.Adapter.RegionAdapter;
 import modle.Adapter.Requirdapter;
 import modle.Adapter.StudentAdapter;
 import modle.Adapter.TeacherListAdapter;
@@ -88,6 +97,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
     Intent intent;
     ListView listview1;
     ListView listview2;
+    ListView listView3;
     LinearLayout linearLayout;
     RelativeLayout lineavitint;
     List<Map<String,Object>> listmap;
@@ -104,6 +114,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
     private TextView nan;
     private TextView nv;
     private int xinbie;
+
 
     private TextView kemubuxian;
     private TextView yuwen;
@@ -162,6 +173,14 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
     private ImageButton searchBtn;
     private User_Realization user_init;
     private Gaode_dinwei gaode_dinwei;
+    private List<EntityProvince> provinces ;
+    private ProvinceAdapter provinceAdapter;
+    private CityAdapter cityAdapter;
+    private RegionAdapter regionAdapter;
+    private List<EntityCity> cities = new ArrayList<>();
+    private List<EntityRegion> regions = new ArrayList<>();
+
+//    =new SimpleAdapter(context,listmap,R.layout.text_itme,new String[]{"diqu"},new int[]{R.id.textsuan});
 
     @Override
     public void onResume() {
@@ -215,6 +234,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
         ImageButton chooseBtn= (ImageButton) view.findViewById(R.id.shaixuanbut3);
         listview1= (ListView) view.findViewById(R.id.listviewhastva);
         listview2= (ListView) view.findViewById(R.id.listviewhastva2);
+        listView3 = (ListView) view.findViewById(R.id.listviewhastva3);
         linearLayout= (LinearLayout) view.findViewById(R.id.lincavtilint);
         listView= (PullToRefreshListView) view.findViewById(R.id.list1);
         shaixuan= (RelativeLayout) view.findViewById(R.id.shaixuan);
@@ -251,9 +271,10 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
         quyuBtn.setOnClickListener(this);
         paixuBtn.setOnClickListener(this);
         chooseBtn.setOnClickListener(this);
+        ditutext.setOnClickListener(this);
 
 
-
+        provinces = XmlUits.getInstance().getprovince(getContext());
 
         //下拉刷新
 //        listView.setInterface(this);
@@ -278,7 +299,12 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
         listview1.setVerticalScrollBarEnabled(false);
         listview2.setOverScrollMode(view.OVER_SCROLL_NEVER);
         listview2.setVerticalScrollBarEnabled(false);
+        listView3.setOverScrollMode(view.OVER_SCROLL_NEVER);
+        listView3.setVerticalScrollBarEnabled(false);
 
+//        for (int i = 0; i < provinces.size(); i++) {
+//
+//        }
         //隐藏条件布局
         lineavitint= (RelativeLayout) view.findViewById(R.id.relativelayout);
         lineavitint.setVisibility(View.GONE);
@@ -304,15 +330,25 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
             linearLayout.setBackgroundResource(R.drawable.tiaojian_quyu);
             paixuBtn.setVisibility(View.GONE);
         }
+        provinceAdapter = new ProvinceAdapter(provinces,getContext());
+        listview1.setAdapter(provinceAdapter);
+        cityAdapter = new CityAdapter(cities,getContext());
+        listview2.setAdapter(cityAdapter);
+        regionAdapter = new RegionAdapter(regions,getContext());
+        listView3.setAdapter(regionAdapter);
+
 
         //城市列表
         listview1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Map<String,Object> map= (Map<String, Object>) listview1.getItemAtPosition(position);
-                String aa= (String) map.get("text");
-                myconteol_init.setlist_dqiandao(aa,listview2,getActivity());
-
+//                Map<String,Object> map= (Map<String, Object>) listview1.getItemAtPosition(position);
+//                String aa= (String) map.get("text");
+//                myconteol_init.setlist_dqiandao(aa,listview2,getActivity());
+                cities.clear();
+                cities.addAll(provinces.get(position).getCity());
+                cityAdapter.notifyDataSetChanged();
+                listview2.setVisibility(View.VISIBLE);
             }
         });
 
@@ -320,14 +356,33 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
         listview2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Map<String,Object> map= (Map<String, Object>) listview2.getItemAtPosition(position);
-                String aa= (String) map.get("diqu");
-
-                myconteol_init.setlist_a(id_fuzhi,role,lat, lng, listView, getActivity(),0,aa,0,0,0,3,page);
-                lineavitint.setVisibility(View.GONE);
+//                Map<String,Object> map= (Map<String, Object>) listview2.getItemAtPosition(position);
+//                String aa= (String) map.get("diqu");
+//
+//                myconteol_init.setlist_a(id_fuzhi,role,lat, lng, listView, getActivity(),0,aa,0,0,0,3,page);
+//                lineavitint.setVisibility(View.GONE);
+                regions.clear();
+                regions.addAll(cities.get(position).getList());
+                regionAdapter.notifyDataSetChanged();
+                listView3.setVisibility(View.VISIBLE);
             }
         });
+        listView3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long longid) {
+                lat = Double.parseDouble(regions.get(position).getLat());
+                lng = Double.parseDouble(regions.get(position).getLng());
+                if (role == 2){
+                    demand_init.getDemand_list(id,role,0,0,"2016-08-10",0,page,Double.parseDouble(regions.get(position).getLat()),
+                            Double.parseDouble(regions.get(position).getLng()),null,null,Teacher_fragment.this);
+                }else if (role == 1){
+                    t.Get_Teacher_list(id, role, regions.get(position).getLat(),
+                            regions.get(position).getLng(),
+                            listView, getActivity(), 0, "", 0, 0, 0, 3, Teacher_fragment.this, page);                }
 
+
+            }
+        });
         //listview监听事件
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -513,6 +568,10 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.ditutext:
+
+                gaode_dinwei = new Gaode_dinwei(this,getActivity());
+                break;
             case R.id.main_search_btn:
                 startActivity(SearchActivity_.intent(this).get());
 
@@ -528,13 +587,13 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
                 tiaojianshaixuan.setVisibility(View.GONE);
                 //显示地区筛选
                 listview1.setVisibility(View.VISIBLE);
-                listview2.setVisibility(View.VISIBLE);
+//                listview2.setVisibility(View.VISIBLE);
                 if (role == 2){
                     linearLayout.setBackgroundResource(R.drawable.tiaojian_quyu);
                 }else {
                     linearLayout.setBackgroundResource(R.drawable.list01);
                 }
-                myconteol_init.setlist_d("浙江省",listview1,getActivity());
+//                myconteol_init.setlist_d("浙江省",listview1,getActivity());
 
                 break;
             case R.id.paixubut2:
@@ -546,6 +605,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
                 //隐藏地区筛选
                 listview1.setVisibility(View.GONE);
                 listview2.setVisibility(View.GONE);
+                listView3.setVisibility(View.GONE);
                 tiaojianshaixuan.setVisibility(View.GONE);
                 //显示排序
                 shaixuan.setVisibility(View.VISIBLE);
@@ -553,19 +613,19 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
             case R.id.xinjipaixu:
                 //星级排序
                 Log.e("aa","点击的是星级");
-                myconteol_init.setlist_a(id,role,lat, lng, listView, getActivity(),1,"",0,0,0,3,page);
+                myconteol_init.setlist_a(id,role,lat+"", lng+"", listView, getActivity(),1,"",0,0,0,3,page);
                 lineavitint.setVisibility(View.GONE);
                 break;
             case R.id.jiagepaixu:
                 //价格排序
                 Log.e("aa","点击的是价格");
-                myconteol_init.setlist_a(id,role,lat, lng, listView, getActivity(),2,"",0,0,0,3,page);
+                myconteol_init.setlist_a(id,role,lat+"", lng+"", listView, getActivity(),2,"",0,0,0,3,page);
                 lineavitint.setVisibility(View.GONE);
                 break;
             case R.id.renqipaixu:
                 //人气排序
                 Log.e("aa","点击的是人气");
-                myconteol_init.setlist_a(id,role,lat, lng, listView, getActivity(),3,"",0,0,0,3,page);
+                myconteol_init.setlist_a(id,role,lat+"", lng+"", listView, getActivity(),3,"",0,0,0,3,page);
                 lineavitint.setVisibility(View.GONE);
                 break;
             case R.id.shaixuanbut3:
@@ -707,7 +767,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
 //                }else if (role == 2){
 //                    demand_init.getDemand_list(id,role,0,0,"2016-08-10",0,page,null,null,this);
 //                }
-                myconteol_init.setlist_a(id,role,lat, lng, listView, getActivity(),1,"",xinbie,kemu,xueli,order_rank,page);
+                myconteol_init.setlist_a(id,role,""+lat,""+ lng, listView, getActivity(),1,"",xinbie,kemu,xueli,order_rank,page);
                 tiaojianshaixuan.setVisibility(View.GONE);
 
                 break;
@@ -776,6 +836,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
         User_id.setLng(lng);
         ditutext.setText(map.get("District")+"");
         User_id.setStatus(map.get("District")+"");
+        User_id.setAddress(map.get("address")+"");
         if (user_init !=null){
             user_init.setlan_lng(id,lat,lng);
             user_init.User_Data(id,User_id.getLat()+"",User_id.getLng()+"",this);
@@ -785,10 +846,10 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
             user_init.User_Data(id,User_id.getLat()+"",User_id.getLng()+"",this);
         }
 
-        EventBus.getDefault().post(map.get("District")+"","status");
+        EventBus.getDefault().post(map.get("address")+"","status");
         if (role==1) {
 
-            t.Get_Teacher_list(id, role, lat, lng, listView, getActivity(),0, "", 0, 0, 0, 3, this,page);
+            t.Get_Teacher_list(id, role, lat+"",""+ lng, listView, getActivity(),0, "", 0, 0, 0, 3, this,page);
         }else {
             demand_init.getDemand_list(id,role,0,0,"2016-08-10",0,page,lat,lng,null,null,this);
         }
@@ -855,7 +916,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
         if (role == 2){
             demand_init.getDemand_list(id,role,0,0,"2016-08-10",0,page,lat,lng,null,null,this);
         }else if (role == 1){
-            t.Get_Teacher_list(id, role, lat, lng, listView, getActivity(),0, "", 0, 0, 0, 3, this,page);
+            t.Get_Teacher_list(id, role, lat+"", ""+lng, listView, getActivity(),0, "", 0, 0, 0, 3, this,page);
         }
     }
 
@@ -878,7 +939,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
 //                            }
 //                        }).start();
 //            }else {
-                t.Get_Teacher_list(id, role, lat, lng, listView, getActivity(), 0, "", 0, 0, 0, 3, this, page);
+                t.Get_Teacher_list(id, role, ""+lat, ""+lng, listView, getActivity(), 0, "", 0, 0, 0, 3, this, page);
 //            }
         }
         listView.onRefreshComplete();
@@ -887,6 +948,9 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void successXuqiu(List<Map<String, Object>> maps) {
+        listview2.setVisibility(View.GONE);
+        listView3.setVisibility(View.GONE);
+        lineavitint.setVisibility(View.GONE);
         listView.onRefreshComplete();
         if (page == 1){
             datas.clear();
@@ -908,6 +972,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
             entity.setDistance((String) maps.get(i).get("distance"));
             entity.setFee(String.valueOf(maps.get(i).get("fee")));
             entity.setGrade_name((String)maps.get(i).get("grade_name"));
+            entity.setAddress((String)maps.get(i).get("address"));
             if ((maps.get(i).get("status")).equals("1")||maps.get(i).get("status").equals("2")){
                 continue;
             }
@@ -925,6 +990,9 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void successTeacher(List<Map<String, Object>> maps) {
+        listview2.setVisibility(View.GONE);
+        listView3.setVisibility(View.GONE);
+        lineavitint.setVisibility(View.GONE);
         listView.onRefreshComplete();
         if (page == 1){
             teachers.clear();
@@ -945,6 +1013,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
 //            entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
                 entity.setDistance((String) maps.get(i).get("distance"));
                 entity.setFee(String.valueOf(maps.get(i).get("fee")));
+                entity.setHaoping_num((String)maps.get(i).get("haoping_num"));
                 List<Map<String,Object>> listmap = ((List<Map<String,Object>>)maps.get(i).get("information_temp"));
                 String course_name = "";
                 for (int j = 0; j < listmap.size(); j++) {

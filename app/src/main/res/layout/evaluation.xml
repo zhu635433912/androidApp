@@ -21,7 +21,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20px"
-        android:text="个人信息"
+        android:text="个人评价"
         android:textSize="30px" />
 
     <TextView
@@ -61,6 +61,7 @@
         android:background="@drawable/hly02" />
 
     <RelativeLayout
+        android:layout_below="@+id/pingjiafanhui"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#e0eaf1"

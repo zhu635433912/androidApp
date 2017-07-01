@@ -17,6 +17,11 @@ import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.List;
+import java.util.Map;
+
+import modle.JieYse.Dtu_Modle.ProvinceAreaHelper;
+
 @EActivity(R.layout.content_how_to_publish)
 public class HowToPublishActivity extends MyBaseActivity {
 
@@ -29,6 +34,11 @@ public class HowToPublishActivity extends MyBaseActivity {
 
     @Override
     public void initView() {
+        ProvinceAreaHelper provinceAreaHelper = new ProvinceAreaHelper(this);
+        provinceAreaHelper.initProvinceData();
+        Map<String,String[]> list = provinceAreaHelper.getsheng();
+        Map<String,String[]> list1 = provinceAreaHelper.getshi();
+        Map<String,String> list2 = provinceAreaHelper.getqu();
 //        imageView.setImage(ImageSource.resource(R.mipmap.how_to_publish));
         backRl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +50,7 @@ public class HowToPublishActivity extends MyBaseActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HowToPublishActivity.this,PictureZoo.class);
-                intent.putExtra("hiemag",R.mipmap.how_to_publish+"");
+                intent.putExtra("hide",R.mipmap.how_to_publish+"");
                 startActivity(intent);
             }
         });

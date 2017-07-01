@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.deguan.xuelema.androidapp.Pick_singleActivty;
 import com.deguan.xuelema.androidapp.R;
 
 import java.io.IOException;
@@ -17,6 +16,8 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -56,12 +57,13 @@ public class GrideViewadbut extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (view==null){
-            viewhode=new Viewhode();
             view=layoutInflater.inflate(R.layout.pick_singleitme,null);
+            viewhode=new Viewhode(view);
             viewhode.liebiaoname= (CircleImageView) view.findViewById(R.id.liebiaoname);
             viewhode.listname= (TextView) view.findViewById(R.id.listname);
             viewhode.coursename= (TextView) view.findViewById(R.id.coursename);
             viewhode.xiadans= (TextView) view.findViewById(R.id.xiadans);
+            viewhode.address = (TextView) view.findViewById(R.id.address_tv);
             view.setTag(viewhode);
         }else {
             viewhode= (Viewhode) view.getTag();
@@ -73,17 +75,26 @@ public class GrideViewadbut extends BaseAdapter {
         }else {
             viewhode.coursename.setText(course_name);
         }
-        viewhode.xiadans.setText(listmap.get(i).get("created")+"");
+        viewhode.address.setText(listmap.get(i).get("address")+"");
+        Date d = new Date(Long.parseLong(listmap.get(i).get("created")+"")*1000);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        viewhode.xiadans.setText(sdf.format(d));
+
+//        viewhode.xiadans.setText(listmap.get(i).get("created")+"");
         setbitmap(listmap.get(i).get("teacher_headimg").toString(),viewhode.liebiaoname);
 
         return view;
     }
 
     class Viewhode {
+        TextView address;
         CircleImageView liebiaoname;
         TextView listname;
         TextView coursename;
         TextView xiadans;
+        public Viewhode(View view){
+
+        }
     }
 
 

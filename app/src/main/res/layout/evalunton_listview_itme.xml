@@ -9,7 +9,6 @@
         android:layout_width="600px"
         android:layout_height="250px">
         <modle.toos.CircleImageView
-            android:background="#000"
             android:id="@+id/evaluaton_name"
             android:layout_marginLeft="20px"
             android:layout_marginTop="20px"

@@ -63,22 +63,22 @@ public class ConductFragment extends BaseFragment implements OrderView, SwipeRef
 //        listView.setOnRefreshListener(this);
         listView.setAdapter(adapter);
 
-        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (!isLoading) {
-                    RecyclerView.Adapter adapter1 = recyclerView.getAdapter();
-                    View childAt = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
-                    int position = recyclerView.getChildAdapterPosition(childAt);
-                    if (adapter1.getItemCount() - position < 5) {
-                        isLoading = true;
-                        page++;
-//                        NetworkUtil.getService().getTopList(id, ++page, 20).enqueue(TopListFragment.this);
-                    }
-                }
-            }
-        });
+//        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                if (!isLoading) {
+//                    RecyclerView.Adapter adapter1 = recyclerView.getAdapter();
+//                    View childAt = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
+//                    int position = recyclerView.getChildAdapterPosition(childAt);
+//                    if (adapter1.getItemCount() - position < 5) {
+//                        isLoading = true;
+//                        page++;
+////                        NetworkUtil.getService().getTopList(id, ++page, 20).enqueue(TopListFragment.this);
+//                    }
+//                }
+//            }
+//        });
         swipeRefreshLayout.setOnRefreshListener(this);
 
         if (User_id.getRole().equals("1")){
