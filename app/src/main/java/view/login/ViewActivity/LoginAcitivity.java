@@ -21,7 +21,6 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
-import com.deguan.xuelema.androidapp.MainActivity;
 import com.deguan.xuelema.androidapp.NewMainActivity_;
 //import com.deguan.xuelema.androidapp.New_StudentActivity_;
 import com.deguan.xuelema.androidapp.R;
@@ -212,8 +211,6 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
     @Override
     public void loginture(Map<String,Object> map) {
 
-//        intent= New_StudentActivity_.intent(this).extra("id",id).extra("role",role).get();
-//                new Intent(LoginAcitivity.this,MainActivity.class);
         final String role= (String) map.get("role");
         final String id= (String) map.get("id");
 //        intent.putExtra("id",id);
@@ -271,11 +268,6 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
                 // get user's info (this should be get from App's server or 3rd party service)
                 DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
 
-//                Intent intent = new Intent(LoginAcitivity.this,
-//                        MainActivity.class);
-//                startActivity(intent);
-//                startActivity(NewMainActivity_.intent(LoginAcitivity.this).extra("id",id).extra("role",role).get());
-//                finish();
             }
 
             @Override

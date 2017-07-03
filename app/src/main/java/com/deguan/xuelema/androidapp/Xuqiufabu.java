@@ -108,8 +108,11 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 if (aMapLocation.getErrorCode() == 0) {
                     //可在其中解析amapLocation获取相应内容。
 
-                    userweizhi.setText(aMapLocation.getProvince().toString() + aMapLocation.getCity().toString()
-                            + aMapLocation.getDistrict().toString() + aMapLocation.getStreet().toString() +
+                    userweizhi.setText(
+//                            aMapLocation.getProvince().toString() +
+//                            aMapLocation.getCity().toString()
+//                            + aMapLocation.getDistrict().toString() +
+                            aMapLocation.getStreet().toString() +
                             aMapLocation.getStreetNum().toString());
 
                     provinc = aMapLocation.getProvince().toString();
@@ -275,7 +278,9 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 builder.setIcon(R.drawable.add04);
                 builder.setTitle("请选择一个年级");
                 //    指定下拉列表的显示数据
-                final String[] cities = {"一年级", "二年级", "三年级", "四年级", "五年级", "六年级", "初一", "初二", "初三", "高一", "高二", "高三"};
+                final String[] cities = {"小学", "初中", "高中", "大学"
+//                        , "五年级", "六年级", "初一", "初二", "初三", "高一", "高二", "高三"
+                };
                 //    设置一个下拉的列表选择项
                 builder.setItems(cities, new DialogInterface.OnClickListener() {
                     @Override

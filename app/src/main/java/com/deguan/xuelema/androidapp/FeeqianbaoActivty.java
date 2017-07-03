@@ -1,7 +1,5 @@
 package com.deguan.xuelema.androidapp;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,8 +23,6 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
-import com.deguan.xuelema.androidapp.init.Student_init;
-import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
 import com.deguan.xuelema.androidapp.viewimpl.CashView;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -38,10 +34,7 @@ import java.util.Map;
 
 import modle.alipay.PayResult;
 import modle.getdata.Getdata;
-import modle.inter_test;
 import modle.user_ziliao.User_id;
-import view.fee.Feechongzhi_fagment;
-import view.fee.Withdrawals_fagment;
 
 /**
  * 钱包
@@ -219,11 +212,6 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
             case R.id.textView4:
                 //充值
                 rechargePopwindow.showAtLocation(textView4, Gravity.CENTER,0,0);
-//                Feechongzhi_fagment dindan_fagment=new Feechongzhi_fagment();
-//                FragmentManager fragmentManager=getFragmentManager();
-//                FragmentTransaction beginTransaction=fragmentManager.beginTransaction();
-//                beginTransaction.add(R.id.feechongzhi,dindan_fagment);
-//                beginTransaction.commit();
                 break;
             case R.id.xianjinjuan:
                 //跳转现金券
@@ -234,11 +222,6 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
             case R.id.tixian:
                 //提现
                 cashPopwindow.showAtLocation(tixian,Gravity.CENTER,0,0);
-//                Withdrawals_fagment withdrawalsFagment=new Withdrawals_fagment();
-//                FragmentManager fr=getFragmentManager();
-//                FragmentTransaction bt=fr.beginTransaction();
-//                bt.add(R.id.feechongzhi,withdrawalsFagment);
-//                bt.commit();
                 break;
             case R.id.qianbaohuitui:
                 //返回

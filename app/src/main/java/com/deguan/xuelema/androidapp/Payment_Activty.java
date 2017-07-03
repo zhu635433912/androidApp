@@ -190,7 +190,7 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
 
 //                    Toast.makeText(this, "暂不可用", Toast.LENGTH_SHORT).show();
                         } else {
-                            if (durationa * order_fee < tolFee) {
+                            if (durationa * order_fee <= tolFee) {
                                 Order_init order_init = new Order();
                                 String password = User_id.getPassword();
                                 order_init.Update_Order(uid, order_id, 2, password, durationa * order_fee);
@@ -215,7 +215,7 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
 
 //                    Toast.makeText(this, "暂不可用", Toast.LENGTH_SHORT).show();
                     } else {
-                        if (durationa * order_fee < tolFee) {
+                        if (durationa * order_fee <= tolFee) {
                             Order_init order_init = new Order();
                             String password = User_id.getPassword();
                             order_init.Update_Order(uid, order_id, 2, password, durationa * order_fee);
@@ -229,7 +229,7 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
                 }
                 break;
             case R.id.querendindanfanhui:
-                Payment_Activty.this.finish();
+                finish();
                 break;
 
         }
@@ -237,20 +237,20 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
 
     @Override
     public void Updatecontent(Map<String, Object> map) {
-        if (flag == 1){
-
-//            PayReq payReq = new PayReq();
-//            payReq.appId = APP_ID;
-//            payReq.partnerId = map.get("partnerid").toString();
-//            payReq.nonceStr = map.get("noncestr").toString();
-//            payReq.packageValue = map.get("package").toString();
-//            payReq.prepayId = map.get("prepayid").toString();
-//            payReq.timeStamp = ""+map.get("timestamp").toString();
-//            Log.d("aa","timestamp---------"+payReq.timeStamp);
-//            payReq.sign = map.get("sign").toString();
-//            Log.d("aa",payReq.appId+"----"+payReq.partnerId+"----"+payReq.nonceStr+"----"+payReq.packageValue+"----"+payReq.prepayId+"----"+payReq.sign+"----");
-//            iwxapi.sendReq(payReq);
-        }else if (flag == 2) {
+//        if (flag == 1){
+//
+////            PayReq payReq = new PayReq();
+////            payReq.appId = APP_ID;
+////            payReq.partnerId = map.get("partnerid").toString();
+////            payReq.nonceStr = map.get("noncestr").toString();
+////            payReq.packageValue = map.get("package").toString();
+////            payReq.prepayId = map.get("prepayid").toString();
+////            payReq.timeStamp = ""+map.get("timestamp").toString();
+////            Log.d("aa","timestamp---------"+payReq.timeStamp);
+////            payReq.sign = map.get("sign").toString();
+////            Log.d("aa",payReq.appId+"----"+payReq.partnerId+"----"+payReq.nonceStr+"----"+payReq.packageValue+"----"+payReq.prepayId+"----"+payReq.sign+"----");
+////            iwxapi.sendReq(payReq);
+//        }else if (flag == 2) {
             //获取去服务器返回的支付宝订单信息再去唤起支付宝
 //            String info = (String) map.get("info");
 //            String ordert = info.substring(13);
@@ -276,12 +276,13 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
 //            // 必须异步调用
 //            Thread payThread = new Thread(payRunnable);
 //            payThread.start();
+//        }else {
+//
+//        }
+        if (map.get("fee") != null) {
+            tolFee = Double.parseDouble(map.get("fee")+"");
         }else {
-            if (map.get("fee") != null) {
-                tolFee = (double) map.get("fee");
-            }else {
-                tolFee = 0;
-            }
+            tolFee = 0.0;
         }
         if (map.get("TotalFee")==null){
 //            mogint.setText("0");

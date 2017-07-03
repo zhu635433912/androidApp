@@ -10,6 +10,8 @@ import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.viewimpl.TeacherView;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
+import org.simple.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -133,7 +135,7 @@ public class Teacher implements Teacher_init {
     @Override
     public List<Map<String, Object>> Get_Teacher_list(int uid, final int role, String lat, String lng, final PullToRefreshListView listView, final Context context, int order, String
             state, int gender, int speciality, int grade_type, int order_rank, final Requirdetailed requirdetailed,int page) {
-        Call<ContentModle> call=teacher_http.getTeacherlist(uid,lat,lng,order,state,gender,speciality,grade_type,order_rank);
+        Call<ContentModle> call=teacher_http.getTeacherlist(uid,lat,lng,order,state,gender,speciality,grade_type,order_rank,page);
         listmap=new ArrayList<Map<String, Object>>();
         call.enqueue(new Callback<ContentModle>() {
             @Override

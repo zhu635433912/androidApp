@@ -1,7 +1,5 @@
 package com.deguan.xuelema.androidapp;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,30 +19,22 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.deguan.xuelema.androidapp.huanxin.HuihuaActivity;
-import com.deguan.xuelema.androidapp.init.Bitmap_init;
-import com.deguan.xuelema.androidapp.init.Ordercontent_init;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
-import com.deguan.xuelema.androidapp.init.Student_init;
-import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.deguan.xuelema.androidapp.viewimpl.Baseinit;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
-import com.hyphenate.exceptions.HyphenateException;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -53,13 +43,11 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import modle.Adapter.KechengAdapter;
-import modle.GetBitmap_Url;
 import modle.Huanxing.ui.ChatActivity;
 import modle.Increase_course.Increase_course;
 import modle.Order_Modle.Order;
@@ -69,9 +57,6 @@ import modle.Teacher_Modle.Teacher_init;
 import modle.getdata.Getdata;
 import modle.toos.CircleImageView;
 import modle.user_ziliao.User_id;
-import view.fee.Purchase_figment;
-
-import static android.R.attr.alpha;
 
 /**
  * 老师个人信息
@@ -204,20 +189,6 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 int visit_fee=Integer.parseInt(fee);
                 buyPopWindow.showAtLocation(imageButton2, Gravity.BOTTOM,0,0);
 
-                //购买课程
-//                Purchase_figment purchase_fagment=new Purchase_figment();
-//                FragmentManager fragmentManager=getFragmentManager();
-//                FragmentTransaction beginTransaction=fragmentManager.beginTransaction();
-//                beginTransaction.add(R.id.jiaoyi,purchase_fagment);
-//                Bundle bundle = new Bundle();
-//                bundle.putInt("unvisit_fee",unvisit_fee);
-//                bundle.putInt("visit_fee",visit_fee);
-//                bundle.putInt("Requir_id",Requir_id);
-//                bundle.putString("grade_id",grade_id);
-//                bundle.putString("course_id",course_id);
-//                bundle.putString("course_name",course_name);
-//                purchase_fagment.setArguments(bundle);
-//                beginTransaction.commit();
             }
         });
         new Thread(new Runnable() {

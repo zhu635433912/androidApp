@@ -30,7 +30,7 @@ public interface Teacher_http {
     @POST("index.php?s=/Service/Teacher/gets_teacher")
     Call<ContentModle> getTeacherlist(@Query("uid") int uid, @Query("lat") String lat, @Query("lng") String lng,
                                       @Query("order") int order,@Query("state") String state,@Query("gender") int gender,@Query("speciality") int speciality,
-                                      @Query("grade_type") int grade_type,@Query("order_rank") int order_rank);
+                                      @Query("grade_type") int grade_type,@Query("order_rank") int order_rank,@Query("page")int page);
     /*
     教师资料更新荣誉证书
      */

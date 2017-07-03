@@ -113,6 +113,8 @@ public class Cashvolume_Activty extends AutoLayoutActivity implements PullToRefr
                         Toast.makeText(Cashvolume_Activty.this, "可提现金额不足", Toast.LENGTH_SHORT).show();
                     }else if(cashFee % 100 == 0){
                         getdata.getCash(Integer.parseInt(User_id.getUid()), User_id.getUsername(), "现金券提现", 3, Float.parseFloat(cashId.getText().toString()), Cashvolume_Activty.this);
+                                        Toast.makeText(Cashvolume_Activty.this,"已提交提现申请",Toast.LENGTH_LONG).show();
+
                     }else {
                         Toast.makeText(Cashvolume_Activty.this, "请输入合适的金额", Toast.LENGTH_SHORT).show();
                     }
@@ -125,8 +127,12 @@ public class Cashvolume_Activty extends AutoLayoutActivity implements PullToRefr
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.xinjinjuantixian:
-                cashPopwindow.showAtLocation(xinjinjuantixian, Gravity.BOTTOM,0,0);
-                Toast.makeText(this,"提现成功",Toast.LENGTH_LONG).show();
+                if (User_id.getRole().equals("1")) {
+                    Toast.makeText(this,"对不起!学生不能提现",Toast.LENGTH_LONG).show();
+                }else {
+                    cashPopwindow.showAtLocation(xinjinjuantixian, Gravity.BOTTOM, 0, 0);
+                }
+//                Toast.makeText(this,"提现成功",Toast.LENGTH_LONG).show();
                 break;
             case R.id.xianjinjbufanhui:
                 Cashvolume_Activty.this.finish();

@@ -149,7 +149,7 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/xuqiubenke"
             android:layout_marginTop="10px"
-            android:text="本科"
+            android:text="学历不限"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>

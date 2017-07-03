@@ -179,6 +179,7 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
     private RegionAdapter regionAdapter;
     private List<EntityCity> cities = new ArrayList<>();
     private List<EntityRegion> regions = new ArrayList<>();
+    private String loadMore;
 
 //    =new SimpleAdapter(context,listmap,R.layout.text_itme,new String[]{"diqu"},new int[]{R.id.textsuan});
 
@@ -858,9 +859,15 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
     //高德失败回调
     @Override
     public void Updatecuowu(Map<String, Object> map) {
-//        Toast.makeText(getActivity(),"请开启手机定位!",Toast.LENGTH_LONG).show();
-        lat= 125.61750;
-        lng= 25.65471;
+        Toast.makeText(getActivity(),"定位失败!!请开启手机定位!",Toast.LENGTH_LONG).show();
+        if (role==1) {
+
+            t.Get_Teacher_list(id, role, "","", listView, getActivity(),0, "", 0, 0, 0, 3, this,page);
+        }else {
+            demand_init.getDemand_list(id,role,0,0,"2016-08-10",0,page,0,0,null,null,this);
+        }
+//        lat= 125.61750;
+//        lng= 25.65471;
       /*
       lat= 125.61750;
         lng= 25.65471;

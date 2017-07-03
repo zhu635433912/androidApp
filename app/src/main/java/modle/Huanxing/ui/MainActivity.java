@@ -163,12 +163,10 @@ public class MainActivity extends BaseActivity {
 		PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
 			@Override
 			public void onGranted() {
-//				Toast.makeText(MainActivity.this, "All permissions have been granted", Toast.LENGTH_SHORT).show();
 			}
 
 			@Override
 			public void onDenied(String permission) {
-				//Toast.makeText(MainActivity.this, "Permission " + permission + " has been denied", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

@@ -190,6 +190,9 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         String service_type = (String) map.get("service_type");
         String start = (String) map.get("start");
         String end = (String) map.get("end");
+        if (map.get("education_name")!=null){
+            xueliTv.setText(map.get("education_name")+"");
+        }
         course_id = Integer.parseInt((String)map.get("course_id"));
         grade_id = Integer.parseInt((String)map.get("grade_id"));
         demand_init.getTuijianDemand_list(course_id,grade_id,User_id.getLat()+"",""+User_id.getLng(),null,null,null,listview,this,null);
