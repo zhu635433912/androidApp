@@ -281,16 +281,15 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
 //        }
         if (map.get("fee") != null) {
             tolFee = Double.parseDouble(map.get("fee")+"");
-        }else {
-            tolFee = 0.0;
         }
-        if (map.get("TotalFee")==null){
+        if (map.get("TotalFee")!=null){
 //            mogint.setText("0");
-            mianfee = 0;
-        }else {
-//            mogint.setText((String)map.get("TotalFee"));
             mianfee = (int) Float.parseFloat((String)map.get("TotalFee"));
+//            mianfee = 0;
         }
+//            mogint.setText((String)map.get("TotalFee"));
+
+
     }
 
 
