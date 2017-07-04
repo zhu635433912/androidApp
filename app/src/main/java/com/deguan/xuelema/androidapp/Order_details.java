@@ -104,6 +104,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         String durationa=getIntent().getStringExtra("duration");
         teacherImage = getIntent().getStringExtra("teacher_headimg");
 
+        Glide.with(this).load(teacherImage).transform(new GlideCircleTransform(this)).into(headImage);
 
 
         status=getIntent().getStringExtra("status");
@@ -164,8 +165,8 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         String requirement_grade = (String) map.get("grade_name");
         String requirement_course = (String) map.get("course_name");
         String feae= (String) map.get("fee");
-        teacherImage = (String) map.get("teacher_headimg");
-        Glide.with(this).load(teacherImage).transform(new GlideCircleTransform(this)).into(headImage);
+//        teacherImage = (String) map.get("teacher_headimg");
+            Glide.with(this).load((String) map.get("teacher_headimg")).transform(new GlideCircleTransform(this)).into(headImage);
         teacherId = (String) map.get("teacher_id");
 
         telTv.setText(Html.fromHtml("<u>"+(String)map.get("teacher_mobile")+""+"</u>"));

@@ -824,6 +824,10 @@
             android:name=".HowToPublishActivity_"
             />
         <activity android:name=".PlaceActivity_"></activity>
+        <!--下载更新的服务-->
+        <service
+            android:name="com.loveplusplus.update.DownloadService"
+            android:exported="true" />
     </application>
 
 </manifest>

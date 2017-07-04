@@ -133,8 +133,12 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
         SharedPreferencesUtils.setParam(this, APPConfig.USER_HEAD_IMG,imageUrl);
         getUser_id().setImageUrl(imageUrl);
         // 登录成功，将用户的环信ID、昵称和头像缓存在本地
-        UserCacheManager.save(User_id.getUsername(), User_id.getUsername(), imageUrl);
-        EMClient.getInstance().login(User_id.getUsername(),User_id.getPassword(),new EMCallBack() {//回调
+        UserCacheManager.save(User_id.getUsername(), map.get("nickname")+"", imageUrl);
+        EMClient.getInstance().login(User_id.getUsername(),
+//                User_id.getPassword()
+                "123456"
+
+                ,new EMCallBack() {//回调
             @Override
             public void onSuccess() {
                 EMClient.getInstance().groupManager().loadAllGroups();

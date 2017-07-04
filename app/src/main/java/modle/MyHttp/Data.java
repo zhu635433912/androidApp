@@ -19,7 +19,7 @@ import retrofit2.http.Query;
  */
 
 public interface Data {
-
+    //更新 下载地址
     @POST("index.php?s=/Service/Public/downUrl")
     Call<DownloadEntity> getDownload(@Query("type")String type);
     //年级

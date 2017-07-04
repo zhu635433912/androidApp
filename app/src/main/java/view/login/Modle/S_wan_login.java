@@ -318,7 +318,10 @@ public class S_wan_login implements Modle_wan_login {
                     Log.e("aa","注册成功开始注环信账号");
                     //注册环信账号
                     //注册失败会抛出HyphenateException
-                    EMClient.getInstance().createAccount(username,password);//同步方法
+                    EMClient.getInstance().createAccount(username,
+//                            password
+                    "123456"
+                    );//同步方法
                     Log.e("aa","环信注册成功");
 
                     User_id.setPassword(password);

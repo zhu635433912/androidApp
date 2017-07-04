@@ -223,15 +223,15 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         Toast.makeText(getActivity(),map.get("text").toString(),Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        user_init.User_Data(id,User_id.getLat()+"",User_id.getLng()+"",this);
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+////        user_init.User_Data(id,User_id.getLat()+"",User_id.getLng()+"",this);
+//    }
 
     @Override
     public void onDestroy() {
-        EventBus.getDefault().unregister(this);
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

@@ -30,6 +30,7 @@
 
     <modle.Huanxing.widget.ContactItemView
         android:id="@+id/robot_item"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:contactItemImage="@drawable/em_groups_icon"

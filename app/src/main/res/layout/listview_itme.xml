@@ -110,7 +110,7 @@
         <TextView
             android:id="@+id/text7"
             android:layout_marginLeft="14px"
-            android:layout_marginBottom="24px"
+            android:layout_marginBottom="54px"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:text="14km"
@@ -119,7 +119,8 @@
         <TextView
             android:id="@+id/text8"
             android:layout_marginRight="14px"
-            android:layout_marginBottom="24px"
+            android:layout_marginBottom="4px"
+            android:layout_marginTop="20px"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:textSize="26px"

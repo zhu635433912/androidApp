@@ -178,7 +178,9 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
     public void onClick(View v) {
         if (listener != null) {
             int position = recyclerView.getChildAdapterPosition(v);
-            listener.onTopClick(listmap.get(position));
+            if (position >= 0) {
+                listener.onTopClick(listmap.get(position));
+            }
         }
     }
     @Override

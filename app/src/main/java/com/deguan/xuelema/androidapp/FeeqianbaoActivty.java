@@ -118,8 +118,8 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         cashSure.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!TextUtils.isEmpty(cashNmae.getText().toString())||!TextUtils.isEmpty(cashId.getText().toString())||!TextUtils.isEmpty(cashFee.getText().toString())) {
-                    if (Float.parseFloat(cashFee.getText().toString())>myBalance){
+                if (!TextUtils.isEmpty(cashNmae.getText().toString())&&!TextUtils.isEmpty(cashId.getText().toString())&&!TextUtils.isEmpty(cashFee.getText().toString())) {
+                    if (Double.parseDouble(cashFee.getText().toString())>myBalance){
                         Toast.makeText(FeeqianbaoActivty.this, "可提现金额不足", Toast.LENGTH_SHORT).show();
                     }else {
                         getdata.getCash(Integer.parseInt(User_id.getUid()), cashNmae.getText().toString(),

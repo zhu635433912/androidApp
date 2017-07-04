@@ -52,7 +52,7 @@
             android:layout_marginLeft="30px"
             android:layout_marginTop="33px"
             android:text=""
-            android:textColor="#c6cbd3"
+            android:textColor="#27272a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageButton
@@ -79,8 +79,8 @@
             android:id="@+id/main_search_btn"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/add18"
-            android:layout_marginEnd="30px"
+            android:background="@drawable/sousuo"
+            android:layout_marginEnd="80px"
             android:layout_marginTop="33px"
             android:layout_width="50px"
             android:layout_height="50px"

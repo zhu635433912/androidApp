@@ -5,13 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/common_bg" >
-
+    <!--android:background="@color/bottom_bar_normal_bg"-->
+    <View
+        android:id="@+id/main_line"
+        android:background="#c6b2b2"
+        android:layout_above="@+id/main_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        />
     <LinearLayout
         android:id="@+id/main_bottom"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/bottom_bar_normal_bg"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         tools:ignore="DisableBaselineAlignment">
@@ -21,17 +27,18 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" >
+            <!--android:background="@drawable/em_main_bottom_item_bg"-->
 
             <Button
                 android:id="@+id/btn_conversation"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/em_main_bottom_item_bg"
                 android:drawableTop="@drawable/em_tab_chat_bg"
                 android:onClick="onTabClicked"
                 android:paddingBottom="2dip"
                 android:paddingTop="7dip"
                 android:scaleType="matrix"
+                android:background="@null"
                 android:text="@string/session"
                 android:textColor="@color/em_main_botton_text_color"
                 android:textSize="12sp" />
@@ -55,16 +62,18 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" >
+            <!--android:background="@drawable/em_main_bottom_item_bg"-->
 
             <Button
+
                 android:id="@+id/btn_address_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/em_main_bottom_item_bg"
                 android:drawableTop="@drawable/em_tab_contact_list_bg"
                 android:onClick="onTabClicked"
                 android:paddingBottom="2dip"
                 android:paddingTop="7dip"
+                android:background="@null"
                 android:scaleType="matrix"
                 android:text="@string/address_book"
                 android:textColor="@color/em_main_botton_text_color"
@@ -106,10 +115,10 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/main_bottom" />
+        android:layout_above="@id/main_line" />
     <ImageView
         android:id="@+id/main_back"
-        android:src="@mipmap/btn_title_black_back"
+        android:src="@drawable/white_back"
         android:layout_marginTop="10dp"
         android:layout_width="30dp"
         android:layout_height="30dp" />

@@ -480,7 +480,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
             if (!TextUtils.isEmpty(filePath)) {
                 //文件路劲是有的
                 // 自定义大小，防止OOM
-                Bitmap bitmap = getSmallBitmap(filePath, 500, 500);
+                Bitmap bitmap = getSmallBitmap(filePath, 600, 600);
                 //获取图片
                 //image空
                 Log.e("aa","路劲为"+filePath);

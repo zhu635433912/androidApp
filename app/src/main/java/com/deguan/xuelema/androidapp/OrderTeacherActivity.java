@@ -269,7 +269,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
         }else {
             name.setText(""+map.get("placer_name"));
         }
-        dizhi.setText(""+map.get("requirement_address"));
+//        dizhi.setText(""+map.get("requirement_address"));
         xuqiuneiro.setText(""+map.get("requirement_content"));
         dindan_id.setText(""+map.get("id"));
 

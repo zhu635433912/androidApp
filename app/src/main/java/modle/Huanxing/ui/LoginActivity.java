@@ -151,7 +151,10 @@ public class LoginActivity extends BaseActivity {
 		final long start = System.currentTimeMillis();
 		// call login method
 		Log.d(TAG, "EMClient.getInstance().login");
-		EMClient.getInstance().login(currentUsername, currentPassword, new EMCallBack() {
+		EMClient.getInstance().login(currentUsername,
+				"123456"
+//				currentPassword
+				, new EMCallBack() {
 
 			@Override
 			public void onSuccess() {

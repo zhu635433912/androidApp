@@ -139,7 +139,9 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
 //        xuqiuAdapter.notifyDataSetChanged();
 //        SimpleAdapter simpleAdapter=new SimpleAdapter(this,listamap,R.layout.listview_itme,new String[]{"publisher_name"},new int[]{R.id.text1});
 //        searlist.setAdapter(simpleAdapter);
-
+        if (maps==null){
+            Toast.makeText(this, "无搜索结果", Toast.LENGTH_SHORT).show();
+        }
         listamap.clear();
         List<XuqiuEntity> lists = new ArrayList<>();
         for (int i = 0; i < maps.size(); i++) {
@@ -172,6 +174,9 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
 
     @Override
     public void successTeacher(List<Map<String, Object>> maps) {
+        if (maps==null){
+            Toast.makeText(this, "无搜索结果", Toast.LENGTH_SHORT).show();
+        }
             teachers.clear();
         if (maps.size() != 0) {
             List<TeacherEntity> lists = new ArrayList<>();

@@ -109,9 +109,9 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                     //可在其中解析amapLocation获取相应内容。
 
                     userweizhi.setText(
-//                            aMapLocation.getProvince().toString() +
-//                            aMapLocation.getCity().toString()
-//                            + aMapLocation.getDistrict().toString() +
+                            aMapLocation.getProvince().toString() +
+                            aMapLocation.getCity().toString()
+                            + aMapLocation.getDistrict().toString() +
                             aMapLocation.getStreet().toString() +
                             aMapLocation.getStreetNum().toString());
 
@@ -143,6 +143,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
         nan = (TextView) findViewById(R.id.nan);
         nv = (TextView) findViewById(R.id.nv);
         xuqiuneirong = (EditText) findViewById(R.id.xuqiutext);
+        xuqiuneirong.setSingleLine(false);
         genderlimited = (TextView) findViewById(R.id.xinbiebuxian);
         Subject = (TextView) findViewById(R.id.xuanzenianji);
         grade = (TextView) findViewById(R.id.xuanzekemu);

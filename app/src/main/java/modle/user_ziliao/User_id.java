@@ -80,6 +80,7 @@ public class User_id extends Application {
         super.onCreate();
         applicationContent = this;
         instance = this;
+
         DemoHelper.getInstance().init(applicationContent);
         //初始化Fresco
 //        FrescoHelper.getInstance().init(this);

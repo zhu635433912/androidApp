@@ -912,6 +912,7 @@ public class DemoHelper {
 //        }
         // 从本地缓存中获取用户昵称头像
         EaseUser user = UserCacheManager.getEaseUser(username);
+
         // if user is not in your contacts, set inital letter for him/her
         if(user == null){
             user = new EaseUser(username);

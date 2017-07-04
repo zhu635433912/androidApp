@@ -243,7 +243,10 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
         final long start = System.currentTimeMillis();
         // call login method
 //        Log.d(TAG, "EMClient.getInstance().login");
-        EMClient.getInstance().login(map.get("username")+"", map.get("password")+"", new EMCallBack() {
+        EMClient.getInstance().login(map.get("username")+"",
+//                map.get("password")+""
+                "123456"
+                , new EMCallBack() {
 
             @Override
             public void onSuccess() {
