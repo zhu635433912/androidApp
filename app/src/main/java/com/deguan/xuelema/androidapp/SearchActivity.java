@@ -82,8 +82,8 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
 //                    String uid = requirdapter.geiuiserid(position-1);
                     Intent intent = new Intent(SearchActivity.this, UserxinxiActivty.class);
 //                    intent.putExtra("user_id", uid);
-                    intent.putExtra("head_image",teachers.get(position-1).getUser_headimg());
-                    intent.putExtra("user_id",teachers.get(position-1).getUser_id());
+                    intent.putExtra("head_image",teachers.get(position).getUser_headimg());
+                    intent.putExtra("user_id",teachers.get(position).getUser_id());
                     startActivity(intent);
                 }else {
                     //进入学生
@@ -92,11 +92,11 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
 //                    map=studentAdapter.geiuiserid(position-1);
 
                     Intent intent = new Intent(SearchActivity.this, Xuqiuxiangx.class);
-                    intent.putExtra("user_id",listamap.get(position-1).getId());
-                    intent.putExtra("fee",listamap.get(position-1).getFee());
-                    intent.putExtra("publisher_id",listamap.get(position-1).getPublisher_id());
-                    intent.putExtra("course_id",listamap.get(position-1).getCourse_id());
-                    intent.putExtra("grade_id",listamap.get(position-1).getGrade_id());
+                    intent.putExtra("user_id",listamap.get(position).getId());
+                    intent.putExtra("fee",listamap.get(position).getFee());
+                    intent.putExtra("publisher_id",listamap.get(position).getPublisher_id());
+                    intent.putExtra("course_id",listamap.get(position).getCourse_id());
+                    intent.putExtra("grade_id",listamap.get(position).getGrade_id());
 //                    intent.putExtra("user_id",(String)map.get("user_id"));
 //                    intent.putExtra("fee",(String)map.get("fee"));
 //                    intent.putExtra("publisher_id",(String)map.get("publisher_id"));
@@ -139,7 +139,7 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
 //        xuqiuAdapter.notifyDataSetChanged();
 //        SimpleAdapter simpleAdapter=new SimpleAdapter(this,listamap,R.layout.listview_itme,new String[]{"publisher_name"},new int[]{R.id.text1});
 //        searlist.setAdapter(simpleAdapter);
-        if (maps==null){
+        if (maps.size() == 0){
             Toast.makeText(this, "无搜索结果", Toast.LENGTH_SHORT).show();
         }
         listamap.clear();

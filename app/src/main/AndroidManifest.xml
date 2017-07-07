@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <!-- 拨号 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -73,11 +73,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="view.login.ViewActivity.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name="view.login.ViewActivity.LoginAcitivity"
@@ -152,12 +152,8 @@
         <activity
             android:name=".Order_state"
             android:launchMode="singleTask" />
-        <activity
-            android:name=".Payment_Activty"
-            />
-
-        <activity android:name=".PictureZoo"/>
-
+        <activity android:name=".Payment_Activty" />
+        <activity android:name=".PictureZoo" />
         <activity
             android:name=".Payment_tureActivty"
             android:launchMode="singleTask" />
@@ -179,23 +175,26 @@
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:scheme="wx3815ad6bb05c5aca"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="wx3815ad6bb05c5aca" />
             </intent-filter>
-            </activity>
+        </activity>
         <activity
             android:name=".wxapi.WXEntryActivity"
-            android:label="@string/app_name"
             android:exported="true"
+            android:label="@string/app_name"
             android:launchMode="singleTop">
-
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:scheme="wx3815ad6bb05c5aca"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="wx3815ad6bb05c5aca" />
             </intent-filter>
         </activity>
         <!-- 设置屏幕百分比 -->
@@ -218,6 +217,11 @@
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="1120170519115497#xuelema" />
+
+        <!-- 环信百度地图的appkey -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="lc5ES7u24eaYgeoEYWiXwCpSG5WzBstH" />
         <!-- 声明SDK所需的service SDK核心功能 -->
         <service
             android:name="com.hyphenate.chat.EMChatService"
@@ -820,14 +824,20 @@
         <!-- <activity android:name=".New_StudentActivity_" /> -->
         <activity android:name=".NewMainActivity_" />
         <activity android:name=".OrderTeacherActivity" />
-        <activity
-            android:name=".HowToPublishActivity_"
-            />
-        <activity android:name=".PlaceActivity_"></activity>
-        <!--下载更新的服务-->
+        <activity android:name=".HowToPublishActivity_" />
+        <activity android:name=".PlaceActivity_" />
+        <!-- 下载更新的服务 -->
         <service
             android:name="com.loveplusplus.update.DownloadService"
             android:exported="true" />
+
+        <activity android:name=".StartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

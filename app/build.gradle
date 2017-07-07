@@ -126,6 +126,10 @@ dependencies {
     //greenDao
     compile project(':easeui')
     //加载长图
+    compile files('libs/libammsdk.jar')
+    //photoView
+    compile project(':update')
+
     compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.6.0'
     compile 'com.zhy:autolayout:latest.release'
     compile 'com.squareup.okhttp3:okhttp:3.6.0'
@@ -151,12 +155,10 @@ dependencies {
     compile 'com.android.support:design:25.3.0'
     compile 'com.android.support:support-v4:25.3.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha6'
+    compile 'com.bm.photoview:library:1.4.1'
     testCompile 'junit:junit:4.12'
     apt 'org.androidannotations:androidannotations:3.3.2'
-    compile files('libs/libammsdk.jar')
-    //photoView
-    compile 'com.bm.photoview:library:1.4.1'
-    compile project(':update')
+
 }
 apt {
     arguments {

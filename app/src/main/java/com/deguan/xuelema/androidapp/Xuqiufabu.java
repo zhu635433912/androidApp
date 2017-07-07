@@ -279,8 +279,8 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 builder.setIcon(R.drawable.add04);
                 builder.setTitle("请选择一个年级");
                 //    指定下拉列表的显示数据
-                final String[] cities = {"小学", "初中", "高中", "大学"
-//                        , "五年级", "六年级", "初一", "初二", "初三", "高一", "高二", "高三"
+                final String[] cities = {"小学","一年级","二年级","三年级","四年级"
+                        , "五年级", "六年级","初中", "初一", "初二", "初三",  "高中","高一", "高二", "高三","大学"
                 };
                 //    设置一个下拉的列表选择项
                 builder.setItems(cities, new DialogInterface.OnClickListener() {
@@ -288,7 +288,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(Xuqiufabu.this, "选择的年级为：" + cities[which], Toast.LENGTH_SHORT).show();
                         Subject.setText(cities[which]);
-                        zuigrade = which;
+                        zuigrade = which + 13;
 
                     }
                 });

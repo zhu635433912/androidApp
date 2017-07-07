@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:background="@drawable/inde1"
+        android:background="@drawable/inde2"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

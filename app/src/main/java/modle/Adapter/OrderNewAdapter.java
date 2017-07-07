@@ -99,6 +99,7 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
         String  orderid=listmap.get(position).get("id").toString();
         if (User_id.getRole().equals("1")) {
             hode.studentlistname.setText(listmap.get(position).get("teacher_name") + "");
+
             Glide.with(context).load(listmap.get(position).get("teacher_headimg")).transform(new GlideCircleTransform(context)).into(hode.headImage);
         }else {
             hode.studentlistname.setText(listmap.get(position).get("placer_name")+"");
@@ -116,20 +117,35 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
 
         switch (listmap.get(position).get("status").toString()){
             case "1":
-                hode.studentkechengzhuangtai.setText("未付款");
-                hode.querenshouhuo.setText("确认付款");
+                if (User_id.getRole().equals("1")) {
+                    hode.studentkechengzhuangtai.setText("未付款");
+                    hode.querenshouhuo.setText("确认付款");
+                }else {
+                    hode.studentkechengzhuangtai.setText("未付款");
+                    hode.querenshouhuo.setText("等待付款");
+                }
                 break;
             case "2":
-                hode.studentkechengzhuangtai.setText("进行中");
-                hode.querenshouhuo.setText("确认收货");
+                if (User_id.getRole().equals("1")) {
+                    hode.studentkechengzhuangtai.setText("进行中");
+                    hode.querenshouhuo.setText("确认收货");
+                }else {
+                    hode.studentkechengzhuangtai.setText("进行中");
+                    hode.querenshouhuo.setText("等待收货");
+                }
                 break;
             case "3":
                 hode.studentkechengzhuangtai.setText("交易完成");
                 hode.querenshouhuo.setText("去评价");
                 break;
             case "4":
-                hode.studentkechengzhuangtai.setText("申请退款中");
-                hode.querenshouhuo.setText("申请退款");
+                if (User_id.getRole().equals("1")) {
+                    hode.studentkechengzhuangtai.setText("申请退款中");
+                    hode.querenshouhuo.setText("申请退款");
+                }else {
+                    hode.studentkechengzhuangtai.setText("申请退款中");
+                    hode.querenshouhuo.setText("确认or拒绝");
+                }
                 break;
             case "5":
                 hode.studentkechengzhuangtai.setText("同意退款");
@@ -189,7 +205,7 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
         return longListener != null && longListener.onItemLongClickListener(v, listmap.get(position));
     }
 
-    public static class OrderNewViewHolder extends RecyclerView.ViewHolder{
+     class OrderNewViewHolder extends RecyclerView.ViewHolder{
 
         private TextView studentlistname;//订单教师昵称
         private TextView xdsj;//下单时间

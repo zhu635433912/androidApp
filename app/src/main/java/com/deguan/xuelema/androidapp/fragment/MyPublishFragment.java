@@ -171,7 +171,8 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
     @Override
     public void onRefresh() {
         page = 1;
-        new PublishPresenterImpl(this, Integer.parseInt(User_id.getUid()),4).getPublishEntity();
+        publishPresenter.getPublishEntity();
+//        new PublishPresenterImpl(this, Integer.parseInt(User_id.getUid()),4).getPublishEntity();
     }
 
     @Override

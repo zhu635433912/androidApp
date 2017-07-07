@@ -28,6 +28,8 @@ import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import modle.Order_Modle.Order;
@@ -204,7 +206,10 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
     public void Updatecontent(Map<String, Object> map) {
         String status = (String) map.get("status");
         String requirement_address = (String) map.get("address");
-        String created = (String) map.get("created");
+        Date d = new Date(Long.parseLong(map.get("created")+"")*1000);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        String created = sdf.format(d);
+//        String created = (String) map.get("created");
         String requirement_grade = (String) map.get("grade_name");
         String requirement_course = (String) map.get("course_name");
         String feae= (String) map.get("fee");
@@ -270,7 +275,8 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
             name.setText(""+map.get("placer_name"));
         }
 //        dizhi.setText(""+map.get("requirement_address"));
-        xuqiuneiro.setText(""+map.get("requirement_content"));
+//        xuqiuneiro.setText(""+map.get("requirement_content"));
+        xuqiuneiro.setText("德冠网络科技公司");
         dindan_id.setText(""+map.get("id"));
 
         String ger=map.get("requirement_gender")+"";

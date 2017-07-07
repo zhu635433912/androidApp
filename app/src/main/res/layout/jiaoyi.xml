@@ -182,14 +182,14 @@
                 android:layout_marginLeft="40px"
                 android:layout_toRightOf="@+id/gerjianjie"
                 android:layout_centerVertical="true"
-                android:text="教学案例"
+                android:text="          "
                 android:layout_width="wrap_content"
                 android:layout_height="200px"
                 android:gravity="center" />
             <TextView
                 android:textColor="#464646"
                 android:id="@+id/gerxxjinl"
-                android:text="个人经历"
+                android:text="        "
                 android:layout_toRightOf="@+id/gerxxjiaoxueanl"
                 android:layout_marginLeft="40px"
                 android:layout_centerVertical="true"

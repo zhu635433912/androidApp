@@ -64,7 +64,7 @@
             android:layout_marginTop="70px"
             android:layout_below="@+id/xuqiuxiangxi"
             android:layout_centerHorizontal="true"
-            android:textSize="35px"
+            android:textSize="25px"
             android:textColor="#fff"
             android:text="“孩子平时不听话，英语成绩提高不上去,临近期末，希望有老师辅导一下”"
             android:layout_width="600px"
@@ -72,7 +72,6 @@
 
         <modle.toos.CircleImageView
             android:id="@+id/xuqiuimage"
-            android:layout_marginTop="30px"
             android:layout_below="@+id/xuqiuneirong"
             android:layout_centerHorizontal="true"
             android:src="@drawable/ox2"
@@ -80,7 +79,6 @@
             android:layout_height="120px" />
         <TextView
             android:id="@+id/xuqiuname"
-            android:layout_marginTop="20px"
             android:layout_below="@+id/xuqiuimage"
             android:layout_centerHorizontal="true"
             android:textSize="35px"
@@ -102,13 +100,23 @@
     </RelativeLayout>
     <TextView
         android:id="@+id/tadfexuqiu"
-        android:textColor="#f9d385"
+        android:textColor="#f98c26"
         android:layout_marginLeft="40px"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="10px"
         android:layout_below="@+id/xuqiurelayout"
         android:textSize="30px"
         android:text="他的需求"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiu_tel_tv"
+        android:text="11111"
+        android:layout_marginLeft="40px"
+        android:layout_toRightOf="@+id/tadfexuqiu"
+        android:layout_marginTop="10px"
+        android:layout_below="@+id/xuqiurelayout"
+        android:textSize="30px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -252,7 +260,7 @@
         android:orientation="horizontal"/>
      <TextView
          android:id="@+id/diqu"
-         android:layout_marginLeft="100px"
+         android:layout_marginLeft="1px"
          android:layout_marginTop="10px"
          android:layout_toRightOf="@id/zhongjianfenge"
          android:layout_below="@id/fengexianbottton"
@@ -269,7 +277,7 @@
         android:orientation="horizontal" />
     <TextView
         android:id="@+id/xiangsixuqiu"
-        android:textColor="#f9d385"
+        android:textColor="#f98c26"
         android:layout_marginLeft="40px"
         android:layout_marginTop="10px"
         android:layout_alignParentLeft="true"

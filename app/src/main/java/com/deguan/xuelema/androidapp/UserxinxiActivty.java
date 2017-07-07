@@ -96,6 +96,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private TextView courseType;
     private TextView courseNametV;
     private String myid;
+    private String address;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -136,6 +137,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         gerxxxuexiquan.setOnClickListener(this);
         grfanhui.setOnClickListener(this);
 
+        address = User_id.getAddress();
         myid = getIntent().getStringExtra("myid");
         final String user_id=getIntent().getStringExtra("user_id");
         Log.e("aa","UserxinActivyt接收到老师id为"+user_id);
@@ -251,6 +253,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
 //                teacherShangmen.setTextColor(Color.parseColor("#8b8b8b"));
                 courseMoney.setText(coursefee+"元/节");
                 zongfee.setText(coursefee*courseNumber+"元");
+
             }
         });
         teacherShangmen.setOnClickListener(new View.OnClickListener() {
@@ -292,7 +295,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                                 //创建订单
                                 order_init.Establish_Order(uid,teacherId,Integer.parseInt(myid),coursefee,courseNumber,Integer.parseInt(courseId),Integer.parseInt(gradeId),servicetype,User_id.getAddress());
                                 Toast.makeText(UserxinxiActivty.this,"购买课程成功",Toast.LENGTH_SHORT).show();
-                                Intent intent=NewMainActivity_.intent(UserxinxiActivty.this).get();
+                                Intent intent=new Intent(UserxinxiActivty.this,MyOrderActivity.class);
                                 startActivity(intent);
                             }
                         }).setNegativeButton("否", new DialogInterface.OnClickListener() {
@@ -313,11 +316,11 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         String resume = (String) map.get("resume");
         username = (String) map.get("username");
 
-
+        address = map.get("address")+"";
             mobile= (String) map.get("mobile");
             String order_finish= (String) map.get("order_finish");
             String order_working= (String) map.get("order_working");
-        Glide.with(this).load((String)map.get("class_img")).into(iamgeview);
+//        Glide.with(this).load((String)map.get("class_img")).into(iamgeview);
         gerxues.setText(order_working);
         dindan.setText(order_finish);
         Requitext.setText(resume);
@@ -403,22 +406,25 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         /**
          * 动态设置ListView的高度
          */
-    public static void setListViewHeightBasedOnChildren(ListView listView) {
-        if(listView == null) return;
+    public void setListViewHeightBasedOnChildren(ListView listView) {
+        if(listView == null)
+            return;
         ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {
-            // pre-condition
             return;
         }
         int totalHeight = 0;
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            View listItem = listAdapter.getView(i, null, listView);
-            listItem.measure(0, 0);
-            totalHeight += listItem.getMeasuredHeight();
+        if (listAdapter.getCount()!=0) {
+            for (int i = 0; i < listAdapter.getCount(); i++) {
+
+                View listItem = listAdapter.getView(i, null, listView);
+                listItem.measure(0, 0);
+                totalHeight += listItem.getMeasuredHeight();
+            }
+            ViewGroup.LayoutParams params = listView.getLayoutParams();
+            params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+            listView.setLayoutParams(params);
         }
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
     }
 
 

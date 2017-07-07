@@ -43,7 +43,7 @@ public class SubjectUtil {
 
     public static List<SubjectEntity> getSubjectList(){
         List<SubjectEntity> list = new ArrayList<>();
-            list.add(new SubjectEntity("206" , "基础知识"));
+//            list.add(new SubjectEntity("206" , "基础知识"));
             list.add(new SubjectEntity("208" , "语文"));
             list.add(new SubjectEntity("212" , "数学"));
             list.add(new SubjectEntity("213" , "英语"));

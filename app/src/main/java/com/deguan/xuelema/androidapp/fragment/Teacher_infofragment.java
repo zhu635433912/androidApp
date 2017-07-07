@@ -64,6 +64,7 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
 
     private List<String> tlebat=new ArrayList<>();
     private List<Fragment> fragments=new ArrayList<>();
+    private User_init user_init;
 
     @Override
     public void before() {
@@ -86,19 +87,19 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
 
     @Override
     public void initData() {
-        User_init user_init = new User_Realization();
+        user_init = new User_Realization();
         user_init.User_Data(uid,User_id.getLat()+"",User_id.getLng()+"", this);
 
         tlebat.add("推荐需求");
         tlebat.add("我的订单");
         fragments.add(DmadFragmengt_.builder().build());
-//        fragments.add(OrderFragment_.builder().build());
-        fragments.add(NewOrderFragment_.builder().build());
+        fragments.add(OrderFragment_.builder().build());
+//        fragments.add(NewOrderFragment_.builder().build());
         HomeTitleAdapter adapter = new HomeTitleAdapter(getFragmentManager(),fragments,tlebat);
         new_techaer_viewpage.setAdapter(adapter);
         new_teacher_tablayout.setupWithViewPager(new_techaer_viewpage);
         new_teacher_tablayout.setTabMode(TabLayout.MODE_FIXED);
-
+//        new_techaer_viewpage.setOffscreenPageLimit(0);
     }
 
     @Override
@@ -135,7 +136,10 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
 //        Glide.with(this).load(msg).into(teacher_loc);
         Glide.with(this).load(msg).into(teacher_loc);
     }
-
+    @Subscriber(tag = "update")
+    public void updateMsg(String msg){
+        user_init.User_Data(uid,User_id.getLat()+"",User_id.getLng()+"",this);
+    }
     /**
      * 获取用户资料成功回调并设置
      * @param map

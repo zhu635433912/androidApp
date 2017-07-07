@@ -202,7 +202,8 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
             name.setText(""+map.get("placer_name"));
         }
 //        dizhi.setText(""+map.get("address"));
-        xuqiuneiro.setText(""+map.get("requirement_content"));
+//        xuqiuneiro.setText(""+map.get("requirement_content"));
+        xuqiuneiro.setText("德冠网络科技公司");
         dindan_id.setText(""+map.get("id"));
 
         String ger=map.get("requirement_gender")+"";
@@ -310,7 +311,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                             order_init.Update_Order(uid,order_id,4,password,duration*fee);
                             Intent intent=NewMainActivity_.intent(Order_details.this).get();
                             startActivity(intent);
-                            Toast.makeText(Order_details.this,"退款成功!~",Toast.LENGTH_LONG).show();
+                            Toast.makeText(Order_details.this,"已提交退款申请!~",Toast.LENGTH_LONG).show();
 
                         }
                     }).setNegativeButton("取消", new DialogInterface.OnClickListener() {

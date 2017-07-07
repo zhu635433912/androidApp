@@ -44,6 +44,7 @@
     <TextView
         android:id="@+id/course"
         android:textSize="40px"
+        android:layout_marginLeft="40px"
         android:layout_alignBottom="@+id/nianji"
         android:layout_toRightOf="@+id/nianji"
         android:layout_width="wrap_content"
@@ -127,12 +128,12 @@
         android:layout_width="80px"
         android:layout_height="80px" />
     <TextView
-        android:layout_marginLeft="175px"
+        android:layout_marginLeft="150px"
         android:layout_alignParentLeft="true"
         android:id="@+id/name"
         android:layout_marginTop="25px"
         android:layout_below="@+id/xuqiufenggexian2"
-        android:textSize="40px"
+        android:textSize="25px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -198,6 +199,8 @@
         android:layout_marginLeft="20px"
         android:layout_toRightOf="@+id/dianputubiao"
         android:textSize="35px"
+        android:gravity="center"
+        android:text="快劝他们好好学习!"
         android:layout_width="500px"
         android:layout_height="120px"
         android:layout_above="@+id/dindanbianhao" />

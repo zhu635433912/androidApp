@@ -188,41 +188,41 @@
         android:layout_alignParentRight="true"
         android:layout_width="500px"
         android:layout_height="100px" />
-    <RelativeLayout
-        android:id="@+id/fuwuleia"
-        android:layout_below="@+id/emage"
-        android:layout_width="match_parent"
-        android:layout_height="100px">
-        <TextView
-            android:id="@+id/tonxuezeng"
-            android:layout_marginLeft="50px"
-            android:layout_alignParentLeft="true"
-            android:textSize="30px"
-            android:text="服务类型"
-            android:layout_marginTop="30px"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/xuqiufenggexian6"
-            android:background="#d7d7d7"
-            android:layout_marginTop="30px"
-            android:layout_below="@+id/tonxuezeng"
-            android:layout_width="match_parent"
-            android:layout_height="1px" />
-        <TextView
-            android:gravity="end|center"
-            android:id="@+id/biyexuexiao"
-            android:textColor="#1e1e1e"
-            android:layout_marginRight="50px"
-            android:layout_alignBottom="@+id/xuqiufenggexian6"
-            android:textSize="30px"
-            android:layout_alignParentRight="true"
-            android:layout_width="500px"
-            android:layout_height="100px" />
-    </RelativeLayout>
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/fuwuleia"-->
+        <!--android:layout_below="@+id/emage"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="100px">-->
+        <!--<TextView-->
+            <!--android:id="@+id/tonxuezeng"-->
+            <!--android:layout_marginLeft="50px"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:textSize="30px"-->
+            <!--android:text="服务类型"-->
+            <!--android:layout_marginTop="30px"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/xuqiufenggexian6"-->
+            <!--android:background="#d7d7d7"-->
+            <!--android:layout_marginTop="30px"-->
+            <!--android:layout_below="@+id/tonxuezeng"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="1px" />-->
+        <!--<TextView-->
+            <!--android:gravity="end|center"-->
+            <!--android:id="@+id/biyexuexiao"-->
+            <!--android:textColor="#1e1e1e"-->
+            <!--android:layout_marginRight="50px"-->
+            <!--android:layout_alignBottom="@+id/xuqiufenggexian6"-->
+            <!--android:textSize="30px"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_width="500px"-->
+            <!--android:layout_height="100px" />-->
+    <!--</RelativeLayout>-->
     <RelativeLayout
         android:id="@+id/jiaolinlayout"
-        android:layout_below="@+id/fuwuleia"
+        android:layout_below="@+id/emage"
         android:layout_width="match_parent"
         android:layout_height="100px">
         <TextView
@@ -252,7 +252,38 @@
             android:layout_width="500px"
             android:layout_height="100px" />
     </RelativeLayout>
-
+    <RelativeLayout
+        android:id="@+id/fuwuleia"
+        android:layout_below="@+id/jiaolinlayout"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <TextView
+            android:id="@+id/tonxuezeng"
+            android:layout_marginLeft="50px"
+            android:layout_alignParentLeft="true"
+            android:textSize="30px"
+            android:text="个人签名"
+            android:layout_marginTop="30px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/xuqiufenggexian6"
+            android:background="#d7d7d7"
+            android:layout_marginTop="30px"
+            android:layout_below="@+id/tonxuezeng"
+            android:layout_width="match_parent"
+            android:layout_height="1px" />
+        <TextView
+            android:gravity="end|center"
+            android:id="@+id/biyexuexiao"
+            android:textColor="#1e1e1e"
+            android:layout_marginRight="50px"
+            android:layout_alignBottom="@+id/xuqiufenggexian6"
+            android:textSize="30px"
+            android:layout_alignParentRight="true"
+            android:layout_width="500px"
+            android:layout_height="100px" />
+    </RelativeLayout>
     <Button
         android:id="@+id/baocun"
         android:layout_marginBottom="40px"

@@ -132,12 +132,13 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void initData() {
         titles.add("我的发布");
-        titles.add("我的订单");
         titles.add("推荐教师");
+        titles.add("我的订单");
+//        titles.add("推荐教师");
         fragments.add(MyPublishFragment_.builder().build());
-        fragments.add(NewOrderFragment_.builder().build());
+//        fragments.add(NewOrderFragment_.builder().build());
         fragments.add(TuijianFragment_.builder().build());
-//        fragments.add(OrderFragment_.builder().build());
+        fragments.add(OrderFragment_.builder().build());
 //        fragments.add(TuijianFragment_.builder().build());
 //        fragments.add(new TestFragment());
 //        fragments.add(new TestFragment());
@@ -145,6 +146,7 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
+//        viewPager.setOffscreenPageLimit(0);
 
         demand_init.getMyDemand_list(id,4,this);
         user_init.User_Data(id,User_id.getLat()+"",User_id.getLng()+"",this);
@@ -206,6 +208,11 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     @Subscriber(tag = "headUrl")
     public void updateHead(File msg){
         Glide.with(this).load(msg).transform(new GlideCircleTransform(getActivity())).into(studenttouxiangimg);
+    }
+
+    @Subscriber(tag = "update")
+    public void updateMsg(String msg){
+        user_init.User_Data(id,User_id.getLat()+"",User_id.getLng()+"",this);
     }
     @Override
     public void Updatecontent(Map<String, Object> map) {

@@ -29,6 +29,7 @@
             android:layout_alignParentLeft="true"
             android:layout_marginTop="14px"
             android:layout_marginLeft="14px"
+            android:scaleType="centerCrop"
             android:src="@drawable/ox2"
             android:layout_width="56px"
             android:layout_height="56px" />

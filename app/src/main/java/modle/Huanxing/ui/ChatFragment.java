@@ -135,11 +135,11 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         //use the menu in base class
         super.registerExtendMenuItem();
         //extend menu items
-        inputMenu.registerExtendMenuItem(R.string.attach_video, R.drawable.em_chat_video_selector, ITEM_VIDEO, extendMenuItemClickListener);
+//        inputMenu.registerExtendMenuItem(R.string.attach_video, R.drawable.em_chat_video_selector, ITEM_VIDEO, extendMenuItemClickListener);
         inputMenu.registerExtendMenuItem(R.string.attach_file, R.drawable.em_chat_file_selector, ITEM_FILE, extendMenuItemClickListener);
         if(chatType == Constant.CHATTYPE_SINGLE){
-            inputMenu.registerExtendMenuItem(R.string.attach_voice_call, R.drawable.em_chat_voice_call_selector, ITEM_VOICE_CALL, extendMenuItemClickListener);
-            inputMenu.registerExtendMenuItem(R.string.attach_video_call, R.drawable.em_chat_video_call_selector, ITEM_VIDEO_CALL, extendMenuItemClickListener);
+//            inputMenu.registerExtendMenuItem(R.string.attach_voice_call, R.drawable.em_chat_voice_call_selector, ITEM_VOICE_CALL, extendMenuItemClickListener);
+//            inputMenu.registerExtendMenuItem(R.string.attach_video_call, R.drawable.em_chat_video_call_selector, ITEM_VIDEO_CALL, extendMenuItemClickListener);
         }
         //聊天室暂时不支持红包功能
         //red packet code : 注册红包菜单选项
@@ -176,22 +176,22 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragmentHe
         }
         if(resultCode == Activity.RESULT_OK){
             switch (requestCode) {
-            case REQUEST_CODE_SELECT_VIDEO: //send the video
-                if (data != null) {
-                    int duration = data.getIntExtra("dur", 0);
-                    String videoPath = data.getStringExtra("path");
-                    File file = new File(PathUtil.getInstance().getImagePath(), "thvideo" + System.currentTimeMillis());
-                    try {
-                        FileOutputStream fos = new FileOutputStream(file);
-                        Bitmap ThumbBitmap = ThumbnailUtils.createVideoThumbnail(videoPath, 3);
-                        ThumbBitmap.compress(CompressFormat.JPEG, 100, fos);
-                        fos.close();
-                        sendVideoMessage(videoPath, file.getAbsolutePath(), duration);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                break;
+//            case REQUEST_CODE_SELECT_VIDEO: //send the video
+//                if (data != null) {
+//                    int duration = data.getIntExtra("dur", 0);
+//                    String videoPath = data.getStringExtra("path");
+//                    File file = new File(PathUtil.getInstance().getImagePath(), "thvideo" + System.currentTimeMillis());
+//                    try {
+//                        FileOutputStream fos = new FileOutputStream(file);
+//                        Bitmap ThumbBitmap = ThumbnailUtils.createVideoThumbnail(videoPath, 3);
+//                        ThumbBitmap.compress(CompressFormat.JPEG, 100, fos);
+//                        fos.close();
+////                        sendVideoMessage(videoPath, file.getAbsolutePath(), duration);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                break;
             case REQUEST_CODE_SELECT_FILE: //send the file
                 if (data != null) {
                     Uri uri = data.getData();

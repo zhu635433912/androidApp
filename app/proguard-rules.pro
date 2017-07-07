@@ -58,3 +58,8 @@
    -keep class com.tencent.mm.sdk.** {
       *;
    }
+
+#   百度
+-keep class com.baidu.** {*;}
+-keep class vi.com.** {*;}
+-dontwarn com.baidu.**

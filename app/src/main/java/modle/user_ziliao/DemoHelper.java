@@ -10,6 +10,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.deguan.xuelema.androidapp.R;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.EMConnectionListener;
@@ -155,8 +156,8 @@ public class DemoHelper {
 	    //use default options if options is null
 		if (EaseUI.getInstance().init(context, options)) {
 		    appContext = context;
-		    
-		    //debug mode, you'd better set it to false, if you want release your App officially.
+            SDKInitializer.initialize(context);
+            //debug mode, you'd better set it to false, if you want release your App officially.
 		    EMClient.getInstance().setDebugMode(false);
 		    //get easeui instance
 		    easeUI = EaseUI.getInstance();

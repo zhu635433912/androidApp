@@ -157,7 +157,7 @@ public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapte
         return longListener != null && longListener.onItemLongClickListener(v, list.get(position));
     }
 
-    public static class MyPublishNewViewHolder extends RecyclerView.ViewHolder{
+     class MyPublishNewViewHolder extends RecyclerView.ViewHolder{
 
         private ImageView user_headimg;
         //        private CircleImageView user_headimg;//用户头像

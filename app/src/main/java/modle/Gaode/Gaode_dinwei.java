@@ -36,7 +36,9 @@ public class Gaode_dinwei {
                     map.put("District",aMapLocation.getDistrict().toString());
                     map.put("lat",aMapLocation.getLatitude());
                     map.put("lng",aMapLocation.getLongitude());
-                    map.put("address",aMapLocation.getProvince().toString() + aMapLocation.getCity().toString()
+                    map.put("address",
+//                            aMapLocation.getProvince().toString() +
+                                    aMapLocation.getCity().toString()
                             + aMapLocation.getDistrict().toString() + aMapLocation.getStreet().toString() +
                             aMapLocation.getStreetNum().toString());
                     requirdetailed.Updategaode(map);

@@ -76,7 +76,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
     private TextView zhonglei;
     private RelativeLayout jiaoshiguanlifanhui;
     private TextView kemuzhonglei;
-    private EditText editText2;
+    private TextView editText2;
     private EditText shanggmenfee;
     private EditText xueshengfee;
     private Button naxt;
@@ -134,7 +134,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         jiaoshiguanlifanhui= (RelativeLayout) findViewById(R.id.jiaoshiguanlifanhui);
         zhonglei= (TextView) findViewById(R.id.kechengzhonglei);
         kemuzhonglei= (TextView) findViewById(R.id.textView7);
-        editText2= (EditText) findViewById(R.id.editText2);
+        editText2= (TextView) findViewById(R.id.editText2);
         shanggmenfee= (EditText) findViewById(R.id.shanggmenfee);
         xueshengfee= (EditText) findViewById(R.id.xueshengfee);
         tianjiaxueli1= (RelativeLayout) findViewById(R.id.tianjiaxueli1);
@@ -205,7 +205,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         increase_course=new Increase_course();
         increase_course.selecouse(uid,null,this);
     }
-
+    private int a = 0;
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -240,6 +240,39 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 });
                 subjectDialog.show();
 //                getdata.getGrade(this);
+                break;
+            case R.id.editText2:
+                //服务类型
+
+                final String[] sex1={"一对一","一对多","一对一/一对多"};
+                AlertDialog.Builder rolage1=new AlertDialog.Builder(Teacher_management.this);
+                rolage1.setIcon(android.R.drawable.btn_star);
+                rolage1.setTitle("选择类型!");
+                rolage1.setSingleChoiceItems(sex1, 1, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        a = which + 1;
+                    }
+                });
+                rolage1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if ( a == 0 || a == 2) {
+                            editText2.setText(sex1[1]);
+                        }else if (a == 1){
+                            editText2.setText(sex1[0]);
+                        }else {
+                            editText2.setText(sex1[2]);
+                        }
+                    }
+                });
+                rolage1.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                rolage1.show();
                 break;
 //            case R.id.kecheng_service_type:
 //

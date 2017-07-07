@@ -313,55 +313,24 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                 if (image != null) {
                     EventBus.getDefault().post(image, "headUrl");
                 }
+                    EventBus.getDefault().post("update","update");
+
                 finish();
                 Toast.makeText(this,"更新资料成功！",Toast.LENGTH_SHORT).show();
 
                 break;
             case R.id.biyexuexiao:
-                //服务类型
-                final String[] sex1={"一对一","一对多"};
-                AlertDialog.Builder rolage1=new AlertDialog.Builder(Personal_Activty.this);
-                rolage1.setIcon(android.R.drawable.btn_star);
-                rolage1.setTitle("选择类型!");
-                rolage1.setSingleChoiceItems(sex1, 1, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        a=which+1;
-                    }
-                });
-                rolage1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (a==0||a==2) {
-                            teacher.Teacher_service_type(uid,a+"");
-                            biyexuexiao.setText(sex1[1]);
-                        }else {
-                            teacher.Teacher_service_type(uid,1+"");
-                            biyexuexiao.setText(sex1[0]);
-                        }
-                        Toast.makeText(Personal_Activty.this,"修改服务类型成功成功",Toast.LENGTH_LONG).show();
-                    }
-                });
-                rolage1.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                rolage1.show();
-
-                break;
-            case R.id.shurujiaol:
-                //教龄
+                //个人签名
                 new  AlertDialog.Builder(this).setTitle("请输入!").setIcon(android.R.drawable.btn_star).setView(edit)
                         .setPositiveButton("确认",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if (!edit.getText().toString().equals("")) {
-                                    int years=Integer.parseInt(edit.getText().toString());
-                                    teacher.Teacher_years(uid,years);
-                                    shurujiaol.setText(years+"年");
+                                    String signature = edit.getText().toString();
+                                    teacher.Teacher_signature(uid,signature);
+                                    biyexuexiao.setText(signature);
                                 }else {
+                                    Toast.makeText(Personal_Activty.this, "请输入签名", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }).setNegativeButton("取消",new DialogInterface.OnClickListener() {
@@ -370,6 +339,53 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
 
                     }
                 }).show();
+
+
+                break;
+            case R.id.shurujiaol:
+
+                AlertDialog.Builder serviceTypeDialog = new AlertDialog.Builder(Personal_Activty.this);
+                serviceTypeDialog.setIcon(R.drawable.add04);
+                serviceTypeDialog.setTitle("请选择服务类型");
+                //    指定下拉列表的显示数据
+                final String[] fuwuType = {"1年", "2年", "3年" ,"4年", "5年","6年","7年" ,"8年", "9年","10年",
+                        "11年", "12年", "13年" ,"14年", "15年","16年","17年" ,"18年", "19年","20年",
+                        "21年", "22年", "23年" ,"24年", "25年","26年","27年" ,"28年", "29年","30年",
+                        "31年", "32年", "33年" ,"34年", "35年","36年","37年" ,"38年", "39年","40年",
+                        "41年", "42年", "43年" ,"44年", "45年","46年","47年" ,"48年", "49年","50年"
+
+                };
+                //    设置一个下拉的列表选择项
+                serviceTypeDialog.setItems(fuwuType, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        shurujiaol.setText(fuwuType[which]);
+//                        int years=Integer.parseInt(edit.getText().toString());
+                        teacher.Teacher_years(uid,which+1);
+                    }
+                });
+                serviceTypeDialog.show();
+                //教龄
+//                new  AlertDialog.Builder(this).setTitle("请输入!").setIcon(android.R.drawable.btn_star).setView(edit)
+//                        .setPositiveButton("确认",new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                if (!edit.getText().toString().equals("")) {
+//                                    int years=Integer.parseInt(edit.getText().toString());
+//                                    teacher.Teacher_years(uid,years);
+//                                    shurujiaol.setText(years+"年");
+//                                }else {
+//                                }
+//                            }
+//                        }).setNegativeButton("取消",new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//
+//                    }
+//                }).show();
+
+
+
 
                 break;
 
@@ -425,11 +441,12 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
 
         if (mapa.get("years").toString().equals("0.0")) {
 
-        }else if (mapa.get("service_type").toString().equals("1")){
-            biyexuexiao.setText("一对一");
-        }else {
-            biyexuexiao.setText("一对多");
+        }else if (mapa.get("signature") != null){
+            biyexuexiao.setText(mapa.get("signature").toString());
         }
+//        else {
+//            biyexuexiao.setText(mapa.get("signature").toString());
+//        }
         shurujiaol.setText(mapa.get("years").toString()+"年");
 
     }

@@ -86,6 +86,7 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
             radioButton1.setText("学生");
             imageView.setImageResource(R.drawable.logo);
         }
+        fragments.clear();
         fragments.add(new Teacher_fragment());
         fragments.add(BaseFragment_.builder().build());
 //        fragments.add(new Teacher_fragment());

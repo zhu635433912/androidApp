@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
@@ -73,6 +74,7 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
         xinjijiaoshi= (TextView) findViewById(R.id.xinjijiaoshi);
         grfanhui= (RelativeLayout) findViewById(R.id.grfanhui);
         techartext= (TextView) findViewById(R.id.techartext);
+        techartext.setMovementMethod(ScrollingMovementMethod.getInstance());
         techaertec= (TextView) findViewById(R.id.techaertec);
         techaerxue= (TextView) findViewById(R.id.techaerxue);
         jiaoling= (TextView) findViewById(R.id.jiaoling);

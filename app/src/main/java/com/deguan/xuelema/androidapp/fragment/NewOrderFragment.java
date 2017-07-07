@@ -44,6 +44,7 @@ public class NewOrderFragment extends BaseFragment {
         viewPager.setAdapter(adapter);
         tableLayout.setupWithViewPager(viewPager);
         tableLayout.setTabMode(TabLayout.MODE_FIXED);
+//        viewPager.setOffscreenPageLimit(0);
     }
 
 }

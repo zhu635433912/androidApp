@@ -68,16 +68,16 @@
                     android:layout_height="220px"/>
                 <ImageView
                     android:id="@+id/huanxin_but"
-                    android:layout_marginTop="20px"
-                    android:padding="30px"
+                    android:layout_marginTop="40px"
+                    android:layout_marginLeft="95px"
                     android:src="@mipmap/chat_icon"
-                    android:layout_marginRight="110px"
+                    android:layout_marginRight="100px"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/teacher_setup"
-                    android:layout_width="120px"
-                    android:layout_height="120px" />
+                    android:layout_width="80px"
+                    android:layout_height="100px" />
                 <TextView
-                    android:layout_marginRight="105px"
+                    android:layout_marginRight="75px"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/huanxin_but"
                     android:textColor="#6c7070"

@@ -90,6 +90,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     private int course_id ;
     private int grade_id  ;
     private TextView xueliTv;
+    private TextView phoneTv;
     private ImageButton addFriend;
 
     @Override
@@ -98,6 +99,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         setContentView(R.layout.xuqiulayout);
         User_id.getInstance().addActivity(this);
 
+        phoneTv = (TextView) findViewById(R.id.xuqiu_tel_tv);
         addFriend = (ImageButton) findViewById(R.id.add_friend);
         xueliTv = (TextView) findViewById(R.id.xuqiu_xueli_tv);
         kemuleibie= (TextView) findViewById(R.id.kemuleibie);
@@ -213,6 +215,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         username = (String) map.get("publisher_mobile");
 
 
+        phoneTv.setText(username);
         String desc=start+" - "+end;
 
         if (gender.equals("1")) {
