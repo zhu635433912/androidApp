@@ -21,12 +21,16 @@
         android:layout_height="100px">
         <include
             layout="@layout/widget_bottom_layout"
-            />
+            android:layout_alignTop="@+id/new_main_image"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
         <ImageView
             android:id="@+id/new_main_image"
             android:layout_centerInParent="true"
             android:layout_width="300px"
-            android:layout_margin="15px"
+            android:padding="8px"
+            android:layout_marginRight="15px"
+            android:layout_marginLeft="15px"
             android:scaleType="fitCenter"
             android:src="@drawable/hly03"
             android:layout_height="100px" />

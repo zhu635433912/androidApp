@@ -66,6 +66,7 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
 
     @Override
     public void initView() {
+        User_id.getInstance().addActivity(this);
         //定义底部标签图片大小
 //        Drawable drawableFirst = getResources().getDrawable(R.drawable.bottom_home_icon);
 //        drawableFirst.setBounds(0, 0, 60, 60);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
@@ -80,10 +81,10 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
 
         new Getdata().getDownloadUrl(this);
         if (User_id.getRole().equals("1")){
-            radioButton1.setText("老师");
+            radioButton1.setText("找老师");
             imageView.setImageResource(R.drawable.hly03);
         }else {
-            radioButton1.setText("学生");
+            radioButton1.setText("找学生");
             imageView.setImageResource(R.drawable.logo);
         }
         fragments.clear();

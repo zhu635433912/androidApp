@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.deguan.xuelema.androidapp.BillActivity">
+    <RelativeLayout
+        android:id="@+id/bill_back"
+        android:layout_width="120px"
+        android:layout_height="80px">
+    </RelativeLayout>
+    <ImageButton
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/add19"
+        android:layout_width="20px"
+        android:layout_height="30px" />
+
+
+    <TextView
+        android:textSize="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="我的账单"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian"
+        android:background="#d7d7d7"
+        android:layout_marginTop="80px"
+        android:layout_below="@+id/neirongtext"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <LinearLayout
+        android:id="@+id/bill_title"
+        android:orientation="horizontal"
+        android:background="#e2e2e2"
+        android:layout_below="@id/xuqiufenggexian"
+        android:layout_width="match_parent"
+        android:layout_height="80px">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="账单号"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="金额"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="类型"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="时间"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <ListView
+        android:id="@+id/bill_list"
+        android:divider="@null"
+        android:layout_marginTop="10px"
+        android:layout_below="@+id/bill_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</RelativeLayout>

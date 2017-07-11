@@ -53,7 +53,7 @@
     <Button
         android:id="@+id/tijiaojubao"
         android:textColor="#fff"
-        android:text="保存"
+        android:text="提交举报"
         android:background="@drawable/add15"
         android:layout_marginBottom="50px"
         android:layout_centerHorizontal="true"

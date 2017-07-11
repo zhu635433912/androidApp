@@ -4,26 +4,31 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.text.method.ScrollingMovementMethod;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
 import com.deguan.xuelema.androidapp.huanxin.HuihuaActivity;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
+import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.deguan.xuelema.androidapp.viewimpl.SimilarXuqiuView;
 import com.deguan.xuelema.androidapp.viewimpl.XuqiuView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -74,7 +79,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     private TextView shijianduan;
     private String username;
     private TextView diqu;
-    private CircleImageView xuqiuimage;
+    private ImageView xuqiuimage;
     private AVLoadingIndicatorView xuqiushuax;
     private int fee;
     private int id;
@@ -92,6 +97,8 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     private TextView xueliTv;
     private TextView phoneTv;
     private ImageButton addFriend;
+    private ImageButton bohaoImage;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -99,6 +106,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         setContentView(R.layout.xuqiulayout);
         User_id.getInstance().addActivity(this);
 
+        bohaoImage = (ImageButton) findViewById(R.id.bohao);
         phoneTv = (TextView) findViewById(R.id.xuqiu_tel_tv);
         addFriend = (ImageButton) findViewById(R.id.add_friend);
         xueliTv = (TextView) findViewById(R.id.xuqiu_xueli_tv);
@@ -117,14 +125,31 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         fuwufang= (TextView) findViewById(R.id.fuwufang);
         shijianduan= (TextView) findViewById(R.id.shijianduan);
         diqu= (TextView) findViewById(R.id.diqu);
-        xuqiuimage= (CircleImageView) findViewById(R.id.xuqiuimage);
+        xuqiuimage= (ImageView) findViewById(R.id.xuqiuimage);
         xuqiushuax= (AVLoadingIndicatorView) findViewById(R.id.xuqiushuax);
+        Demandcontent.setMovementMethod(ScrollingMovementMethod.getInstance());
 
         xuqiufanhui.bringToFront();
         xuqiuweix.setOnClickListener(this);
         xuqiufanhui.setOnClickListener(this);
         addFriend.setOnClickListener(this);
-
+        bohaoImage.setOnClickListener(this);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            xuqiushuax.setVisibility(View.GONE);
+                        }
+                    });
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
         //获取需求id与用户id
         String  publisher_id=getIntent().getStringExtra("publisher_id");
         String uds = getIntent().getStringExtra("user_id");
@@ -184,6 +209,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     //更新内容
     @Override
     public void Updatecontent(Map<String, Object> map) {
+
         String publisher_name = (String) map.get("publisher_name");
         String content = (String) map.get("content");
         String created = (String) map.get("created");
@@ -214,7 +240,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         diqu.setText(state+"");
         username = (String) map.get("publisher_mobile");
 
-
+        Glide.with(this).load(map.get("publisher_headimg")+"").placeholder(R.drawable.ox2).transform(new GlideCircleTransform(this)).into(xuqiuimage);
         phoneTv.setText(username);
         String desc=start+" - "+end;
 
@@ -240,7 +266,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         Requirname.setText(publisher_name);
         kemuleibie.setText(map.get("course_name")+"");
         nianjia.setText(map.get("grade_name")+"");
-        setbitmap(map.get("publisher_headimg")+"");
+//        setbitmap(map.get("publisher_headimg")+"");
 
     }
 
@@ -253,10 +279,18 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
 
 
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case  R.id.bohao:
+                //拨号
+                Log.e("aa", "拨号成功");
+                Intent inte = new Intent(Intent.ACTION_DIAL);
+                inte.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                inte.setData(Uri.parse("tel:" + username));
+                startActivity(inte);
+
+                break;
             case R.id.add_friend:
                 Toast.makeText(this, "已发送好友申请", Toast.LENGTH_SHORT).show();
                 new Thread(new Runnable() {
@@ -378,6 +412,9 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
             entity.setContent((String) maps.get(i).get("content"));
             entity.setCreated((String) maps.get(i).get("created"));
             entity.setId((String) maps.get(i).get("id"));
+            if (maps.get(i).get("id").equals(dindan+"")) {
+                continue;
+            }
             entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
             entity.setDistance((String) maps.get(i).get("distance"));
             entity.setFee(String.valueOf(maps.get(i).get("fee")));

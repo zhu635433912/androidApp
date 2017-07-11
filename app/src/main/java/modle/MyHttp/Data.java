@@ -1,5 +1,7 @@
 package modle.MyHttp;
 
+import android.content.Context;
+
 import com.deguan.xuelema.androidapp.entities.DownloadEntity;
 import com.deguan.xuelema.androidapp.entities.PayEntity;
 
@@ -86,4 +88,7 @@ public interface Data {
     @POST("index.php?s=/Service/Order/query_deal_list")
     Call<ContentModle> getTurnover(@Query("teacher_id")int teacher_id,@Query("page")int page);
 
+    //账单列表
+    @POST("index.php?s=/Service/Finance/gets_billing")
+    Call<ContentModle> getBillList(@Query("uid")int uid);
 }

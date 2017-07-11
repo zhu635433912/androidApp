@@ -116,7 +116,8 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
                                 startActivity(intent2);
 
                                 Toast.makeText(SetUp.this,"退出成功！",Toast.LENGTH_LONG).show();
-                                User_id.getInstance().exit();
+//                                User_id.getInstance().exit();
+
                             }
                         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override

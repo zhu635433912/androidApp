@@ -17,6 +17,8 @@ import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.SetUp;
 import com.deguan.xuelema.androidapp.Teacher_management;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 import org.simple.eventbus.EventBus;
@@ -45,7 +47,7 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
     @ViewById(R.id.myfee)
     ImageView myfee;
     @ViewById(R.id.teacher_loc)
-    CircleImageView teacher_loc;
+    ImageView teacher_loc;
     @ViewById(R.id.huanxin_but)
     ImageView huanxin_but;
     @ViewById(R.id.teacher_name)
@@ -93,8 +95,8 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
         tlebat.add("推荐需求");
         tlebat.add("我的订单");
         fragments.add(DmadFragmengt_.builder().build());
-        fragments.add(OrderFragment_.builder().build());
-//        fragments.add(NewOrderFragment_.builder().build());
+//        fragments.add(OrderFragment_.builder().build());
+        fragments.add(NewOrderFragment_.builder().build());
         HomeTitleAdapter adapter = new HomeTitleAdapter(getFragmentManager(),fragments,tlebat);
         new_techaer_viewpage.setAdapter(adapter);
         new_teacher_tablayout.setupWithViewPager(new_techaer_viewpage);
@@ -134,7 +136,7 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
     @Subscriber(tag = "headUrl")
     private void updateHead(File msg){
 //        Glide.with(this).load(msg).into(teacher_loc);
-        Glide.with(this).load(msg).into(teacher_loc);
+        Glide.with(this).load(msg).placeholder(R.mipmap.ic_launcher).transform(new GlideCircleTransform(getContext())).into(teacher_loc);
     }
     @Subscriber(tag = "update")
     public void updateMsg(String msg){
@@ -146,7 +148,7 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
      */
     @Override
     public void Updatecontent(Map<String, Object> map) {
-        Glide.with(this).load(map.get("headimg").toString()).into(teacher_loc);
+        Glide.with(this).load(map.get("headimg").toString()).placeholder(R.mipmap.ic_launcher).transform(new GlideCircleTransform(getContext())).into(teacher_loc);
         teacher_name.setText(map.get("nickname")+"");
         teacher_autograph.setText(map.get("signature")+"");
     }

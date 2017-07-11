@@ -52,6 +52,7 @@ public interface User_init {
      */
     public Map<String,Object> User_Data(int user_id,String lat,String lng, Requirdetailed requirdetailed);
 
+
     /**
      用户资料更新
      user_id    用户id
@@ -74,5 +75,6 @@ public interface User_init {
 
     public void setlan_lng(int uid,double lat,double lng);
 
+    public void UpdateEducation(int user_id,int education_id);
 
 }

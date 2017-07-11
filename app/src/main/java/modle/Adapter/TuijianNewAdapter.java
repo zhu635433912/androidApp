@@ -15,6 +15,7 @@ import com.deguan.xuelema.androidapp.entities.TuijianEntity;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.zhy.autolayout.utils.AutoUtils;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -92,12 +93,18 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
         Glide.with(context).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
         String dist = list.get(position).getDistance();
 //        holder.stats.setText(""+list.get(position).getStatus2());
-        int myDist = 0;
-        if (!dist.equals("")) {
-            myDist = Integer.parseInt(dist) / 1000;
+        double myDist = 0;
+        if (!dist.equals("")){
+            myDist = Double.parseDouble(dist)/1000;
         }
-        int lat = myDist / 1000;
-        holder.distance.setText(lat + "km");
+        DecimalFormat df = new DecimalFormat("#0.0");
+
+//        int myDist = 0;
+//        if (!dist.equals("")) {
+//            myDist = Integer.parseInt(dist) ;
+//        }
+//        int lat = myDist / 1000;
+        holder.distance.setText(df.format(myDist) + "km");
         if (!TextUtils.isEmpty(list.get(position).getGender())){
             String gender = list.get(position).getGender();
             if (gender.equals("1")) {

@@ -207,7 +207,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
         String status = (String) map.get("status");
         String requirement_address = (String) map.get("address");
         Date d = new Date(Long.parseLong(map.get("created")+"")*1000);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String created = sdf.format(d);
 //        String created = (String) map.get("created");
         String requirement_grade = (String) map.get("grade_name");
@@ -276,7 +276,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
         }
 //        dizhi.setText(""+map.get("requirement_address"));
 //        xuqiuneiro.setText(""+map.get("requirement_content"));
-        xuqiuneiro.setText("德冠网络科技公司");
+//        xuqiuneiro.setText("德冠网络科技公司");
         dindan_id.setText(""+map.get("id"));
 
         String ger=map.get("requirement_gender")+"";

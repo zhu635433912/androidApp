@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <ImageButton
-
+        android:id="@+id/userxinxi_back"
         android:layout_marginLeft="34px"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
@@ -43,10 +43,12 @@
         android:layout_height="35px" />
 </RelativeLayout>
 <ScrollView
-    android:layout_centerHorizontal="true"
     android:id="@+id/mafegin"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true">
     <RelativeLayout
         android:id="@+id/gerxxrelayout"
         android:background="@drawable/mask"
@@ -68,11 +70,12 @@
                 android:src="@drawable/add11"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-         <modle.toos.CircleImageView
+         <ImageView
          android:id="@+id/gerxxtoux"
          android:layout_marginTop="58px"
          android:layout_alignParentTop="true"
          android:layout_centerHorizontal="true"
+             android:scaleType="centerInside"
          android:src="@drawable/ox2"
          android:layout_width="110px"
          android:layout_height="110px" />

@@ -83,7 +83,7 @@
                     android:layout_toLeftOf="@+id/studentwodeqianbao"
                     android:background="@drawable/hly17" />
 
-                <modle.toos.CircleImageView
+                <ImageView
                     android:id="@+id/studenttouxiangimg"
                     android:layout_width="220px"
                     android:layout_height="220px"

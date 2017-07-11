@@ -19,6 +19,7 @@ import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.zhy.autolayout.utils.AutoUtils;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 
@@ -108,12 +109,13 @@ public class XuqiuAdapter extends ListBaseAdapter {
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
         Glide.with(context).load(list.get(position).getPublisher_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
         String dist = list.get(position).getDistance();
-        int myDist = 0;
+        double myDist = 0;
         if (!dist.equals("")){
-            myDist = Integer.parseInt(dist)/1000;
+            myDist = Double.parseDouble(dist)/1000;
         }
-//        int lat = myDist/1000;
-        holder.distance.setText(myDist+"km       "+list.get(position).getAddress());
+        DecimalFormat df = new DecimalFormat("#0.0");
+
+        holder.distance.setText(df.format(myDist)+"km     "+list.get(position).getAddress());
         holder.haoping_numtext.setText(""+list.get(position).getCreated());
         holder.nianji.setText(""+list.get(position).getGrade_name());
         return convertView;

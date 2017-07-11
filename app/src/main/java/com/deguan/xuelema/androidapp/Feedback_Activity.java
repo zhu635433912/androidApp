@@ -33,6 +33,7 @@ public class Feedback_Activity extends AutoLayoutActivity implements View.OnClic
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.feedback);
+        User_id.getInstance().addActivity(this);
 
         editText= (EditText) findViewById(R.id.fankuineirong);
         relativeLayout= (RelativeLayout) findViewById(R.id.tianjaitupian);

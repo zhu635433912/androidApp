@@ -14,9 +14,9 @@
     <RadioButton
         android:id="@+id/main_bottom_name"
         style="@style/bottom_radio_btn"
-        android:text="教师"
         android:drawableTop="@drawable/bottom_home_icon"
-        />
+        android:text="找教师" />
+
     <RadioButton
         style="@style/bottom_radio_btn"
 

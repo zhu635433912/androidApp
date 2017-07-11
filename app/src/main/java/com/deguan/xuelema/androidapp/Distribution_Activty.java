@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.ShareUtil;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class Distribution_Activty extends AutoLayoutActivity implements View.OnC
     private TextView erjifee;
     private TextView yqm;
     private int z=1;
+    private ImageView weichatImage,xinlangImage,weichatCoreImage,qqImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +46,11 @@ public class Distribution_Activty extends AutoLayoutActivity implements View.OnC
         setContentView(R.layout.distribution);
         User_id.getInstance().addActivity(this);
 
+
+        weichatImage = (ImageView) findViewById(R.id.share_to_weixin_image);
+        xinlangImage = (ImageView) findViewById(R.id.share_to_xinlang_image);
+        weichatCoreImage = (ImageView) findViewById(R.id.share_to_weixincore_image);
+        qqImage = (ImageView) findViewById(R.id.share_to_qq_image);
         jiantou= (RelativeLayout) findViewById(R.id.jiantou);
         wodeffenxiao= (RelativeLayout) findViewById(R.id.wodeffenxiao);
         erweima= (ImageView) findViewById(R.id.erweima);
@@ -57,6 +64,7 @@ public class Distribution_Activty extends AutoLayoutActivity implements View.OnC
         uid=Integer.parseInt(User_id.getUid());
         //获取推广金额
         getdata=new Getdata();
+        //获取不到啊!
         getdata.getinfo(uid,1,this);
 
         //设置生成二维码
@@ -64,7 +72,10 @@ public class Distribution_Activty extends AutoLayoutActivity implements View.OnC
         user.User_Data(uid,User_id.getLat()+"",User_id.getLng()+"",this);
 
 
-
+        weichatImage.setOnClickListener(this);
+        xinlangImage.setOnClickListener(this);
+        weichatCoreImage.setOnClickListener(this);
+        qqImage.setOnClickListener(this);
 
 
         wodeffenxiao.setOnClickListener(this);
@@ -74,6 +85,22 @@ public class Distribution_Activty extends AutoLayoutActivity implements View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.share_to_weixin_image:
+                ShareUtil.getInstance().share(this);
+//                ShareUtil.getInstance().shareQQ(this);
+                break;
+            case R.id.share_to_weixincore_image:
+                ShareUtil.getInstance().share(this);
+
+                break;
+            case R.id.share_to_qq_image:
+                ShareUtil.getInstance().share(this);
+
+                break;
+            case R.id.share_to_xinlang_image:
+
+                ShareUtil.getInstance().share(this);
+                break;
             case R.id.jiantou:
                 //推广金额
                 Intent intent=new Intent(Distribution_Activty.this,Promote_Acitvty.class);

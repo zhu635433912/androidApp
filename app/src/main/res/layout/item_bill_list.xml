@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="110px">
+
+    <android.support.v7.widget.CardView
+        android:layout_margin="10px"
+        app:cardCornerRadius="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <LinearLayout
+            android:background="#e4e3e6"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/bill_id_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="123"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/bill_money_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="200,0"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/bill_type_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="充值"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/bill_time_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="2017.7.7"
+                android:gravity="center"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>

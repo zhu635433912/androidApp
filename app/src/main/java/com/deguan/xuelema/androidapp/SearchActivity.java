@@ -201,6 +201,7 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
 //                    course_name = course_name + listmap.get(j).get("course_name")+"  ";
 //                }
                 entity.setStatus2(course_name);
+                entity.setEducation((String)maps.get(i).get("education"));
 //            entity.setGrade_name((String)maps.get(i).get("grade_name"));
                 lists.add(entity);
             }

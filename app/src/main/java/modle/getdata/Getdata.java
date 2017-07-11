@@ -372,4 +372,24 @@ public class Getdata {
             }
         });
     }
+
+    //获取账单列表
+    public void getBillList(int uid,final  TurnoverView turnoverView){
+        Call<ContentModle> call = data.getBillList(uid);
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                if (response.body().getError().equals("ok")){
+                    turnoverView.successTurnover(response.body().getContent());
+                }else {
+                    turnoverView.failTurnover("获取失败");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                turnoverView.failTurnover("网络错误");
+            }
+        });
+    }
 }

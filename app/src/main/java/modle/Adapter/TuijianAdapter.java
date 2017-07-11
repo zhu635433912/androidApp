@@ -14,6 +14,7 @@ import com.deguan.xuelema.androidapp.entities.TuijianEntity;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.deguan.xuelema.androidapp.utils.SubjectUtil;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -90,12 +91,18 @@ public class TuijianAdapter extends ListBaseAdapter {
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
         Glide.with(context).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
         String dist = list.get(position).getDistance();
-        int myDist = 0;
+        double myDist = 0;
         if (!dist.equals("")){
-            myDist = Integer.parseInt(dist)/1000;
+            myDist = Double.parseDouble(dist)/1000;
         }
-        int lat = myDist/1000;
-        holder.distance.setText(lat+"km");
+        DecimalFormat df = new DecimalFormat("#0.0");
+
+//        int myDist = 0;
+//        if (!dist.equals("")){
+//            myDist = Integer.parseInt(dist);
+//        }
+//        int lat = myDist/1000;
+        holder.distance.setText(df.format(dist)+"km");
         holder.haoping_numtext.setText("好评:"+list.get(position).getHaoping_num());
         if (!TextUtils.isEmpty(list.get(position).getGender())){
             String gender = list.get(position).getGender();

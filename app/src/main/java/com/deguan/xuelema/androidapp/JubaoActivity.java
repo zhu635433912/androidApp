@@ -38,7 +38,7 @@ public class JubaoActivity extends MyBaseActivity implements UpReportView {
 
     @Override
     public void before() {
-        teacherId = Integer.parseInt(getIntent().getStringExtra("teacher_id"));
+        teacherId = getIntent().getIntExtra("teacher_id",411);
     }
 
     @Override
@@ -70,6 +70,7 @@ public class JubaoActivity extends MyBaseActivity implements UpReportView {
     @Override
     public void successUpReport(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override

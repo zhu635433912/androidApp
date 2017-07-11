@@ -399,6 +399,28 @@ public class User_Realization implements User_init {
         });
     }
 
+    @Override
+    public void UpdateEducation(int user_id, int education_id) {
+        Call<Demtest> call=myOkhttp.setEducation(user_id,education_id);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")) {
+                    Log.e("aa", "用户资料更新成功");
+                }else {
+                    String errmsg=response.body().getErrmsg();
+                    Log.e("aa","更新用户资料错误="+errmsg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                Log.e("aa","获取用户资料异常错误="+t.toString());
+            }
+        });
+    }
+
     //上传图片
     @Override
     public void setuserbitmap(File file, final Student_init student_init) {

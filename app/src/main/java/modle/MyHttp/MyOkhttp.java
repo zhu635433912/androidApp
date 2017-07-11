@@ -1,6 +1,7 @@
 package modle.MyHttp;
 
 import android.graphics.Bitmap;
+import android.provider.CallLog;
 
 import java.util.List;
 import java.util.Map;
@@ -87,6 +88,9 @@ public interface MyOkhttp {
 */
     @POST("index.php?s=/Service/Accounts/update_profile")
     Call<Demtest> setage(@Query("id") int id, @Query("age") String age);
+
+    @POST("index.php?s=/Service/Accounts/update_profile")
+    Call<Demtest> setEducation(@Query("id")int id,@Query("education_id")int education_id);
 
     /*
 用户资料个性签名

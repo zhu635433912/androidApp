@@ -47,7 +47,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
     private RelativeLayout qianbaohuitui;
     private TextView yuer;
     private TextView mingofee;
-    private TextView textView4;
+    private TextView textView4,myBillTv;
     private PopupWindow rechargePopwindow,cashPopwindow;
     private int flag = 0;
     private Getdata getdata;
@@ -59,6 +59,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         setContentView(R.layout.layout);
         User_id.getInstance().addActivity(this);
 
+        myBillTv = (TextView) findViewById(R.id.my_bill);
         yuer= (TextView) findViewById(R.id.yuer);
         xianjinjuan= (TextView) findViewById(R.id.xianjinjuan);
         chongzhi= (TextView) findViewById(R.id.textView4);
@@ -83,7 +84,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         //获取现金卷
         getdata.getmianfofee(uid,this);
         textView4.setOnClickListener(this);
-
+        myBillTv.setOnClickListener(this);
 
         initPopwindow();
         initCashPopwindow();
@@ -209,6 +210,9 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.my_bill:
+                startActivity(BillActivity_.intent(this).get());
+                break;
             case R.id.textView4:
                 //充值
                 rechargePopwindow.showAtLocation(textView4, Gravity.CENTER,0,0);

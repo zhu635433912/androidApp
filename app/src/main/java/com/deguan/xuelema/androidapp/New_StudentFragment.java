@@ -76,7 +76,7 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     @ViewById(R.id.studentwodeqianbao)
     RelativeLayout studentwodeqianbao;
     @ViewById(R.id.studenttouxiangimg)
-    CircleImageView studenttouxiangimg;
+    ImageView studenttouxiangimg;
     @ViewById(R.id.studentusernametext)
     TextView studentusernametext;
     @ViewById(R.id.studentneirongtext)
@@ -132,13 +132,13 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void initData() {
         titles.add("我的发布");
-        titles.add("推荐教师");
-        titles.add("我的订单");
 //        titles.add("推荐教师");
+        titles.add("我的订单");
+        titles.add("推荐教师");
         fragments.add(MyPublishFragment_.builder().build());
-//        fragments.add(NewOrderFragment_.builder().build());
+        fragments.add(NewOrderFragment_.builder().build());
         fragments.add(TuijianFragment_.builder().build());
-        fragments.add(OrderFragment_.builder().build());
+//        fragments.add(OrderFragment_.builder().build());
 //        fragments.add(TuijianFragment_.builder().build());
 //        fragments.add(new TestFragment());
 //        fragments.add(new TestFragment());
@@ -203,11 +203,10 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
 
     @Override
     public void setListview1(List<Map<String, Object>> listmap) {
-
     }
     @Subscriber(tag = "headUrl")
     public void updateHead(File msg){
-        Glide.with(this).load(msg).transform(new GlideCircleTransform(getActivity())).into(studenttouxiangimg);
+        Glide.with(this).load(msg).placeholder(R.mipmap.ic_launcher).transform(new GlideCircleTransform(getActivity())).into(studenttouxiangimg);
     }
 
     @Subscriber(tag = "update")
@@ -219,7 +218,7 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         if(map.get("nickname").toString()!=null) {
             studentusernametext.setText(map.get("nickname")+"");
             studentneirongtext.setText(map.get("signature")+"");
-            Glide.with(this).load(map.get("headimg").toString()).transform(new GlideCircleTransform(getActivity())).into(studenttouxiangimg);
+            Glide.with(this).load(map.get("headimg").toString()).placeholder(R.mipmap.ic_launcher).transform(new GlideCircleTransform(getActivity())).into(studenttouxiangimg);
         }
     }
 

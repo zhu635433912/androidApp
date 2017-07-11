@@ -13,6 +13,7 @@ import com.deguan.xuelema.androidapp.entities.TeacherEntity;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.zhy.autolayout.utils.AutoUtils;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -88,16 +89,23 @@ public class TeacherListAdapter extends ListBaseAdapter {
 //        holder.speciality.setText("" + list.get(position).getSpeciality());
         holder.speciality.setText("");
         holder.username.setText("" + list.get(position).getSignature());
+
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
         Glide.with(context).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
         String dist = list.get(position).getDistance();
         holder.stats.setText(""+list.get(position).getStatus2());
-        int myDist = 0;
-        if (!dist.equals("")) {
-            myDist = Integer.parseInt(dist) ;
+        double myDist = 0;
+        if (!dist.equals("")){
+            myDist = Double.parseDouble(dist)/1000;
         }
-        int lat = myDist / 1000;
-        holder.distance.setText(lat + "km");
+        DecimalFormat df = new DecimalFormat("#0.0");
+
+//        int myDist = 0;
+//        if (!dist.equals("")) {
+//            myDist = Integer.parseInt(dist) ;
+//        }
+//        int lat = myDist / 1000;
+        holder.distance.setText(df.format(myDist) + "km");
         if (!TextUtils.isEmpty(list.get(position).getGender())){
             String gender = list.get(position).getGender();
             if (gender.equals("1")) {
@@ -106,7 +114,7 @@ public class TeacherListAdapter extends ListBaseAdapter {
                 holder.nianji.setText("女");
             }
         }else {
-            holder.nianji.setText("未知");
+            holder.nianji.setText(" ");
         }
         holder.haoping_numtext.setText("好评: "+list.get(position).getHaoping_num());
 //        switch (list.get(position).getOrder_rank().toString()){
@@ -130,6 +138,7 @@ public class TeacherListAdapter extends ListBaseAdapter {
 //                break;
 //        }
 
+        holder.education.setText(list.get(position).getEducation());
         return convertView;
     }
 
@@ -146,8 +155,10 @@ public class TeacherListAdapter extends ListBaseAdapter {
             private TextView haoping_numtext;//好评分
             private TextView nianji;
             private TextView stats;
+            private TextView education;
 
             public ViewHolder(View itemView) {
+                education = (TextView) itemView.findViewById(R.id.education_tv);
                 user_headimg = (ImageView) itemView.findViewById(R.id.lognhost);
                 nickname = (TextView) itemView.findViewById(R.id.text1);
                 service_type = (TextView) itemView.findViewById(R.id.text9);

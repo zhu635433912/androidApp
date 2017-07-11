@@ -60,7 +60,7 @@ public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapte
     private List<XuqiuEntity> list;
     private MyPublishNewAdapter.OnTopClickListener listener;
     private MyPublishNewAdapter.OnTopLongClickListener longListener;
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss", Locale.CHINA);
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss", Locale.CHINA);
     private RecyclerView recyclerView;
 
     public MyPublishNewAdapter( List<XuqiuEntity> list,Context context) {
@@ -115,6 +115,7 @@ public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapte
         }
 //        int lat = myDist/1000;
         holder.distance.setText(myDist+"km");
+        holder.distance.setText(" ");
         holder.haoping_numtext.setText(""+list.get(position).getCreated());
         holder.nianji.setText(""+list.get(position).getGrade_name());
     }

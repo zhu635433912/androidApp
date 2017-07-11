@@ -103,12 +103,18 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     private static final int REQUEST_IMAGE_CAPTURE = 6;
     private Map<String,Object> mapa;
     private File image;
+    private RelativeLayout xueliRl;
+    private TextView xueliTv;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_data);
         EventBus.getDefault().register(this);
         User_id.getInstance().addActivity(this);
+
+        xueliRl = (RelativeLayout) findViewById(R.id.xuelie_rl);
+        xueliTv = (TextView) findViewById(R.id.xueli_text);
         gerxxhuitui= (RelativeLayout) findViewById(R.id.gerxxhuitui);
         usertoux= (CircleImageView) findViewById(R.id.usertoux);
         userdizhi= (TextView) findViewById(R.id.userdizhi);
@@ -121,6 +127,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         biyexuexiao= (TextView) findViewById(R.id.biyexuexiao);
         shurujiaol= (TextView) findViewById(R.id.shurujiaol);
 
+        xueliTv.setOnClickListener(this);
         biyexuexiao.setOnClickListener(this);
         shurujiaol.setOnClickListener(this);
         userage.setOnClickListener(this);
@@ -142,6 +149,8 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         if (role==1){
             fuwuleia.setVisibility(View.GONE);
             jiaolinlayout.setVisibility(View.GONE);
+            xueliRl.setVisibility(View.GONE);
+
         }else {
             teacher=new Teacher();
             teacher.Get_Teacher_detailed(561,uid,this,1);
@@ -156,13 +165,34 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
 
 
     }
-
+    private int education_id = 0;
     @Override
     public void onClick(View v) {
         final EditText edit = new EditText(this);
         switch (v.getId()) {
+            case R.id.xueli_text:
+                AlertDialog.Builder xueleTypeDialog = new AlertDialog.Builder(Personal_Activty.this);
+                xueleTypeDialog.setIcon(R.drawable.add04);
+                xueleTypeDialog.setTitle("请选择学历");
+                //    指定下拉列表的显示数据
+                final String[] xueliType = {"无","大专", "本科", "硕士" ,"博士"};
+                //    设置一个下拉的列表选择项
+                xueleTypeDialog.setItems(xueliType, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        xueliTv.setText(xueliType[which]);
+//                        int years=Integer.parseInt(edit.getText().toString());
+//                        teacher.Teacher_years(uid,which+1);
+                        education_id = which;
+                        user_init.UpdateEducation(uid,which);
+                    }
+                });
+                xueleTypeDialog.show();
+
+
+                break;
             case R.id.gerxxhuitui:
-                Personal_Activty.this.finish();
+                finish();
                 break;
             case R.id.userdizhi:
                 //所在地
@@ -224,11 +254,11 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                         .setPositiveButton("确认",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (!edit.getText().toString().equals("")) {
+                                if (!edit.getText().toString().equals("")&edit.getText().length()<4) {
                                     user.Updateage(uid,edit.getText().toString());
                                     usershenr.setText(edit.getText().toString());
                                 }else {
-                                    Toast.makeText(Personal_Activty.this,"年龄不能为空",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Personal_Activty.this,"年龄输入有误!!!",Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }).setNegativeButton("取消",new DialogInterface.OnClickListener() {
@@ -245,11 +275,11 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                if (!edit.getText().toString().equals("")) {
+                                if (!edit.getText().toString().equals("")&&edit.getText().toString().length()<4) {
                                     user.Updatename(uid,edit.getText().toString());
                                     ziyouzhiye.setText(edit.getText().toString());
                                 }else {
-                                    Toast.makeText(Personal_Activty.this,"姓名不能为空!",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Personal_Activty.this,"姓名输入有误!",Toast.LENGTH_SHORT).show();
                                 }
 
 
@@ -267,11 +297,11 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                         .setPositiveButton("确认",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (!edit.getText().toString().equals("")) {
+                                if (!edit.getText().toString().equals("")&&edit.getText().length()<10) {
                                     user.Updatenickname(uid,edit.getText().toString());
                                     emage.setText(edit.getText().toString());
                                 }else {
-                                    Toast.makeText(Personal_Activty.this,"昵称不能为空!",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Personal_Activty.this,"昵称不能太短也不能太长哦!!",Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }).setNegativeButton("取消",new DialogInterface.OnClickListener() {
@@ -325,12 +355,12 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                         .setPositiveButton("确认",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (!edit.getText().toString().equals("")) {
+                                if (!edit.getText().toString().equals("")&&edit.getText().length()<=20) {
                                     String signature = edit.getText().toString();
                                     teacher.Teacher_signature(uid,signature);
                                     biyexuexiao.setText(signature);
                                 }else {
-                                    Toast.makeText(Personal_Activty.this, "请输入签名", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Personal_Activty.this, "签名不能太长也不能没有啊", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }).setNegativeButton("取消",new DialogInterface.OnClickListener() {
@@ -431,7 +461,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
             emage.setText((String) map.get("nickname"));
             usershenr.setText((String) map.get("age"));
             ziyouzhiye.setText((String) map.get("name"));
-
+            xueliTv.setText((String)map.get("education_name"));
         setbitmap(map.get("headimg").toString());
     }
 
@@ -774,7 +804,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
 
     @Override
     protected void onDestroy() {
-        EventBus.getDefault().unregister(this);
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

@@ -189,6 +189,12 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
         EventBus.getDefault().register(this);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        gaode_dinwei = new Gaode_dinwei(this,getActivity());
+    }
+
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -1011,7 +1017,9 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
                 entity.setNickname((String) maps.get(i).get("nickname"));
                 entity.setSpeciality((String)maps.get(i).get("speciality"));
                 entity.setSpeciality_name((String) maps.get(i).get("speciality_name"));
-                entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
+//                entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
+
+
                 entity.setSignature((String) maps.get(i).get("signature"));
                 entity.setOrder_rank((String.valueOf(maps.get(i).get("order_rank"))));
                 entity.setUser_headimg((String) maps.get(i).get("user_headimg"));
@@ -1022,11 +1030,17 @@ public class Teacher_fragment extends Fragment implements View.OnClickListener,
                 entity.setFee(String.valueOf(maps.get(i).get("fee")));
                 entity.setHaoping_num((String)maps.get(i).get("haoping_num"));
                 List<Map<String,Object>> listmap = ((List<Map<String,Object>>)maps.get(i).get("information_temp"));
+                if (listmap .size()>0){
+                    entity.setService_type_txt((String) listmap.get(0).get("course_remark"));
+                }else {
+                    entity.setService_type_txt("不限");
+                }
                 String course_name = "";
                 for (int j = 0; j < listmap.size(); j++) {
                     course_name = course_name + listmap.get(j).get("course_name")+"  ";
                 }
                 entity.setStatus2(course_name);
+                entity.setEducation((String)maps.get(i).get("education"));
 //            entity.setGrade_name((String)maps.get(i).get("grade_name"));
                 lists.add(entity);
             }

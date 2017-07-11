@@ -38,6 +38,16 @@
         android:layout_below="@+id/feehost"
         android:layout_width="match_parent"
         android:layout_height="1px"/>
+    <TextView
+        android:id="@+id/my_bill"
+        android:text="我的账单"
+        android:layout_marginTop="10px"
+        android:textSize="45px"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40px"
+        android:layout_below="@+id/feehost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <ImageView
         android:id="@+id/feeimagv"
         android:layout_marginTop="108px"

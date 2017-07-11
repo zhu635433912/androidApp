@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/login_backget"
+    android:background="@mipmap/login_backgroud"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageView
-        android:background="@drawable/ox1"
         android:layout_width="110px"
         android:layout_height="150px"
+        android:id="@+id/imageView"
         android:layout_alignBottom="@+id/pos_relativelayout1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="13px"
-        android:layout_marginBottom="10dp"
-        android:id="@+id/imageView" />
+        android:layout_toLeftOf="@+id/pos_relativelayout1"
+        android:layout_toStartOf="@+id/pos_relativelayout1" />
 
     <RelativeLayout
         android:id="@+id/pos_relativelayout1"
@@ -23,7 +20,7 @@
         android:layout_height="782px">
         <TextView
             android:id="@+id/pos_textviewxiu"
-            android:layout_marginLeft="102px"
+            android:layout_marginLeft="70px"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="202px"
@@ -37,7 +34,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="15px"
             android:layout_marginEnd="16px"
-            android:background="@drawable/ox2"
             android:layout_width="210px"
             android:layout_height="250px"
             android:layout_alignParentRight="true"
@@ -52,16 +48,16 @@
             android:background="@drawable/login_wan_connllat"
             android:id="@+id/pos_username"
             android:layout_marginTop="42px"
-            android:layout_width="346px"
-            android:layout_height="68px" />
+            android:layout_width="400px"
+            android:layout_height="80px" />
         <EditText
             android:inputType="number"
             android:singleLine="true"
             android:textSize="30px"
             android:background="@drawable/login_wan_connllat"
             android:id="@+id/pos_editextyansema"
-            android:layout_width="346px"
-            android:layout_height="68px"
+            android:layout_width="400px"
+            android:layout_height="80px"
             android:layout_marginTop="24px"
             android:hint=" 点击获取验证码"
             android:layout_below="@+id/pos_username"
@@ -71,7 +67,7 @@
             android:id="@+id/pos_vicat"
             android:layout_alignBottom="@+id/pos_editextyansema"
             android:layout_alignEnd="@+id/pos_editextyansema"
-            android:layout_marginBottom="14px"
+            android:layout_marginBottom="20px"
             android:layout_marginEnd="14px"
             android:background="@drawable/butoon_charex"
             android:layout_width="40px"
@@ -91,22 +87,22 @@
             android:id="@+id/pos_password"
             android:textSize="30px"
             android:password="true"
-            android:hint="  *********"
+            android:hint="密码"
             android:background="@drawable/login_wan_connllat"
             android:layout_marginTop="24px"
             android:layout_below="@+id/pos_editextyansema"
             android:layout_alignLeft="@+id/pos_editextyansema"
-            android:layout_width="346px"
-            android:layout_height="68px" />
+            android:layout_width="400px"
+            android:layout_height="80px"/>
         <ImageButton
             android:id="@+id/pos_chakan"
-            android:layout_marginBottom="16px"
+            android:layout_marginBottom="20px"
             android:layout_marginRight="14px"
             android:layout_alignEnd="@+id/pos_password"
             android:layout_alignBottom="@+id/pos_password"
             android:background="@drawable/hly46"
-            android:layout_width="35px"
-            android:layout_height="35px"
+            android:layout_width="40px"
+            android:layout_height="40px"
             android:layout_alignRight="@+id/pos_password" />
         <ImageButton
             android:id="@+id/pos_login"

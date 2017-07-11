@@ -81,7 +81,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private String username;//教师id
     private ImageButton imageButton;
     private KechengAdapter kechengAdapter;
-    private CircleImageView gerxxtoux;
+    private ImageView gerxxtoux;
     private AVLoadingIndicatorView jiaoyishuax;
     private String userHeadUrl = "";
     private TextView jubaoTv;
@@ -97,12 +97,15 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private TextView courseNametV;
     private String myid;
     private String address;
+    private ImageButton backImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.jiaoyi);
         User_id.getInstance().addActivity(this);
+
+        backImage = (ImageButton) findViewById(R.id.userxinxi_back);
         jubaoTv = (TextView) findViewById(R.id.jiaoyi_jubao);
         imageButton= (ImageButton) findViewById(R.id.imageButton);
         gerxues= (TextView) findViewById(R.id.gerxues);
@@ -117,7 +120,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         gerrxxedintext= (ListView) findViewById(R.id.gerrxxedintext);
         bohao= (ImageButton) findViewById(R.id.bohao);
         imageButton2= (ImageButton) findViewById(R.id.imageButton2);
-        gerxxtoux= (CircleImageView) findViewById(R.id.gerxxtoux);
+        gerxxtoux= (ImageView) findViewById(R.id.gerxxtoux);
         jiaoyishuax= (AVLoadingIndicatorView) findViewById(R.id.jiaoyishuax);
         iamgeview= (ImageView) findViewById(R.id.curr_backe);
         gerxxTob= (RelativeLayout) findViewById(R.id.gerxxTob);
@@ -136,6 +139,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         Teachergerjianjie.setOnClickListener(this);
         gerxxxuexiquan.setOnClickListener(this);
         grfanhui.setOnClickListener(this);
+        backImage.setOnClickListener(this);
 
         address = User_id.getAddress();
         myid = getIntent().getStringExtra("myid");
@@ -193,22 +197,22 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
 
             }
         });
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(2000);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            jiaoyishuax.setVisibility(View.GONE);
-                        }
-                    });
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    Thread.sleep(2000);
+//                    runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            jiaoyishuax.setVisibility(View.GONE);
+//                        }
+//                    });
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
     }
 
 
@@ -312,6 +316,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     //更新教师详细资料
     @Override
     public void Updatecontent(Map<String, Object> map) {
+        jiaoyishuax.setVisibility(View.GONE);
         String nickname = (String) map.get("nickname");
         String resume = (String) map.get("resume");
         username = (String) map.get("username");
@@ -333,8 +338,8 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
 
     //更新listview
     @Override
-    public void Updatefee(List<Map<String, Object>> listmap) {
-        this.listmap=listmap;
+    public void Updatefee(List<Map<String, Object>> listmaps) {
+        listmap=listmaps;
         kechengAdapter = new KechengAdapter(listmap, this);
         gerrxxedintext.setAdapter(kechengAdapter);
         setListViewHeightBasedOnChildren(gerrxxedintext);
@@ -344,8 +349,11 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.userxinxi_back:
+                finish();
+                break;
             case R.id.jiaoyi_jubao:
-                startActivity(JubaoActivity_.intent(this).extra("teacher_id","612").get());
+                startActivity(JubaoActivity_.intent(this).extra("teacher_id",teacherId).get());
 
                 break;
             case R.id.grfanhui:

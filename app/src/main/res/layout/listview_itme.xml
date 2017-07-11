@@ -27,9 +27,9 @@
             android:id="@+id/lognhost"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="14px"
             android:layout_marginLeft="14px"
-            android:scaleType="centerCrop"
+            android:scaleType="centerInside"
+            android:layout_marginTop="14px"
             android:src="@drawable/ox2"
             android:layout_width="56px"
             android:layout_height="56px" />
@@ -101,9 +101,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:layout_marginLeft="20px"
+            android:textColor="#ea993c"
+            android:textSize="30px"
+            android:text=""
+            android:layout_below="@+id/tlucahwodjawf"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="40px"
+            android:id="@+id/education_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
             android:textSize="28px"
             android:id="@+id/text6"
-            android:layout_marginTop="35px"
+            android:layout_marginTop="15px"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/text5"
             android:layout_width="570px"
@@ -111,10 +122,11 @@
         <TextView
             android:id="@+id/text7"
             android:layout_marginLeft="14px"
-            android:layout_marginBottom="54px"
+            android:layout_marginBottom="44px"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:text="14km"
+            android:textSize="25px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView

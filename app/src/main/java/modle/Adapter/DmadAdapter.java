@@ -13,6 +13,7 @@ import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.zhy.autolayout.utils.AutoUtils;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -80,12 +81,18 @@ public class DmadAdapter extends RecyclerView.Adapter<DmadAdapter.MyViewHolder> 
         holder.text6.setText(listmap.get(position).get("content").toString()+"");
 //        holder.text7.setText(listmap.get(position).get("distance").toString());
         String dist = listmap.get(position).get("distance").toString();
-        int myDist = 0;
+        double myDist = 0;
         if (!dist.equals("")){
-            myDist = Integer.parseInt(dist)/1000;
+            myDist = Double.parseDouble(dist)/1000;
         }
+        DecimalFormat df = new DecimalFormat("#0.0");
+
+//        int myDist = 0;
+//        if (!dist.equals("")){
+//            myDist = Integer.parseInt(dist)/1000;
+//        }
 //        int lat = myDist/1000;
-        holder.text7.setText(myDist+"km       "+listmap.get(position).get("address"));
+        holder.text7.setText(df.format(myDist)+"km       "+listmap.get(position).get("address"));
         holder.itemView.setTag(position);
     }
 

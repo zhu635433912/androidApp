@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modle.Adapter.HomeTitleAdapter;
+import modle.user_ziliao.User_id;
 
 public class MyOrderActivity extends AutoLayoutActivity {
 
@@ -30,6 +31,7 @@ public class MyOrderActivity extends AutoLayoutActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        User_id.getInstance().addActivity(this);
         setContentView(R.layout.activity_my_order);
         tableLayout = (TabLayout) findViewById(R.id.my_order_tablayout);
         viewPager = (ViewPager) findViewById(R.id.my_order_vp);
@@ -37,7 +39,8 @@ public class MyOrderActivity extends AutoLayoutActivity {
         backImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyOrderActivity.this.finish();
+                startActivity(NewMainActivity_.intent(MyOrderActivity.this).get());
+//     MyOrderActivity.this.finish();
             }
         });
         initData();

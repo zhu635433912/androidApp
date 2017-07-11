@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/login_backget"
+    android:background="@mipmap/login_backgroud"
      android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageButton
@@ -24,17 +24,16 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="15px"
             android:layout_marginEnd="16px"
-            android:background="@drawable/ox2"
             android:layout_width="210px"
             android:layout_height="250px"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15px" />
         <TextView
             android:id="@+id/dei_textviewdeng"
-            android:layout_marginLeft="102px"
+            android:layout_marginLeft="80px"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="150px"
+            android:layout_marginTop="120px"
             android:textColor="#4d4d4d"
             android:textSize="48px"
             android:text="@string/login_zhuce"
@@ -85,8 +84,8 @@
             android:layout_marginTop="30px"
             android:layout_below="@+id/dei_RadioGrooup"
             android:layout_alignLeft="@+id/dei_textviewdeng"
-            android:layout_width="346px"
-            android:layout_height="68px" />
+            android:layout_width="400px"
+            android:layout_height="80px" />
         <TextView
             android:layout_marginLeft="10px"
             android:layout_toEndOf="@+id/dei_editextyansema"
@@ -100,9 +99,9 @@
             android:textSize="30px"
             android:background="@drawable/login_wan_connllat"
             android:id="@+id/dei_editextyansema"
-            android:layout_width="346px"
-            android:layout_height="68px"
-            android:layout_marginTop="24px"
+            android:layout_width="400px"
+            android:layout_height="80px"
+            android:layout_marginTop="16px"
             android:hint=" 点击获取验证码"
             android:layout_below="@+id/dei_username"
             android:layout_alignLeft="@+id/dei_username"
@@ -127,8 +126,8 @@
             android:layout_marginTop="24px"
             android:layout_below="@+id/dei_editextyansema"
             android:layout_alignLeft="@+id/dei_editextyansema"
-            android:layout_width="346px"
-            android:layout_height="68px" />
+            android:layout_width="400px"
+            android:layout_height="80px" />
         <EditText
             android:id="@+id/dei_tuijianma"
             android:textSize="30px"
@@ -136,26 +135,26 @@
             android:layout_marginTop="24px"
             android:layout_below="@+id/dei_password"
             android:layout_alignLeft="@+id/dei_password"
-            android:layout_width="346px"
-            android:layout_height="68px" />
+            android:layout_width="400px"
+            android:layout_height="80px" />
         <TextView
             android:layout_marginEnd="14px"
             android:layout_marginBottom="16px"
             android:layout_alignBottom="@+id/dei_tuijianma"
             android:layout_alignEnd="@+id/dei_tuijianma"
             android:text="邀请码"
-            android:textSize="25px"
+            android:textSize="30px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageButton
             android:id="@+id/dei_imagSess"
-            android:layout_marginBottom="16px"
+            android:layout_marginBottom="20px"
             android:layout_marginRight="14px"
             android:layout_alignEnd="@+id/dei_password"
             android:layout_alignBottom="@+id/dei_password"
             android:background="@drawable/hly46"
-            android:layout_width="35px"
-            android:layout_height="35px"
+            android:layout_width="40px"
+            android:layout_height="40px"
             android:layout_alignRight="@+id/dei_password" />
 
         <ImageButton
@@ -168,7 +167,6 @@
             android:id="@+id/dei_login" />
     </RelativeLayout>
     <ImageView
-        android:background="@drawable/ox1"
         android:layout_width="110px"
         android:layout_height="150px"
         android:layout_alignBottom="@+id/dei_relatvelayout"

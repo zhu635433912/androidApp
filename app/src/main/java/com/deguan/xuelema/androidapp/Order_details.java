@@ -160,7 +160,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         String status = (String) map.get("status");
         String requirement_address = (String) map.get("address");
         Date d = new Date(Long.parseLong(map.get("created")+"")*1000);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String created = sdf.format(d);
         String requirement_grade = (String) map.get("grade_name");
         String requirement_course = (String) map.get("course_name");
@@ -203,7 +203,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         }
 //        dizhi.setText(""+map.get("address"));
 //        xuqiuneiro.setText(""+map.get("requirement_content"));
-        xuqiuneiro.setText("德冠网络科技公司");
+//        xuqiuneiro.setText("德冠网络科技公司");
         dindan_id.setText(""+map.get("id"));
 
         String ger=map.get("requirement_gender")+"";
@@ -244,7 +244,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
             intentTeacher.putExtra("head_image",teacherImage);
             intentTeacher.putExtra("user_id",teacherId);
             startActivity(intentTeacher);
-
+            finish();
 
             break;
         case R.id.order_detail_headimg:
@@ -254,6 +254,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
             intentTeacher2.putExtra("head_image",teacherImage);
             intentTeacher2.putExtra("user_id",teacherId);
             startActivity(intentTeacher2);
+            finish();
             break;
         case R.id.dindanxiangxihuitui:
             Order_details.this.finish();
@@ -267,7 +268,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                 intent.putExtra("duration", duration+"");
                 startActivity(intent);
                 Toast.makeText(Order_details.this, "进入支付环节", Toast.LENGTH_SHORT).show();
-
+                finish();
             }
             if (status.equals("2")){
                 //进行中
@@ -279,10 +280,12 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                                 String password = User_id.getPassword();
                                 order_init.Update_Order(uid, order_id, 3, password, duration * fee);
 //                                Intent intent = new Intent(Order_details.this, Student_Activty.class);
-                                Intent intent = NewMainActivity_.intent(Order_details.this).get();
+                                Intent intent = new Intent(Order_details.this,Student_assessment.class);
+                                intent.putExtra("oredr_id", order_id+"");
+                                intent.putExtra("teacher_id",teacherId);
                                 startActivity(intent);
                                 Toast.makeText(Order_details.this, "赶快去评价这位老师吧~", Toast.LENGTH_LONG).show();
-
+                                finish();
                             }
                         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
@@ -297,6 +300,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                 intent2.putExtra("oredr_id", order_id+"");
                 intent2.putExtra("teacher_id",teacherId);
                 startActivity(intent2);
+                finish();
             }
 
             break;
@@ -312,7 +316,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                             Intent intent=NewMainActivity_.intent(Order_details.this).get();
                             startActivity(intent);
                             Toast.makeText(Order_details.this,"已提交退款申请!~",Toast.LENGTH_LONG).show();
-
+                            finish();
                         }
                     }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                 @Override
@@ -320,6 +324,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
 
                 }
             }).show();
+
             break;
     }
     }

@@ -63,7 +63,7 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
     private List<Map<String,Object>> listmap;
     private OrderNewAdapter.OnTopClickListener listener;
     private OrderNewAdapter.OnTopLongClickListener longListener;
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 hh:mm:ss", Locale.CHINA);
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss", Locale.CHINA);
     private RecyclerView recyclerView;
 
     public OrderNewAdapter( List<Map<String,Object>> list,Context context) {
@@ -108,7 +108,7 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
         }
 //        hode.xdsj.setText(listmap.get(position).get("created")+"");
         Date d = new Date(Long.parseLong(listmap.get(position).get("created")+"")*1000);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         hode.xdsj.setText(sdf.format(d));
 
         hode.nianji.setText(listmap.get(position).get("grade_name")+"");
