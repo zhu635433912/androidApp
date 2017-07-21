@@ -28,6 +28,7 @@ import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
+import com.hyphenate.chat.EMClient;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.EFragment;
@@ -61,6 +62,8 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     private User_init user_init;
     private int TAGE_IRONG=0;
 
+    @ViewById(R.id.unread_address_number)
+    TextView unreadLabel;
     @ViewById(R.id.new_student_viewpage)
     ViewPager viewPager;
     @ViewById(R.id.new_student_tablayout)
@@ -81,14 +84,10 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     TextView studentusernametext;
     @ViewById(R.id.studentneirongtext)
     TextView studentneirongtext;
-//    @ViewById(R.id.studentwodejiaoshi)
-//    RelativeLayout wodejiaoshi;
-//    @ViewById(R.id.studenthost)
-//    RelativeLayout host;
-//    @ViewById(R.id.wodegerxxstudent)
-//    ImageView wodegerxxstudent;
-//    @ViewById(R.id.wodegerxxstudenttext)
-//    TextView wodegerxxstudenttext;
+    @ViewById(R.id.student_chat)
+    ImageView studentChatImage;
+    @ViewById(R.id.student_my)
+    ImageView studentMychatImage;
 
     @Override
     public void before() {
@@ -100,8 +99,6 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         EventBus.getDefault().register(this);
         //获取用户资料
         user_init=new User_Realization();
-
-
 
         //获取用户自己的需求 这里开始
 //        wodefabulist.setInterface(this);
@@ -127,6 +124,8 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         studenttouxiangimg.setOnClickListener(this);
         studentwodeqianbao.setOnClickListener(this);
         stidentshezhiimabt.setOnClickListener(this);
+        studentChatImage.setOnClickListener(this);
+        studentMychatImage.setOnClickListener(this);
     }
 
     @Override
@@ -156,6 +155,16 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     public void onClick(View v) {
         int version = Integer.valueOf(android.os.Build.VERSION.SDK);
         switch (v.getId()){
+            case R.id.student_chat:
+                //会话列表
+                Intent intent1 = new Intent(getActivity(), modle.Huanxing.ui.MainActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.student_my:
+                //会话列表
+                Intent intent11 = new Intent(getActivity(), modle.Huanxing.ui.NewHuanxinMainActivity.class);
+                startActivity(intent11);
+                break;
             case R.id.studentwodeqianbao:
                 //设置
                 startActivity(new Intent(getActivity(), SetUp.class));
@@ -190,8 +199,8 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
                 break;
             case R.id.huihua:
                 //会话列表
-                Intent intent1 = new Intent(getActivity(), modle.Huanxing.ui.MainActivity.class);
-                startActivity(intent1);
+                Intent intent21 = new Intent(getActivity(), modle.Huanxing.ui.MainActivity.class);
+                startActivity(intent21);
                 break;
         }
     }
@@ -206,7 +215,7 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     }
     @Subscriber(tag = "headUrl")
     public void updateHead(File msg){
-        Glide.with(this).load(msg).placeholder(R.mipmap.ic_launcher).transform(new GlideCircleTransform(getActivity())).into(studenttouxiangimg);
+        Glide.with(this).load(msg).transform(new GlideCircleTransform(getActivity())).into(studenttouxiangimg);
     }
 
     @Subscriber(tag = "update")
@@ -218,7 +227,7 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         if(map.get("nickname").toString()!=null) {
             studentusernametext.setText(map.get("nickname")+"");
             studentneirongtext.setText(map.get("signature")+"");
-            Glide.with(this).load(map.get("headimg").toString()).placeholder(R.mipmap.ic_launcher).transform(new GlideCircleTransform(getActivity())).into(studenttouxiangimg);
+            Glide.with(this).load(map.get("headimg").toString()).transform(new GlideCircleTransform(getActivity())).into(studenttouxiangimg);
         }
     }
 
@@ -239,5 +248,24 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+    public int getUnreadMsgCountTotal() {
+        return EMClient.getInstance().chatManager().getUnreadMsgsCount();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUnreadLabel();
+    }
+
+    public void updateUnreadLabel() {
+        int count = getUnreadMsgCountTotal();
+        if (count > 0) {
+            unreadLabel.setText(count +"");
+            unreadLabel.setVisibility(View.VISIBLE);
+        } else {
+            unreadLabel.setVisibility(View.INVISIBLE);
+        }
     }
 }

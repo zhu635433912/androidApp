@@ -125,10 +125,9 @@
         android:layout_alignParentRight="true"
         android:textColor="#e7728c"
         android:textSize="30px"
-        android:background="@drawable/wodeorderitme"
         android:layout_width="166px"
         android:layout_height="48px" />
-
+<!--        android:background="@drawable/wodeorderitme"-->
     <TextView
         android:layout_marginBottom="15px"
         android:id="@+id/dindanbianhao"

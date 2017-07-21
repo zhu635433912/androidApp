@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="110px">
+    android:layout_height="120px">
 
     <android.support.v7.widget.CardView
         android:layout_margin="10px"
         app:cardCornerRadius="8dp"
         android:layout_width="match_parent"
-        android:layout_height="100px">
+        android:layout_height="match_parent">
         <LinearLayout
             android:background="#e4e3e6"
             android:orientation="horizontal"

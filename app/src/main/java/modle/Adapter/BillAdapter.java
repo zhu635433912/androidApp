@@ -76,6 +76,16 @@ public class BillAdapter extends ListBaseAdapter {
         }
         else if (type.equals("5")){
             holder.typeTv.setText("退款");
+        }else if (type.equals("6")){
+            holder.typeTv.setText("手续费");
+        }else if (type.equals("7")){
+            if (list.get(position).get("level").equals("1")){
+                holder.typeTv.setText("一级返");
+                holder.idTv.setText(list.get(position).get("order_id")+"");
+            }else {
+                holder.typeTv.setText("二级返");
+                holder.idTv.setText(list.get(position).get("order_id")+"");
+            }
         }
         String time = list.get(position).get("created")+"";
         holder.timeTv.setText(time);

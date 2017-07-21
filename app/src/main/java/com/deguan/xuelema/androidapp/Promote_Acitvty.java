@@ -102,34 +102,40 @@ public class Promote_Acitvty  extends AutoLayoutActivity implements View.OnClick
     @Override
     public void Updatecontent(Map<String, Object> map) {
         if (map.get("TotalFee")!=null){
-            zongfee+= (int) map.get("TotalFee");
+//            zongfee+= (int) map.get("TotalFee");
+            zongjine.setText( map.get("TotalFee")+"");
+            leijifeejin.setText( map.get("TotalFee")+"");
+        }
+        if (map.get("TotalFee1") != null){
+            tuiguanjine.setText(map.get("TotalFee1")+"元");
+        }
+        if (map.get("TotalFee2") != null){
+            erjifenxiao.setText(map.get("TotalFee2")+"元");
         }
 
-        zongjine.setText(zongfee+"");
-        leijifeejin.setText(zongfee+"");
 
-        if (tuiguanjine.getText().toString().equals("")){
-            i=2;
-            if (map.get("TotalFee")==null) {
-                tuiguanjine.setText("0.00");
-                getdata.getinfo(uid,2,this);
-            }else {
-
-                tuiguanjine.setText((String)map.get("TotalFee"));
-                getdata.getinfo(uid,2,this);
-
-            }
-        }else {
-            if (i==2) {
-                if (erjifenxiao.getText().toString().equals("")) {
-                    if (map.get("TotalFee") == null) {
-                        erjifenxiao.setText("0.00");
-                    } else {
-                        erjifenxiao.setText((String) map.get("TotalFee"));
-                    }
-                }
-            }
-        }
+//        if (tuiguanjine.getText().toString().equals("")){
+//            i=2;
+//            if (map.get("TotalFee")==null) {
+//                tuiguanjine.setText("0.00");
+//                getdata.getinfo(uid,2,this);
+//            }else {
+//
+//                tuiguanjine.setText((String)map.get("TotalFee"));
+//                getdata.getinfo(uid,2,this);
+//
+//            }
+//        }else {
+//            if (i==2) {
+//                if (erjifenxiao.getText().toString().equals("")) {
+//                    if (map.get("TotalFee") == null) {
+//                        erjifenxiao.setText("0.00");
+//                    } else {
+//                        erjifenxiao.setText((String) map.get("TotalFee"));
+//                    }
+//                }
+//            }
+//        }
     }
 
     @Override

@@ -58,10 +58,21 @@ public class Evalunton_Adapdter extends ListBaseAdapter {
                 .transform(new GlideCircleTransform(context))
                 .into(viewhod.evalunton_name);
         viewhod.evalunton_username.setText(listmap.get(position).get("nickname")+"");
-
+        int rank = Integer.parseInt(listmap.get(position).get("rank")+"");
+        if (rank == 1){
+            viewhod.evaluntion_star.setBackgroundResource(R.drawable.one);
+        }else if (rank==2){
+            viewhod.evaluntion_star.setBackgroundResource(R.drawable.two);
+        }else if (rank == 3){
+            viewhod.evaluntion_star.setBackgroundResource(R.drawable.three);
+        }else if (rank == 4){
+            viewhod.evaluntion_star.setBackgroundResource(R.drawable.four);
+        }else if (rank == 5){
+            viewhod.evaluntion_star.setBackgroundResource(R.drawable.five);
+        }
 
         Date d = new Date(Long.parseLong(listmap.get(position).get("created")+"")*1000);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         viewhod.evalunton_time.setText(sdf.format(d));
 //        viewhod.evalunton_time.setText(listmap.get(position).get("created")+"");
         viewhod.evalunton_text.setText(listmap.get(position).get("content")+"");
@@ -69,11 +80,13 @@ public class Evalunton_Adapdter extends ListBaseAdapter {
     }
 
     class Viewhod{
+        ImageView evaluntion_star;
         ImageView evalunton_name;
         TextView evalunton_username;
         TextView evalunton_time;
         TextView evalunton_text;
         public Viewhod(View itemView){
+            evaluntion_star = (ImageView) itemView.findViewById(R.id.evaluaton_star);
             evalunton_name = (ImageView) itemView.findViewById(R.id.evaluaton_name);
             evalunton_username = (TextView) itemView.findViewById(R.id.evalunaton_username);
             evalunton_time = (TextView) itemView.findViewById(R.id.evalunaton_time);

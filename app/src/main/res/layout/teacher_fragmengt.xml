@@ -42,8 +42,35 @@
                     android:id="@+id/techaer_massge"
                     android:padding="35px"
                     android:src="@drawable/hly005"
+                    android:layout_width="0px"
+                    android:layout_height="0px" />
+                <ImageView
+                    android:id="@+id/teacher_chat"
+                    android:layout_toRightOf="@+id/techaer_massge"
+                    android:padding="30px"
+                    android:src="@drawable/chat_icon"
                     android:layout_width="120px"
                     android:layout_height="120px" />
+                <TextView
+                    android:layout_marginRight="100px"
+                    android:layout_marginTop="30px"
+                    android:layout_marginLeft="100px"
+                    android:id="@+id/unread_address_number"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:text="2"
+                    android:gravity="center"
+                    android:textSize="10sp"
+                    android:background="@drawable/em_unread_dot"
+                    android:visibility="gone" />
+                <ImageView
+                    android:id="@+id/teacher_my"
+                    android:layout_toRightOf="@+id/teacher_chat"
+                    android:padding="30px"
+                    android:src="@drawable/chat_my_icon"
+                    android:layout_width="120px"
+                    android:layout_height="120px" />
+
                 <ImageView
                     android:id="@+id/teacher_setup"
                     android:padding="35px"
@@ -61,6 +88,7 @@
                     android:layout_width="120px"
                     android:layout_height="120px" />
                 <ImageView
+                    android:src="@drawable/hold_head"
                     android:id="@+id/teacher_loc"
                     android:layout_marginTop="100px"
                     android:layout_centerHorizontal="true"
@@ -74,8 +102,9 @@
                     android:layout_marginRight="100px"
                     android:layout_alignParentRight="true"
                     android:layout_below="@+id/teacher_setup"
-                    android:layout_width="80px"
-                    android:layout_height="100px" />
+                    android:layout_width="0px"
+                    android:layout_height="0px" />
+
                 <TextView
                     android:layout_marginRight="75px"
                     android:layout_alignParentRight="true"
@@ -83,8 +112,8 @@
                     android:textColor="#6c7070"
                     android:textSize="30px"
                     android:text="聊天管理"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_width="0px"
+                    android:layout_height="0px" />
                 <TextView
                     android:id="@+id/teacher_name"
                     android:layout_marginTop="15px"

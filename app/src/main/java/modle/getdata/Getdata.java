@@ -10,6 +10,7 @@ import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
 import com.deguan.xuelema.androidapp.viewimpl.Baseinit;
 import com.deguan.xuelema.androidapp.viewimpl.CashListView;
 import com.deguan.xuelema.androidapp.viewimpl.CashView;
+import com.deguan.xuelema.androidapp.viewimpl.DistributionView;
 import com.deguan.xuelema.androidapp.viewimpl.DownloadView;
 import com.deguan.xuelema.androidapp.viewimpl.TurnoverView;
 import com.deguan.xuelema.androidapp.viewimpl.UpReportView;
@@ -389,6 +390,43 @@ public class Getdata {
             @Override
             public void onFailure(Call<ContentModle> call, Throwable t) {
                 turnoverView.failTurnover("网络错误");
+            }
+        });
+    }
+
+    //发送消息
+    public void sendMessage(String content,String tel){
+        Call<ContentModle> call = data.sendMsg(content,tel);
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    //分销
+    public void getDistribution(int uid, int type, int page, final DistributionView distributionView){
+        Call<ContentModle> call = data.getDistribution(uid,type,page);
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                if (response.body().getError().equals("ok")){
+                    distributionView.successDistribution(response.body().getContent());
+                }else {
+                    distributionView.failDistribution("获取失败");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                    distributionView.failDistribution("网络错误");
             }
         });
     }

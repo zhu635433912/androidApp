@@ -111,7 +111,7 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         hode.xdsj.setText(sdf.format(d));
 
-        hode.nianji.setText(listmap.get(position).get("grade_name")+"");
+        hode.nianji.setText(listmap.get(position).get("grade_name")+"  ");
         hode.yaoqiukemu.setText(listmap.get(position).get("course_name")+"");
         hode.keshifei.setText("￥"+keshifee+"/节");
 
@@ -128,10 +128,10 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
             case "2":
                 if (User_id.getRole().equals("1")) {
                     hode.studentkechengzhuangtai.setText("进行中");
-                    hode.querenshouhuo.setText("确认收货");
+                    hode.querenshouhuo.setText("确认授课");
                 }else {
                     hode.studentkechengzhuangtai.setText("进行中");
-                    hode.querenshouhuo.setText("等待收货");
+                    hode.querenshouhuo.setText("等待授课");
                 }
                 break;
             case "3":

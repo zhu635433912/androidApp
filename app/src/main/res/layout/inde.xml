@@ -11,12 +11,13 @@
 
 
     <ImageButton
-        android:layout_marginBottom="20px"
+        android:layout_marginBottom="50px"
         android:layout_alignParentBottom="true"
         android:background="@drawable/inde3button"
         android:id="@+id/jinru"
+        android:layout_marginLeft="20px"
         android:layout_centerHorizontal="true"
-        android:layout_width="300px"
+        android:layout_width="320px"
         android:layout_height="80px" />
 
 

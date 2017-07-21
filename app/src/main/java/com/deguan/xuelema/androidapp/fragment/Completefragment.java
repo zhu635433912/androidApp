@@ -90,7 +90,10 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
         }else {
             tuijianPresenter = new OrderPresenterImpl(this,Integer.parseInt(User_id.getUid()),1,page);
         }
-        tuijianPresenter.getEvaluateOrderEntity(3,3);
+        if (list.size() > 0){}
+        else {
+            tuijianPresenter.getEvaluateOrderEntity(3, 3);
+        }
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -117,7 +120,8 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
 //            }
             for (int i = 0; i < maps.size(); i++) {
                 if (maps.get(i).get("status").equals("3")||maps.get(i).get("status").equals("5")
-                        ||maps.get(i).get("status").equals("6")) {
+//                        ||maps.get(i).get("status").equals("6")
+                        ) {
                     maps.get(i).put("status","7");
                     list.add(maps.get(i));
                 }
@@ -174,11 +178,14 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
         String ida = (String) map.get("id");
         String duration = (String) map.get("duration");
         String teacherImage = (String) map.get("teacher_headimg");
+
         Intent intent = null;
         if (User_id.getRole().equals("1")) {
             intent = new Intent(getActivity(), Order_details.class);
+//            intent.putExtra("telphone",map.get("teacher_mobile")+"");
         }else {
             intent = new Intent(getActivity(), OrderTeacherActivity.class);
+//            intent.putExtra("telphone",map.get("placer_mobile")+"");
         }
         intent.putExtra("oredr_id", ida);
         intent.putExtra("duration", duration);

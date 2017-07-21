@@ -79,6 +79,7 @@
             android:background="@drawable/mask">
 
             <TextView
+
                 android:id="@+id/gerenjianjie"
                 android:layout_width="150px"
                 android:layout_height="wrap_content"
@@ -86,7 +87,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="50px"
                 android:layout_marginTop="40px"
-                android:text="个人简介"
+                android:text=""
                 android:textSize="35px" />
 
             <TextView
@@ -134,22 +135,22 @@
                 android:text="五星"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <ProgressBar
+            <ImageView
                 android:id="@+id/jintutiao"
                 android:layout_marginBottom="5px"
-                android:background="#fff"
                 android:layout_marginLeft="24px"
+                android:src="@drawable/five"
                 android:layout_toEndOf="@+id/wuxin"
-                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_alignBottom="@+id/wuxin"
                 android:layout_width="250px"
-                android:layout_height="20px" />
+                android:layout_height="30px" />
             <TextView
+                android:id="@+id/pingjia1"
                 android:layout_marginLeft="24px"
                 android:layout_toEndOf="@+id/jintutiao"
                 android:layout_alignBottom="@+id/wuxin"
                 android:textSize="25px"
-                android:text="60%"
+                android:text=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -161,22 +162,22 @@
                 android:text="四星"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <ProgressBar
+            <ImageView
                 android:id="@+id/jintutiao1"
                 android:layout_marginBottom="5px"
-                android:background="#fff"
                 android:layout_marginLeft="24px"
+                android:src="@drawable/four"
                 android:layout_toEndOf="@+id/wuxin1"
-                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_alignBottom="@+id/wuxin1"
                 android:layout_width="250px"
-                android:layout_height="20px" />
+                android:layout_height="30px" />
             <TextView
+                android:id="@+id/pingjia2"
                 android:layout_marginLeft="24px"
                 android:layout_toEndOf="@+id/jintutiao"
                 android:layout_alignBottom="@+id/wuxin1"
                 android:textSize="25px"
-                android:text="0%"
+                android:text=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -188,22 +189,22 @@
                 android:text="三星"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <ProgressBar
+            <ImageView
                 android:id="@+id/jintutiao2"
                 android:layout_marginBottom="5px"
-                android:background="#fff"
                 android:layout_marginLeft="24px"
+                android:src="@drawable/three"
                 android:layout_toEndOf="@+id/wuxin2"
-                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_alignBottom="@+id/wuxin2"
                 android:layout_width="250px"
-                android:layout_height="20px" />
+                android:layout_height="30px" />
             <TextView
+                android:id="@+id/pingjia3"
                 android:layout_marginLeft="24px"
                 android:layout_toEndOf="@+id/jintutiao"
                 android:layout_alignBottom="@+id/wuxin2"
                 android:textSize="25px"
-                android:text="0%"
+                android:text=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -215,22 +216,22 @@
                 android:text="二星"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <ProgressBar
+            <ImageView
                 android:id="@+id/jintutiao3"
                 android:layout_marginBottom="5px"
-                android:background="#fff"
+                android:src="@drawable/two"
                 android:layout_marginLeft="24px"
                 android:layout_toEndOf="@+id/wuxin3"
-                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_alignBottom="@+id/wuxin3"
                 android:layout_width="250px"
-                android:layout_height="20px" />
+                android:layout_height="30px" />
             <TextView
+                android:id="@+id/pingjia4"
                 android:layout_marginLeft="24px"
                 android:layout_toEndOf="@+id/jintutiao"
                 android:layout_alignBottom="@+id/wuxin3"
                 android:textSize="25px"
-                android:text="0%"
+                android:text=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -242,22 +243,22 @@
                 android:text="一星"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <ProgressBar
+            <ImageView
                 android:id="@+id/jintutiao4"
+                android:src="@drawable/one"
                 android:layout_marginBottom="5px"
-                android:background="#fff"
                 android:layout_marginLeft="24px"
                 android:layout_toEndOf="@+id/wuxin4"
-                style="?android:attr/progressBarStyleHorizontal"
                 android:layout_alignBottom="@+id/wuxin4"
                 android:layout_width="250px"
-                android:layout_height="20px" />
+                android:layout_height="30px" />
             <TextView
+                android:id="@+id/pingjia5"
                 android:layout_marginLeft="24px"
                 android:layout_toEndOf="@+id/jintutiao"
                 android:layout_alignBottom="@+id/wuxin4"
                 android:textSize="25px"
-                android:text="40%"
+                android:text=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView

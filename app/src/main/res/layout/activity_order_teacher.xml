@@ -170,7 +170,7 @@
         android:layout_width="26px"
         android:layout_height="34px" />
     <TextView
-        android:textSize="40px"
+        android:textSize="30px"
         android:layout_marginLeft="20px"
         android:layout_toRightOf="@+id/weizhitubiao"
         android:layout_alignTop="@+id/weizhitubiao"
@@ -329,6 +329,7 @@
 
     <RelativeLayout
         android:id="@+id/ycang"
+        android:visibility="gone"
         android:background="@drawable/tuikuan"
         android:layout_width="88px"
         android:layout_height="42px"

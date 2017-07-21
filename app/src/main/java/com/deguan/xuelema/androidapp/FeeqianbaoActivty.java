@@ -2,6 +2,7 @@ package com.deguan.xuelema.androidapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -102,6 +103,8 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         final TextView cashType = (TextView) view.findViewById(R.id.cash_type);
         ImageView wechatRl = (ImageView) view.findViewById(R.id.cash_wechat);
         ImageView alpayRl = (ImageView) view.findViewById(R.id.cash_alpay);
+        final TextView weixinTv = (TextView) view.findViewById(R.id.tixian_weixin);
+        final TextView alipayTv = (TextView) view.findViewById(R.id.tixian_alipay);
         cashPopwindow = new PopupWindow(view);
         cashPopwindow.setFocusable(true);
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
@@ -125,6 +128,8 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
                     }else {
                         getdata.getCash(Integer.parseInt(User_id.getUid()), cashNmae.getText().toString(),
                                 cashId.getText().toString(), cashFlag, Float.parseFloat(cashFee.getText().toString()), FeeqianbaoActivty.this);
+                        cashFee.setText("");
+                        cashPopwindow.dismiss();
                     }
                 }else {
                     Toast.makeText(FeeqianbaoActivty.this, "请输入完整", Toast.LENGTH_SHORT).show();
@@ -134,6 +139,8 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         wechatRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                weixinTv.setTextColor(Color.parseColor("#e92c2c"));
+                alipayTv.setTextColor(Color.parseColor("#8a8686"));
                 cashType.setText("微信");
                 cashFlag = 2;
             }
@@ -141,6 +148,8 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         alpayRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                weixinTv.setTextColor(Color.parseColor("#8a8686"));
+                alipayTv.setTextColor(Color.parseColor("#e92c2c"));
                 cashType.setText("支付宝");
                 cashFlag = 1;
             }
@@ -158,6 +167,8 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         final TextView rechargeType = (TextView) view.findViewById(R.id.feechongzhifee);
         ImageView wechatRl = (ImageView) view.findViewById(R.id.feeweixzhifu);
         ImageView alpayRl = (ImageView) view.findViewById(R.id.feezhifubao);
+        final TextView weixinTv = (TextView) view.findViewById(R.id.chongzhi_weixin_tv);
+        final TextView alipayTv = (TextView) view.findViewById(R.id.chongzhi_alipay_tv);
         rechargePopwindow = new PopupWindow(view);
         rechargePopwindow.setFocusable(true);
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
@@ -187,6 +198,8 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         wechatRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                weixinTv.setTextColor(Color.parseColor("#e92c2c"));
+                alipayTv.setTextColor(Color.parseColor("#8a8686"));
                 rechargeType.setText("微信");
                 rechargeFlag = 2;
             }
@@ -194,6 +207,8 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         alpayRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                weixinTv.setTextColor(Color.parseColor("#8a8686"));
+                alipayTv.setTextColor(Color.parseColor("#e92c2c"));
                 rechargeType.setText("支付宝");
                 rechargeFlag = 1;
             }

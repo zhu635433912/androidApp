@@ -87,12 +87,13 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
         holder.service_type.setText("" + list.get(position).getService_type_txt());
 //        holder.fee.setText("" + list.get(position).getFee());
         holder.fee.setText("");
+        holder.speciality.setVisibility(View.GONE);
         holder.speciality.setText("" + list.get(position).getSpeciality());
         holder.username.setText("" + list.get(position).getSignature());
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
         Glide.with(context).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
         String dist = list.get(position).getDistance();
-//        holder.stats.setText(""+list.get(position).getStatus2());
+        holder.stats.setText(""+list.get(position).getStatus2());
         double myDist = 0;
         if (!dist.equals("")){
             myDist = Double.parseDouble(dist)/1000;
@@ -116,6 +117,21 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
             holder.nianji.setText("未知");
         }
         holder.haoping_numtext.setText("好评:"+list.get(position).getHaoping_num());
+//        holder.haoping_numtext.setText("");
+//        holder.haoping_numtext.setVisibility(View.GONE);
+        double rank = Double.parseDouble(list.get(position).getOrder_rank());
+        if (0 <= rank && rank <1.5){
+            holder.haoping_num.setBackgroundResource(R.drawable.one);
+        }else if (rank>= 1.5 && rank < 2.5){
+            holder.haoping_num.setBackgroundResource(R.drawable.two);
+        }else if (rank>= 2.5 && rank < 3.5){
+            holder.haoping_num.setBackgroundResource(R.drawable.three);
+        }else if (rank>= 3.5 && rank < 4.5){
+            holder.haoping_num.setBackgroundResource(R.drawable.four);
+        }else if (rank >= 4.5){
+            holder.haoping_num.setBackgroundResource(R.drawable.five);
+        }
+
 //        switch (list.get(position).getOrder_rank().toString()){
 //            case "0.0":
 //                holder.haoping_num.setBackgroundResource(R.drawable.five);

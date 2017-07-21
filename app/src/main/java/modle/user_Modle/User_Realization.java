@@ -333,6 +333,28 @@ public class User_Realization implements User_init {
     }
 
     @Override
+    public void Upsignature(int user_id, String signature) {
+        Call<Demtest> call=myOkhttp.setgender(user_id,signature);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")) {
+                    Log.e("aa", "用户资料更新成功");
+                }else {
+                    String errmsg=response.body().getErrmsg();
+                    Log.e("aa","更新用户资料错误="+errmsg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                Log.e("aa","获取用户资料异常错误="+t.toString());
+            }
+        });
+    }
+
+    @Override
     public void Updateage(int user_id, String age) {
         Call<Demtest> call=myOkhttp.setage(user_id,age);
         call.enqueue(new Callback<Demtest>() {

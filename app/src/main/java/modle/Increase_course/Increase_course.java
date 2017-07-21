@@ -7,6 +7,7 @@ import android.util.Log;
 import com.deguan.xuelema.androidapp.Teacher_management;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.viewimpl.TurnoverView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -61,7 +62,7 @@ public class Increase_course {
         releaseCourseHttp=retrofit.create(Release_course_http.class);
     }
     //增加课程
-    public void Addcourse(int uid,int course_id,String text,int visit_fee,int unvisit_fee,int kechentType,int grade_id){
+    public void Addcourse(int uid, int course_id, String text, int visit_fee, int unvisit_fee, int kechentType, int grade_id, final TurnoverView turnoverView){
         Call<Demtest> call=releaseCourseHttp.Addcourse(uid,course_id,text,visit_fee,unvisit_fee,kechentType,grade_id);
         call.enqueue(new Callback<Demtest>() {
             @Override
@@ -69,6 +70,7 @@ public class Increase_course {
                 String error=response.body().getError();
                 if (error.equals("ok")){
                     Log.e("aa","增加课程成功");
+                    turnoverView.successTurnover(null);
                 }else {
                     Log.e("aa","增加课程失败"+response.body().getErrmsg());
                 }

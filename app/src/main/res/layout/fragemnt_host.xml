@@ -52,7 +52,7 @@
             android:layout_marginLeft="30px"
             android:layout_marginTop="33px"
             android:text=""
-            android:textColor="#27272a"
+            android:textColor="#4e4e50"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageButton
@@ -70,7 +70,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="90px"
             android:layout_centerHorizontal="true"
-            android:textColor="#635e5e"
+            android:textColor="#4e4e50"
             android:textSize="50px"
             android:text="@string/index_faxianjiaos"
             android:layout_width="wrap_content"
@@ -88,22 +88,24 @@
             android:layout_marginRight="30px" />
         <TextView
             android:id="@+id/hosttextview"
-            android:layout_marginTop="40px"
-            android:layout_below="@+id/faxianjiaoshi"
-            android:layout_centerHorizontal="true"
-            android:textColor="#635e5e"
+            android:layout_marginTop="15dp"
+            android:textColor="#4e4e50"
             android:textSize="50px"
             android:text="@string/index_hosttext1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/faxianjiaoshi"
+            android:layout_alignLeft="@+id/textView8"
+            android:layout_alignStart="@+id/textView8" />
         <TextView
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/hosttextview"
             android:text="@string/index_hosttext2"
-            android:textColor="#635e5e"
+            android:textColor="#4e4e50"
             android:textSize="50px"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:id="@+id/textView8" />
     </RelativeLayout>
     <LinearLayout
         android:background="@drawable/list01"

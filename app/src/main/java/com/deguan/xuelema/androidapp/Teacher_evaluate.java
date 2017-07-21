@@ -40,6 +40,7 @@ public class Teacher_evaluate extends AutoLayoutActivity implements View.OnClick
     private  Teacher_init teacher_init;
     private Evalunton_Adapdter adapdter;
     private List<Map<String,Object>>  datas = new ArrayList<>();
+    private TextView pingjia1,pingjia2,pingjia3,pingjia4,pingjia5;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +51,11 @@ public class Teacher_evaluate extends AutoLayoutActivity implements View.OnClick
         xinyuxinji= (ImageView) findViewById(R.id.xinyuxinji);
         pingjiafenshu= (TextView) findViewById(R.id.pingjiafenshu);
         pullToRefreshListView= (PullToRefreshListView) findViewById(R.id.pinlun);
-
+        pingjia1 = (TextView) findViewById(R.id.pingjia1);
+        pingjia2 = (TextView) findViewById(R.id.pingjia2);
+        pingjia3 = (TextView) findViewById(R.id.pingjia3);
+        pingjia4 = (TextView) findViewById(R.id.pingjia4);
+        pingjia5 = (TextView) findViewById(R.id.pingjia5);
         pingjiafanhui.bringToFront();
 
         //下拉刷新
@@ -99,32 +104,49 @@ public class Teacher_evaluate extends AutoLayoutActivity implements View.OnClick
 
         Map<String,Object> map=listmap.get(0);
         pingjiafenshu.setText(map.get("order_rank").toString());
-        switch (map.get("order_rank").toString()){
-            case "0.0":
-                xinyuxinji.setBackgroundResource(R.drawable.one);
-                pingjiafenshu.setText("0.0");
-                break;
-            case "1.0":
-                xinyuxinji.setBackgroundResource(R.drawable.one);
-                pingjiafenshu.setText("1.0");
-                break;
-            case "2.0":
-                xinyuxinji.setBackgroundResource(R.drawable.two);
-                pingjiafenshu.setText("2.0");
-                break;
-            case "3.0":
-                xinyuxinji.setBackgroundResource(R.drawable.three);
-                pingjiafenshu.setText("3.0");
-                break;
-            case "4.0":
-                xinyuxinji.setBackgroundResource(R.drawable.four);
-                pingjiafenshu.setText("4.0");
-                break;
-            case "5.0":
-                xinyuxinji.setBackgroundResource(R.drawable.five);
-                pingjiafenshu.setText("5.0");
-                break;
+        double orderrank = Double.parseDouble(map.get("order_rank")+"");
+        if (orderrank<1.5){
+            xinyuxinji.setBackgroundResource(R.drawable.one);
+        }else if (orderrank >= 1.5 && orderrank <2.5){
+            xinyuxinji.setBackgroundResource(R.drawable.two);
+        }else if (orderrank >= 2.5 && orderrank <3.5){
+            xinyuxinji.setBackgroundResource(R.drawable.three);
+        }else if (orderrank >= 3.5 && orderrank <4.5){
+            xinyuxinji.setBackgroundResource(R.drawable.four);
+        }else if (orderrank >= 4.5 ){
+            xinyuxinji.setBackgroundResource(R.drawable.five);
         }
+        pingjia1.setText(map.get("rank_count5")+"人");
+        pingjia2.setText(map.get("rank_count4")+"人");
+        pingjia3.setText(map.get("rank_count3")+"人");
+        pingjia4.setText(map.get("rank_count2")+"人");
+        pingjia5.setText(map.get("rank_count1")+"人");
+//        switch (map.get("order_rank").toString()){
+//            case "0.0":
+//                xinyuxinji.setBackgroundResource(R.drawable.one);
+//                pingjiafenshu.setText("0.0");
+//                break;
+//            case "1.0":
+//                xinyuxinji.setBackgroundResource(R.drawable.one);
+//                pingjiafenshu.setText("1.0");
+//                break;
+//            case "2.0":
+//                xinyuxinji.setBackgroundResource(R.drawable.two);
+//                pingjiafenshu.setText("2.0");
+//                break;
+//            case "3.0":
+//                xinyuxinji.setBackgroundResource(R.drawable.three);
+//                pingjiafenshu.setText("3.0");
+//                break;
+//            case "4.0":
+//                xinyuxinji.setBackgroundResource(R.drawable.four);
+//                pingjiafenshu.setText("4.0");
+//                break;
+//            case "5.0":
+//                xinyuxinji.setBackgroundResource(R.drawable.five);
+//                pingjiafenshu.setText("5.0");
+//                break;
+//        }
     }
 
     @Override
@@ -142,10 +164,13 @@ public class Teacher_evaluate extends AutoLayoutActivity implements View.OnClick
 
     @Override
     public void setListview(List<Map<String, Object>> listmap) {
+
         pullToRefreshListView.onRefreshComplete();
-        datas.clear();
-        datas.addAll(listmap);
-        adapdter.notifyDataSetChanged();
+        if (listmap != null) {
+            datas.clear();
+            datas.addAll(listmap);
+            adapdter.notifyDataSetChanged();
+        }
     }
 
     @Override

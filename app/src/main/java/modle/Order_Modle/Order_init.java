@@ -62,7 +62,7 @@ public interface Order_init {
      * rank3    教学范围
      * rank4    评价 1:好评 2:中评 3:差评
      */
-    public Map<String,Object> UpdateOrder_score(int uid,int id,int rank1,int rank2,int rank3,int rank4);
+    public Map<String,Object> UpdateOrder_score(int uid,int id,int rank1,int rank2,int rank3,int rank4,int rank);
     /**
      * 更新订单金额
      * uid      用户id
@@ -84,7 +84,7 @@ public interface Order_init {
      * content        评论内容
      * picture        评论图片
      */
-    public Map<String,Object> Comment_Order(int uid,int source_id,String content,long picture);
+    public Map<String,Object> Comment_Order(int uid,int source_id,String content,long picture,int rank,int rank4);
     /**
      * 订单退款
      * uid            用户id
@@ -95,5 +95,5 @@ public interface Order_init {
     public Map<String,Object> Order_refund(int uid,int id,int status,float refund_fee);
 
     //创建订单
-    public void CreateOrder(int uid,int teacher_id,int requirement_id,float fee,int course_id,int grade_id,Requirdetailed requirdetailed,String address);
+    public void CreateOrder(int uid,int teacher_id,int requirement_id,float fee,int course_id,int grade_id,Requirdetailed requirdetailed,String address,double lat,double lng);
 }

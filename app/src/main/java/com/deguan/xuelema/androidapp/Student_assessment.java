@@ -49,6 +49,7 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
     private TextView pingfenTv;
     private TextView goodTv;
     private TextView midTv;
+    private int rank = 4;
 
 
     @Override
@@ -101,9 +102,8 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
                             public void onClick(DialogInterface dialog, int which) {
                                 Order_init order_init=new Order();
                                 long ac=11;
-                                order_init.Comment_Order(uid,oredr_id,pingjiatext.getText().toString(),ac);
-                                order_init.UpdateOrder_score(uid,oredr_id,1,1,1,rantoke);
-
+                                order_init.Comment_Order(uid,oredr_id,pingjiatext.getText().toString(),ac,rank,rantoke);
+//                                order_init.UpdateOrder_score(uid,oredr_id,1,1,1,rantoke,rank);
                                 Intent intent=NewMainActivity_.intent(Student_assessment.this).get();
                                 startActivity(intent);
                                 Toast.makeText(Student_assessment.this,"评论订单成功!",Toast.LENGTH_LONG).show();
@@ -118,26 +118,31 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
             case R.id.but1:
                 pingfenxinji.setBackgroundResource(R.drawable.one);
                 rantoke=3;
+                rank = 1;
                 pingfenTv.setText("1.0");
                 break;
             case R.id.but2:
                 pingfenxinji.setBackgroundResource(R.drawable.two);
                 rantoke=3;
+                rank = 2;
                 pingfenTv.setText("2.0");
                 break;
             case R.id.but3:
                 pingfenxinji.setBackgroundResource(R.drawable.three);
                 rantoke=2;
+                rank = 3;
                 pingfenTv.setText("3.0");
                 break;
             case R.id.but4:
                 pingfenxinji.setBackgroundResource(R.drawable.four);
                 rantoke=2;
+                rank =4;
                 pingfenTv.setText("4.0");
                 break;
             case R.id.but5:
                 pingfenxinji.setBackgroundResource(R.drawable.five);
                 rantoke=1;
+                rank = 5;
                 pingfenTv.setText("5.0");
                 break;
         }

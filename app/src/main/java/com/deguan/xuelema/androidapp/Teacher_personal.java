@@ -185,11 +185,13 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
     @Override
     public void Updatefee(List<Map<String, Object>> listmap) {
         map = listmap.get(0);
-
-        techartext.setText(map.get("resume").toString()+"");
+        if (map.get("resume") != null)
+        techartext.setText(map.get("resume")+"");
 //        techaertec.setText(map.get("speciality_name").toString());
-        techaerxue.setText(map.get("graduated_school").toString()+"");
-        jiaoling.setText(map.get("years").toString()+"年");
+        if (map.get("graduated_school") != null)
+            techaerxue.setText(map.get("graduated_school")+"");
+        if (map.get("years") != null)
+            jiaoling.setText(map.get("years")+"年");
 
 
 

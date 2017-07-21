@@ -67,6 +67,8 @@ public interface User_init {
 
     public void Updategender(int user_id, String gender);
 
+    public void Upsignature(int user_id,String signature);
+
     public void Updateage(int user_id, String age);
 
     public void Updateaddress(int user_id, String address);

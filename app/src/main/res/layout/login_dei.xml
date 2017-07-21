@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@mipmap/login_backgroud"
+    android:background="@drawable/login_backgroud"
      android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageButton
@@ -18,7 +18,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_width="534px"
-        android:layout_height="848px">
+        android:layout_height="900px">
         <ImageView
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -30,7 +30,7 @@
             android:layout_marginRight="15px" />
         <TextView
             android:id="@+id/dei_textviewdeng"
-            android:layout_marginLeft="80px"
+            android:layout_marginLeft="60px"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="120px"

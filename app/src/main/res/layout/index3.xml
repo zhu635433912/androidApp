@@ -4,15 +4,10 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:background="@drawable/index3"
+        android:id="@+id/view3_image"
+         android:src="@drawable/index3"
+        android:scaleType="fitXY"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <ImageButton
-        android:layout_marginBottom="20px"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/inde3button"
-        android:layout_width="350px"
-        android:layout_height="80px" />
-    
+
 </RelativeLayout>

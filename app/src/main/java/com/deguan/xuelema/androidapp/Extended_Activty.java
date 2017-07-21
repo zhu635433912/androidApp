@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -14,14 +15,14 @@ import modle.user_ziliao.User_id;
  */
 
 public class Extended_Activty extends AutoLayoutActivity implements View.OnClickListener{
-    private ImageButton tuiguangshuoming;
+    private ImageView tuiguangshuoming;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.promote_that);
+        setContentView(R.layout.promotethat);
         User_id.getInstance().addActivity(this);
 
-        tuiguangshuoming= (ImageButton) findViewById(R.id.tuiguangshuoming);
+        tuiguangshuoming= (ImageView) findViewById(R.id.tuiguangshuoming);
 
         tuiguangshuoming.setOnClickListener(this);
     }

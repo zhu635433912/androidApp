@@ -130,9 +130,9 @@ public class MainActivity extends BaseActivity {
 		initView();
 
 		//umeng api
-		MobclickAgent.updateOnlineConfig(this);
-		UmengUpdateAgent.setUpdateOnlyWifi(false);
-		UmengUpdateAgent.update(this);
+//		MobclickAgent.updateOnlineConfig(this);
+//		UmengUpdateAgent.setUpdateOnlyWifi(false);
+//		UmengUpdateAgent.update(this);
 
 		showExceptionDialogFromIntent(getIntent());
 
@@ -146,7 +146,7 @@ public class MainActivity extends BaseActivity {
 		};
 
 		getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, conversationListFragment)
-				.add(R.id.fragment_container, contactListFragment).hide(contactListFragment).show(conversationListFragment)
+				.add(R.id.fragment_container, contactListFragment).hide(conversationListFragment).show(contactListFragment)
 				.commit();
 
 		//register broadcast receiver to receive the change of group from DemoHelper

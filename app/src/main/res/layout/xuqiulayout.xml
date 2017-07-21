@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="#e0eaf1"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.wang.avi.AVLoadingIndicatorView
@@ -15,9 +16,13 @@
 
     <RelativeLayout
         android:id="@+id/xuqiurelayout"
-        android:background="#727272"
         android:layout_width="match_parent"
         android:layout_height="540px">
+        <ImageView
+            android:scaleType="fitXY"
+            android:src="@drawable/demand_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
         <RelativeLayout
             android:id="@+id/xuqiufanhui"
             android:layout_width="120px"
@@ -28,34 +33,33 @@
             android:layout_marginLeft="35px"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/add19"
-            android:layout_width="20px"
-            android:layout_height="35px" />
+            android:background="@drawable/demand_back"
+            android:layout_width="50px"
+            android:layout_height="50px" />
         <TextView
             android:id="@+id/xuqiuxiangxi"
             android:layout_marginTop="20px"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:textSize="40px"
-            android:textColor="#fff"
+            android:textColor="#403f3f"
             android:text="需求详细"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/kemuleibie"
             android:layout_marginTop="14px"
-            android:text="英语"
+            android:text=""
             android:layout_marginLeft="260px"
-            android:textColor="#fff"
+            android:textColor="#403f3f"
             android:layout_below="@+id/xuqiuxiangxi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/nianjia"
-            android:textColor="#fff"
+            android:textColor="#403f3f"
             android:text="一年级"
-            android:layout_marginLeft="20px"
-            android:layout_toRightOf="@+id/kemuleibie"
+            android:layout_centerHorizontal="true"
             android:layout_alignBottom="@+id/kemuleibie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -73,8 +77,8 @@
             android:layout_below="@+id/xuqiuimage"
             android:layout_centerHorizontal="true"
             android:textSize="35px"
-            android:textColor="#fff"
-            android:text="孺子牛教育"
+            android:textColor="#403f3f"
+            android:text="德冠教育"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -83,10 +87,10 @@
             android:layout_below="@+id/xuqiuname"
             android:layout_centerHorizontal="true"
             android:textSize="25px"
-            android:textColor="#fff"
+            android:textColor="#403f3f"
             android:scrollbars="vertical"
             android:maxLines="4"
-            android:text="“孩子平时不听话，英语成绩提高不上去,临近期末，希望有老师辅导一下”"
+            android:text=""
             android:layout_width="600px"
             android:layout_height="150px" />
 
@@ -113,7 +117,7 @@
             android:layout_marginBottom="20px"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:textColor="#fff"
+            android:textColor="#403f3f"
             android:textSize="30px"
             android:text="2016-7-25"
             android:layout_width="wrap_content"
@@ -133,6 +137,7 @@
     <TextView
         android:id="@+id/xuqiu_tel_tv"
         android:text="11111"
+        android:visibility="gone"
         android:layout_marginLeft="40px"
         android:layout_toRightOf="@+id/tadfexuqiu"
         android:layout_marginTop="10px"
@@ -156,7 +161,7 @@
         android:layout_marginTop="10px"
         android:layout_below="@+id/tadfexuqiu"
         android:layout_centerHorizontal="true"
-        android:background="#e6e6e6"
+        android:background="#b3b0b0"
         android:layout_width="710px"
         android:layout_height="2px"
         android:orientation="horizontal" />
@@ -257,7 +262,7 @@
         android:layout_marginTop="10px"
         android:layout_below="@+id/xuqiurelayout1"
         android:layout_centerHorizontal="true"
-        android:background="#e6e6e6"
+        android:background="#c4c3c3"
         android:layout_width="710px"
         android:layout_height="2px"
         android:orientation="horizontal" />
@@ -273,11 +278,11 @@
             android:layout_height="wrap_content" />
     <LinearLayout
         android:id="@+id/zhongjianfenge"
-        android:background="#e6e6e6"
+        android:background="#b3adad"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/fengexianbottton"
         android:layout_width="2px"
-        android:layout_height="20px"
+        android:layout_height="40px"
         android:orientation="horizontal"/>
      <TextView
          android:id="@+id/diqu"
@@ -291,10 +296,10 @@
          android:layout_height="wrap_content" />
     <LinearLayout
         android:id="@+id/fengexianbottton1"
-        android:layout_marginTop="30px"
+        android:layout_marginTop="10px"
         android:layout_below="@+id/zhongjianfenge"
         android:layout_centerHorizontal="true"
-        android:background="#e6e6e6"
+        android:background="#bab8b8"
         android:layout_width="710px"
         android:layout_height="2px"
         android:orientation="horizontal" />

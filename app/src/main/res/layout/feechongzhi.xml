@@ -84,6 +84,7 @@
                 android:layout_width="80px"
                 android:layout_height="80px" />
             <TextView
+                android:id="@+id/chongzhi_weixin_tv"
                 android:textSize="27px"
                 android:layout_marginTop="10px"
                 android:layout_centerHorizontal="true"
@@ -107,11 +108,13 @@
                 android:layout_width="80px"
                 android:layout_height="80px" />
             <TextView
+                android:id="@+id/chongzhi_alipay_tv"
                 android:layout_marginTop="10px"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/feezhifubao"
                 android:textSize="27px"
                 android:text="支付宝"
+                android:textColor="#e92c2c"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>

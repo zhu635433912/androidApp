@@ -25,6 +25,8 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import org.simple.eventbus.EventBus;
+
 import java.util.List;
 import java.util.Map;
 
@@ -57,7 +59,7 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
     private int flag = 3;
     public static String APP_ID = "wx3815ad6bb05c5aca";
     private int mianfee = 0;
-    private EditText cashPayEdit;
+    private TextView cashPayEdit;
 
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -68,6 +70,7 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
 
             switch (resultStatus){
                 case "9000":
+                    new Getdata().sendMessage(User_id.getNickName()+"已支付订单",telphone);
                     Toast.makeText(Payment_Activty.this,"订单支付成功",Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Payment_Activty.this,Payment_tureActivty.class));
                     Payment_Activty.this.finish();
@@ -97,11 +100,14 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
     };
     private Getdata getdata;
     private IWXAPI iwxapi;
+    private String telphone;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         setContentView(R.layout.makeorder);
+
         iwxapi = WXAPIFactory.createWXAPI(this,APP_ID);
         iwxapi.registerApp(APP_ID);
         User_id.getInstance().addActivity(this);
@@ -114,7 +120,7 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
         payQianbao = (RelativeLayout) findViewById(R.id.qianbao);
         weixinTv = (TextView) findViewById(R.id.pay_weixin_tv);
         alipayTv = (TextView) findViewById(R.id.pay_alipay_tv);
-        cashPayEdit = (EditText) findViewById(R.id.cash_pay_edit);
+        cashPayEdit = (TextView) findViewById(R.id.cash_pay_edit);
         qianbaoTv = (TextView) findViewById(R.id.pay_qianbao_tv);
 
         qianbaoTv.setTextColor(Color.parseColor("#e92c2c"));
@@ -122,6 +128,7 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
         //获取订单id
         String id=getIntent().getStringExtra("id");
         String duration=getIntent().getStringExtra("duration");
+        telphone = getIntent().getStringExtra("telphone");
         //获取订单金额
         String fee=getIntent().getStringExtra("fee");
         uid=Integer.parseInt(User_id.getUid());
@@ -168,65 +175,112 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
                 break;
             case R.id.querenzhifu:
 
-           /*     //更新订单状态
-                Order_init order_init=new Order();
-                String password=User_id.getPassword();
-                order_init.Update_Order(uid,order_id,2,password,durationa*order_fee);
-               Intent intent=new Intent(Payment_Activty.this,Payment_tureActivty.class);
-                startActivity(intent);
-                Toast.makeText(this,"支付成功",Toast.LENGTH_SHORT).show();*/
-           int cashPayfee = 0;
-                if (!TextUtils.isEmpty(cashPayEdit.getText())){
-                    int cashfee = Integer.parseInt(cashPayEdit.getText().toString());
-                    if ((mianfee - cashfee )>= cashfee){
-                        cashPayfee = cashfee;
-                        if (flag == 2) {
-                            new PayUtil().getPayDetails(order_id, 0, cashPayfee, this);
-//                    getdata.getzfbordet(order_id, 0, this);
+                   if (mianfee > 0){
+                       if (durationa * order_fee - mianfee >= mianfee){
+                           if (flag == 2) {
+                               new PayUtil().getPayDetails(order_id, 0, mianfee, this);
+                           } else if (flag == 1) {
+                               new PayUtil().getPayDetails(order_id, 1, mianfee, this);
+                           } else {
+                               if ((durationa * order_fee - mianfee) <= tolFee) {
+                                   new PayUtil().getPayDetails(order_id, 2, mianfee, this);
+                                   new Getdata().sendMessage(User_id.getNickName()+"已经支付了订单哦",telphone);
+                                   Intent intent = new Intent(Payment_Activty.this, Payment_tureActivty.class);
+                                   startActivity(intent);
+                                   Toast.makeText(this, "支付成功", Toast.LENGTH_SHORT).show();
+                               } else {
+                                   Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
+                               }
+                           }
+                       }else {
+                           if (flag == 2) {
+                               new PayUtil().getPayDetails(order_id, 0, durationa * order_fee / 2, this);
+                           } else if (flag == 1) {
+                               new PayUtil().getPayDetails(order_id, 1, durationa * order_fee / 2, this);
+                           } else {
+                               if ((durationa * order_fee / 2) <= tolFee) {
+                                   new PayUtil().getPayDetails(order_id, 2, durationa * order_fee / 2, this);
+                                   new Getdata().sendMessage(User_id.getNickName()+"已经支付了订单哦",telphone);
+                                   Intent intent = new Intent(Payment_Activty.this, Payment_tureActivty.class);
+                                   startActivity(intent);
+                                   Toast.makeText(this, "支付成功", Toast.LENGTH_SHORT).show();
+                               } else {
+                                   Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
+                               }
+                           }
+                       }
+        //
+                   }else {
+                       if (flag == 2) {
+                           new PayUtil().getPayDetails(order_id, 0, 0, this);
+                       } else if (flag == 1) {
+                           new PayUtil().getPayDetails(order_id, 1, 0, this);
+                       } else {
+                           if ((durationa * order_fee) <= tolFee) {
+                               new PayUtil().getPayDetails(order_id, 2, 0, this);
+                               new Getdata().sendMessage(User_id.getNickName()+"已经支付了订单哦",telphone);
+                               Intent intent = new Intent(Payment_Activty.this, Payment_tureActivty.class);
+                               startActivity(intent);
+                               Toast.makeText(this, "支付成功", Toast.LENGTH_SHORT).show();
+                           } else {
+                               Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
+                           }
+                       }
 
-                        } else if (flag == 1) {
-                            new PayUtil().getPayDetails(order_id, 1, cashPayfee, this);
-//                    getdata.getzfbordet(order_id,1,this);
-
-//                    Toast.makeText(this, "暂不可用", Toast.LENGTH_SHORT).show();
-                        } else {
-                            if (durationa * order_fee <= tolFee) {
-                                Order_init order_init = new Order();
-                                String password = User_id.getPassword();
-                                order_init.Update_Order(uid, order_id, 2, password, durationa * order_fee);
-                                Intent intent = new Intent(Payment_Activty.this, Payment_tureActivty.class);
-                                startActivity(intent);
-                                Toast.makeText(this, "支付成功", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(this, "余额不足", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }else {
-                        Toast.makeText(Payment_Activty.this, "可以现金券不足", Toast.LENGTH_SHORT).show();
-                    }
-                }else {
-                    if (flag == 2) {
-                        new PayUtil().getPayDetails(order_id, 0, cashPayfee, this);
-//                    getdata.getzfbordet(order_id, 0, this);
-
-                    } else if (flag == 1) {
-                        new PayUtil().getPayDetails(order_id, 1, cashPayfee, this);
-//                    getdata.getzfbordet(order_id,1,this);
-
-//                    Toast.makeText(this, "暂不可用", Toast.LENGTH_SHORT).show();
-                    } else {
-                        if (durationa * order_fee <= tolFee) {
-                            Order_init order_init = new Order();
-                            String password = User_id.getPassword();
-                            order_init.Update_Order(uid, order_id, 2, password, durationa * order_fee);
-                            Intent intent = new Intent(Payment_Activty.this, Payment_tureActivty.class);
-                            startActivity(intent);
-                            Toast.makeText(this, "支付成功", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(this, "余额不足", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
+                   }
+//           int cashPayfee = 0;
+//                if (!TextUtils.isEmpty(cashPayEdit.getText())){
+//                    int cashfee = Integer.parseInt(cashPayEdit.getText().toString());
+//                    if ((mianfee - cashfee )>= cashfee){
+//                        cashPayfee = cashfee;
+//                        if (flag == 2) {
+//                            new PayUtil().getPayDetails(order_id, 0, cashPayfee, this);
+////                    getdata.getzfbordet(order_id, 0, this);
+//
+//                        } else if (flag == 1) {
+//                            new PayUtil().getPayDetails(order_id, 1, cashPayfee, this);
+////                    getdata.getzfbordet(order_id,1,this);
+//
+////                    Toast.makeText(this, "暂不可用", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            if (durationa * order_fee <= tolFee) {
+//                                Order_init order_init = new Order();
+//                                String password = User_id.getPassword();
+//                                order_init.Update_Order(uid, order_id, 2, password, durationa * order_fee);
+//                                new Getdata().sendMessage(User_id.getNickName()+"已经支付了订单哦",telphone);
+//                                Intent intent = new Intent(Payment_Activty.this, Payment_tureActivty.class);
+//                                startActivity(intent);
+//                                Toast.makeText(this, "支付成功", Toast.LENGTH_SHORT).show();
+//                            } else {
+//                                Toast.makeText(this, "余额不足", Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//                    }else {
+//                        Toast.makeText(Payment_Activty.this, "可以现金券不足", Toast.LENGTH_SHORT).show();
+//                    }
+//                }else {
+//                    if (flag == 2) {
+//                        new PayUtil().getPayDetails(order_id, 0, cashPayfee, this);
+////                    getdata.getzfbordet(order_id, 0, this);
+//
+//                    } else if (flag == 1) {
+//                        new PayUtil().getPayDetails(order_id, 1, cashPayfee, this);
+////                    getdata.getzfbordet(order_id,1,this);
+//
+////                    Toast.makeText(this, "暂不可用", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        if (durationa * order_fee <= tolFee) {
+//                            Order_init order_init = new Order();
+//                            String password = User_id.getPassword();
+//                            order_init.Update_Order(uid, order_id, 2, password, durationa * order_fee);
+//                            Intent intent = new Intent(Payment_Activty.this, Payment_tureActivty.class);
+//                            startActivity(intent);
+//                            Toast.makeText(this, "支付成功", Toast.LENGTH_SHORT).show();
+//                        } else {
+//                            Toast.makeText(this, "余额不足", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//                }
                 break;
             case R.id.querendindanfanhui:
                 finish();
@@ -287,7 +341,13 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
             mianfee = (int) Float.parseFloat((String)map.get("TotalFee"));
 //            mianfee = 0;
         }
-//            mogint.setText((String)map.get("TotalFee"));
+        if (tolFee != 0 && mianfee != 0){
+            if ((durationa * order_fee - mianfee) >= mianfee){
+                    cashPayEdit.setText("现金券抵扣:" + mianfee);
+            }else {
+                    cashPayEdit.setText("现金券抵扣:" + (durationa * order_fee / 2));
+            }
+        }
 
 
     }
@@ -314,6 +374,7 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
             payReq.sign = map.get("sign").toString();
             Log.d("aa",payReq.appId+"----"+payReq.partnerId+"----"+payReq.nonceStr+"----"+payReq.packageValue+"----"+payReq.prepayId+"----"+payReq.sign+"----");
             iwxapi.sendReq(payReq);
+            EventBus.getDefault().post(telphone,"telphone");
 
         }else if (flag == 2) {
             //获取去服务器返回的支付宝订单信息再去唤起支付宝
@@ -341,11 +402,24 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
             // 必须异步调用
             Thread payThread = new Thread(payRunnable);
             payThread.start();
+        }else if (flag == 3){
+            if (map.get("error").toString().equals("ok")){
+                new Getdata().sendMessage(User_id.getNickName()+"已经支付了订单哦",telphone);
+                Intent intent = new Intent(Payment_Activty.this, Payment_tureActivty.class);
+                startActivity(intent);
+                Toast.makeText(this, "支付成功", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
     @Override
     public void failPay(String msg) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

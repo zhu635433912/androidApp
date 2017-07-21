@@ -61,6 +61,7 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
 
     @Override
     public void initView() {
+        User_id.getInstance().addActivity(this);
         role=Integer.parseInt(User_id.getRole());
         demand_init=new Demand(this);
         teacher_init = new Teacher(this);

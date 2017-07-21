@@ -58,7 +58,15 @@ public class User_id extends Application {
     private static String status;
     public static String APP_URL = "http://deguanjiaoyu.com/index.php?s=/Service/Public/downUrl";
     private static String address;
+    private static String nickName;
 
+    public static String getNickName() {
+        return nickName;
+    }
+
+    public static void setNickName(String nickName) {
+        User_id.nickName = nickName;
+    }
 
     private Context appContext;
     EMMessageListener messageListener = null;

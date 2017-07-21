@@ -91,4 +91,11 @@ public interface Data {
     //账单列表
     @POST("index.php?s=/Service/Finance/gets_billing")
     Call<ContentModle> getBillList(@Query("uid")int uid);
+
+    //发送消息
+    @POST("index.php?s=/Service/Public/sendToUid")
+    Call<ContentModle> sendMsg(@Query("content")String content,@Query("tel")String tel);
+
+    @POST("index.php?s=/Service/Finance/remember_list")
+    Call<ContentModle> getDistribution(@Query("uid")int uid,@Query("type")int type,@Query("page")int page);
 }

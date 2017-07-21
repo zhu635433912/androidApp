@@ -11,7 +11,7 @@
         android:background="@drawable/mianlistview"
         android:layout_gravity="center"
         android:layout_width="700px"
-        android:layout_height="340px"
+        android:layout_height="150px"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
         <!--<modle.toos.CircleImageView-->
@@ -25,8 +25,9 @@
         <!--android:layout_height="56px" />-->
 
         <TextView
+            android:visibility="gone"
             android:layout_marginLeft="25px"
-            android:layout_marginTop="26px"
+            android:layout_marginTop="10px"
             android:layout_alignTop="@+id/lognhost"
             android:layout_toRightOf="@+id/lognhost"
             android:textSize="24px"
@@ -45,7 +46,7 @@
             android:layout_height="wrap_content" />
         <TextView
             android:layout_marginRight="20px"
-            android:layout_marginTop="16px"
+            android:layout_marginTop="0px"
             android:layout_alignTop="@+id/text3"
             android:layout_toLeftOf="@+id/text3"
             android:textColor="#a0d9fe"
@@ -57,7 +58,7 @@
         <TextView
             android:id="@+id/text3"
             android:layout_marginRight="25px"
-            android:layout_marginTop="20px"
+            android:layout_marginTop="10px"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:textColor="#a0d9fe"
@@ -66,6 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:visibility="gone"
             android:id="@+id/tlucahwodjawf"
             android:layout_marginTop="20px"
             android:background="#a0d9fe"
@@ -124,7 +126,7 @@
         <TextView
             android:id="@+id/turn_time_tv"
             android:layout_marginRight="14px"
-            android:layout_marginBottom="24px"
+            android:layout_marginBottom="10px"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:textSize="26px"

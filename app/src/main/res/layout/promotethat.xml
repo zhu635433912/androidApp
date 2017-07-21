@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/mylayout"
+        android:layout_width="match_parent"
+        android:layout_height="100px" >
+        <ImageView
+            android:id="@+id/tuiguangshuoming"
+            android:padding="30px"
+            android:src="@drawable/add19"
+            android:layout_width="150px"
+            android:layout_height="150px" />
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="35px"
+            android:text="学了吗推广说明"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/xuqiufenggexian"
+        android:background="#d7d7d7"
+        android:layout_marginTop="1px"
+        android:layout_below="@+id/mylayout"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <ScrollView
+        android:layout_below="@+id/xuqiufenggexian"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10px"
+        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_gravity="center"
+        android:background="@drawable/add08"
+        android:layout_marginTop="10px"
+        android:layout_below="@+id/xuqiufenggexian"
+        android:layout_width="700px"
+        android:layout_centerHorizontal="true"
+        android:layout_height="match_parent">
+    <TextView
+        android:textSize="35px"
+        android:layout_marginTop="30px"
+        android:id="@+id/tuiguangtext"
+        android:text="【一】推广"
+        android:layout_centerHorizontal="true"
+        android:layout_width="650px"
+        android:layout_height="50px" />
+    <TextView
+        android:id="@+id/mytextsaz1"
+        android:textSize="30px"
+        android:text="          让朋友扫描自己加入后生成的个人推荐二维码，每加入一人，送五元现金券，消费时，代金券最多代用50%的金额，学生不得提现现金券，老师可以抵扣100元整数倍提现。"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tuiguangtext"
+        android:layout_width="650px"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/mytextsaz2"
+        android:textSize="30px"
+        android:text="          充值送比例的金额度，作为现金使用，不能提现，仅用于消费。"
+        android:layout_marginTop="10px"
+        android:layout_below="@+id/mytextsaz1"
+        android:layout_centerHorizontal="true"
+        android:layout_width="650px"
+        android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="35px"
+            android:layout_marginTop="20px"
+            android:layout_below="@+id/mytextsaz2"
+            android:id="@+id/tuiguangtext1"
+            android:text="【二】盈利提成"
+            android:layout_centerHorizontal="true"
+            android:layout_width="650px"
+            android:layout_height="50px" />
+        <TextView
+            android:id="@+id/mytextsaz3"
+            android:textSize="30px"
+            android:text="          每个用户的上下级关系确立，二级分享奖励1%（普通用户0.5%，老师用户0.5%）其第一级0.1%，第二级0.4%的分配值"
+            android:layout_marginTop="10px"
+            android:layout_below="@+id/tuiguangtext1"
+            android:layout_centerHorizontal="true"
+            android:layout_width="650px"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/mytextsaz4"
+            android:textSize="30px"
+            android:text="          分配一级奖励收益，参与分享群体奖励1%，如区域+代理商名字或者编号，自动生成分享链接计算奖励额度"
+            android:layout_marginTop="10px"
+            android:layout_below="@+id/mytextsaz3"
+            android:layout_centerHorizontal="true"
+            android:layout_width="650px"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/mytextsaz5"
+            android:textSize="30px"
+            android:text="          每单提成10%，其中2.5%用于分享奖励，0.5%用于老师星级奖励，5.5%分配给代理商，公司留1.5"
+            android:layout_marginTop="10px"
+            android:layout_below="@+id/mytextsaz4"
+            android:layout_centerHorizontal="true"
+            android:layout_width="650px"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="35px"
+            android:layout_marginTop="20px"
+            android:layout_below="@+id/mytextsaz5"
+            android:id="@+id/tuiguangtext3"
+            android:text="【三】老师升级标准"
+            android:layout_centerHorizontal="true"
+            android:layout_width="650px"
+            android:layout_height="50px" />
+        <TextView
+            android:id="@+id/mytextsaz6"
+            android:textSize="30px"
+            android:text="          老师月教育次数与评论分综合，按星级划分，老师星级越高奖励越多，来评比教师级别，如月总星数60星普1级，90星普二级，120星普三级"
+            android:layout_marginTop="10px"
+            android:layout_below="@+id/tuiguangtext3"
+            android:layout_centerHorizontal="true"
+            android:layout_width="650px"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/mytextsaz7"
+            android:textSize="30px"
+            android:text="          服务星级标准衡量，评论分有5星，由学生打分，满分5分，月教育课时数，每2课时满星，奖励一星"
+            android:layout_marginTop="10px"
+            android:layout_marginBottom="30px"
+            android:layout_below="@+id/mytextsaz6"
+            android:layout_centerHorizontal="true"
+            android:layout_width="650px"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

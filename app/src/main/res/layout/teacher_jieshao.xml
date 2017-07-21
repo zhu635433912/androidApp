@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/teachername"
                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="120px"
+                android:layout_marginLeft="20px"
                 android:layout_marginTop="5px"
                 android:text="浙江台州"
                 android:textSize="25px" />
@@ -124,7 +124,7 @@
                 android:layout_height="50px"
                 android:layout_below="@+id/teachername"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="80px"
+                android:layout_marginRight="10px"
                 android:layout_marginTop="5px"
                 android:text="一星级教师"
                 android:textSize="25px" />

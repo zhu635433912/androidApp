@@ -1,13 +1,197 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.deguan.xuelema.androidapp.fragment.StudentFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        >
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/indeshuax"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_width="300px"-->
+        <!--android:layout_height="300px">-->
+        <!--<com.wang.avi.AVLoadingIndicatorView-->
+            <!--android:id="@+id/xiaohuangdou"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--app:indicator="Pacman"-->
+            <!--app:indicator_color="#f7e61c"-->
+            <!--android:layout_width="200px"-->
+            <!--android:layout_height="200px" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/indeshuaxtext"-->
+            <!--android:textColor="#d43414"-->
+            <!--android:textSize="30px"-->
+            <!--android:text="加载数据中...."-->
+            <!--android:layout_below="@+id/xiaohuangdou"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+    <!--</RelativeLayout>-->
 
-</FrameLayout>
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y150"
+        android:background="@drawable/top">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="#e2eef1"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:statusBarScrim="#d3eaed"
+            app:titleEnabled="false">
+
+            <!--android:minHeight="?attr/actionBarSize"-->
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/student_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y30"
+                app:layout_collapseMode="pin" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y30">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:id="@+id/student_linear"
+                android:layout_width="0dp"
+                android:layout_weight="14"
+                android:layout_height="match_parent"
+                android:background="@drawable/list01"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/student_city_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y30"
+                    android:layout_weight="1"
+                    android:background="#00000000" />
+
+                <ImageButton
+                    android:id="@+id/student_list_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y30"
+                    android:layout_weight="1"
+                    android:background="#00000000" />
+
+                <ImageButton
+                    android:id="@+id/student_choose_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y30"
+                    android:layout_weight="1"
+                    android:background="#00000000" />
+            </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/relayout1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y120"
+                >
+
+                <TextView
+                    android:background="@drawable/city_black"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/y4"
+                    android:id="@+id/student_city_tv"
+                    android:layout_width="@dimen/x80"
+                    android:layout_height="@dimen/y22"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="30px"
+                    android:layout_marginTop="33px"
+                    android:text="乌鲁木齐好"
+                    android:textColor="#4e4e50"
+                    android:textSize="12sp" />
+
+
+                <ImageButton
+                    android:layout_width="30px"
+                    android:layout_height="20px"
+                    android:layout_alignTop="@+id/ditutext"
+                    android:layout_marginLeft="5px"
+                    android:layout_marginTop="14px"
+                    android:layout_toEndOf="@+id/ditutext"
+                    android:layout_toRightOf="@+id/ditutext"
+                    android:background="@drawable/add13"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/faxianjiaoshi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="200px"
+                    android:text="今天你学了吗!"
+                    android:textColor="#4e4e50"
+                    android:textSize="50px" />
+
+                <ImageButton
+                    android:id="@+id/student_search_btn"
+                    android:layout_width="60px"
+                    android:layout_height="60px"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="80px"
+                    android:layout_marginRight="30px"
+                    android:layout_marginTop="30px"
+                    android:background="@drawable/sousuo" />
+
+                <TextView
+                    android:id="@+id/hosttextview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/textView8"
+                    android:layout_alignStart="@+id/textView8"
+                    android:layout_below="@+id/faxianjiaoshi"
+                    android:layout_marginTop="15dp"
+                    android:text=" "
+                    android:textColor="#4e4e50"
+                    android:textSize="50px" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/hosttextview"
+                    android:layout_centerHorizontal="true"
+                    android:text=" "
+                    android:textColor="#4e4e50"
+                    android:textSize="50px" />
+            </RelativeLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:background="#e0eaf1"
+        android:id="@+id/student_swiperefresh"
+        android:layout_width="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="match_parent"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:background="#e0eaf1"
+            android:divider="@null"
+            android:scrollbars="none"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layoutManager="LinearLayoutManager"
+            android:id="@+id/student_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</android.support.design.widget.CoordinatorLayout>

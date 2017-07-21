@@ -79,8 +79,9 @@ public class Demand implements Demand_init {
     获取需求列表
      */
     @Override
-    public List<Map<String, Object>> getDemand_list(int uid, final int role, int filter_type, int filter_id, final String start_time, int end_time, int page, double lat,double lng,final PullToRefreshListView listView, final Context context, final Student_init student_init) {
-        Call<ContentModle> call=demand_http.getDemandlist(uid,filter_type,filter_id,start_time,end_time,page,lat,lng);
+    public List<Map<String, Object>> getDemand_list(int uid, final int role, int filter_type, int filter_id, final String start_time, int end_time, int page, double lat,double lng,final PullToRefreshListView listView, final Context context, final Student_init student_init
+    ,int grade_id,int course_id,String order,String order_desc) {
+        Call<ContentModle> call=demand_http.getDemandlist(uid,filter_type,filter_id,start_time,end_time,page,lat,lng,grade_id,course_id,order,order_desc);
         call.enqueue(new Callback<ContentModle>() {
             @Override
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
@@ -237,8 +238,8 @@ public class Demand implements Demand_init {
     }
 
     @Override
-    public void getTuijianDemand_list(int course_id, int grade_id, String lat, String lng, String province, String city, String state, PullToRefreshListView listView, Context context, Student_init requirdetailed) {
-        Call<ContentModle> call=demand_http.getTuijianDemandList(course_id,grade_id,lat,lng,province,city,state);
+    public void getTuijianDemand_list(int course_id, String uid, String lat, String lng, String province, String city, String state, PullToRefreshListView listView, Context context, Student_init requirdetailed) {
+        Call<ContentModle> call=demand_http.getTuijianDemandList(course_id,uid,lat,lng,province,city,state);
         call.enqueue(new Callback<ContentModle>() {
             @Override
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {

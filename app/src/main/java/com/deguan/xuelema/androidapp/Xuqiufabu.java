@@ -109,7 +109,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                     //可在其中解析amapLocation获取相应内容。
 
                     userweizhi.setText(
-                            aMapLocation.getProvince().toString() +
+//                            aMapLocation.getProvince().toString() +
                             aMapLocation.getCity().toString()
                             + aMapLocation.getDistrict().toString() +
                             aMapLocation.getStreet().toString() +
@@ -279,8 +279,8 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 builder.setIcon(R.drawable.add04);
                 builder.setTitle("请选择一个年级");
                 //    指定下拉列表的显示数据
-                final String[] cities = {"小学","一年级","二年级","三年级","四年级"
-                        , "五年级", "六年级","初中", "初一", "初二", "初三",  "高中","高一", "高二", "高三","大学"
+                final String[] cities = {"一年级","二年级","三年级","四年级"
+                        , "五年级", "六年级", "七年级", "八年级", "九年级","高一", "高二", "高三","大学"
                 };
                 //    设置一个下拉的列表选择项
                 builder.setItems(cities, new DialogInterface.OnClickListener() {
@@ -288,7 +288,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(Xuqiufabu.this, "选择的年级为：" + cities[which], Toast.LENGTH_SHORT).show();
                         Subject.setText(cities[which]);
-                        zuigrade = which + 13;
+                        zuigrade = which + 29;
 
                     }
                 });
@@ -342,7 +342,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                 TimePickerDialog timePickerDialogz = new TimePickerDialog(Xuqiufabu.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        if (minute <= 10) {
+                        if (minute < 10) {
                             jieshushijian.setText("结束时间:" + hourOfDay + ":0" + minute);
                             jieshu = hourOfDay + ":0" + minute ;
                         }else {
@@ -546,6 +546,9 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
 
     @Override
     public void Updatecuowu(Map<String, Object> map) {
+        Demand_init demand_init = new Demand();
+        demand_init.ReleaseDemand(id, xuqiuneirong.getText().toString(), 0, zuigrade + 1, kcid, Gender, age, xueli, "", "", "", fuwfangshi - 1, start, end, 28, 121,userweizhi.getText().toString());
+
     }
     public void pvoptions(){
         optionsPickerView= new  OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {

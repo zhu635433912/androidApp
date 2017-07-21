@@ -37,7 +37,7 @@
     android:layout_below="@+id/xuqiufenggexian"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-        
+
      <RelativeLayout
         android:focusable="true"
         android:focusableInTouchMode="true"
@@ -45,77 +45,84 @@
         android:layout_height="match_parent">
         <TextView
             android:id="@+id/kechenfengmian"
-            android:text="课程封面"
-            android:layout_marginTop="20px"
+            android:text=""
             android:layout_marginLeft="60px"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
          <TextView
-             android:text="个人签名"
-             android:layout_marginTop="20px"
-             android:layout_marginRight="60px"
+             android:id="@+id/gexqiam"
+             android:text=""
+             android:layout_marginRight="200px"
              android:layout_alignParentTop="true"
              android:layout_alignParentRight="true"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content" />
         <RelativeLayout
             android:id="@+id/kechengtupian"
-            android:layout_marginTop="20px"
             android:layout_below="@+id/kechenfengmian"
             android:layout_alignLeft="@+id/kechenfengmian"
-            android:background="@drawable/add08"
             android:layout_width="310px"
-            android:layout_height="188px" >
-            <ImageView
-                android:id="@+id/class_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-           <TextView
-               android:textSize="30px"
-               android:layout_centerVertical="true"
-               android:layout_centerHorizontal="true"
-               android:text=""
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content" />
-            <TextView
-                android:id="@+id/class_image_change"
-                android:textColor="#f7c55e"
-                android:textSize="30px"
-                android:layout_marginRight="10px"
-                android:text="更换"
-                android:layout_marginTop="10px"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
+            android:layout_height="1px" >
         </RelativeLayout>
+
          <RelativeLayout
-             android:layout_marginTop="20px"
+             android:id="@+id/sign_rlayout"
              android:layout_marginLeft="20px"
              android:layout_below="@+id/kechenfengmian"
              android:layout_toRightOf="@+id/kechengtupian"
-             android:background="@drawable/add08"
              android:layout_width="310px"
-             android:layout_height="188px" >
-             <EditText
-                 android:id="@+id/person_sign"
-                 android:textSize="30px"
-                 android:gravity="center"
-                 android:maxLength="20"
-                 android:textColor="#747475"
-                 android:background="@drawable/gerxxkk"
-                 android:hint="个人签名"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent" />
+             android:layout_height="1px" >
          </RelativeLayout>
+
+
+         <TextView
+             android:id="@+id/teacher_year"
+             android:textSize="30px"
+             android:layout_alignLeft="@+id/kechengtupian"
+             android:layout_marginTop="20px"
+             android:layout_below="@+id/kechengtupian"
+             android:text="教龄"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <TextView
+             android:id="@+id/education_text"
+             android:textSize="30px"
+             android:layout_marginRight="250px"
+             android:layout_alignParentRight="true"
+             android:layout_marginTop="20px"
+             android:layout_below="@+id/sign_rlayout"
+             android:text="特长"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <TextView
+             android:id="@+id/teacher_year_et"
+             android:gravity="center"
+             android:textSize="25px"
+             android:text="0年"
+             android:layout_marginTop="10px"
+             android:layout_alignLeft="@+id/kechengtupian"
+             android:layout_below="@+id/teacher_year"
+             android:background="@drawable/gerxxkk"
+             android:layout_width="300px"
+             android:layout_height="70px" />
+         <EditText
+             android:id="@+id/education_et"
+             android:gravity="center"
+             android:textSize="25px"
+             android:hint="输入特长"
+             android:layout_marginTop="10px"
+             android:layout_alignRight="@+id/sign_rlayout"
+             android:layout_below="@+id/education_text"
+             android:background="@drawable/gerxxkk"
+             android:layout_width="300px"
+             android:layout_height="70px" />
         <TextView
             android:id="@+id/kecheng"
             android:layout_marginTop="40px"
             android:layout_alignLeft="@+id/kechengtupian"
-            android:layout_below="@+id/kechengtupian"
+            android:layout_below="@+id/teacher_year_et"
             android:textSize="30px"
             android:text="课程"
             android:layout_width="wrap_content"
@@ -312,7 +319,7 @@
             android:layout_alignLeft="@+id/tianjiaxueli"
             android:layout_marginTop="50px"
             android:layout_below="@+id/tianjiaxueli"
-            android:text="个人介绍"
+            android:text="个人介绍*"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <RelativeLayout
@@ -339,7 +346,7 @@
                 android:layout_alignLeft="@+id/gerjianjietext_edi"
                 android:layout_marginTop="20px"
                 android:layout_below="@+id/gerjianjietext_edi"
-                android:text="特长"
+                android:text="学历*"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
@@ -349,15 +356,14 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="20px"
                 android:layout_below="@+id/gerjianjietext_edi"
-                android:text="毕业学校"
+                android:text="毕业学校*"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-            <EditText
+            <TextView
                 android:id="@+id/techang"
                 android:gravity="center"
                 android:textSize="25px"
-                android:hint="输入特长"
-
+                android:text="学历未知"
                 android:layout_marginTop="20px"
                 android:layout_alignLeft="@+id/gerjianjietext_edi"
                 android:layout_below="@+id/techangtv"
@@ -382,7 +388,7 @@
             android:layout_marginTop="20px"
             android:layout_alignLeft="@+id/gerjianjie"
             android:layout_below="@+id/userxinxi"
-            android:text="学历"
+            android:text="上传学历证书*"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -435,7 +441,7 @@
         android:layout_marginTop="40px"
         android:layout_below="@+id/tianjiaxueli1"
         android:layout_alignLeft="@+id/tianjiaxueli1"
-        android:text="荣誉证书"
+        android:text="上传荣誉证书"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -488,10 +494,65 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
-        <Button
+         <TextView
+             android:id="@+id/postuserimage"
+             android:layout_marginTop="40px"
+             android:layout_below="@+id/tianjiazhengshu"
+             android:layout_alignLeft="@+id/tianjiaxueli1"
+             android:text="上传身份证*(手持身份证正反面)"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+
+         <LinearLayout
+             android:layout_marginTop="20px"
+             android:id="@+id/rongyuimage1"
+             android:orientation="horizontal"
+             android:layout_below="@+id/postuserimage"
+             android:layout_centerHorizontal="true"
+             android:layout_width="680px"
+             android:layout_height="100px">
+             <ImageView
+                 android:id="@+id/postuserimage1"
+                 android:layout_width="0dp"
+                 android:layout_weight="1"
+                 android:layout_height="match_parent" />
+             <ImageView
+                 android:id="@+id/postuserimage2"
+                 android:layout_width="0dp"
+                 android:layout_weight="1"
+                 android:layout_height="match_parent" />
+         </LinearLayout>
+         <RelativeLayout
+             android:id="@+id/tianjiasfenz"
+             android:background="@drawable/xuxian"
+             android:layout_marginTop="20px"
+             android:layout_below="@+id/rongyuimage1"
+             android:layout_centerHorizontal="true"
+             android:layout_width="680px"
+             android:layout_height="180px">
+             <Button
+                 android:id="@+id/tianjiarongyuztubiao1"
+                 android:layout_marginTop="40px"
+                 android:layout_alignParentTop="true"
+                 android:layout_centerHorizontal="true"
+                 android:background="@drawable/hly62"
+                 android:layout_width="66px"
+                 android:layout_height="66px" />
+             <TextView
+                 android:textSize="30px"
+                 android:layout_marginTop="10px"
+                 android:layout_below="@+id/tianjiarongyuztubiao1"
+                 android:layout_centerHorizontal="true"
+                 android:text="上传身份证"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+         </RelativeLayout>
+
+         <Button
+             android:layout_marginBottom="10px"
             android:id="@+id/baocunjiaoshi"
             android:layout_marginTop="30px"
-            android:layout_below="@+id/tianjiazhengshu"
+            android:layout_below="@+id/tianjiasfenz"
             android:layout_centerHorizontal="true"
             android:textSize="40px"
             android:textColor="#fff"

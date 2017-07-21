@@ -1,6 +1,7 @@
 package control;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ListView;
 
@@ -23,7 +24,7 @@ public interface Myconteol_init {
      * @param int   $lat    纬度
      * @param int   $lng    经度
      */
-    public void setlist_a(int uid, int role , String lat, String ing, PullToRefreshListView listView,
+    public void setlist_a(int uid, int role , String lat, String ing, RecyclerView listView,
                           Context context, int order, String state, int gender, int speciality, int grade_type,int order_rank,int page);
 
     public void huidiao(List<Map<String,Object>> listmap,int role, PullToRefreshListView listView,Context context);

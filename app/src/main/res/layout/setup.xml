@@ -66,6 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="1px" />
     <TextView
+        android:visibility="gone"
         android:paddingTop="30px"
         android:id="@+id/jiaoshirenzheng"
         android:layout_marginLeft="50px"
@@ -78,7 +79,7 @@
     <TextView
         android:id="@+id/xuqiufenggexian1"
         android:background="#d7d7d7"
-        android:layout_below="@+id/jiaoshirenzheng"
+        android:layout_below="@+id/xuqiufenggexian0"
         android:layout_width="match_parent"
         android:layout_height="1px" />
     <TextView

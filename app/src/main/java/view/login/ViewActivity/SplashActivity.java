@@ -114,6 +114,7 @@ public class SplashActivity extends AutoLayoutActivity implements View.OnClickLi
                 String role = sp1.getString("role", "t");
                 String username = sp1.getString("username", "t");
                 String password = sp1.getString("password", "t");
+                String nickname = sp1.getString("nickname","t");
 //                intent.putExtra("id", id);
 //                intent.putExtra("role", role);
                 Intent intent = NewMainActivity_.intent(this).extra("id",id).extra("role",role).get();
@@ -121,6 +122,7 @@ public class SplashActivity extends AutoLayoutActivity implements View.OnClickLi
                 User_id.setUid(id);
                 User_id.setPassword(password);
                 User_id.setUsername(username);
+                User_id.setNickName(nickname);
                 startActivity(intent);
                 this.finish();
             }

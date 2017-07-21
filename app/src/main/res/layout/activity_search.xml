@@ -45,7 +45,7 @@
         android:layout_width="110px"
         android:layout_marginRight="20px"
         android:layout_height="80px"
-        android:src="@drawable/sousuo" />
+        android:src="@drawable/search_icon" />
 
     <EditText
         android:background="@drawable/yuanjiao"
@@ -55,7 +55,7 @@
         android:textColor="#c16767"
         android:hint="输入你要查询的内容"
         android:id="@+id/text_search"
-        android:layout_width="550px"
+        android:layout_width="580px"
         android:layout_height="80px"
         />
 

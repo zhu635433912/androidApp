@@ -30,7 +30,8 @@ public interface Teacher_http {
     @POST("index.php?s=/Service/Teacher/gets_teacher")
     Call<ContentModle> getTeacherlist(@Query("uid") int uid, @Query("lat") String lat, @Query("lng") String lng,
                                       @Query("order") int order,@Query("state") String state,@Query("gender") int gender,@Query("speciality") int speciality,
-                                      @Query("grade_type") int grade_type,@Query("order_rank") int order_rank,@Query("page")int page);
+                                      @Query("grade_id") int grade_type,@Query("order_rank") int order_rank,@Query("page")int page
+                                        ,@Query("course_id")int course_id);
     /*
     教师资料更新荣誉证书
      */
@@ -51,6 +52,17 @@ public interface Teacher_http {
    */
     @POST("index.php?s=/Service/Teacher/update_information")
     Call<Demtest> getTeachergenxin4(@Query("uid") int uid,@Query("others_4") String others_4);
+
+    /*
+    教师资料更新荣誉证书
+     */
+    @POST("index.php?s=/Service/Teacher/update_information")
+    Call<Demtest> getTeachergenxin5(@Query("uid") int uid,@Query("others_5") String others_5);
+    /*
+     教师资料更新荣誉证书
+   */
+    @POST("index.php?s=/Service/Teacher/update_information")
+    Call<Demtest> getTeachergenxin6(@Query("uid") int uid,@Query("others_6") String others_6);
 
     /*
     教师列表显示状态更改
@@ -105,7 +117,8 @@ public interface Teacher_http {
     */
 @POST("index.php?s=/Service/Teacher/recommend_teacher")
 Call<TuijianListEntity> gettuijianjiaoshi(
-//        @Query("course_id") int course_id,@Query("grade_id") int grade_id,
+        @Query("uid") int uid,
+// @Query("grade_id") int grade_id,
 //        @Query("address") String address,
         @Query("lat") String lat,@Query("lng") String lng);
 

@@ -1,6 +1,7 @@
 package control;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.widget.ListAdapter;
@@ -55,13 +56,13 @@ public class Mycontrol implements Myconteol_init  {
     }
     //获取教师列表
     @Override
-    public void setlist_a(final int uid, final int role, final String lat, final String ing, final PullToRefreshListView listView, final Context context, int order, String state
-            , int gender, int speciality, int grade_type, int order_rank,int page) {
+    public void setlist_a(final int uid, final int role, final String lat, final String ing, final RecyclerView listView, final Context context, int order, String state
+            , int gender, int speciality, int grade_type, int order_rank, int page) {
         Log.e("aa","用户身份为"+role);
         if (role==1) {
             //判断用户是否为学生 为学生展示老师信息
             teacher_init = new Teacher(teacherView);
-            listmap = teacher_init.Get_Teacher_list(uid,role, lat, ing, listView, context,order,state,gender,speciality,grade_type,order_rank,null,page);
+            listmap = teacher_init.Get_Teacher_list(uid,role, lat, ing, listView, context,order,state,gender,speciality,grade_type,order_rank,null,page,0);
 
         }else {
             //判断用户是否为老师，为老师展示学生信息

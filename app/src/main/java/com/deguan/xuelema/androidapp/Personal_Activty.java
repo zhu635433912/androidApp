@@ -147,7 +147,6 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         uid=Integer.parseInt(User_id.getUid());
         int role=Integer.parseInt(User_id.getRole());
         if (role==1){
-            fuwuleia.setVisibility(View.GONE);
             jiaolinlayout.setVisibility(View.GONE);
             xueliRl.setVisibility(View.GONE);
 
@@ -281,8 +280,6 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                                 }else {
                                     Toast.makeText(Personal_Activty.this,"姓名输入有误!",Toast.LENGTH_SHORT).show();
                                 }
-
-
                             }
                         }).setNegativeButton("取消",new DialogInterface.OnClickListener() {
                     @Override
@@ -357,7 +354,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                             public void onClick(DialogInterface dialog, int which) {
                                 if (!edit.getText().toString().equals("")&&edit.getText().length()<=20) {
                                     String signature = edit.getText().toString();
-                                    teacher.Teacher_signature(uid,signature);
+                                    user_init.Upsignature(uid,signature);
                                     biyexuexiao.setText(signature);
                                 }else {
                                     Toast.makeText(Personal_Activty.this, "签名不能太长也不能没有啊", Toast.LENGTH_SHORT).show();

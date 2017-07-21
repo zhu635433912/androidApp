@@ -87,7 +87,11 @@ public class ConductFragment extends BaseFragment implements OrderView, SwipeRef
         }else {
             tuijianPresenter = new OrderPresenterImpl(this,Integer.parseInt(User_id.getUid()),1,page);
         }
-        tuijianPresenter.getNofinishOrderEntity(2);
+//        tuijianPresenter.getNofinishOrderEntity(2);
+        if (list.size() > 0){}
+        else {
+            tuijianPresenter.getOrderEntity();
+        }
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -113,8 +117,13 @@ public class ConductFragment extends BaseFragment implements OrderView, SwipeRef
 //                }
 //            }
             for (int i = 0; i < maps.size(); i++) {
-                if (maps.get(i).get("status").equals("2")||maps.get(i).get("status").equals("4")) {
+                if (maps.get(i).get("status").equals("2")) {
                     list.add(maps.get(i));
+                }
+                if (maps.get(i).get("status").equals("4")
+//                        ||maps.get(i).get("status").equals("5")
+                        ||maps.get(i).get("status").equals("6")) {
+                    list.add(0,maps.get(i));
                 }
             }
 
@@ -153,9 +162,9 @@ public class ConductFragment extends BaseFragment implements OrderView, SwipeRef
     @Override
     public void onRefresh() {
         if (User_id.getRole().equals("1")) {
-            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 0, 1).getNofinishOrderEntity(2);
+            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 0, 1).getOrderEntity();
         }else {
-            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 1, 1).getNofinishOrderEntity(2);
+            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 1, 1).getOrderEntity();
         }
     }
 

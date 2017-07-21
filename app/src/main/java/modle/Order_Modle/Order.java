@@ -209,8 +209,8 @@ public class Order implements Order_init {
     更新订单评分
      */
     @Override
-    public Map<String, Object> UpdateOrder_score(int uid, int id, int rank1, int rank2, int rank3, int rank4) {
-        Call<Demtest> call=oredr_http.Updatepingfen(uid,id,rank1,rank2,rank3,rank4);
+    public Map<String, Object> UpdateOrder_score(int uid, int id, int rank1, int rank2, int rank3, int rank4,int rank) {
+        Call<Demtest> call=oredr_http.Updatepingfen(uid,id,rank1,rank2,rank3,rank4,rank);
         call.enqueue(new Callback<Demtest>() {
             @Override
             public void onResponse(Call<Demtest> call, Response<Demtest> response) {
@@ -288,8 +288,8 @@ public class Order implements Order_init {
     评论订单
      */
     @Override
-    public Map<String, Object> Comment_Order(int uid, int source_id, String content, long picture) {
-        Call<Demtest> call=oredr_http.PinglunOredr(uid,source_id,content,picture);
+    public Map<String, Object> Comment_Order(int uid, int source_id, String content, long picture,int rank,int rank4) {
+        Call<Demtest> call=oredr_http.PinglunOredr(uid,source_id,content,picture,rank,rank4);
         call.enqueue(new Callback<Demtest>() {
             @Override
             public void onResponse(Call<Demtest> call, Response<Demtest> response) {
@@ -336,8 +336,8 @@ public class Order implements Order_init {
 
     //创建临时订单
     @Override
-    public void  CreateOrder(int uid, int teacher_id , int requirement_id, float fee,int course_id,int grade_id, final Requirdetailed requirdetailed,String address){
-        Call<Demtest> call=oredr_http.Createorder(uid,teacher_id,requirement_id,fee,course_id,grade_id,address);
+    public void  CreateOrder(int uid, int teacher_id , int requirement_id, float fee,int course_id,int grade_id, final Requirdetailed requirdetailed,String address,double lat,double lng){
+        Call<Demtest> call=oredr_http.Createorder(uid,teacher_id,requirement_id,fee,course_id,grade_id,address,lat,lng);
         call.enqueue(new Callback<Demtest>() {
             @Override
             public void onResponse(Call<Demtest> call, Response<Demtest> response) {

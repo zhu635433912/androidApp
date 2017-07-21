@@ -98,6 +98,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private String myid;
     private String address;
     private ImageButton backImage;
+    private TextView successTv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -115,6 +116,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         Teachergerjianjie= (TextView) findViewById(R.id.gerjianjie);
         pingjia= (TextView) findViewById(R.id.pingjia);
         grfanhui= (RelativeLayout) findViewById(R.id.grfanhui);
+        successTv = (TextView) findViewById(R.id.gerxxxuexiquana);
         gerxxxuexiquan= (TextView) findViewById(R.id.gerxxxuexiquan);
         jiaoyi= (RelativeLayout) findViewById(R.id.jiaoyi);
         gerrxxedintext= (ListView) findViewById(R.id.gerrxxedintext);
@@ -131,6 +133,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         jiaoyi.bringToFront();
         grfanhui.bringToFront();
 
+        successTv.setOnClickListener(this);
         jubaoTv.setOnClickListener(this);
         imageButton.setOnClickListener(this);
         imageButton2.setOnClickListener(this);
@@ -299,6 +302,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                                 //创建订单
                                 order_init.Establish_Order(uid,teacherId,Integer.parseInt(myid),coursefee,courseNumber,Integer.parseInt(courseId),Integer.parseInt(gradeId),servicetype,User_id.getAddress());
                                 Toast.makeText(UserxinxiActivty.this,"购买课程成功",Toast.LENGTH_SHORT).show();
+                                new Getdata().sendMessage("有人购买了你的课程哦,快去看看吧",mobile);
                                 Intent intent=new Intent(UserxinxiActivty.this,MyOrderActivity.class);
                                 startActivity(intent);
                             }
@@ -349,6 +353,12 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.gerxxxuexiquana:
+                //跳转成交率
+                Intent intent1 = new Intent(UserxinxiActivty.this, Closing.class);
+                intent1.putExtra("Requir_id",Requir_id+"");
+                startActivity(intent1);
+                break;
             case R.id.userxinxi_back:
                 finish();
                 break;
@@ -389,10 +399,10 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
             case R.id.imageButton2:
                 //聊天
 //                Intent intent1 = new Intent(UserxinxiActivty.this, HuihuaActivity.class);
-                Intent intent1 = new Intent(UserxinxiActivty.this, ChatActivity.class);
-                intent1.putExtra(EaseConstant.EXTRA_USER_ID, username);
-                intent1.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
-                startActivity(intent1);
+                Intent intent2 = new Intent(UserxinxiActivty.this, ChatActivity.class);
+                intent2.putExtra(EaseConstant.EXTRA_USER_ID, mobile);
+                intent2.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
+                startActivity(intent2);
                 break;
             case R.id.imageButton:
                 Toast.makeText(this, "已发送好友申请", Toast.LENGTH_SHORT).show();
@@ -435,53 +445,8 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         }
     }
 
-
-
-    public void setbitmap(final String pate){
-        //创建一个新线程，用于从网络上获取图片
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //从网络上获取图片
-                final Bitmap bitmap=getPicture(pate);
-                //发送一个Runnable对象
-                gerxxtoux.post(new Runnable(){
-
-                    @Override
-                    public void run() {
-                        gerxxtoux.setImageBitmap(bitmap);//在ImageView中显示从网络上获取到的图片
-                        jiaoyishuax.setVisibility(View.GONE);
-                    }
-
-                });
-
-            }
-        }).start();//开启线程
-    }
-    /*
-     * 功能:根据网址获取图片对应的Bitmap对象
-     * @param path
-     * @return Bitmap
-     * */
-    public Bitmap getPicture(String path){
-        Bitmap bm=null;
-        URL url;
-        try {
-            url = new URL(path);//创建URL对象
-            URLConnection conn=url.openConnection();//获取URL对象对应的连接
-            conn.connect();//打开连接
-            InputStream is=conn.getInputStream();//获取输入流对象
-            bm= BitmapFactory.decodeStream(is);//根据输入流对象创建Bitmap对象
-        } catch (MalformedURLException e1) {
-            e1.printStackTrace();//输出异常信息
-        }catch (IOException e) {
-            e.printStackTrace();//输出异常信息
-        }
-        return bm;
-    }
-
     @Override
     public void upcontent(Map<String,Object> map) {
-        gerxxxuexiquan.setText(map.get("comp_rate")+"");
+        gerxxxuexiquan.setText((int)(Double.parseDouble(map.get("comp_rate")+"")*100)+"%");
     }
 }

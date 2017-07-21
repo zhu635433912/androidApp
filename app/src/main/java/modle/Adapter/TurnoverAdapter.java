@@ -43,8 +43,8 @@ public class TurnoverAdapter extends ListBaseAdapter {
         holder = (ViewHolder) convertView.getTag();
         holder.turnIdTv.setText(list.get(position).get("id")+"");
         holder.turnNameTv.setText(list.get(position).get("nickname")+"");
-        Date d = new Date(Long.parseLong((String)list.get(position).get("created")));
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date d = new Date(Long.parseLong((String)list.get(position).get("created")+"")*1000);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         holder.turnTimeTv.setText(sdf.format(d)+"");
         String type = list.get(position).get("status")+"";
         if (type.equals("1")){

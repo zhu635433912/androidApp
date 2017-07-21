@@ -22,6 +22,12 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
+
+import modle.getdata.Getdata;
+import modle.user_ziliao.User_id;
+
 
 public class WXPayEntryActivity extends AutoLayoutActivity implements IWXAPIEventHandler {
 	
@@ -29,10 +35,12 @@ public class WXPayEntryActivity extends AutoLayoutActivity implements IWXAPIEven
 	
     private IWXAPI api;
 	private Button wancheng;
+	private int flag = 1;
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+		EventBus.getDefault().register(this);
         setContentView(R.layout.paycomplete);
         
     	api = WXAPIFactory.createWXAPI(this, "wx3815ad6bb05c5aca");
@@ -49,6 +57,7 @@ public class WXPayEntryActivity extends AutoLayoutActivity implements IWXAPIEven
 		wancheng.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				finish();
 				Intent intent=new Intent(WXPayEntryActivity.this,MyOrderActivity.class);
 				startActivity(intent);
 				Toast.makeText(WXPayEntryActivity.this,"赶快去学习吧~",Toast.LENGTH_SHORT).show();
@@ -67,6 +76,13 @@ public class WXPayEntryActivity extends AutoLayoutActivity implements IWXAPIEven
 	public void onReq(BaseReq req) {
 	}
 
+	@Subscriber(tag = "telphone")
+	public void getTelPhone(String telphone){
+		if (flag == 0){
+			new Getdata().sendMessage(User_id.getNickName()+"已支付订单",telphone);
+		}
+	}
+
 	@Override
 	public void onResp(BaseResp resp) {
 		if (resp.errCode==-1){
@@ -76,6 +92,7 @@ public class WXPayEntryActivity extends AutoLayoutActivity implements IWXAPIEven
 			Toast.makeText(this, "取消支付", Toast.LENGTH_SHORT).show();
 			finish();
 		}
+		flag = resp.errCode;
 //		Log.d("aa", "onPayFinish, errCode = " + resp.errCode);
 
 //		if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
@@ -84,5 +101,11 @@ public class WXPayEntryActivity extends AutoLayoutActivity implements IWXAPIEven
 //			builder.setMessage(getString(R.string.pay_result_callback_msg, String.valueOf(resp.errCode)));
 //			builder.show();
 //		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		EventBus.getDefault().unregister(this);
 	}
 }

@@ -18,6 +18,7 @@ import com.deguan.xuelema.androidapp.SetUp;
 import com.deguan.xuelema.androidapp.Teacher_management;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.hyphenate.chat.EMClient;
 
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
@@ -60,6 +61,12 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
     ViewPager new_techaer_viewpage;
     @ViewById(R.id.toolbar)
     Toolbar toolbar;
+    @ViewById(R.id.unread_address_number)
+    TextView unreadLabel;
+    @ViewById(R.id.teacher_chat)
+    ImageView chatImage;
+    @ViewById(R.id.teacher_my)
+    ImageView mychatImage;
 
     private int uid;
     private int role;
@@ -85,6 +92,8 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
         teacher_setup.setOnClickListener(this);
         myfee.setOnClickListener(this);
         huanxin_but.setOnClickListener(this);
+        chatImage.setOnClickListener(this);
+        mychatImage.setOnClickListener(this);
     }
 
     @Override
@@ -107,6 +116,16 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.teacher_chat:
+                Intent intent3 = new Intent();
+                intent3.setClass(getActivity(), modle.Huanxing.ui.NewHuanxinMainActivity.class);
+                startActivity(intent3);
+                break;
+            case R.id.teacher_my:
+                Intent intent13 = new Intent();
+                intent13.setClass(getActivity(), modle.Huanxing.ui.MainActivity.class);
+                startActivity(intent13);
+                break;
             case R.id.techaer_massge:
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), Teacher_management.class);
@@ -123,9 +142,9 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
                 startActivity(intent2);
                 break;
             case R.id.huanxin_but:
-                Intent intent3 = new Intent();
-                intent3.setClass(getActivity(), modle.Huanxing.ui.MainActivity.class);
-                startActivity(intent3);
+                Intent intent23 = new Intent();
+                intent23.setClass(getActivity(), modle.Huanxing.ui.MainActivity.class);
+                startActivity(intent23);
                 break;
             case R.id.teacher_loc:
                 Intent intent4 = new Intent(getActivity(), Personal_Activty.class);
@@ -136,7 +155,7 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
     @Subscriber(tag = "headUrl")
     private void updateHead(File msg){
 //        Glide.with(this).load(msg).into(teacher_loc);
-        Glide.with(this).load(msg).placeholder(R.mipmap.ic_launcher).transform(new GlideCircleTransform(getContext())).into(teacher_loc);
+        Glide.with(this).load(msg).transform(new GlideCircleTransform(getContext())).into(teacher_loc);
     }
     @Subscriber(tag = "update")
     public void updateMsg(String msg){
@@ -148,7 +167,7 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
      */
     @Override
     public void Updatecontent(Map<String, Object> map) {
-        Glide.with(this).load(map.get("headimg").toString()).placeholder(R.mipmap.ic_launcher).transform(new GlideCircleTransform(getContext())).into(teacher_loc);
+        Glide.with(this).load(map.get("headimg").toString()).transform(new GlideCircleTransform(getContext())).into(teacher_loc);
         teacher_name.setText(map.get("nickname")+"");
         teacher_autograph.setText(map.get("signature")+"");
     }
@@ -162,5 +181,25 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
     public void onDestroy() {
         EventBus.getDefault().unregister(this);
         super.onDestroy();
+    }
+
+    public int getUnreadMsgCountTotal() {
+        return EMClient.getInstance().chatManager().getUnreadMsgsCount();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUnreadLabel();
+    }
+
+    public void updateUnreadLabel() {
+        int count = getUnreadMsgCountTotal();
+        if (count > 0) {
+            unreadLabel.setText(count + "");
+            unreadLabel.setVisibility(View.VISIBLE);
+        } else {
+            unreadLabel.setVisibility(View.INVISIBLE);
+        }
     }
 }

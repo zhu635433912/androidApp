@@ -1,12 +1,14 @@
 package modle.Teacher_Modle;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.widget.ListView;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.viewimpl.PayView;
 import com.deguan.xuelema.androidapp.viewimpl.TeacherView;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import control.Myconteol_init;
 import control.Mycontrol;
@@ -37,32 +40,60 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class Teacher implements Teacher_init {
-    private Map<String,Object> map;
+    private Map<String, Object> map;
     private Retrofit retrofit;
     private Teacher_http teacher_http;
-    private List<Map<String,Object>> listmap;
+    private List<Map<String, Object>> listmap;
     private TeacherView teacherView;
+
     //初始化网络访问对象
-    public Teacher(){
-        map=new HashMap<String,Object>();
-        retrofit=new Retrofit.Builder().baseUrl(MyUrl.URL)
+    public Teacher() {
+        map = new HashMap<String, Object>();
+        retrofit = new Retrofit.Builder().baseUrl(MyUrl.URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        teacher_http=retrofit.create(Teacher_http.class);
+        teacher_http = retrofit.create(Teacher_http.class);
     }
 
     //初始化网络访问对象
-    public Teacher(TeacherView teacherView){
+    public Teacher(TeacherView teacherView) {
         this.teacherView = teacherView;
-        map=new HashMap<String,Object>();
-        retrofit=new Retrofit.Builder().baseUrl(MyUrl.URL)
+        map = new HashMap<String, Object>();
+        retrofit = new Retrofit.Builder().baseUrl(MyUrl.URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        teacher_http=retrofit.create(Teacher_http.class);
+        teacher_http = retrofit.create(Teacher_http.class);
     }
 
+
+    /*
+    获取教师个人资料
+     */
+    @Override
+    public Map<String, Object> Get_Teacher1(int uid, final PayView requirdetailed) {
+        Call<User_Modle> call = teacher_http.getTeacherziliao(uid);
+        call.enqueue(new Callback<User_Modle>() {
+            @Override
+            public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {
+                String error = response.body().getError();
+                if (error.equals("ok")) {
+                    Map<String,Object> maps = response.body().getContent();
+                    requirdetailed.successPay(maps);
+                } else {
+                    String errmsg = response.body().getErrmsg();
+                    Log.e("aa", "获取教师个人资料错误=" + errmsg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User_Modle> call, Throwable t) {
+                Log.e("aa", "获取教师个人资料异常错误=" + t.toString());
+            }
+        });
+        return null;
+    }
 
     /*
     获取教师个人资料
@@ -133,9 +164,9 @@ public class Teacher implements Teacher_init {
     获取教师列表
      */
     @Override
-    public List<Map<String, Object>> Get_Teacher_list(int uid, final int role, String lat, String lng, final PullToRefreshListView listView, final Context context, int order, String
-            state, int gender, int speciality, int grade_type, int order_rank, final Requirdetailed requirdetailed,int page) {
-        Call<ContentModle> call=teacher_http.getTeacherlist(uid,lat,lng,order,state,gender,speciality,grade_type,order_rank,page);
+    public List<Map<String, Object>> Get_Teacher_list(int uid, final int role, String lat, String lng, final RecyclerView listView, final Context context, int order, String
+            state, int gender, int speciality, int grade_type, int order_rank, final Requirdetailed requirdetailed, int page,int course_id) {
+        Call<ContentModle> call=teacher_http.getTeacherlist(uid,lat,lng,order,state,gender,speciality,grade_type,order_rank,page,course_id);
         listmap=new ArrayList<Map<String, Object>>();
         call.enqueue(new Callback<ContentModle>() {
             @Override
@@ -218,6 +249,52 @@ public class Teacher implements Teacher_init {
             }
         });
         return null;
+    }
+    //身份证正面
+    @Override
+    public void Teacher_update5(int uid, String others) {
+        Call<Demtest> call=teacher_http.getTeachergenxin5(uid,others);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                Log.e("aa","error"+error);
+                if (error.equals("ok")){
+                    Log.e("aa","更新教师资料成功");
+                }else {
+                    String errmsg=response.body().getErrmsg();
+                    Log.e("aa","更新教师资料错误="+errmsg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                Log.e("aa","更新教师资料异常错误="+t.toString());
+            }
+        });
+    }
+    //身份证反面
+    @Override
+    public void Teacher_update6(int uid, String others) {
+        Call<Demtest> call=teacher_http.getTeachergenxin6(uid,others);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                Log.e("aa","error"+error);
+                if (error.equals("ok")){
+                    Log.e("aa","更新教师资料成功");
+                }else {
+                    String errmsg=response.body().getErrmsg();
+                    Log.e("aa","更新教师资料错误="+errmsg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                Log.e("aa","更新教师资料异常错误="+t.toString());
+            }
+        });
     }
 
     /*
@@ -466,7 +543,7 @@ public class Teacher implements Teacher_init {
             }
         });
     }
-
+    //教师签名
     @Override
     public void Teacher_signature(int uid, String signature) {
         Call<Demtest> call=teacher_http.getsignature(uid,signature);

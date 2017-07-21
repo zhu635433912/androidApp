@@ -1,5 +1,7 @@
 package com.deguan.xuelema.androidapp.entities;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Map;
 
 /**
@@ -35,8 +37,11 @@ import java.util.Map;
  * 修改备注：
  */
 public class PayEntity {
+    @SerializedName("error")
     private String error;
+    @SerializedName("errmsg")
     private String errmsg;
+    @SerializedName("content")
     private Map<String,Object> content;
 
     public String getError() {

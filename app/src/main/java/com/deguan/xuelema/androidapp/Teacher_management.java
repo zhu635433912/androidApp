@@ -41,6 +41,7 @@ import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.utils.SubjectUtil;
+import com.deguan.xuelema.androidapp.viewimpl.TurnoverView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 
@@ -72,17 +73,17 @@ import modle.user_ziliao.User_id;
  * 教师管理
  */
 
-public class Teacher_management extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed,Student_init {
+public class Teacher_management extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed,Student_init, TurnoverView {
     private TextView zhonglei;
     private RelativeLayout jiaoshiguanlifanhui;
     private TextView kemuzhonglei;
     private TextView editText2;
     private EditText shanggmenfee;
     private EditText xueshengfee;
-    private Button naxt;
+    private Button naxt,educationBtn,bookBtn;
     private int kcid=206;
     private EditText gerjianjietext_edi;
-    private EditText techang;
+    private TextView techang;
     private EditText biyexuex;
     private Button baocunjiaoshi;
     private Teacher_init teacher_init;
@@ -102,6 +103,8 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
     private String others_2;
     private String others_3;
     private String others_4;
+    private String others_5;
+    private String others_6;
     private LinearLayout rongyuimage;
     private int TAGE_ISRONT;
     private File image;
@@ -109,12 +112,19 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
     private Increase_course increase_course;
     private TextView serviceTv;
     private int kechengType = 1;
-    private EditText signEdit;
+//    private EditText signEdit;
     private int flag = 1;
-    private ImageView classImage;
-    private TextView classImageChange;
+//    private ImageView classImage;
+//    private TextView classImageChange;
     private ImageView xueliImage1,xueliImage2,rongyuImage1,rongyuImage2;
     private int grade_id;
+    private EditText educationEdit;
+    private TextView teacherYearEdit;
+    private RelativeLayout tianjiasfenz;
+    private ImageView postuserimage1;
+    private ImageView postuserimage2;
+    private TextView kechenfengmian;
+    private boolean ispass = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -122,13 +132,17 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         setContentView(R.layout.teachers_management);
         User_id.getInstance().addActivity(this);
 
+        educationBtn = (Button) findViewById(R.id.tianjiaxuelitubiao);
+        bookBtn = (Button) findViewById(R.id.tianjiarongyuztubiao);
+        educationEdit = (EditText) findViewById(R.id.education_et);
+        teacherYearEdit = (TextView) findViewById(R.id.teacher_year_et);
         xueliImage1 = (ImageView) findViewById(R.id.xueli_image1);
         xueliImage2 = (ImageView) findViewById(R.id.xueli_image2);
         rongyuImage1 = (ImageView) findViewById(R.id.rongyu_image1);
         rongyuImage2 = (ImageView) findViewById(R.id.rongyu_image2);
-        classImageChange = (TextView) findViewById(R.id.class_image_change);
-        classImage = (ImageView) findViewById(R.id.class_image);
-        signEdit = (EditText) findViewById(R.id.person_sign);
+//        classImageChange = (TextView) findViewById(R.id.class_image_change);
+//        classImage = (ImageView) findViewById(R.id.class_image);
+//        signEdit = (EditText) findViewById(R.id.person_sign);
         rongyuimage= (LinearLayout) findViewById(R.id.rongyuimage);
         xuelimage= (LinearLayout) findViewById(R.id.xueliimage);
         jiaoshiguanlifanhui= (RelativeLayout) findViewById(R.id.jiaoshiguanlifanhui);
@@ -141,17 +155,19 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         tianjiazhengshu= (RelativeLayout) findViewById(R.id.tianjiazhengshu);
         gerjianjietext_edi= (EditText) findViewById(R.id.gerjianjietext_edi);
         naxt= (Button) findViewById(R.id.naxt);
-        techang= (EditText) findViewById(R.id.techang);
+        techang= (TextView) findViewById(R.id.techang);
         biyexuex= (EditText) findViewById(R.id.biyexuex);
         viw= (RelativeLayout) findViewById(R.id.viw);
         baocunjiaoshi= (Button) findViewById(R.id.baocunjiaoshi);
         tianjiaxueli= (RelativeLayout) findViewById(R.id.tianjiaxueli);
         kechengitme= (ListView) findViewById(R.id.kechengitme);
+        tianjiasfenz= (RelativeLayout) findViewById(R.id.tianjiasfenz);
+        postuserimage1= (ImageView) findViewById(R.id.postuserimage1);
+        postuserimage2= (ImageView) findViewById(R.id.postuserimage2);
         jiaoshiguanlifanhui.bringToFront();
 //        serviceTv = (TextView) findViewById(R.id.kecheng_service_type);
-        viw.setVisibility(View.GONE);
-
-        classImageChange.setOnClickListener(this);
+        tianjiasfenz.setOnClickListener(this);
+//        classImageChange.setOnClickListener(this);
 //        serviceTv.setOnClickListener(this);
         tianjiaxueli.setOnClickListener(this);
         tianjiazhengshu.setOnClickListener(this);
@@ -164,6 +180,11 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         kemuzhonglei.setOnClickListener(this);
         zhonglei.setOnClickListener(this);
         jiaoshiguanlifanhui.setOnClickListener(this);
+        educationEdit.setOnClickListener(this);
+        teacherYearEdit.setOnClickListener(this);
+        techang.setOnClickListener(this);
+        educationBtn.setOnClickListener(this);
+        bookBtn.setOnClickListener(this);
 
         //去获取教师详细资料
         uid=Integer.parseInt(User_id.getUid());
@@ -172,8 +193,11 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
 
         View view = getLayoutInflater().inflate(R.layout.layout_dialog_pick, null);
         mPickDialog = new android.app.AlertDialog.Builder(this).setView(view).create();
+
         View view2 = getLayoutInflater().inflate(R.layout.dialog_zhengshu,null);
         zhengshuDialog = new AlertDialog.Builder(this).setView(view2).create();
+
+
         //获取课程
         getmCourse();
 
@@ -209,12 +233,57 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.class_image_change:
-                //添加课程图片
-                TAGE_ISRONT=3;
-                mPickDialog.show();
+            case R.id.teacher_year_et:
+
+                AlertDialog.Builder serviceTypeDialog = new AlertDialog.Builder(Teacher_management.this);
+                serviceTypeDialog.setIcon(R.drawable.add04);
+                serviceTypeDialog.setTitle("请选择服务类型");
+                //    指定下拉列表的显示数据
+                final String[] fuwuType = {"1年", "2年", "3年" ,"4年", "5年","6年","7年" ,"8年", "9年","10年",
+                        "11年", "12年", "13年" ,"14年", "15年","16年","17年" ,"18年", "19年","20年",
+                        "21年", "22年", "23年" ,"24年", "25年","26年","27年" ,"28年", "29年","30年",
+                        "31年", "32年", "33年" ,"34年", "35年","36年","37年" ,"38年", "39年","40年",
+                        "41年", "42年", "43年" ,"44年", "45年","46年","47年" ,"48年", "49年","50年"
+
+                };
+                //    设置一个下拉的列表选择项
+                serviceTypeDialog.setItems(fuwuType, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        teacherYearEdit.setText(fuwuType[which]);
+//                        int years=Integer.parseInt(edit.getText().toString());
+                        teacher_init.Teacher_years(uid,which+1);
+                    }
+                });
+                serviceTypeDialog.show();
+                break;
+            case R.id.techang:
+                AlertDialog.Builder xueleTypeDialog = new AlertDialog.Builder(Teacher_management.this);
+                xueleTypeDialog.setIcon(R.drawable.add04);
+                xueleTypeDialog.setTitle("请选择学历");
+                //    指定下拉列表的显示数据
+                final String[] xueliType = {"无","大专", "本科","研究生", "硕士" ,"博士"};
+                //    设置一个下拉的列表选择项
+                xueleTypeDialog.setItems(xueliType, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        techang.setText(xueliType[which]);
+//                        int years=Integer.parseInt(edit.getText().toString());
+//                        teacher.Teacher_years(uid,which+1);
+//                        education_id = which;
+                        new User_Realization().UpdateEducation(uid,which);
+                    }
+                });
+                xueleTypeDialog.show();
+
 
                 break;
+//            case R.id.class_image_change:
+//                //添加课程图片
+//                TAGE_ISRONT=3;
+//                mPickDialog.show();
+//
+//                break;
             case R.id.jiaoshiguanlifanhui:
                 Teacher_management.this.finish();
                 break;
@@ -333,11 +402,16 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                                     Increase_course inc=new Increase_course();
                                     int laoshifee=Integer.parseInt(shanggmenfee.getText().toString());
                                     int xuesfee=Integer.parseInt(xueshengfee.getText().toString());
-//                                    int xuesfee = 0;
-                                    inc.Addcourse(uid,kcid,editText2.getText().toString(),laoshifee,xuesfee,6,grade_id);
-                                    Toast.makeText(Teacher_management.this,"增加课程成功",Toast.LENGTH_SHORT).show();
+//                                         int xuesfee = 0;
+                                    if (ispass) {
+                                        inc.Addcourse(uid, kcid, editText2.getText().toString(), laoshifee, xuesfee, 6, grade_id, Teacher_management.this);
+
+                                        Toast.makeText(Teacher_management.this, "增加课程成功", Toast.LENGTH_SHORT).show();
+                                    }else {
+                                        Toast.makeText(Teacher_management.this, "请完善信息等待审核通过", Toast.LENGTH_SHORT).show();
+                                    }
                                     //刷新课程
-                                    getmCourse();
+//                                    getmCourse();
                                     viw.setVisibility(View.GONE);
                                 }
                             }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -350,9 +424,9 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 break;
             case R.id.baocunjiaoshi:
                 String dei=gerjianjietext_edi.getText().toString();
-                String tec=techang.getText().toString();
+                String tec=educationEdit.getText().toString();
                 String biy=biyexuex.getText().toString();
-                String signText = signEdit.getText().toString()+"";
+//                String signText = signEdit.getText().toString()+"";
 
                 if (dei.equals("")||tec.equals("")||biy.equals("")){
                     Toast.makeText(Teacher_management.this,"个人介绍不能为空!",Toast.LENGTH_LONG).show();
@@ -360,15 +434,26 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                     teacher_init.Teacher_resume(uid,dei);
                     teacher_init.Teacher_speciality(uid,tec);
                     teacher_init.Teacher_graduated_school(uid,biy);
-                    teacher_init.Teacher_signature(uid,signText);
+//                    teacher_init.Teacher_signature(uid,signText);
                     Toast.makeText(Teacher_management.this,"更新个人信息成功!",Toast.LENGTH_LONG).show();
                 }
 
+                break;
+            case R.id.tianjiarongyuztubiao:
+                //添加荣誉证书图片
+                TAGE_ISRONT=2;
+//                Toast.makeText(this, "暂不用", Toast.LENGTH_SHORT).show();
+                mPickDialog.show();
                 break;
             case R.id.tianjiazhengshu:
                 //添加荣誉证书图片
                 TAGE_ISRONT=2;
 //                Toast.makeText(this, "暂不用", Toast.LENGTH_SHORT).show();
+                mPickDialog.show();
+                break;
+            case R.id.tianjiaxuelitubiao:
+                //添加学历图片
+                TAGE_ISRONT=1;
                 mPickDialog.show();
                 break;
             case R.id.tianjiaxueli1:
@@ -377,6 +462,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 mPickDialog.show();
                 break;
             case R.id.zhengshu_dialog_pick:
+
                 flag = 1 ;
                 new User_Realization().setuserbitmap(image,this);
                 zhengshuDialog.dismiss();
@@ -401,7 +487,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                                     Manifest.permission.ACCESS_COARSE_LOCATION,
                                     Manifest.permission.ACCESS_FINE_LOCATION,
                                     Manifest.permission.READ_PHONE_STATE,
-                                    android.Manifest.permission.CAMERA
+                                    Manifest.permission.CAMERA
                             )
                             .request();
 //
@@ -421,8 +507,34 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                     viw.setVisibility(View.GONE);
                 }
                 break;
+            case R.id.tianjiasfenz:
+                TAGE_ISRONT=4;
+                mPickDialog.show();
+                break;
+            case R.id.xueli_image1:
+                setIntentimage(others_1);
+                break;
+            case R.id.xueli_image2:
+                setIntentimage(others_2);
+                break;
+            case R.id.rongyu_image1:
+                setIntentimage(others_3);
+                break;
+            case R.id.rongyu_image2:
+                setIntentimage(others_4);
+                break;
+            case R.id.postuserimage1:
+                setIntentimage(others_5);
+                break;
+            case R.id.postuserimage2:
+                setIntentimage(others_6);
+                break;
         }
-
+    }
+    public void setIntentimage(String hdie){
+        Intent intent=new Intent(this,PictureZoo.class);
+        intent.putExtra("hide",hdie);
+        startActivity(intent);
     }
 
     @Override
@@ -457,18 +569,32 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
     public void Updatefee(List<Map<String, Object>> listmap) {
         Map<String,Object> map=new HashMap<String,Object>();
         map=listmap.get(0);
-        signEdit.setText(map.get("signature")+"");
-        techang.setText(map.get("speciality")+"");
-        gerjianjietext_edi.setText(map.get("resume")+"");
-        biyexuex.setText(map.get("graduated_school")+"");
+//        signEdit.setText(map.get("signature")+"");
+        educationEdit.setText(map.get("speciality")+"");
+        if (map.get("is_passed").equals("1")){
+            ispass = true;
+        }
+        if (map.get("graduated_school")!=null)
+            biyexuex.setText(map.get("graduated_school")+"");
+        if (map.get("resume") != null)
+            gerjianjietext_edi.setText(map.get("resume")+"");
         others_1=map.get("others_1")+"";
         others_2=map.get("others_2")+"";
         others_3=map.get("others_3")+"";
         others_4=map.get("others_4")+"";
+        others_5=map.get("others_5")+"";
+        others_6=map.get("others_6")+"";
+        if (map.get("education")!=null)
+            techang.setText(map.get("education")+"");
+        if (map.get("years") != null)
+            teacherYearEdit.setText(map.get("years")+"年");
         String classimage = map.get("class_img")+"";
         if (classimage != null){
-            Glide.with(this).load(classimage).into(classImage);
+//            Glide.with(this).load(classimage).into(classImage);
         }
+        Glide.with(this).load(map.get("others_5")).into(postuserimage1);
+        Glide.with(this).load(map.get("others_6")).into(postuserimage2);
+
         //判断服务器返回是否由照片
        if (others_1!=null&&others_2!=null){
 //        String[] ot1={others_1,others_2};
@@ -526,7 +652,10 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                     new User_Realization().setuserbitmap(image,this);
                 }else if (TAGE_ISRONT == 2){
                     zhengshuDialog.show();
+                }else if (TAGE_ISRONT==4){
+                    zhengshuDialog.show();
                 }
+
 
 
             }
@@ -674,6 +803,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
     }
 
 
+
     @Override
     public void setListview1(List<Map<String, Object>> listmap) {
         //更新用户证书
@@ -690,7 +820,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
             }
         }else if (TAGE_ISRONT == 3){
             teacher_init.Teacher_updateSubjectBg(uid, map.get("imageurl").toString());
-            Glide.with(this).load(map.get("imageurl")).into(classImage);
+//            Glide.with(this).load(map.get("imageurl")).into(classImage);
         }else if (TAGE_ISRONT == 2){
             if (flag == 1) {
                 teacher_init.Teacher_update3(uid, map.get("imageurl").toString());
@@ -701,7 +831,17 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
 //                Glide.with(this).load(map.get("imageurl")).into(classImage);
                 Glide.with(this).load(map.get("imageurl")).into(rongyuImage2);
             }
+        }else if (TAGE_ISRONT == 4){
+            if (flag == 1) {
+                teacher_init.Teacher_update5(uid, map.get("imageurl").toString());
+                Glide.with(this).load(map.get("imageurl")).into(postuserimage1);
+            }else  if (flag == 2){
+                teacher_init.Teacher_update6(uid, map.get("imageurl").toString());
+                Glide.with(this).load(map.get("imageurl")).into(postuserimage2);
+            }
+
         }
+
         Toast.makeText(this,"更新成功",Toast.LENGTH_LONG).show();
     }
 
@@ -838,4 +978,13 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         return listbimap;
     }
 
+    @Override
+    public void successTurnover(List<Map<String, Object>> list) {
+        getmCourse();
+    }
+
+    @Override
+    public void failTurnover(String msg) {
+
+    }
 }

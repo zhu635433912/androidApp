@@ -56,9 +56,10 @@ public class TuijianModelImpl extends BaseModel implements TuijianModel {
     }
 
     @Override
-    public void getTuijianData(Callback<TuijianListEntity> callback, int course_id, int grade_id, String address, String lat, String lng) {
+    public void getTuijianData(Callback<TuijianListEntity> callback, int uid, int grade_id, String address, String lat, String lng) {
 //        service.gettuijianjiaoshi(course_id,grade_id,address,lat,lng);
         service.gettuijianjiaoshi(
+                uid,
 //                course_id,grade_id,
 //                address,
                 lat,lng).enqueue(callback);

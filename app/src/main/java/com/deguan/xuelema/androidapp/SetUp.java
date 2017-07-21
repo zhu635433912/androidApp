@@ -110,6 +110,7 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
                                 editor.remove("username");
                                 editor.remove("password");
                                 editor.remove("state");
+                                editor.remove("nickname");
                                 editor.commit();
                                 logout();
                                 Intent intent2=new Intent(SetUp.this, LoginAcitivity.class);

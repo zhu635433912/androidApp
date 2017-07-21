@@ -3,9 +3,12 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/wan_relaivtlayout"
-    android:background="@mipmap/login_backgroud"
+    android:fitsSystemWindows="false"
+    android:background="@drawable/login_backgroud"
     android:layout_height="match_parent">
+
     <ImageButton
+        android:visibility="gone"
      android:id="@+id/wan_imagebutton"
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
@@ -42,13 +45,15 @@
         android:layout_marginBottom="10dp"
         android:id="@+id/imageView" />
 
+
     <RelativeLayout
-        android:id="@+id/wan_relativelayout1"
         android:background="@drawable/mask"
+        android:id="@+id/wan_relativelayout1"
         android:layout_width="534px"
         android:layout_height="782px"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
+
     <TextView
         android:id="@+id/wan_textviewdeng"
         android:layout_marginLeft="70px"

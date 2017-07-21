@@ -75,12 +75,16 @@ public class DmadFragmengt extends BaseFragment implements SimilarXuqiuView {
         //        xuqiuAdapter = new XuqiuAdapter(list,getActivity());
             uid=Integer.parseInt(User_id.getUid());
         demand=new Demand(this);
-        demand.getTuijianDemand_list(0,0,User_id.getLat()+"",""+User_id.getLng(),"",null,null,null,null,null);
+        if (list.size() > 0){
+
+        }else {
+            demand.getTuijianDemand_list(0,User_id.getUid(),User_id.getLat()+"",""+User_id.getLng(),"",null,null,null,null,null);
+        }
 
         tacher_top_list_swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
-                    demand.getTuijianDemand_list(0,0,User_id.getLat()+"",""+User_id.getLng(),"",null,null,null,null,null);
+                    demand.getTuijianDemand_list(0,User_id.getUid(),User_id.getLat()+"",""+User_id.getLng(),"",null,null,null,null,null);
                 }
             });
     }

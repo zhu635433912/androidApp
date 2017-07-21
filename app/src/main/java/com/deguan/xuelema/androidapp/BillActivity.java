@@ -23,6 +23,10 @@ import modle.Huanxing.ui.BaseActivity;
 import modle.getdata.Getdata;
 import modle.user_ziliao.User_id;
 
+
+/**
+ * 账单页面
+ */
 @EActivity(R.layout.activity_bill)
 public class BillActivity extends MyBaseActivity implements TurnoverView {
 

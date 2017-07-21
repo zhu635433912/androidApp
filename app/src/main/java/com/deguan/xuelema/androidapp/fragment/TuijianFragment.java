@@ -82,8 +82,12 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
 //        });
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        tuijianPresenter =  new TuijianPresenterImpl(this,courseid,grade_id,User_id.getStatus(), User_id.getLat()+"",User_id.getLng()+"");
-        tuijianPresenter.getTuijianEntity();
+        tuijianPresenter =  new TuijianPresenterImpl(this,Integer.parseInt(User_id.getUid()),grade_id,User_id.getStatus(), User_id.getLat()+"",User_id.getLng()+"");
+        if (list.size() > 0){
+
+        }else {
+            tuijianPresenter.getTuijianEntity();
+        }
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -120,11 +124,11 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
                 entity.setFee(String.valueOf(maps.get(i).get("fee")));
                 entity.setHaoping_num((String)maps.get(i).get("haoping_num"));
                 List<Map<String,Object>> listmap = ((List<Map<String,Object>>)maps.get(i).get("information_temp"));
-//                String course_name = "";
-//                for (int j = 0; j < listmap.size(); j++) {
-//                    course_name = course_name + listmap.get(j).get("course_name")+"  ";
-//                }
-//                entity.setStatus2(course_name);
+                String course_name = "";
+                for (int j = 0; j < listmap.size(); j++) {
+                    course_name = course_name + listmap.get(j).get("course_name")+"  ";
+                }
+                entity.setStatus2(course_name);
 //            entity.setGrade_name((String)maps.get(i).get("grade_name"));
 
                 list.add(entity);
@@ -145,7 +149,7 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
     @Override
     public void onRefresh() {
         page = 1;
-        new TuijianPresenterImpl(this,courseid,grade_id,User_id.getStatus(),User_id.getLat()+"",User_id.getLng()+"").getTuijianEntity();
+        new TuijianPresenterImpl(this,Integer.parseInt(User_id.getUid()),grade_id,User_id.getStatus(),User_id.getLat()+"",User_id.getLng()+"").getTuijianEntity();
     }
 
     @Override
@@ -154,6 +158,7 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
 //                    intent.putExtra("user_id", uid);
         intent.putExtra("head_image",entity.getUser_headimg());
         intent.putExtra("user_id",entity.getUser_id());
+        intent.putExtra("myid","1");
         startActivity(intent);
     }
 

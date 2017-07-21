@@ -114,31 +114,32 @@ public class Distribution_Activty extends AutoLayoutActivity implements View.OnC
 
     @Override
     public void Updatecontent(Map<String, Object> map) {
-        if (map.get("TotalUser")!=null){
+//        if (map.get("TotalUser")!=null){
             if (map.get("TotalFee")!=null){
-                zongfee+= (int) map.get("TotalFee");
+//                zongfee= (int) map.get("TotalFee");
+                leijifee.setText(map.get("TotalFee")+"");
             }
-        if (yijifee.getText().toString().equals("")){
-            z=2;
-            if (map.get("TotalFee")==null) {
-                yijifee.setText("0.00");
-            }else {
-                yijifee.setText((String) map.get("TotalFee"));
-                zongfee+=(int)map.get("TotalFee");
+//        if (yijifee.getText().toString().equals("")){
+//            z=2;
+            if (map.get("TotalFee1")!=null) {
+                yijifee.setText(map.get("TotalFee1")+"");
+//            }else {
+//                yijifee.setText((String) map.get("TotalFee"));
+//                zongfee+=(int)map.get("TotalFee");
             }
-        }
-         if (z==2){
-             if (erjifee.getText().toString().equals("")){
-                 if (map.get("TotalFee")==null) {
-                     erjifee.setText("0.00");
-                 }else {
-                     erjifee.setText((String) map.get("TotalFee"));
-                     zongfee+=(int)map.get("TotalFee");
+//        }
+//         if (z==2){
+//             if (erjifee.getText().toString().equals("")){
+                 if (map.get("TotalFee2") !=null) {
+                     erjifee.setText(map.get("TotalFee2")+"");
+//                 }else {
+//                     erjifee.setText((String) map.get("TotalFee"));
+//                     zongfee+=(int)map.get("TotalFee");
                  }
-             }
-         }
-        leijifee.setText(""+zongfee);
-        }
+//             }
+//         }
+//        leijifee.setText(""+zongfee);
+//        }
 
         if (map.get("mobile")!=null) {
             Erweima erweimac = new Erweima();

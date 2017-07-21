@@ -16,6 +16,9 @@ import android.widget.RadioGroup;
 
 import com.deguan.xuelema.androidapp.entities.DownloadEntity;
 import com.deguan.xuelema.androidapp.fragment.BaseFragment_;
+import com.deguan.xuelema.androidapp.fragment.NewTeacherFragment;
+import com.deguan.xuelema.androidapp.fragment.NewTeacherFragment_;
+import com.deguan.xuelema.androidapp.fragment.StudentFragment_;
 import com.deguan.xuelema.androidapp.fragment.Teacher_infofragment;
 import com.deguan.xuelema.androidapp.fragment.Teacher_infofragment_;
 import com.deguan.xuelema.androidapp.fragment.TestFragment;
@@ -40,7 +43,7 @@ import java.util.Map;
 import modle.Huanxing.cache.UserCacheManager;
 import modle.getdata.Getdata;
 import modle.user_ziliao.User_id;
-import view.index.Teacher_fragment;
+//import view.index.Teacher_fragment;
 
 @EActivity(R.layout.activity_new_main)
 public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,DownloadView{
@@ -88,12 +91,13 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
             imageView.setImageResource(R.drawable.logo);
         }
         fragments.clear();
-        fragments.add(new Teacher_fragment());
-        fragments.add(BaseFragment_.builder().build());
-//        fragments.add(new Teacher_fragment());
         if (User_id.getRole().equals("1")) {
+            fragments.add(StudentFragment_.builder().build());
+            fragments.add(BaseFragment_.builder().build());
             fragments.add(New_StudentFragment_.builder().build());
         }else {
+            fragments.add(NewTeacherFragment_.builder().build());
+            fragments.add(BaseFragment_.builder().build());
             fragments.add(Teacher_infofragment_.builder().build());
         }
         //底部按钮切换fragment的工具类

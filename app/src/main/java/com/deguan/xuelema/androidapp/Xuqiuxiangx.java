@@ -29,6 +29,7 @@ import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.deguan.xuelema.androidapp.viewimpl.PayView;
 import com.deguan.xuelema.androidapp.viewimpl.SimilarXuqiuView;
 import com.deguan.xuelema.androidapp.viewimpl.XuqiuView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -55,6 +56,8 @@ import modle.Demand_Modle.Demand_init;
 import modle.Huanxing.ui.*;
 import modle.Order_Modle.Order;
 import modle.Order_Modle.Order_init;
+import modle.Teacher_Modle.Teacher;
+import modle.getdata.Getdata;
 import modle.toos.CircleImageView;
 import modle.user_ziliao.User_id;
 
@@ -63,7 +66,7 @@ import modle.user_ziliao.User_id;
  * 需求详细
  */
 
-public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,View.OnClickListener,Requirdetailed,PullToRefreshBase.OnRefreshListener, Student_init, SimilarXuqiuView {
+public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,View.OnClickListener,Requirdetailed,PullToRefreshBase.OnRefreshListener, Student_init, SimilarXuqiuView, PayView {
     private PullToRefreshListView listview;
     private List<Map<String, Object>> listamap;
     private TextView textView;
@@ -98,6 +101,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     private TextView phoneTv;
     private ImageButton addFriend;
     private ImageButton bohaoImage;
+    private boolean ispass = false;
 
 
     @Override
@@ -194,6 +198,8 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
                 startActivity(intent);
             }
         });
+
+        new Teacher().Get_Teacher1(Integer.parseInt(User_id.getUid()),this);
     }
 
 
@@ -231,8 +237,14 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         }
             course_id = Integer.parseInt((String)map.get("course_id"));
         grade_id = Integer.parseInt((String)map.get("grade_id"));
-        demand_init.getTuijianDemand_list(course_id,grade_id,User_id.getLat()+"",""+User_id.getLng(),null,null,null,listview,this,null);
-        String state = (String) map.get("address");
+        demand_init.getTuijianDemand_list(course_id,User_id.getUid(),User_id.getLat()+"",""+User_id.getLng(),null,null,null,listview,this,null);
+        String state = "";
+        if ((map.get("address")+"").length()>7) {
+             state = ((String) map.get("address")).substring(0,7)+"......";
+        }else {
+            state = ((String) map.get("address"));
+        }
+
         if (!TextUtils.isEmpty(map.get("ordernum").toString())){
             String ordernum =  map.get("ordernum").toString();
             textView.setText("已有"+ordernum+"人接取");
@@ -240,7 +252,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         diqu.setText(state+"");
         username = (String) map.get("publisher_mobile");
 
-        Glide.with(this).load(map.get("publisher_headimg")+"").placeholder(R.drawable.ox2).transform(new GlideCircleTransform(this)).into(xuqiuimage);
+        Glide.with(this).load(map.get("publisher_headimg")+"").transform(new GlideCircleTransform(this)).into(xuqiuimage);
         phoneTv.setText(username);
         String desc=start+" - "+end;
 
@@ -264,8 +276,8 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         Relasetime.setText(created);
         Demandcontent.setText(content);
         Requirname.setText(publisher_name);
-        kemuleibie.setText(map.get("course_name")+"");
-        nianjia.setText(map.get("grade_name")+"");
+//        kemuleibie.setText(map.get("course_name")+"");
+        nianjia.setText(map.get("course_name")+" "+map.get("grade_name")+"");
 //        setbitmap(map.get("publisher_headimg")+"");
 
     }
@@ -273,9 +285,11 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     @Override
     public void Updatefee(List<Map<String, Object>> listmap) {
         Map<String,Object> map=listmap.get(0);
+
+        if (map.get("tosa") .equals("创建订单成功")){
+            new Getdata().sendMessage("有老师接取了你的需求快去看看我的发布里吧!",username);
+        }
         Toast.makeText(Xuqiuxiangx.this,(String)map.get("tosa"),Toast.LENGTH_SHORT).show();
-
-
 
 
     }
@@ -283,57 +297,71 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     public void onClick(View v) {
         switch (v.getId()){
             case  R.id.bohao:
-                //拨号
-                Log.e("aa", "拨号成功");
-                Intent inte = new Intent(Intent.ACTION_DIAL);
-                inte.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                inte.setData(Uri.parse("tel:" + username));
-                startActivity(inte);
-
+                if (ispass) {
+                    //拨号
+                    Log.e("aa", "拨号成功");
+                    Intent inte = new Intent(Intent.ACTION_DIAL);
+                    inte.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    inte.setData(Uri.parse("tel:" + username));
+                    startActivity(inte);
+                }else {
+                    Toast.makeText(this, "请完善信息等待审核通过", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.add_friend:
-                Toast.makeText(this, "已发送好友申请", Toast.LENGTH_SHORT).show();
-                new Thread(new Runnable() {
-                    public void run() {
-                        try {
-                            //demo use a hardcode reason here, you need let user to input if you like
-                            String s = getResources().getString(R.string.Add_a_friend);
-                            EMClient.getInstance().contactManager().addContact(username, s);
-                        } catch (final Exception e) {
+                if (ispass) {
+                    Toast.makeText(this, "已发送好友申请", Toast.LENGTH_SHORT).show();
+                    new Thread(new Runnable() {
+                        public void run() {
+                            try {
+                                //demo use a hardcode reason here, you need let user to input if you like
+                                String s = getResources().getString(R.string.Add_a_friend);
+                                EMClient.getInstance().contactManager().addContact(username, s);
+                            } catch (final Exception e) {
 
+                            }
                         }
-                    }
-                }).start();
+                    }).start();
+                }else {
+                    Toast.makeText(this, "请完善信息等待审核通过", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.xuqiufanhui:
                 Xuqiuxiangx.this.finish();
                 break;
             case R.id.xuqiuweix:
-                //聊天
+                if (ispass) {
+                    //聊天
 //                Intent intent1=new Intent(Xuqiuxiangx.this, HuihuaActivity.class);
-                Intent intent1 = new Intent(Xuqiuxiangx.this, ChatActivity.class);
-                intent1.putExtra(EaseConstant.EXTRA_USER_ID, username);
-                intent1.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
-                startActivity(intent1);
+                    Intent intent1 = new Intent(Xuqiuxiangx.this, ChatActivity.class);
+                    intent1.putExtra(EaseConstant.EXTRA_USER_ID, username);
+                    intent1.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
+                    startActivity(intent1);
+                }else {
+                    Toast.makeText(this, "请完善信息等待审核通过", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.xuqiudianh:
-                new AlertDialog.Builder(Xuqiuxiangx.this).setTitle("学了么提示!").setMessage("是否确定接取需求?")
-                        .setPositiveButton("是", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Order_init order_init = new Order();
-                                order_init.CreateOrder(user_id,id,dindan,fee,course_id,grade_id,Xuqiuxiangx.this,User_id.getAddress());
-                                Intent intent= NewMainActivity_.intent(Xuqiuxiangx.this).get();
-                                startActivity(intent);
-                            }
-                        }).setNegativeButton("否", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(Xuqiuxiangx.this,"再去看看别的需求吧~",Toast.LENGTH_SHORT).show();
-                    }
-                }).show();
-
+                if (ispass) {
+                    new AlertDialog.Builder(Xuqiuxiangx.this).setTitle("学了么提示!").setMessage("是否确定接取需求?")
+                            .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Order_init order_init = new Order();
+                                    order_init.CreateOrder(user_id, id, dindan, fee, course_id, grade_id, Xuqiuxiangx.this, User_id.getAddress(), User_id.getLat(), User_id.getLng());
+                                    Intent intent = NewMainActivity_.intent(Xuqiuxiangx.this).get();
+                                    startActivity(intent);
+                                }
+                            }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(Xuqiuxiangx.this, "再去看看别的需求吧~", Toast.LENGTH_SHORT).show();
+                        }
+                    }).show();
+                }else {
+                    Toast.makeText(this, "请完善信息等待审核通过", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -384,7 +412,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
 
     @Override
     public void onRefresh(PullToRefreshBase refreshView) {
-        demand_init.getTuijianDemand_list(course_id,grade_id,""+User_id.getLat(),""+User_id.getLng(),null,null,null,listview,this,null);
+        demand_init.getTuijianDemand_list(course_id,User_id.getUid(),""+User_id.getLat(),""+User_id.getLng(),null,null,null,listview,this,null);
 //        demand_init.getDemand_list(user_id,Integer.parseInt(User_id.getRole()),filter_type,filter_id,"2016-08-10",0,1,null,null,this);
     }
 
@@ -421,7 +449,12 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
             entity.setGrade_name((String)maps.get(i).get("grade_name"));
             entity.setCourse_id((String)maps.get(i).get("course_id"));
             entity.setGrade_id((String)maps.get(i).get("grade_id"));
-            entity.setAddress((String)maps.get(i).get("address"));
+//            entity.setAddress((String)maps.get(i).get("address"));
+            if ((maps.get(i).get("address")+"").length()>7) {
+                entity.setAddress(((String) maps.get(i).get("address")).substring(0, 7) + "......");
+            }else {
+                entity.setAddress((String) maps.get(i).get("address"));
+            }
             lists.add(entity);
         }
         datas.addAll(lists);
@@ -431,5 +464,17 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     @Override
     public void failSimilarXuqiu(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void successPay(Map<String, Object> map) {
+        if (map.get("is_passed").equals("1")){
+            ispass = true;
+        }
+    }
+
+    @Override
+    public void failPay(String msg) {
+
     }
 }

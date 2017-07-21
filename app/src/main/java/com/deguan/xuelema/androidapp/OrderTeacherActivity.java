@@ -34,6 +34,7 @@ import java.util.Map;
 
 import modle.Order_Modle.Order;
 import modle.Order_Modle.Order_init;
+import modle.getdata.Getdata;
 import modle.user_ziliao.User_id;
 
 public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercontent_init,View.OnClickListener, ChangeOrderView {
@@ -64,6 +65,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
     private String teacherImage;
     private PopupWindow changePopWindow;
     private Order_init order_init;
+    private String telphone;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -118,7 +120,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
                 statuse.setText("修改订单价格");
                 break;
             case "2":
-                statuse.setText("待收货");
+                statuse.setText("待授课");
                 break;
             case "3":
                 statuse.setText("待评价");
@@ -188,6 +190,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
                 if (!TextUtils.isEmpty(changeMoney.getText())){
                     int changeFee = (int) Double.parseDouble(changeMoney.getText().toString());
                     order_init.UpdateOrder_Amount(Integer.parseInt(User_id.getUid()),order_id,changeFee,OrderTeacherActivity.this);
+                    new Getdata().sendMessage(User_id.getNickName()+"已修改订单价格为"+changeFee,telphone);
                 }else {
                     Toast.makeText(OrderTeacherActivity.this, "请输入修改价格", Toast.LENGTH_SHORT).show();
                 }
@@ -216,7 +219,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
         teacherImage = (String) map.get("placer_headimg");
         Glide.with(this).load(teacherImage).transform(new GlideCircleTransform(this)).into(headImage);
         teacherId = (String) map.get("teacher_id");
-
+        telphone = map.get("placer_mobile")+"";
         telTv.setText(Html.fromHtml("<u>"+(String)map.get("placer_mobile")+""+"</u>"));
         fee=Integer.parseInt(feae);
         int duration=Integer.parseInt(map.get("duration").toString());
@@ -241,7 +244,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
                 order_status.setText("未付款");
                 break;
             case "2":
-                statuse.setText("待收货");
+                statuse.setText("待授课");
                 order_status.setText("进行中");
                 break;
             case "3":
@@ -285,7 +288,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
         }else {
             gender.setText("女");
         }
-        String stuts=map.get("requirement_service_type")+"";
+        String stuts=map.get("service_type")+"";
         switch (stuts){
             case "1":
                 fuwufan.setText("教师上门");
@@ -349,12 +352,14 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
                                 public void onClick(DialogInterface dialog, int which) {
                                     //创建订单
                                     order_init.Order_refund(uid,order_id,5,fee);
+                                    new Getdata().sendMessage(User_id.getNickName()+"已同意退款",telphone);
                                     Toast.makeText(OrderTeacherActivity.this,"已确认退款",Toast.LENGTH_SHORT).show();
                                 }
                             }).setNegativeButton("拒绝退款", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            order_init.Order_refund(uid,order_id,5,fee);
+                            order_init.Order_refund(uid,order_id,6,fee);
+                            new Getdata().sendMessage(User_id.getNickName()+"拒绝退款",telphone);
                             Toast.makeText(OrderTeacherActivity.this,"已拒绝退款~",Toast.LENGTH_SHORT).show();
                         }
                     }).show();

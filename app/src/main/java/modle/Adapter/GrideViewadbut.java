@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -69,18 +70,26 @@ public class GrideViewadbut extends BaseAdapter {
             viewhode= (Viewhode) view.getTag();
         }
         viewhode.listname.setText(listmap.get(i).get("teacher_name")+"");
-        String course_name=listmap.get(i).get("course_name")+"";
+        String course_name  = listmap.get(i).get("course_name")+"";
+        String course_fee = listmap.get(i).get("unvisit_fee") +"元";
         if (course_name.equals("")) {
             viewhode.coursename.setText("不限");
         }else {
-            viewhode.coursename.setText(course_name);
+            viewhode.coursename.setText(course_name + "         "+ course_fee);
         }
-        viewhode.address.setText(listmap.get(i).get("address")+"");
+//        viewhode.address.setText(listmap.get(i).get("address")+"");
+        String dist = listmap.get(i).get("distance")+"";
+        double myDist = 0;
+        if (!dist.equals("")){
+            myDist = Double.parseDouble(dist)/1000;
+        }
+        DecimalFormat df = new DecimalFormat("#0.0");
+
+        viewhode.address.setText(df.format(myDist) + "km");
         Date d = new Date(Long.parseLong(listmap.get(i).get("created")+"")*1000);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         viewhode.xiadans.setText(sdf.format(d));
 
-//        viewhode.xiadans.setText(listmap.get(i).get("created")+"");
         setbitmap(listmap.get(i).get("teacher_headimg").toString(),viewhode.liebiaoname);
 
         return view;

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout android:id="@+id/relativelayout"
+    android:background="@drawable/add08"
+    android:layout_width="540px"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListView
+        android:layout_marginBottom="20px"
+        android:layout_marginTop="20px"
+        android:layout_marginLeft="20px"
+        android:scrollbars="none"
+        android:dividerHeight="5dp"
+        android:divider="#fdfdfe"
+        android:id="@+id/student_list1"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent">
+    </ListView>
+    <ListView
+        android:layout_marginBottom="20px"
+        android:layout_marginTop="20px"
+        android:layout_marginLeft="20px"
+        android:scrollbars="none"
+        android:dividerHeight="5dp"
+        android:divider="#fdfdfe"
+        android:id="@+id/student_list2"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        >
+    </ListView>
+    <ListView
+        android:layout_marginBottom="20px"
+        android:layout_marginTop="20px"
+        android:layout_marginLeft="20px"
+        android:scrollbars="none"
+        android:dividerHeight="5dp"
+        android:divider="#ffffff"
+        android:id="@+id/student_list3"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_marginRight="20px"
+        />
+</LinearLayout>

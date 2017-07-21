@@ -229,6 +229,7 @@
             <!--android:layout_height="100px" />-->
     <!--</RelativeLayout>-->
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/jiaolinlayout"
         android:layout_below="@+id/emage"
         android:layout_width="match_parent"
@@ -293,6 +294,7 @@
             android:layout_height="100px" />
     </RelativeLayout>
         <RelativeLayout
+            android:visibility="gone"
             android:id="@+id/xuelie_rl"
             android:layout_below="@+id/fuwuleia"
             android:layout_width="match_parent"

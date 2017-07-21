@@ -59,21 +59,29 @@ public class DmadAdapter extends RecyclerView.Adapter<DmadAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        holder.text1.setText(listmap.get(position).get("publisher_name").toString());
-        String service_type=listmap.get(position).get("service_type").toString();
-        switch (service_type){
-            case "1":
-                holder.text9.setText("教师上门");
-                break;
-            case "2":
-                holder.text9.setText("学生上门");
-                break;
-            case "3":
-                holder.text9.setText("第三方");
-                break;
+        if (listmap.get(position).get("publisher_name") != null) {
+
+            holder.text1.setText(listmap.get(position).get("publisher_name") + "");
         }
-        Glide.with(context).load(listmap.get(position).get("publisher_headimg").toString())
-                .transform(new GlideCircleTransform(context)).into(holder.lognhost);
+        if (listmap.get(position).get("service_type") != null) {
+            String service_type = listmap.get(position).get("service_type") + "";
+
+            switch (service_type){
+                case "1":
+                    holder.text9.setText("教师上门");
+                    break;
+                case "2":
+                    holder.text9.setText("学生上门");
+                    break;
+                case "3":
+                    holder.text9.setText("第三方");
+                    break;
+            }
+        }
+        if (listmap.get(position).get("publisher_headimg") != null) {
+            Glide.with(context).load(listmap.get(position).get("publisher_headimg").toString())
+                    .transform(new GlideCircleTransform(context)).into(holder.lognhost);
+        }
         if (listmap.get(position).get("grade_name")!=null) {
             holder.text2.setText(listmap.get(position).get("grade_name").toString() + "");
         }

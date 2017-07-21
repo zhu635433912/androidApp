@@ -22,7 +22,8 @@ public interface Demand_http {
      */
     @POST("index.php?s=/Service/Requirement/gets_requirement")
     Call<ContentModle> getDemandlist(@Query("uid") int uid, @Query("filter_type") int filter_type, @Query("filter_id") int filter_id, @Query("start_time") String start_time,
-                                     @Query("end_time") int end_time, @Query("page") int page,@Query("lat")double lat,@Query("lng")double lng);
+                                     @Query("end_time") int end_time, @Query("page") int page,@Query("lat")double lat,@Query("lng")double lng
+                                ,@Query("grade_id")int grade_id,@Query("course_id")int course_id,@Query("order")String order,@Query("order_desc")String order_desc);
     /*
     获取单一需求
      */
@@ -67,7 +68,7 @@ public interface Demand_http {
 
 
     @POST("index.php?s=/Service/Requirement/recommend_requirement_commend")
-    Call<ContentModle> getTuijianDemandList(@Query("course_id") int course_id, @Query("grade_id") int grade_id
+    Call<ContentModle> getTuijianDemandList(@Query("course_id") int course_id, @Query("uid") String uid
     ,@Query("lat") String lat, @Query("lng") String lng,@Query("province") String province, @Query("city") String city,@Query("state") String state);
 
     @POST("index.php?s=/Service/Requirement/recommend_requirement_commend")

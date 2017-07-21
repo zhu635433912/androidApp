@@ -29,6 +29,7 @@ import java.util.Map;
 
 import modle.Order_Modle.Order;
 import modle.Order_Modle.Order_init;
+import modle.getdata.Getdata;
 import modle.user_ziliao.User_id;
 
 /**
@@ -62,6 +63,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
     private TextView statuse,telTv;
     private String teacherImage;
     private int duration1;
+    private String telphone;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -115,9 +117,10 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         switch (status){
             case "1":
                 statuse.setText("去支付");
+                ycang.setVisibility(View.GONE);
                 break;
             case "2":
-                statuse.setText("确认收货");
+                statuse.setText("确认授课");
                 break;
             case "3":
                 statuse.setText("去评价");
@@ -128,8 +131,16 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                     xuqiufenggexian7.setVisibility(View.GONE);
                 }
                 break;
+            case "5":
+                statuse.setText("已同意退款");
+                ycang.setVisibility(View.GONE);
+                break;
+            case "6":
+                statuse.setText("已拒绝退款");
+                break;
             case "7":
                 statuse.setText("交易完成");
+                ycang.setVisibility(View.GONE);
                 break;
         }
 
@@ -170,6 +181,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         teacherId = (String) map.get("teacher_id");
 
         telTv.setText(Html.fromHtml("<u>"+(String)map.get("teacher_mobile")+""+"</u>"));
+        telphone = map.get("teacher_mobile")+"";
         fee=Integer.parseInt(feae);
         duration1 = Integer.parseInt(map.get("duration").toString());
         kechengjieshu.setText("x"+ duration1 +"节");
@@ -192,6 +204,15 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
             case "3":
                 order_status.setText("交易完成");
                 break;
+            case "4":
+                order_status.setText("申请退款中");
+                break;
+            case "5":
+                order_status.setText("已同意退款");
+                break;
+            case "6":
+                order_status.setText("已拒绝退款");
+                break;
             case "7":
                 order_status.setText("交易完成");
         }
@@ -202,7 +223,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
             name.setText(""+map.get("placer_name"));
         }
 //        dizhi.setText(""+map.get("address"));
-//        xuqiuneiro.setText(""+map.get("requirement_content"));
+        xuqiuneiro.setText(""+map.get("requirement_content"));
 //        xuqiuneiro.setText("德冠网络科技公司");
         dindan_id.setText(""+map.get("id"));
 
@@ -212,7 +233,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         }else {
             gender.setText("女");
         }
-        String stuts=map.get("requirement_service_type")+"";
+        String stuts=map.get("service_type")+"";
         switch (stuts){
             case "1":
                 fuwufan.setText("教师上门");
@@ -266,6 +287,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                 intent.putExtra("id", order_id+"");
                 intent.putExtra("fee", fee+"");
                 intent.putExtra("duration", duration+"");
+                intent.putExtra("telphone",telphone);
                 startActivity(intent);
                 Toast.makeText(Order_details.this, "进入支付环节", Toast.LENGTH_SHORT).show();
                 finish();
@@ -283,6 +305,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                                 Intent intent = new Intent(Order_details.this,Student_assessment.class);
                                 intent.putExtra("oredr_id", order_id+"");
                                 intent.putExtra("teacher_id",teacherId);
+                                new Getdata().sendMessage(User_id.getNickName()+"已经确认授课完成了哦!",telphone);
                                 startActivity(intent);
                                 Toast.makeText(Order_details.this, "赶快去评价这位老师吧~", Toast.LENGTH_LONG).show();
                                 finish();
@@ -302,6 +325,9 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                 startActivity(intent2);
                 finish();
             }
+            if (status.equals("6")){
+                Toast.makeText(Order_details.this, "有问题请联系客服", Toast.LENGTH_SHORT).show();
+            }
 
             break;
         case R.id.ordettuikuan:
@@ -313,6 +339,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                             Order_init order_init=new Order();
                             String password=User_id.getPassword();
                             order_init.Update_Order(uid,order_id,4,password,duration*fee);
+                            new Getdata().sendMessage(User_id.getNickName()+"已提交退款申请",telphone);
                             Intent intent=NewMainActivity_.intent(Order_details.this).get();
                             startActivity(intent);
                             Toast.makeText(Order_details.this,"已提交退款申请!~",Toast.LENGTH_LONG).show();

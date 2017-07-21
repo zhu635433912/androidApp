@@ -96,7 +96,12 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
                 break;
             case R.id.dei_login:
                 Log.d("aa","注册");
-                dwan.Registereduser();
+                if (dei_editext1.getText().length() > 8 && dei_editext1.getText().length() <= 16) {
+                    dwan.Registereduser();
+                }else {
+                    Toast.makeText(this, "密码必须超过8位小于16位", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
             case R.id.dei_exti:
                 Log.d("aa","返回上一步");
@@ -141,7 +146,7 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
 
     @Override
     public void setReatfalse(String a) {
-    Toast.makeText(this,a,Toast.LENGTH_LONG).show();
+        Toast.makeText(this,a,Toast.LENGTH_LONG).show();
     }
 
     @Override

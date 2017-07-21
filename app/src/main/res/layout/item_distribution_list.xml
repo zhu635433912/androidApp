@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_margin="10px"
+        android:background="@drawable/mianlistview"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <ImageView
+            android:id="@+id/distribution_head_image"
+            android:layout_marginLeft="40px"
+            android:layout_width="100px"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginLeft="20px"
+            android:id="@+id/distribution_name"
+            android:text="qwjuidhqihjrioqw"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:layout_weight="1"
+            android:id="@+id/distribution_money"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:textSize="15sp"
+            android:text="12333"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</LinearLayout>

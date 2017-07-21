@@ -50,15 +50,15 @@ import retrofit2.Response;
  */
 public class TuijianPresenterImpl implements TuijianPresenter {
     private TuijianView tuijianView;
-    private int course_id;
+    private int uid;
     private int grade_id;
     private String address;
     private String lat;
     private String lng;
 
-    public TuijianPresenterImpl(TuijianView tuijianView, int course_id, int grade_id, String address, String lat, String lng) {
+    public TuijianPresenterImpl(TuijianView tuijianView, int uid, int grade_id, String address, String lat, String lng) {
         this.tuijianView = tuijianView;
-        this.course_id = course_id;
+        this.uid = uid;
         this.grade_id = grade_id;
         this.address = address;
         this.lat = lat;
@@ -86,6 +86,6 @@ public class TuijianPresenterImpl implements TuijianPresenter {
             public void onFailure(Call<TuijianListEntity> call, Throwable t) {
                 tuijianView.failTuijian("网络错误");
             }
-        },course_id,grade_id,address,lat,lng);
+        },uid,grade_id,address,lat,lng);
     }
 }

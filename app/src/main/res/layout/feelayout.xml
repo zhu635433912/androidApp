@@ -114,6 +114,7 @@
                 android:layout_width="80px"
                 android:layout_height="80px" />
             <TextView
+                android:id="@+id/tixian_weixin"
                 android:textSize="27px"
                 android:layout_marginTop="10px"
                 android:layout_centerHorizontal="true"
@@ -137,10 +138,12 @@
                 android:layout_width="80px"
                 android:layout_height="80px" />
             <TextView
+                android:id="@+id/tixian_alipay"
                 android:layout_marginTop="10px"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/cash_alpay"
                 android:textSize="27px"
+                android:textColor="#e92c2c"
                 android:text="支付宝"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

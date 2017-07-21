@@ -93,7 +93,11 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
         swipeRefreshLayout.setOnRefreshListener(this);
         listView.setAdapter(adapter);
         publishPresenter =  new PublishPresenterImpl(this, Integer.parseInt(User_id.getUid()),4);
-        publishPresenter.getPublishEntity();
+        if (list.size() > 0){
+
+        }else {
+            publishPresenter.getPublishEntity();
+        }
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

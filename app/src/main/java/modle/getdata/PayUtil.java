@@ -73,18 +73,20 @@ public class PayUtil {
         call.enqueue(new Callback<PayEntity>() {
             @Override
             public void onResponse(Call<PayEntity> call, Response<PayEntity> response) {
-                Map<String,Object> maps=new HashMap<String, Object>();
+                Map<String,Object> maps=new HashMap<>();
                 if (paytype == 1) {
                     maps = response.body().getContent();
                 }else if (paytype == 0){
-                    maps.put("info", response.body().getContent().toString());
+                    maps.put("info", response.body().getContent()+"");
+                }else if (paytype == 2){
+                    maps.put("error",response.body().getError()+"");
                 }
                 payView.successPay(maps);
             }
 
             @Override
             public void onFailure(Call<PayEntity> call, Throwable t) {
-                Log.e("aa","获取支付宝订单错误");
+                Log.e("aa","获取订单错误");
             }
         });
     }

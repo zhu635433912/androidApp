@@ -79,9 +79,9 @@ public class Closing extends AutoLayoutActivity implements View.OnClickListener,
 
     @Override
     public void upcontent(Map<String, Object> map) {
-        chengjiaolv.setText(map.get("comp_rate")+"");
-        size_imte.setText(map.get("comp_case_num")+"");
-        ron_itme.setText(map.get("gets_case_num")+"");
+        chengjiaolv.setText((int)(Double.parseDouble(map.get("comp_rate")+"")*100)+"");
+        size_imte.setText("完成"+map.get("comp_case_num")+"单");
+        ron_itme.setText("共接取"+map.get("gets_case_num")+"单");
     }
 
 

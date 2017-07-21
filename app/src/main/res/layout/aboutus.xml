@@ -36,8 +36,8 @@
         android:layout_below="@+id/xuqiufenggexian"
         android:layout_centerHorizontal="true"
         android:background="@drawable/logo"
-        android:layout_width="360px"
-        android:layout_height="200px" />
+        android:layout_width="250px"
+        android:layout_height="250px" />
     <TextView
         android:id="@+id/hanlingyuan"
         android:layout_marginTop="50px"
@@ -59,7 +59,7 @@
         android:id="@+id/zhishigaibianmingyun"
         android:layout_marginTop="46px"
         android:layout_below="@+id/hanlingyuan"
-        android:text="知识改变命运,翰林促进成长"
+        android:text="知识改变命运,德冠促进成长"
         android:layout_centerHorizontal="true"
         android:textSize="40px"
         android:layout_width="wrap_content"

@@ -170,7 +170,7 @@
             android:layout_width="26px"
             android:layout_height="34px" />
         <TextView
-            android:textSize="40px"
+            android:textSize="30px"
             android:layout_marginLeft="20px"
             android:layout_toRightOf="@+id/weizhitubiao"
             android:layout_alignTop="@+id/weizhitubiao"
@@ -198,8 +198,10 @@
             android:id="@+id/xuqiuneiro"
             android:layout_marginLeft="20px"
             android:layout_toRightOf="@+id/dianputubiao"
-            android:textSize="35px"
+            android:textSize="25px"
             android:gravity="center"
+            android:singleLine="false"
+            android:scrollbars="vertical"
             android:text="好好学习吧"
             android:layout_width="500px"
             android:layout_height="120px"
@@ -330,7 +332,7 @@
     <RelativeLayout
         android:id="@+id/ycang"
         android:background="@drawable/tuikuan"
-        android:layout_width="88px"
+        android:layout_width="120px"
         android:layout_height="42px"
         android:layout_below="@+id/textView6"
         android:layout_alignRight="@+id/xuqiufenggexian6">
@@ -340,7 +342,7 @@
             android:textSize="25px"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:text="退款"
+            android:text="申请退款"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

@@ -86,7 +86,10 @@ public class EvaluationFragment extends BaseFragment implements OrderView, Swipe
         }else {
             tuijianPresenter = new OrderPresenterImpl(this,Integer.parseInt(User_id.getUid()),1,page);
         }
-        tuijianPresenter.getEvaluateOrderEntity(3,1);
+        if (list.size() > 0){}
+        else {
+            tuijianPresenter.getEvaluateOrderEntity(3, 1);
+        }
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
