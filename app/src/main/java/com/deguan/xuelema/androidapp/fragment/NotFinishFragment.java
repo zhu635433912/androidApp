@@ -33,6 +33,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +66,20 @@ public class NotFinishFragment extends BaseFragment implements OrderView, SwipeR
 
     @Override
     public void before() {
+        EventBus.getDefault().register(this);
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+
+    @Subscriber(tag = "changeStatus")
+    public void updateList(int msg){
+        if (msg == 1){
+            tuijianPresenter.getNofinishOrderEntity(1);
+        }
     }
 
     @Override

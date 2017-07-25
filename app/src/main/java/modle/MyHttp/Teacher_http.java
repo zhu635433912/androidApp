@@ -115,9 +115,9 @@ public interface Teacher_http {
       /*
         获取推荐教师
     */
-@POST("index.php?s=/Service/Teacher/recommend_teacher")
-Call<TuijianListEntity> gettuijianjiaoshi(
-        @Query("uid") int uid,
+    @POST("index.php?s=/Service/Teacher/recommend_teacher")
+    Call<TuijianListEntity> gettuijianjiaoshi(
+            @Query("uid") int uid,
 // @Query("grade_id") int grade_id,
 //        @Query("address") String address,
         @Query("lat") String lat,@Query("lng") String lng);
@@ -130,5 +130,6 @@ Call<TuijianListEntity> gettuijianjiaoshi(
     //搜索老师
     @POST("index.php?s=/Service/Teacher/recommend_teacher")
     Call<ContentModle> gettuijianjiaoshi1(  @Query("name") String name,@Query("lat")String lat,@Query("lng")String lng);
+
 
 }

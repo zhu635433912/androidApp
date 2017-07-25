@@ -55,7 +55,8 @@ public interface Data {
     //获取支付宝订单
     @POST("index.php?s=/Service/Order/dopay")
     Call<PayEntity> getpayMsg(@Query("id") int id, @Query("paytype") int paytype
-            ,@Query("reward_fee")int reward_fee);
+            ,@Query("reward_fee")double reward_fee,@Query("pay_password")String payPsd);
+
     //关于我们
     @POST("index.php?s=/Service/Setup/aboutus")
     Call<User_Modle> getabotuse();
@@ -95,7 +96,7 @@ public interface Data {
     //发送消息
     @POST("index.php?s=/Service/Public/sendToUid")
     Call<ContentModle> sendMsg(@Query("content")String content,@Query("tel")String tel);
-
+    //获取1 2级分销
     @POST("index.php?s=/Service/Finance/remember_list")
     Call<ContentModle> getDistribution(@Query("uid")int uid,@Query("type")int type,@Query("page")int page);
 }

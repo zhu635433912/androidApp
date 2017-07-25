@@ -288,7 +288,7 @@
          android:id="@+id/diqu"
          android:layout_marginLeft="1px"
          android:layout_marginTop="10px"
-         android:textSize="20px"
+         android:textSize="25px"
 
          android:layout_toRightOf="@id/zhongjianfenge"
          android:layout_below="@id/fengexianbottton"

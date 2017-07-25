@@ -3,6 +3,7 @@ package modle;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import modle.JieYse.Demtest;
@@ -25,7 +26,7 @@ public class Onteh implements Onteh_init {
 
     //初始化网络访问对象
     public Onteh(){
-        map=new ArrayMap<String,Object>();
+        map=new HashMap<String,Object>();
         retrofit=new Retrofit.Builder().baseUrl(MyUrl.URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())

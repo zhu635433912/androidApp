@@ -61,7 +61,7 @@ public class BillAdapter extends ListBaseAdapter {
             convertView.setTag(holder);
         }
         holder = (ViewHolder) convertView.getTag();
-        holder.idTv.setText(list.get(position).get("id")+"");
+        holder.idTv.setText(list.get(position).get("order_id")+"");
         holder.moneyTv.setText(list.get(position).get("fee")+"元");
         String type = list.get(position).get("financetype")+"";
         if (type.equals("1")){

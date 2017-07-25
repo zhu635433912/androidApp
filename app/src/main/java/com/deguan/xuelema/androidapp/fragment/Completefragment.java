@@ -22,6 +22,8 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,10 +54,16 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
     private int page = 1;
     private boolean isLoading = false;
 
+
     @Override
     public void before() {
+        EventBus.getDefault().register(this);
     }
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
     @Override
     public void initView() {
         adapter = new OrderNewAdapter(list,getContext());
@@ -92,7 +100,7 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
         }
         if (list.size() > 0){}
         else {
-            tuijianPresenter.getEvaluateOrderEntity(3, 3);
+            tuijianPresenter.getEvaluateOrderEntity(3, 0);
         }
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -104,7 +112,12 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
 //        });
     }
 
-
+    @Subscriber(tag = "changeStatus")
+    public void updateList(int msg){
+        if (msg == 1){
+            tuijianPresenter.getEvaluateOrderEntity(3, 0);
+        }
+    }
     @Override
     public void successOrder(List<Map<String, Object>> maps) {
 //        listView.onRefreshComplete();
@@ -162,9 +175,9 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
     @Override
     public void onRefresh() {
         if (User_id.getRole().equals("1")) {
-            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 0, 1).getEvaluateOrderEntity(3,3);
+            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 0, 1).getEvaluateOrderEntity(3,0);
         }else {
-            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 1, 1).getEvaluateOrderEntity(3,3);
+            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 1, 1).getEvaluateOrderEntity(3,0);
         }
     }
 
@@ -308,4 +321,5 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
 //    public void setListview1(List<Map<String, Object>> listmap) {
 //
 //    }
+
 }

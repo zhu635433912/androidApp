@@ -76,6 +76,9 @@ public class DmadAdapter extends RecyclerView.Adapter<DmadAdapter.MyViewHolder> 
                 case "3":
                     holder.text9.setText("第三方");
                     break;
+                case "4":
+                    holder.text9.setText("不限");
+                    break;
             }
         }
         if (listmap.get(position).get("publisher_headimg") != null) {
@@ -100,7 +103,8 @@ public class DmadAdapter extends RecyclerView.Adapter<DmadAdapter.MyViewHolder> 
 //            myDist = Integer.parseInt(dist)/1000;
 //        }
 //        int lat = myDist/1000;
-        holder.text7.setText(df.format(myDist)+"km       "+listmap.get(position).get("address"));
+        holder.text7.setText(df.format(myDist)+"km       "+((String)listmap.get(position).get("address")).substring(0, 7) + "......");
+        holder.text8.setText(""+listmap.get(position).get("created"));
         holder.itemView.setTag(position);
     }
 

@@ -35,13 +35,13 @@
         android:background="#d7d7d7" />
     <LinearLayout
         android:id="@+id/pingfenxinji"
-        android:background="@drawable/four"
+        android:background="@drawable/five"
         android:orientation="horizontal"
         android:layout_marginTop="100px"
         android:layout_below="@+id/xuqiufenggexian"
         android:layout_centerHorizontal="true"
-        android:layout_width="230px"
-        android:layout_height="35px">
+        android:layout_width="280px"
+        android:layout_height="40px">
         <Button
             android:id="@+id/but1"
             android:background="#00000000"
@@ -75,7 +75,7 @@
     </LinearLayout>
     <TextView
         android:textSize="30px"
-        android:text="4.0"
+        android:text="5.0"
         android:id="@+id/pingfen_tv"
         android:layout_marginLeft="20px"
         android:layout_toRightOf="@+id/pingfenxinji"

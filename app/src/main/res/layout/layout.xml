@@ -154,5 +154,16 @@
         android:textSize="40px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
 </RelativeLayout>
+    <TextView
+        android:paddingTop="30px"
+        android:id="@+id/wodetuiguang"
+        android:layout_marginLeft="40px"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/feechongzhi"
+        android:textSize="40px"
+        android:text="我的推广"
+        android:layout_width="match_parent"
+        android:layout_height="80px" />
 </RelativeLayout>

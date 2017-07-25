@@ -39,7 +39,7 @@ public interface Order_init {
      * requirement_id   需求id
      * fee              金额
      */
-    public Map<String,Object> Establish_Order(int uid,int teacher_id,int requirement_id,float fee,int duration,int course_Id,int grade_id,int service_type,String address);
+    public Map<String,Object> Establish_Order(int uid,int teacher_id,int requirement_id,float fee,int duration,int course_Id,int grade_id,int service_type,String address,String province,String city,String district,String desc);
     /**
      * 删除订单
      * uid      用户id
@@ -52,7 +52,7 @@ public interface Order_init {
      * id       订单id
      * status   订单状态  1:未付款 2:进行中 3:交易完成 4:申请退款 5:同意退款 6:拒绝退款
      */
-    public Map<String,Object> Update_Order(int uid,int id,int status,String safeword,float fee );
+    public Map<String,Object> Update_Order(int uid,int id,int status,String safeword,double fee );
     /**
      * 更新订单评分
      * uid      用户id
@@ -69,7 +69,7 @@ public interface Order_init {
      * id       订单id
      * fee      金额
      */
-    public Map<String,Object> UpdateOrder_Amount(int uid,int id,int fee,ChangeOrderView changeOrderView);
+    public Map<String,Object> UpdateOrder_Amount(int uid,int id,double fee,ChangeOrderView changeOrderView);
     /**
      * 更新订单课时数费用
      * uid      用户id
@@ -92,7 +92,7 @@ public interface Order_init {
      * status         订单状态 1:未付款 2:进行中 3:交易完成 4:申请退款 5:同意退款 6:拒绝退款
      * refund_fee     退款金额
      */
-    public Map<String,Object> Order_refund(int uid,int id,int status,float refund_fee);
+    public Map<String,Object> Order_refund(int uid,int id,int status,double refund_fee);
 
     //创建订单
     public void CreateOrder(int uid,int teacher_id,int requirement_id,float fee,int course_id,int grade_id,Requirdetailed requirdetailed,String address,double lat,double lng);

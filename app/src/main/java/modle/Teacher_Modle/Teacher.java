@@ -174,19 +174,11 @@ public class Teacher implements Teacher_init {
                 String error=response.body().getError();
                 if (error.equals("ok")){
                     listmap=response.body().getContent();
-//                    if (requirdetailed==null) {
-//                        Myconteol_init myconteol_init = new Mycontrol();
-//                        myconteol_init.huidiao(listmap,role,listView,context);
-
                         teacherView.successTeacher(listmap);
-//                    }else {
-//                        requirdetailed.Updatefee(listmap);
-//                    }
-
                 }else {
-                    String errmsg=response.body().getErrmsg();
-                    Log.e("aa","获取教师列表错误="+errmsg);
-                    teacherView.failTeacher(errmsg);
+//                    String errmsg=response.body().getErrmsg();
+//                    Log.e("aa","获取教师列表错误"+errmsg);
+                    teacherView.failTeacher("无数据");
                 }
             }
             @Override

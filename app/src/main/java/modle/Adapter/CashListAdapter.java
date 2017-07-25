@@ -65,8 +65,8 @@ public class CashListAdapter extends ListBaseAdapter {
         holder.orderTypeTv.setText(list.get(position).get("remark")+"");
         holder.orderMoneyTv.setText(list.get(position).get("fee")+"");
 
-        Date d = new Date(Long.parseLong((String)list.get(position).get("create_date")));
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date d = new Date(1000*Long.parseLong((String)list.get(position).get("create_date")));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         holder.orderTimeTv.setText(sdf.format(d)+"");
 
         return convertView;

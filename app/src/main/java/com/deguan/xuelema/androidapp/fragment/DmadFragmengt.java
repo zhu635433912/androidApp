@@ -100,6 +100,7 @@ public class DmadFragmengt extends BaseFragment implements SimilarXuqiuView {
 
     @Override
     public void failSimilarXuqiu(String msg) {
+        tacher_top_list_swipe.setRefreshing(false);
         Toast.makeText(getActivity(),msg+"!",Toast.LENGTH_LONG).show();
     }
 }

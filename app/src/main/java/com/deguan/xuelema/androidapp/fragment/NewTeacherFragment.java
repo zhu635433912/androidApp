@@ -462,6 +462,8 @@ public class NewTeacherFragment extends BaseFragment implements Gaodehuidiao_ini
             User_id.setLat(lat);
             User_id.setLng(lng);
         }
+            User_id.setProvince(map.get("Province")+"");
+            User_id.setCity(map.get("City")+"");
             cityTv.setText(map.get("District")+"");
             User_id.setStatus(map.get("District") + "");
             User_id.setAddress(map.get("address") + "");

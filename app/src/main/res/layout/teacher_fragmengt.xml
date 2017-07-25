@@ -73,7 +73,7 @@
 
                 <ImageView
                     android:id="@+id/teacher_setup"
-                    android:padding="35px"
+                    android:padding="30px"
                     android:src="@drawable/hly20"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
@@ -83,7 +83,7 @@
                     android:id="@+id/myfee"
                     android:layout_toLeftOf="@+id/teacher_setup"
                     android:layout_alignBottom="@+id/teacher_setup"
-                    android:padding="35px"
+                    android:padding="30px"
                     android:src="@drawable/hly17"
                     android:layout_width="120px"
                     android:layout_height="120px" />

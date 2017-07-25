@@ -37,7 +37,11 @@ public interface Oredr_http {
                         @Query("course_id")int course_id
             ,@Query("grade_id")int grade_id
                        ,@Query("service_type")int service_type
-                        ,@Query("address")String address
+                        ,@Query("address")String address,
+                        @Query("province")String province,
+                        @Query("city")String city,
+                        @Query("district")String district,
+                        @Query("desc")String desc
     );
     /*
     删除订单
@@ -49,7 +53,7 @@ public interface Oredr_http {
      */
     @POST("index.php?s=/Service/Order/update_orderstatus")
     Call<Erre> UpdateOredr(@Query("uid") int uid, @Query("id") int id,@Query("status") float status ,
-                           @Query("safeword") String safewprd,@Query("fee") float fee);
+                           @Query("safeword") String safewprd,@Query("fee") double fee);
     /*
     更新订单评分
      */
@@ -61,7 +65,7 @@ public interface Oredr_http {
      */
 
     @POST("index.php?s=/Service/Order/update_orderfee")
-    Call<Demtest> UpdateOredrfee(@Query("uid") int uid, @Query("id") int id,@Query("fee") float fee);
+    Call<Demtest> UpdateOredrfee(@Query("uid") int uid, @Query("id") int id,@Query("fee") double fee);
     /*
     更新订单课时数  ----------->更新失败
      */
@@ -78,7 +82,7 @@ public interface Oredr_http {
     订单退款
      */
     @POST("index.php?s=/Service/Order/order_refund")
-    Call<Demtest> Oredrtuikun(@Query("uid") int uid, @Query("id") int id,@Query("status") int status,@Query("refund_fee") float refund_fee);
+    Call<Demtest> Oredrtuikun(@Query("uid") int uid, @Query("id") int id,@Query("status") int status,@Query("refund_fee") double refund_fee);
     /*
     创建临时订单
      */

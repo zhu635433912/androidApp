@@ -48,7 +48,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
     private RelativeLayout qianbaohuitui;
     private TextView yuer;
     private TextView mingofee;
-    private TextView textView4,myBillTv;
+    private TextView textView4,myBillTv,myPushTv;
     private PopupWindow rechargePopwindow,cashPopwindow;
     private int flag = 0;
     private Getdata getdata;
@@ -60,6 +60,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         setContentView(R.layout.layout);
         User_id.getInstance().addActivity(this);
 
+        myPushTv = (TextView) findViewById(R.id.wodetuiguang);
         myBillTv = (TextView) findViewById(R.id.my_bill);
         yuer= (TextView) findViewById(R.id.yuer);
         xianjinjuan= (TextView) findViewById(R.id.xianjinjuan);
@@ -73,6 +74,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         tixian.setOnClickListener(this);
         xianjinjuan.setOnClickListener(this);
         chongzhi.setOnClickListener(this);
+        myPushTv.setOnClickListener(this);
         textView4= (TextView) findViewById(R.id.textView4);
 
 
@@ -225,6 +227,11 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.wodetuiguang:
+                //我的推广
+                Intent intentb=new Intent(FeeqianbaoActivty.this,Distribution_Activty.class);
+                startActivity(intentb);
+                break;
             case R.id.my_bill:
                 startActivity(BillActivity_.intent(this).get());
                 break;

@@ -18,7 +18,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_width="534px"
-        android:layout_height="900px">
+        android:layout_height="1000px">
         <ImageView
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -137,11 +137,31 @@
             android:layout_alignLeft="@+id/dei_password"
             android:layout_width="400px"
             android:layout_height="80px" />
+        <EditText
+            android:id="@+id/dei_pay_password"
+            android:textSize="30px"
+            android:inputType="number"
+            android:maxLines="6"
+            android:background="@drawable/login_wan_connllat"
+            android:layout_marginTop="24px"
+            android:layout_below="@+id/dei_tuijianma"
+            android:layout_alignLeft="@+id/dei_password"
+            android:layout_width="400px"
+            android:layout_height="80px" />
         <TextView
-            android:layout_marginEnd="14px"
+            android:layout_marginRight="14px"
+            android:layout_marginBottom="20px"
+            android:layout_alignBottom="@+id/dei_pay_password"
+            android:layout_alignRight="@+id/dei_pay_password"
+            android:text="6位支付密码"
+            android:textSize="25px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginRight="14px"
             android:layout_marginBottom="16px"
             android:layout_alignBottom="@+id/dei_tuijianma"
-            android:layout_alignEnd="@+id/dei_tuijianma"
+            android:layout_alignRight="@+id/dei_tuijianma"
             android:text="邀请码"
             android:textSize="30px"
             android:layout_width="wrap_content"
@@ -158,11 +178,11 @@
             android:layout_alignRight="@+id/dei_password" />
 
         <ImageButton
-            android:layout_marginTop="120px"
+            android:layout_marginTop="50px"
             android:background="@drawable/hly60"
             android:layout_width="104px"
             android:layout_height="104px"
-            android:layout_below="@+id/dei_password"
+            android:layout_below="@+id/dei_pay_password"
             android:layout_centerHorizontal="true"
             android:id="@+id/dei_login" />
     </RelativeLayout>

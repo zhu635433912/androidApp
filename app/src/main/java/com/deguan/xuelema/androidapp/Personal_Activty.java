@@ -58,6 +58,7 @@ import java.util.Map;
 
 import kr.co.namee.permissiongen.PermissionGen;
 import modle.Gaode.Gaode_dinwei;
+import modle.Huanxing.cache.UserCacheManager;
 import modle.Huanxing.ui.UserProfileActivity;
 import modle.Teacher_Modle.Teacher;
 import modle.Teacher_Modle.Teacher_init;
@@ -106,6 +107,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     private RelativeLayout xueliRl;
     private TextView xueliTv;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,8 +150,6 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         int role=Integer.parseInt(User_id.getRole());
         if (role==1){
             jiaolinlayout.setVisibility(View.GONE);
-            xueliRl.setVisibility(View.GONE);
-
         }else {
             teacher=new Teacher();
             teacher.Get_Teacher_detailed(561,uid,this,1);
@@ -170,25 +170,42 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         final EditText edit = new EditText(this);
         switch (v.getId()) {
             case R.id.xueli_text:
-                AlertDialog.Builder xueleTypeDialog = new AlertDialog.Builder(Personal_Activty.this);
-                xueleTypeDialog.setIcon(R.drawable.add04);
-                xueleTypeDialog.setTitle("请选择学历");
-                //    指定下拉列表的显示数据
-                final String[] xueliType = {"无","大专", "本科", "硕士" ,"博士"};
-                //    设置一个下拉的列表选择项
-                xueleTypeDialog.setItems(xueliType, new DialogInterface.OnClickListener() {
+//                AlertDialog.Builder xueleTypeDialog = new AlertDialog.Builder(Personal_Activty.this);
+//                xueleTypeDialog.setIcon(R.drawable.add04);
+//                xueleTypeDialog.setTitle("请选择学历");
+//                //    指定下拉列表的显示数据
+//                final String[] xueliType = {"无","大专", "本科", "硕士" ,"博士"};
+//                //    设置一个下拉的列表选择项
+//                xueleTypeDialog.setItems(xueliType, new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        xueliTv.setText(xueliType[which]);
+////                        int years=Integer.parseInt(edit.getText().toString());
+////                        teacher.Teacher_years(uid,which+1);
+//                        education_id = which;
+//                        user_init.UpdateEducation(uid,which);
+//                    }
+//                });
+//                xueleTypeDialog.show();
+
+                //所在地
+                new  AlertDialog.Builder(this).setTitle("请输入").setIcon(android.R.drawable.btn_star).setView(edit)
+                        .setPositiveButton("确认",new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (!edit.getText().toString().equals("")&&edit.getText().length()==18) {
+                                    user.UpdateIdcard(uid, edit.getText().toString());
+                                    xueliTv.setText(edit.getText().toString());
+                                }else {
+                                    Toast.makeText(Personal_Activty.this,"请输入正确的身份证号码",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }).setNegativeButton("取消",new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        xueliTv.setText(xueliType[which]);
-//                        int years=Integer.parseInt(edit.getText().toString());
-//                        teacher.Teacher_years(uid,which+1);
-                        education_id = which;
-                        user_init.UpdateEducation(uid,which);
+
                     }
-                });
-                xueleTypeDialog.show();
-
-
+                }).show();
                 break;
             case R.id.gerxxhuitui:
                 finish();
@@ -443,7 +460,9 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
 
     @Override
     public void Updatecontent(Map<String, Object> map) {
-
+//        UserCacheManager.save(User_id.getUsername(), map.get("nickname")+"", map.get("headimg")+"");
+        UserCacheManager.updateMyNick( map.get("nickname")+"");
+        UserCacheManager.updateMyAvatar(map.get("headimg")+"");
             address = (String) map.get("address");
             gender = (String) map.get("gender");
             age = (String) map.get("age");
@@ -453,13 +472,15 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
             } else {
                 userage.setText("女");
             }
-
+        if (map.get("signature") != null) {
+            biyexuexiao.setText(map.get("signature") +"");
+        }
             userdizhi.setText((String) map.get("address"));
             emage.setText((String) map.get("nickname"));
             usershenr.setText((String) map.get("age"));
             ziyouzhiye.setText((String) map.get("name"));
-            xueliTv.setText((String)map.get("education_name"));
-        setbitmap(map.get("headimg").toString());
+            xueliTv.setText((String)map.get("idcard"));
+            setbitmap(map.get("headimg")+"");
     }
 
     @Override
@@ -512,7 +533,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
             if (!TextUtils.isEmpty(filePath)) {
 
                 // 自定义大小，防止OOM
-                Bitmap bitmap = getSmallBitmap(filePath, 400, 400);
+                Bitmap bitmap = getSmallBitmap(filePath, 300, 300);
                 //获取图片
                 usertoux.setImageBitmap(bitmap);
                 Log.e("aa","路劲为"+filePath);
@@ -792,8 +813,8 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
         // outputX outputY 是裁剪图片宽高
-        intent.putExtra("outputX", 340);
-        intent.putExtra("outputY", 340);
+        intent.putExtra("outputX", 300);
+        intent.putExtra("outputY", 300);
         intent.putExtra("return-data", true);
         intent.putExtra("noFaceDetection", true);
         startActivityForResult(intent,REQUESTCODE_CUTTING);

@@ -1,11 +1,15 @@
 package com.deguan.xuelema.androidapp;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,7 +32,11 @@ import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
+import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMCmdMessageBody;
+import com.hyphenate.chat.EMMessage;
+import com.hyphenate.easeui.utils.EaseCommonUtils;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.EFragment;
@@ -45,9 +53,12 @@ import java.util.Map;
 import modle.Adapter.HomeTitleAdapter;
 import modle.Demand_Modle.Demand;
 import modle.Demand_Modle.Demand_init;
+import modle.Huanxing.ui.GroupsActivity;
 import modle.toos.CircleImageView;
 import modle.user_Modle.User_Realization;
 import modle.user_Modle.User_init;
+import modle.user_ziliao.Constant;
+import modle.user_ziliao.DemoHelper;
 import modle.user_ziliao.User_id;
 
 @EFragment(R.layout.activity_new__student)
@@ -103,14 +114,15 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         //获取用户自己的需求 这里开始
 //        wodefabulist.setInterface(this);
         demand_init=new Demand();
+        DemoHelper sdkHelper = DemoHelper.getInstance();
+        sdkHelper.pushActivity(getActivity());
 
+        EMClient.getInstance().chatManager().addMessageListener(messageListener);
     }
 
     @Override
     public void initView() {
 
-//        wodegerxxstudent.setBackgroundResource(R.drawable.hly48);
-//        wodegerxxstudenttext.setTextColor(Color.parseColor("#f7e61c"));
         studentwodeqianbao.bringToFront();
         stidentshezhiimabt.bringToFront();
 
@@ -149,6 +161,20 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
 
         demand_init.getMyDemand_list(id,4,this);
         user_init.User_Data(id,User_id.getLat()+"",User_id.getLng()+"",this);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 1; i > 0; i++) {
+                    try {
+                        Thread.sleep(100000);
+                        updateUnreadLabel();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }).start();
+        registerBroadcastReceiver();
     }
 
     @Override
@@ -157,12 +183,12 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         switch (v.getId()){
             case R.id.student_chat:
                 //会话列表
-                Intent intent1 = new Intent(getActivity(), modle.Huanxing.ui.MainActivity.class);
+                Intent intent1 = new Intent(getActivity(), modle.Huanxing.ui.NewHuanxinMainActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.student_my:
                 //会话列表
-                Intent intent11 = new Intent(getActivity(), modle.Huanxing.ui.NewHuanxinMainActivity.class);
+                Intent intent11 = new Intent(getActivity(), modle.Huanxing.ui.MainActivity.class);
                 startActivity(intent11);
                 break;
             case R.id.studentwodeqianbao:
@@ -238,11 +264,6 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         Toast.makeText(getActivity(),map.get("text").toString(),Toast.LENGTH_SHORT).show();
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-////        user_init.User_Data(id,User_id.getLat()+"",User_id.getLng()+"",this);
-//    }
 
     @Override
     public void onDestroy() {
@@ -257,10 +278,12 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     public void onResume() {
         super.onResume();
         updateUnreadLabel();
+
     }
 
-    public void updateUnreadLabel() {
-        int count = getUnreadMsgCountTotal();
+    @Subscriber(tag = "refresh")
+    public void getrefresh(String msg){
+        final int count = getUnreadMsgCountTotal();
         if (count > 0) {
             unreadLabel.setText(count +"");
             unreadLabel.setVisibility(View.VISIBLE);
@@ -268,4 +291,83 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
             unreadLabel.setVisibility(View.INVISIBLE);
         }
     }
+
+    public void updateUnreadLabel() {
+        EventBus.getDefault().post("123","refresh");
+    }
+    private BroadcastReceiver broadcastReceiver;
+    private LocalBroadcastManager broadcastManager;
+    private void registerBroadcastReceiver() {
+        broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Constant.ACTION_CONTACT_CHANAGED);
+        intentFilter.addAction(Constant.ACTION_GROUP_CHANAGED);
+//		intentFilter.addAction(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION);
+        broadcastReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                updateUnreadLabel();
+//                updateUnreadAddressLable();
+
+                String action = intent.getAction();
+                if(action.equals(Constant.ACTION_GROUP_CHANAGED)){
+                    if (EaseCommonUtils.getTopActivity(getActivity()).equals(GroupsActivity.class.getName())) {
+                        GroupsActivity.instance.onResume();
+                    }
+                }
+                //red packet code : 处理红包回执透传消息
+//				if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
+//					if (conversationListFragment != null){
+//						conversationListFragment.refresh();
+//					}
+//				}
+                //end of red packet code
+            }
+        };
+        broadcastManager.registerReceiver(broadcastReceiver, intentFilter);
+    }
+    EMMessageListener messageListener = new EMMessageListener() {
+
+        @Override
+        public void onMessageReceived(List<EMMessage> messages) {
+            // notify new message
+            for (EMMessage message : messages) {
+                DemoHelper.getInstance().getNotifier().onNewMsg(message);
+            }
+            refreshUIWithMessage();
+        }
+
+        @Override
+        public void onCmdMessageReceived(List<EMMessage> messages) {
+            //red packet code : 处理红包回执透传消息
+            for (EMMessage message : messages) {
+                EMCmdMessageBody cmdMsgBody = (EMCmdMessageBody) message.getBody();
+            }
+
+            refreshUIWithMessage();
+        }
+
+        @Override
+        public void onMessageRead(List<EMMessage> messages) {
+        }
+
+        @Override
+        public void onMessageDelivered(List<EMMessage> message) {
+        }
+
+        @Override
+        public void onMessageChanged(EMMessage message, Object change) {}
+    };
+
+    private void refreshUIWithMessage() {
+        getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                // refresh unread count
+                updateUnreadLabel();
+
+            }
+        });
+    }
+
 }

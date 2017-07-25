@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -166,9 +167,17 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
 //                    String uid=adapter.getuid(position-1);
                     String uid = entity.getId();
                     String headUrl = entity.getPublisher_headimg();
+        String content;
+        if (!TextUtils.isEmpty(entity.getContent())) {
+             content = entity.getContent();
+        }else {
+             content = "";}
                     Intent intent=new Intent(getContext(),Pick_singleActivty.class);
                     intent.putExtra("id",uid);
+
+                    intent.putExtra("content",content);
                     intent.putExtra("teacher_headimg",headUrl);
+
                     startActivity(intent);
     }
 

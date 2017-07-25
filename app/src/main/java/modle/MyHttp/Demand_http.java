@@ -75,4 +75,6 @@ public interface Demand_http {
     Call<ContentModle> getTuijianDemandList1(@Query("name") String name,@Query("lat")String lat,@Query("lng")String lng);
 
 
+    @POST("index.php?s=/Service/Requirement/gets_requirement_byorder")
+    Call<ContentModle> getMyReceptDemand(@Query("uid") int uid);
 }

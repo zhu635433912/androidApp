@@ -92,4 +92,7 @@ public interface Demand_init {
     //搜索
     public void getTuijianDemand_list1(String name,String lat,String lng);
 
+
+    //获取我接取的需求
+    public void getReceptDemand(int uid);
 }

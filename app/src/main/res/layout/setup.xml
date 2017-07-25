@@ -58,7 +58,7 @@
         android:textSize="30px"
         android:text="我的推广"
         android:layout_width="match_parent"
-        android:layout_height="80px" />
+        android:layout_height="0px" />
     <TextView
         android:id="@+id/xuqiufenggexian0"
         android:background="#d7d7d7"

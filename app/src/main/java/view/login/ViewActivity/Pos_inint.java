@@ -13,6 +13,7 @@ public interface Pos_inint  {
     public String getusername();
     public String getpassword();
     public String getyzm();
+    public String getPayPsd();
     /*
     修改成功修改失败
      */

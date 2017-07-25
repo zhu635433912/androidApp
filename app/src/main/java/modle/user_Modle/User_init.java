@@ -73,6 +73,8 @@ public interface User_init {
 
     public void Updateaddress(int user_id, String address);
 
+    public void UpdateIdcard(int user_id,String idCard);
+
     public void setuserbitmap(File file,Student_init student_init);
 
     public void setlan_lng(int uid,double lat,double lng);

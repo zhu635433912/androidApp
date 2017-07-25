@@ -49,6 +49,7 @@ public class Pick_singleActivty  extends AutoLayoutActivity implements View.OnCl
     private int id;
     private List<Map<String,Object>> listmap =new ArrayList<>();
     private GridView gridView;
+    private String content;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class Pick_singleActivty  extends AutoLayoutActivity implements View.OnCl
         final String myid=getIntent().getStringExtra("id");
         Log.e("aa","接收到的参数为"+myid);
         id=Integer.parseInt(myid);
-
+        content = getIntent().getStringExtra("content");
         jiedanliebiaofanhui.bringToFront();
         jiedanliebiaofanhui.setOnClickListener(this);
 
@@ -83,6 +84,7 @@ public class Pick_singleActivty  extends AutoLayoutActivity implements View.OnCl
                 Intent intent=new Intent(Pick_singleActivty.this,UserxinxiActivty.class);
                 intent.putExtra("user_id",teacher_id);
                 intent.putExtra("head_image",head_image);
+                intent.putExtra("content",content);
                 intent.putExtra("myid",myid);
                 startActivity(intent);
 

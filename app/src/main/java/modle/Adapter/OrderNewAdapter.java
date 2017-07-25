@@ -91,10 +91,10 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
     public void onBindViewHolder(OrderNewAdapter.OrderNewViewHolder hode, int position) {
         Map<String,Object> entity = listmap.get(position);
         //课时费
-        int keshifee=Integer.parseInt(listmap.get(position).get("fee").toString());
-        int duration=Integer.parseInt(listmap.get(position).get("duration").toString());
+        int keshifee=Integer.parseInt(listmap.get(position).get("fee")+"");
+        int duration=Integer.parseInt(listmap.get(position).get("duration")+"");
         //总课时费
-        int zongfee=keshifee*duration;
+        double zongfee= Double.parseDouble(listmap.get(position).get("order_fee")+"");
         //订单id
         String  orderid=listmap.get(position).get("id").toString();
         if (User_id.getRole().equals("1")) {

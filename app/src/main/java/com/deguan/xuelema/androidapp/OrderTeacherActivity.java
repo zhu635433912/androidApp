@@ -49,7 +49,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
     private RelativeLayout dindanxiangxihuitui;
     private RelativeLayout xuqiufenggexian7;
     private int duration;
-    private int fee;
+    private double fee;
     private TextView keshishufee;
     private TextView kechengjieshu;
     private TextView ordettuikuan;
@@ -188,8 +188,9 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(changeMoney.getText())){
-                    int changeFee = (int) Double.parseDouble(changeMoney.getText().toString());
+                    double changeFee = (Double.parseDouble(changeMoney.getText().toString()));
                     order_init.UpdateOrder_Amount(Integer.parseInt(User_id.getUid()),order_id,changeFee,OrderTeacherActivity.this);
+                    order_init.getOrder_danyilist(uid, order_id, OrderTeacherActivity.this);
                     new Getdata().sendMessage(User_id.getNickName()+"已修改订单价格为"+changeFee,telphone);
                 }else {
                     Toast.makeText(OrderTeacherActivity.this, "请输入修改价格", Toast.LENGTH_SHORT).show();
@@ -215,13 +216,13 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
 //        String created = (String) map.get("created");
         String requirement_grade = (String) map.get("grade_name");
         String requirement_course = (String) map.get("course_name");
-        String feae= (String) map.get("fee");
+        String feae= (String) map.get("order_fee");
         teacherImage = (String) map.get("placer_headimg");
         Glide.with(this).load(teacherImage).transform(new GlideCircleTransform(this)).into(headImage);
         teacherId = (String) map.get("teacher_id");
         telphone = map.get("placer_mobile")+"";
         telTv.setText(Html.fromHtml("<u>"+(String)map.get("placer_mobile")+""+"</u>"));
-        fee=Integer.parseInt(feae);
+        fee=Double.parseDouble(feae);
         int duration=Integer.parseInt(map.get("duration").toString());
         kechengjieshu.setText("x"+duration+"节");
         keshishufee.setText("￥"+fee+"/节");
@@ -230,9 +231,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
         grade.setText(requirement_grade);
         closingtime.setText(created);
         dizhi.setText(requirement_address);
-        zongjijine.setText("￥"+(fee*duration));
-
-
+        zongjijine.setText("￥"+map.get("order_fee"));
 
 
 
@@ -278,7 +277,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
             name.setText(""+map.get("placer_name"));
         }
 //        dizhi.setText(""+map.get("requirement_address"));
-//        xuqiuneiro.setText(""+map.get("requirement_content"));
+        xuqiuneiro.setText(""+map.get("desc"));
 //        xuqiuneiro.setText("德冠网络科技公司");
         dindan_id.setText(""+map.get("id"));
 

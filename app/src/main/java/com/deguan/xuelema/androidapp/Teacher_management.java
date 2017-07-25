@@ -90,7 +90,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
     private RelativeLayout tianjiaxueli1;
     private int uid;
     private android.app.AlertDialog mPickDialog;
-    private AlertDialog zhengshuDialog;
+    private AlertDialog zhengshuDialog,shenfenDialog;
     private String mCurrentPhotoPath;
     private static final int REQUEST_IMAGE_GET = 0;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -197,6 +197,8 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         View view2 = getLayoutInflater().inflate(R.layout.dialog_zhengshu,null);
         zhengshuDialog = new AlertDialog.Builder(this).setView(view2).create();
 
+        View view5 = getLayoutInflater().inflate(R.layout.dialog_shenfen,null);
+        shenfenDialog = new AlertDialog.Builder(this).setView(view5).create();
 
         //获取课程
         getmCourse();
@@ -429,7 +431,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
 //                String signText = signEdit.getText().toString()+"";
 
                 if (dei.equals("")||tec.equals("")||biy.equals("")){
-                    Toast.makeText(Teacher_management.this,"个人介绍不能为空!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Teacher_management.this,"个人介绍学历毕业学校不能为空!",Toast.LENGTH_LONG).show();
                 }else {
                     teacher_init.Teacher_resume(uid,dei);
                     teacher_init.Teacher_speciality(uid,tec);
@@ -471,6 +473,16 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 flag = 2;
                 new User_Realization().setuserbitmap(image,this);
                 zhengshuDialog.dismiss();
+                break;
+            case R.id.shenfen_dialog_pick:
+                flag = 1;
+                new User_Realization().setuserbitmap(image,this);
+                shenfenDialog.dismiss();
+                break;
+            case R.id.shenfen2_dialog_pick:
+                flag = 2;
+                new User_Realization().setuserbitmap(image,this);
+                shenfenDialog.dismiss();
                 break;
             case R.id.picture_dialog_pick: {
                 selectImage();
@@ -653,7 +665,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 }else if (TAGE_ISRONT == 2){
                     zhengshuDialog.show();
                 }else if (TAGE_ISRONT==4){
-                    zhengshuDialog.show();
+                    shenfenDialog.show();
                 }
 
 

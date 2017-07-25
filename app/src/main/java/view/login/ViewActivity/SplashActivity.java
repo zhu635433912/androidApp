@@ -52,8 +52,8 @@ public class SplashActivity extends AutoLayoutActivity implements View.OnClickLi
         viewpager = (ViewPager) findViewById(R.id.viewpager);
         jinru = (ImageButton) findViewById(R.id.jinru);
 
-        jinru.setVisibility(View.GONE);
-        jinru.setOnClickListener(this);
+//        jinru.setVisibility(View.GONE);
+//        jinru.setOnClickListener(this);
 
         //加载引导页
         LayoutInflater layoutInflater = getLayoutInflater();
@@ -65,18 +65,28 @@ public class SplashActivity extends AutoLayoutActivity implements View.OnClickLi
         listview.add(view1);
         listview.add(view2);
         listview.add(view3);
-
+        view3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sp = getSharedPreferences("ydy", Context.MODE_PRIVATE);
+                SharedPreferences.Editor ddite = sp.edit();
+                //第一次进入
+                ddite.putString("booled", "1");
+                ddite.commit();
+                getsj();
+            }
+        });
         viewpager.setAdapter(new My_PagerAdapter(listview));
 
         viewpager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (position!=2){
-                    jinru.setVisibility(View.GONE);
-                }
-                if (position == 2) {
-                    jinru.setVisibility(View.VISIBLE);
-                }
+//                if (position!=2){
+//                    jinru.setVisibility(View.GONE);
+//                }
+//                if (position == 2) {
+//                    jinru.setVisibility(View.VISIBLE);
+//                }
             }
 
             @Override

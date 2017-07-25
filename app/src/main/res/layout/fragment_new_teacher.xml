@@ -122,21 +122,23 @@
                 android:id="@+id/relayout1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y120">
-
+                <!--android:layout_width="@dimen/x80"-->
+                <!--android:layout_height="@dimen/y22"-->
                 <TextView
-                    android:background="@drawable/city_black"
-                    android:gravity="center"
-                    android:paddingBottom="@dimen/y4"
                     android:id="@+id/teacher_city_tv"
-                    android:layout_width="@dimen/x80"
-                    android:layout_height="@dimen/y22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="30px"
                     android:layout_marginTop="33px"
-                    android:text="乌鲁木齐好"
+                    android:background="@drawable/city_black"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/y4"
+                    android:text=""
                     android:textColor="#4e4e50"
                     android:textSize="12sp" />
+
                 <ImageButton
                     android:layout_width="30px"
                     android:layout_height="20px"
@@ -154,20 +156,20 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="200px"
-                    android:text="今天你学了吗!"
+                    android:layout_marginTop="120px"
+                    android:text="一壶清澧  广施甘露"
                     android:textColor="#4e4e50"
-                    android:textSize="50px" />
+                    android:textSize="45px" />
 
                 <ImageButton
                     android:id="@+id/teacher_search_btn"
-                    android:layout_width="70px"
-                    android:layout_height="70px"
+                    android:layout_width="57px"
+                    android:layout_height="66px"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginEnd="80px"
-                    android:layout_marginRight="20px"
+                    android:layout_marginRight="40px"
                     android:layout_marginTop="33px"
                     android:background="@drawable/sousuo" />
 
@@ -175,13 +177,12 @@
                     android:id="@+id/hosttextview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignLeft="@+id/textView8"
-                    android:layout_alignStart="@+id/textView8"
+                    android:layout_centerHorizontal="true"
                     android:layout_below="@+id/faxianjiaoshi"
-                    android:layout_marginTop="15dp"
-                    android:text=" "
-                    android:textColor="#4e4e50"
-                    android:textSize="50px" />
+                    android:layout_marginTop="10dp"
+                    android:text="帮助Ta找到方法,解决需求,既是Ta的进步"
+                    android:textColor="#747474"
+                    android:textSize="30px" />
 
                 <TextView
                     android:id="@+id/textView8"
@@ -189,9 +190,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/hosttextview"
                     android:layout_centerHorizontal="true"
-                    android:text=" "
-                    android:textColor="#4e4e50"
-                    android:textSize="50px" />
+                    android:text="也是您的收获!"
+                    android:textColor="#747474"
+                    android:textSize="30px" />
             </RelativeLayout>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>

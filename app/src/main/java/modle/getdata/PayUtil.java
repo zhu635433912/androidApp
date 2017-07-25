@@ -67,19 +67,21 @@ public class PayUtil {
     }
 
     //获取订单详细
-    public void getPayDetails(int id, final int paytype,int reward_fee ,final PayView payView){
-        Call<PayEntity> call=data.getpayMsg(id,paytype,reward_fee);
+    public void getPayDetails(int id, final int paytype,double reward_fee ,String payPsw,final PayView payView){
+        Call<PayEntity> call=data.getpayMsg(id,paytype,reward_fee,payPsw);
 
         call.enqueue(new Callback<PayEntity>() {
             @Override
             public void onResponse(Call<PayEntity> call, Response<PayEntity> response) {
+                Log.d("aa",response.body().getError()+"pay_response"+response.body().getErrmsg());
                 Map<String,Object> maps=new HashMap<>();
                 if (paytype == 1) {
                     maps = response.body().getContent();
                 }else if (paytype == 0){
-                    maps.put("info", response.body().getContent()+"");
+                    maps.put("info", response.body().getErrmsg()+"");
                 }else if (paytype == 2){
                     maps.put("error",response.body().getError()+"");
+                    maps.put("errmsg",response.body().getErrmsg()+"");
                 }
                 payView.successPay(maps);
             }

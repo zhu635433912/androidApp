@@ -145,7 +145,7 @@ public class StudentFragment extends BaseFragment implements Gaodehuidiao_init, 
     private int genderId = 0;
     private int gradeId = 0;
     private int subjectId = 0;
-    private int order_rank = 0;
+    private int order_rank = 3;
     private int order = 0;
     private TextView subjectotherTv;
     private User_Realization user_init;
@@ -574,6 +574,8 @@ public class StudentFragment extends BaseFragment implements Gaodehuidiao_init, 
             User_id.setLat(lat);
             User_id.setLng(lng);
         }
+            User_id.setProvince(map.get("Province")+"");
+            User_id.setCity(map.get("City")+"");
             cityTv.setText(map.get("District")+"");
             User_id.setStatus(map.get("District") + "");
             User_id.setAddress(map.get("address") + "");
@@ -588,7 +590,7 @@ public class StudentFragment extends BaseFragment implements Gaodehuidiao_init, 
 
             EventBus.getDefault().post(map.get("address") + "", "status");
 //
-            teacher.Get_Teacher_list(id, Integer.parseInt(User_id.getRole()), User_id.getLat() + "", "" + User_id.getLng(), recyclerView, getActivity(), 0, "", 0, 0, 0, 3, this, page,subjectId);
+            teacher.Get_Teacher_list(id, Integer.parseInt(User_id.getRole()), User_id.getLat() + "", "" + User_id.getLng(), recyclerView, getActivity(), order, "",  genderId, 0, gradeId, order_rank, this, page,subjectId);
 
 
     }
@@ -669,7 +671,19 @@ public class StudentFragment extends BaseFragment implements Gaodehuidiao_init, 
                 }
                 String course_name = "";
                 for (int j = 0; j < listmap.size(); j++) {
-                    course_name = course_name + listmap.get(j).get("course_name")+"  ";
+                    if (listmap.get(j).get("grade_id").equals("1")){
+                        course_name = course_name + listmap.get(j).get("course_name")+"(小学)"+"  ";
+                    }else if (listmap.get(j).get("grade_id").equals("2")){
+                        course_name = course_name + listmap.get(j).get("course_name")+"(初中)"+"  ";
+
+                    }else if (listmap.get(j).get("grade_id").equals("3")){
+                        course_name = course_name + listmap.get(j).get("course_name")+"(高中)"+"  ";
+
+                    }else if (listmap.get(j).get("grade_id").equals("4")){
+                        course_name = course_name + listmap.get(j).get("course_name")+"(大学)"+"  ";
+                    }else {
+                        course_name = course_name + listmap.get(j).get("course_name")+"(不限)"+"  ";
+                    }
                 }
                 entity.setStatus2(course_name);
                 entity.setEducation((String)maps.get(i).get("education"));

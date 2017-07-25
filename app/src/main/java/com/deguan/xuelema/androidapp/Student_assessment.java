@@ -20,6 +20,8 @@ import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 
+import org.simple.eventbus.EventBus;
+
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
@@ -44,17 +46,18 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
     private Button but4;
     private Button but5;
     private LinearLayout pingfenxinji;
-    private int rantoke=2;//评分
+    private int rantoke=1;//评分
     private EditText pingjiatext;
     private TextView pingfenTv;
     private TextView goodTv;
     private TextView midTv;
-    private int rank = 4;
+    private int rank = 5;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         setContentView(R.layout.evaluation_sutuder);
         User_id.getInstance().addActivity(this);
      //   HideIMEUtil.wrap(this);
@@ -106,6 +109,7 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
 //                                order_init.UpdateOrder_score(uid,oredr_id,1,1,1,rantoke,rank);
                                 Intent intent=NewMainActivity_.intent(Student_assessment.this).get();
                                 startActivity(intent);
+                                EventBus.getDefault().post(1,"changeStatus");
                                 Toast.makeText(Student_assessment.this,"评论订单成功!",Toast.LENGTH_LONG).show();
                             }
                         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -201,5 +205,11 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
     @Override
     public void Updatefee(List<Map<String, Object>> listmap) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

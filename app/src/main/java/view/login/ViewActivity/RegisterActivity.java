@@ -46,6 +46,7 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
     private EditText dei_yqm;//邀请码
     private login_wan_presenter dwan;
     private TextView text;
+    private EditText payPsdEdit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
         dei_editext= (EditText) findViewById(R.id.dei_username);
         dei_editext1= (EditText) findViewById(R.id.dei_password);
         dei_Verfic= (EditText) findViewById(R.id.dei_editextyansema);
+        payPsdEdit = (EditText) findViewById(R.id.dei_pay_password);
         dei_toview= (ImageButton) findViewById(R.id.dei_VictButton);
         dei_Verificatgion= (ImageButton) findViewById(R.id.dei_imagSess);
         text= (TextView) findViewById(R.id.dei_yzm);
@@ -96,8 +98,10 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
                 break;
             case R.id.dei_login:
                 Log.d("aa","注册");
-                if (dei_editext1.getText().length() > 8 && dei_editext1.getText().length() <= 16) {
+                if (dei_editext1.getText().length() > 8 && dei_editext1.getText().length() <= 16 && payPsdEdit.getText().length()==6) {
                     dwan.Registereduser();
+                }else if (dei_editext1.getText().length() > 8 && dei_editext1.getText().length() <= 16 && payPsdEdit.getText().length()<6){
+                    Toast.makeText(this, "请输入6位支付密码", Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(this, "密码必须超过8位小于16位", Toast.LENGTH_SHORT).show();
                 }
@@ -130,6 +134,7 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
         return dei_editext1.getText().toString();
     }
 
+    public String getPayPsd(){return payPsdEdit.getText().toString();}
     @Override
     public String Verification() {
         return dei_Verfic.getText().toString();

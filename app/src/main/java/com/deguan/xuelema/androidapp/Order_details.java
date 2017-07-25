@@ -64,10 +64,12 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
     private String teacherImage;
     private int duration1;
     private String telphone;
+    private double tolFee;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
         setContentView(R.layout.dindanxxi);
         User_id.getInstance().addActivity(this);
         headImage = (ImageView) findViewById(R.id.order_detail_headimg);
@@ -134,13 +136,25 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
             case "5":
                 statuse.setText("已同意退款");
                 ycang.setVisibility(View.GONE);
+                if(!User_id.getRole().equals("2")) {
+                    ycang.setVisibility(View.GONE);
+                    xuqiufenggexian7.setVisibility(View.GONE);
+                }
                 break;
             case "6":
                 statuse.setText("已拒绝退款");
+                if(!User_id.getRole().equals("2")) {
+                    ycang.setVisibility(View.GONE);
+                    xuqiufenggexian7.setVisibility(View.GONE);
+                }
                 break;
             case "7":
                 statuse.setText("交易完成");
                 ycang.setVisibility(View.GONE);
+                if(!User_id.getRole().equals("2")) {
+                    ycang.setVisibility(View.GONE);
+                    xuqiufenggexian7.setVisibility(View.GONE);
+                }
                 break;
         }
 
@@ -192,8 +206,8 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
 
         closingtime.setText(created);
         dizhi.setText(requirement_address);
-        zongjijine.setText("￥"+(fee* duration1));
-
+        zongjijine.setText("￥"+map.get("order_fee"));
+        tolFee = Double.parseDouble(map.get("order_fee")+"");
         switch (status){
             case "1":
                 order_status.setText("未付款");
@@ -208,10 +222,10 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                 order_status.setText("申请退款中");
                 break;
             case "5":
-                order_status.setText("已同意退款");
+                order_status.setText("退款成功");
                 break;
             case "6":
-                order_status.setText("已拒绝退款");
+                order_status.setText("退款失败,请联系客服");
                 break;
             case "7":
                 order_status.setText("交易完成");
@@ -223,7 +237,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
             name.setText(""+map.get("placer_name"));
         }
 //        dizhi.setText(""+map.get("address"));
-        xuqiuneiro.setText(""+map.get("requirement_content"));
+        xuqiuneiro.setText(""+map.get("desc"));
 //        xuqiuneiro.setText("德冠网络科技公司");
         dindan_id.setText(""+map.get("id"));
 
@@ -285,7 +299,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                 //未完成
                 Intent intent = new Intent(Order_details.this, Payment_Activty.class);
                 intent.putExtra("id", order_id+"");
-                intent.putExtra("fee", fee+"");
+                intent.putExtra("fee", tolFee+"");
                 intent.putExtra("duration", duration+"");
                 intent.putExtra("telphone",telphone);
                 startActivity(intent);
@@ -300,12 +314,13 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                             public void onClick(DialogInterface dialog, int which) {
                                 Order_init order_init = new Order();
                                 String password = User_id.getPassword();
-                                order_init.Update_Order(uid, order_id, 3, password, duration * fee);
+                                order_init.Update_Order(uid, order_id, 3, password, tolFee);
 //                                Intent intent = new Intent(Order_details.this, Student_Activty.class);
                                 Intent intent = new Intent(Order_details.this,Student_assessment.class);
                                 intent.putExtra("oredr_id", order_id+"");
                                 intent.putExtra("teacher_id",teacherId);
                                 new Getdata().sendMessage(User_id.getNickName()+"已经确认授课完成了哦!",telphone);
+                                EventBus.getDefault().post(1,"changeStatus");
                                 startActivity(intent);
                                 Toast.makeText(Order_details.this, "赶快去评价这位老师吧~", Toast.LENGTH_LONG).show();
                                 finish();
@@ -338,9 +353,10 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                         public void onClick(DialogInterface dialog, int which) {
                             Order_init order_init=new Order();
                             String password=User_id.getPassword();
-                            order_init.Update_Order(uid,order_id,4,password,duration*fee);
+                            order_init.Update_Order(uid,order_id,4,password,tolFee);
                             new Getdata().sendMessage(User_id.getNickName()+"已提交退款申请",telphone);
-                            Intent intent=NewMainActivity_.intent(Order_details.this).get();
+                            EventBus.getDefault().post(1,"changeStatus");
+                            Intent intent= new Intent(Order_details.this,MyOrderActivity.class);
                             startActivity(intent);
                             Toast.makeText(Order_details.this,"已提交退款申请!~",Toast.LENGTH_LONG).show();
                             finish();
@@ -354,5 +370,11 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
 
             break;
     }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

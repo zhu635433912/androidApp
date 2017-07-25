@@ -266,6 +266,28 @@ public class User_Realization implements User_init {
         });
 
     }
+    //上传身份证id
+    public void UpdateIdcard(int user_id,String idCard){
+        Call<Demtest> call=myOkhttp.setnickname(user_id,idCard);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")) {
+                    Log.e("aa", "用户资料更新成功");
+                }else {
+                    String errmsg=response.body().getErrmsg();
+                    Log.e("aa","更新用户资料错误="+errmsg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                Log.e("aa","获取用户资料异常错误="+t.toString());
+            }
+        });
+
+    }
 
     @Override
     public void Updateheadimg(int user_id, String headimg) {
@@ -334,7 +356,7 @@ public class User_Realization implements User_init {
 
     @Override
     public void Upsignature(int user_id, String signature) {
-        Call<Demtest> call=myOkhttp.setgender(user_id,signature);
+        Call<Demtest> call=myOkhttp.setsignature(user_id,signature);
         call.enqueue(new Callback<Demtest>() {
             @Override
             public void onResponse(Call<Demtest> call, Response<Demtest> response) {
@@ -512,8 +534,8 @@ public class User_Realization implements User_init {
         newOpts.inJustDecodeBounds = false;
         int w = newOpts.outWidth;
         int h = newOpts.outHeight;
-        float hh = 300f;//
-        float ww = 240f;//
+        float hh = 900f;//
+        float ww = 720f;//
         int be = 1;
         if (w > h && w > ww) {
             be = (int) (newOpts.outWidth / ww);

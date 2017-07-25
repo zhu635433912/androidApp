@@ -272,7 +272,11 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
 //        }
         fuwufang.setText((String)map.get("service_type_txt"));
         shijianduan.setText(desc);
-        userage.setText(age+"岁");
+        if (age.equals("不限")) {
+            userage.setText(age + "年龄");
+        }else {
+            userage.setText(age + "岁");
+        }
         Relasetime.setText(created);
         Demandcontent.setText(content);
         Requirname.setText(publisher_name);
@@ -350,6 +354,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
                                 public void onClick(DialogInterface dialog, int which) {
                                     Order_init order_init = new Order();
                                     order_init.CreateOrder(user_id, id, dindan, fee, course_id, grade_id, Xuqiuxiangx.this, User_id.getAddress(), User_id.getLat(), User_id.getLng());
+                                    new Getdata().sendMessage("您的需求已被"+User_id.getNickName()+"接取",username);
                                     Intent intent = NewMainActivity_.intent(Xuqiuxiangx.this).get();
                                     startActivity(intent);
                                 }

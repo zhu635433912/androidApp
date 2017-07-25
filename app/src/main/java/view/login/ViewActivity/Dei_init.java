@@ -36,6 +36,12 @@ public interface Dei_init  {
     获取验证码
      */
     public String Verification();
+
+    /**
+     * 获取支付密码
+     * @return
+     */
+    public String getPayPsd();
     /*
     获取用户级别
      */

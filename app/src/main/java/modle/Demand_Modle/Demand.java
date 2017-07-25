@@ -307,5 +307,28 @@ public class Demand implements Demand_init {
         });
     }
 
+    //获取用户自己的接取的需求
+    public void getReceptDemand(int uid){
+        Call<ContentModle> call=demand_http.getMyReceptDemand(uid);
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                String errpr=response.body().getError();
+                if (errpr.equals("ok")) {
+                    List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
+                    listmap = response.body().getContent();
+                    similarXuqiuView.successSimilarXuqiu(listmap);
+                }else {
+                    String errmsg=response.body().getErrmsg();
+                    Log.e("aa","获取我的需求列表="+errmsg);
+                    similarXuqiuView.failSimilarXuqiu(errmsg);
+                }
+            }
 
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                similarXuqiuView.failSimilarXuqiu("网络错误");
+            }
+        });
+    }
 }

@@ -126,7 +126,17 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
                 List<Map<String,Object>> listmap = ((List<Map<String,Object>>)maps.get(i).get("information_temp"));
                 String course_name = "";
                 for (int j = 0; j < listmap.size(); j++) {
-                    course_name = course_name + listmap.get(j).get("course_name")+"  ";
+                    if (listmap.get(j).get("grade_id").equals("1")){
+                        course_name = course_name + listmap.get(j).get("course_name")+"(小学)"+"  ";
+                    }else if (listmap.get(j).get("grade_id").equals("2")){
+                        course_name = course_name + listmap.get(j).get("course_name")+"(初中)"+"  ";
+                    }else if (listmap.get(j).get("grade_id").equals("3")){
+                        course_name = course_name + listmap.get(j).get("course_name")+"(高中)"+"  ";
+                    }else if (listmap.get(j).get("grade_id").equals("4")){
+                        course_name = course_name + listmap.get(j).get("course_name")+"(大学)"+"  ";
+                    }else {
+                        course_name = course_name + listmap.get(j).get("course_name")+"(不限)"+"  ";
+                    }
                 }
                 entity.setStatus2(course_name);
 //            entity.setGrade_name((String)maps.get(i).get("grade_name"));
@@ -143,6 +153,7 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
 
     @Override
     public void failTuijian(String msg) {
+        swipeRefreshLayout.setRefreshing(false);
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 

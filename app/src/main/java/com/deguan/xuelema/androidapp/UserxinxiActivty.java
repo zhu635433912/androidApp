@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -99,6 +101,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private String address;
     private ImageButton backImage;
     private TextView successTv;
+    private String content = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -143,7 +146,9 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         gerxxxuexiquan.setOnClickListener(this);
         grfanhui.setOnClickListener(this);
         backImage.setOnClickListener(this);
-
+        if (getIntent().getStringExtra("content")!=null) {
+            content = getIntent().getStringExtra("content");
+        }
         address = User_id.getAddress();
         myid = getIntent().getStringExtra("myid");
         final String user_id=getIntent().getStringExtra("user_id");
@@ -237,6 +242,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         courseNametV = (TextView) view.findViewById(R.id.kechengname);
         studentShangmen  = (TextView) view.findViewById(R.id.xuessm);
         teacherShangmen = (TextView) view.findViewById(R.id.laoshism);
+        final EditText descEdit = (EditText) view.findViewById(R.id.buy_course_desc);
         studentShangmen.setTextColor(Color.parseColor("#fd1245"));
         buyPopWindow = new PopupWindow(view);
         buyPopWindow.setFocusable(true);
@@ -244,7 +250,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         int height = wm.getDefaultDisplay().getHeight();
         int width = wm.getDefaultDisplay().getWidth();
         buyPopWindow.setWidth(width);
-        buyPopWindow.setHeight(height/3);
+        buyPopWindow.setHeight(height/5*2);
         buyPopWindow.setBackgroundDrawable(new BitmapDrawable());
         buyPopWindow.setOutsideTouchable(true);
         servicetype = 2;
@@ -290,6 +296,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 zongfee.setText(coursefee*courseNumber+"元");
             }
         });
+        descEdit.setText(content);
         buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -297,10 +304,17 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                         .setPositiveButton("是", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                buyPopWindow.dismiss();
                                 int uid=Integer.parseInt(User_id.getUid());
                                 Order_init order_init=new Order();
                                 //创建订单
-                                order_init.Establish_Order(uid,teacherId,Integer.parseInt(myid),coursefee,courseNumber,Integer.parseInt(courseId),Integer.parseInt(gradeId),servicetype,User_id.getAddress());
+                                if (!TextUtils.isEmpty(descEdit.getText())) {
+                                    order_init.Establish_Order(uid, teacherId, Integer.parseInt(myid), coursefee, courseNumber, Integer.parseInt(courseId), Integer.parseInt(gradeId), servicetype,
+                                            User_id.getAddress(), User_id.getProvince(), User_id.getCity(), User_id.getStatus(),descEdit.getText().toString() );
+                                }else {
+                                    order_init.Establish_Order(uid, teacherId, Integer.parseInt(myid), coursefee, courseNumber, Integer.parseInt(courseId), Integer.parseInt(gradeId), servicetype,
+                                            User_id.getAddress(), User_id.getProvince(), User_id.getCity(), User_id.getStatus(),"" );
+                                }
                                 Toast.makeText(UserxinxiActivty.this,"购买课程成功",Toast.LENGTH_SHORT).show();
                                 new Getdata().sendMessage("有人购买了你的课程哦,快去看看吧",mobile);
                                 Intent intent=new Intent(UserxinxiActivty.this,MyOrderActivity.class);

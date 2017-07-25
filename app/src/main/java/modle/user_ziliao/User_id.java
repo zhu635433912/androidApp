@@ -59,6 +59,24 @@ public class User_id extends Application {
     public static String APP_URL = "http://deguanjiaoyu.com/index.php?s=/Service/Public/downUrl";
     private static String address;
     private static String nickName;
+    private static String province;
+    private static String city;
+
+    public static String getProvince() {
+        return province;
+    }
+
+    public static void setProvince(String province) {
+        User_id.province = province;
+    }
+
+    public static String getCity() {
+        return city;
+    }
+
+    public static void setCity(String city) {
+        User_id.city = city;
+    }
 
     public static String getNickName() {
         return nickName;

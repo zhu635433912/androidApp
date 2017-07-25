@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="#fdfdfe"
      android:layout_width="match_parent"
-    android:layout_height="500px">
+    android:layout_height="600px">
     <TextView
         android:id="@+id/kechengname"
         android:layout_marginTop="44px"
@@ -116,7 +116,7 @@
     <TextView
         android:id="@+id/fee"
         android:textColor="#dac11d"
-        android:layout_marginEnd="10px"
+        android:layout_marginRight="10px"
         android:gravity="center"
         android:textSize="30px"
         android:text="1"
@@ -129,7 +129,7 @@
         android:gravity="center"
         android:textSize="20px"
         android:text="一"
-        android:layout_marginEnd="10px"
+        android:layout_marginRight="10px"
         android:layout_toLeftOf="@+id/fee"
         android:layout_below="@+id/fengexianfee"
         android:layout_width="40px"
@@ -143,10 +143,27 @@
         android:layout_width="706px"
         android:layout_height="1px" />
     <TextView
+        android:layout_marginLeft="20px"
+        android:text="备注"
+        android:textSize="25px"
+        android:layout_below="@+id/fengexianfee1"
+        android:layout_alignLeft="@+id/shangkefnagshi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+
+        android:textSize="30px"
+        android:layout_marginTop="25px"
+        android:layout_below="@+id/fengexianfee1"
+        android:layout_alignLeft="@+id/shangkefnagshi"
+        android:id="@+id/buy_course_desc"
+        android:layout_width="match_parent"
+        android:layout_height="100px" />
+    <TextView
         android:id="@+id/zonggongjine"
         android:textSize="35px"
         android:layout_marginTop="24px"
-        android:layout_below="@+id/fengexianfee1"
+        android:layout_below="@+id/buy_course_desc"
         android:layout_alignLeft="@+id/shangkefnagshi"
         android:text="共计: ￥"
         android:layout_width="wrap_content"
@@ -162,12 +179,12 @@
         android:layout_height="wrap_content" />
     <Button
         android:id="@+id/goumai"
-        android:layout_marginEnd="44px"
+        android:layout_marginRight="44px"
         android:textSize="30px"
         android:textColor="#fff"
         android:text="确定"
         android:layout_alignBottom="@+id/zonggongjine"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:background="@drawable/hongse"
         android:layout_width="160px"
         android:layout_height="50px" />

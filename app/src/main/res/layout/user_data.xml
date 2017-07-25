@@ -294,7 +294,7 @@
             android:layout_height="100px" />
     </RelativeLayout>
         <RelativeLayout
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/xuelie_rl"
             android:layout_below="@+id/fuwuleia"
             android:layout_width="match_parent"
@@ -304,7 +304,7 @@
                 android:layout_marginLeft="50px"
                 android:layout_alignParentLeft="true"
                 android:textSize="30px"
-                android:text="学历"
+                android:text="身份证号码"
                 android:layout_marginTop="30px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -321,7 +321,9 @@
                 android:id="@+id/xueli_text"
                 android:textColor="#1e1e1e"
                 android:layout_marginRight="50px"
-
+                android:maxEms="4"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:textSize="30px"
                 android:layout_alignParentRight="true"
                 android:layout_width="500px"

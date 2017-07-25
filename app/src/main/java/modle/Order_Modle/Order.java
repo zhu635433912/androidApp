@@ -123,8 +123,8 @@ public class Order implements Order_init {
      */
 
     @Override
-    public Map<String, Object> Establish_Order(int uid, int teacher_id, int requirement_id, float fee,int duration,int course_Id,int grade_Id,int service_type,String address) {
-        Call<Erre> call=oredr_http.setOredr(uid,teacher_id,requirement_id,fee,duration,course_Id,grade_Id,service_type,address);
+    public Map<String, Object> Establish_Order(int uid, int teacher_id, int requirement_id, float fee,int duration,int course_Id,int grade_Id,int service_type,String address,String province,String city,String district ,String desc   ) {
+        Call<Erre> call=oredr_http.setOredr(uid,teacher_id,requirement_id,fee,duration,course_Id,grade_Id,service_type,address,province,city,district,desc);
         call.enqueue(new Callback<Erre>() {
             @Override
             public void onResponse(Call<Erre> call, Response<Erre> response) {
@@ -181,7 +181,7 @@ public class Order implements Order_init {
     更新订单状态
      */
     @Override
-    public Map<String, Object> Update_Order(int id, int dindan, int status,String safeword,float fee) {
+    public Map<String, Object> Update_Order(int id, int dindan, int status,String safeword,double fee) {
 
         Call<Erre> call=oredr_http.UpdateOredr(id,dindan,status,safeword,fee);
         call.enqueue(new Callback<Erre>() {
@@ -234,7 +234,7 @@ public class Order implements Order_init {
     更新订单金额
      */
     @Override
-    public Map<String, Object> UpdateOrder_Amount(int uid, int id, int fee, final ChangeOrderView changeOrderView) {
+    public Map<String, Object> UpdateOrder_Amount(int uid, int id, double fee, final ChangeOrderView changeOrderView) {
         Call<Demtest> call=oredr_http.UpdateOredrfee(uid,id,fee);
         call.enqueue(new Callback<Demtest>() {
             @Override
@@ -313,7 +313,7 @@ public class Order implements Order_init {
     订单退款
      */
     @Override
-    public Map<String, Object> Order_refund(int uid, int id, int status, float refund_fee) {
+    public Map<String, Object> Order_refund(int uid, int id, int status, double refund_fee) {
         Call<Demtest> call=oredr_http.Oredrtuikun(uid,id,status,refund_fee);
         call.enqueue(new Callback<Demtest>() {
             @Override

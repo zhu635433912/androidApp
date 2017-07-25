@@ -18,6 +18,6 @@ public interface Modle_wan_login {
     /*
     修改 注册用户线程逻辑
      */
-    public void Userregistration(String category, String username, String passowrd, String ftype,String yqm);
+    public void Userregistration(String category, String username, String passowrd, String ftype,String yqm,String payPsd);
 }
 

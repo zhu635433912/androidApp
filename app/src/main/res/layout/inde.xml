@@ -15,6 +15,7 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/inde3button"
         android:id="@+id/jinru"
+        android:visibility="gone"
         android:layout_marginLeft="20px"
         android:layout_centerHorizontal="true"
         android:layout_width="320px"

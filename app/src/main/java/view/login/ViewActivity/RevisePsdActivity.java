@@ -88,6 +88,7 @@ public class RevisePsdActivity extends AutoLayoutActivity implements Pos_inint,V
                 break;
             case R.id.pos_login:
                 dwan.xiugai();
+
                 break;
 
         }
@@ -107,6 +108,8 @@ public class RevisePsdActivity extends AutoLayoutActivity implements Pos_inint,V
     public String getyzm() {
         return pos_Verfic.getText().toString();
     }
+
+    public String getPayPsd(){return "";}
 
     @Override
     public void xiuflase(String eseemge) {

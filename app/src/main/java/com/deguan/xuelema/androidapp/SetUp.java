@@ -5,8 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,6 +19,8 @@ import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.Set;
 
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import modle.Huanxing.cache.UserCacheManager;
 import modle.Order_Modle.Order;
 import modle.Order_Modle.Order_init;
@@ -99,6 +103,7 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, ""));
                                 //清空数据登录状态数据
                                 //从xml里取保存的账号
                                 SharedPreferences userxml=getSharedPreferences("userxml",MODE_PRIVATE);
@@ -113,11 +118,11 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
                                 editor.remove("nickname");
                                 editor.commit();
                                 logout();
+                                User_id.getInstance().exit();
                                 Intent intent2=new Intent(SetUp.this, LoginAcitivity.class);
                                 startActivity(intent2);
 
                                 Toast.makeText(SetUp.this,"退出成功！",Toast.LENGTH_LONG).show();
-//                                User_id.getInstance().exit();
 
                             }
                         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -181,5 +186,46 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
             }
         });
     }
-
+    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+            String logs ;
+            switch (code) {
+                case 0:
+                    logs = "Set tag and alias success";
+                    Log.i("aa", logs);
+                    // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
+                    break;
+                case 6002:
+                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+                    Log.i("aa", logs);
+                    // 延迟 60 秒来调用 Handler 设置别名
+                    mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
+                    break;
+                default:
+                    logs = "Failed with errorCode = " + code;
+                    Log.e("aa", logs);
+            }
+//            ExampleUtil.showToast(logs, getApplicationContext());
+        }
+    };
+    private static final int MSG_SET_ALIAS = 1001;
+    private final Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case MSG_SET_ALIAS:
+                    Log.d("aa", "Set alias in handler.");
+                    // 调用 JPush 接口来设置别名。
+                    JPushInterface.setAliasAndTags(getApplicationContext(),
+                            (String) msg.obj,
+                            null,
+                            mAliasCallback);
+                    break;
+                default:
+                    Log.i("aa", "Unhandled msg - " + msg.what);
+            }
+        }
+    };
 }

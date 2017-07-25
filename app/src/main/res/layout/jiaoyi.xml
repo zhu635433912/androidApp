@@ -51,7 +51,7 @@
     android:layout_alignParentStart="true">
     <RelativeLayout
         android:id="@+id/gerxxrelayout"
-        android:background="@drawable/mask"
+        android:background="@drawable/mask1"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="130px"

@@ -210,4 +210,9 @@
         android:layout_centerHorizontal="true"
         android:layout_width="600px"
         android:layout_height="80px" />
+    <View
+        android:id="@+id/pay_bottom_line"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="0.5px"/>
 </RelativeLayout>
