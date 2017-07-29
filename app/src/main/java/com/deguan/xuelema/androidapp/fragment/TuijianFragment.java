@@ -29,7 +29,7 @@ import modle.Adapter.TuijianNewAdapter;
 import modle.user_ziliao.User_id;
 
 /**
- * 推荐
+ * 推荐教师
  */
 @EFragment(R.layout.tuijian_new_fragment)
 public class TuijianFragment extends BaseFragment implements  TuijianView, SwipeRefreshLayout.OnRefreshListener, TuijianNewAdapter.OnTopClickListener {
@@ -119,6 +119,7 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
                 entity.setUser_headimg((String) maps.get(i).get("user_headimg"));
                 entity.setUser_id((String) maps.get(i).get("user_id"));
                 entity.setGender((String) maps.get(i).get("gender"));
+                entity.setClick(maps.get(i).get("click")+"");
 //            entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
                 entity.setDistance((String) maps.get(i).get("distance"));
                 entity.setFee(String.valueOf(maps.get(i).get("fee")));

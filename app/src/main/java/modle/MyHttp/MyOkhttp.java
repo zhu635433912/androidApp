@@ -78,6 +78,12 @@ public interface MyOkhttp {
     Call<Demtest> setnickname(@Query("id") int id, @Query("nickname") String nickname);
 
     /*
+      用户资料更新身份证
+       */
+    @POST("index.php?s=/Service/Accounts/update_profile")
+    Call<Demtest> setIdcard(@Query("id") int id, @Query("idcard") String nickname);
+
+    /*
    用户资料真实姓名
    */
     @POST("index.php?s=/Service/Accounts/update_profile")

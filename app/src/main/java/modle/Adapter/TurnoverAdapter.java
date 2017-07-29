@@ -63,6 +63,8 @@ public class TurnoverAdapter extends ListBaseAdapter {
         }
         else if (type.equals("6")){
             holder.turnStatsTv.setText("拒绝退款");
+        }else {
+            holder.turnStatsTv.setText(" ");
         }
         Glide.with(context).load(list.get(position).get("headimg")+"").transform(new GlideCircleTransform(context)).into(holder.turnHeadImage);
 

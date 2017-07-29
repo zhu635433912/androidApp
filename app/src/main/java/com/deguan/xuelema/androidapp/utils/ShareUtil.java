@@ -49,10 +49,10 @@ public class ShareUtil {
         // 分享时Notification的图标和文字  2.5.9以后的版本不     调用此方法
         //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
         // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-//        onekeyShare.setTitle("学了吗");
-        onekeyShare.setTitle("邀请码: "+User_id.getUsername());
+        onekeyShare.setTitle("学了吗");
+//        onekeyShare.setTitle("邀请码: "+User_id.getUsername());
 //        onekeyShare.setText("邀请码: "+User_id.getUsername());
-        onekeyShare.setText("学了吗-精英领航 沉梦飞翔");
+        onekeyShare.setText("精英领航 沉梦飞翔");
         // imagePath是图片的本地路径：除Linked-In以外的平台都支持此参数
         //oks.setImagePath(Environment.getExternalStorageDirectory() + "/meinv.jpg");//确保SDcard下面存在此张图片
 
@@ -60,10 +60,10 @@ public class ShareUtil {
         onekeyShare.setImageUrl("http://img.xiumi.us/xmi/ua/14iWN/i/d89eb61c05946f1b84710fc2b86b7fd6-sz_80016.png?x-oss-process=style/xm" );//网络图片rul
 
         // url：仅在微信（包括好友和朋友圈）中使用
-        onekeyShare.setUrl("http://v.xiumi.us/board/v5/2Z7Fo/48857694");   //网友点进链接后，可以看到分享的详情
+        onekeyShare.setUrl("http://deguanjiaoyu.com/index.php?s=/Home/users/index/tel/"+User_id.getUsername());   //网友点进链接后，可以看到分享的详情
 //        onekeyShare.setUrl("http://www.baidu.com/");
         // Url：仅在QQ空间使用
-        onekeyShare.setTitleUrl("http://v.xiumi.us/board/v5/2Z7Fo/48857694");  //网友点进链接后，可以看到分享的详情
+        onekeyShare.setTitleUrl("http://deguanjiaoyu.com/index.php?s=/Home/users/index/tel/"+User_id.getUsername());  //网友点进链接后，可以看到分享的详情
 //        onekeyShare.set
         // 启动分享GUI
         onekeyShare.show(context);

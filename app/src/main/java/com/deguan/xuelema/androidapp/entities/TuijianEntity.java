@@ -86,6 +86,15 @@ public class TuijianEntity {
     private String signature;
     private String distance;
     private String address;
+    private String click;
+
+    public String getClick() {
+        return click;
+    }
+
+    public void setClick(String click) {
+        this.click = click;
+    }
 
     public String getUser_id() {
         return user_id;

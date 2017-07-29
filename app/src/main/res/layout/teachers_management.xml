@@ -399,13 +399,16 @@
              android:layout_below="@+id/xueli"
              android:layout_centerHorizontal="true"
              android:layout_width="680px"
-             android:layout_height="100px">
+             android:layout_height="200px">
              <ImageView
+                 android:src="@drawable/refund_edit_back"
                  android:id="@+id/xueli_image1"
                  android:layout_width="0dp"
                  android:layout_weight="1"
                  android:layout_height="match_parent" />
              <ImageView
+                 android:src="@drawable/refund_edit_back"
+
                  android:id="@+id/xueli_image2"
                  android:layout_width="0dp"
                  android:layout_weight="1"
@@ -454,11 +457,15 @@
              android:layout_width="680px"
              android:layout_height="100px">
              <ImageView
+                 android:src="@drawable/refund_edit_back"
+
                  android:id="@+id/rongyu_image1"
                  android:layout_width="0dp"
                  android:layout_weight="1"
                  android:layout_height="match_parent" />
              <ImageView
+                 android:src="@drawable/refund_edit_back"
+
                  android:id="@+id/rongyu_image2"
                  android:layout_width="0dp"
                  android:layout_weight="1"
@@ -512,11 +519,14 @@
              android:layout_width="680px"
              android:layout_height="100px">
              <ImageView
+                 android:src="@drawable/refund_edit_back"
                  android:id="@+id/postuserimage1"
                  android:layout_width="0dp"
                  android:layout_weight="1"
                  android:layout_height="match_parent" />
              <ImageView
+                 android:src="@drawable/refund_edit_back"
+
                  android:id="@+id/postuserimage2"
                  android:layout_width="0dp"
                  android:layout_weight="1"

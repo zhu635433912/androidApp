@@ -133,6 +133,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         xuqiushuax= (AVLoadingIndicatorView) findViewById(R.id.xuqiushuax);
         Demandcontent.setMovementMethod(ScrollingMovementMethod.getInstance());
 
+        xuqiuimage.setOnClickListener(this);
         xuqiufanhui.bringToFront();
         xuqiuweix.setOnClickListener(this);
         xuqiufanhui.setOnClickListener(this);
@@ -167,7 +168,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         course_id = Integer.parseInt(getIntent().getStringExtra("course_id"));
         grade_id = Integer.parseInt(getIntent().getStringExtra("grade_id"));
 
-        Log.e("aa", "需求详细接收到需求编号为" + dindan + "发布者id为"+user_id+"金额为"+feeva);
+//        Log.e("aa", "需求详细接收到需求编号为" + dindan + "发布者id为"+user_id+"金额为"+feeva);
 
         //相似需求
         listview.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
@@ -300,6 +301,10 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.xuqiuimage:
+
+
+                break;
             case  R.id.bohao:
                 if (ispass) {
                     //拨号

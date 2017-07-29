@@ -94,7 +94,7 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
         int keshifee=Integer.parseInt(listmap.get(position).get("fee")+"");
         int duration=Integer.parseInt(listmap.get(position).get("duration")+"");
         //总课时费
-        double zongfee= Double.parseDouble(listmap.get(position).get("order_fee")+"");
+        double zongfee= Double.parseDouble(listmap.get(position).get("order_price")+"");
         //订单id
         String  orderid=listmap.get(position).get("id").toString();
         if (User_id.getRole().equals("1")) {

@@ -143,7 +143,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
                 statuse.setText("已完成");
         }
 
-        Log.e("aa", "订单详细收到的订单id为" + order_id + "与用户id为" + uida);
+//        Log.e("aa", "订单详细收到的订单id为" + order_id + "与用户id为" + uida);
 
         //根据订单号用户id去后台获取订单详细信息
         order_init = new Order();
@@ -153,7 +153,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
             @Override
             public void onClick(View v) {
                 //拨号
-                Log.e("aa", "拨号成功");
+//                Log.e("aa", "拨号成功");
                 Intent inte = new Intent(Intent.ACTION_DIAL);
                 inte.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 inte.setData(Uri.parse("tel:" + telTv.getText().toString()));
@@ -205,7 +205,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
     }
 
     private String teacherId;
-
+    private double tolFee;
     @Override
     public void Updatecontent(Map<String, Object> map) {
         String status = (String) map.get("status");
@@ -216,7 +216,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
 //        String created = (String) map.get("created");
         String requirement_grade = (String) map.get("grade_name");
         String requirement_course = (String) map.get("course_name");
-        String feae= (String) map.get("order_fee");
+        String feae= (String) map.get("fee");
         teacherImage = (String) map.get("placer_headimg");
         Glide.with(this).load(teacherImage).transform(new GlideCircleTransform(this)).into(headImage);
         teacherId = (String) map.get("teacher_id");
@@ -226,12 +226,12 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
         int duration=Integer.parseInt(map.get("duration").toString());
         kechengjieshu.setText("x"+duration+"节");
         keshishufee.setText("￥"+fee+"/节");
-
+        tolFee = Double.parseDouble(map.get("order_fee")+"");
         course.setText(requirement_course);
         grade.setText(requirement_grade);
         closingtime.setText(created);
         dizhi.setText(requirement_address);
-        zongjijine.setText("￥"+map.get("order_fee"));
+        zongjijine.setText("￥"+map.get("order_price"));
 
 
 
@@ -343,23 +343,23 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
 //                    intent.putExtra("duration", duration+"");
 //                    startActivity(intent);
 //                    Toast.makeText(OrderTeacherActivity.this, "进入支付环节", Toast.LENGTH_SHORT).show();
-
                 }else if (status.equals("4")){
                     new AlertDialog.Builder(OrderTeacherActivity.this).setTitle("学了么提示!").setMessage("确认退款吗")
                             .setPositiveButton("确认退款", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     //创建订单
-                                    order_init.Order_refund(uid,order_id,5,fee);
+                                    order_init.Order_refund(uid,order_id,5,tolFee);
                                     new Getdata().sendMessage(User_id.getNickName()+"已同意退款",telphone);
                                     Toast.makeText(OrderTeacherActivity.this,"已确认退款",Toast.LENGTH_SHORT).show();
                                 }
                             }).setNegativeButton("拒绝退款", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            order_init.Order_refund(uid,order_id,6,fee);
+                            order_init.Order_refund(uid,order_id,6,tolFee);
                             new Getdata().sendMessage(User_id.getNickName()+"拒绝退款",telphone);
                             Toast.makeText(OrderTeacherActivity.this,"已拒绝退款~",Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     }).show();
 

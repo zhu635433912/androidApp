@@ -118,10 +118,10 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
                                 editor.remove("nickname");
                                 editor.commit();
                                 logout();
-                                User_id.getInstance().exit();
+
                                 Intent intent2=new Intent(SetUp.this, LoginAcitivity.class);
                                 startActivity(intent2);
-
+                                User_id.getInstance().exit();
                                 Toast.makeText(SetUp.this,"退出成功！",Toast.LENGTH_LONG).show();
 
                             }
@@ -180,7 +180,7 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
                     public void run() {
                         // TODO Auto-generated method stub
                         pd.dismiss();
-                        Toast.makeText(SetUp.this, "unbind devicetokens failed", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(SetUp.this, "unbind devicetokens failed", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -193,7 +193,7 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
             switch (code) {
                 case 0:
                     logs = "Set tag and alias success";
-                    Log.i("aa", logs);
+//                    Log.i("aa", logs);
                     // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
                     break;
                 case 6002:

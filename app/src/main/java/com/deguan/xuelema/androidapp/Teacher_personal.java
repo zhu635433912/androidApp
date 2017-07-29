@@ -96,7 +96,7 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
         teacher_init.Get_Teacher(teacher_id,this);
 
         //获取教师详细资料
-        teacher_init.Get_Teacher_detailed(uid,teacher_id,this,0);
+        teacher_init.Get_Teacher_detailed(uid,teacher_id,this,0,0);
         if (!TextUtils.isEmpty(headUrl)) {
             Glide.with(this).load(headUrl).transform(new GlideCircleTransform(this)).into(teachertoux);
         }
@@ -147,7 +147,7 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
         diqu.setText(map.get("address").toString()+"");
 
 
-        Log.e("aa","图片地址"+map.get("user_headimg").toString());
+//        Log.e("aa","图片地址"+map.get("user_headimg").toString());
 //        setbitmap(map.get("user_headimg").toString());
 //        Glide.with(this).load(map.get("user_headimg").toString()).transform(new GlideCircleTransform(this)).into(teachertoux);
         switch (map.get("order_rank").toString()){

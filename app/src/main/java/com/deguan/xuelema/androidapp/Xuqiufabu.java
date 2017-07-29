@@ -248,8 +248,8 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                                                 end = jieshu;
                                                 String user_id = User_id.getUid();
                                                 id = Integer.parseInt(user_id);
-                                                Log.e("aa", "用户发布内容 id" + id + "内容" + xuqiuneirong.getText().toString() + "课时费" + "年级id" + zuigrade +
-                                                        "科目id" + kcid + "性别要求" + Gender + "年龄" + age + "学历" + xueli + "地区" + provinc + location + caty + "服务方式+" + 1 + "时间段" + start + "结束时间段" + end);
+//                                                Log.e("aa", "用户发布内容 id" + id + "内容" + xuqiuneirong.getText().toString() + "课时费" + "年级id" + zuigrade +
+//                                                        "科目id" + kcid + "性别要求" + Gender + "年龄" + age + "学历" + xueli + "地区" + provinc + location + caty + "服务方式+" + 1 + "时间段" + start + "结束时间段" + end);
                                                 //发布需求
                                                 Gaode_dinwei gaode_dinwei = new Gaode_dinwei(Xuqiufabu.this, Xuqiufabu.this);
 

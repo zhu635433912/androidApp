@@ -180,13 +180,21 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
         passwordView.setOnFinishInput(new OnPasswordInputFinish() {
             @Override
             public void inputFinish() {
-                new PayUtil().getPayDetails(order_id, 2, mianfee,passwordView.getStrPassword(), Payment_Activty.this);
+                if (mianfee > 0) {
+                    if (order_fee - mianfee >= mianfee) {
+                        new PayUtil().getPayDetails(order_id, 2, mianfee, passwordView.getStrPassword(), Payment_Activty.this);
+                    }else {
+                        new PayUtil().getPayDetails(order_id, 2, order_fee / 2.0, passwordView.getStrPassword(), Payment_Activty.this);
+                    }
+                }else {
+                    new PayUtil().getPayDetails(order_id, 2, 0, passwordView.getStrPassword(), Payment_Activty.this);
+                }
 //                new Getdata().sendMessage(User_id.getNickName()+"已经支付了订单哦",telphone);
 //                Intent intent = new Intent(Payment_Activty.this, Payment_tureActivty.class);
 //                startActivity(intent);
 //                finish();
 //                Toast.makeText(Payment_Activty.this, "支付成功", Toast.LENGTH_SHORT).show();
-                Toast.makeText(Payment_Activty.this, "支付密码为:"+passwordView.getStrPassword(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Payment_Activty.this, "支付密码为:"+passwordView.getStrPassword(), Toast.LENGTH_SHORT).show();
                 passwordView.clearPassword();
                 passwordView.setCurrentIndex(-1);
                 payPopwindow.dismiss();
@@ -434,9 +442,9 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
             payReq.packageValue = map.get("package").toString();
             payReq.prepayId = map.get("prepayid").toString();
             payReq.timeStamp = map.get("timestamp").toString();
-            Log.d("aa","timestamp---------"+payReq.timeStamp);
+//            Log.d("aa","timestamp---------"+payReq.timeStamp);
             payReq.sign = map.get("sign").toString();
-            Log.d("aa",payReq.appId+"----"+payReq.partnerId+"----"+payReq.nonceStr+"----"+payReq.packageValue+"----"+payReq.prepayId+"----"+payReq.sign+"----");
+//            Log.d("aa",payReq.appId+"----"+payReq.partnerId+"----"+payReq.nonceStr+"----"+payReq.packageValue+"----"+payReq.prepayId+"----"+payReq.sign+"----");
             iwxapi.sendReq(payReq);
             EventBus.getDefault().post(telphone,"telphone");
 
@@ -446,11 +454,11 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
             String ordert = info.substring(13);
             final String orderInfo = ordert;
 
-            Log.e("aa", ordert);
+//            Log.e("aa", ordert);
             Runnable payRunnable = new Runnable() {
                 @Override
                 public void run() {
-                    Log.e("aa", "唤起支付宝");
+//                    Log.e("aa", "唤起支付宝");
                     PayTask alipay = new PayTask(Payment_Activty.this);
                     Map<String, String> result = alipay.payV2(orderInfo, true);
                     Message msg = new Message();

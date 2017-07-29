@@ -505,7 +505,7 @@ public class StudentFragment extends BaseFragment implements Gaodehuidiao_init, 
                 latFlag = 0;
                 User_id.setLat(lat);
                 User_id.setLng(lng);
-                Toast.makeText(getActivity(), lat+"  "+lng, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), lat+"  "+lng, Toast.LENGTH_SHORT).show();
                 list2.setVisibility(View.GONE);
                 list3.setVisibility(View.GONE);
                 cityPop.dismiss();
@@ -653,7 +653,7 @@ public class StudentFragment extends BaseFragment implements Gaodehuidiao_init, 
                 entity.setSpeciality_name((String) maps.get(i).get("speciality_name"));
 //                entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
 
-
+                entity.setClick(maps.get(i).get("click")+"");
                 entity.setSignature((String) maps.get(i).get("signature"));
                 entity.setOrder_rank((String.valueOf(maps.get(i).get("order_rank"))));
                 entity.setUser_headimg((String) maps.get(i).get("user_headimg"));

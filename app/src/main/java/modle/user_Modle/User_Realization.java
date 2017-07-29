@@ -268,7 +268,7 @@ public class User_Realization implements User_init {
     }
     //上传身份证id
     public void UpdateIdcard(int user_id,String idCard){
-        Call<Demtest> call=myOkhttp.setnickname(user_id,idCard);
+        Call<Demtest> call=myOkhttp.setIdcard(user_id,idCard);
         call.enqueue(new Callback<Demtest>() {
             @Override
             public void onResponse(Call<Demtest> call, Response<Demtest> response) {

@@ -84,7 +84,7 @@ public interface Order_init {
      * content        评论内容
      * picture        评论图片
      */
-    public Map<String,Object> Comment_Order(int uid,int source_id,String content,long picture,int rank,int rank4);
+    public Map<String,Object> Comment_Order(int uid,int source_id,String content,long picture,int rank,int rank4,int rank1,int rank2,int rank3);
     /**
      * 订单退款
      * uid            用户id
@@ -96,4 +96,9 @@ public interface Order_init {
 
     //创建订单
     public void CreateOrder(int uid,int teacher_id,int requirement_id,float fee,int course_id,int grade_id,Requirdetailed requirdetailed,String address,double lat,double lng);
+
+    //退款
+    public void submit_refund(int uid,int id,int status,String refund_fee,String reason,String desc,String imgs1,String imgs2,String imgs3,String imgs4,ChangeOrderView changeOrderView);
+
+
 }

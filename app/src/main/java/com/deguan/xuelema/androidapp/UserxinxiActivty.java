@@ -136,6 +136,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         jiaoyi.bringToFront();
         grfanhui.bringToFront();
 
+        gerxxtoux.setOnClickListener(this);
         successTv.setOnClickListener(this);
         jubaoTv.setOnClickListener(this);
         imageButton.setOnClickListener(this);
@@ -152,7 +153,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         address = User_id.getAddress();
         myid = getIntent().getStringExtra("myid");
         final String user_id=getIntent().getStringExtra("user_id");
-        Log.e("aa","UserxinActivyt接收到老师id为"+user_id);
+//        Log.e("aa","UserxinActivyt接收到老师id为"+user_id);
         int id=Integer.parseInt(User_id.getUid());
         Requir_id=Integer.parseInt(user_id);
         teacherId = Requir_id;
@@ -162,7 +163,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
 
         //加载数据
         Teacher_init teacher=new Teacher();
-        teacher.Get_Teacher_detailed(id,Requir_id,this,0);
+        teacher.Get_Teacher_detailed(id,Requir_id,this,0,1);
 
         //获取成交率
         Getdata getdata=new Getdata();
@@ -349,7 +350,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         Requitext.setText(resume);
         Requiname.setText(nickname);
 
-        Log.e("aa","头像地址为"+map.get("user_headimg").toString());
+//        Log.e("aa","头像地址为"+map.get("user_headimg").toString());
 //        setbitmap(map.get("user_headimg").toString());
 
     }
@@ -367,6 +368,14 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.gerxxtoux:
+                if (userHeadUrl != null) {
+                    Intent intent2 = new Intent(UserxinxiActivty.this, PictureZoo.class);
+                    intent2.putExtra("hide",userHeadUrl);
+                    startActivity(intent2);
+                }
+
+                break;
             case R.id.gerxxxuexiquana:
                 //跳转成交率
                 Intent intent1 = new Intent(UserxinxiActivty.this, Closing.class);

@@ -72,7 +72,7 @@ public class Teacher_evaluate extends AutoLayoutActivity implements View.OnClick
         int uid=Integer.parseInt(User_id.getUid());
 
         teacher_init=new Teacher();
-        teacher_init.Get_Teacher_detailed(uid,teacher_id,this,1);
+        teacher_init.Get_Teacher_detailed(uid,teacher_id,this,1,0);
 
         teacher_init.setEvaluation_Teacher(teacher_id,this);
 
@@ -101,7 +101,7 @@ public class Teacher_evaluate extends AutoLayoutActivity implements View.OnClick
 
     @Override
     public void Updatefee(List<Map<String, Object>> listmap) {
-
+        pullToRefreshListView.onRefreshComplete();
         Map<String,Object> map=listmap.get(0);
         pingjiafenshu.setText(map.get("order_rank").toString());
         double orderrank = Double.parseDouble(map.get("order_rank")+"");

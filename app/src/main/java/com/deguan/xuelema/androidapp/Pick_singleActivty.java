@@ -62,7 +62,7 @@ public class Pick_singleActivty  extends AutoLayoutActivity implements View.OnCl
         jiedanliebiaofanhui.setOnClickListener(this);
 
         final String myid=getIntent().getStringExtra("id");
-        Log.e("aa","接收到的参数为"+myid);
+//        Log.e("aa","接收到的参数为"+myid);
         id=Integer.parseInt(myid);
         content = getIntent().getStringExtra("content");
         jiedanliebiaofanhui.bringToFront();

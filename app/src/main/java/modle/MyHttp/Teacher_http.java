@@ -23,7 +23,7 @@ public interface Teacher_http {
     获取教师详细个人资料
      */
     @POST("index.php?s=/Service/Teacher/get_teacher")
-    Call<User_Modle> getTeacherxiangxizl(@Query("uid") int uid,@Query("id") int id);
+    Call<User_Modle> getTeacherxiangxizl(@Query("uid") int uid,@Query("id") int id,@Query("number")int number);
     /*
     获取教师列表
      */

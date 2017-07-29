@@ -158,7 +158,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                 break;
         }
 
-        Log.e("aa", "订单详细收到的订单id为" + order_id + "与用户id为" + uida);
+//        Log.e("aa", "订单详细收到的订单id为" + order_id + "与用户id为" + uida);
 
         //根据订单号用户id去后台获取订单详细信息
         Order_init order_init = new Order();
@@ -168,7 +168,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
             @Override
             public void onClick(View v) {
                 //拨号
-                Log.e("aa", "拨号成功");
+//                Log.e("aa", "拨号成功");
                 Intent inte = new Intent(Intent.ACTION_DIAL);
                 inte.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 inte.setData(Uri.parse("tel:" + telTv.getText().toString()));
@@ -190,6 +190,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         String requirement_grade = (String) map.get("grade_name");
         String requirement_course = (String) map.get("course_name");
         String feae= (String) map.get("fee");
+
 //        teacherImage = (String) map.get("teacher_headimg");
             Glide.with(this).load((String) map.get("teacher_headimg")).transform(new GlideCircleTransform(this)).into(headImage);
         teacherId = (String) map.get("teacher_id");
@@ -201,12 +202,13 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         kechengjieshu.setText("x"+ duration1 +"节");
         keshishufee.setText("￥"+fee+"/节");
 
+
         course.setText(requirement_course);
         grade.setText(requirement_grade);
 
         closingtime.setText(created);
         dizhi.setText(requirement_address);
-        zongjijine.setText("￥"+map.get("order_fee"));
+        zongjijine.setText("￥"+map.get("order_price"));
         tolFee = Double.parseDouble(map.get("order_fee")+"");
         switch (status){
             case "1":
@@ -346,27 +348,31 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
 
             break;
         case R.id.ordettuikuan:
-          //订单退款
-            new AlertDialog.Builder(Order_details.this).setTitle("学了么提示!").setMessage("确定退款吗?")
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Order_init order_init=new Order();
-                            String password=User_id.getPassword();
-                            order_init.Update_Order(uid,order_id,4,password,tolFee);
-                            new Getdata().sendMessage(User_id.getNickName()+"已提交退款申请",telphone);
-                            EventBus.getDefault().post(1,"changeStatus");
-                            Intent intent= new Intent(Order_details.this,MyOrderActivity.class);
-                            startActivity(intent);
-                            Toast.makeText(Order_details.this,"已提交退款申请!~",Toast.LENGTH_LONG).show();
-                            finish();
-                        }
-                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
 
-                }
-            }).show();
+
+            startActivity(RefoundActivity_.intent(this).extra("orderId",order_id).get());
+            finish();
+//          //订单退款
+//            new AlertDialog.Builder(Order_details.this).setTitle("学了么提示!").setMessage("确定退款吗?")
+//                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            Order_init order_init=new Order();
+//                            String password=User_id.getPassword();
+//                            order_init.Update_Order(uid,order_id,4,password,tolFee);
+//                            new Getdata().sendMessage(User_id.getNickName()+"已提交退款申请",telphone);
+//                            EventBus.getDefault().post(1,"changeStatus");
+//                            Intent intent= new Intent(Order_details.this,MyOrderActivity.class);
+//                            startActivity(intent);
+//                            Toast.makeText(Order_details.this,"已提交退款申请!~",Toast.LENGTH_LONG).show();
+//                            finish();
+//                        }
+//                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//
+//                }
+//            }).show();
 
             break;
     }

@@ -75,7 +75,7 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
 
     @Override
     public TuijianNewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.listview_itme, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.teacher_list_item, parent, false);
         view.setOnClickListener(this);
         return new TuijianNewViewHolder(view);
     }
@@ -116,7 +116,7 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
         }else {
             holder.nianji.setText("未知");
         }
-        holder.haoping_numtext.setText("好评:"+list.get(position).getHaoping_num());
+        holder.haoping_numtext.setText(list.get(position).getClick()+"  好评:"+list.get(position).getHaoping_num());
 //        holder.haoping_numtext.setText("");
 //        holder.haoping_numtext.setVisibility(View.GONE);
         double rank = Double.parseDouble(list.get(position).getOrder_rank());
@@ -152,6 +152,8 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
 //                holder.haoping_num.setBackgroundResource(R.drawable.five);
 //                break;
 //        }
+
+        holder.education.setText(list.get(position).getEducation());
 
     }
 
@@ -201,10 +203,12 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
         private TextView haoping_numtext;//好评分
         private TextView nianji;
         private TextView stats;
+        private TextView education;
 
         public TuijianNewViewHolder(View itemView) {
             super(itemView);
             AutoUtils.autoSize(itemView);
+            education = (TextView) itemView.findViewById(R.id.education_tv);
             user_headimg = (ImageView) itemView.findViewById(R.id.lognhost);
             nickname = (TextView) itemView.findViewById(R.id.text1);
             service_type = (TextView) itemView.findViewById(R.id.text9);

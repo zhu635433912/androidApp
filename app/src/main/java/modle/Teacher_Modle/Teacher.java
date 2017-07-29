@@ -130,8 +130,8 @@ public class Teacher implements Teacher_init {
        */
 
     @Override
-    public Map<String, Object> Get_Teacher_detailed(int uid, int id, final Requirdetailed requirdetailed, final int ztm) {
-        Call<User_Modle> call=teacher_http.getTeacherxiangxizl(uid,id);
+    public Map<String, Object> Get_Teacher_detailed(int uid, int id, final Requirdetailed requirdetailed, final int ztm,int number) {
+        Call<User_Modle> call=teacher_http.getTeacherxiangxizl(uid,id,number);
         call.enqueue(new Callback<User_Modle>() {
             @Override
             public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {

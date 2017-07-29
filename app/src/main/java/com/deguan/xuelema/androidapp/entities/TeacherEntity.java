@@ -29,6 +29,15 @@ public class TeacherEntity {
     private String status1;
     private String status2;
     private String signature;
+    private String click;
+
+    public String getClick() {
+        return click;
+    }
+
+    public void setClick(String click) {
+        this.click = click;
+    }
 
     public TeacherEntity() {
     }

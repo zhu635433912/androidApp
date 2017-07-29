@@ -8,6 +8,7 @@
         android:id="@+id/tacher_top_list_swipe"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:background="#e0eaf1"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:android="http://schemas.android.com/apk/res/android">

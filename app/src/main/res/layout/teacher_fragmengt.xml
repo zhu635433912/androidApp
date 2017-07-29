@@ -47,7 +47,7 @@
                 <ImageView
                     android:id="@+id/teacher_chat"
                     android:layout_toRightOf="@+id/techaer_massge"
-                    android:padding="30px"
+                    android:padding="35px"
                     android:src="@drawable/chat_icon"
                     android:layout_width="120px"
                     android:layout_height="120px" />
@@ -66,14 +66,14 @@
                 <ImageView
                     android:id="@+id/teacher_my"
                     android:layout_toRightOf="@+id/teacher_chat"
-                    android:padding="30px"
+                    android:padding="35px"
                     android:src="@drawable/chat_my_icon"
                     android:layout_width="120px"
                     android:layout_height="120px" />
 
                 <ImageView
                     android:id="@+id/teacher_setup"
-                    android:padding="30px"
+                    android:padding="35px"
                     android:src="@drawable/hly20"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
@@ -83,7 +83,7 @@
                     android:id="@+id/myfee"
                     android:layout_toLeftOf="@+id/teacher_setup"
                     android:layout_alignBottom="@+id/teacher_setup"
-                    android:padding="30px"
+                    android:padding="35px"
                     android:src="@drawable/hly17"
                     android:layout_width="120px"
                     android:layout_height="120px" />

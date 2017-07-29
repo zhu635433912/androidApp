@@ -44,7 +44,7 @@ public class SplashActivity extends AutoLayoutActivity implements View.OnClickLi
         sp = getSharedPreferences("ydy", MODE_PRIVATE);
         //判断记录是第一次就是"t",不是就是"1"
         String myydy= sp.getString("booled", "t");
-        if (myydy.equals("1")){
+        if (myydy.equals("2")){
             getsj();
         }
 

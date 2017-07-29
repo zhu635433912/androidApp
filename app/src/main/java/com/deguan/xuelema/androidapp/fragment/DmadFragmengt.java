@@ -26,6 +26,7 @@ import modle.Demand_Modle.Demand_init;
 import modle.user_ziliao.User_id;
 
 /**
+ * 推荐需求
  * Created by Administrator on 2017/6/22 0022.
  */
 @EFragment(R.layout.teacher_list_fragement)
@@ -58,7 +59,7 @@ public class DmadFragmengt extends BaseFragment implements SimilarXuqiuView {
                 String publisher_id=list.get(position).get("publisher_id")+"";
                 String user_id=list.get(position).get("id")+"";
                 String fee=list.get(position).get("fee")+"";
-                Toast.makeText(getActivity(),publisher_id,Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(),publisher_id,Toast.LENGTH_LONG).show();
                 Intent intent=new Intent(getActivity(), Xuqiuxiangx.class);
                 intent.putExtra("publisher_id",publisher_id);
                 intent.putExtra("user_id",user_id);

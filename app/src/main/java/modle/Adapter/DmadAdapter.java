@@ -2,6 +2,7 @@ package modle.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,7 +104,11 @@ public class DmadAdapter extends RecyclerView.Adapter<DmadAdapter.MyViewHolder> 
 //            myDist = Integer.parseInt(dist)/1000;
 //        }
 //        int lat = myDist/1000;
-        holder.text7.setText(df.format(myDist)+"km       "+((String)listmap.get(position).get("address")).substring(0, 7) + "......");
+        if (!TextUtils.isEmpty(listmap.get(position).get("address")+"")) {
+            holder.text7.setText(df.format(myDist) + "km       " + ((String) listmap.get(position).get("address")).substring(0, 7) + "......");
+        }else {
+            holder.text7.setText(df.format(myDist) + "km       " );
+        }
         holder.text8.setText(""+listmap.get(position).get("created"));
         holder.itemView.setTag(position);
     }

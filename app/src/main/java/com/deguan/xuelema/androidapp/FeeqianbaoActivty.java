@@ -305,9 +305,9 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
             payReq.packageValue = map.get("package").toString();
             payReq.prepayId = map.get("prepayid").toString();
             payReq.timeStamp = ""+map.get("timestamp").toString();
-            Log.d("aa","timestamp---------"+payReq.timeStamp);
+//            Log.d("aa","timestamp---------"+payReq.timeStamp);
             payReq.sign = map.get("sign").toString();
-            Log.d("aa",payReq.appId+"----"+payReq.partnerId+"----"+payReq.nonceStr+"----"+payReq.packageValue+"----"+payReq.prepayId+"----"+payReq.sign+"----");
+//            Log.d("aa",payReq.appId+"----"+payReq.partnerId+"----"+payReq.nonceStr+"----"+payReq.packageValue+"----"+payReq.prepayId+"----"+payReq.sign+"----");
             iwxapi.sendReq(payReq);
             flag = 0;
         }else if (flag == 2){
@@ -316,7 +316,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
             String ordert=info.substring(13);
             final String orderInfo = ordert;
 
-            Log.e("aa",ordert);
+//            Log.e("aa",ordert);
             Runnable payRunnable = new Runnable() {
                 @Override
                 public void run() {
@@ -359,7 +359,11 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
 
     @Override
     public void successCash(String msg) {
-        Toast.makeText(this, "已提交提现申请", Toast.LENGTH_SHORT).show();
+        if (cashFlag == 2) {
+            Toast.makeText(this, "已提交提现申请,我方将会申请加微信好友,请通过", Toast.LENGTH_SHORT).show();
+        }else {
+
+        }
         cashPopwindow.dismiss();
         getdata.getFee(uid,this);
     }

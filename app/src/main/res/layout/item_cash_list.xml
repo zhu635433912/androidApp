@@ -11,7 +11,7 @@
         android:background="@drawable/mianlistview"
         android:layout_gravity="center"
         android:layout_width="700px"
-        android:layout_height="340px"
+        android:layout_height="250px"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
         <!--<modle.toos.CircleImageView-->
@@ -82,7 +82,7 @@
             android:textSize="40px"
             android:id="@+id/order_money_tv"
             android:text="100元"
-            android:layout_marginTop="35px"
+            android:layout_marginTop="15px"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/order_type_tv"
             android:layout_width="570px"

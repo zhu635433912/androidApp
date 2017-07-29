@@ -273,7 +273,7 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
                 // update current user's display name for APNs
                 boolean updatenick = EMClient.getInstance().pushManager().updatePushNickname(name);
                 if (!updatenick) {
-                    Log.e("LoginActivity", "update current user nick fail");
+//                    Log.e("LoginActivity", "update current user nick fail");
                 }
 
 
@@ -319,7 +319,7 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
     //登录失败
     @Override
     public void loginflase(String user) {
-        Log.d("aa","登陆状态="+user);
+//        Log.d("aa","登陆状态="+user);
         if (loginLoading.getVisibility()==View.VISIBLE) {
             loginLoading.setVisibility(View.GONE);
             loginLoadingTv.setVisibility(View.GONE);

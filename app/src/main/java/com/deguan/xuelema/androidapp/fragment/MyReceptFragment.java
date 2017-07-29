@@ -90,7 +90,7 @@ public class MyReceptFragment  extends BaseFragment implements SimilarXuqiuView 
                 String publisher_id=list.get(position).get("publisher_id")+"";
                 String user_id=list.get(position).get("id")+"";
                 String fee=list.get(position).get("fee")+"";
-                Toast.makeText(getActivity(),publisher_id,Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(),publisher_id,Toast.LENGTH_LONG).show();
                 Intent intent=new Intent(getActivity(), Xuqiuxiangx.class);
                 intent.putExtra("publisher_id",publisher_id);
                 intent.putExtra("user_id",user_id);
@@ -125,7 +125,16 @@ public class MyReceptFragment  extends BaseFragment implements SimilarXuqiuView 
     @Override
     public void successSimilarXuqiu(List<Map<String, Object>> maps) {
         list.clear();
-        list.addAll(maps);
+        if (maps != null) {
+            for (int i = 0; i < maps.size(); i++) {
+                if ((maps.get(i).get("status")).equals("1")||maps.get(i).get("status").equals("2")){
+                    continue;
+                }
+                list.add(maps.get(i));
+            }
+        }
+
+//        list.addAll(maps);
         dmadAdapter.notifyDataSetChanged();
         tacher_top_list_swipe.setRefreshing(false);
     }

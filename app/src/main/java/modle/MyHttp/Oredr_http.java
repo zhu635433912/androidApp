@@ -77,7 +77,8 @@ public interface Oredr_http {
     @POST("index.php?s=/Service/Order/comment_order")
     Call<Demtest> PinglunOredr(@Query("uid") int uid, @Query("source_id") int id,
                                @Query("content") String content,@Query("picture") long picture,
-                               @Query("rank")int rank ,@Query("rank4")int rank4);
+                               @Query("rank")int rank ,@Query("rank4")int rank4,
+                               @Query("rank1") int rank1,@Query("rank2") int rank2,@Query("rank3") int rank3);
     /*
     订单退款
      */
@@ -91,6 +92,8 @@ public interface Oredr_http {
                               @Query("requirement_id") int requirement_id,@Query("fee") float fee,@Query("course_id")int course_Id,
                               @Query("grade_id")int grade_id,@Query("address")String address,@Query("lat")double lat,@Query("lng")double lng);
 
-
-
+    @POST("index.php?s=/Service/Order/submit_refund")
+    Call<Demtest> submitRefund(@Query("uid") int uid,@Query("id")int id,@Query("status")int status,
+                               @Query("refund_fee")String refund_fee,@Query("reason")String reason,@Query("desc")String desc,
+                               @Query("imgs1")String imgs1,@Query("imgs2")String imgs2,@Query("imgs3")String imgs3,@Query("imgs4")String imgs4);
 }

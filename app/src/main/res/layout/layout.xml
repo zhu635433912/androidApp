@@ -156,12 +156,19 @@
         android:layout_height="wrap_content" />
 
 </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/feefenggexian4"
+        android:background="#9eebda"
+        android:layout_below="@+id/feechongzhi"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:orientation="horizontal" />
     <TextView
         android:paddingTop="30px"
         android:id="@+id/wodetuiguang"
         android:layout_marginLeft="40px"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/feechongzhi"
+        android:layout_below="@+id/feefenggexian4"
         android:textSize="40px"
         android:text="我的推广"
         android:layout_width="match_parent"

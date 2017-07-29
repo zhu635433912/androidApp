@@ -288,8 +288,8 @@ public class Order implements Order_init {
     评论订单
      */
     @Override
-    public Map<String, Object> Comment_Order(int uid, int source_id, String content, long picture,int rank,int rank4) {
-        Call<Demtest> call=oredr_http.PinglunOredr(uid,source_id,content,picture,rank,rank4);
+    public Map<String, Object> Comment_Order(int uid, int source_id, String content, long picture,int rank,int rank4,int rank1,int rank2,int rank3) {
+        Call<Demtest> call=oredr_http.PinglunOredr(uid,source_id,content,picture,rank,rank4,rank1,rank2,rank3);
         call.enqueue(new Callback<Demtest>() {
             @Override
             public void onResponse(Call<Demtest> call, Response<Demtest> response) {
@@ -366,4 +366,30 @@ public class Order implements Order_init {
         });
 
     }
+
+    //退款页面
+    public void submit_refund(int uid, int id, int status, String refund_fee, String reason, String desc, String imgs1, String imgs2, String imgs3, String imgs4, final ChangeOrderView changeOrderView){
+        Call<Demtest> call=oredr_http.submitRefund(uid,id,status,refund_fee,reason,desc,imgs1,imgs2,imgs3,imgs4);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    changeOrderView.successOrder("已提交退款申请");
+//                    Log.e("aa","订单退款成功");
+                }else {
+                    String errmsg=response.body().getErrmsg();
+//                    Log.e("aa","评论退款失败="+errmsg);
+                    changeOrderView.successOrder(errmsg);
+                }
+            }
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                    changeOrderView.failOrder("网络错误");
+
+            }
+        });
+    }
+
+
 }

@@ -77,7 +77,7 @@ public class NewTeacherAdapter extends RecyclerView.Adapter<NewTeacherAdapter.Ne
 
     @Override
     public NewTeacherViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.listview_itme, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.teacher_list_item, parent, false);
         view.setOnClickListener(this);
         return new NewTeacherViewHolder(view);
     }
@@ -119,7 +119,7 @@ public class NewTeacherAdapter extends RecyclerView.Adapter<NewTeacherAdapter.Ne
         }else {
             holder.nianji.setText(" ");
         }
-        holder.haoping_numtext.setText("好评: "+list.get(position).getHaoping_num());
+        holder.haoping_numtext.setText(list.get(position).getClick()+" 好评: "+list.get(position).getHaoping_num());
 //        holder.haoping_numtext.setText("");
         double rank = Double.parseDouble(list.get(position).getOrder_rank());
         if (0 <= rank && rank <1.5){

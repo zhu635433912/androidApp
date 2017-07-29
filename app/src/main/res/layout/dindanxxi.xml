@@ -342,7 +342,7 @@
             android:textSize="25px"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:text="申请退款"
+            android:text="申请售后"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

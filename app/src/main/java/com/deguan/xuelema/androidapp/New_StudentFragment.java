@@ -261,7 +261,7 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     public void Updatefee(List<Map<String, Object>> listmap) {
         Map<String,Object> map=new HashMap<String,Object>();
         map=listmap.get(0);
-        Toast.makeText(getActivity(),map.get("text").toString(),Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(),map.get("text").toString(),Toast.LENGTH_SHORT).show();
     }
 
 

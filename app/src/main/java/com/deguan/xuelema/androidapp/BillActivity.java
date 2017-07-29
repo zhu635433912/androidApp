@@ -3,6 +3,7 @@ package com.deguan.xuelema.androidapp;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -56,6 +57,7 @@ public class BillActivity extends MyBaseActivity implements TurnoverView {
     public void successTurnover(List<Map<String, Object>> list) {
         data.addAll(list);
         adapter.notifyDataSetChanged();
+
     }
 
     @Override

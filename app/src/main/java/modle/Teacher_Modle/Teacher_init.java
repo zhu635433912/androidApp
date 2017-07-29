@@ -31,7 +31,7 @@ public interface Teacher_init {
      uid    用户id
      id     操作教师id
      */
-    public Map<String,Object> Get_Teacher_detailed(int uid, int id, Requirdetailed requirdetailed, int ztm);
+    public Map<String,Object> Get_Teacher_detailed(int uid, int id, Requirdetailed requirdetailed, int ztm,int number);
     /**
      * 获取教师列表
      * uid    用户id

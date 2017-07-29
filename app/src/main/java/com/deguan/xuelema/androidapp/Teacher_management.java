@@ -189,7 +189,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         //去获取教师详细资料
         uid=Integer.parseInt(User_id.getUid());
         teacher_init=new Teacher();
-        teacher_init.Get_Teacher_detailed(628,uid,this,1);
+        teacher_init.Get_Teacher_detailed(628,uid,this,1,0);
 
         View view = getLayoutInflater().inflate(R.layout.layout_dialog_pick, null);
         mPickDialog = new android.app.AlertDialog.Builder(this).setView(view).create();
@@ -208,7 +208,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final int course_id=kechengAdapter.getcourse_id(i);
-                Log.e("aa","删除"+course_id);
+//                Log.e("aa","删除"+course_id);
                 new AlertDialog.Builder(Teacher_management.this).setTitle("学了么提示!").setMessage("确定删除课程吗?")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
@@ -654,7 +654,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 Bitmap bitmap = getSmallBitmap(filePath, 600, 600);
                 //获取图片
                 //image空
-                Log.e("aa","路劲为"+filePath);
+//                Log.e("aa","路劲为"+filePath);
                 User_init user_init=new User_Realization();
                 image=new File(filePath);
                 if (TAGE_ISRONT==1){
@@ -686,6 +686,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
 //        } else {
 //            showToast("未找到图片查看器");
 //        }
+
         Intent intent;
         if (Build.VERSION.SDK_INT < 19) {
             intent = new Intent(Intent.ACTION_GET_CONTENT);

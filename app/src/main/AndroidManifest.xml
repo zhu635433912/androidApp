@@ -88,7 +88,7 @@
         <activity
             android:name="view.login.ViewActivity.LoginAcitivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Order_details"
             android:launchMode="singleTask"
@@ -96,7 +96,7 @@
         <activity
             android:name="view.login.ViewActivity.RegisterActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="view.login.ViewActivity.RevisePsdActivity"
             android:launchMode="singleTask"
@@ -942,7 +942,8 @@
         <activity
             android:name="modle.Huanxing.ui.NewHuanxinMainActivity"
             android:label="@string/title_activity_new_huanxin_main"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".RefoundActivity_"></activity>
     </application>
 
 </manifest>

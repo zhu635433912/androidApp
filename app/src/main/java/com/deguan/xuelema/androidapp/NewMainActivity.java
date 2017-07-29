@@ -1,6 +1,8 @@
 package com.deguan.xuelema.androidapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -64,6 +66,12 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
     RadioButton radioButton2;
     private String ids;
     private String roles;
+    @ViewById(R.id.guide1)
+    ImageView guideImage1;
+    @ViewById(R.id.guide2)
+    ImageView guideImage2;
+    @ViewById(R.id.guide3)
+    ImageView guideImage3;
 
     @Override
     public void before() {
@@ -127,6 +135,51 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
         });
 
         new Getdata().getmobieke(User_id.getUsername(),this);
+        SharedPreferences sp = getSharedPreferences("ydy", MODE_PRIVATE);
+        //判断记录是第一次就是"t",不是就是"1"
+        String myydy= sp.getString("booled", "t");
+        if (myydy.equals("1")){
+            getsj();
+        }
+    }
+
+    private void getsj() {
+        if (roles.equals("1")){
+            guideImage1.setVisibility(View.VISIBLE);
+            guideImage1.setImageResource(R.drawable.student_guide1);
+            guideImage2.setImageResource(R.drawable.student_guide2);
+            guideImage3.setImageResource(R.drawable.student_guide3);
+        }else {
+            guideImage1.setVisibility(View.VISIBLE);
+            guideImage1.setImageResource(R.drawable.teacher_guide1);
+            guideImage2.setImageResource(R.drawable.teacher_guide2);
+            guideImage3.setImageResource(R.drawable.teacher_guide3);
+        }
+        guideImage1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guideImage1.setVisibility(View.GONE);
+                guideImage2.setVisibility(View.VISIBLE);
+            }
+        });
+        guideImage2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guideImage2.setVisibility(View.GONE);
+                guideImage3.setVisibility(View.VISIBLE);
+            }
+        });
+        guideImage3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guideImage3.setVisibility(View.GONE);
+                SharedPreferences sp = getSharedPreferences("ydy", Context.MODE_PRIVATE);
+                SharedPreferences.Editor ddite = sp.edit();
+                //第一次进入
+                ddite.putString("booled", "2");
+                ddite.commit();
+            }
+        });
     }
 
     @Override
@@ -135,14 +188,14 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
 //        if (requestCode == 100){
 //            Gaode_dinwei gaode_dinwei=new Gaode_dinwei(this,getActivity());
 //        }
-        Log.d("aa","------requestCode"+requestCode);
+//        Log.d("aa","------requestCode"+requestCode);
         EventBus.getDefault().post(requestCode,"requsetPermiss");
     }
 
     @Override
     public void Updatecontent(Map<String, Object> map) {
         String imageUrl = (String)map.get("headimg");
-        Log.e("aa","头像地址"+imageUrl);
+//        Log.e("aa","头像地址"+imageUrl);
         SharedPreferencesUtils.setParam(this, APPConfig.USER_HEAD_IMG,imageUrl);
         getUser_id().setImageUrl(imageUrl);
         // 登录成功，将用户的环信ID、昵称和头像缓存在本地
@@ -156,7 +209,7 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
             public void onSuccess() {
                 EMClient.getInstance().groupManager().loadAllGroups();
                 EMClient.getInstance().chatManager().loadAllConversations();
-                Log.e("aa", "登录聊天服务器成功！");
+//                Log.e("aa", "登录聊天服务器成功！");
             }
 
             @Override
@@ -166,7 +219,7 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
 
             @Override
             public void onError(int code, String message) {
-                Log.e("aa", code+"登录聊天服务器失败！"+message);
+//                Log.e("aa", code+"登录聊天服务器失败！"+message);
             }
         });
     }
@@ -202,7 +255,7 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
         int  versionCode = info.versionCode;
         String versionname = entity.getVersion();
         String versionName = info.versionName;
-        Log.d("123","versionName"+versionName+"versionname"+versionname);
+//        Log.d("123","versionName"+versionName+"versionname"+versionname);
         if (!versionname.equals(versionName)){
             UpdateChecker.checkForDialog(NewMainActivity.this, entity.getContent());
         }
@@ -211,7 +264,7 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
     private void setAlias(String bieming) {
         String alias =bieming;
         if (TextUtils.isEmpty(alias)) {
-            Toast.makeText(NewMainActivity.this,"111", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(NewMainActivity.this,"111", Toast.LENGTH_SHORT).show();
             return;
         }
 //        if (!ExampleUtil.isValidTagAndAlias(alias)) {
@@ -230,18 +283,18 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
             switch (code) {
                 case 0:
                     logs = "Set tag and alias success";
-                    Log.i("aa", logs);
+//                    Log.i("aa", logs);
                     // 建议这里往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
                     break;
                 case 6002:
                     logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
-                    Log.i("aa", logs);
+//                    Log.i("aa", logs);
                     // 延迟 60 秒来调用 Handler 设置别名
                     mHandler.sendMessageDelayed(mHandler.obtainMessage(MSG_SET_ALIAS, alias), 1000 * 60);
                     break;
                 default:
                     logs = "Failed with errorCode = " + code;
-                    Log.e("aa", logs);
+//                    Log.e("aa", logs);
             }
 //            ExampleUtil.showToast(logs, getApplicationContext());
         }
@@ -253,7 +306,7 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_SET_ALIAS:
-                    Log.d("aa", "Set alias in handler.");
+//                    Log.d("aa", "Set alias in handler.");
                     // 调用 JPush 接口来设置别名。
                     JPushInterface.setAliasAndTags(getApplicationContext(),
                             (String) msg.obj,
@@ -261,7 +314,7 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
                             mAliasCallback);
                     break;
                 default:
-                    Log.i("aa", "Unhandled msg - " + msg.what);
+//                    Log.i("aa", "Unhandled msg - " + msg.what);
             }
         }
     };

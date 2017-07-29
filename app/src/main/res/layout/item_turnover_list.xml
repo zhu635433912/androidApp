@@ -11,7 +11,7 @@
         android:background="@drawable/mianlistview"
         android:layout_gravity="center"
         android:layout_width="700px"
-        android:layout_height="150px"
+        android:layout_height="100px"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
         <!--<modle.toos.CircleImageView-->
@@ -106,11 +106,13 @@
             android:src="@drawable/ox2"
             android:id="@+id/turn_head_image"
             android:layout_centerVertical="true"
-            android:layout_width="100px"
-            android:layout_height="100px" />
+            android:layout_width="75px"
+            android:layout_height="75px" />
         <TextView
-            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10px"
             android:text="名字"
+            android:layout_toRightOf="@+id/turn_head_image"
             android:id="@+id/turn_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

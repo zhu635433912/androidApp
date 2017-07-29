@@ -152,7 +152,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
             jiaolinlayout.setVisibility(View.GONE);
         }else {
             teacher=new Teacher();
-            teacher.Get_Teacher_detailed(561,uid,this,1);
+            teacher.Get_Teacher_detailed(561,uid,this,1,0);
         }
         //获取用户资料
         user_init=new User_Realization();
@@ -189,13 +189,13 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
 //                xueleTypeDialog.show();
 
                 //所在地
-                new  AlertDialog.Builder(this).setTitle("请输入").setIcon(android.R.drawable.btn_star).setView(edit)
+                new  AlertDialog.Builder(this).setTitle("请输入(一旦确定无法修改)").setIcon(android.R.drawable.btn_star).setView(edit)
                         .setPositiveButton("确认",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if (!edit.getText().toString().equals("")&&edit.getText().length()==18) {
                                     user.UpdateIdcard(uid, edit.getText().toString());
-                                    xueliTv.setText(edit.getText().toString());
+                                    xueliTv.setText(edit.getText().toString().substring(0,4)+"********");
                                 }else {
                                     Toast.makeText(Personal_Activty.this,"请输入正确的身份证号码",Toast.LENGTH_SHORT).show();
                                 }
@@ -442,7 +442,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
 //        if (requestCode == 100){
 //            Gaode_dinwei gaode_dinwei=new Gaode_dinwei(this,getActivity());
 //        }
-        Log.d("aa","------requestCode"+requestCode);
+//        Log.d("aa","------requestCode"+requestCode);
         dispatchTakePictureIntent();
 
     }
@@ -479,7 +479,12 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
             emage.setText((String) map.get("nickname"));
             usershenr.setText((String) map.get("age"));
             ziyouzhiye.setText((String) map.get("name"));
-            xueliTv.setText((String)map.get("idcard"));
+        if (!TextUtils.isEmpty(map.get("idcard")+"")) {
+            xueliTv.setText(((String) map.get("idcard")).substring(0, 4) + "********");
+        }
+        if (!TextUtils.isEmpty(map.get("idcard")+"")){
+            xueliRl.setVisibility(View.GONE);
+        }
             setbitmap(map.get("headimg")+"");
     }
 
@@ -536,7 +541,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                 Bitmap bitmap = getSmallBitmap(filePath, 300, 300);
                 //获取图片
                 usertoux.setImageBitmap(bitmap);
-                Log.e("aa","路劲为"+filePath);
+//                Log.e("aa","路劲为"+filePath);
 
                 //去服务器更新图片
                 if (image!=null) {

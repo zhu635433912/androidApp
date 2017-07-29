@@ -45,12 +45,19 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
     private Button but3;
     private Button but4;
     private Button but5;
+    private Button timeBtb1,timeBtb2,timeBtb3,timeBtb4,timeBtb5,qualityBtn1,qualityBtn2,
+    qualityBtn3,qualityBtn4,qualityBtn5,serviceBtn1,serviceBtn2,serviceBtn3,serviceBtn4,serviceBtn5;
+    private LinearLayout pingfenxinji1,pingfenxinji2,pingfenxinji3;
+    private TextView pingfenTv1,pingfenTv2,pingfenTv3;
     private LinearLayout pingfenxinji;
     private int rantoke=1;//评分
     private EditText pingjiatext;
     private TextView pingfenTv;
     private TextView goodTv;
     private TextView midTv;
+    private int rank1=5;
+    private int rank2=5;
+    private int rank3=5;
     private int rank = 5;
 
 
@@ -61,18 +68,37 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
         setContentView(R.layout.evaluation_sutuder);
         User_id.getInstance().addActivity(this);
      //   HideIMEUtil.wrap(this);
-
-
         midTv = (TextView) findViewById(R.id.mid_percent);
         goodTv = (TextView) findViewById(R.id.good_percent);
         pingfenTv = (TextView) findViewById(R.id.pingfen_tv);
+        pingfenTv1 = (TextView) findViewById(R.id.pingfen_tv1);
+        pingfenTv2 = (TextView) findViewById(R.id.pingfen_tv2);
+        pingfenTv3 = (TextView) findViewById(R.id.pingfen_tv3);
         pingjiafanhui= (RelativeLayout) findViewById(R.id.pingjiafanhui);
         but1= (Button) findViewById(R.id.but1);
         but2= (Button) findViewById(R.id.but2);
         but3= (Button) findViewById(R.id.but3);
         but4= (Button) findViewById(R.id.but4);
         but5= (Button) findViewById(R.id.but5);
+        timeBtb1= (Button) findViewById(R.id.time_but1);
+        timeBtb2= (Button) findViewById(R.id.time_but2);
+        timeBtb3= (Button) findViewById(R.id.time_but3);
+        timeBtb4= (Button) findViewById(R.id.time_but4);
+        timeBtb5= (Button) findViewById(R.id.time_but5);
+        qualityBtn1= (Button) findViewById(R.id.quality_but1);
+        qualityBtn2= (Button) findViewById(R.id.quality_but2);
+        qualityBtn3= (Button) findViewById(R.id.quality_but3);
+        qualityBtn4= (Button) findViewById(R.id.quality_but4);
+        qualityBtn5= (Button) findViewById(R.id.quality_but5);
+        serviceBtn1= (Button) findViewById(R.id.service_but1);
+        serviceBtn2= (Button) findViewById(R.id.service_but2);
+        serviceBtn3= (Button) findViewById(R.id.service_but3);
+        serviceBtn4= (Button) findViewById(R.id.service_but4);
+        serviceBtn5= (Button) findViewById(R.id.service_but5);
         pingfenxinji= (LinearLayout) findViewById(R.id.pingfenxinji);
+        pingfenxinji1= (LinearLayout) findViewById(R.id.pingfenxinji1);
+        pingfenxinji2= (LinearLayout) findViewById(R.id.pingfenxinji2);
+        pingfenxinji3= (LinearLayout) findViewById(R.id.pingfenxinji3);
         pingjiatext= (EditText) findViewById(R.id.pingjiatext);
 
         String oredr_ida=getIntent().getStringExtra("oredr_id");
@@ -87,6 +113,21 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
         but3.setOnClickListener(this);
         but4.setOnClickListener(this);
         but5.setOnClickListener(this);
+        timeBtb1.setOnClickListener(this);
+        timeBtb2.setOnClickListener(this);
+        timeBtb3.setOnClickListener(this);
+        timeBtb4.setOnClickListener(this);
+        timeBtb5.setOnClickListener(this);
+        qualityBtn1.setOnClickListener(this);
+        qualityBtn2.setOnClickListener(this);
+        qualityBtn3.setOnClickListener(this);
+        qualityBtn4.setOnClickListener(this);
+        qualityBtn5.setOnClickListener(this);
+        serviceBtn1.setOnClickListener(this);
+        serviceBtn2.setOnClickListener(this);
+        serviceBtn3.setOnClickListener(this);
+        serviceBtn4.setOnClickListener(this);
+        serviceBtn5.setOnClickListener(this);
         pingjiafanhui.bringToFront();
         jieinteun.setOnClickListener(this);
         pingjiafanhui.setOnClickListener(this);
@@ -105,7 +146,7 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
                             public void onClick(DialogInterface dialog, int which) {
                                 Order_init order_init=new Order();
                                 long ac=11;
-                                order_init.Comment_Order(uid,oredr_id,pingjiatext.getText().toString(),ac,rank,rantoke);
+                                order_init.Comment_Order(uid,oredr_id,pingjiatext.getText().toString(),ac,rank,rantoke,rank1,rank2,rank3);
 //                                order_init.UpdateOrder_score(uid,oredr_id,1,1,1,rantoke,rank);
                                 Intent intent=NewMainActivity_.intent(Student_assessment.this).get();
                                 startActivity(intent);
@@ -148,6 +189,82 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
                 rantoke=1;
                 rank = 5;
                 pingfenTv.setText("5.0");
+                break;
+            case R.id.time_but1:
+                pingfenxinji1.setBackgroundResource(R.drawable.one);
+                rank1 = 1;
+                pingfenTv1.setText("1.0");
+                break;
+            case R.id.time_but2:
+                pingfenxinji1.setBackgroundResource(R.drawable.two);
+                rank1 = 2;
+                pingfenTv1.setText("2.0");
+                break;
+            case R.id.time_but3:
+                pingfenxinji1.setBackgroundResource(R.drawable.three);
+                rank1 = 3;
+                pingfenTv1.setText("3.0");
+                break;
+            case R.id.time_but4:
+                pingfenxinji1.setBackgroundResource(R.drawable.four);
+                rank1 =4;
+                pingfenTv1.setText("4.0");
+                break;
+            case R.id.time_but5:
+                pingfenxinji1.setBackgroundResource(R.drawable.five);
+                rank1 = 5;
+                pingfenTv1.setText("5.0");
+                break;
+            case R.id.quality_but1:
+                pingfenxinji2.setBackgroundResource(R.drawable.one);
+                rank2 = 1;
+                pingfenTv2.setText("1.0");
+                break;
+            case R.id.quality_but2:
+                pingfenxinji2.setBackgroundResource(R.drawable.two);
+                rank2 = 2;
+                pingfenTv2.setText("2.0");
+                break;
+            case R.id.quality_but3:
+                pingfenxinji2.setBackgroundResource(R.drawable.three);
+                rantoke=2;
+                rank2 = 3;
+                pingfenTv2.setText("3.0");
+                break;
+            case R.id.quality_but4:
+                pingfenxinji2.setBackgroundResource(R.drawable.four);
+                rank2 =4;
+                pingfenTv2.setText("4.0");
+                break;
+            case R.id.quality_but5:
+                pingfenxinji2.setBackgroundResource(R.drawable.five);
+                rank2 = 5;
+                pingfenTv2.setText("5.0");
+                break;
+            case R.id.service_but1:
+                pingfenxinji3.setBackgroundResource(R.drawable.one);
+                rank3 = 1;
+                pingfenTv3.setText("1.0");
+                break;
+            case R.id.service_but2:
+                pingfenxinji3.setBackgroundResource(R.drawable.two);
+                rank3 = 2;
+                pingfenTv3.setText("2.0");
+                break;
+            case R.id.service_but3:
+                pingfenxinji3.setBackgroundResource(R.drawable.three);
+                rank3 = 3;
+                pingfenTv3.setText("3.0");
+                break;
+            case R.id.service_but4:
+                pingfenxinji3.setBackgroundResource(R.drawable.four);
+                rank3 =4;
+                pingfenTv3.setText("4.0");
+                break;
+            case R.id.service_but5:
+                pingfenxinji3.setBackgroundResource(R.drawable.five);
+                rank3 = 5;
+                pingfenTv3.setText("5.0");
                 break;
         }
     }

@@ -391,7 +391,7 @@ public class NewTeacherFragment extends BaseFragment implements Gaodehuidiao_ini
                 latFlag = 0;
                 User_id.setLat(lat);
                 User_id.setLng(lng);
-                Toast.makeText(getActivity(), lat+"  "+lng, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), lat+"  "+lng, Toast.LENGTH_SHORT).show();
                 list2.setVisibility(View.GONE);
                 list3.setVisibility(View.GONE);
                 cityPop.dismiss();
