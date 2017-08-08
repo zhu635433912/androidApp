@@ -130,6 +130,6 @@
         android:layout_marginTop="60px"
         android:background="@drawable/add07"
         android:layout_width="70px"
-        android:layout_height="70px" />
+        android:layout_height="0px" />
 
 </RelativeLayout>

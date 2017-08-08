@@ -142,6 +142,7 @@ public class MyDistribution_Actvity extends AutoLayoutActivity implements View.O
 
     @Override
     public void failDistribution(String msg) {
+        pullToRefreshListView.onRefreshComplete();
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.deguan.xuelema.androidapp.EducationActivity">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <RelativeLayout
+            android:id="@+id/education_back"
+            android:layout_width="120px"
+            android:layout_height="100px">
+            <ImageButton
+                android:layout_marginLeft="30px"
+                android:layout_marginTop="25px"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/add19"
+                android:layout_width="30px"
+                android:layout_height="40px" />
+        </RelativeLayout>
+        <TextView
+            android:paddingRight="60px"
+            android:gravity="center"
+            android:textSize="40px"
+            android:layout_marginTop="20px"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="学历信息"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/xuqiufenggexian"
+        android:background="#b9b6b6"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:layout_marginTop="20px">
+
+            <TextView
+                style="@style/manager_text_style"
+                android:text="在校时间" />
+
+            <EditText
+                android:layout_width="200px"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30px"
+                android:background="@drawable/education_edit_bg"
+                android:gravity="center"
+                android:hint="2013.09.01" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="30px"
+                android:text="To"
+                android:textSize="38px" />
+
+            <EditText
+                android:layout_width="200px"
+                android:layout_height="match_parent"
+
+                android:layout_marginLeft="30px"
+                android:background="@drawable/education_edit_bg"
+                android:gravity="center"
+                android:hint="2017.06.01" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="50px"
+            android:layout_width="match_parent"
+            android:layout_height="100px">
+
+            <TextView
+                style="@style/manager_text_style"
+                android:text="毕业院校"/>
+            <EditText
+                android:gravity="center"
+                android:hint="2013.09.01"
+                android:layout_marginRight="50px"
+                android:layout_marginLeft="30px"
+                android:background="@drawable/education_edit_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="50px"
+            android:layout_width="match_parent"
+            android:layout_height="100px">
+
+            <TextView
+                style="@style/manager_text_style"
+                android:text="最高学历"/>
+            <EditText
+                android:gravity="center"
+                android:hint="本科"
+                android:layout_marginRight="10px"
+                android:layout_marginLeft="30px"
+                android:background="@drawable/education_edit_bg"
+                android:layout_width="300px"
+                android:layout_height="match_parent" />
+            <EditText
+                android:gravity="center"
+                android:hint="备注"
+                android:layout_marginRight="50px"
+                android:layout_marginLeft="30px"
+                android:background="@drawable/education_edit_bg"
+                android:layout_width="150px"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="50px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_marginLeft="40px"
+                android:textSize="40px"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="证书上传"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginRight="50px"
+                android:layout_marginLeft="30px"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <ImageView
+                android:gravity="center"
+                android:background="@drawable/education_edit_bg"
+                android:layout_width="match_parent"
+                android:layout_height="250px" />
+                <ImageView
+                    android:layout_marginTop="30px"
+                    android:gravity="center"
+                    android:background="@drawable/education_edit_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="250px" />
+            </LinearLayout>
+         </LinearLayout>
+       </LinearLayout>
+    </ScrollView>
+</LinearLayout>

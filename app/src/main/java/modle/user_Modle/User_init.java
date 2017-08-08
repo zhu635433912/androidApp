@@ -80,5 +80,6 @@ public interface User_init {
     public void setlan_lng(int uid,double lat,double lng);
 
     public void UpdateEducation(int user_id,int education_id);
+    public void setAddress(int uid,String province,String city,String status);
 
 }

@@ -1,1 +1,1 @@
-include ':app', ':PullToRefresh', ':lib', ':easeui', ':update', ':shareSDKmainLibs', ':oneKeyShare'
+include ':app', ':PullToRefresh', ':lib', ':easeui', ':update'

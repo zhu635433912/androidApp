@@ -7,8 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/easeui/easeui.iml" filepath="$PROJECT_DIR$/easeui/easeui.iml" />
       <module fileurl="file://$PROJECT_DIR$/lib/lib.iml" filepath="$PROJECT_DIR$/lib/lib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/oneKeyShare/oneKeyShare.iml" filepath="$PROJECT_DIR$/oneKeyShare/oneKeyShare.iml" />
-      <module fileurl="file://$PROJECT_DIR$/shareSDKmainLibs/shareSDKmainLibs.iml" filepath="$PROJECT_DIR$/shareSDKmainLibs/shareSDKmainLibs.iml" />
       <module fileurl="file://$PROJECT_DIR$/update/update.iml" filepath="$PROJECT_DIR$/update/update.iml" />
     </modules>
   </component>

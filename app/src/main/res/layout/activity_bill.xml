@@ -5,11 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.deguan.xuelema.androidapp.BillActivity">
-    <RelativeLayout
-        android:id="@+id/bill_back"
-        android:layout_width="120px"
-        android:layout_height="80px">
-    </RelativeLayout>
+
     <ImageButton
         android:layout_marginLeft="30px"
         android:layout_marginTop="20px"
@@ -19,7 +15,11 @@
         android:layout_width="20px"
         android:layout_height="30px" />
 
-
+    <RelativeLayout
+        android:id="@+id/bill_back"
+        android:layout_width="120px"
+        android:layout_height="80px">
+    </RelativeLayout>
     <TextView
         android:textSize="30px"
         android:layout_marginTop="20px"

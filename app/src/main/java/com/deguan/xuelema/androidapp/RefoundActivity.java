@@ -55,6 +55,9 @@ import modle.user_Modle.User_Realization;
 import modle.user_Modle.User_init;
 import modle.user_ziliao.User_id;
 
+/**
+ * 退款页面
+ */
 @EActivity(R.layout.activity_refound)
 public class RefoundActivity extends MyBaseActivity implements View.OnClickListener, Ordercontent_init, Student_init, ChangeOrderView {
     @ViewById(R.id.refund_back)
@@ -152,6 +155,7 @@ public class RefoundActivity extends MyBaseActivity implements View.OnClickListe
                 fourImage.setImageDrawable(getResources().getDrawable(R.drawable.refund_normal));
                 reasonFlag = 1;
                 descTv.setText("退款说明:  教师未授课");
+                reason = "退款说明:  教师未授课";
                 reasonPop.dismiss();
             }
         });
@@ -163,6 +167,7 @@ public class RefoundActivity extends MyBaseActivity implements View.OnClickListe
                 thirdImage.setImageDrawable(getResources().getDrawable(R.drawable.refund_normal));
                 fourImage.setImageDrawable(getResources().getDrawable(R.drawable.refund_normal));
                 reasonFlag = 2;
+                reason = "退款说明:  教师态度极差,并有辱骂现象";
                 descTv.setText("退款说明:  教师态度极差,并有辱骂现象");
                 reasonPop.dismiss();
             }
@@ -176,6 +181,7 @@ public class RefoundActivity extends MyBaseActivity implements View.OnClickListe
                 fourImage.setImageDrawable(getResources().getDrawable(R.drawable.refund_normal));
                 reasonFlag = 3;
                 reasonPop.dismiss();
+                reason = "退款说明:  有事未去听课";
                 descTv.setText("退款说明:  有事未去听课");
             }
         });
@@ -188,6 +194,7 @@ public class RefoundActivity extends MyBaseActivity implements View.OnClickListe
                 fourImage.setImageDrawable(getResources().getDrawable(R.drawable.refund_choose));
                 reasonFlag = 4;
                 reasonPop.dismiss();
+                reason = "退款说明:  其他";
                 descTv.setText("退款说明:  其他");
             }
         });
@@ -239,6 +246,11 @@ public class RefoundActivity extends MyBaseActivity implements View.OnClickListe
                 TAGE_ISRONT = 4;
                 break;
             case R.id.refund_sure_btn:
+                if (TextUtils.isEmpty(reasonEdit.getText())){
+                    desc = reason;
+                }else {
+                    desc = reasonEdit.getText().toString();
+                }
                 order_init.submit_refund(Integer.parseInt(User_id.getUid()),orderId,4,refund_fee,reason,desc
                 ,imageurl1,imageurl2,imageurl3,imageurl4,this);
 

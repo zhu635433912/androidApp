@@ -80,7 +80,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
     private TextView editText2;
     private EditText shanggmenfee;
     private EditText xueshengfee;
-    private Button naxt,educationBtn,bookBtn;
+    private Button naxt,educationBtn,bookBtn,tianjiaSubject,tianjiarongyuztubiao1;
     private int kcid=206;
     private EditText gerjianjietext_edi;
     private TextView techang;
@@ -132,6 +132,8 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         setContentView(R.layout.teachers_management);
         User_id.getInstance().addActivity(this);
 
+        tianjiarongyuztubiao1 = (Button) findViewById(R.id.tianjiarongyuztubiao1);
+        tianjiaSubject = (Button) findViewById(R.id.tianjiakecheng);
         educationBtn = (Button) findViewById(R.id.tianjiaxuelitubiao);
         bookBtn = (Button) findViewById(R.id.tianjiarongyuztubiao);
         educationEdit = (EditText) findViewById(R.id.education_et);
@@ -174,6 +176,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         tianjiaxueli1.setOnClickListener(this);
         baocunjiaoshi.setOnClickListener(this);
         naxt.setOnClickListener(this);
+        tianjiaSubject.setOnClickListener(this);
         xueshengfee.setOnClickListener(this);
         shanggmenfee.setOnClickListener(this);
         editText2.setOnClickListener(this);
@@ -185,6 +188,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         techang.setOnClickListener(this);
         educationBtn.setOnClickListener(this);
         bookBtn.setOnClickListener(this);
+        tianjiarongyuztubiao1.setOnClickListener(this);
 
         //去获取教师详细资料
         uid=Integer.parseInt(User_id.getUid());
@@ -264,7 +268,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 xueleTypeDialog.setIcon(R.drawable.add04);
                 xueleTypeDialog.setTitle("请选择学历");
                 //    指定下拉列表的显示数据
-                final String[] xueliType = {"无","大专", "本科","研究生", "硕士" ,"博士"};
+                final String[] xueliType = {"无","大专", "本科", "硕士" ,"博士"};
                 //    设置一个下拉的列表选择项
                 xueleTypeDialog.setItems(xueliType, new DialogInterface.OnClickListener() {
                     @Override
@@ -511,6 +515,13 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 mPickDialog.dismiss();
             }
             break;
+            case R.id.tianjiakecheng:
+                if (viw.getVisibility()==View.GONE) {
+                    viw.setVisibility(View.VISIBLE);
+                }else {
+                    viw.setVisibility(View.GONE);
+                }
+                break;
             case R.id.tianjiaxueli:
 
                 if (viw.getVisibility()==View.GONE) {
@@ -518,6 +529,10 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                 }else {
                     viw.setVisibility(View.GONE);
                 }
+                break;
+            case R.id.tianjiarongyuztubiao1:
+                TAGE_ISRONT=4;
+                mPickDialog.show();
                 break;
             case R.id.tianjiasfenz:
                 TAGE_ISRONT=4;

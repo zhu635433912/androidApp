@@ -39,14 +39,14 @@ import modle.user_ziliao.User_id;
 public class Teacher_personal extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed {
     private TextView pingjia;
     private RelativeLayout grfanhui;
-    private TextView xinjijiaoshi;
+
     private TextView techartext;
     private Map<String,Object> map;
-    private TextView techaertec;
-    private TextView techaerxue;
-    private TextView jiaoling;
+
+
+
     private TextView teachername;
-    private TextView diqu;
+
     private int teacher_id;
     private ImageView teachertoux;
     private ImageButton jianjiebohao;
@@ -54,6 +54,12 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
     private ImageView zhengshuImage;
     private String xueliUrl ;
     private String zhengshuUrl;
+
+    private TextView diqu;
+    private TextView xinjijiaoshi;
+    private TextView jiaoling;
+    private TextView techaertec;
+    private TextView techaerxue;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,16 +76,16 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
         jianjiebohao= (ImageButton) findViewById(R.id.jianjiebohao);
         teachertoux= (ImageView) findViewById(R.id.teachertoux);
         pingjia= (TextView) findViewById(R.id.pingjia);
+
         techaertec = (TextView) findViewById(R.id.techaertec);
         xinjijiaoshi= (TextView) findViewById(R.id.xinjijiaoshi);
+        techaerxue= (TextView) findViewById(R.id.techaerxue);
+        jiaoling= (TextView) findViewById(R.id.jiaoling);
+        diqu= (TextView) findViewById(R.id.diqu);
         grfanhui= (RelativeLayout) findViewById(R.id.grfanhui);
         techartext= (TextView) findViewById(R.id.techartext);
         techartext.setMovementMethod(ScrollingMovementMethod.getInstance());
-        techaertec= (TextView) findViewById(R.id.techaertec);
-        techaerxue= (TextView) findViewById(R.id.techaerxue);
-        jiaoling= (TextView) findViewById(R.id.jiaoling);
         teachername= (TextView) findViewById(R.id.teachername);
-        diqu= (TextView) findViewById(R.id.diqu);
         grfanhui.bringToFront();
 
         jianjiebohao.setOnClickListener(this);

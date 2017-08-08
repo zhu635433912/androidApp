@@ -180,7 +180,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_below="@+id/faxianjiaoshi"
                     android:layout_marginTop="10dp"
-                    android:text="帮助Ta找到方法,解决需求,既是Ta的进步"
+                    android:text="帮助Ta找到方法,解决需求"
                     android:textColor="#747474"
                     android:textSize="30px" />
 
@@ -190,7 +190,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/hosttextview"
                     android:layout_centerHorizontal="true"
-                    android:text="也是您的收获!"
+                    android:text="既是Ta的进步,也是您的收获!"
                     android:textColor="#747474"
                     android:textSize="30px" />
             </RelativeLayout>

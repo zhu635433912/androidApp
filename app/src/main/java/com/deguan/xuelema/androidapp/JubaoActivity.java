@@ -21,8 +21,12 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
 import modle.getdata.Getdata;
+import modle.user_ziliao.User_id;
 import retrofit2.Retrofit;
 
+/**
+ * 举报
+ */
 @EActivity(R.layout.activity_jubao)
 public class JubaoActivity extends MyBaseActivity implements UpReportView {
 
@@ -53,7 +57,7 @@ public class JubaoActivity extends MyBaseActivity implements UpReportView {
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(jubaoTv.getText().toString())){
-                    new Getdata().upReport(teacherId,jubaoTv.getText().toString(),JubaoActivity.this);
+                    new Getdata().upReport(teacherId,jubaoTv.getText().toString(),JubaoActivity.this,Integer.parseInt(User_id.getUid()));
                 }else {
                     Toast.makeText(JubaoActivity.this, "请输入举报内容", Toast.LENGTH_SHORT).show();
                 }

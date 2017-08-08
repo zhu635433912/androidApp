@@ -114,7 +114,7 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
                 entity.setSpeciality((String)maps.get(i).get("speciality"));
                 entity.setSpeciality_name((String) maps.get(i).get("speciality_name"));
                 entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
-                entity.setSignature((String) maps.get(i).get("signature"));
+                entity.setSignature((String) maps.get(i).get("resume"));
                 entity.setOrder_rank((String.valueOf(maps.get(i).get("order_rank"))));
                 entity.setUser_headimg((String) maps.get(i).get("user_headimg"));
                 entity.setUser_id((String) maps.get(i).get("user_id"));
@@ -125,6 +125,11 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
                 entity.setFee(String.valueOf(maps.get(i).get("fee")));
                 entity.setHaoping_num((String)maps.get(i).get("haoping_num"));
                 List<Map<String,Object>> listmap = ((List<Map<String,Object>>)maps.get(i).get("information_temp"));
+                if (listmap .size()>0){
+                    entity.setService_type_txt((String) listmap.get(0).get("course_remark"));
+                }else {
+                    entity.setService_type_txt("不限");
+                }
                 String course_name = "";
                 for (int j = 0; j < listmap.size(); j++) {
                     if (listmap.get(j).get("grade_id").equals("1")){
@@ -141,7 +146,7 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
                 }
                 entity.setStatus2(course_name);
 //            entity.setGrade_name((String)maps.get(i).get("grade_name"));
-
+                entity.setEducation((String)maps.get(i).get("education"));
                 list.add(entity);
             }
             adapter.addAll(list);
@@ -170,7 +175,7 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
 //                    intent.putExtra("user_id", uid);
         intent.putExtra("head_image",entity.getUser_headimg());
         intent.putExtra("user_id",entity.getUser_id());
-        intent.putExtra("myid","1");
+        intent.putExtra("myid","0");
         startActivity(intent);
     }
 

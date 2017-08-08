@@ -1,6 +1,8 @@
 package com.deguan.xuelema.androidapp;
 
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -11,6 +13,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.deguan.xuelema.androidapp.entities.TeacherEntity;
+import com.deguan.xuelema.androidapp.entities.TuijianEntity;
 import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.viewimpl.SimilarXuqiuView;
@@ -24,7 +27,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import modle.Adapter.DmadAdapter;
 import modle.Adapter.TeacherListAdapter;
+import modle.Adapter.TuijianNewAdapter;
 import modle.Adapter.XuqiuAdapter;
 import modle.Demand_Modle.Demand;
 import modle.Demand_Modle.Demand_init;
@@ -33,7 +38,7 @@ import modle.Teacher_Modle.Teacher_init;
 import modle.user_ziliao.User_id;
 
 @EActivity(R.layout.activity_search)
-public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, TeacherView {
+public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, TeacherView, SwipeRefreshLayout.OnRefreshListener {
     @ViewById
     EditText text_search;
 
@@ -42,17 +47,22 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
     @ViewById(R.id.search_back)
     RelativeLayout backRl;
 
-    @ViewById
-    ListView searlist;
+    @ViewById(R.id.search_swipe)
+    SwipeRefreshLayout swipeRefreshLayout;
+    @ViewById(R.id.searlist)
+    RecyclerView searlist;
+
+    private List<Map<String,Object>> list=new ArrayList<>();
+    private List<TuijianEntity> datas = new ArrayList<>();
 
     private int role;
     private Demand_init demand_init;
 
     private List<XuqiuEntity> listamap;
-    private XuqiuAdapter xuqiuAdapter;
+    private DmadAdapter xuqiuAdapter;
     //教师列表数据
     private List<TeacherEntity> teachers = new ArrayList<>();
-    private TeacherListAdapter teacherAdapter;
+    private TuijianNewAdapter teacherAdapter;
     private Teacher_init teacher_init;
 
     @Override
@@ -66,45 +76,42 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
         demand_init=new Demand(this);
         teacher_init = new Teacher(this);
         listamap = new ArrayList<>();
+        swipeRefreshLayout.setOnRefreshListener(this);
+
         if (User_id.getRole().equals("1")) {
-            teacherAdapter = new TeacherListAdapter(teachers,this);
+            teacherAdapter = new TuijianNewAdapter(datas,this);
             searlist.setAdapter(teacherAdapter);
-        }else {
-            xuqiuAdapter = new XuqiuAdapter(listamap, this);
-            searlist.setAdapter(xuqiuAdapter);
-        }
-//        simpleAdapter=new SimpleAdapter(this,listamap,R.layout.listview_itme,new String[]{"publisher_name"},new int[]{R.id.text1});
-//        searlist.setAdapter(simpleAdapter);
-        searlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (role==1) {
-                    //进入老师
-//                    String uid = requirdapter.geiuiserid(position-1);
+            teacherAdapter.setOnTopClickListener(new TuijianNewAdapter.OnTopClickListener() {
+                @Override
+                public void onTopClick(TuijianEntity entity) {
                     Intent intent = new Intent(SearchActivity.this, UserxinxiActivty.class);
 //                    intent.putExtra("user_id", uid);
-                    intent.putExtra("head_image",teachers.get(position).getUser_headimg());
-                    intent.putExtra("user_id",teachers.get(position).getUser_id());
-                    startActivity(intent);
-                }else {
-                    //进入学生
-
-//                    Map<String,Object> map=new HashMap<String, Object>();
-//                    map=studentAdapter.geiuiserid(position-1);
-
-                    Intent intent = new Intent(SearchActivity.this, Xuqiuxiangx.class);
-                    intent.putExtra("user_id",listamap.get(position).getId());
-                    intent.putExtra("fee",listamap.get(position).getFee());
-                    intent.putExtra("publisher_id",listamap.get(position).getPublisher_id());
-                    intent.putExtra("course_id",listamap.get(position).getCourse_id());
-                    intent.putExtra("grade_id",listamap.get(position).getGrade_id());
-//                    intent.putExtra("user_id",(String)map.get("user_id"));
-//                    intent.putExtra("fee",(String)map.get("fee"));
-//                    intent.putExtra("publisher_id",(String)map.get("publisher_id"));
+                    intent.putExtra("head_image",entity.getUser_headimg());
+                    intent.putExtra("user_id",entity.getUser_id());
                     startActivity(intent);
                 }
-            }
-        });
+            });
+        }else {
+            xuqiuAdapter = new DmadAdapter(this, list);
+            searlist.setAdapter(xuqiuAdapter);
+            xuqiuAdapter.setOnItemClickListener(new DmadAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    String publisher_id = list.get(position).get("publisher_id") + "";
+                    String user_id = list.get(position).get("id") + "";
+                    String fee = list.get(position).get("fee") + "";
+//                Toast.makeText(getActivity(),publisher_id,Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(SearchActivity.this, Xuqiuxiangx.class);
+                    intent.putExtra("publisher_id", publisher_id);
+                    intent.putExtra("user_id", user_id);
+                    intent.putExtra("fee", fee);
+                    intent.putExtra("course_id", list.get(position).get("course_id").toString());
+                    intent.putExtra("grade_id", list.get(position).get("grade_id").toString());
+                    startActivity(intent);
+                }
+            });
+        }
+
         backRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,84 +142,87 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
 
     @Override
     public void successSimilarXuqiu(List<Map<String, Object>> maps) {
-//        listamap.clear();
-//        listamap.addAll(maps);
-//        xuqiuAdapter.notifyDataSetChanged();
-//        SimpleAdapter simpleAdapter=new SimpleAdapter(this,listamap,R.layout.listview_itme,new String[]{"publisher_name"},new int[]{R.id.text1});
-//        searlist.setAdapter(simpleAdapter);
         if (maps.size() == 0){
             Toast.makeText(this, "无搜索结果", Toast.LENGTH_SHORT).show();
         }
-        listamap.clear();
-        List<XuqiuEntity> lists = new ArrayList<>();
-        for (int i = 0; i < maps.size(); i++) {
-            XuqiuEntity entity = new XuqiuEntity();
-            entity.setPublisher_id((String) maps.get(i).get("publisher_id"));
-            entity.setPublisher_name((String) maps.get(i).get("publisher_name"));
-            entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
-            entity.setCourse_name((String) maps.get(i).get("course_name"));
-            entity.setContent((String) maps.get(i).get("content"));
-            entity.setCreated((String) maps.get(i).get("created"));
-            entity.setId((String) maps.get(i).get("id"));
-            entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
-            entity.setDistance((String) maps.get(i).get("distance"));
-            entity.setFee(String.valueOf(maps.get(i).get("fee")));
-            entity.setGrade_name((String)maps.get(i).get("grade_name"));
-            entity.setCourse_id((String)maps.get(i).get("course_id"));
-            entity.setGrade_id((String)maps.get(i).get("grade_id"));
-            entity.setAddress((String)maps.get(i).get("address"));
-
-            lists.add(entity);
-        }
-        listamap.addAll(lists);
+        list.clear();
+        list.addAll(maps);
         xuqiuAdapter.notifyDataSetChanged();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void failSimilarXuqiu(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        swipeRefreshLayout.setRefreshing(false);
+        Toast.makeText(this, msg+"!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void successTeacher(List<Map<String, Object>> maps) {
-        if (maps==null){
+        if (maps.size() == 0){
             Toast.makeText(this, "无搜索结果", Toast.LENGTH_SHORT).show();
         }
-            teachers.clear();
+        teacherAdapter.clear();
+            datas.clear();
         if (maps.size() != 0) {
-            List<TeacherEntity> lists = new ArrayList<>();
             for (int i = 0; i < maps.size(); i++) {
-                TeacherEntity entity = new TeacherEntity();
-                entity.setNickname((String) maps.get(i).get("nickname"));
-                entity.setSpeciality((String)maps.get(i).get("speciality"));
-                entity.setSpeciality_name((String) maps.get(i).get("speciality_name"));
-                entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
-                entity.setSignature((String) maps.get(i).get("signature"));
-                entity.setOrder_rank((String.valueOf(maps.get(i).get("order_rank"))));
-                entity.setUser_headimg((String) maps.get(i).get("user_headimg"));
-                entity.setUser_id((String) maps.get(i).get("user_id"));
-                entity.setGender((String) maps.get(i).get("gender"));
-                entity.setHaoping_num((String)maps.get(i).get("haoping_num"));
+            TuijianEntity entity = new TuijianEntity();
+            entity.setNickname((String) maps.get(i).get("nickname"));
+            entity.setSpeciality((String)maps.get(i).get("speciality"));
+            entity.setSpeciality_name((String) maps.get(i).get("speciality_name"));
+            entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
+            entity.setSignature((String) maps.get(i).get("resume"));
+            entity.setOrder_rank((String.valueOf(maps.get(i).get("order_rank"))));
+            entity.setUser_headimg((String) maps.get(i).get("user_headimg"));
+            entity.setUser_id((String) maps.get(i).get("user_id"));
+            entity.setGender((String) maps.get(i).get("gender"));
+            entity.setClick(maps.get(i).get("click")+"");
 //            entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
-                entity.setDistance((String) maps.get(i).get("distance"));
-                entity.setFee(String.valueOf(maps.get(i).get("fee")));
-                List<Map<String,Object>> listmap = ((List<Map<String,Object>>)maps.get(i).get("information_temp"));
-                String course_name = "";
-//                for (int j = 0; j < listmap.size(); j++) {
-//                    course_name = course_name + listmap.get(j).get("course_name")+"  ";
-//                }
-                entity.setStatus2(course_name);
-                entity.setEducation((String)maps.get(i).get("education"));
-//            entity.setGrade_name((String)maps.get(i).get("grade_name"));
-                lists.add(entity);
+            entity.setDistance((String) maps.get(i).get("distance"));
+            entity.setFee(String.valueOf(maps.get(i).get("fee")));
+            entity.setHaoping_num((String)maps.get(i).get("haoping_num"));
+            List<Map<String,Object>> listmap = ((List<Map<String,Object>>)maps.get(i).get("information_temp"));
+            String course_name = "";
+            for (int j = 0; j < listmap.size(); j++) {
+                if (listmap.get(j).get("grade_id").equals("1")){
+                    course_name = course_name + listmap.get(j).get("course_name")+"(小学)"+"  ";
+                }else if (listmap.get(j).get("grade_id").equals("2")){
+                    course_name = course_name + listmap.get(j).get("course_name")+"(初中)"+"  ";
+                }else if (listmap.get(j).get("grade_id").equals("3")){
+                    course_name = course_name + listmap.get(j).get("course_name")+"(高中)"+"  ";
+                }else if (listmap.get(j).get("grade_id").equals("4")){
+                    course_name = course_name + listmap.get(j).get("course_name")+"(大学)"+"  ";
+                }else {
+                    course_name = course_name + listmap.get(j).get("course_name")+"(不限)"+"  ";
+                }
             }
-            teachers.addAll(lists);
-            teacherAdapter.notifyDataSetChanged();
+            entity.setStatus2(course_name);
+//            entity.setGrade_name((String)maps.get(i).get("grade_name"));
+
+            datas.add(entity);
+        }
+        teacherAdapter.addAll(datas);
+        swipeRefreshLayout.setRefreshing(false);
         }
     }
 
     @Override
     public void failTeacher(String msg) {
+        swipeRefreshLayout.setRefreshing(false);
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onRefresh() {
+        String aa = text_search.getText().toString();
+        if (!aa.equals("")) {
+            if (role == 1) {
+                teacher_init.gettuijian_Teacher1(aa,User_id.getLat()+"",""+User_id.getLng());
+            } else {
+                demand_init.getTuijianDemand_list1(aa,User_id.getLat()+"",""+User_id.getLng());
+            }
+        }else {
+            Toast.makeText(SearchActivity.this, "请输入搜索内容", Toast.LENGTH_SHORT).show();
+        }
     }
 }

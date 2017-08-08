@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import com.deguan.xuelema.androidapp.fragment.Completefragment_;
 import com.deguan.xuelema.androidapp.fragment.ConductFragment_;
@@ -27,20 +28,28 @@ public class MyOrderActivity extends AutoLayoutActivity {
     private List<String> titles = new ArrayList<>();
     private List<Fragment> fragments = new ArrayList<>();
     private ImageButton backImage;
+    private RelativeLayout stuentordentfanhui;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         User_id.getInstance().addActivity(this);
         setContentView(R.layout.activity_my_order);
+        stuentordentfanhui = (RelativeLayout) findViewById(R.id.stuentordentfanhui);
         tableLayout = (TabLayout) findViewById(R.id.my_order_tablayout);
         viewPager = (ViewPager) findViewById(R.id.my_order_vp);
         backImage = (ImageButton) findViewById(R.id.my_order_back);
         backImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(NewMainActivity_.intent(MyOrderActivity.this).get());
-//     MyOrderActivity.this.finish();
+//                startActivity(NewMainActivity_.intent(MyOrderActivity.this).get());
+                finish();
+            }
+        });
+        stuentordentfanhui.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
         initData();

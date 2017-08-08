@@ -75,19 +75,26 @@ public class PayUtil {
             public void onResponse(Call<PayEntity> call, Response<PayEntity> response) {
                 Log.d("aa",response.body().getError()+"pay_response"+response.body().getErrmsg());
                 Map<String,Object> maps=new HashMap<>();
-                if (paytype == 1) {
-                    maps = response.body().getContent();
-                }else if (paytype == 0){
-                    maps.put("info", response.body().getErrmsg()+"");
-                }else if (paytype == 2){
-                    maps.put("error",response.body().getError()+"");
-                    maps.put("errmsg",response.body().getErrmsg()+"");
+                if (response.body().getError().equals("no")){
+                    payView.failPay(response.body().getErrmsg());
+                }else {
+                    if (paytype == 1) {
+                        maps = response.body().getContent();
+                    } else if (paytype == 0) {
+
+                        maps.put("info", response.body().getContent().toString() + "");
+//                    maps.put("info", response.body().getErrmsg()+"");
+                    } else if (paytype == 2) {
+                        maps.put("error", response.body().getError() + "");
+                        maps.put("errmsg", response.body().getErrmsg() + "");
+                    }
+                    payView.successPay(maps);
                 }
-                payView.successPay(maps);
             }
 
             @Override
             public void onFailure(Call<PayEntity> call, Throwable t) {
+                payView.failPay("网络错误");
                 Log.e("aa","获取订单错误");
             }
         });

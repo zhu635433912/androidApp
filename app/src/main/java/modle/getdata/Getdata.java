@@ -4,12 +4,14 @@ import android.util.ArrayMap;
 import android.util.Log;
 
 import com.deguan.xuelema.androidapp.entities.DownloadEntity;
+import com.deguan.xuelema.androidapp.entities.PayEntity;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
 import com.deguan.xuelema.androidapp.viewimpl.Baseinit;
 import com.deguan.xuelema.androidapp.viewimpl.CashListView;
 import com.deguan.xuelema.androidapp.viewimpl.CashView;
+import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
 import com.deguan.xuelema.androidapp.viewimpl.DistributionView;
 import com.deguan.xuelema.androidapp.viewimpl.DownloadView;
 import com.deguan.xuelema.androidapp.viewimpl.TurnoverView;
@@ -93,6 +95,26 @@ public class Getdata {
            }
        });
 
+   }
+    //取消支付
+   public void cancalPay(int id, final ChangeOrderView changeOrderView){
+       Call<PayEntity> call=data.cancalPay(id);
+       call.enqueue(new Callback<PayEntity>() {
+           @Override
+           public void onResponse(Call<PayEntity> call, Response<PayEntity> response) {
+               String error=response.body().getError();
+               if (error.equals("ok")){
+                   changeOrderView.failOrder("取消支付");
+               }else {
+                   changeOrderView.failOrder("已支付");
+               }
+           }
+
+           @Override
+           public void onFailure(Call<PayEntity> call, Throwable t) {
+               Log.e("aa","获取科目异常错误");
+           }
+       });
    }
 
     //获取余额
@@ -288,6 +310,7 @@ public class Getdata {
         });
     }
 
+    //获取现金券列表
     public void getCashList(int uid, int page, final CashListView cashListView ){
         Call<ContentModle> call = data.getcashList(uid,page);
         call.enqueue(new Callback<ContentModle>() {
@@ -309,8 +332,9 @@ public class Getdata {
             }
         });
     }
-    public void upReport(int uid, String content, final UpReportView upReportView){
-        Call<User_Modle> call  = data.upReport(uid,content);
+    //举报
+    public void upReport(int uid, String content, final UpReportView upReportView,int uid2){
+        Call<User_Modle> call  = data.upReport(uid,content,uid2);
         call.enqueue(new Callback<User_Modle>() {
             @Override
             public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {

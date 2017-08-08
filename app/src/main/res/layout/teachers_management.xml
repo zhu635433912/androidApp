@@ -161,32 +161,6 @@
             android:layout_width="194px"
             android:layout_height="76px"
             android:id="@+id/textView7" />
-            <!--<TextView-->
-                <!--android:id="@+id/kecheng_service_type"-->
-                <!--android:textSize="30px"-->
-                <!--android:text="服务类型"-->
-                <!--android:gravity="center"-->
-                <!--android:background="@drawable/gerxxkk"-->
-                <!--android:layout_marginTop="50px"-->
-                <!--android:layout_marginLeft="40px"-->
-                <!--android:layout_alignParentLeft="true"-->
-                <!--android:layout_below="@+id/textView7"-->
-                <!--android:layout_width="194px"-->
-                <!--android:layout_height="76px" />-->
-            <!--<EditText-->
-                <!--android:textSize="30px"-->
-                <!--android:hint="服务费"-->
-                <!--android:gravity="center"-->
-                <!--android:inputType="number"-->
-                <!--android:textColor="#747475"-->
-                <!--android:id="@+id/shanggmenfee"-->
-                <!--android:background="@drawable/gerxxkk"-->
-                <!--android:layout_toRightOf="@+id/kecheng_service_type"-->
-                <!--android:layout_marginTop="50px"-->
-                <!--android:layout_marginLeft="40px"-->
-                <!--android:layout_below="@+id/textView7"-->
-                <!--android:layout_width="194px"-->
-                <!--android:layout_height="76px" />-->
         <TextView
             android:layout_marginLeft="50px"
             android:gravity="center"
@@ -287,6 +261,15 @@
             android:background="#f3f7f8"
             android:layout_width="194px"
             android:layout_height="79px" />
+            <TextView
+                android:gravity="center"
+                android:layout_below="@+id/naxt"
+                android:layout_marginLeft="50px"
+                android:layout_alignParentBottom="true"
+                android:text="每笔订单平台将收取10%的手续费"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="10px"
+                android:layout_height="wrap_content" />
         </RelativeLayout>
         <RelativeLayout
             android:id="@+id/tianjiaxueli"

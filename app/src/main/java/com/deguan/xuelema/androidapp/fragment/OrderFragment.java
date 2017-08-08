@@ -147,6 +147,7 @@ public class OrderFragment extends BaseFragment implements OrderView , SwipeRefr
 
     @Override
     public void failOrder(String msg) {
+        swipeRefreshLayout.setRefreshing(false);
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 

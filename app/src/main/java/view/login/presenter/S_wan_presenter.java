@@ -189,15 +189,15 @@ public class S_wan_presenter implements login_wan_presenter {
         String Verif=dei.Verification();
         String cla=dei.gettoogbuton();
         String yqm=dei.getyqm();
-        String payPsd = dei.getPayPsd();
+//        String payPsd = dei.getPayPsd();
         if (username.length()>=11&&!password.equals("")&&!Verif.equals("")&&!cla.equals("")){
-            if (password.length()<8){
-                dei.Fail("密码不能小于八位");
+            if (password.length()<6){
+                dei.Fail("密码不能小于6位");
             }else {
 
                     modlewan = new S_wan_login(dei);
                     Log.d("aa", "传递进类型=" + cla + "---账号=" + username + "---密码=" + password + "验证码" + Verif);
-                    modlewan.Userregistration(cla, username, password, Verif, yqm,payPsd);
+                    modlewan.Userregistration(cla, username, password, Verif, yqm);
 
             }
         }else{
@@ -228,7 +228,7 @@ public class S_wan_presenter implements login_wan_presenter {
         if (username.length() >= 11 && !password.equals("") && !Myyzm.equals("")) {
             if (password.length() > 8 && password.length() <16) {
                 modlewan = new S_wan_login(pos);
-                modlewan.Userregistration("z", username, password, Myyzm,yqm,"");
+                modlewan.Userregistration("z", username, password, Myyzm,yqm);
             } else {
                 pos.xiuflase("密码必须超过8位小于16位");
             }

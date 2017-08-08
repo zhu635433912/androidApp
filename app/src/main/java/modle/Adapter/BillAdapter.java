@@ -86,6 +86,8 @@ public class BillAdapter extends ListBaseAdapter {
                 holder.typeTv.setText("二级返");
                 holder.idTv.setText(list.get(position).get("order_id")+"");
             }
+        }else if (type.equals("8")){
+            holder.typeTv.setText("拒绝提现");
         }
         String time = list.get(position).get("created")+"";
         holder.timeTv.setText(time);

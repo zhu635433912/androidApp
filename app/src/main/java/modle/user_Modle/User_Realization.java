@@ -443,6 +443,27 @@ public class User_Realization implements User_init {
         });
     }
 
+    public void setAddress(int uid,String province,String city,String status){
+        Call<Demtest> call=myOkhttp.setAddress(uid,province,city,status);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")) {
+                    Log.e("aa", "用户资料位置更新成功");
+                }else {
+                    String errmsg=response.body().getErrmsg();
+                    Log.e("aa","更新用户位置资料错误="+errmsg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                Log.e("aa","获取用户位置资料异常错误="+t.toString());
+            }
+        });
+    }
+
     @Override
     public void UpdateEducation(int user_id, int education_id) {
         Call<Demtest> call=myOkhttp.setEducation(user_id,education_id);
@@ -475,7 +496,6 @@ public class User_Realization implements User_init {
         }
         //空
         try {
-            Log.e("aa","图片压缩前"+bitmap.getHeight());
             FileOutputStream out = new FileOutputStream(f);
             bitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
             out.flush();

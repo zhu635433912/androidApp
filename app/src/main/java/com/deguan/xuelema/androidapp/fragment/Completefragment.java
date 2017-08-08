@@ -69,7 +69,7 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
         adapter = new OrderNewAdapter(list,getContext());
 
         adapter.setOnTopClickListener(this);
-        adapter.setOnItemLongClickListener(this);
+//        adapter.setOnItemLongClickListener(this);
 //        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
 //        listView.setOnRefreshListener(this);
         listView.setAdapter(adapter);
@@ -121,21 +121,24 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
     @Override
     public void successOrder(List<Map<String, Object>> maps) {
 //        listView.onRefreshComplete();
+        if (page == 1) {
+            adapter.clear();
+            list.clear();
+        }
         if (maps != null) {
-            if (page == 1) {
-                adapter.clear();
-                list.clear();
-            }
 //            for (int i = 0; i < maps.size(); i++) {
 //                if (!maps.get(i).get("status").equals("9")) {
 //                    list.add(maps.get(i));
 //                }
 //            }
             for (int i = 0; i < maps.size(); i++) {
-                if (maps.get(i).get("status").equals("3")||maps.get(i).get("status").equals("5")
+                if (maps.get(i).get("status").equals("3")
 //                        ||maps.get(i).get("status").equals("6")
                         ) {
                     maps.get(i).put("status","7");
+                    list.add(maps.get(i));
+                }
+                if (maps.get(i).get("status").equals("5")){
                     list.add(maps.get(i));
                 }
             }
@@ -169,6 +172,7 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
 
     @Override
     public void failOrder(String msg) {
+        swipeRefreshLayout.setRefreshing(false);
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
@@ -231,6 +235,7 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
 
     @Override
     public void Updatecontent(Map<String, Object> map) {
+        swipeRefreshLayout.setRefreshing(false);
         Toast.makeText(getContext(), "已删除请刷新", Toast.LENGTH_SHORT).show();
         if (User_id.getRole().equals("1")) {
             new OrderPresenterImpl(Completefragment.this, Integer.parseInt(User_id.getUid()), 0, 1).getNofinishOrderEntity(1);
@@ -241,7 +246,7 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
 
     @Override
     public void Updatefee(List<Map<String, Object>> listmap) {
-
+        swipeRefreshLayout.setRefreshing(false);
     }
 
 

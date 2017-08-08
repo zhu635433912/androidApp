@@ -55,9 +55,12 @@ public class BillActivity extends MyBaseActivity implements TurnoverView {
 
     @Override
     public void successTurnover(List<Map<String, Object>> list) {
-        data.addAll(list);
-        adapter.notifyDataSetChanged();
-
+        if (list == null){
+            Toast.makeText(this, "无账单", Toast.LENGTH_SHORT).show();
+        }else {
+            data.addAll(list);
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override

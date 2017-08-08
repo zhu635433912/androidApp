@@ -26,7 +26,7 @@
     <!-- 用于申请获取蓝牙信息进行室内定位 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <!-- Required -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -928,14 +928,23 @@
             </intent-filter>
 
             <!-- 集成line客户端登录授权，需要添如下格式的过滤器 -->
-            <!-- <intent-filter> -->
-            <!-- <data android:scheme="line.1477692153" /> -->
-            <!-- <action android:name="android.intent.action.VIEW"/> -->
-            <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
-            <!-- <category android:name="android.intent.category.DEFAULT" /> -->
-            <!-- </intent-filter> -->
+            <intent-filter>
+                <data android:scheme="line.1477692153" />
 
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
+        <!-- 填写您从Mob开发者后台中得到的Appkey和AppSecret -->
+        <meta-data
+            android:name="Mob-AppKey"
+            android:value="1f241772300ba" />
+        <meta-data
+            android:name="Mob-AppSecret"
+            android:value="64c63e072aac4e2415a1ba4f05c80990" />
+
         <activity
             android:name=".BillActivity_"
             android:screenOrientation="portrait" />
@@ -943,7 +952,15 @@
             android:name="modle.Huanxing.ui.NewHuanxinMainActivity"
             android:label="@string/title_activity_new_huanxin_main"
             android:theme="@style/AppTheme" />
-        <activity android:name=".RefoundActivity_"></activity>
+        <activity android:name=".RefoundActivity_" />
+        <activity android:name=".TeacherActivity" />
+        <activity android:name=".AmapActivity" />
+        <activity android:name=".TeacherManActivity_" />
+        <activity android:name=".EducationActivity_" />
+        <activity android:name=".HonorActivity_" />
+        <activity android:name=".ManagerActivity_" />
+        <activity android:name=".ExampleActivity_" />
+        <activity android:name=".ExerActivity_"></activity>
     </application>
 
 </manifest>

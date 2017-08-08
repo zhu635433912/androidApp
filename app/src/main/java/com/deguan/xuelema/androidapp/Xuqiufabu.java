@@ -1,10 +1,12 @@
 package com.deguan.xuelema.androidapp;
 
+import android.app.Activity;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -29,6 +31,7 @@ import com.bigkoo.pickerview.OptionsPickerView;
 import com.deguan.xuelema.androidapp.init.Gaodehuidiao_init;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.utils.SubjectUtil;
+import com.hyphenate.easeui.ui.EaseBaiduMapActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 
@@ -80,7 +83,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
     private EditText xuqiuneirong;
     private RelativeLayout xuqiufabufanhui;
     private EditText userweizhi;
-    private TextView kaishishijian;
+    private TextView kaishishijian,weizhiTv;
     private int kcid = 206;
     private TextView jieshushijian;
     private int year, monthOfYear, dayOfMonth, hourOfDay, minute;
@@ -129,6 +132,9 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
             }
         }
     };
+    private double lat;
+    private double lng;
+    private float i;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -140,6 +146,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
 //        getWindow().setEnterTransition(fade);
 
         User_id.getInstance().addActivity(this);
+        weizhiTv = (TextView) findViewById(R.id.weizhitubiao);
         nan = (TextView) findViewById(R.id.nan);
         nv = (TextView) findViewById(R.id.nv);
         xuqiuneirong = (EditText) findViewById(R.id.xuqiutext);
@@ -207,6 +214,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
         Forty.setOnClickListener(this);
         Subject.setOnClickListener(this);
         grade.setOnClickListener(this);
+        weizhiTv.setOnClickListener(this);
         nan.setOnClickListener(this);
         nv.setOnClickListener(this);
         genderlimited.setOnClickListener(this);
@@ -216,12 +224,34 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
         dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
         hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
         minute = calendar.get(Calendar.MINUTE);
+        Gaode_dinwei gaode_dinwei = new Gaode_dinwei(Xuqiufabu.this, Xuqiufabu.this);
+
 
     }
+    protected static final int REQUEST_CODE_MAP = 1;
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_CODE_MAP) { // location
+                String latitude = data.getStringExtra("latitude");
+                String longitude = data.getStringExtra("longitude");
+                String locationAddress = data.getStringExtra("address");
+                if (locationAddress != null && !locationAddress.equals("")) {
+                    userweizhi.setText(locationAddress);
+                }
 
+            }
+        }
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.weizhitubiao:
+
+                startActivityForResult(new Intent(this, AmapActivity.class), REQUEST_CODE_MAP);
+//                startActivityForResult(new Intent(this, EaseBaiduMapActivity.class), REQUEST_CODE_MAP);
+                break;
             case R.id.xuqiufabufanhui:
                 Xuqiufabu.this.finish();
                 break;
@@ -251,8 +281,8 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
 //                                                Log.e("aa", "用户发布内容 id" + id + "内容" + xuqiuneirong.getText().toString() + "课时费" + "年级id" + zuigrade +
 //                                                        "科目id" + kcid + "性别要求" + Gender + "年龄" + age + "学历" + xueli + "地区" + provinc + location + caty + "服务方式+" + 1 + "时间段" + start + "结束时间段" + end);
                                                 //发布需求
-                                                Gaode_dinwei gaode_dinwei = new Gaode_dinwei(Xuqiufabu.this, Xuqiufabu.this);
-
+                                                Demand_init demand_init = new Demand();
+                                                demand_init.ReleaseDemand(id, xuqiuneirong.getText().toString(), i, zuigrade + 1, kcid, Gender, age, xueli, provinc, location, caty, fuwfangshi - 1, start, end, lat, lng,userweizhi.getText().toString());
                                                 Toast.makeText(Xuqiufabu.this, "发布需求成功！", Toast.LENGTH_SHORT).show();
                                                 Intent intent = NewMainActivity_.intent(Xuqiufabu.this).get();
                                                 startActivity(intent);
@@ -532,14 +562,12 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
     //定位发布成功
     @Override
     public void Updategaode(Map<String, Object> map) {
-        double lat = (double) map.get("lat");
-        double lng = (double) map.get("lng");
-        Demand_init demand_init = new Demand();
-        float i = 0;
+        lat = (double) map.get("lat");
+        lng = (double) map.get("lng");
+        i = 0;
         if (userweizhi.getText() ==null){
             userweizhi.setText(User_id.getAddress());
         }
-        demand_init.ReleaseDemand(id, xuqiuneirong.getText().toString(), i, zuigrade + 1, kcid, Gender, age, xueli, provinc, location, caty, fuwfangshi - 1, start, end, lat, lng,userweizhi.getText().toString());
 
 
     }

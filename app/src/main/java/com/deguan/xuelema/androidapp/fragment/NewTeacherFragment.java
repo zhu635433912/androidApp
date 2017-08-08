@@ -470,10 +470,12 @@ public class NewTeacherFragment extends BaseFragment implements Gaodehuidiao_ini
             if (user_init != null) {
                 user_init.setlan_lng(id, User_id.getLat(), User_id.getLng());
                 user_init.User_Data(id, User_id.getLat() + "", User_id.getLng() + "", this);
+                user_init.setAddress(id,User_id.getProvince(),User_id.getCity(),User_id.getStatus());
             } else {
                 user_init = new User_Realization();
                 user_init.setlan_lng(id, User_id.getLat(), User_id.getLng());
                 user_init.User_Data(id, User_id.getLat() + "", User_id.getLng() + "", this);
+                user_init.setAddress(id,User_id.getProvince(),User_id.getCity(),User_id.getStatus());
             }
 
             EventBus.getDefault().post(map.get("address") + "", "status");
@@ -609,12 +611,13 @@ public class NewTeacherFragment extends BaseFragment implements Gaodehuidiao_ini
         datas.addAll(lists);
         isLoading = false;
         demandAdapter.addAll(lists);
-        swipeRefreshLayout.setRefreshing(false);
         }
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void failXuqiu(String msg) {
-                Toast.makeText(getActivity(), "网络错误", Toast.LENGTH_SHORT).show();
+        swipeRefreshLayout.setRefreshing(false);
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 }

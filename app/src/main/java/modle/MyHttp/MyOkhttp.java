@@ -127,6 +127,10 @@ public interface MyOkhttp {
     @POST("index.php?s=/Service/Accounts/update_profile")
     Call<Demtest> setlat_lng(@Query("id") int id, @Query("lat") double lat,@Query("lng") double lng);
 
+    @POST("index.php?s=/Service/Accounts/update_profile")
+    Call<Demtest> setAddress(@Query("id") int id,  @Query("province")String province,
+                             @Query("city")String city,
+                             @Query("state")String district);
 
     /**
      * 上传一张图片

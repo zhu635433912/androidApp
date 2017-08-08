@@ -143,7 +143,9 @@ public class Distribution_Activty extends AutoLayoutActivity implements View.OnC
 
         if (map.get("mobile")!=null) {
             Erweima erweimac = new Erweima();
-            Bitmap bitmap = erweimac.generateBitmap("邀请码为:" + map.get("mobile"), 440, 440);
+            Bitmap bitmap = erweimac.generateBitmap("http://deguanjiaoyu.com/index.php?s=/Home/users/index/tel/"+User_id.getUsername(), 440, 440);
+//            http://deguanjiaoyu.com/index.php?s=/Home/users/index/tel/"+User_id.getUsername()
+//            Bitmap bitmap = erweimac.generateBitmap("邀请码为:" + map.get("mobile"), 440, 440);
             erweima.setImageBitmap(bitmap);
             yqm.setText((String) map.get("mobile"));
         }

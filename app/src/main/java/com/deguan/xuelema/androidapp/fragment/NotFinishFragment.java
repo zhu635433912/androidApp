@@ -134,11 +134,11 @@ public class NotFinishFragment extends BaseFragment implements OrderView, SwipeR
     @Override
     public void successOrder(List<Map<String, Object>> maps) {
 //        listView.onRefreshComplete();
+        if (page == 1) {
+            adapter.clear();
+            list.clear();
+        }
         if (maps != null) {
-            if (page == 1) {
-                adapter.clear();
-                list.clear();
-            }
 //            for (int i = 0; i < maps.size(); i++) {
 //                if (!maps.get(i).get("status").equals("9")) {
 //                    list.add(maps.get(i));
@@ -151,8 +151,8 @@ public class NotFinishFragment extends BaseFragment implements OrderView, SwipeR
             }
 
         }
-            adapter.addAll(list);
-            swipeRefreshLayout.setRefreshing(false);
+        adapter.addAll(list);
+        swipeRefreshLayout.setRefreshing(false);
             isLoading = false;
 //        list.addAll(maps);
 //        for (int i = 0; i < maps.size(); i++) {
@@ -179,6 +179,7 @@ public class NotFinishFragment extends BaseFragment implements OrderView, SwipeR
 
     @Override
     public void failOrder(String msg) {
+        swipeRefreshLayout.setRefreshing(false);
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
@@ -236,17 +237,18 @@ public class NotFinishFragment extends BaseFragment implements OrderView, SwipeR
 
     @Override
     public void Updatecontent(Map<String, Object> map) {
+        Toast.makeText(getContext(), "删除失败", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void Updatefee(List<Map<String, Object>> listmap) {
         Toast.makeText(getContext(), "已删除请刷新", Toast.LENGTH_SHORT).show();
         if (User_id.getRole().equals("1")) {
             new OrderPresenterImpl(NotFinishFragment.this, Integer.parseInt(User_id.getUid()), 0, 1).getNofinishOrderEntity(1);
         } else {
             new OrderPresenterImpl(NotFinishFragment.this, Integer.parseInt(User_id.getUid()), 1, 1).getNofinishOrderEntity(1);
         }
-    }
-
-    @Override
-    public void Updatefee(List<Map<String, Object>> listmap) {
-
     }
 //    @ViewById(R.id.tuijian_listview)
 //    PullToRefreshListView listView;

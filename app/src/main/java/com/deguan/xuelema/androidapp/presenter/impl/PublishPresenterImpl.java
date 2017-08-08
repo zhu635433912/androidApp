@@ -66,12 +66,15 @@ public class PublishPresenterImpl implements PublishPresenter {
                 String error=response.body().getError();
                 if (error.equals("ok")){
                     Log.e("aa","获取推荐教师成功");
-                    List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
-                    list=response.body().getContent();
-                    myPublishView.successMyPublish(list);
+                    if (response.body().getContent() .size() == 0) {
+                        myPublishView.failMyPublish("您还未发布");
+                    }
+                        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+                        list = response.body().getContent();
+                        myPublishView.successMyPublish(list);
+
                 }else {
-                    myPublishView.failMyPublish("获取推荐教师失败");
-                    Log.e("aa","获取推荐教师失败");
+                    myPublishView.failMyPublish("您还未发布");
                 }
             }
 

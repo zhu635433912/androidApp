@@ -173,8 +173,12 @@ public class Teacher implements Teacher_init {
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
                 String error=response.body().getError();
                 if (error.equals("ok")){
-                    listmap=response.body().getContent();
+                    if (response.body().getContent() .size() == 0){
+                        teacherView.failTeacher("无数据");
+                    }
+                        listmap = response.body().getContent();
                         teacherView.successTeacher(listmap);
+
                 }else {
 //                    String errmsg=response.body().getErrmsg();
 //                    Log.e("aa","获取教师列表错误"+errmsg);
@@ -585,8 +589,8 @@ public class Teacher implements Teacher_init {
 
     //获取教师评价接口
     @Override
-    public void setEvaluation_Teacher(int uid, final Student_init student_init) {
-        Call<ContentModle> call=teacher_http.getEvluation(uid);
+    public void setEvaluation_Teacher(int uid, final Student_init student_init,int page) {
+        Call<ContentModle> call=teacher_http.getEvluation(uid,page);
         call.enqueue(new Callback<ContentModle>() {
             @Override
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
@@ -619,9 +623,11 @@ public class Teacher implements Teacher_init {
                 String error=response.body().getError();
                 if (error.equals("ok")){
                     Log.e("aa","获取推荐教师成功");
-                    List<Map<String,Object>> list=new ArrayList<Map<String, Object>>();
-                    list=response.body().getContent();
-                    teacherView.successTeacher(list);
+
+                        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+                        list = response.body().getContent();
+                        teacherView.successTeacher(list);
+
                 }else {
                     Log.e("aa","获取推荐教师失败");
                 }
@@ -630,6 +636,7 @@ public class Teacher implements Teacher_init {
             @Override
             public void onFailure(Call<ContentModle> call, Throwable t) {
                 Log.e("aa","获取推荐教师异常错误");
+                teacherView.failTeacher("网络异常");
             }
         });
     }

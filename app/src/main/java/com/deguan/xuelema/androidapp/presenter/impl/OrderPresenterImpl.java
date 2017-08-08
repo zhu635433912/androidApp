@@ -65,15 +65,24 @@ public class OrderPresenterImpl implements OrderPresenter {
         ModelFactory.getInstance().getOrderModelImpl().getOrderData(new Callback<ContentModle>() {
             @Override
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
-                String error=response.body().getError();
-                if (error.equals("ok")){
-                    Log.e("aa","获取推荐教师成功");
-                    List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
-                    list=response.body().getContent();
+                List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+                if (response.body() == null){
                     orderView.successOrder(list);
                 }else {
-                    orderView.failOrder("获取推荐教师失败");
-                    Log.e("aa","获取推荐教师失败");
+                    String error = response.body().getError();
+                    if (error.equals("ok")) {
+                        if (response.body().getContent().size() == 0){
+//                            orderView.failOrder("无订单");
+//                            Log.e("aa", "获取推荐教师失败");
+                        }
+                            Log.e("aa", "获取推荐教师成功");
+                            list = response.body().getContent();
+                            orderView.successOrder(list);
+
+                    } else {
+                        orderView.failOrder("无订单");
+                        Log.e("aa", "获取推荐教师失败");
+                    }
                 }
             }
 
@@ -88,15 +97,24 @@ public class OrderPresenterImpl implements OrderPresenter {
         ModelFactory.getInstance().getOrderModelImpl().getNoFinishOrderData(new Callback<ContentModle>() {
             @Override
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
-                String error=response.body().getError();
-                if (error.equals("ok")){
-                    Log.e("aa","获取推荐教师成功");
-                    List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
-                    list=response.body().getContent();
+                List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+                if (response.body() == null){
                     orderView.successOrder(list);
                 }else {
-                    orderView.failOrder("获取推荐教师失败");
-                    Log.e("aa","获取推荐教师失败");
+                    String error = response.body().getError();
+                    if (error.equals("ok")) {
+                        if (response.body().getContent() .size() == 0 ){
+//                            orderView.failOrder("无订单");
+//                            Log.e("aa", "获取推荐教师失败");
+                        }
+                            Log.e("aa", "获取推荐教师成功");
+                            list = response.body().getContent();
+                            orderView.successOrder(list);
+
+                    } else {
+                        orderView.failOrder("无订单");
+                        Log.e("aa", "获取推荐教师失败");
+                    }
                 }
             }
 
@@ -112,15 +130,25 @@ public class OrderPresenterImpl implements OrderPresenter {
         ModelFactory.getInstance().getOrderModelImpl().getEvaluateOrderData(new Callback<ContentModle>() {
             @Override
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
-                String error=response.body().getError();
-                if (error.equals("ok")){
-                    Log.e("aa","获取推荐教师成功");
-                    List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
-                    list=response.body().getContent();
+                List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+                if (response.body() == null){
                     orderView.successOrder(list);
                 }else {
-                    orderView.failOrder("获取推荐教师失败");
-                    Log.e("aa","获取推荐教师失败");
+                    String error = response.body().getError();
+                    if (error.equals("ok")) {
+                        if (response.body().getContent() .size() == 0){
+//                            orderView.failOrder("无订单");
+//                            Log.e("aa", "获取推荐教师失败");
+                        }
+                            Log.e("aa", "获取推荐教师成功");
+                            list = response.body().getContent();
+                            orderView.successOrder(list);
+
+
+                    } else {
+                        orderView.failOrder("无订单");
+                        Log.e("aa", "获取推荐教师失败");
+                    }
                 }
             }
 

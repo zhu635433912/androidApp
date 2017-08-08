@@ -9,6 +9,7 @@ import com.deguan.xuelema.androidapp.init.Ordercontent_init;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
+import com.deguan.xuelema.androidapp.viewimpl.TuijianView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -123,7 +124,7 @@ public class Order implements Order_init {
      */
 
     @Override
-    public Map<String, Object> Establish_Order(int uid, int teacher_id, int requirement_id, float fee,int duration,int course_Id,int grade_Id,int service_type,String address,String province,String city,String district ,String desc   ) {
+    public Map<String, Object> Establish_Order(final TuijianView tuijianView, int uid, int teacher_id, final int requirement_id, float fee, int duration, int course_Id, int grade_Id, int service_type, String address, String province, String city, String district , String desc   ) {
         Call<Erre> call=oredr_http.setOredr(uid,teacher_id,requirement_id,fee,duration,course_Id,grade_Id,service_type,address,province,city,district,desc);
         call.enqueue(new Callback<Erre>() {
             @Override
@@ -131,13 +132,16 @@ public class Order implements Order_init {
                 String error=response.body().getError();
                 if (error.equals("ok")) {
                     Log.e("aa", "创建订单成功");
+                    tuijianView.failTuijian("ok");
                 }else {
+                    tuijianView.failTuijian("创建订单失败");
                     Log.e("aa", "创建订单失败"+response.body().getErrmsg());
                 }
             }
 
             @Override
             public void onFailure(Call<Erre> call, Throwable t) {
+                tuijianView.failTuijian("网络错误");
                 Log.e("aa", "创建订单异常错误");
             }
         });

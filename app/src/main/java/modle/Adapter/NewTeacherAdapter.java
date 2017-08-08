@@ -119,7 +119,7 @@ public class NewTeacherAdapter extends RecyclerView.Adapter<NewTeacherAdapter.Ne
         }else {
             holder.nianji.setText(" ");
         }
-        holder.haoping_numtext.setText(list.get(position).getClick()+" 好评: "+list.get(position).getHaoping_num());
+        holder.haoping_numtext.setText(list.get(position).getClick()+"人看过  好评: "+list.get(position).getHaoping_num());
 //        holder.haoping_numtext.setText("");
         double rank = Double.parseDouble(list.get(position).getOrder_rank());
         if (0 <= rank && rank <1.5){

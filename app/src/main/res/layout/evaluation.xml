@@ -72,11 +72,11 @@
         <RelativeLayout
             android:id="@+id/gerxxrelayout"
             android:layout_width="730px"
-            android:layout_height="1100px"
+            android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="34px"
-            android:background="@drawable/mask">
+            android:layout_marginTop="40px"
+            android:background="#ffffff">
 
             <TextView
 
@@ -90,14 +90,6 @@
                 android:text=""
                 android:textSize="35px" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/gerenjianjie"
-                android:layout_marginLeft="40px"
-                android:layout_toRightOf="@+id/gerenjianjie"
-                android:text="评价"
-                android:textSize="35px" />
 
             <TextView
                 android:id="@+id/xuqiufenggexian1"
@@ -112,15 +104,13 @@
                 android:layout_marginLeft="80px"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="36px"
-                android:layout_below="@+id/xuqiufenggexian1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
                 android:id="@+id/xinyuxinji"
-                android:layout_marginLeft="220px"
+                android:layout_marginLeft="280px"
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="36px"
-                android:layout_below="@+id/xuqiufenggexian1"
                 android:background="@drawable/five"
                 android:layout_width="220px"
                 android:layout_height="30px" />
@@ -137,15 +127,15 @@
                 android:text="效率评价"
                 android:layout_marginLeft="80px"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop="106px"
+                android:layout_marginTop="36px"
                 android:layout_below="@+id/xuqiufenggexian1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
                 android:id="@+id/xinyuxinji1"
-                android:layout_marginLeft="220px"
+                android:layout_marginLeft="280px"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop="106px"
+                android:layout_marginTop="40px"
                 android:layout_below="@+id/xuqiufenggexian1"
                 android:background="@drawable/five"
                 android:layout_width="220px"
@@ -163,15 +153,15 @@
                 android:text="服务态度"
                 android:layout_marginLeft="80px"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop="246px"
+                android:layout_marginTop="176px"
                 android:layout_below="@+id/xuqiufenggexian1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
                 android:id="@+id/xinyuxinji3"
-                android:layout_marginLeft="220px"
+                android:layout_marginLeft="280px"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop="246px"
+                android:layout_marginTop="180px"
                 android:layout_below="@+id/xuqiufenggexian1"
                 android:background="@drawable/five"
                 android:layout_width="220px"
@@ -189,15 +179,15 @@
                 android:text="教学质量"
                 android:layout_marginLeft="80px"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop="176px"
+                android:layout_marginTop="106px"
                 android:layout_below="@+id/xuqiufenggexian1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <ImageView
                 android:id="@+id/xinyuxinji2"
-                android:layout_marginLeft="220px"
+                android:layout_marginLeft="280px"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop="176px"
+                android:layout_marginTop="110px"
                 android:layout_below="@+id/xuqiufenggexian1"
                 android:background="@drawable/five"
                 android:layout_width="220px"
@@ -350,7 +340,7 @@
                 android:id="@+id/quanbupinglun"
                 android:layout_marginLeft="50px"
                 android:layout_alignParentLeft="true"
-                android:layout_marginTop="46px"
+                android:layout_marginTop="96px"
                 android:layout_below="@+id/wuxin4"
                 android:textColor="#f6bd47"
                 android:textSize="30px"
@@ -369,11 +359,10 @@
                 android:id="@+id/pinlun"
                 android:layout_below="@+id/xuqiufenggexian2"
                 android:layout_centerHorizontal="true"
-                android:layout_width="680px"
+                android:layout_width="700px"
                 android:layout_height="match_parent">
             </com.handmark.pulltorefresh.library.PullToRefreshListView>
         </RelativeLayout>
-
 
     </RelativeLayout>
 </RelativeLayout>

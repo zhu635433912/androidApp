@@ -582,10 +582,12 @@ public class StudentFragment extends BaseFragment implements Gaodehuidiao_init, 
             if (user_init != null) {
                 user_init.setlan_lng(id, User_id.getLat(), User_id.getLng());
                 user_init.User_Data(id, User_id.getLat() + "", User_id.getLng() + "", this);
+                user_init.setAddress(id,User_id.getProvince(),User_id.getCity(),User_id.getStatus());
             } else {
                 user_init = new User_Realization();
                 user_init.setlan_lng(id, User_id.getLat(), User_id.getLng());
                 user_init.User_Data(id, User_id.getLat() + "", User_id.getLng() + "", this);
+                user_init.setAddress(id,User_id.getProvince(),User_id.getCity(),User_id.getStatus());
             }
 
             EventBus.getDefault().post(map.get("address") + "", "status");
@@ -654,7 +656,7 @@ public class StudentFragment extends BaseFragment implements Gaodehuidiao_init, 
 //                entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
 
                 entity.setClick(maps.get(i).get("click")+"");
-                entity.setSignature((String) maps.get(i).get("signature"));
+                entity.setSignature((String) maps.get(i).get("resume"));
                 entity.setOrder_rank((String.valueOf(maps.get(i).get("order_rank"))));
                 entity.setUser_headimg((String) maps.get(i).get("user_headimg"));
                 entity.setUser_id((String) maps.get(i).get("user_id"));
@@ -695,14 +697,14 @@ public class StudentFragment extends BaseFragment implements Gaodehuidiao_init, 
             teachers.addAll(lists);
             isLoading = false;
             teacherAdapter.addAll(lists);
-            swipeRefreshLayout.setRefreshing(false);
-
         }
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void failTeacher(String msg) {
-        Toast.makeText(getActivity(), "网络错误", Toast.LENGTH_SHORT).show();
+        swipeRefreshLayout.setRefreshing(false);
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -723,7 +725,7 @@ public class StudentFragment extends BaseFragment implements Gaodehuidiao_init, 
 //                    intent.putExtra("user_id", uid);
                     intent.putExtra("head_image",entity.getUser_headimg());
                     intent.putExtra("user_id",entity.getUser_id());
-                    intent.putExtra("myid","1");
+                    intent.putExtra("myid","0");
                     startActivity(intent);
     }
 

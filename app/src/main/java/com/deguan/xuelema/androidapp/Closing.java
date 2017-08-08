@@ -103,6 +103,10 @@ public class Closing extends AutoLayoutActivity implements View.OnClickListener,
         cjiaolv.onRefreshComplete();
         if (page == 1) {
             list.clear();
+            if (data == null){
+                Toast.makeText(this, "暂无成交", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
         list.addAll(data);
         adapter.notifyDataSetChanged();
@@ -110,6 +114,7 @@ public class Closing extends AutoLayoutActivity implements View.OnClickListener,
 
     @Override
     public void failTurnover(String msg) {
+        cjiaolv.onRefreshComplete();
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

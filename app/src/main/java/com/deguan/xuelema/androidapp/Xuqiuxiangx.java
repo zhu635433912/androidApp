@@ -292,7 +292,8 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         Map<String,Object> map=listmap.get(0);
 
         if (map.get("tosa") .equals("创建订单成功")){
-            new Getdata().sendMessage("有老师接取了你的需求快去看看我的发布里吧!",username);
+            new Getdata().sendMessage("您的需求已被"+User_id.getNickName()+"接取",username);
+//            new Getdata().sendMessage("有老师接取了你的需求快去看看我的发布里吧!",username);
         }
         Toast.makeText(Xuqiuxiangx.this,(String)map.get("tosa"),Toast.LENGTH_SHORT).show();
 
@@ -359,7 +360,6 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
                                 public void onClick(DialogInterface dialog, int which) {
                                     Order_init order_init = new Order();
                                     order_init.CreateOrder(user_id, id, dindan, fee, course_id, grade_id, Xuqiuxiangx.this, User_id.getAddress(), User_id.getLat(), User_id.getLng());
-                                    new Getdata().sendMessage("您的需求已被"+User_id.getNickName()+"接取",username);
                                     Intent intent = NewMainActivity_.intent(Xuqiuxiangx.this).get();
                                     startActivity(intent);
                                 }
@@ -370,7 +370,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
                         }
                     }).show();
                 }else {
-                    Toast.makeText(this, "请完善信息等待审核通过", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请完善信息等待审核通过,并发布相应的课程才能接单哦", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -473,6 +473,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
 
     @Override
     public void failSimilarXuqiu(String msg) {
+        listview.onRefreshComplete();
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 

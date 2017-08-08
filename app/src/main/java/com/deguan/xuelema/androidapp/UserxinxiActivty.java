@@ -1,5 +1,6 @@
 package com.deguan.xuelema.androidapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -34,6 +37,7 @@ import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.deguan.xuelema.androidapp.viewimpl.Baseinit;
+import com.deguan.xuelema.androidapp.viewimpl.TuijianView;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
@@ -60,15 +64,17 @@ import modle.getdata.Getdata;
 import modle.toos.CircleImageView;
 import modle.user_ziliao.User_id;
 
+import static com.deguan.xuelema.androidapp.R.id.teacher_star;
+
 /**
  * 老师个人信息
  */
 
-public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetailed,View.OnClickListener,Baseinit {
+public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetailed,View.OnClickListener,Baseinit, TuijianView {
     private TextView Requiname;
     private TextView Requitext;
-    private TextView Teachergerjianjie;
-    private TextView pingjia;
+    private TextView Teachergerjianjie,gerxxjiaoxueanl,gerxxjinl;
+    private LinearLayout pingjia;
     private RelativeLayout grfanhui;
     private TextView gerxxxuexiquan;
     private RelativeLayout jiaoyi;
@@ -102,6 +108,19 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private ImageButton backImage;
     private TextView successTv;
     private String content = "";
+    private TextView signTv;
+    private String xueliUrl ;
+
+    private TextView diqu;
+    private TextView xinjijiaoshi;
+    private TextView jiaoling;
+    private TextView techaertec;
+    private TextView techaerxue;
+
+    private TextView starNumberTv;
+    private ImageView starImage;
+    private ImageView teacherCardImage;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,6 +128,12 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         setContentView(R.layout.jiaoyi);
         User_id.getInstance().addActivity(this);
 
+        gerxxjinl = (TextView) findViewById(R.id.gerxxjinl);
+        gerxxjiaoxueanl = (TextView) findViewById(R.id.gerxxjiaoxueanl);
+        teacherCardImage = (ImageView) findViewById(R.id.teacher_card_pic);
+        starNumberTv = (TextView) findViewById(R.id.teacher_star_number);
+        starImage = (ImageView) findViewById(teacher_star);
+        signTv = (TextView) findViewById(R.id.textView2);
         backImage = (ImageButton) findViewById(R.id.userxinxi_back);
         jubaoTv = (TextView) findViewById(R.id.jiaoyi_jubao);
         imageButton= (ImageButton) findViewById(R.id.imageButton);
@@ -117,7 +142,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         Requiname= (TextView) findViewById(R.id.gerxxname);
         Requitext= (TextView) findViewById(R.id.gerxxneirong);
         Teachergerjianjie= (TextView) findViewById(R.id.gerjianjie);
-        pingjia= (TextView) findViewById(R.id.pingjia);
+        pingjia= (LinearLayout) findViewById(R.id.teacher_eva);
         grfanhui= (RelativeLayout) findViewById(R.id.grfanhui);
         successTv = (TextView) findViewById(R.id.gerxxxuexiquana);
         gerxxxuexiquan= (TextView) findViewById(R.id.gerxxxuexiquan);
@@ -129,6 +154,12 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         jiaoyishuax= (AVLoadingIndicatorView) findViewById(R.id.jiaoyishuax);
         iamgeview= (ImageView) findViewById(R.id.curr_backe);
         gerxxTob= (RelativeLayout) findViewById(R.id.gerxxTob);
+        techaertec = (TextView) findViewById(R.id.techaertec);
+        xinjijiaoshi= (TextView) findViewById(R.id.xinjijiaoshi);
+        techaerxue= (TextView) findViewById(R.id.techaerxue);
+        jiaoling= (TextView) findViewById(R.id.jiaoling);
+        diqu= (TextView) findViewById(R.id.diqu);
+
 
         gerxxTob.bringToFront();
         jiaoyishuax.bringToFront();
@@ -136,6 +167,9 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         jiaoyi.bringToFront();
         grfanhui.bringToFront();
 
+        gerxxjinl.setOnClickListener(this);
+        gerxxjiaoxueanl.setOnClickListener(this);
+        teacherCardImage.setOnClickListener(this);
         gerxxtoux.setOnClickListener(this);
         successTv.setOnClickListener(this);
         jubaoTv.setOnClickListener(this);
@@ -147,11 +181,16 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         gerxxxuexiquan.setOnClickListener(this);
         grfanhui.setOnClickListener(this);
         backImage.setOnClickListener(this);
+        signTv.setOnClickListener(this);
         if (getIntent().getStringExtra("content")!=null) {
             content = getIntent().getStringExtra("content");
         }
         address = User_id.getAddress();
         myid = getIntent().getStringExtra("myid");
+        if (myid == null)
+        {
+            myid = "0";
+        }
         final String user_id=getIntent().getStringExtra("user_id");
 //        Log.e("aa","UserxinActivyt接收到老师id为"+user_id);
         int id=Integer.parseInt(User_id.getUid());
@@ -173,11 +212,13 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         Increase_course increaseCourse=new Increase_course();
         increaseCourse.selecouse(Requir_id,this,null);
 
-        showBuyPop();
+
 
         gerrxxedintext.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showBuyPop();
+                buyPopWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
                 Map<String, Object> map = new HashMap<String, Object>();
                 map = listmap.get(position);
                 String fee= (String) map.get("visit_fee");
@@ -202,7 +243,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
 
                 int unvisit_fee=Integer.parseInt(fee1);
                 int visit_fee=Integer.parseInt(fee);
-                buyPopWindow.showAtLocation(imageButton2, Gravity.BOTTOM,0,0);
+//                buyPopWindow.showAtLocation(imageButton2, Gravity.BOTTOM,0,0);
 
             }
         });
@@ -250,10 +291,17 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         int height = wm.getDefaultDisplay().getHeight();
         int width = wm.getDefaultDisplay().getWidth();
-        buyPopWindow.setWidth(width);
+        buyPopWindow.setWidth(width/10*9);
         buyPopWindow.setHeight(height/5*2);
         buyPopWindow.setBackgroundDrawable(new BitmapDrawable());
+        backgroundAlpha(this, 0.5f);//0.0-1.0  ;
         buyPopWindow.setOutsideTouchable(true);
+        buyPopWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(UserxinxiActivty.this, 1f);
+            }
+        });
         servicetype = 2;
 
         studentShangmen.setOnClickListener(new View.OnClickListener() {
@@ -292,7 +340,9 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         jian.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                courseNumber --;
+                if (courseNumber > 1){
+                    courseNumber --;
+                }
                 keshi.setText(courseNumber+"");
                 zongfee.setText(coursefee*courseNumber+"元");
             }
@@ -310,26 +360,35 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                                 Order_init order_init=new Order();
                                 //创建订单
                                 if (!TextUtils.isEmpty(descEdit.getText())) {
-                                    order_init.Establish_Order(uid, teacherId, Integer.parseInt(myid), coursefee, courseNumber, Integer.parseInt(courseId), Integer.parseInt(gradeId), servicetype,
+                                    order_init.Establish_Order(UserxinxiActivty.this,uid, teacherId, Integer.parseInt(myid), coursefee, courseNumber, Integer.parseInt(courseId), Integer.parseInt(gradeId), servicetype,
                                             User_id.getAddress(), User_id.getProvince(), User_id.getCity(), User_id.getStatus(),descEdit.getText().toString() );
                                 }else {
-                                    order_init.Establish_Order(uid, teacherId, Integer.parseInt(myid), coursefee, courseNumber, Integer.parseInt(courseId), Integer.parseInt(gradeId), servicetype,
+                                    order_init.Establish_Order(UserxinxiActivty.this,uid, teacherId, Integer.parseInt(myid), coursefee, courseNumber, Integer.parseInt(courseId), Integer.parseInt(gradeId), servicetype,
                                             User_id.getAddress(), User_id.getProvince(), User_id.getCity(), User_id.getStatus(),"" );
                                 }
-                                Toast.makeText(UserxinxiActivty.this,"购买课程成功",Toast.LENGTH_SHORT).show();
-                                new Getdata().sendMessage("有人购买了你的课程哦,快去看看吧",mobile);
-                                Intent intent=new Intent(UserxinxiActivty.this,MyOrderActivity.class);
-                                startActivity(intent);
+
                             }
                         }).setNegativeButton("否", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(UserxinxiActivty.this,"在看看别的老师吧~",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserxinxiActivty.this,"再看看别的老师吧~",Toast.LENGTH_SHORT).show();
                     }
                 }).show();
             }
         });
 
+    }
+
+    /**
+     * 设置添加屏幕的背景透明度
+     *
+     * @param bgAlpha
+     */
+    public void backgroundAlpha(Activity context, float bgAlpha) {
+        WindowManager.LayoutParams lp = context.getWindow().getAttributes();
+        lp.alpha = bgAlpha;
+        context.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        context.getWindow().setAttributes(lp);
     }
 
     //更新教师详细资料
@@ -339,8 +398,9 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         String nickname = (String) map.get("nickname");
         String resume = (String) map.get("resume");
         username = (String) map.get("username");
-
+        signTv.setText(map.get("signature")+"");
         address = map.get("address")+"";
+        diqu.setText(address);
             mobile= (String) map.get("mobile");
             String order_finish= (String) map.get("order_finish");
             String order_working= (String) map.get("order_working");
@@ -349,10 +409,31 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         dindan.setText(order_finish);
         Requitext.setText(resume);
         Requiname.setText(nickname);
-
+        if (map.get("years") != null)
+            jiaoling.setText(map.get("years")+"年");
+        if (map.get("graduated_school") != null)
+            techaerxue.setText(map.get("graduated_school")+"");
+        techaertec.setText(map.get("speciality")+"");
 //        Log.e("aa","头像地址为"+map.get("user_headimg").toString());
 //        setbitmap(map.get("user_headimg").toString());
+        starNumberTv.setText(map.get("order_rank").toString());
+        double orderrank = Double.parseDouble(map.get("order_rank")+"");
+        if (orderrank<1.5){
+            starImage.setImageResource(R.drawable.one);
+        }else if (orderrank >= 1.5 && orderrank <2.5){
+            starImage.setImageResource(R.drawable.two);
+        }else if (orderrank >= 2.5 && orderrank <3.5){
+            starImage.setImageResource(R.drawable.three);
+        }else if (orderrank >= 3.5 && orderrank <4.5){
+            starImage.setImageResource(R.drawable.four);
+        }else if (orderrank >= 4.5 ){
+            starImage.setImageResource(R.drawable.five);
+        }
 
+        if (map.get("others_1")!=null) {
+            xueliUrl = map.get("others_1").toString() + "";
+            Glide.with(this).load(xueliUrl).into(teacherCardImage);
+        }
     }
 
     //更新listview
@@ -365,9 +446,25 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
 
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.gerxxjinl:
+                Toast.makeText(this, "暂无", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.gerxxjiaoxueanl:
+                Toast.makeText(this, "暂无", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.teacher_card_pic:
+
+//                if (xueliUrl != null) {
+//                    Intent intent = new Intent(UserxinxiActivty.this, PictureZoo.class);
+//                    intent.putExtra("hide",xueliUrl);
+//                    startActivity(intent);
+//                }
+
+                break;
             case R.id.gerxxtoux:
                 if (userHeadUrl != null) {
                     Intent intent2 = new Intent(UserxinxiActivty.this, PictureZoo.class);
@@ -398,14 +495,14 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 intent.putExtra("Requir_id",Requir_id+"");
                 startActivity(intent);
                 break;
-            case R.id.gerjianjie:
-                //跳转个人简介
-                Intent i = new Intent(UserxinxiActivty.this, Teacher_personal.class);
-                i.putExtra("teacher_id", Requir_id + "");
-                i.putExtra("teacher_image",userHeadUrl);
-                startActivity(i);
-                break;
-            case R.id.pingjia:
+//            case R.id.gerjianjie:
+//                //跳转个人简介
+//                Intent i = new Intent(UserxinxiActivty.this, Teacher_personal.class);
+//                i.putExtra("teacher_id", Requir_id + "");
+//                i.putExtra("teacher_image",userHeadUrl);
+//                startActivity(i);
+//                break;
+            case R.id.teacher_eva:
                 //评价
                 Intent pj = new Intent(UserxinxiActivty.this, Teacher_evaluate.class);
                 pj.putExtra("teacher_id", Requir_id + "");
@@ -471,5 +568,23 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     @Override
     public void upcontent(Map<String,Object> map) {
         gerxxxuexiquan.setText((int)(Double.parseDouble(map.get("comp_rate")+"")*100)+"%");
+    }
+
+    @Override
+    public void successTuijian(List<Map<String, Object>> maps) {
+
+    }
+
+    @Override
+    public void failTuijian(String msg) {
+        if (msg.equals("ok")){
+            Toast.makeText(UserxinxiActivty.this,"购买课程成功",Toast.LENGTH_SHORT).show();
+            new Getdata().sendMessage("有人购买了你的课程哦,快去看看吧",mobile);
+            Intent intent=new Intent(UserxinxiActivty.this,MyOrderActivity.class);
+            startActivity(intent);
+            finish();
+        }else {
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        }
     }
 }

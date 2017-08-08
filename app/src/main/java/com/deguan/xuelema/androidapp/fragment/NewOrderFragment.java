@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modle.Adapter.HomeTitleAdapter;
+import modle.user_ziliao.User_id;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,6 +33,7 @@ public class NewOrderFragment extends BaseFragment {
     private List<Fragment> fragments = new ArrayList<>();
 
     public void initData() {
+
         titles.add("未完成");
         titles.add("进行中");
         titles.add("待评价");
@@ -44,7 +46,7 @@ public class NewOrderFragment extends BaseFragment {
         viewPager.setAdapter(adapter);
         tableLayout.setupWithViewPager(viewPager);
         tableLayout.setTabMode(TabLayout.MODE_FIXED);
-//        viewPager.setOffscreenPageLimit(0);
+        viewPager.setOffscreenPageLimit(0);
     }
 
 }

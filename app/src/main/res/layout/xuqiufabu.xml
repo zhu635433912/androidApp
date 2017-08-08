@@ -405,7 +405,7 @@
             android:id="@+id/weizhitubiao"
             android:gravity="center"
             style="@style/text_flag_01"
-            android:text="不限" />
+            android:text="选择" />
 
 
             <EditText

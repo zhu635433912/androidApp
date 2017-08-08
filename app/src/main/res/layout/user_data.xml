@@ -294,7 +294,7 @@
             android:layout_height="100px" />
     </RelativeLayout>
         <RelativeLayout
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/xuelie_rl"
             android:layout_below="@+id/fuwuleia"
             android:layout_width="match_parent"
@@ -317,6 +317,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px" />
             <TextView
+
                 android:gravity="end|center"
                 android:id="@+id/xueli_text"
                 android:textColor="#1e1e1e"

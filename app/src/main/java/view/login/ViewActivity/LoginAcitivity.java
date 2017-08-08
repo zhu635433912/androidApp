@@ -228,6 +228,9 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
 
         if (rememberBtn.isChecked()){
             rememberPssword();
+        }else {
+            SharedPreferences userxml=getSharedPreferences("userxml",MODE_PRIVATE);
+            userxml.edit().remove("username").remove("password").commit();
         }
         SharedPreferencesUtils.setParam(this, APPConfig.USRE_PHONE,getusername());
             SharedPreferences sp = getSharedPreferences("userstate", Context.MODE_PRIVATE);
@@ -249,6 +252,7 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
         // reset current user name before login
         DemoHelper.getInstance().setCurrentUserName(map.get("username")+"");
         final String name = map.get("username")+"";
+        User_id.setUsername(name);
         final long start = System.currentTimeMillis();
         // call login method
 //        Log.d(TAG, "EMClient.getInstance().login");

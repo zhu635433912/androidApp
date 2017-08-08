@@ -7,6 +7,7 @@ import com.deguan.xuelema.androidapp.init.Ordercontent_init;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
+import com.deguan.xuelema.androidapp.viewimpl.TuijianView;
 
 import java.util.Map;
 
@@ -39,7 +40,7 @@ public interface Order_init {
      * requirement_id   需求id
      * fee              金额
      */
-    public Map<String,Object> Establish_Order(int uid,int teacher_id,int requirement_id,float fee,int duration,int course_Id,int grade_id,int service_type,String address,String province,String city,String district,String desc);
+    public Map<String,Object> Establish_Order(TuijianView tuijianView,int uid, int teacher_id, int requirement_id, float fee, int duration, int course_Id, int grade_id, int service_type, String address, String province, String city, String district, String desc);
     /**
      * 删除订单
      * uid      用户id

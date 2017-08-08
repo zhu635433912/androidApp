@@ -19,12 +19,13 @@
     android:layout_height="70px" />
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/denglulogo"
+
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             app:indicator="BallBeat"
-            app:indicator_color="#f7e61c"
-            android:layout_height="50px"
-            android:layout_width="150px" />
+            app:indicator_color="#000000"
+            android:layout_height="0px"
+            android:layout_width="0px" />
     <TextView
         android:textColor="#d43414"
         android:textSize="30px"
@@ -102,7 +103,7 @@
             android:id="@+id/wan_password"
             android:textColor="@color/login_zitiyanse"
             android:textSize="40px"
-            android:hint=" *********"
+            android:hint="  密码"
             android:background="@drawable/login_wan_connllat"
             android:layout_marginTop="24px"
             android:layout_below="@+id/wan_username"

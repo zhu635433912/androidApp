@@ -80,7 +80,7 @@ public class S_wan_login implements Modle_wan_login {
     }
     //注册,修改
     @Override
-    public void Userregistration(String category, String username, String passowrd,String ftype,String yqm,String payPsd) {
+    public void Userregistration(String category, String username, String passowrd,String ftype,String yqm) {
         String url;
         if (!category.equals("z")){
             if (category.equals("学生")){
@@ -99,7 +99,7 @@ public class S_wan_login implements Modle_wan_login {
         }
         this.username=username;
         this.password=passowrd;
-       new Myregister().execute(url,ftype,yqm,payPsd);
+       new Myregister().execute(url,ftype,yqm);
     }
 
 
@@ -297,7 +297,7 @@ public class S_wan_login implements Modle_wan_login {
                 jsonb.put("username",username);
                 jsonb.put("password",password);
                 jsonb.put("inv_code",params[2]);
-                jsonb.put("pay_password",params[3]);
+//                jsonb.put("pay_password",params[3]);
                 url=new URL(params[0]);
                 httpconn= (HttpURLConnection) url.openConnection();
                 httpconn.setRequestMethod("POST");
@@ -321,17 +321,26 @@ public class S_wan_login implements Modle_wan_login {
                     //注册环信账号
                     //注册失败会抛出HyphenateException
                     if (i == 1) {
-                        EMClient.getInstance().createAccount(username,
-//                            password
-                                "123456"
-                        );//同步方法
-                        Log.e("aa", "环信注册成功");
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    EMClient.getInstance().createAccount(username,
+    //                            password
+                                            "123456"
+                                    );//同步方法
+                                } catch (HyphenateException e) {
+                                    e.printStackTrace();
+                                }
+                                Log.e("aa", "环信注册成功");
+                            }
+                        }).start();
+
                     }
+                    User_id.setUsername(username);
                     User_id.setPassword(password);
                     user_id=jsono.getInt("user_id");
                     Log.e("aa","用户id为"+user_id);
-
-
 
                     retrofit=new Retrofit.Builder().baseUrl(MyUrl.URL)
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
@@ -375,8 +384,6 @@ public class S_wan_login implements Modle_wan_login {
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
-                e.printStackTrace();
-            } catch (HyphenateException e) {
                 e.printStackTrace();
             }
 

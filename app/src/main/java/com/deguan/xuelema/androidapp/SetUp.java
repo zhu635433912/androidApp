@@ -106,8 +106,8 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
                                 mHandler.sendMessage(mHandler.obtainMessage(MSG_SET_ALIAS, ""));
                                 //清空数据登录状态数据
                                 //从xml里取保存的账号
-                                SharedPreferences userxml=getSharedPreferences("userxml",MODE_PRIVATE);
-                                userxml.edit().remove("username").remove("password").commit();
+//                                SharedPreferences userxml=getSharedPreferences("userxml",MODE_PRIVATE);
+//                                userxml.edit().remove("username").remove("password").commit();
                                 SharedPreferences settings = getSharedPreferences("userstate", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.remove("id");

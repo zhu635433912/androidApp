@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import com.deguan.xuelema.androidapp.NewMainActivity_;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.utils.PermissUtil;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.ArrayList;
@@ -133,6 +135,14 @@ public class SplashActivity extends AutoLayoutActivity implements View.OnClickLi
                 User_id.setPassword(password);
                 User_id.setUsername(username);
                 User_id.setNickName(nickname);
+                try {
+                    EMClient.getInstance().createAccount(username,
+                            //                            password
+                            "123456"
+                    );//同步方法
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                }
                 startActivity(intent);
                 this.finish();
             }

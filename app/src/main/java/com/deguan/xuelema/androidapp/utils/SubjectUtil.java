@@ -61,7 +61,6 @@ public class SubjectUtil {
             list.add(new SubjectEntity("327" , "文综"));
             list.add(new SubjectEntity("328" , "理综"));
 
-            list.add(new SubjectEntity("238" , "书法美术"));
             list.add(new SubjectEntity("239" , "软笔书法"));
             list.add(new SubjectEntity("240" , "硬笔书法"));
             list.add(new SubjectEntity("241" , "篆刻"));
@@ -76,7 +75,6 @@ public class SubjectUtil {
 
 
 
-            list.add(new SubjectEntity("207" , "乐器"));
             list.add(new SubjectEntity("209" , "钢琴"));
             list.add(new SubjectEntity("225" , "吉他"));
             list.add(new SubjectEntity("226" , "架子鼓"));
@@ -106,7 +104,6 @@ public class SubjectUtil {
             list.add(new SubjectEntity("317" , "萧"));
             list.add(new SubjectEntity("318" , "竹笛"));
 
-            list.add(new SubjectEntity("231" , "体育运动"));
             list.add(new SubjectEntity("232" , "篮球"));
             list.add(new SubjectEntity("233" , "轮滑"));
             list.add(new SubjectEntity("234" , "羽毛球"));
@@ -122,7 +119,6 @@ public class SubjectUtil {
             list.add(new SubjectEntity("283" , "桌球"));
             list.add(new SubjectEntity("284" , "攀岩"));
 
-            list.add(new SubjectEntity("210" , "舞蹈"));
             list.add(new SubjectEntity("211" , "肚皮舞"));
             list.add(new SubjectEntity("235" , "街舞"));
             list.add(new SubjectEntity("236" , "爵士舞"));
@@ -135,7 +131,6 @@ public class SubjectUtil {
             list.add(new SubjectEntity("292" , "国际舞"));
             list.add(new SubjectEntity("273" , "瑜伽"));
 
-            list.add(new SubjectEntity("250" , "武术"));
             list.add(new SubjectEntity("255" , "跆拳道"));
             list.add(new SubjectEntity("257" , "空手道"));
             list.add(new SubjectEntity("258" , "太极"));
@@ -144,7 +139,6 @@ public class SubjectUtil {
             list.add(new SubjectEntity("261" , "咏春"));
             list.add(new SubjectEntity("262" , "柔道"));
 
-            list.add(new SubjectEntity("251" , "棋类"));
             list.add(new SubjectEntity("263" , "象棋"));
             list.add(new SubjectEntity("264" , "国际象棋"));
             list.add(new SubjectEntity("256" , "围棋"));
@@ -154,7 +148,6 @@ public class SubjectUtil {
             list.add(new SubjectEntity("254" , "拓展培训"));
 
 
-            list.add(new SubjectEntity("265" , "手工"));
             list.add(new SubjectEntity("266" , "沙画"));
             list.add(new SubjectEntity("267" , "航模"));
             list.add(new SubjectEntity("268" , "木艺"));
@@ -163,13 +156,11 @@ public class SubjectUtil {
             list.add(new SubjectEntity("271" , "茶艺"));
             list.add(new SubjectEntity("272" , "手工编织"));
 
-            list.add(new SubjectEntity("293" , "表演声乐"));
             list.add(new SubjectEntity("294" , "美声唱法"));
             list.add(new SubjectEntity("295" , "民族唱法"));
             list.add(new SubjectEntity("296" , "流行唱法"));
             list.add(new SubjectEntity("297" , "少儿声乐"));
 
-            list.add(new SubjectEntity("320" , "主持人"));
             list.add(new SubjectEntity("321" , "演讲"));
             list.add(new SubjectEntity("322" , "朗诵"));
             list.add(new SubjectEntity("323" , "快板"));

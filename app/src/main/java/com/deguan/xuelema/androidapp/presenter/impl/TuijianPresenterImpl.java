@@ -72,12 +72,15 @@ public class TuijianPresenterImpl implements TuijianPresenter {
             public void onResponse(Call<TuijianListEntity> call, Response<TuijianListEntity> response) {
                 String error=response.body().getError();
                 if (error.equals("ok")){
-                    Log.e("aa","获取推荐教师成功");
-                    List<Map<String,Object>> list=new ArrayList<Map<String, Object>>();
-                    list=response.body().getContent();
-                    tuijianView.successTuijian(list);
+                    if (response.body().getContent() .size() == 0){
+                        tuijianView.failTuijian("无推荐教师");
+                    }
+                        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+                        list = response.body().getContent();
+                        tuijianView.successTuijian(list);
+
                 }else {
-                    tuijianView.failTuijian("获取推荐教师失败");
+                    tuijianView.failTuijian("无推荐教师");
                     Log.e("aa","获取推荐教师失败");
                 }
             }

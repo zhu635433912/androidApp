@@ -103,7 +103,7 @@
                 android:layout_below="@+id/teachertoux"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30px"
-                android:text="孺子牛2017"
+                android:text=""
                 android:textSize="30px" />
 
             <TextView

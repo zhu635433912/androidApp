@@ -118,8 +118,10 @@
         android:layout_above="@id/main_line" />
     <ImageView
         android:id="@+id/main_back"
+        android:layout_marginLeft="10dp"
         android:src="@drawable/add19"
         android:layout_marginTop="10dp"
-        android:layout_width="25dp"
-        android:layout_height="25dp" />
+        android:padding="5dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
 </RelativeLayout>

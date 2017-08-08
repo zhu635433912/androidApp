@@ -34,6 +34,7 @@ import com.deguan.xuelema.androidapp.utils.SharedPreferencesUtils;
 import com.deguan.xuelema.androidapp.viewimpl.DownloadView;
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.hyphenate.exceptions.HyphenateException;
 import com.loveplusplus.update.UpdateChecker;
 
 import org.androidannotations.annotations.EActivity;
@@ -72,6 +73,7 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
     ImageView guideImage2;
     @ViewById(R.id.guide3)
     ImageView guideImage3;
+    private String myydy;
 
     @Override
     public void before() {
@@ -79,6 +81,9 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
         ids=User_id.getUid();
         roles=User_id.getRole();
         EventBus.getDefault().register(this);
+        SharedPreferences sp = getSharedPreferences("ydy", MODE_PRIVATE);
+        //判断记录是第一次就是"t",不是就是"1"
+        myydy = sp.getString("booled", "t");
     }
 
     @Override
@@ -94,6 +99,22 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
 //        drawableSearch.setBounds(0, 0, 60, 60);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
 //        radioButton2.setCompoundDrawables(null, drawableSearch, null, null);//只放上面
 //        radioButton2.setPadding(0,0,0,0);
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        EMClient.getInstance().createAccount(User_id.getUsername(),
+                                //                            password
+                                "123456"
+                        );//同步方法
+                    } catch (HyphenateException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+
+
 
 //jpush设置id
         setAlias("hly_"+ids);
@@ -125,22 +146,22 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
                 //需求发布
                 if (User_id.getRole().equals("1")){
                     Intent intent = new Intent(NewMainActivity.this, Xuqiufabu.class);
-//                    startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
                     startActivity(intent);
                 }else {
                     Intent intentTeacher = new Intent(NewMainActivity.this,Teacher_management.class);
                     startActivity(intentTeacher);
+//                    startActivity(TeacherManActivity_.intent(NewMainActivity.this).get());
                 }
             }
         });
 
         new Getdata().getmobieke(User_id.getUsername(),this);
-        SharedPreferences sp = getSharedPreferences("ydy", MODE_PRIVATE);
-        //判断记录是第一次就是"t",不是就是"1"
-        String myydy= sp.getString("booled", "t");
+
         if (myydy.equals("1")){
             getsj();
         }
+
+
     }
 
     private void getsj() {
@@ -178,6 +199,7 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
                 //第一次进入
                 ddite.putString("booled", "2");
                 ddite.commit();
+                myydy = "2";
             }
         });
     }

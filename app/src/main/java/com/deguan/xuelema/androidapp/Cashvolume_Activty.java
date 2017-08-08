@@ -74,7 +74,9 @@ public class Cashvolume_Activty extends AutoLayoutActivity implements PullToRefr
         listView.setMode(PullToRefreshBase.Mode.BOTH);
         listView.setOnRefreshListener(this);
         listView.setAdapter(adapter);
-
+        if (User_id.getRole().equals("1")) {
+            xinjinjuantixian.setVisibility(View.GONE);
+        }
         //获取用户余额
         uid = Integer.parseInt(User_id.getUid());
         getdata = new Getdata();
@@ -182,8 +184,13 @@ public class Cashvolume_Activty extends AutoLayoutActivity implements PullToRefr
     @Override
     public void successCashList(List<Map<String,Object>> map) {
         listView.onRefreshComplete();
+
         if (page == 1){
             list.clear();
+            if (map == null){
+                Toast.makeText(this, "无记录", Toast.LENGTH_SHORT).show();
+                return;
+            }
         }
         list.addAll(map);
         adapter.notifyDataSetChanged();
@@ -191,6 +198,7 @@ public class Cashvolume_Activty extends AutoLayoutActivity implements PullToRefr
 
     @Override
     public void failCashList() {
+        listView.onRefreshComplete();
         Toast.makeText(this, "获取现金券流水失败", Toast.LENGTH_SHORT).show();
     }
 

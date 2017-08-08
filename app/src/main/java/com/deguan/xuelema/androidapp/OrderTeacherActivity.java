@@ -1,6 +1,5 @@
 package com.deguan.xuelema.androidapp;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.Html;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,12 +64,15 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
     private PopupWindow changePopWindow;
     private Order_init order_init;
     private String telphone;
+    private double changeFee ;
+    private ImageView teacher_detail_tel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_teacher);
         User_id.getInstance().addActivity(this);
+        teacher_detail_tel = (ImageView) findViewById(R.id.teacher_detail_tel);
         headImage = (ImageView) findViewById(R.id.order_detail_headimg);
         telTv = (TextView) findViewById(R.id.dianhuahaoma);
         name = (TextView) findViewById(R.id.name);
@@ -161,7 +162,17 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
             }
         });
         initPopwindow();
-
+        teacher_detail_tel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //拨号
+//                Log.e("aa", "拨号成功");
+                Intent inte = new Intent(Intent.ACTION_DIAL);
+                inte.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                inte.setData(Uri.parse("tel:" + telTv.getText().toString()));
+                startActivity(inte);
+            }
+        });
     }
 
     private void initPopwindow() {
@@ -188,10 +199,15 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(changeMoney.getText())){
-                    double changeFee = (Double.parseDouble(changeMoney.getText().toString()));
-                    order_init.UpdateOrder_Amount(Integer.parseInt(User_id.getUid()),order_id,changeFee,OrderTeacherActivity.this);
-                    order_init.getOrder_danyilist(uid, order_id, OrderTeacherActivity.this);
-                    new Getdata().sendMessage(User_id.getNickName()+"已修改订单价格为"+changeFee,telphone);
+
+                    changeFee = (Double.parseDouble(changeMoney.getText().toString()));
+                    if (changeFee > 0) {
+                        order_init.UpdateOrder_Amount(Integer.parseInt(User_id.getUid()), order_id, changeFee, OrderTeacherActivity.this);
+                    }else {
+                        Toast.makeText(OrderTeacherActivity.this, "订单价格不能小于0", Toast.LENGTH_SHORT).show();
+                    }
+//                    order_init.getOrder_danyilist(uid, order_id, OrderTeacherActivity.this);
+
                 }else {
                     Toast.makeText(OrderTeacherActivity.this, "请输入修改价格", Toast.LENGTH_SHORT).show();
                 }
@@ -351,6 +367,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
                                     //创建订单
                                     order_init.Order_refund(uid,order_id,5,tolFee);
                                     new Getdata().sendMessage(User_id.getNickName()+"已同意退款",telphone);
+                                    finish();
                                     Toast.makeText(OrderTeacherActivity.this,"已确认退款",Toast.LENGTH_SHORT).show();
                                 }
                             }).setNegativeButton("拒绝退款", new DialogInterface.OnClickListener() {
@@ -419,8 +436,10 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
 
     @Override
     public void successOrder(String msg) {
+        new Getdata().sendMessage(User_id.getNickName()+"已修改订单价格为"+changeFee,telphone);
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         order_init.getOrder_danyilist(uid, order_id, this);
+        finish();
     }
 
     @Override

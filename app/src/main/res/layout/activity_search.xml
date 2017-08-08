@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <RelativeLayout
-            android:id="@+id/search_back"
-            android:layout_width="120px"
-            android:layout_height="80px">
-        </RelativeLayout>
+
         <ImageButton
             android:layout_marginLeft="30px"
             android:layout_marginTop="20px"
@@ -19,6 +16,11 @@
             android:background="@drawable/add19"
             android:layout_width="20px"
             android:layout_height="30px" />
+        <RelativeLayout
+            android:id="@+id/search_back"
+            android:layout_width="120px"
+            android:layout_height="80px">
+        </RelativeLayout>
         <TextView
             android:textSize="35px"
             android:layout_marginTop="20px"
@@ -46,7 +48,7 @@
         android:layout_width="80px"
         android:layout_marginRight="20px"
         android:layout_height="60px"
-        android:src="@drawable/search_icon" />
+        android:src="@drawable/sousuo" />
 
     <EditText
         android:background="@drawable/yuanjiao"
@@ -54,19 +56,27 @@
         android:textSize="25px"
         android:layout_marginLeft="30px"
         android:textColor="#c16767"
-        android:hint="输入你要查询的内容"
+        android:hint="输入你要查询的内容.科目,年级.名字.电话等"
         android:id="@+id/text_search"
         android:layout_width="580px"
         android:layout_height="80px"
         />
 
     </RelativeLayout>
-<ListView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/search_swipe"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="#e0eaf1"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+<android.support.v7.widget.RecyclerView
     android:divider="@null"
     android:id="@+id/searlist"
+    android:scrollbars="none"
+    app:layoutManager="LinearLayoutManager"
     android:layout_below="@+id/myrelayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"></ListView>
+    android:layout_height="match_parent"/>
 
-
+</android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

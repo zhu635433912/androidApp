@@ -98,7 +98,7 @@ public interface Teacher_init {
     /*
    获取对教师的评价接口
     */
-    public void setEvaluation_Teacher(int uid, Student_init student_init);
+    public void setEvaluation_Teacher(int uid, Student_init student_init,int page);
 
 
     //更新教师课程封面

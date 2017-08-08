@@ -79,7 +79,7 @@ public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapte
 
     @Override
     public MyPublishNewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.listview_itme, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.teacher_list_item, parent, false);
         view.setOnClickListener(this);
         view.setOnLongClickListener(this);
         return new MyPublishNewViewHolder(view);
@@ -146,9 +146,11 @@ public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapte
 
     @Override
     public void onClick(View v) {
-        if (listener != null) {
-            int position = recyclerView.getChildAdapterPosition(v);
-            listener.onTopClick(list.get(position));
+        if (list != null) {
+            if (listener != null) {
+                int position = recyclerView.getChildAdapterPosition(v);
+                listener.onTopClick(list.get(position));
+            }
         }
     }
 

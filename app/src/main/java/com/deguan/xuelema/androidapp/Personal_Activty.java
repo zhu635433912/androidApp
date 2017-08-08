@@ -106,6 +106,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     private File image;
     private RelativeLayout xueliRl;
     private TextView xueliTv;
+    private String idCard;
 
 
     @Override
@@ -483,7 +484,11 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
             xueliTv.setText(((String) map.get("idcard")).substring(0, 4) + "********");
         }
         if (!TextUtils.isEmpty(map.get("idcard")+"")){
+            idCard = map.get("idcard")+"";
             xueliRl.setVisibility(View.GONE);
+        }
+        if (TextUtils.isEmpty(idCard)){
+            xueliRl.setVisibility(View.VISIBLE);
         }
             setbitmap(map.get("headimg")+"");
     }
@@ -667,7 +672,6 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         image = File.createTempFile(imageFileName,  /* 文件名 */
                 ".jpg",         /* 后缀 */
                 storageDir      /* 路径 */
-
         );
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
@@ -804,7 +808,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         }
         return bm;
     }
-
+    private File fileCut;//裁切后图片
     /**
      * 裁剪图片方法实现
      *
@@ -812,15 +816,79 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     public void startPhotoZoom(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
+
+        String state=Environment.getExternalStorageState();
+        if (state.equals(Environment.MEDIA_MOUNTED))
+        {
+            String saveDir=Environment.getExternalStorageDirectory()+"/pmcylg1/";
+            Log.v("zms", "裁切后临时路径:"+saveDir);
+
+            try {
+                File dir=new File(saveDir);
+                if (!dir.exists())
+                {
+                    Log.v("zms", "新建目录:"+saveDir);
+                    dir.mkdir();
+                    dir.setReadable(true);
+                    dir.setWritable(true);
+                }
+                fileCut=new File(saveDir+"temp.jpg");
+                if (fileCut.exists())
+                {
+                    try {
+                        Log.v("zms", "删除文件:"+fileCut.getAbsolutePath());
+                        fileCut.delete();
+                    } catch (Exception e) {
+                        Log.v("zms", "删除文件失败");
+                        e.printStackTrace();
+                    }
+                }
+                if (!fileCut.exists())
+                {
+                    try {
+                        Log.v("zms", "创建文件:"+fileCut.getAbsolutePath());
+                        fileCut.createNewFile();
+                        fileCut.setReadable(true);
+                        fileCut.setWritable(true);
+                    } catch (IOException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                        Log.v("zms", e.toString()+e.getMessage());
+                        Toast.makeText(this, "文件创建失败", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                }
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                Toast.makeText(this, "文件操作失败", Toast.LENGTH_LONG).show();
+            }
+        }else {
+            Toast.makeText(this, "存储卡不存在", Toast.LENGTH_LONG).show();
+        }
+
+
+
         // 设置裁剪
         intent.putExtra("crop", true);
+
+        //后加
+        intent.putExtra("scale", true);// 保存比例
+        intent.putExtra("scaleUpIfNeeded", true);// 去黑边
+
+
         // aspectX aspectY 是宽高的比例
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
         // outputX outputY 是裁剪图片宽高
         intent.putExtra("outputX", 300);
         intent.putExtra("outputY", 300);
-        intent.putExtra("return-data", true);
+
+        //后加
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+
+//        后改false
+        intent.putExtra("return-data", false);//设置为不返回数据，true返回bitMap
         intent.putExtra("noFaceDetection", true);
         startActivityForResult(intent,REQUESTCODE_CUTTING);
     }

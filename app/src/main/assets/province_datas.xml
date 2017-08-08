@@ -1622,14 +1622,11 @@
             <District Name='泰和县' Lon='114.88' Lat='26.8'/>
             <District Name='遂川县' Lon='114.52' Lat='26.33'/>
             <District Name='万安县' Lon='114.78' Lat='26.47'/>
-        </City>
-        <City Name='吉安???' >
-            <District Name='安福县' Lon='114.62' Lat='27.38'/>
-        </City>
-        <City Name='吉安市' >
             <District Name='永新县' Lon='114.23' Lat='26.95'/>
             <District Name='井冈山市' Lon='114.27' Lat='26.72'/>
+            <District Name='安福县' Lon='114.62' Lat='27.38'/>
         </City>
+
         <City Name='宜春市' >
             <District Name='宜春市' Lon='114.38' Lat='27.8'/>
             <District Name='袁州区' Lon='114.38' Lat='27.8'/>

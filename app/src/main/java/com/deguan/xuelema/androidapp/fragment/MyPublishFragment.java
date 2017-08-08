@@ -135,6 +135,7 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
                 entity.setPublisher_id((String) maps.get(i).get("publisher_id"));
                 entity.setPublisher_name((String) maps.get(i).get("publisher_name"));
                 entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
+                entity.setService_type(maps.get(i).get("service_type")+"");
                 entity.setCourse_name((String) maps.get(i).get("course_name"));
                 entity.setContent((String) maps.get(i).get("content"));
                 entity.setCreated((String) maps.get(i).get("created"));
@@ -143,6 +144,7 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
                 entity.setDistance((String) maps.get(i).get("distance"));
                 entity.setFee(String.valueOf(maps.get(i).get("fee")));
                 entity.setGrade_name((String) maps.get(i).get("grade_name"));
+                
                 if ((maps.get(i).get("status")).equals("1")) {
                     continue;
                 }
@@ -158,6 +160,7 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
 
     @Override
     public void failMyPublish(String msg) {
+        swipeRefreshLayout.setRefreshing(false);
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 

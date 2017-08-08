@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -29,6 +31,8 @@ import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zhy.autolayout.AutoLayoutActivity;
+
+import org.simple.eventbus.EventBus;
 
 import java.util.List;
 import java.util.Map;
@@ -58,6 +62,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout);
+        EventBus.getDefault().register(this);
         User_id.getInstance().addActivity(this);
 
         myPushTv = (TextView) findViewById(R.id.wodetuiguang);
@@ -115,6 +120,23 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         cashPopwindow.setWidth(width);
         cashPopwindow.setHeight(height/2);
         cashPopwindow.setOutsideTouchable(true);
+        cashFee.addTextChangedListener(new TextWatcher()
+        {
+            public void afterTextChanged(Editable edt)
+            {
+                String temp = edt.toString();
+                int posDot = temp.indexOf(".");
+                if (posDot <= 0) return;
+                if (temp.length() - posDot - 1 > 2)
+                {
+                    edt.delete(posDot + 3, posDot + 4);
+                }
+            }
+
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
+
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
+        });
         cashBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,6 +153,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
                         getdata.getCash(Integer.parseInt(User_id.getUid()), cashNmae.getText().toString(),
                                 cashId.getText().toString(), cashFlag, Float.parseFloat(cashFee.getText().toString()), FeeqianbaoActivty.this);
                         cashFee.setText("");
+                        Toast.makeText(FeeqianbaoActivty.this, "已提交提现申请", Toast.LENGTH_SHORT).show();
                         cashPopwindow.dismiss();
                     }
                 }else {
@@ -196,6 +219,23 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
                     Toast.makeText(FeeqianbaoActivty.this, "请输入充值金额", Toast.LENGTH_SHORT).show();
                 }
             }
+        });
+        rechargeFee.addTextChangedListener(new TextWatcher()
+        {
+            public void afterTextChanged(Editable edt)
+            {
+                String temp = edt.toString();
+                int posDot = temp.indexOf(".");
+                if (posDot <= 0) return;
+                if (temp.length() - posDot - 1 > 2)
+                {
+                    edt.delete(posDot + 3, posDot + 4);
+                }
+            }
+
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
+
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
         });
         wechatRl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -267,6 +307,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
             switch (resultStatus){
                 case "9000":
                     Toast.makeText(FeeqianbaoActivty.this,"订单支付成功",Toast.LENGTH_SHORT).show();
+                    getdata.getFee(uid,FeeqianbaoActivty.this);
                     break;
                 case "8000":
                     Toast.makeText(FeeqianbaoActivty.this,"正在处理中，支付结果未知（有可能已经支付成功）!",Toast.LENGTH_SHORT).show();
@@ -309,6 +350,8 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
             payReq.sign = map.get("sign").toString();
 //            Log.d("aa",payReq.appId+"----"+payReq.partnerId+"----"+payReq.nonceStr+"----"+payReq.packageValue+"----"+payReq.prepayId+"----"+payReq.sign+"----");
             iwxapi.sendReq(payReq);
+            EventBus.getDefault().post(1,"recharge");
+            rechargePopwindow.dismiss();
             flag = 0;
         }else if (flag == 2){
             //获取去服务器返回的支付宝订单信息再去唤起支付宝
@@ -337,15 +380,14 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
             Thread payThread = new Thread(payRunnable);
             payThread.start();
             flag = 0;
+            rechargePopwindow.dismiss();
         }else {
             if (map.get("fee") != null) {
                 myBalance = (double) map.get("fee");
                 yuer.setText("¥" + myBalance);
             }
 
-            if (map.get("TotalFee") == null) {
-                mingofee.setText("0");
-            } else {
+            if (map.get("TotalFee") != null) {
                 String minfee = (String) map.get("TotalFee");
                 mingofee.setText(minfee);
             }
@@ -362,7 +404,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         if (cashFlag == 2) {
             Toast.makeText(this, "已提交提现申请,我方将会申请加微信好友,请通过", Toast.LENGTH_SHORT).show();
         }else {
-
+            Toast.makeText(this, "提现将在3个工作日之内到账,请注意查收", Toast.LENGTH_SHORT).show();
         }
         cashPopwindow.dismiss();
         getdata.getFee(uid,this);
@@ -413,5 +455,12 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
             }
         }
         return false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().register(this);
+
     }
 }

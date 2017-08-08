@@ -14,11 +14,11 @@ import java.util.HashMap;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
 import modle.user_ziliao.User_id;
 import okhttp3.internal.Util;
+import onekeyshare.OnekeyShare;
 
 /**
  * 第三方分享工具类
@@ -42,30 +42,25 @@ public class ShareUtil {
     }
 
     public void share(Context context){
-        ShareSDK.initSDK(context);
         OnekeyShare onekeyShare = new OnekeyShare();
         //关闭sso授权
         onekeyShare.disableSSOWhenAuthorize();
-        // 分享时Notification的图标和文字  2.5.9以后的版本不     调用此方法
-        //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
-        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
         onekeyShare.setTitle("学了吗");
-//        onekeyShare.setTitle("邀请码: "+User_id.getUsername());
-//        onekeyShare.setText("邀请码: "+User_id.getUsername());
-        onekeyShare.setText("精英领航 沉梦飞翔");
-        // imagePath是图片的本地路径：除Linked-In以外的平台都支持此参数
-        //oks.setImagePath(Environment.getExternalStorageDirectory() + "/meinv.jpg");//确保SDcard下面存在此张图片
+        onekeyShare.setText("精英领航 筑梦飞翔");
 
         //网络图片的url：所有平台
-        onekeyShare.setImageUrl("http://img.xiumi.us/xmi/ua/14iWN/i/d89eb61c05946f1b84710fc2b86b7fd6-sz_80016.png?x-oss-process=style/xm" );//网络图片rul
-
+//        onekeyShare.setImageUrl("http://deguanjiaoyu.com/Public\\static\\register1\\image\\title1.png" );//网络图片rul
+//
+//        onekeyShare.setImagePath("http://deguanjiaoyu.com/Public\\static\\register1\\image\\title1.png");//确保SDcard下面存在此张图片
+//        onekeyShare.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+        onekeyShare.setImageUrl("http://f1.sdk.mob.com/web/images/e79/bd1/6359340c97e8819de16ab2fde6.png");
         // url：仅在微信（包括好友和朋友圈）中使用
         onekeyShare.setUrl("http://deguanjiaoyu.com/index.php?s=/Home/users/index/tel/"+User_id.getUsername());   //网友点进链接后，可以看到分享的详情
-//        onekeyShare.setUrl("http://www.baidu.com/");
+//        onekeyShare.setUrl("http://sharesdk.cn");
         // Url：仅在QQ空间使用
+//        onekeyShare.setTitleUrl("http://sharesdk.cn");
+
         onekeyShare.setTitleUrl("http://deguanjiaoyu.com/index.php?s=/Home/users/index/tel/"+User_id.getUsername());  //网友点进链接后，可以看到分享的详情
-//        onekeyShare.set
-        // 启动分享GUI
         onekeyShare.show(context);
     }
     public void shareXinlang(Context context){

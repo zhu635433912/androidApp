@@ -2,10 +2,11 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <RelativeLayout
         android:id="@+id/feehost"
-        android:background="#fdfdfe"
+        android:background="#f7f7fa"
         android:layout_width="match_parent"
         android:layout_height="100px">
         <RelativeLayout
@@ -38,19 +39,10 @@
         android:layout_below="@+id/feehost"
         android:layout_width="match_parent"
         android:layout_height="1px"/>
-    <TextView
-        android:id="@+id/my_bill"
-        android:text="我的账单"
-        android:layout_marginTop="10px"
-        android:textSize="45px"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="40px"
-        android:layout_below="@+id/feehost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+
     <ImageView
         android:id="@+id/feeimagv"
-        android:layout_marginTop="108px"
+        android:layout_marginTop="88px"
         android:layout_below="@+id/feehost"
         android:layout_centerHorizontal="true"
         android:background="@drawable/hly17"
@@ -62,10 +54,10 @@
     android:layout_below="@+id/feeimagv"
     android:layout_centerVertical="true"
     android:layout_width="match_parent"
-    android:layout_height="503px">
+    android:layout_height="400px">
     <LinearLayout
         android:id="@+id/feefenggexian"
-        android:layout_marginTop="200px"
+        android:layout_marginTop="100px"
         android:background="#9eebda"
         android:layout_width="match_parent"
         android:layout_height="1px"
@@ -86,13 +78,22 @@
         android:id="@+id/yuer"
         android:layout_alignBottom="@+id/feefenggexian"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="40px"
+        android:layout_marginRight="50px"
         android:layout_marginBottom="24px"
         android:textSize="40px"
         android:textColor="#808080"
         android:text="¥0.00"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_alignBottom="@+id/feefenggexian"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="0px"
+        android:layout_marginBottom="30px"
+        android:src="@drawable/fanxinjiantou"
+        android:layout_width="0px"
+        android:layout_height="0px" />
+
     <LinearLayout
         android:id="@+id/feefenggexian1"
         android:layout_marginTop="100px"
@@ -111,6 +112,14 @@
         android:layout_alignBottom="@+id/feefenggexian1"
         android:layout_alignLeft="@+id/textView3"
         android:id="@+id/textView4" />
+    <ImageView
+        android:layout_alignBottom="@+id/feefenggexian1"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="0px"
+        android:layout_marginBottom="30px"
+        android:src="@drawable/fanxinjiantou"
+        android:layout_width="50px"
+        android:layout_height="50px" />
     <LinearLayout
         android:id="@+id/feefenggexian2"
         android:layout_marginTop="100px"
@@ -128,6 +137,14 @@
         android:textSize="40px"
         android:layout_width="match_parent"
         android:layout_height="100px" />
+    <ImageView
+        android:layout_alignBottom="@+id/feefenggexian2"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="0px"
+        android:layout_marginBottom="30px"
+        android:src="@drawable/fanxinjiantou"
+        android:layout_width="50px"
+        android:layout_height="50px" />
     <TextView
         android:paddingTop="25px"
         android:id="@+id/xianjinjuan"
@@ -137,6 +154,14 @@
         android:textSize="40px"
         android:layout_width="match_parent"
         android:layout_height="100px" />
+    <ImageView
+        android:layout_alignBottom="@+id/xianjinjuan"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="0px"
+        android:layout_marginBottom="30px"
+        android:src="@drawable/fanxinjiantou"
+        android:layout_width="50px"
+        android:layout_height="50px" />
     <LinearLayout
         android:id="@+id/feefenggexian3"
         android:background="#9eebda"
@@ -173,4 +198,40 @@
         android:text="我的推广"
         android:layout_width="match_parent"
         android:layout_height="80px" />
+    <ImageView
+        android:layout_below="@+id/feefenggexian4"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="0px"
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="20px"
+        android:src="@drawable/fanxinjiantou"
+        android:layout_width="50px"
+        android:layout_height="50px" />
+    <LinearLayout
+        android:id="@+id/feefenggexian5"
+        android:background="#9eebda"
+        android:layout_marginTop="20px"
+        android:layout_below="@+id/wodetuiguang"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:orientation="horizontal" />
+    <TextView
+        android:layout_marginLeft="40px"
+        android:id="@+id/my_bill"
+        android:text="我的账单"
+        android:layout_marginTop="20px"
+        android:textSize="40px"
+        android:layout_marginRight="40px"
+        android:layout_below="@+id/feefenggexian5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_below="@+id/feefenggexian5"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="0px"
+        android:layout_marginTop="10px"
+        android:layout_marginBottom="20px"
+        android:src="@drawable/fanxinjiantou"
+        android:layout_width="50px"
+        android:layout_height="50px" />
 </RelativeLayout>

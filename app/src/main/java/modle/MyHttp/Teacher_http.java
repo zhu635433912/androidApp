@@ -123,7 +123,7 @@ public interface Teacher_http {
         @Query("lat") String lat,@Query("lng") String lng);
 
     @POST("index.php?s=/Service/Teacher/get_teacher_comment")
-    Call<ContentModle> getEvluation(@Query("teacher_id") int teacher_id);
+    Call<ContentModle> getEvluation(@Query("teacher_id") int teacher_id,@Query("page")int page);
 
     @POST("index.php?s=/Service/Teacher/update_information")
     Call<Demtest> getsubjectBackgroud(@Query("uid") int uid,@Query("class_img") String class_img);

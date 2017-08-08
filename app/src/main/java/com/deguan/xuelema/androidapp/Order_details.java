@@ -65,6 +65,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
     private int duration1;
     private String telphone;
     private double tolFee;
+    private ImageView detail_tel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         EventBus.getDefault().register(this);
         setContentView(R.layout.dindanxxi);
         User_id.getInstance().addActivity(this);
+        detail_tel = (ImageView) findViewById(R.id.detail_tel);
         headImage = (ImageView) findViewById(R.id.order_detail_headimg);
         telTv = (TextView) findViewById(R.id.dianhuahaoma);
         name = (TextView) findViewById(R.id.name);
@@ -126,6 +128,9 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                 break;
             case "3":
                 statuse.setText("去评价");
+                if(!User_id.getRole().equals("2")) {
+                    ycang.setVisibility(View.GONE);
+                }
                 break;
             case "4":
                 if(!User_id.getRole().equals("2")) {
@@ -145,7 +150,6 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                 statuse.setText("已拒绝退款");
                 if(!User_id.getRole().equals("2")) {
                     ycang.setVisibility(View.GONE);
-                    xuqiufenggexian7.setVisibility(View.GONE);
                 }
                 break;
             case "7":
@@ -175,7 +179,17 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                 startActivity(inte);
             }
         });
-
+        detail_tel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //拨号
+//                Log.e("aa", "拨号成功");
+                Intent inte = new Intent(Intent.ACTION_DIAL);
+                inte.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                inte.setData(Uri.parse("tel:" + telTv.getText().toString()));
+                startActivity(inte);
+            }
+        });
     }
 
     private String teacherId;
@@ -326,6 +340,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                                 startActivity(intent);
                                 Toast.makeText(Order_details.this, "赶快去评价这位老师吧~", Toast.LENGTH_LONG).show();
                                 finish();
+
                             }
                         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override

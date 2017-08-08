@@ -120,7 +120,7 @@
              android:layout_marginTop="10px"
              android:layout_below="@+id/wodeyaoqingma"
              android:layout_alignLeft="@+id/wodeyaoqingma"
-             android:text="15157269365"
+             android:text=""
              android:layout_width="wrap_content"
              android:layout_height="wrap_content" />
          <ImageView
@@ -190,7 +190,6 @@
                  android:layout_alignBottom="@+id/erweima"
                  android:layout_width="40px"
                  android:layout_height="40px"/>
-
      </RelativeLayout>
 
 

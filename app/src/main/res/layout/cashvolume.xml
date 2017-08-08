@@ -89,6 +89,12 @@
         android:layout_below="@+id/tixianjieshao"
         android:layout_width="match_parent"
         android:layout_height="1px" />
+
+    <RelativeLayout
+        android:background="#e0eaf1"
+        android:layout_below="@+id/xuqiufenggexian1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <TextView
         android:id="@+id/xinjinxiaofeijilv"
         android:textSize="30px"
@@ -99,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <com.handmark.pulltorefresh.library.PullToRefreshListView
-        android:layout_marginTop="20px"
+        android:layout_marginTop="10px"
         android:divider="@null"
         android:id="@+id/cash_ticket_list"
         android:layout_below="@+id/xinjinxiaofeijilv"

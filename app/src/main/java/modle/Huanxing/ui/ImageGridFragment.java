@@ -257,7 +257,7 @@ public class ImageGridFragment extends Fragment implements OnItemClickListener {
 				VideoEntity entty=mList.get(position-1);
 				holder.tvDur.setVisibility(View.VISIBLE);
 				
-				holder.tvDur.setText(DateUtils.toTime(entty.duration));
+				holder.tvDur.setText(modle.Huanxing.util.DateUtils.toTime(entty.duration));
 				holder.tvSize.setText(TextFormater.getDataSize(entty.size));
 				holder.imageView.setImageResource(R.drawable.em_empty_photo);
 				mImageResizer.loadImage(entty.filePath, holder.imageView);

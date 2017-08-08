@@ -137,7 +137,7 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.pingjiafanhui:
-                Student_assessment.this.finish();
+                finish();
                 break;
             case R.id.jieinteun:
                 new AlertDialog.Builder(Student_assessment.this).setTitle("学了么提示!").setMessage("确定提交评论?")
@@ -152,6 +152,7 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
                                 startActivity(intent);
                                 EventBus.getDefault().post(1,"changeStatus");
                                 Toast.makeText(Student_assessment.this,"评论订单成功!",Toast.LENGTH_LONG).show();
+                                finish();
                             }
                         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override

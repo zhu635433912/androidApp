@@ -8,6 +8,7 @@
         android:layout_height="80px">
     </RelativeLayout>
     <ImageButton
+
         android:layout_marginLeft="30px"
         android:layout_marginTop="20px"
         android:layout_alignParentTop="true"
@@ -35,7 +36,7 @@
         android:layout_marginTop="70px"
         android:layout_below="@+id/xuqiufenggexian"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/logo"
+        android:background="@mipmap/ic_launcher"
         android:layout_width="250px"
         android:layout_height="250px" />
     <TextView
@@ -49,10 +50,10 @@
         android:layout_height="wrap_content" />
     <TextView
         android:layout_marginLeft="10px"
-        android:layout_toEndOf="@+id/hanlingyuan"
+        android:layout_toRightOf="@+id/hanlingyuan"
         android:layout_alignBottom="@+id/hanlingyuan"
         android:textSize="30px"
-        android:text="v1.1"
+        android:text="v1.5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -78,7 +79,7 @@
         android:textColor="#c6c6c6"
         android:layout_marginLeft="20px"
         android:layout_marginBottom="12px"
-        android:layout_toEndOf="@+id/weibo"
+        android:layout_toRightOf="@+id/weibo"
         android:layout_alignBottom="@+id/weibo"
         android:text="点击关注我们的官方微博"
         android:layout_width="wrap_content"
@@ -106,7 +107,7 @@
         android:layout_marginBottom="12px"
         android:layout_toRightOf="@+id/weixin"
         android:layout_alignBottom="@+id/weixin"
-        android:text="官方微信:   德冠网络教育"
+        android:text="官方微信:   学了吗学习平台"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -156,7 +157,7 @@
         android:textColor="#c6c6c6"
         android:layout_marginLeft="20px"
         android:layout_marginBottom="12px"
-        android:layout_toEndOf="@+id/emage"
+        android:layout_toRightOf="@+id/emage"
         android:layout_alignBottom="@+id/emage"
         android:text="官方邮箱:  deguanjy@163.com"
         android:layout_width="wrap_content"
@@ -182,7 +183,7 @@
         android:textColor="#c6c6c6"
         android:layout_marginLeft="20px"
         android:layout_marginBottom="12px"
-        android:layout_toEndOf="@+id/web"
+        android:layout_toRightOf="@+id/web"
         android:layout_alignBottom="@+id/web"
         android:text="官方网址:  www.deguanjiaoyu.com"
         android:layout_width="wrap_content"

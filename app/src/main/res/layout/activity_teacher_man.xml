@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.deguan.xuelema.androidapp.TeacherManActivity">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <RelativeLayout
+            android:id="@+id/teacher_man_back"
+            android:layout_width="120px"
+            android:layout_height="100px">
+            <ImageButton
+                android:layout_marginLeft="30px"
+                android:layout_marginTop="25px"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/add19"
+                android:layout_width="30px"
+                android:layout_height="40px" />
+        </RelativeLayout>
+        <TextView
+            android:paddingRight="60px"
+            android:gravity="center"
+            android:textSize="40px"
+            android:layout_marginTop="20px"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="教师管理"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/xuqiufenggexian"
+        android:background="#b9b6b6"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <LinearLayout
+        android:id="@+id/teacher_man_person"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="200px">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="50px"
+            android:src="@drawable/hold_head"
+            android:id="@+id/man_head"
+            android:layout_width="160px"
+            android:layout_height="160px" />
+        <TextView
+            android:textSize="40px"
+            android:id="@+id/teacher_man_sign"
+            android:gravity="center"
+            android:layout_marginLeft="20px"
+            android:text="聚是一团火,散是满天星"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_marginLeft="20px"
+            android:src="@drawable/teacher_man_right"
+            android:layout_marginRight="20px"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:background="#b9b6b6"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <LinearLayout
+        android:id="@+id/teacher_man_xueli"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="50px"
+            android:src="@drawable/teacher_xueli"
+
+            android:layout_width="60px"
+            android:layout_height="60px" />
+        <TextView
+            android:textSize="40px"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20px"
+            android:text="学历信息"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_marginLeft="20px"
+            android:src="@drawable/teacher_xueli_right"
+            android:layout_width="wrap_content"
+            android:layout_margin="20px"
+
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:background="#b9b6b6"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <LinearLayout
+        android:id="@+id/teacher_man_rongyu"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="50px"
+            android:src="@drawable/teacher_rongyu"
+
+            android:layout_width="60px"
+            android:layout_height="60px" />
+        <TextView
+            android:textSize="40px"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20px"
+            android:text="荣誉证书"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_margin="20px"
+            android:src="@drawable/teacher_xueli_right"
+            android:layout_marginRight="20px"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:background="#b9b6b6"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <LinearLayout
+        android:id="@+id/teacher_man_manager"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="50px"
+            android:src="@drawable/teacher_manager"
+
+            android:layout_width="60px"
+            android:layout_height="60px" />
+        <TextView
+            android:textSize="40px"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20px"
+            android:text="课程管理"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_margin="20px"
+            android:src="@drawable/teacher_xueli_right"
+            android:layout_marginRight="20px"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:background="#b9b6b6"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <LinearLayout
+        android:id="@+id/teacher_man_example"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="50px"
+            android:src="@drawable/teacher_example"
+
+            android:layout_width="60px"
+            android:layout_height="60px" />
+        <TextView
+            android:textSize="40px"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20px"
+            android:text="教学案例"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_margin="20px"
+            android:src="@drawable/teacher_xueli_right"
+            android:layout_marginRight="20px"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:background="#b9b6b6"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <LinearLayout
+        android:id="@+id/teacher_man_exper"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+
+        <ImageView
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="50px"
+            android:src="@drawable/teacher_express"
+
+            android:layout_width="60px"
+            android:layout_height="60px" />
+        <TextView
+            android:textSize="40px"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20px"
+            android:text="个人经历"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_margin="20px"
+            android:src="@drawable/teacher_xueli_right"
+            android:layout_marginRight="20px"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:background="#b9b6b6"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+</LinearLayout>

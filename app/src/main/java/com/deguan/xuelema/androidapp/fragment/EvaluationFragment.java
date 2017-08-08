@@ -117,11 +117,11 @@ public class EvaluationFragment extends BaseFragment implements OrderView, Swipe
     @Override
     public void successOrder(List<Map<String, Object>> maps) {
 //        listView.onRefreshComplete();
+        if (page == 1) {
+            adapter.clear();
+            list.clear();
+        }
         if (maps != null) {
-            if (page == 1) {
-                adapter.clear();
-                list.clear();
-            }
 //            for (int i = 0; i < maps.size(); i++) {
 //                if (!maps.get(i).get("status").equals("9")) {
 //                    list.add(maps.get(i));
@@ -163,6 +163,7 @@ public class EvaluationFragment extends BaseFragment implements OrderView, Swipe
 
     @Override
     public void failOrder(String msg) {
+        swipeRefreshLayout.setRefreshing(false);
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
     }
 

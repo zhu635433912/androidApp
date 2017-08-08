@@ -57,6 +57,10 @@ public interface Data {
     Call<PayEntity> getpayMsg(@Query("id") int id, @Query("paytype") int paytype
             ,@Query("reward_fee")double reward_fee,@Query("pay_password")String payPsd);
 
+
+    @POST("index.php?s=/Service/Order/cancel_pay")
+    Call<PayEntity> cancalPay(@Query("id") int id);
+
     //关于我们
     @POST("index.php?s=/Service/Setup/aboutus")
     Call<User_Modle> getabotuse();
@@ -79,7 +83,7 @@ public interface Data {
 
     //举报
     @POST("index.php?s=/Service/Accounts/create_tip")
-    Call<User_Modle> upReport(@Query("uid")int uid,@Query("content")String content);
+    Call<User_Modle> upReport(@Query("uid")int uid,@Query("content")String content,@Query("uid2")int uid2);
 
     //获取成交率
     @POST("/index.php?s=/Service/Teacher/query_deal_info")

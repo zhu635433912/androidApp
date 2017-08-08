@@ -18,7 +18,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_width="534px"
-        android:layout_height="1000px">
+        android:layout_height="900px">
         <ImageView
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -121,7 +121,7 @@
             android:password="true"
             android:id="@+id/dei_password"
             android:textSize="30px"
-            android:hint="  *********"
+            android:hint=" 密码"
             android:background="@drawable/login_wan_connllat"
             android:layout_marginTop="24px"
             android:layout_below="@+id/dei_editextyansema"
@@ -147,7 +147,7 @@
             android:layout_below="@+id/dei_tuijianma"
             android:layout_alignLeft="@+id/dei_password"
             android:layout_width="400px"
-            android:layout_height="80px" />
+            android:layout_height="0px" />
         <TextView
             android:layout_marginRight="14px"
             android:layout_marginBottom="20px"
@@ -156,7 +156,7 @@
             android:text="6位支付密码"
             android:textSize="25px"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="0dp" />
         <TextView
             android:layout_marginRight="14px"
             android:layout_marginBottom="16px"
@@ -196,6 +196,7 @@
         android:layout_marginBottom="10dp"
         android:id="@+id/imageView" />
     <TextView
+        android:id="@+id/register_user"
         android:textSize="30px"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
