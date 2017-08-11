@@ -2,6 +2,7 @@ package com.deguan.xuelema.androidapp;
 
 import android.*;
 import android.Manifest;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -15,6 +16,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -23,6 +25,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +38,11 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.hyphenate.util.PathUtil;
 import com.hyphenate.util.Utils;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -72,7 +80,7 @@ import retrofit2.Call;
 /**
  * 个人信息
  */
-public class Personal_Activty extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed {
+public class Personal_Activty extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed,ChangeOrderView {
     private RelativeLayout gerxxhuitui;
     private TextView userdizhi;
     private TextView userage;
@@ -80,7 +88,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     private TextView ziyouzhiye;
     private EditText edit1;
     private TextView emage;
-    private CircleImageView usertoux;
+    private ImageView usertoux;
     private String address;//用户地区
     private String gender;//用户年龄
     private String age;//用户性别
@@ -100,6 +108,8 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     private Button baocun;
     private Teacher_init teacher;
     private String mCurrentPhotoPath;
+
+
     private static final int REQUEST_IMAGE_GET = 5;
     private static final int REQUEST_IMAGE_CAPTURE = 6;
     private Map<String,Object> mapa;
@@ -107,6 +117,12 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     private RelativeLayout xueliRl;
     private TextView xueliTv;
     private String idCard;
+
+    protected File cameraFile;
+    private static final int REQUESTCODE_PICK = 1;
+    protected static final int REQUEST_CODE_CAMERA = 2;
+    protected static final int REQUEST_CODE_LOCAL = 3;
+    private static final int REQUESTCODE_CUTTING = 4;
 
 
     @Override
@@ -119,7 +135,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         xueliRl = (RelativeLayout) findViewById(R.id.xuelie_rl);
         xueliTv = (TextView) findViewById(R.id.xueli_text);
         gerxxhuitui= (RelativeLayout) findViewById(R.id.gerxxhuitui);
-        usertoux= (CircleImageView) findViewById(R.id.usertoux);
+        usertoux= (ImageView) findViewById(R.id.usertoux);
         userdizhi= (TextView) findViewById(R.id.userdizhi);
         userage= (TextView) findViewById(R.id.userage);
         usershenr= (TextView) findViewById(R.id.usershenr);
@@ -171,23 +187,6 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         final EditText edit = new EditText(this);
         switch (v.getId()) {
             case R.id.xueli_text:
-//                AlertDialog.Builder xueleTypeDialog = new AlertDialog.Builder(Personal_Activty.this);
-//                xueleTypeDialog.setIcon(R.drawable.add04);
-//                xueleTypeDialog.setTitle("请选择学历");
-//                //    指定下拉列表的显示数据
-//                final String[] xueliType = {"无","大专", "本科", "硕士" ,"博士"};
-//                //    设置一个下拉的列表选择项
-//                xueleTypeDialog.setItems(xueliType, new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        xueliTv.setText(xueliType[which]);
-////                        int years=Integer.parseInt(edit.getText().toString());
-////                        teacher.Teacher_years(uid,which+1);
-//                        education_id = which;
-//                        user_init.UpdateEducation(uid,which);
-//                    }
-//                });
-//                xueleTypeDialog.show();
 
                 //所在地
                 new  AlertDialog.Builder(this).setTitle("请输入(一旦确定无法修改)").setIcon(android.R.drawable.btn_star).setView(edit)
@@ -292,7 +291,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                if (!edit.getText().toString().equals("")&&edit.getText().toString().length()<4) {
+                                if (!edit.getText().toString().equals("")&&edit.getText().toString().length()<=4) {
                                     user.Updatename(uid,edit.getText().toString());
                                     ziyouzhiye.setText(edit.getText().toString());
                                 }else {
@@ -331,7 +330,8 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                 break;
             //dialog
             case R.id.picture_dialog_pick: {
-                selectImage();
+                selectPicFromLocal();
+//                selectImage();
                 mPickDialog.dismiss();
             }
             break;
@@ -347,9 +347,9 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                             .request();
 //
                 }else{
-                    dispatchTakePictureIntent();
+                    selectPicFromCamera();
+//                    dispatchTakePictureIntent();
                 }
-
                 mPickDialog.dismiss();
             }
             break;
@@ -410,27 +410,6 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                     }
                 });
                 serviceTypeDialog.show();
-                //教龄
-//                new  AlertDialog.Builder(this).setTitle("请输入!").setIcon(android.R.drawable.btn_star).setView(edit)
-//                        .setPositiveButton("确认",new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                if (!edit.getText().toString().equals("")) {
-//                                    int years=Integer.parseInt(edit.getText().toString());
-//                                    teacher.Teacher_years(uid,years);
-//                                    shurujiaol.setText(years+"年");
-//                                }else {
-//                                }
-//                            }
-//                        }).setNegativeButton("取消",new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//
-//                    }
-//                }).show();
-
-
-
 
                 break;
 
@@ -440,12 +419,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {
-//        if (requestCode == 100){
-//            Gaode_dinwei gaode_dinwei=new Gaode_dinwei(this,getActivity());
-//        }
-//        Log.d("aa","------requestCode"+requestCode);
-        dispatchTakePictureIntent();
-
+        selectPicFromCamera();
     }
     public void updateuserdata(){
         //获取用户昵称与资料
@@ -490,7 +464,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         if (TextUtils.isEmpty(idCard)){
             xueliRl.setVisibility(View.VISIBLE);
         }
-            setbitmap(map.get("headimg")+"");
+            Glide.with(getApplicationContext()).load(map.get("headimg")+"").transform(new GlideCircleTransform(this)).into(usertoux);
     }
 
     @Override
@@ -512,52 +486,84 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case REQUESTCODE_PICK:
-                if (data == null || data.getData() == null) {
-                    return;
-                }
-                startPhotoZoom(data.getData());
-                break;
-            case REQUESTCODE_CUTTING:
-                if (data != null) {
-                    setPicToView(data);
-                }
-                break;
-            default:
-                break;
-        }
+
         super.onActivityResult(requestCode, resultCode, data);
         // 回调成功
-        if (resultCode == RESULT_OK) {
-            String filePath = null;
-            //判断是哪一个的回调
-            if (requestCode == REQUEST_IMAGE_GET) {
-                //返回的是content://的样式
-                filePath = getFilePathFromContentUri(data.getData(), this);
-            } else if (requestCode == REQUEST_IMAGE_CAPTURE) {
-                if (mCurrentPhotoPath != null) {
-                    filePath = mCurrentPhotoPath;
-                }
-            }
-            if (!TextUtils.isEmpty(filePath)) {
-
-                // 自定义大小，防止OOM
-                Bitmap bitmap = getSmallBitmap(filePath, 300, 300);
-                //获取图片
-                usertoux.setImageBitmap(bitmap);
-//                Log.e("aa","路劲为"+filePath);
-
-                //去服务器更新图片
-                if (image!=null) {
-                    setuseryoux(image);
-                }else {
-                    image=new File(filePath);
-                    setuseryoux(image);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_CODE_CAMERA) { // capture new image
+                if (cameraFile != null && cameraFile.exists()) {
+                    setuseryoux(cameraFile);
+                    Bitmap bitmap = getSmallBitmap(cameraFile.getAbsolutePath(), 600, 600);
+                    usertoux.setImageBitmap(bitmap);
+//                    sendImageMessage(cameraFile.getAbsolutePath());
                 }
 
+            }else if (requestCode == REQUEST_CODE_LOCAL) { // send local image
+                if (data != null) {
+                    sendPicByUri(data.getData());
+//     startPhotoZoom(data.getData());
+                }
+            }else if (requestCode == REQUESTCODE_CUTTING){
+                if (data != null) {
+                    setPicToView(data);
+//                    sendPicByUri(data.getData());
+                }
             }
+
         }
+
+    }
+    /**
+     * send image
+     *
+     * @param selectedImage
+     */
+    protected void sendPicByUri(Uri selectedImage) {
+        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            cursor = null;
+
+            if (picturePath == null || picturePath.equals("null")) {
+                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                return;
+            }
+            setuseryoux(new File(picturePath));
+            Bitmap bitmap = getSmallBitmap(picturePath, 600, 600);
+            usertoux.setImageBitmap(bitmap);
+        } else {
+            File file = new File(selectedImage.getPath());
+            if (!file.exists()) {
+                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                return;
+
+            }
+            setuseryoux(file);
+            Bitmap bitmap = getSmallBitmap(file.getAbsolutePath(), 600, 600);
+            usertoux.setImageBitmap(bitmap);
+        }
+    }
+    /**
+     * select local image
+     */
+    protected void selectPicFromLocal() {
+        Intent intent;
+        if (Build.VERSION.SDK_INT < 19) {
+            intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+
+        } else {
+            intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        }
+        startActivityForResult(intent, REQUEST_CODE_LOCAL);
     }
 
     /**
@@ -579,7 +585,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
 
             String timeStamp = new SimpleDateFormat("yyyy").format(new Date());
             String imageFileName = "" + timeStamp + "_";
-            File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
             setuseryoux(byte2File(Bitmap2Bytes(photo),storageDir.getAbsolutePath(),imageFileName));
         }
 
@@ -638,25 +644,6 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
         return baos.toByteArray();
     }
-    private static final int REQUESTCODE_PICK = 1;
-    private static final int REQUESTCODE_CUTTING = 2;
-    /**
-     * 从相册中获取
-     */
-    public void selectImage() {
-        Intent pickIntent = new Intent(Intent.ACTION_PICK,null);
-        pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-        startActivityForResult(pickIntent, REQUESTCODE_PICK);
-//        Intent intent = new Intent(Intent.ACTION_PICK);
-//        intent.setType("image/*");
-//        //判断系统中是否有处理该Intent的Activity
-//        if (intent.resolveActivity(getPackageManager()) != null) {
-//            startActivityForResult(intent, REQUEST_IMAGE_GET);
-//        } else {
-//            showToast("未找到图片查看器");
-//        }
-
-    }
 
 
     /**
@@ -677,51 +664,28 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         return image;
 
     }
-
-    private void dispatchTakePictureIntent() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // 判断系统中是否有处理该Intent的Activity
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            // 创建文件来保存拍的照片
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // 异常处理
-            }
-            if (photoFile != null) {
-                ContentValues contentValues = new ContentValues(1);
-                contentValues.put(MediaStore.Images.Media.DATA, photoFile.getAbsolutePath());
-                Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValues);
-//                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
-            }
-        } else {
-            showToast("无法启动相机");
+    /**
+     * capture new image
+     */
+    protected void selectPicFromCamera() {
+        if (!EaseCommonUtils.isSdcardExist()) {
+            Toast.makeText(this, com.hyphenate.easeui.R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
+                + System.currentTimeMillis() + ".jpg");
+        //noinspection ResultOfMethodCallIgnored
+        cameraFile.getParentFile().mkdirs();
+        startActivityForResult(
+                new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
+                REQUEST_CODE_CAMERA);
     }
 
     private void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * @param uri     content:// 样式
-     * @param context
-     * @return real file path
-     */
-    public static String getFilePathFromContentUri(Uri uri, Context context) {
-        String filePath;
-        String[] filePathColumn = {MediaStore.MediaColumns.DATA};
-        Cursor cursor = context.getContentResolver().query(uri, filePathColumn, null, null, null);
-        if (cursor == null) return null;
-        cursor.moveToFirst();
-        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-        filePath = cursor.getString(columnIndex);
-        cursor.close();
-        return filePath;
-    }
 
     /**
      * 获取小图片，防止OOM
@@ -765,7 +729,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     }
 
     private void setuseryoux(File file){
-        user.setuserbitmap(file,null);
+        user.setuserbitmap(file,null,this);
     }
 
     public void setbitmap(final String pate){
@@ -816,86 +780,40 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     public void startPhotoZoom(Uri uri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
-
-        String state=Environment.getExternalStorageState();
-        if (state.equals(Environment.MEDIA_MOUNTED))
-        {
-            String saveDir=Environment.getExternalStorageDirectory()+"/pmcylg1/";
-            Log.v("zms", "裁切后临时路径:"+saveDir);
-
-            try {
-                File dir=new File(saveDir);
-                if (!dir.exists())
-                {
-                    Log.v("zms", "新建目录:"+saveDir);
-                    dir.mkdir();
-                    dir.setReadable(true);
-                    dir.setWritable(true);
-                }
-                fileCut=new File(saveDir+"temp.jpg");
-                if (fileCut.exists())
-                {
-                    try {
-                        Log.v("zms", "删除文件:"+fileCut.getAbsolutePath());
-                        fileCut.delete();
-                    } catch (Exception e) {
-                        Log.v("zms", "删除文件失败");
-                        e.printStackTrace();
-                    }
-                }
-                if (!fileCut.exists())
-                {
-                    try {
-                        Log.v("zms", "创建文件:"+fileCut.getAbsolutePath());
-                        fileCut.createNewFile();
-                        fileCut.setReadable(true);
-                        fileCut.setWritable(true);
-                    } catch (IOException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                        Log.v("zms", e.toString()+e.getMessage());
-                        Toast.makeText(this, "文件创建失败", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                }
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                Toast.makeText(this, "文件操作失败", Toast.LENGTH_LONG).show();
-            }
-        }else {
-            Toast.makeText(this, "存储卡不存在", Toast.LENGTH_LONG).show();
-        }
-
-
-
-        // 设置裁剪
         intent.putExtra("crop", true);
-
-        //后加
-        intent.putExtra("scale", true);// 保存比例
-        intent.putExtra("scaleUpIfNeeded", true);// 去黑边
-
-
-        // aspectX aspectY 是宽高的比例
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
-        // outputX outputY 是裁剪图片宽高
         intent.putExtra("outputX", 300);
         intent.putExtra("outputY", 300);
-
-        //后加
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-
-//        后改false
-        intent.putExtra("return-data", false);//设置为不返回数据，true返回bitMap
+        intent.putExtra("return-data", true);
         intent.putExtra("noFaceDetection", true);
-        startActivityForResult(intent,REQUESTCODE_CUTTING);
+        startActivityForResult(intent, REQUESTCODE_CUTTING);
+        // 设置裁剪
+//        intent.putExtra("crop", true);
+        // aspectX aspectY 是宽高的比例
+//        intent.putExtra("aspectX", 1);
+//        intent.putExtra("aspectY", 1);
+        // outputX outputY 是裁剪图片宽高
+//        intent.putExtra("outputX", 300);
+//        intent.putExtra("outputY", 300);
+//        intent.putExtra("return-data", true);//设置为不返回数据，true返回bitMap
+//        intent.putExtra("noFaceDetection", true);
+//        startActivityForResult(intent,REQUESTCODE_CUTTING);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    @Override
+    public void successOrder(String msg) {
+        Glide.with(getApplicationContext()).load(msg).transform(new GlideCircleTransform(this)).into(usertoux);
+    }
+
+    @Override
+    public void failOrder(String msg) {
+
     }
 }

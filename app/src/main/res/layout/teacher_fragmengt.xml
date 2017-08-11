@@ -70,7 +70,18 @@
                     android:src="@drawable/chat_my_icon"
                     android:layout_width="120px"
                     android:layout_height="120px" />
-
+                <TextView
+                    android:layout_marginRight="100px"
+                    android:layout_marginTop="30px"
+                    android:layout_marginLeft="200px"
+                    android:id="@+id/unread_message_number"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:text="2"
+                    android:gravity="center"
+                    android:textSize="10sp"
+                    android:background="@drawable/em_unread_dot"
+                    android:visibility="gone" />
                 <ImageView
                     android:id="@+id/teacher_setup"
                     android:padding="35px"

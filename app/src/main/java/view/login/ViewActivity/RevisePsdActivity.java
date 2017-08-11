@@ -74,8 +74,8 @@ public class RevisePsdActivity extends AutoLayoutActivity implements Pos_inint,V
         switch (v.getId()){
             case R.id.pos_imageButton:
                 Log.d("aa","返回");
-                Intent intin=new Intent(RevisePsdActivity.this,LoginAcitivity.class);
-                startActivity(intin);
+//                Intent intin=new Intent(RevisePsdActivity.this,LoginAcitivity.class);
+//                startActivity(intin);
                 finish();
                 break;
             case R.id.pos_vicat:

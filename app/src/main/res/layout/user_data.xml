@@ -42,7 +42,7 @@
             android:layout_below="@+id/neirongtext"
             android:layout_width="match_parent"
             android:layout_height="1px" />
-    <modle.toos.CircleImageView
+    <ImageView
         android:id="@+id/usertoux"
         android:layout_marginTop="30px"
         android:layout_below="@+id/xuqiufenggexian"
@@ -147,7 +147,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/xuqiufenggexian3"
         android:textSize="30px"
-        android:text="姓名"
+        android:text="*姓名"
         android:layout_marginTop="30px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -175,7 +175,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/xuqiufenggexian4"
         android:textSize="30px"
-        android:text="昵称"
+        android:text="*昵称"
         android:layout_marginTop="30px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -304,7 +304,7 @@
                 android:layout_marginLeft="50px"
                 android:layout_alignParentLeft="true"
                 android:textSize="30px"
-                android:text="身份证号码"
+                android:text="*身份证号码"
                 android:layout_marginTop="30px"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

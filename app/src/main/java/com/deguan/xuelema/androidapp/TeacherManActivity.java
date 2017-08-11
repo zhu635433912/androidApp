@@ -60,7 +60,7 @@ public class TeacherManActivity extends MyBaseActivity implements Requirdetailed
         personLl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TeacherManActivity.this,Personal_Activty.class));
+                startActivity(TeacherActivity_.intent(TeacherManActivity.this).get());
             }
         });
         educationLl.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +109,7 @@ public class TeacherManActivity extends MyBaseActivity implements Requirdetailed
     @Override
     public void Updatecontent(Map<String, Object> map) {
         if (!TextUtils.isEmpty(map.get("user_headimg")+""))
-        Glide.with(this).load(map.get("user_headimg")).transform(new GlideRoundTransform(this,12)).into(headImage);
+        Glide.with(getApplicationContext()).load(map.get("user_headimg")).transform(new GlideRoundTransform(this,12)).into(headImage);
         if (!TextUtils.isEmpty(map.get("signature")+""))
             signTv.setText(map.get("signature")+"");
 

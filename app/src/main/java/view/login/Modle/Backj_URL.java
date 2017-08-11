@@ -6,20 +6,6 @@ package view.login.Modle;
 
 public class Backj_URL {
     /**
-     * 用户登录
-     * 传递
-     *   string $username 用户名
-     *   string $password 密码
-     * 返回
-     * {
-     *     error        : "string"  // ok:成功 no:失败
-     *     errmsg       : "string"  // 错误信息
-     *     user_id      : "int"     // 用户id
-     * }
-     */
-    public final static String USER_URL="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/signin";
-
-    /**
      * 注册用户
      * @param  int    $role     用户角色 1:普通用户 2:教师 3:运营 4:管理员
      * @param  string $username 用户名
@@ -33,9 +19,25 @@ public class Backj_URL {
      *     user_id      : "int"     // 用户id
      * }
      */
-    public final static String REGISTER_URL="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/signup";
+
+
     //短信验证
-    public final static String SMS_URL="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/check_mobile";
+    /*
+    获取用户资料
+     */
+    public final static String USER_ZILIAO="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/get_profile";
+    /**
+     * 用户登录
+     * 传递
+     *   string $username 用户名
+     *   string $password 密码
+     * 返回
+     * {
+     *     error        : "string"  // ok:成功 no:失败
+     *     errmsg       : "string"  // 错误信息
+     *     user_id      : "int"     // 用户id
+     * }
+     */
     /**
      * 重置密码
      * index.php?s=/Service/Accounts/reset
@@ -49,11 +51,14 @@ public class Backj_URL {
      *     user_id      : "int"     // 用户id
      * }
      */
+    public final static String USER_URL="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/signin";
+    public final static String SMS_URL="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/check_mobile";
+    public final static String REGISTER_URL="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/signup";
     public final static String CZ_URL="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/reset";
-    /*
-    获取用户资料
-     */
-    public final static String USER_ZILIAO="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/get_profile";
 
+//    public final static String USER_URL="http://1754q21l80.51mypc.cn:88/index.php?s=/Service/Accounts/signin";
+//    public final static String CZ_URL="http://1754q21l80.51mypc.cn:88/index.php?s=/Service/Accounts/reset";
+//    public final static String SMS_URL="http://1754q21l80.51mypc.cn:88/index.php?s=/Service/Accounts/check_mobile";
+//    public final static String REGISTER_URL="http://1754q21l80.51mypc.cn:88/index.php?s=/Service/Accounts/signup";
 
 }

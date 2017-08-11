@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="100px">
         <RelativeLayout
-            android:id="@+id/education_back"
             android:layout_width="120px"
             android:layout_height="100px">
             <ImageButton
@@ -23,17 +22,30 @@
                 android:background="@drawable/add19"
                 android:layout_width="30px"
                 android:layout_height="40px" />
+        <RelativeLayout
+            android:id="@+id/education_back"
+            android:layout_width="120px"
+            android:layout_height="100px">
+
+        </RelativeLayout>
         </RelativeLayout>
         <TextView
             android:paddingRight="60px"
             android:gravity="center"
             android:textSize="40px"
-            android:layout_marginTop="20px"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:text="学历信息"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/education_save"
+            android:gravity="center"
+            android:text="保存"
+            android:textSize="40px"
+            android:layout_width="100px"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <View
@@ -42,9 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="1px" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
         <LinearLayout
             android:background="#ffffff"
             android:orientation="vertical"
@@ -61,42 +71,45 @@
                 android:text="在校时间" />
 
             <EditText
+                android:id="@+id/education_start_time"
+                android:textSize="30px"
                 android:layout_width="200px"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="30px"
                 android:background="@drawable/education_edit_bg"
                 android:gravity="center"
-                android:hint="2013.09.01" />
+                android:hint="" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="30px"
-                android:text="To"
+                android:text="到"
                 android:textSize="38px" />
 
             <EditText
+                android:textSize="30px"
+                android:id="@+id/education_end_time"
                 android:layout_width="200px"
                 android:layout_height="match_parent"
-
                 android:layout_marginLeft="30px"
                 android:background="@drawable/education_edit_bg"
                 android:gravity="center"
-                android:hint="2017.06.01" />
+                android:hint="" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_marginTop="50px"
             android:layout_width="match_parent"
             android:layout_height="100px">
-
             <TextView
                 style="@style/manager_text_style"
-                android:text="毕业院校"/>
+                android:text="*毕业院校"/>
             <EditText
                 android:gravity="center"
-                android:hint="2013.09.01"
+                android:id="@+id/education_school"
+                android:hint="请输入毕业学校"
                 android:layout_marginRight="50px"
                 android:layout_marginLeft="30px"
                 android:background="@drawable/education_edit_bg"
@@ -111,8 +124,10 @@
 
             <TextView
                 style="@style/manager_text_style"
-                android:text="最高学历"/>
-            <EditText
+                android:text="*最高学历"/>
+            <TextView
+                android:id="@+id/education_choose"
+                android:textSize="35px"
                 android:gravity="center"
                 android:hint="本科"
                 android:layout_marginRight="10px"
@@ -121,6 +136,7 @@
                 android:layout_width="300px"
                 android:layout_height="match_parent" />
             <EditText
+                android:id="@+id/education_other"
                 android:gravity="center"
                 android:hint="备注"
                 android:layout_marginRight="50px"
@@ -131,35 +147,80 @@
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_marginTop="50px"
+            android:layout_marginTop="40px"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_marginLeft="40px"
+                android:layout_marginLeft="30px"
                 android:textSize="40px"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:text="证书上传"/>
+                android:text="*学历证书"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_marginRight="50px"
                 android:layout_marginLeft="30px"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-            <ImageView
-                android:gravity="center"
-                android:background="@drawable/education_edit_bg"
-                android:layout_width="match_parent"
-                android:layout_height="250px" />
                 <ImageView
-                    android:layout_marginTop="30px"
+                    android:id="@+id/education_pic1"
                     android:gravity="center"
-                    android:background="@drawable/education_edit_bg"
+                    android:src="@drawable/education_edit_bg"
                     android:layout_width="match_parent"
                     android:layout_height="250px" />
+
+                <ImageView
+                    android:id="@+id/education_pic2"
+                    android:layout_marginTop="30px"
+                    android:gravity="center"
+                    android:src="@drawable/education_edit_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="250px" />
+
             </LinearLayout>
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/education_add1"
+                    android:layout_marginTop="75px"
+                    android:src="@drawable/hly62"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="100px"
+                    android:layout_height="100px" />
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/education_add2"
+                    android:layout_marginTop="355px"
+                    android:src="@drawable/hly62"
+                    android:layout_centerHorizontal="true"
+                    android:layout_width="100px"
+                    android:layout_height="100px" />
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/education_del1"
+                    android:layout_marginTop="15px"
+                    android:layout_marginRight="70px"
+                    android:src="@drawable/honor_del"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="50px"
+                    android:layout_height="50px"
+                    android:layout_alignLeft="@+id/education_del2"
+                    android:layout_alignStart="@+id/education_del2" />
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/education_del2"
+                    android:layout_marginTop="295px"
+                    android:layout_marginRight="70px"
+                    android:src="@drawable/honor_del"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="50px"
+                    android:layout_height="50px" />
+            </RelativeLayout>
          </LinearLayout>
        </LinearLayout>
-    </ScrollView>
+
 </LinearLayout>

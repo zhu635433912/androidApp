@@ -39,7 +39,7 @@ public class PictureZoo extends AppCompatActivity {
         if (!hide.equals("")){
             String SBM=hide.substring(0,1);
             if (SBM.equals("h")){
-                Glide.with(this)
+                Glide.with(getApplicationContext())
                         .load(hide)
                         .into(himagr);
             }else {

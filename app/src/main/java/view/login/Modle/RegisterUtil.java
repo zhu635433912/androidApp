@@ -61,6 +61,25 @@ public class RegisterUtil {
         data=retrofit.create(RegisterApi.class);
     }
 
+    public void getLogin(String username, String password, final MobileView registerView){
+        Call<RegisterEntity> call = data.getLoginEntity(username,password);
+        call.enqueue(new Callback<RegisterEntity>() {
+            @Override
+            public void onResponse(Call<RegisterEntity> call, Response<RegisterEntity> response) {
+                if (response.body().getError().equals("ok")) {
+                    registerView.successRegister(response.body().getUser_id());
+                }else {
+                    registerView.failRegister(response.body().getErrmsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegisterEntity> call, Throwable t) {
+                registerView.failRegister("网络错误");
+            }
+        });
+    }
+
     public void getMobileNum(String mobile, final RegisterView registerView){
         Call<User_Modle> call = data.getMobileNumber(mobile,"signup");
         call.enqueue(new Callback<User_Modle>() {

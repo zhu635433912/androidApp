@@ -519,6 +519,28 @@ public class Teacher implements Teacher_init {
         });
     }
 
+    //更新在校时间
+    public void TeacherUpdateTime(int uid,String starttime,String endtime){
+        Call<Demtest> call=teacher_http.UpdateTime(uid,starttime,endtime);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    Log.e("aa","更新在校时间成功");
+                }else {
+                    Log.e("aa","更新在校时间失败");
+                }
+            }
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                Log.e("aa","更新在校时间异常失败"+t.toString());
+            }
+        });
+    }
+
+
+
     //更新教师毕业学校
     @Override
     public void Teacher_graduated_school(int uid, String graduated_school) {

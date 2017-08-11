@@ -234,7 +234,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
         String requirement_course = (String) map.get("course_name");
         String feae= (String) map.get("fee");
         teacherImage = (String) map.get("placer_headimg");
-        Glide.with(this).load(teacherImage).transform(new GlideCircleTransform(this)).into(headImage);
+        Glide.with(getApplicationContext()).load(teacherImage).transform(new GlideCircleTransform(this)).into(headImage);
         teacherId = (String) map.get("teacher_id");
         telphone = map.get("placer_mobile")+"";
         telTv.setText(Html.fromHtml("<u>"+(String)map.get("placer_mobile")+""+"</u>"));

@@ -4,11 +4,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
@@ -31,19 +37,32 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.viewimpl.Baseinit;
 import com.deguan.xuelema.androidapp.viewimpl.TuijianView;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.EaseConstant;
+import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.hyphenate.util.PathUtil;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ViewById;
+
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.co.namee.permissiongen.PermissionGen;
 import modle.Adapter.KechengAdapter;
 import modle.Huanxing.ui.ChatActivity;
 import modle.Increase_course.Increase_course;
@@ -52,434 +71,403 @@ import modle.Order_Modle.Order_init;
 import modle.Teacher_Modle.Teacher;
 import modle.Teacher_Modle.Teacher_init;
 import modle.getdata.Getdata;
+import modle.user_Modle.User_Realization;
 import modle.user_ziliao.User_id;
 
-public class TeacherActivity extends AutoLayoutActivity implements Requirdetailed,View.OnClickListener,Baseinit, TuijianView {
-    private TextView Requiname;
-    private TextView Requitext;
-    private TextView Teachergerjianjie;
-    private TextView pingjia;
-    private RelativeLayout grfanhui;
-    private TextView gerxxxuexiquan;
-    private RelativeLayout jiaoyi;
-    private ListView gerrxxedintext;
-    private ImageButton bohao;
-    private String mobile;
-    private ImageButton imageButton2;
-    private TextView gerxues;
-    private TextView dindan;
-    private List<Map<String, Object>> listmap;
-    private int Requir_id;
-    private String username;//教师id
-    private ImageButton imageButton;
-    private KechengAdapter kechengAdapter;
-    private ImageView gerxxtoux;
-    private AVLoadingIndicatorView jiaoyishuax;
-    private String userHeadUrl = "";
-    private TextView jubaoTv;
-    private ImageView iamgeview;
-    private RelativeLayout gerxxTob;
-    private PopupWindow buyPopWindow;
-    private TextView courseMoney;
-    private TextView zongfee;
-    private TextView keshi;
-    private Button buyBtn;
-    private TextView courseExplain;
-    private TextView courseType;
-    private TextView courseNametV;
-    private String myid;
-    private String address;
-    private ImageButton backImage;
-    private TextView successTv;
-    private String content = "";
-    private TextView signTv;
+@EActivity(R.layout.activity_teacher)
+public class TeacherActivity extends MyBaseActivity implements View.OnClickListener, Student_init, Requirdetailed {
 
+    @ViewById(R.id.teacher_add1)
+    ImageView imageAdd1;
+    @ViewById(R.id.teacher_add2)
+    ImageView imageAdd2;
+    @ViewById(R.id.teacher_save)
+    TextView saveTv;
+    @ViewById(R.id.teacher_back)
+    RelativeLayout backRl;
+
+    @ViewById(R.id.teacher_del1)
+    ImageView imageDel1;
+    @ViewById(R.id.teacher_del2)
+    ImageView imageDel2;
+    @ViewById(R.id.teacher_pic1)
+    ImageView educationImage1;
+    @ViewById(R.id.teacher_pic2)
+    ImageView educationImage2;
+    @ViewById(R.id.teacher_year)
+    TextView yearTv;
+    @ViewById(R.id.teacher_special)
+    EditText specialEdit;
+    @ViewById(R.id.teacher_desc)
+    EditText descEdit;
+
+
+
+    protected File cameraFile;
+    protected static final int REQUEST_CODE_CAMERA = 2;
+    protected static final int REQUEST_CODE_LOCAL = 3;
+    private static final int REQUESTCODE_CUTTING = 4;
+    private android.app.AlertDialog mPickDialog;
+    private int flag = 1;
+    private Teacher teacher;
+    private String other_1;
+    private String other_2;
+    private int education_id;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.jiaoyi);
-        User_id.getInstance().addActivity(this);
-
-        signTv = (TextView) findViewById(R.id.textView2);
-        backImage = (ImageButton) findViewById(R.id.userxinxi_back);
-        jubaoTv = (TextView) findViewById(R.id.jiaoyi_jubao);
-        imageButton= (ImageButton) findViewById(R.id.imageButton);
-        gerxues= (TextView) findViewById(R.id.gerxues);
-        dindan= (TextView) findViewById(R.id.dindan);
-        Requiname= (TextView) findViewById(R.id.gerxxname);
-        Requitext= (TextView) findViewById(R.id.gerxxneirong);
-        Teachergerjianjie= (TextView) findViewById(R.id.gerjianjie);
-        pingjia= (TextView) findViewById(R.id.pingjia);
-        grfanhui= (RelativeLayout) findViewById(R.id.grfanhui);
-        successTv = (TextView) findViewById(R.id.gerxxxuexiquana);
-        gerxxxuexiquan= (TextView) findViewById(R.id.gerxxxuexiquan);
-        jiaoyi= (RelativeLayout) findViewById(R.id.jiaoyi);
-        gerrxxedintext= (ListView) findViewById(R.id.gerrxxedintext);
-        bohao= (ImageButton) findViewById(R.id.bohao);
-        imageButton2= (ImageButton) findViewById(R.id.imageButton2);
-        gerxxtoux= (ImageView) findViewById(R.id.gerxxtoux);
-        jiaoyishuax= (AVLoadingIndicatorView) findViewById(R.id.jiaoyishuax);
-        iamgeview= (ImageView) findViewById(R.id.curr_backe);
-        gerxxTob= (RelativeLayout) findViewById(R.id.gerxxTob);
-
-        gerxxTob.bringToFront();
-        jiaoyishuax.bringToFront();
-        gerxxxuexiquan.bringToFront();
-        jiaoyi.bringToFront();
-        grfanhui.bringToFront();
-
-        gerxxtoux.setOnClickListener(this);
-        successTv.setOnClickListener(this);
-        jubaoTv.setOnClickListener(this);
-        imageButton.setOnClickListener(this);
-        imageButton2.setOnClickListener(this);
-        bohao.setOnClickListener(this);
-        pingjia.setOnClickListener(this);
-        Teachergerjianjie.setOnClickListener(this);
-        gerxxxuexiquan.setOnClickListener(this);
-        grfanhui.setOnClickListener(this);
-        backImage.setOnClickListener(this);
-        signTv.setOnClickListener(this);
-        if (getIntent().getStringExtra("content")!=null) {
-            content = getIntent().getStringExtra("content");
-        }
-        address = User_id.getAddress();
-        myid = getIntent().getStringExtra("myid");
-        if (myid == null)
-        {
-            myid = "0";
-        }
-        final String user_id=getIntent().getStringExtra("user_id");
-//        Log.e("aa","UserxinActivyt接收到老师id为"+user_id);
-        int id=Integer.parseInt(User_id.getUid());
-        Requir_id=Integer.parseInt(user_id);
-        teacherId = Requir_id;
-        userHeadUrl = getIntent().getStringExtra("head_image");
-        if (!userHeadUrl.equals(""))
-            Glide.with(this).load(userHeadUrl).transform(new GlideCircleTransform(this)).into(gerxxtoux);
-
-        //加载数据
-        Teacher_init teacher=new Teacher();
-        teacher.Get_Teacher_detailed(id,Requir_id,this,0,1);
-
-        //获取成交率
-        Getdata getdata=new Getdata();
-        getdata.getdelt_info(Requir_id,this);
-
-        //加载课程数据
-        Increase_course increaseCourse=new Increase_course();
-        increaseCourse.selecouse(Requir_id,this,null);
-
-        showBuyPop();
-
-        gerrxxedintext.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                map = listmap.get(position);
-                String fee= (String) map.get("visit_fee");
-                teacherfee = Integer.parseInt((String)map.get("visit_fee"));
-                studentfee = Integer.parseInt((String)map.get("unvisit_fee"));
-                coursefee = studentfee;
-                courseId = (String) map.get("course_id");
-                gradeId = (String)map.get("grade_id");
-                courseName =  (String)map.get("course_name") ;
-                courseNumber = 1;
-
-                keshi.setText(courseNumber+"");
-                courseMoney.setText(coursefee+"元/节");
-                courseNametV.setText(courseName);
-//                courseType.setText((String)map.get("service_type_txt"));
-                courseExplain.setText((String)map.get("course_remark"));
-                zongfee.setText(coursefee*courseNumber+"");
-                String fee1= (String) map.get("unvisit_fee");
-                String course_id = (String) map.get("course_id");
-                String course_name = (String)map.get("course_name") ;
-                String grade_id = (String)map.get("grade_id");
-
-                int unvisit_fee=Integer.parseInt(fee1);
-                int visit_fee=Integer.parseInt(fee);
-                buyPopWindow.showAtLocation(imageButton2, Gravity.BOTTOM,0,0);
-
-            }
-        });
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Thread.sleep(2000);
-//                    runOnUiThread(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            jiaoyishuax.setVisibility(View.GONE);
-//                        }
-//                    });
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }).start();
+    public void before() {
+        teacher = new Teacher();
     }
 
-
-    private TextView studentShangmen,teacherShangmen;
-    private int coursefee,teacherId,courseNumber,servicetype,studentfee,teacherfee;
-    private String courseId,gradeId,serviceType,courseName;
-    private void showBuyPop() {
-
-        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.purchase_course,null);
-        courseMoney = (TextView) view.findViewById(R.id.jieshufee);
-        zongfee = (TextView) view.findViewById(R.id.zongfee);
-        TextView jia= (TextView) view.findViewById(R.id.jia);
-        TextView jian= (TextView) view.findViewById(R.id.jian);
-        keshi = (TextView) view.findViewById(R.id.fee);
-        buyBtn = (Button) view.findViewById(R.id.goumai);
-        courseExplain = (TextView) view.findViewById(R.id.course_explain);
-        courseType = (TextView) view.findViewById(R.id.xuessm);
-        courseNametV = (TextView) view.findViewById(R.id.kechengname);
-        studentShangmen  = (TextView) view.findViewById(R.id.xuessm);
-        teacherShangmen = (TextView) view.findViewById(R.id.laoshism);
-        final EditText descEdit = (EditText) view.findViewById(R.id.buy_course_desc);
-        studentShangmen.setTextColor(Color.parseColor("#fd1245"));
-        buyPopWindow = new PopupWindow(view);
-        buyPopWindow.setFocusable(true);
-        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-        int height = wm.getDefaultDisplay().getHeight();
-        int width = wm.getDefaultDisplay().getWidth();
-        buyPopWindow.setWidth(width);
-        buyPopWindow.setHeight(height/5*2);
-        buyPopWindow.setBackgroundDrawable(new BitmapDrawable());
-        buyPopWindow.setOutsideTouchable(true);
-        servicetype = 2;
-
-        studentShangmen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                studentShangmen.setTextColor(0xfffd1245);
-                teacherShangmen.setTextColor(0xff8b8b8b);
-                servicetype = 2;
-                coursefee = studentfee;
-//                studentShangmen.setTextColor(Color.parseColor("#fd1245"));
-//                teacherShangmen.setTextColor(Color.parseColor("#8b8b8b"));
-                courseMoney.setText(coursefee+"元/节");
-                zongfee.setText(coursefee*courseNumber+"元");
-
-            }
-        });
-        teacherShangmen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                coursefee = teacherfee;
-                teacherShangmen.setTextColor(0xfffd1245);
-                studentShangmen.setTextColor(0xff8b8b8b);
-                servicetype = 1;
-                courseMoney.setText(coursefee+"元/节");
-                zongfee.setText(coursefee*courseNumber+"元");
-            }
-        });
-        jia.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                courseNumber ++;
-                keshi.setText(courseNumber+"");
-                zongfee.setText(coursefee*courseNumber+"元");
-            }
-        });
-        jian.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                courseNumber --;
-                keshi.setText(courseNumber+"");
-                zongfee.setText(coursefee*courseNumber+"元");
-            }
-        });
-        descEdit.setText(content);
-        buyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new AlertDialog.Builder(TeacherActivity.this).setTitle("学了么提示!").setMessage("是否确定下单?")
-                        .setPositiveButton("是", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                buyPopWindow.dismiss();
-                                int uid=Integer.parseInt(User_id.getUid());
-                                Order_init order_init=new Order();
-                                //创建订单
-                                if (!TextUtils.isEmpty(descEdit.getText())) {
-                                    order_init .Establish_Order(TeacherActivity.this,uid, teacherId, Integer.parseInt(myid), coursefee, courseNumber, Integer.parseInt(courseId), Integer.parseInt(gradeId), servicetype,
-                                            User_id.getAddress(), User_id.getProvince(), User_id.getCity(), User_id.getStatus(),descEdit.getText().toString() );
-                                }else {
-                                    order_init.Establish_Order(TeacherActivity.this,uid, teacherId, Integer.parseInt(myid), coursefee, courseNumber, Integer.parseInt(courseId), Integer.parseInt(gradeId), servicetype,
-                                            User_id.getAddress(), User_id.getProvince(), User_id.getCity(), User_id.getStatus(),"" );
-                                }
-                                Toast.makeText(TeacherActivity.this,"购买课程成功",Toast.LENGTH_SHORT).show();
-                                new Getdata().sendMessage("有人购买了你的课程哦,快去看看吧",mobile);
-                                Intent intent=new Intent(TeacherActivity.this,MyOrderActivity.class);
-                                startActivity(intent);
-                            }
-                        }).setNegativeButton("否", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(TeacherActivity.this,"再看看别的老师吧~",Toast.LENGTH_SHORT).show();
-                    }
-                }).show();
-            }
-        });
-
-    }
-
-    //更新教师详细资料
     @Override
-    public void Updatecontent(Map<String, Object> map) {
-        jiaoyishuax.setVisibility(View.GONE);
-        String nickname = (String) map.get("nickname");
-        String resume = (String) map.get("resume");
-        username = (String) map.get("username");
-        signTv.setText(map.get("signature")+"");
-        address = map.get("address")+"";
-        mobile= (String) map.get("mobile");
-        String order_finish= (String) map.get("order_finish");
-        String order_working= (String) map.get("order_working");
-//        Glide.with(this).load((String)map.get("class_img")).into(iamgeview);
-        gerxues.setText(order_working);
-        dindan.setText(order_finish);
-        Requitext.setText(resume);
-        Requiname.setText(nickname);
-
-//        Log.e("aa","头像地址为"+map.get("user_headimg").toString());
-//        setbitmap(map.get("user_headimg").toString());
-
+    public void initData() {
+        teacher.Get_Teacher_detailed(Integer.parseInt(User_id.getUid()),
+                Integer.parseInt(User_id.getUid()),this,2,0);
     }
 
-    //更新listview
     @Override
-    public void Updatefee(List<Map<String, Object>> listmaps) {
-        listmap=listmaps;
-        kechengAdapter = new KechengAdapter(listmap, this);
-        gerrxxedintext.setAdapter(kechengAdapter);
-        setListViewHeightBasedOnChildren(gerrxxedintext);
-
+    public void initView() {
+        View view = getLayoutInflater().inflate(R.layout.layout_dialog_pick, null);
+        mPickDialog = new android.app.AlertDialog.Builder(this).setView(view).create();
+        imageAdd1.setOnClickListener(this);
+        imageAdd2.setOnClickListener(this);
+        backRl.setOnClickListener(this);
+        imageDel1.setOnClickListener(this);
+        imageDel2.setOnClickListener(this);
+        saveTv.setOnClickListener(this);
+        yearTv.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
+        switch (v.getId()){
+            case R.id.teacher_year:
+                AlertDialog.Builder serviceTypeDialog = new AlertDialog.Builder(TeacherActivity.this);
+                serviceTypeDialog.setIcon(R.drawable.add04);
+                serviceTypeDialog.setTitle("请选择服务类型");
+                //    指定下拉列表的显示数据
+                final String[] fuwuType = {"1年", "2年", "3年" ,"4年", "5年","6年","7年" ,"8年", "9年","10年",
+                        "11年", "12年", "13年" ,"14年", "15年","16年","17年" ,"18年", "19年","20年",
+                        "21年", "22年", "23年" ,"24年", "25年","26年","27年" ,"28年", "29年","30年",
+                        "31年", "32年", "33年" ,"34年", "35年","36年","37年" ,"38年", "39年","40年",
+                        "41年", "42年", "43年" ,"44年", "45年","46年","47年" ,"48年", "49年","50年"
 
-
-            case R.id.gerxxtoux:
-                if (userHeadUrl != null) {
-                    Intent intent2 = new Intent(TeacherActivity.this, PictureZoo.class);
-                    intent2.putExtra("hide",userHeadUrl);
-                    startActivity(intent2);
+                };
+                //    设置一个下拉的列表选择项
+                serviceTypeDialog.setItems(fuwuType, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        yearTv.setText(fuwuType[which]);
+//                        int years=Integer.parseInt(edit.getText().toString());
+                        teacher.Teacher_years(Integer.parseInt(User_id.getUid()),which+1);
+                    }
+                });
+                serviceTypeDialog.show();
+                break;
+            case R.id.teacher_save:
+                if (yearTv.getText().equals("请选择教龄")){
+                    Toast.makeText(this, "请完善学历", Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(specialEdit.getText())){
+                    Toast.makeText(this, "请完善特长", Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(other_1)&&TextUtils.isEmpty(other_2)){
+                    Toast.makeText(this, "请上传身份证", Toast.LENGTH_SHORT).show();
+                }else {
+                    teacher.Teacher_resume(Integer.parseInt(User_id.getUid()),descEdit.getText()+"");
+                    teacher.Teacher_speciality(Integer.parseInt(User_id.getUid()),specialEdit.getText()+"");
+                    finish();
                 }
+                break;
+            case R.id.teacher_del1:
+                new AlertDialog.Builder(TeacherActivity.this).setTitle("学了么提示!").setMessage("确认删除身份证书吗")
+                        .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                teacher.Teacher_update5(Integer.parseInt(User_id.getUid()),"");
+                                educationImage1.setImageResource(R.drawable.education_edit_bg);
+                                imageAdd1.setVisibility(View.VISIBLE);
+                            }
+                        }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                }).show();
                 break;
-            case R.id.gerxxxuexiquana:
-                //跳转成交率
-                Intent intent1 = new Intent(TeacherActivity.this, Closing.class);
-                intent1.putExtra("Requir_id",Requir_id+"");
-                startActivity(intent1);
+            case R.id.teacher_del2:
+                new AlertDialog.Builder(TeacherActivity.this).setTitle("学了么提示!").setMessage("确认删除证书吗")
+                        .setPositiveButton("是", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                teacher.Teacher_update6(Integer.parseInt(User_id.getUid()),"");
+                                educationImage2.setImageResource(R.drawable.education_edit_bg);
+                                imageAdd2.setVisibility(View.VISIBLE);
+                            }
+                        }).setNegativeButton("否", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).show();
                 break;
-            case R.id.userxinxi_back:
+            case R.id.teacher_back:
                 finish();
                 break;
-            case R.id.jiaoyi_jubao:
-                startActivity(JubaoActivity_.intent(this).extra("teacher_id",teacherId).get());
+            case R.id.teacher_add1:
+                flag = 1;
+                mPickDialog.show();
+                break;
+            case R.id.teacher_add2:
+                flag = 2;
+                mPickDialog.show();
+                break;
+            case R.id.picture_dialog_pick: {
+                selectPicFromLocal();
+                mPickDialog.dismiss();
+            }
+            break;
+            case R.id.camera_dialog_pick: {
+                if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED) {
+                    PermissionGen.with(this)
+                            .addRequestCode(100)
+                            .permissions(
+                                    android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                    android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                                    android.Manifest.permission.READ_PHONE_STATE,
+                                    android.Manifest.permission.CAMERA
+                            )
+                            .request();
+//
+                }else{
+//  定位
+                    selectPicFromCamera();
+                }
 
-                break;
-            case R.id.grfanhui:
-                TeacherActivity.this.finish();
-                break;
-            case R.id.gerxxxuexiquan:
-                //跳转成交率
-                Intent intent = new Intent(TeacherActivity.this, Closing.class);
-                intent.putExtra("Requir_id",Requir_id+"");
-                startActivity(intent);
-                break;
-            case R.id.gerjianjie:
-                //跳转个人简介
-                Intent i = new Intent(TeacherActivity.this, Teacher_personal.class);
-                i.putExtra("teacher_id", Requir_id + "");
-                i.putExtra("teacher_image",userHeadUrl);
-                startActivity(i);
-                break;
-            case R.id.pingjia:
-                //评价
-                Intent pj = new Intent(TeacherActivity.this, Teacher_evaluate.class);
-                pj.putExtra("teacher_id", Requir_id + "");
-                startActivity(pj);
-                break;
-            case R.id.bohao:
-                //拨号
-                Log.e("aa", "拨号成功");
-                Intent inte = new Intent(Intent.ACTION_DIAL);
-                inte.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                inte.setData(Uri.parse("tel:" + mobile));
-                startActivity(inte);
-                break;
-            case R.id.imageButton2:
-                //聊天
-//                Intent intent1 = new Intent(UserxinxiActivty.this, HuihuaActivity.class);
-                Intent intent2 = new Intent(TeacherActivity.this, ChatActivity.class);
-                intent2.putExtra(EaseConstant.EXTRA_USER_ID, mobile);
-                intent2.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
-                startActivity(intent2);
-                break;
-            case R.id.imageButton:
-                Toast.makeText(this, "已发送好友申请", Toast.LENGTH_SHORT).show();
-                new Thread(new Runnable() {
-                    public void run() {
-                        try {
-                            //demo use a hardcode reason here, you need let user to input if you like
-                            String s = getResources().getString(R.string.Add_a_friend);
-                            EMClient.getInstance().contactManager().addContact(username, s);
-                        } catch (final Exception e) {
-
-                        }
-                    }
-                }).start();
-                break;
+                mPickDialog.dismiss();
+            }
+            break;
         }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        selectPicFromCamera();
+    }
+
+    private void setuseryoux(File file){
+        new User_Realization().setuserbitmap(file,this,null);
+    }
+    /**
+     * select local image
+     */
+    protected void selectPicFromLocal() {
+        Intent intent;
+        if (Build.VERSION.SDK_INT < 19) {
+            intent = new Intent(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
+
+        } else {
+            intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        }
+        startActivityForResult(intent, REQUEST_CODE_LOCAL);
     }
 
     /**
-     * 动态设置ListView的高度
+     * capture new image
      */
-    public void setListViewHeightBasedOnChildren(ListView listView) {
-        if(listView == null)
-            return;
-        ListAdapter listAdapter = listView.getAdapter();
-        if (listAdapter == null) {
+    protected void selectPicFromCamera() {
+        if (!EaseCommonUtils.isSdcardExist()) {
+            Toast.makeText(this, com.hyphenate.easeui.R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
             return;
         }
-        int totalHeight = 0;
-        if (listAdapter.getCount()!=0) {
-            for (int i = 0; i < listAdapter.getCount(); i++) {
 
-                View listItem = listAdapter.getView(i, null, listView);
-                listItem.measure(0, 0);
-                totalHeight += listItem.getMeasuredHeight();
+        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
+                + System.currentTimeMillis() + ".jpg");
+        //noinspection ResultOfMethodCallIgnored
+        cameraFile.getParentFile().mkdirs();
+        startActivityForResult(
+                new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
+                REQUEST_CODE_CAMERA);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_CODE_CAMERA) { // capture new image
+                if (cameraFile != null && cameraFile.exists()) {
+                    setuseryoux(cameraFile);
+                }
+
+            }else if (requestCode == REQUEST_CODE_LOCAL) { // send local image
+                Uri selectedImage = data.getData();
+                if (selectedImage != null) {
+                    sendPicByUri(selectedImage);
+                }
+
             }
-            ViewGroup.LayoutParams params = listView.getLayoutParams();
-            params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-            listView.setLayoutParams(params);
+
         }
     }
 
-    @Override
-    public void upcontent(Map<String,Object> map) {
-        gerxxxuexiquan.setText((int)(Double.parseDouble(map.get("comp_rate")+"")*100)+"%");
-    }
 
     @Override
-    public void successTuijian(List<Map<String, Object>> maps) {
+    public void setListview(List<Map<String, Object>> listmap) {
 
     }
 
     @Override
-    public void failTuijian(String msg) {
+    public void setListview1(List<Map<String, Object>> listmap) {
+        if (flag == 1){
+            teacher.Teacher_update5(Integer.parseInt(User_id.getUid()), listmap.get(0).get("imageurl")+"");
+            other_1 = listmap.get(0).get("imageurl")+"";
+            Glide.with(getApplicationContext()).load(listmap.get(0).get("imageurl")+"").into(educationImage1);
+            imageAdd1.setVisibility(View.GONE);
+        }else {
+            other_2 = listmap.get(0).get("imageurl")+"";
+            teacher.Teacher_update6(Integer.parseInt(User_id.getUid()), listmap.get(0).get("imageurl")+"");
+            Glide.with(getApplicationContext()).load(listmap.get(0).get("imageurl")).into(educationImage2);
+            imageAdd2.setVisibility(View.GONE);
+        }
+        Toast.makeText(this,"更新成功",Toast.LENGTH_LONG).show();
+    }
+
+    public static File byte2File(byte[] buf, String filePath, String fileName)
+    {
+        BufferedOutputStream bos = null;
+        FileOutputStream fos = null;
+        File file = null;
+        try
+        {
+            File dir = new File(filePath);
+            if (!dir.exists() && dir.isDirectory())
+            {
+                dir.mkdirs();
+            }
+            file = new File(filePath + File.separator + fileName);
+            fos = new FileOutputStream(file);
+            bos = new BufferedOutputStream(fos);
+            bos.write(buf);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            if (bos != null)
+            {
+                try
+                {
+                    bos.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            if (fos != null)
+            {
+                try
+                {
+                    fos.close();
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return file;
+    }
+    //bitmap转字节流
+    public byte[] Bitmap2Bytes(Bitmap bm){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        return baos.toByteArray();
+    }
+
+    @Override
+    public void Updatecontent(Map<String, Object> map) {
+        if (!TextUtils.isEmpty(map.get("speciality")+"")){
+            specialEdit.setText(map.get("speciality")+"");
+        }
+        if (!TextUtils.isEmpty(map.get("years")+"年")){
+            yearTv.setText(map.get("years")+"年");
+        }
+        if (!TextUtils.isEmpty(map.get("resume")+"")){
+            descEdit.setText(map.get("resume")+"");
+        }
+
+
+        if (!TextUtils.isEmpty(map.get("others_5")+"")){
+            other_1 = map.get("others_5")+"";
+            Glide.with(getApplicationContext()).load(map.get("others_5")+"").into(educationImage1);
+            imageAdd1.setVisibility(View.GONE);
+            if (map.get("is_passed").equals("1")){
+                imageDel1.setVisibility(View.GONE);
+            }else {
+                imageDel1.setVisibility(View.VISIBLE);
+            }
+        }else {
+            imageAdd1.setVisibility(View.VISIBLE);
+            imageDel1.setVisibility(View.VISIBLE);
+        }
+        if (!TextUtils.isEmpty(map.get("others_6")+"")){
+            other_2 = map.get("others_6")+"";
+            Glide.with(getApplicationContext()).load(map.get("others_6")+"").into(educationImage2);
+            imageAdd2.setVisibility(View.GONE);
+            if (map.get("is_passed").equals("1")){
+                imageDel2.setVisibility(View.GONE);
+            }else {
+                imageDel2.setVisibility(View.VISIBLE);
+            }
+        }else {
+            imageAdd2.setVisibility(View.VISIBLE);
+            imageDel2.setVisibility(View.VISIBLE);
+        }
 
     }
+
+    @Override
+    public void Updatefee(List<Map<String, Object>> listmap) {
+
+    }
+
+    /**
+     * send image
+     *
+     * @param selectedImage
+     */
+    protected void sendPicByUri(Uri selectedImage) {
+        String[] filePathColumn = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            cursor = null;
+
+            if (picturePath == null || picturePath.equals("null")) {
+                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                return;
+            }
+            setuseryoux(new File(picturePath));
+        } else {
+            File file = new File(selectedImage.getPath());
+            if (!file.exists()) {
+                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                return;
+
+            }
+            setuseryoux(file);
+        }
+
+    }
+
 }

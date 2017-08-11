@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
 import com.hyphenate.util.FileUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 
@@ -488,7 +489,7 @@ public class User_Realization implements User_init {
 
     //上传图片
     @Override
-    public void setuserbitmap(File file, final Student_init student_init) {
+    public void setuserbitmap(File file, final Student_init student_init, final ChangeOrderView changeOrderView) {
         Bitmap bitmap=compressImageFromFile(file.getPath());
         File f = new File("/sdcard/namecard/");
         if (f.exists()) {
@@ -524,6 +525,7 @@ public class User_Realization implements User_init {
                     if (student_init==null) {
                         //更新用户头像
                         Updateheadimg(id, hemaign);
+                        changeOrderView.successOrder(hemaign);
                     }else {
                         Map<String,Object> map=new HashMap<String, Object>();
                         map.put("imageurl",hemaign);

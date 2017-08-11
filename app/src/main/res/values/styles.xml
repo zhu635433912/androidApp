@@ -100,10 +100,11 @@
         <item name="android:minWidth">40dp</item>
     </style>
     <style name="manager_text_style">
+        <item name="android:textColor">#000000</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">40px</item>
-        <item name="android:layout_marginLeft">50px</item>
+        <item name="android:layout_marginLeft">35px</item>
         <item name="android:layout_gravity">center_vertical</item>
     </style>
 </resources>

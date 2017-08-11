@@ -12,9 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="100px">
         <RelativeLayout
-            android:id="@+id/education_back"
             android:layout_width="120px"
             android:layout_height="100px">
+
             <ImageButton
                 android:layout_marginLeft="30px"
                 android:layout_marginTop="25px"
@@ -23,17 +23,29 @@
                 android:background="@drawable/add19"
                 android:layout_width="30px"
                 android:layout_height="40px" />
+            <RelativeLayout
+                android:id="@+id/manager_back"
+                android:layout_width="120px"
+                android:layout_height="100px">
+        </RelativeLayout>
         </RelativeLayout>
         <TextView
             android:paddingRight="60px"
             android:gravity="center"
             android:textSize="40px"
-            android:layout_marginTop="20px"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:text="课程管理"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/manager_fabu"
+            android:gravity="center"
+            android:text="发布"
+            android:textSize="40px"
+            android:layout_width="100px"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <View
@@ -42,5 +54,9 @@
         android:layout_width="match_parent"
         android:layout_height="1px" />
 
-
+    <ListView
+        android:id="@+id/manager_list"
+        android:divider="@null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

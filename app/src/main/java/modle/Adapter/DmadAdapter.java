@@ -83,7 +83,7 @@ public class DmadAdapter extends RecyclerView.Adapter<DmadAdapter.MyViewHolder> 
             }
         }
         if (listmap.get(position).get("publisher_headimg") != null) {
-            Glide.with(context).load(listmap.get(position).get("publisher_headimg").toString())
+            Glide.with(context.getApplicationContext()).load(listmap.get(position).get("publisher_headimg").toString())
                     .transform(new GlideCircleTransform(context)).into(holder.lognhost);
         }
         if (listmap.get(position).get("grade_name")!=null) {

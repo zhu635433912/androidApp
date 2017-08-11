@@ -42,6 +42,9 @@ import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.utils.SubjectUtil;
 import com.deguan.xuelema.androidapp.viewimpl.TurnoverView;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.hyphenate.util.PathUtil;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 
@@ -414,7 +417,7 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
 
                                         Toast.makeText(Teacher_management.this, "增加课程成功", Toast.LENGTH_SHORT).show();
                                     }else {
-                                        Toast.makeText(Teacher_management.this, "请完善信息等待审核通过", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Teacher_management.this, "请完善教师管理信息等待审核通过", Toast.LENGTH_SHORT).show();
                                     }
                                     //刷新课程
 //                                    getmCourse();
@@ -470,22 +473,22 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
             case R.id.zhengshu_dialog_pick:
 
                 flag = 1 ;
-                new User_Realization().setuserbitmap(image,this);
+                new User_Realization().setuserbitmap(image,this,null);
                 zhengshuDialog.dismiss();
                 break;
             case R.id.zhengshu2_dialog_pick:
                 flag = 2;
-                new User_Realization().setuserbitmap(image,this);
+                new User_Realization().setuserbitmap(image,this,null);
                 zhengshuDialog.dismiss();
                 break;
             case R.id.shenfen_dialog_pick:
                 flag = 1;
-                new User_Realization().setuserbitmap(image,this);
+                new User_Realization().setuserbitmap(image,this,null);
                 shenfenDialog.dismiss();
                 break;
             case R.id.shenfen2_dialog_pick:
                 flag = 2;
-                new User_Realization().setuserbitmap(image,this);
+                new User_Realization().setuserbitmap(image,this,null);
                 shenfenDialog.dismiss();
                 break;
             case R.id.picture_dialog_pick: {
@@ -619,37 +622,39 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         if (classimage != null){
 //            Glide.with(this).load(classimage).into(classImage);
         }
-        Glide.with(this).load(map.get("others_5")).into(postuserimage1);
-        Glide.with(this).load(map.get("others_6")).into(postuserimage2);
+        Glide.with(getApplicationContext()).load(map.get("others_5")).into(postuserimage1);
+        Glide.with(getApplicationContext()).load(map.get("others_6")).into(postuserimage2);
 
         //判断服务器返回是否由照片
        if (others_1!=null&&others_2!=null){
 //        String[] ot1={others_1,others_2};
 //           setbitmap(ot1);/
-           Glide.with(this).load(others_1).into(xueliImage1);
-           Glide.with(this).load(others_2).into(xueliImage2);
+           Glide.with(getApplicationContext()).load(others_1).into(xueliImage1);
+           Glide.with(getApplicationContext()).load(others_2).into(xueliImage2);
        }else if (others_1!=null){
 //           String[] ot1={others_1};
 //           setbitmap(ot1);
-           Glide.with(this).load(others_1).into(xueliImage1);
+           Glide.with(getApplicationContext()).load(others_1).into(xueliImage1);
        }else {
 //           String[] ot1={others_2};
 //           setbitmap(ot1);
-           Glide.with(this).load(others_2).into(xueliImage2);
+           Glide.with(getApplicationContext()).load(others_2).into(xueliImage2);
        }
 //        判断服务器返回是否有照片
         if (others_3!=null&&others_4!=null){
-            Glide.with(this).load(others_3).into(rongyuImage1);
-            Glide.with(this).load(others_4).into(rongyuImage2);
+            Glide.with(getApplicationContext()).load(others_3).into(rongyuImage1);
+            Glide.with(getApplicationContext()).load(others_4).into(rongyuImage2);
         }else if (others_3!=null){
-            Glide.with(this).load(others_3).into(rongyuImage1);
+            Glide.with(getApplicationContext()).load(others_3).into(rongyuImage1);
         }else {
-            Glide.with(this).load(others_4).into(rongyuImage2);
+            Glide.with(getApplicationContext()).load(others_4).into(rongyuImage2);
         }
 
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
         // 回调成功
         if (resultCode == RESULT_OK) {
             String filePath = null;
@@ -676,15 +681,12 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
                     zhengshuDialog.show();
 //                    user_init.setuserbitmap(image,this);
                 }else if(TAGE_ISRONT == 3){
-                    new User_Realization().setuserbitmap(image,this);
+                    new User_Realization().setuserbitmap(image,this,null);
                 }else if (TAGE_ISRONT == 2){
                     zhengshuDialog.show();
                 }else if (TAGE_ISRONT==4){
                     shenfenDialog.show();
                 }
-
-
-
             }
         }
     }
@@ -733,25 +735,38 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         return image;
 
     }
+    protected File cameraFile;
 
     private void dispatchTakePictureIntent() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // 判断系统中是否有处理该Intent的Activity
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            // 创建文件来保存拍的照片
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // 异常处理
-            }
-            if (photoFile != null) {
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
-            }
-        } else {
-            showToast("无法启动相机");
+        if (!EaseCommonUtils.isSdcardExist()) {
+            Toast.makeText(this, com.hyphenate.easeui.R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
+                + System.currentTimeMillis() + ".jpg");
+        //noinspection ResultOfMethodCallIgnored
+        cameraFile.getParentFile().mkdirs();
+        startActivityForResult(
+                new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
+                REQUEST_IMAGE_CAPTURE);
+//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        // 判断系统中是否有处理该Intent的Activity
+//        if (intent.resolveActivity(getPackageManager()) != null) {
+//            // 创建文件来保存拍的照片
+//            File photoFile = null;
+//            try {
+//                photoFile = createImageFile();
+//            } catch (IOException ex) {
+//                // 异常处理
+//            }
+//            if (photoFile != null) {
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+//                startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
+//            }
+//        } else {
+//            showToast("无法启动相机");
+//        }
     }
 
     private void showToast(String msg) {
@@ -839,12 +854,12 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         if (TAGE_ISRONT == 1) {
             if (flag == 1) {
                 teacher_init.Teacher_update(uid, map.get("imageurl").toString());
-                Glide.with(this).load(map.get("imageurl")).into(xueliImage1);
+                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(xueliImage1);
 //                Glide.with(this).load(map.get("imageurl")).into(tianjiaxueli);
             } else if (flag == 2) {
                 teacher_init.Teacher_update2(uid, map.get("imageurl").toString());
 //                Glide.with(this).load(map.get("imageurl")).into(classImage);
-                Glide.with(this).load(map.get("imageurl")).into(xueliImage2);
+                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(xueliImage2);
             }
         }else if (TAGE_ISRONT == 3){
             teacher_init.Teacher_updateSubjectBg(uid, map.get("imageurl").toString());
@@ -852,20 +867,20 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         }else if (TAGE_ISRONT == 2){
             if (flag == 1) {
                 teacher_init.Teacher_update3(uid, map.get("imageurl").toString());
-                Glide.with(this).load(map.get("imageurl")).into(rongyuImage1);
+                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(rongyuImage1);
 //                Glide.with(this).load(map.get("imageurl")).into(tianjiaxueli);
             } else if (flag == 2) {
                 teacher_init.Teacher_update4(uid, map.get("imageurl").toString());
 //                Glide.with(this).load(map.get("imageurl")).into(classImage);
-                Glide.with(this).load(map.get("imageurl")).into(rongyuImage2);
+                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(rongyuImage2);
             }
         }else if (TAGE_ISRONT == 4){
             if (flag == 1) {
                 teacher_init.Teacher_update5(uid, map.get("imageurl").toString());
-                Glide.with(this).load(map.get("imageurl")).into(postuserimage1);
+                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(postuserimage1);
             }else  if (flag == 2){
                 teacher_init.Teacher_update6(uid, map.get("imageurl").toString());
-                Glide.with(this).load(map.get("imageurl")).into(postuserimage2);
+                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(postuserimage2);
             }
 
         }

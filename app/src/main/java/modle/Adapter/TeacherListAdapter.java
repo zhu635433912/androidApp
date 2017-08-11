@@ -91,7 +91,7 @@ public class TeacherListAdapter extends ListBaseAdapter {
         holder.username.setText("" + list.get(position).getSignature());
 
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
-        Glide.with(context).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+        Glide.with(context.getApplicationContext()).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
         String dist = list.get(position).getDistance();
         holder.stats.setText(""+list.get(position).getStatus2());
         double myDist = 0;

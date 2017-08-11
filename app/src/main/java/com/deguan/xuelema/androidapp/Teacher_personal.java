@@ -104,7 +104,7 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
         //获取教师详细资料
         teacher_init.Get_Teacher_detailed(uid,teacher_id,this,0,0);
         if (!TextUtils.isEmpty(headUrl)) {
-            Glide.with(this).load(headUrl).transform(new GlideCircleTransform(this)).into(teachertoux);
+            Glide.with(getApplicationContext()).load(headUrl).transform(new GlideCircleTransform(this)).into(teachertoux);
         }
     }
 
@@ -180,11 +180,11 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
 //        teachername.setText(map.get("nickname").toString()+"");
         if (map.get("others_1")!=null) {
             xueliUrl = map.get("others_1").toString() + "";
-            Glide.with(this).load(xueliUrl).into(xueliImage);
+            Glide.with(getApplicationContext()).load(xueliUrl).into(xueliImage);
         }
         if (map.get("others_3")!=null) {
             zhengshuUrl = map.get("others_3").toString() + "";
-            Glide.with(this).load(zhengshuUrl).into(zhengshuImage);
+            Glide.with(getApplicationContext()).load(zhengshuUrl).into(zhengshuImage);
         }
     }
 

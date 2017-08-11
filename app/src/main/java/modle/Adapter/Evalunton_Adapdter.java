@@ -53,7 +53,7 @@ public class Evalunton_Adapdter extends ListBaseAdapter {
             convertView.setTag(viewhod);
         }
             viewhod= (Viewhod) convertView.getTag();
-        Glide.with(context)
+        Glide.with(context.getApplicationContext())
                 .load(listmap.get(position).get("headimg").toString())
                 .transform(new GlideCircleTransform(context))
                 .into(viewhod.evalunton_name);

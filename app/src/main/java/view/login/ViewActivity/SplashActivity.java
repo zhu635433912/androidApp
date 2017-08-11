@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 
 import com.deguan.xuelema.androidapp.NewMainActivity_;
@@ -23,19 +24,22 @@ import java.util.List;
 
 import modle.Adapter.My_PagerAdapter;
 import modle.user_ziliao.User_id;
+import view.login.Modle.MobileView;
+import view.login.Modle.RegisterUtil;
 
 /**
  * 首次进入引导页面
  * Created by Administrator on 2017/6/4.
  */
 
-public class SplashActivity extends AutoLayoutActivity implements View.OnClickListener {
+public class SplashActivity extends AutoLayoutActivity implements View.OnClickListener, MobileView {
     private SharedPreferences sp1 = null;
     private SharedPreferences sp = null;
     private ViewPager viewpager;
     private View view1,view2,view3;
     private List<View> listview;
     private ImageButton jinru;
+    private Intent intent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -129,7 +133,7 @@ public class SplashActivity extends AutoLayoutActivity implements View.OnClickLi
                 String nickname = sp1.getString("nickname","t");
 //                intent.putExtra("id", id);
 //                intent.putExtra("role", role);
-                Intent intent = NewMainActivity_.intent(this).extra("id",id).extra("role",role).get();
+                intent = NewMainActivity_.intent(this).extra("id",id).extra("role",role).get();
                 User_id.setRole(role);
                 User_id.setUid(id);
                 User_id.setPassword(password);
@@ -143,8 +147,8 @@ public class SplashActivity extends AutoLayoutActivity implements View.OnClickLi
                 } catch (HyphenateException e) {
                     e.printStackTrace();
                 }
-                startActivity(intent);
-                this.finish();
+                new RegisterUtil().getLogin(username,password,this);
+
             }
             //状态改变
 
@@ -157,5 +161,20 @@ public class SplashActivity extends AutoLayoutActivity implements View.OnClickLi
 
         }
 
+    }
+
+    @Override
+    public void successRegister(String msg) {
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public void failRegister(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        //进入登录页面
+        Intent intent = new Intent(SplashActivity.this, LoginAcitivity.class);
+        startActivity(intent);
+        finish();
     }
 }

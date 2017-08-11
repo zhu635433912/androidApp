@@ -395,5 +395,26 @@ public class Order implements Order_init {
         });
     }
 
+    public void complete_order(int order_id, String content, String evaluate, String img1, String img2, String img3, String img4, final ChangeOrderView changeOrderView){
+        Call<Demtest> call=oredr_http.completeOrder(order_id,content,evaluate,img1,img2,img3,img4);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    changeOrderView.successOrder("已提交完成授课");
+//                    Log.e("aa","订单退款成功");
+                }else {
+                    String errmsg=response.body().getErrmsg();
+//                    Log.e("aa","评论退款失败="+errmsg);
+                    changeOrderView.successOrder(errmsg);
+                }
+            }
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                changeOrderView.failOrder("网络错误");
 
+            }
+        });
+    }
 }

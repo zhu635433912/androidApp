@@ -89,7 +89,7 @@ public class TuijianAdapter extends ListBaseAdapter {
         holder.speciality.setText(""+list.get(position).getSpeciality());
         holder.username.setText(""+list.get(position).getUsername());
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
-        Glide.with(context).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+        Glide.with(context.getApplicationContext()).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
         String dist = list.get(position).getDistance();
         double myDist = 0;
         if (!dist.equals("")){

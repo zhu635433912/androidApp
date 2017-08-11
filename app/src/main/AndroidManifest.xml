@@ -953,7 +953,7 @@
             android:label="@string/title_activity_new_huanxin_main"
             android:theme="@style/AppTheme" />
         <activity android:name=".RefoundActivity_" />
-        <activity android:name=".TeacherActivity" />
+        <activity android:name=".TeacherActivity_" />
         <activity android:name=".AmapActivity" />
         <activity android:name=".TeacherManActivity_" />
         <activity android:name=".EducationActivity_" />

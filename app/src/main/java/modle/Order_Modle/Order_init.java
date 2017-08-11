@@ -101,5 +101,6 @@ public interface Order_init {
     //退款
     public void submit_refund(int uid,int id,int status,String refund_fee,String reason,String desc,String imgs1,String imgs2,String imgs3,String imgs4,ChangeOrderView changeOrderView);
 
-
+    //教师完成授课
+    public void complete_order(int order_id,String content,String evaluate,String img1,String img2,String img3,String img4,ChangeOrderView changeOrderView);
 }

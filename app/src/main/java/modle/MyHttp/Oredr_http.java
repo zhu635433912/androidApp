@@ -96,4 +96,10 @@ public interface Oredr_http {
     Call<Demtest> submitRefund(@Query("uid") int uid,@Query("id")int id,@Query("status")int status,
                                @Query("refund_fee")String refund_fee,@Query("reason")String reason,@Query("desc")String desc,
                                @Query("imgs1")String imgs1,@Query("imgs2")String imgs2,@Query("imgs3")String imgs3,@Query("imgs4")String imgs4);
+
+    @POST("index.php?s=/Service/Order/submit_refund")
+    Call<Demtest> completeOrder(@Query("id") int uid,
+                               @Query("content")String content,@Query("evaluate")String evaluate,
+                               @Query("img1")String img1,@Query("img2")String img2,@Query("img3")String img3,@Query("img4")String img4);
+
 }

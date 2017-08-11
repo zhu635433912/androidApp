@@ -32,6 +32,7 @@ import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
+import com.hyphenate.EMContactListener;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMCmdMessageBody;
@@ -53,7 +54,9 @@ import java.util.Map;
 import modle.Adapter.HomeTitleAdapter;
 import modle.Demand_Modle.Demand;
 import modle.Demand_Modle.Demand_init;
+import modle.Huanxing.db.InviteMessgeDao;
 import modle.Huanxing.ui.GroupsActivity;
+import modle.Huanxing.ui.NewHuanxinMainActivity;
 import modle.toos.CircleImageView;
 import modle.user_Modle.User_Realization;
 import modle.user_Modle.User_init;
@@ -73,6 +76,10 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     private User_init user_init;
     private int TAGE_IRONG=0;
 
+
+
+    @ViewById(R.id.unread_message_number)
+    TextView unreadAddressLable;
     @ViewById(R.id.unread_address_number)
     TextView unreadLabel;
     @ViewById(R.id.new_student_viewpage)
@@ -138,6 +145,7 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         stidentshezhiimabt.setOnClickListener(this);
         studentChatImage.setOnClickListener(this);
         studentMychatImage.setOnClickListener(this);
+
     }
 
     @Override
@@ -174,7 +182,9 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
                 }
             }
         }).start();
+        inviteMessgeDao = new InviteMessgeDao(getContext());
         registerBroadcastReceiver();
+        EMClient.getInstance().contactManager().setContactListener(new MyContactListener());
     }
 
     @Override
@@ -241,7 +251,7 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     }
     @Subscriber(tag = "headUrl")
     public void updateHead(File msg){
-        Glide.with(this).load(msg).transform(new GlideCircleTransform(getActivity())).into(studenttouxiangimg);
+        Glide.with(getContext().getApplicationContext()).load(msg).transform(new GlideCircleTransform(getActivity())).into(studenttouxiangimg);
     }
 
     @Subscriber(tag = "update")
@@ -253,7 +263,7 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         if(map.get("nickname").toString()!=null) {
             studentusernametext.setText(map.get("nickname")+"");
             studentneirongtext.setText(map.get("signature")+"");
-            Glide.with(this).load(map.get("headimg").toString()).transform(new GlideCircleTransform(getActivity())).into(studenttouxiangimg);
+            Glide.with(getContext().getApplicationContext()).load(map.get("headimg").toString()).transform(new GlideCircleTransform(getActivity())).into(studenttouxiangimg);
         }
     }
 
@@ -278,7 +288,7 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
     public void onResume() {
         super.onResume();
         updateUnreadLabel();
-
+        updateUnreadAddressLable();
     }
 
     @Subscriber(tag = "refresh")
@@ -291,7 +301,47 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
             unreadLabel.setVisibility(View.INVISIBLE);
         }
     }
-
+    @Subscriber(tag = "refresh1")
+    public void getrefresh1(String msg){
+        final int count = getUnreadAddressCountTotal();
+        if (count > 0) {
+            unreadAddressLable.setText(count +"");
+            unreadAddressLable.setVisibility(View.VISIBLE);
+        } else {
+            unreadAddressLable.setVisibility(View.INVISIBLE);
+        }
+    }
+    private InviteMessgeDao inviteMessgeDao;
+    /**
+     * get unread event notification count, including application, accepted, etc
+     *
+     * @return
+     */
+    public int getUnreadAddressCountTotal() {
+        int unreadAddressCountTotal = 0;
+        unreadAddressCountTotal = inviteMessgeDao.getUnreadMessagesCount();
+        return unreadAddressCountTotal;
+    }
+    /**
+     * update the total unread count
+     */
+    public void updateUnreadAddressLable() {
+        EventBus.getDefault().post("123","refresh1");
+    }
+    public class MyContactListener implements EMContactListener {
+        @Override
+        public void onContactAdded(String username) {}
+        @Override
+        public void onContactDeleted(final String username) {
+            updateUnreadAddressLable();
+        }
+        @Override
+        public void onContactInvited(String username, String reason) {}
+        @Override
+        public void onFriendRequestAccepted(String username) {}
+        @Override
+        public void onFriendRequestDeclined(String username) {}
+    }
     public void updateUnreadLabel() {
         EventBus.getDefault().post("123","refresh");
     }
@@ -308,7 +358,7 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
             @Override
             public void onReceive(Context context, Intent intent) {
                 updateUnreadLabel();
-//                updateUnreadAddressLable();
+                updateUnreadAddressLable();
 
                 String action = intent.getAction();
                 if(action.equals(Constant.ACTION_GROUP_CHANAGED)){
@@ -327,6 +377,18 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         };
         broadcastManager.registerReceiver(broadcastReceiver, intentFilter);
     }
+
+
+
+    private void refreshUIWithMessage() {
+        getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                // refresh unread count
+                updateUnreadLabel();
+
+            }
+        });
+    }
     EMMessageListener messageListener = new EMMessageListener() {
 
         @Override
@@ -344,7 +406,6 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
             for (EMMessage message : messages) {
                 EMCmdMessageBody cmdMsgBody = (EMCmdMessageBody) message.getBody();
             }
-
             refreshUIWithMessage();
         }
 
@@ -359,15 +420,5 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         @Override
         public void onMessageChanged(EMMessage message, Object change) {}
     };
-
-    private void refreshUIWithMessage() {
-        getActivity().runOnUiThread(new Runnable() {
-            public void run() {
-                // refresh unread count
-                updateUnreadLabel();
-
-            }
-        });
-    }
 
 }

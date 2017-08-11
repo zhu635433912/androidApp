@@ -36,12 +36,9 @@
         android:id="@+id/fankuineirong"
         android:hint="请简要描述您的问题和意见"
         android:textSize="30px"
-        android:enabled="true"
         android:gravity="top"
-        android:minLines="8"
         android:maxLines="10"
-        android:scrollbars="vertical"
-        android:inputType="textLongMessage"
+        android:inputType="textMultiLine"
         android:layout_below="@+id/xuqiufenggexian"
         android:layout_width="700px"
         android:layout_height="400px" />

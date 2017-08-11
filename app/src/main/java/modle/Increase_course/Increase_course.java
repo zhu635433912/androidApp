@@ -40,6 +40,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import view.login.Modle.MobileView;
+import view.login.Modle.RegisterView;
 import view.login.presenter.S_wan_presenter;
 
 /**
@@ -117,6 +119,29 @@ public class Increase_course {
 
     }
 
+    public void deleteCourse(int uid, int course_id, final MobileView registerView){
+        Call<Demtest> call=releaseCourseHttp.delect(uid,course_id);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    Log.e("aa","删除课程成功");
+                    registerView.successRegister(response.body().getErrmsg());
+                }else {
+                    registerView.failRegister(response.body().getErrmsg());
+                    Log.e("aa","删除课程失败"+response.body().getErrmsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                registerView.failRegister("网络错误");
+                Log.e("aa","删除课程异常错误");
+            }
+        });
+    }
+
     //删除课程
     public void Delect(int uid, int course_id, final Teacher_management teacher_management){
        Call<Demtest> call=releaseCourseHttp.delect(uid,course_id);
@@ -124,7 +149,7 @@ public class Increase_course {
             @Override
             public void onResponse(Call<Demtest> call, Response<Demtest> response) {
                 String error=response.body().getError();
-                if (error.equals("no")){
+                if (error.equals("ok")){
                     Log.e("aa","删除课程成功");
                     teacher_management.getmCourse();
                 }else {

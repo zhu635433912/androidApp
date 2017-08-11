@@ -36,6 +36,7 @@
         <TextView
             android:id="@+id/kechengfeee"
             android:layout_marginRight="20px"
+            android:textColor="#fd0ba9"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:text="40元/时"

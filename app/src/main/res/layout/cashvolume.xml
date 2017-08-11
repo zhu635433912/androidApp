@@ -44,7 +44,7 @@
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             android:textSize="80px"
-            android:text="200"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -60,7 +60,7 @@
             android:layout_marginTop="20px"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/tuiguangjine"
-            android:text="共推广了40人"
+            android:text="共推广了0人"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
@@ -74,6 +74,7 @@
             android:layout_height="50px" />
     </RelativeLayout>
     <TextView
+        android:visibility="gone"
         android:id="@+id/tixianjieshao"
         android:textSize="30px"
         android:layout_centerHorizontal="true"

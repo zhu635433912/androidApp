@@ -1,6 +1,7 @@
 package com.deguan.xuelema.androidapp;
 
 import android.*;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -34,6 +36,9 @@ import com.deguan.xuelema.androidapp.init.Ordercontent_init;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.hyphenate.util.PathUtil;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
@@ -98,6 +103,13 @@ public class RefoundActivity extends MyBaseActivity implements View.OnClickListe
     private String mCurrentPhotoPath;
     private static final int REQUEST_IMAGE_GET = 0;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+    protected File cameraFile;
+    protected static final int REQUEST_CODE_CAMERA = 2;
+    protected static final int REQUEST_CODE_LOCAL = 3;
+    private static final int REQUESTCODE_CUTTING = 4;
+    private android.app.AlertDialog mPickDialog;
+    private int flag = 1;
+
     private int TAGE_ISRONT;
     private File image;
     private String imageurl1 = "";
@@ -229,21 +241,21 @@ public class RefoundActivity extends MyBaseActivity implements View.OnClickListe
                             )
                             .request();
                 }else{
-                    dispatchTakePictureIntent();
+                    selectPicFromCamera();
                 }
-                TAGE_ISRONT = 1;
+                flag = 1;
                 break;
             case R.id.refund_picture2:
-                selectImage();
-                TAGE_ISRONT = 2;
+                selectPicFromLocal();
+                flag = 2;
                 break;
             case R.id.refund_picture3:
-                selectImage();
-                TAGE_ISRONT = 3;
+                selectPicFromLocal();
+                flag = 3;
                 break;
             case R.id.refund_picture4:
-                selectImage();
-                TAGE_ISRONT = 4;
+                selectPicFromLocal();
+                flag = 4;
                 break;
             case R.id.refund_sure_btn:
                 if (TextUtils.isEmpty(reasonEdit.getText())){
@@ -270,50 +282,20 @@ public class RefoundActivity extends MyBaseActivity implements View.OnClickListe
         refundOrderfeeTv.setText("￥"+map.get("order_price"));
 //        refund_fee = map.get("order_fee")+"";
     }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // 回调成功
-        if (resultCode == RESULT_OK) {
-            String filePath = null;
-            //判断是哪一个的回调
-            if (requestCode == REQUEST_IMAGE_GET) {
-                //返回的是content://的样式
-                filePath = getFilePathFromContentUri(data.getData(), this);
-            } else if (requestCode == REQUEST_IMAGE_CAPTURE) {
-                if (mCurrentPhotoPath != null) {
-                    filePath = mCurrentPhotoPath;
-                }
-            }
-            //图片设置问题
-            if (!TextUtils.isEmpty(filePath)) {
-                //文件路劲是有的
-                // 自定义大小，防止OOM
-                Bitmap bitmap = getSmallBitmap(filePath, 600, 600);
-                //获取图片
-                //image空
-//                Log.e("aa","路劲为"+filePath);
-                User_init user_init=new User_Realization();
-                image=new File(filePath);
-//                if (TAGE_ISRONT==1){
-//                     user_init.setuserbitmap(image,this);
-//                }else if(TAGE_ISRONT == 3){
-//                    user_init.setuserbitmap(image,this);
-//                }else if (TAGE_ISRONT == 2){
-//                    user_init.setuserbitmap(image,this);
-//                }else if (TAGE_ISRONT==4){
-                    user_init.setuserbitmap(image,this);
-//                }
-            }
-        }
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
+        selectPicFromCamera();
     }
 
+    private void setuseryoux(File file){
+        new User_Realization().setuserbitmap(file,this,null);
+    }
     /**
-     * 从相册中获取
+     * select local image
      */
-    public void selectImage() {
-//        Intent pickIntent = new Intent(Intent.ACTION_PICK,null);
-//        pickIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-//        startActivityForResult(pickIntent, REQUEST_IMAGE_GET);
+    protected void selectPicFromLocal() {
         Intent intent;
         if (Build.VERSION.SDK_INT < 19) {
             intent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -322,110 +304,43 @@ public class RefoundActivity extends MyBaseActivity implements View.OnClickListe
         } else {
             intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         }
-        startActivityForResult(intent, REQUEST_IMAGE_GET);
-
+        startActivityForResult(intent, REQUEST_CODE_LOCAL);
     }
-
 
     /**
-     * 创建新文件
-     * @return
-     * @throws IOException
+     * capture new image
      */
-    private File createImageFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyy").format(new Date());
-        String imageFileName = "" + timeStamp + "_";
-        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        image = File.createTempFile(imageFileName,  /* 文件名 */
-                ".jpg",         /* 后缀 */
-                storageDir      /* 路径 */
+    protected void selectPicFromCamera() {
+        if (!EaseCommonUtils.isSdcardExist()) {
+            Toast.makeText(this, com.hyphenate.easeui.R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        );
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
-
+        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
+                + System.currentTimeMillis() + ".jpg");
+        //noinspection ResultOfMethodCallIgnored
+        cameraFile.getParentFile().mkdirs();
+        startActivityForResult(
+                new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
+                REQUEST_CODE_CAMERA);
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == REQUEST_CODE_CAMERA) { // capture new image
+                if (cameraFile != null && cameraFile.exists()) {
+                    setuseryoux(cameraFile);
+                }
 
-    private void dispatchTakePictureIntent() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // 判断系统中是否有处理该Intent的Activity
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            // 创建文件来保存拍的照片
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // 异常处理
+            }else if (requestCode == REQUEST_CODE_LOCAL) { // send local image
+                Uri selectedImage = data.getData();
+                if (selectedImage != null) {
+                    sendPicByUri(selectedImage);
+                }
             }
-            if (photoFile != null) {
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                startActivityForResult(intent,REQUEST_IMAGE_CAPTURE);
-            }
-        } else {
-            showToast("无法启动相机");
+
         }
-    }
-
-    private void showToast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * @param uri     content:// 样式
-     * @param context
-     * @return real file path
-     */
-    public static String getFilePathFromContentUri(Uri uri, Context context) {
-        String filePath;
-        String[] filePathColumn = {MediaStore.MediaColumns.DATA};
-        Cursor cursor = context.getContentResolver().query(uri, filePathColumn, null, null, null);
-        if (cursor == null) return null;
-        cursor.moveToFirst();
-        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-        filePath = cursor.getString(columnIndex);
-        cursor.close();
-        return filePath;
-    }
-
-    /**
-     * 获取小图片，防止OOM
-     *
-     * @param filePath
-     * @param reqWidth
-     * @param reqHeight
-     * @return
-     */
-    public static Bitmap getSmallBitmap(String filePath, int reqWidth, int reqHeight) {
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        try {
-            BitmapFactory.decodeFile(filePath, options);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeFile(filePath, options);
-    }
-
-    /**
-     * 计算图片缩放比例
-     *
-     * @param options
-     * @param reqWidth
-     * @param reqHeight
-     * @return
-     */
-    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
-        if (height > reqHeight || width > reqWidth) {
-            final int heightRatio = Math.round((float) height / (float) reqHeight);
-            final int widthRatio = Math.round((float) width / (float) reqWidth);
-            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
-        }
-        return inSampleSize;
     }
 
 
@@ -438,18 +353,18 @@ public class RefoundActivity extends MyBaseActivity implements View.OnClickListe
     public void setListview1(List<Map<String, Object>> listmap) {
         //更新图片
         Map<String,Object> map=listmap.get(0);
-        if (TAGE_ISRONT == 1) {
+        if (flag == 1) {
             imageurl1 = map.get("imageurl")+"";
-            Glide.with(this).load(imageurl1).into(image1);
-        }else if (TAGE_ISRONT == 2){
+            Glide.with(getApplicationContext()).load(imageurl1).into(image1);
+        }else if (flag == 2){
             imageurl2 = map.get("imageurl")+"";
-            Glide.with(this).load(imageurl2).into(image2);
-        }else if (TAGE_ISRONT == 3){
+            Glide.with(getApplicationContext()).load(imageurl2).into(image2);
+        }else if (flag == 3){
             imageurl3 = map.get("imageurl")+"";
-            Glide.with(this).load(imageurl3).into(image3);
-        }else if (TAGE_ISRONT == 4){
+            Glide.with(getApplicationContext()).load(imageurl3).into(image3);
+        }else if (flag == 4){
             imageurl4 = map.get("imageurl")+"";
-            Glide.with(this).load(imageurl4).into(image4);
+            Glide.with(getApplicationContext()).load(imageurl4).into(image4);
         }
 
         Toast.makeText(this,"更新成功",Toast.LENGTH_LONG).show();
@@ -475,4 +390,41 @@ public class RefoundActivity extends MyBaseActivity implements View.OnClickListe
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
+
+    /**
+     * send image
+     *
+     * @param selectedImage
+     */
+    protected void sendPicByUri(Uri selectedImage) {
+        String[] filePathColumn = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            String picturePath = cursor.getString(columnIndex);
+            cursor.close();
+            cursor = null;
+
+            if (picturePath == null || picturePath.equals("null")) {
+                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                return;
+            }
+            setuseryoux(new File(picturePath));
+        } else {
+            File file = new File(selectedImage.getPath());
+            if (!file.exists()) {
+                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                return;
+
+            }
+            setuseryoux(file);
+        }
+
+    }
+
 }

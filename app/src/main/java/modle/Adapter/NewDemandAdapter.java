@@ -103,7 +103,7 @@ public class NewDemandAdapter extends RecyclerView.Adapter<NewDemandAdapter.NewD
         holder.speciality.setText(""+list.get(position).getCourse_name());
         holder.username.setText(""+list.get(position).getContent());
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
-        Glide.with(context).load(list.get(position).getPublisher_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+        Glide.with(context.getApplicationContext()).load(list.get(position).getPublisher_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
         String dist = list.get(position).getDistance();
         double myDist = 0;
         if (!dist.equals("")){

@@ -120,6 +120,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private TextView starNumberTv;
     private ImageView starImage;
     private ImageView teacherCardImage;
+    private TextView educationPassTv,cardPassTv;
 
 
     @Override
@@ -128,6 +129,8 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         setContentView(R.layout.jiaoyi);
         User_id.getInstance().addActivity(this);
 
+        educationPassTv = (TextView) findViewById(R.id.user_education_pass);
+        cardPassTv = (TextView) findViewById(R.id.user_card_pass);
         gerxxjinl = (TextView) findViewById(R.id.gerxxjinl);
         gerxxjiaoxueanl = (TextView) findViewById(R.id.gerxxjiaoxueanl);
         teacherCardImage = (ImageView) findViewById(R.id.teacher_card_pic);
@@ -198,7 +201,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         teacherId = Requir_id;
         userHeadUrl = getIntent().getStringExtra("head_image");
         if (!userHeadUrl.equals(""))
-            Glide.with(this).load(userHeadUrl).transform(new GlideCircleTransform(this)).into(gerxxtoux);
+            Glide.with(getApplicationContext()).load(userHeadUrl).transform(new GlideCircleTransform(this)).into(gerxxtoux);
 
         //加载数据
         Teacher_init teacher=new Teacher();
@@ -432,7 +435,11 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
 
         if (map.get("others_1")!=null) {
             xueliUrl = map.get("others_1").toString() + "";
-            Glide.with(this).load(xueliUrl).into(teacherCardImage);
+            Glide.with(getApplicationContext()).load(xueliUrl).into(teacherCardImage);
+        }
+        if (map.get("is_passed").equals("1")){
+            educationPassTv.setTextColor(Color.parseColor("#f76d1d"));
+            cardPassTv.setTextColor(Color.parseColor("#f76d1d"));
         }
     }
 
@@ -564,6 +571,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
             listView.setLayoutParams(params);
         }
     }
+
 
     @Override
     public void upcontent(Map<String,Object> map) {

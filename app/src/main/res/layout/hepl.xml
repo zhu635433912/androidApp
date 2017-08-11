@@ -65,4 +65,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
+    <TextView
+        android:layout_marginLeft="30px"
+        android:textSize="35px"
+        android:layout_marginTop="20px"
+        android:layout_below="@+id/howto_place"
+        android:text="客服1   QQ:2598902354"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginLeft="30px"
+        android:textSize="35px"
+        android:layout_marginTop="80px"
+        android:layout_below="@+id/howto_place"
+        android:text="客服2   QQ:2578899636"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginLeft="30px"
+        android:textSize="35px"
+        android:layout_marginTop="140px"
+        android:layout_below="@+id/howto_place"
+        android:text="客服3   QQ:793593393"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginLeft="30px"
+        android:textSize="35px"
+        android:layout_marginTop="200px"
+        android:layout_below="@+id/howto_place"
+        android:text="客服4   QQ:656708043"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </RelativeLayout>

@@ -253,7 +253,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         diqu.setText(state+"");
         username = (String) map.get("publisher_mobile");
 
-        Glide.with(this).load(map.get("publisher_headimg")+"").transform(new GlideCircleTransform(this)).into(xuqiuimage);
+        Glide.with(getApplicationContext()).load(map.get("publisher_headimg")+"").transform(new GlideCircleTransform(this)).into(xuqiuimage);
         phoneTv.setText(username);
         String desc=start+" - "+end;
 
@@ -315,7 +315,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
                     inte.setData(Uri.parse("tel:" + username));
                     startActivity(inte);
                 }else {
-                    Toast.makeText(this, "请完善信息等待审核通过", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请完善教师管理信息等待审核通过", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.add_friend:
@@ -333,7 +333,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
                         }
                     }).start();
                 }else {
-                    Toast.makeText(this, "请完善信息等待审核通过", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请完善教师管理信息等待审核通过", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
@@ -349,7 +349,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
                     intent1.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
                     startActivity(intent1);
                 }else {
-                    Toast.makeText(this, "请完善信息等待审核通过", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请完善教师管理信息等待审核通过", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.xuqiudianh:
@@ -370,7 +370,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
                         }
                     }).show();
                 }else {
-                    Toast.makeText(this, "请完善信息等待审核通过,并发布相应的课程才能接单哦", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请完善教师管理信息等待审核通过,并发布相应的课程才能接单哦", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

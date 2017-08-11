@@ -148,9 +148,9 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
                     Intent intent = new Intent(NewMainActivity.this, Xuqiufabu.class);
                     startActivity(intent);
                 }else {
-                    Intent intentTeacher = new Intent(NewMainActivity.this,Teacher_management.class);
-                    startActivity(intentTeacher);
-//                    startActivity(TeacherManActivity_.intent(NewMainActivity.this).get());
+//                    Intent intentTeacher = new Intent(NewMainActivity.this,Teacher_management.class);
+//                    startActivity(intentTeacher);
+                    startActivity(TeacherManActivity_.intent(NewMainActivity.this).get());
                 }
             }
         });
@@ -160,8 +160,6 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
         if (myydy.equals("1")){
             getsj();
         }
-
-
     }
 
     private void getsj() {

@@ -100,10 +100,10 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
         if (User_id.getRole().equals("1")) {
             hode.studentlistname.setText(listmap.get(position).get("teacher_name") + "");
 
-            Glide.with(context).load(listmap.get(position).get("teacher_headimg")).transform(new GlideCircleTransform(context)).into(hode.headImage);
+            Glide.with(context.getApplicationContext()).load(listmap.get(position).get("teacher_headimg")).transform(new GlideCircleTransform(context)).into(hode.headImage);
         }else {
             hode.studentlistname.setText(listmap.get(position).get("placer_name")+"");
-            Glide.with(context).load(listmap.get(position).get("placer_headimg")).transform(new GlideCircleTransform(context)).into(hode.headImage);
+            Glide.with(context.getApplicationContext()).load(listmap.get(position).get("placer_headimg")).transform(new GlideCircleTransform(context)).into(hode.headImage);
 
         }
 //        hode.xdsj.setText(listmap.get(position).get("created")+"");

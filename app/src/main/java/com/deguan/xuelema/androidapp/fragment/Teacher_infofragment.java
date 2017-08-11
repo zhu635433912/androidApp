@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.FeeqianbaoActivty;
@@ -23,6 +24,7 @@ import com.deguan.xuelema.androidapp.SetUp;
 import com.deguan.xuelema.androidapp.Teacher_management;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.hyphenate.EMContactListener;
 import com.hyphenate.EMMessageListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMCmdMessageBody;
@@ -40,8 +42,11 @@ import java.util.List;
 import java.util.Map;
 
 import modle.Adapter.HomeTitleAdapter;
+import modle.Huanxing.db.InviteMessgeDao;
+import modle.Huanxing.ui.ChatActivity;
 import modle.Huanxing.ui.GroupsActivity;
 import modle.Huanxing.ui.MainActivity;
+import modle.Huanxing.ui.NewHuanxinMainActivity;
 import modle.toos.CircleImageView;
 import modle.user_Modle.User_Realization;
 import modle.user_Modle.User_init;
@@ -74,6 +79,8 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
     ViewPager new_techaer_viewpage;
     @ViewById(R.id.toolbar)
     Toolbar toolbar;
+    @ViewById(R.id.unread_message_number)
+    TextView unreadAddressLable;
     @ViewById(R.id.unread_address_number)
     TextView unreadLabel;
     @ViewById(R.id.teacher_chat)
@@ -111,6 +118,7 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
         huanxin_but.setOnClickListener(this);
         chatImage.setOnClickListener(this);
         mychatImage.setOnClickListener(this);
+
     }
 
     @Override
@@ -143,7 +151,9 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
                 }
             }
         }).start();
+        inviteMessgeDao = new InviteMessgeDao(getContext());
         registerBroadcastReceiver();
+        EMClient.getInstance().contactManager().setContactListener(new MyContactListener());
 //        new_techaer_viewpage.setOffscreenPageLimit(0);
     }
 
@@ -189,7 +199,7 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
     @Subscriber(tag = "headUrl")
     private void updateHead(File msg){
 //        Glide.with(this).load(msg).into(teacher_loc);
-        Glide.with(this).load(msg).transform(new GlideCircleTransform(getContext())).into(teacher_loc);
+        Glide.with(getContext().getApplicationContext()).load(msg).transform(new GlideCircleTransform(getContext())).into(teacher_loc);
     }
     @Subscriber(tag = "update")
     public void updateMsg(String msg){
@@ -201,7 +211,7 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
      */
     @Override
     public void Updatecontent(Map<String, Object> map) {
-        Glide.with(this).load(map.get("headimg").toString()).transform(new GlideCircleTransform(getContext())).into(teacher_loc);
+        Glide.with(getContext().getApplicationContext()).load(map.get("headimg").toString()).transform(new GlideCircleTransform(getContext())).into(teacher_loc);
         teacher_name.setText(map.get("nickname")+"");
         teacher_autograph.setText(map.get("signature")+"");
     }
@@ -225,6 +235,7 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
     public void onResume() {
         super.onResume();
         updateUnreadLabel();
+        updateUnreadAddressLable();
     }
 
     @Subscriber(tag = "refresh")
@@ -237,7 +248,47 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
             unreadLabel.setVisibility(View.INVISIBLE);
         }
     }
-
+    @Subscriber(tag = "refresh1")
+    public void getrefresh1(String msg){
+        final int count = getUnreadAddressCountTotal();
+        if (count > 0) {
+            unreadAddressLable.setText(count +"");
+            unreadAddressLable.setVisibility(View.VISIBLE);
+        } else {
+            unreadAddressLable.setVisibility(View.INVISIBLE);
+        }
+    }
+    private InviteMessgeDao inviteMessgeDao;
+    /**
+     * get unread event notification count, including application, accepted, etc
+     *
+     * @return
+     */
+    public int getUnreadAddressCountTotal() {
+        int unreadAddressCountTotal = 0;
+        unreadAddressCountTotal = inviteMessgeDao.getUnreadMessagesCount();
+        return unreadAddressCountTotal;
+    }
+    /**
+     * update the total unread count
+     */
+    public void updateUnreadAddressLable() {
+        EventBus.getDefault().post("123","refresh1");
+    }
+    public class MyContactListener implements EMContactListener {
+        @Override
+        public void onContactAdded(String username) {}
+        @Override
+        public void onContactDeleted(final String username) {
+            updateUnreadAddressLable();
+        }
+        @Override
+        public void onContactInvited(String username, String reason) {}
+        @Override
+        public void onFriendRequestAccepted(String username) {}
+        @Override
+        public void onFriendRequestDeclined(String username) {}
+    }
     public void updateUnreadLabel() {
         EventBus.getDefault().post("123","refresh");
     }
@@ -254,7 +305,7 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
             @Override
             public void onReceive(Context context, Intent intent) {
                 updateUnreadLabel();
-//                updateUnreadAddressLable();
+                updateUnreadAddressLable();
 
                 String action = intent.getAction();
                 if(action.equals(Constant.ACTION_GROUP_CHANAGED)){
@@ -290,7 +341,6 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
             for (EMMessage message : messages) {
                 EMCmdMessageBody cmdMsgBody = (EMCmdMessageBody) message.getBody();
             }
-
             refreshUIWithMessage();
         }
 
@@ -311,7 +361,6 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
             public void run() {
                 // refresh unread count
                 updateUnreadLabel();
-
             }
         });
     }

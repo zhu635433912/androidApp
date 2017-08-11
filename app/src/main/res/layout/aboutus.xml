@@ -53,7 +53,7 @@
         android:layout_toRightOf="@+id/hanlingyuan"
         android:layout_alignBottom="@+id/hanlingyuan"
         android:textSize="30px"
-        android:text="v1.5"
+        android:text="v2.1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -81,7 +81,7 @@
         android:layout_marginBottom="12px"
         android:layout_toRightOf="@+id/weibo"
         android:layout_alignBottom="@+id/weibo"
-        android:text="点击关注我们的官方微博"
+        android:text="官方微博:    学了吗教育资源平台"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView

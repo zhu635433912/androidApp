@@ -65,7 +65,7 @@ public class DistributionAdapter extends ListBaseAdapter {
             convertView.setTag(holder);
         }
         holder = (ViewHolder) convertView.getTag();
-        Glide.with(context).load(list.get(position).get("user_headimg")+"").transform(new GlideCircleTransform(context)).into(holder.headImage);
+        Glide.with(context.getApplicationContext()).load(list.get(position).get("user_headimg")+"").transform(new GlideCircleTransform(context)).into(holder.headImage);
         holder.nameTv.setText(list.get(position).get("user_name")+"");
         holder.moneyTv.setText(list.get(position).get("fee")+"");
 

@@ -66,7 +66,7 @@ public class TurnoverAdapter extends ListBaseAdapter {
         }else {
             holder.turnStatsTv.setText(" ");
         }
-        Glide.with(context).load(list.get(position).get("headimg")+"").transform(new GlideCircleTransform(context)).into(holder.turnHeadImage);
+        Glide.with(context.getApplicationContext()).load(list.get(position).get("headimg")+"").transform(new GlideCircleTransform(context)).into(holder.turnHeadImage);
 
 
         return convertView;

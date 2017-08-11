@@ -48,4 +48,7 @@ public interface RegisterApi {
     @POST("index.php?s=/Service/Accounts/signup")
     Call<RegisterEntity> getRegisterEntity(@Query("role")int role,@Query("username")String username,@Query("password")String password,
                                            @Query("yzm")String yzm,@Query("inv_code")String inv_code);
+
+    @POST("index.php?s=/Service/Accounts/signin")
+    Call<RegisterEntity> getLoginEntity(@Query("username")String username,@Query("password")String password);
 }

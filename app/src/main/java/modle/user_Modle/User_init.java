@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
 
 import java.io.File;
 import java.util.List;
@@ -75,7 +76,7 @@ public interface User_init {
 
     public void UpdateIdcard(int user_id,String idCard);
 
-    public void setuserbitmap(File file,Student_init student_init);
+    public void setuserbitmap(File file,Student_init student_init, ChangeOrderView changeOrderView);
 
     public void setlan_lng(int uid,double lat,double lng);
 

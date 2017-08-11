@@ -54,6 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
+            android:inputType="number"
             android:id="@+id/cash_name"
             android:layout_marginLeft="40px"
             android:layout_alignBottom="@+id/feekaihuyh"
