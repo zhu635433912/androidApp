@@ -74,15 +74,17 @@
             android:layout_height="50px" />
     </RelativeLayout>
     <TextView
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/tixianjieshao"
         android:textSize="30px"
+
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50px"
-        android:text="@string/tuiguangjieshao"
+        android:text="现金券提现到余额，将于每周四处理，3个工作日之内处理完毕。"
         android:layout_below="@+id/zheshituiguanjine"
         android:layout_width="700px"
         android:layout_height="wrap_content" />
+    <!--android:text="@string/tuiguangjieshao"-->
     <TextView
         android:id="@+id/xuqiufenggexian1"
         android:background="#d7d7d7"

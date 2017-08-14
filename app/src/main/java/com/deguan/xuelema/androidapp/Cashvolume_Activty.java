@@ -68,7 +68,7 @@ public class Cashvolume_Activty extends AutoLayoutActivity implements PullToRefr
         xianjinjbufanhui.bringToFront();
         xianjinjbufanhui.setOnClickListener(this);
         xinjinjuantixian.setOnClickListener(this);
-
+        //应用宝  版本  已上架  下载分享
 
         adapter = new CashListAdapter(list,this);
         listView.setMode(PullToRefreshBase.Mode.BOTH);

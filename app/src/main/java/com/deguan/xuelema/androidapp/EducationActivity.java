@@ -136,6 +136,9 @@ public class EducationActivity extends MyBaseActivity implements View.OnClickLis
                 }else if (TextUtils.isEmpty(other_1)&&TextUtils.isEmpty(other_2)){
                     Toast.makeText(this, "请上传学历证书", Toast.LENGTH_SHORT).show();
                 }else {
+                    if (!TextUtils.isEmpty(otherEdit.getText())){
+                        teacher.TeacherUpdateRemark(Integer.parseInt(User_id.getUid()),otherEdit.getText().toString());
+                    }
                     teacher.TeacherUpdateTime(Integer.parseInt(User_id.getUid()),startEdit.getText()+"",endEdit.getText()+"");
                     teacher.Teacher_graduated_school(Integer.parseInt(User_id.getUid()),schoolEdit.getText().toString());
                     finish();

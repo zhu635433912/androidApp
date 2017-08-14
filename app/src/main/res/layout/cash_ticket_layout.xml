@@ -61,5 +61,13 @@
             android:layout_toRightOf="@+id/feekaihuyh"
             android:layout_width="match_parent"
             android:layout_height="100px" />
+        <TextView
+            android:layout_marginLeft="40px"
+            android:layout_marginTop="40px"
+            android:textSize="35px"
+            android:layout_below="@+id/cash_name"
+            android:text="现金券提现将于每周四处理"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
      </RelativeLayout>
 </RelativeLayout>

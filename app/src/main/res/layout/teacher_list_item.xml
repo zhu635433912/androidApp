@@ -121,11 +121,11 @@
             android:layout_marginTop="10px"
             android:layout_below="@+id/text5"
             android:layout_width="570px"
-            android:layout_height="60px" />
+            android:layout_height="70px" />
         <TextView
             android:id="@+id/text7"
             android:layout_marginLeft="14px"
-            android:layout_marginBottom="44px"
+            android:layout_marginBottom="30px"
             android:layout_alignParentLeft="true"
             android:layout_alignParentBottom="true"
             android:text="14km"
@@ -146,7 +146,7 @@
             android:layout_marginRight="20px"
             android:layout_alignBottom="@+id/text8"
             android:layout_toLeftOf="@+id/text8"
-            android:layout_marginBottom="10px"
+            android:layout_marginBottom="5px"
             android:id="@+id/imagehaop"
             android:layout_width="150px"
             android:layout_height="20px" />

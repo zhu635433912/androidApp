@@ -191,7 +191,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:textSize="35px"
-            android:text="学了么总推广金额"
+            android:text="学了吗总推广金额"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>

@@ -65,6 +65,14 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
 
     @Override
     public void before() {
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
     }
 
     @Override

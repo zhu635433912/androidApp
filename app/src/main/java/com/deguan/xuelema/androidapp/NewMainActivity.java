@@ -157,9 +157,15 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
 
         new Getdata().getmobieke(User_id.getUsername(),this);
 
-        if (myydy.equals("1")){
-            getsj();
-        }
+//        if (myydy.equals("1")){
+//            getsj();
+//            SharedPreferences sp = getSharedPreferences("ydy", Context.MODE_PRIVATE);
+//            SharedPreferences.Editor ddite = sp.edit();
+//            //第一次进入
+//            ddite.putString("booled", "2");
+//            ddite.commit();
+//            myydy = "2";
+//        }
     }
 
     private void getsj() {
@@ -192,12 +198,7 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
             @Override
             public void onClick(View v) {
                 guideImage3.setVisibility(View.GONE);
-                SharedPreferences sp = getSharedPreferences("ydy", Context.MODE_PRIVATE);
-                SharedPreferences.Editor ddite = sp.edit();
-                //第一次进入
-                ddite.putString("booled", "2");
-                ddite.commit();
-                myydy = "2";
+
             }
         });
     }

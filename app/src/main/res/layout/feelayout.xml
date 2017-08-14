@@ -6,7 +6,7 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/add08"
         android:layout_width="750px"
-        android:layout_height="600px">
+        android:layout_height="620px">
 
         <TextView
             android:layout_marginTop="20px"
@@ -56,6 +56,8 @@
         <EditText
             android:id="@+id/cash_name"
             android:background="@null"
+            android:hint="请输入支付宝名字..."
+            android:textSize="30px"
             android:layout_marginLeft="40px"
             android:layout_alignBottom="@+id/feekaihuyh"
             android:layout_toRightOf="@+id/feekaihuyh"
@@ -71,8 +73,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <EditText
+
             android:background="@null"
             android:id="@+id/cash_id"
+            android:hint="请输入支付宝账号..."
+            android:textSize="30px"
             android:layout_marginLeft="40px"
             android:layout_alignBottom="@+id/feeyhzhanghao"
             android:layout_toRightOf="@+id/feeyhzhanghao"
@@ -90,6 +95,9 @@
         <EditText
             android:background="@null"
             android:id="@+id/cash_fee"
+            android:textSize="30px"
+            android:hint="请输入提现金额..."
+            android:inputType="number"
             android:layout_marginLeft="40px"
             android:layout_alignBottom="@+id/zhuanchufeee"
             android:layout_toRightOf="@+id/zhuanchufeee"
@@ -162,9 +170,10 @@
             android:layout_height="wrap_content" />
         <TextView
             android:layout_marginLeft="20px"
-            android:text="提现低于1500元每笔将收取2元手续费,高于1500免费提现"
+            android:text="提现低于1300元每笔支付宝将收取2元服务费,高于1300元每笔支付宝将按0.15%收取服务费(暂时只能整百提现)"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="20px"
+            android:textSize="29px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>

@@ -51,14 +51,20 @@ public class Backj_URL {
      *     user_id      : "int"     // 用户id
      * }
      */
-    public final static String USER_URL="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/signin";
-    public final static String SMS_URL="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/check_mobile";
-    public final static String REGISTER_URL="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/signup";
-    public final static String CZ_URL="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/reset";
+//    public final static String USER_URL="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/signin";
+//    public final static String SMS_URL="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/check_mobile";
+//    public final static String REGISTER_URL="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/signup";
+//    public final static String CZ_URL="http://deguanjiaoyu.com/index.php?s=/Service/Accounts/reset";
 
 //    public final static String USER_URL="http://1754q21l80.51mypc.cn:88/index.php?s=/Service/Accounts/signin";
 //    public final static String CZ_URL="http://1754q21l80.51mypc.cn:88/index.php?s=/Service/Accounts/reset";
 //    public final static String SMS_URL="http://1754q21l80.51mypc.cn:88/index.php?s=/Service/Accounts/check_mobile";
 //    public final static String REGISTER_URL="http://1754q21l80.51mypc.cn:88/index.php?s=/Service/Accounts/signup";
+
+
+    public final static String USER_URL=    "http://deguan.tpddns.cn:88/index.php?s=/Service/Accounts/signin";
+    public final static String CZ_URL=      "http://deguan.tpddns.cn:88/index.php?s=/Service/Accounts/reset";
+    public final static String SMS_URL=     "http://deguan.tpddns.cn:88/index.php?s=/Service/Accounts/check_mobile";
+    public final static String REGISTER_URL="http://deguan.tpddns.cn:88/index.php?s=/Service/Accounts/signup";
 
 }

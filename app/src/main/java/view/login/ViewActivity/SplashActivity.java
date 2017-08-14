@@ -46,16 +46,17 @@ public class SplashActivity extends AutoLayoutActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inde);
         PermissUtil.startPermiss(this);
+        viewpager = (ViewPager) findViewById(R.id.viewpager);
         //判断用户是否第一次进入
         sp = getSharedPreferences("ydy", MODE_PRIVATE);
         //判断记录是第一次就是"t",不是就是"1"
         String myydy= sp.getString("booled", "t");
         if (myydy.equals("2")){
             getsj();
+            viewpager.setVisibility(View.GONE);
         }
 
 
-        viewpager = (ViewPager) findViewById(R.id.viewpager);
         jinru = (ImageButton) findViewById(R.id.jinru);
 
 //        jinru.setVisibility(View.GONE);
@@ -148,7 +149,6 @@ public class SplashActivity extends AutoLayoutActivity implements View.OnClickLi
                     e.printStackTrace();
                 }
                 new RegisterUtil().getLogin(username,password,this);
-
             }
             //状态改变
 

@@ -73,6 +73,8 @@ public interface Teacher_init {
      *教师资料更新教龄
      */
     public Map<String,Object> Teacher_years(int uid, int years);
+    //更新备注
+    public void TeacherUpdateRemark(int uid,String remark);
     /**
      *教师资料更新个人简介
      */

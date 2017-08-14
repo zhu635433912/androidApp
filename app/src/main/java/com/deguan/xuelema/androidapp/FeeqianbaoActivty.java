@@ -150,11 +150,15 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
                     if (Double.parseDouble(cashFee.getText().toString())>myBalance){
                         Toast.makeText(FeeqianbaoActivty.this, "可提现金额不足", Toast.LENGTH_SHORT).show();
                     }else {
-                        getdata.getCash(Integer.parseInt(User_id.getUid()), cashNmae.getText().toString(),
-                                cashId.getText().toString(), cashFlag, Float.parseFloat(cashFee.getText().toString()), FeeqianbaoActivty.this);
-                        cashFee.setText("");
-                        Toast.makeText(FeeqianbaoActivty.this, "已提交提现申请", Toast.LENGTH_SHORT).show();
-                        cashPopwindow.dismiss();
+                        if (Double.parseDouble(cashFee.getText().toString()) %100 == 0) {
+                            getdata.getCash(Integer.parseInt(User_id.getUid()), cashNmae.getText().toString(),
+                                    cashId.getText().toString(), cashFlag, Float.parseFloat(cashFee.getText().toString()), FeeqianbaoActivty.this);
+                            cashFee.setText("");
+                            Toast.makeText(FeeqianbaoActivty.this, "已提交提现申请", Toast.LENGTH_SHORT).show();
+                            cashPopwindow.dismiss();
+                        }else {
+                            Toast.makeText(FeeqianbaoActivty.this, "请整百提现", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }else {
                     Toast.makeText(FeeqianbaoActivty.this, "请输入完整", Toast.LENGTH_SHORT).show();

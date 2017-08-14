@@ -354,7 +354,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         buyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(UserxinxiActivty.this).setTitle("学了么提示!").setMessage("是否确定下单?")
+                new AlertDialog.Builder(UserxinxiActivty.this).setTitle("学了吗提示!").setMessage("是否确定下单?")
                         .setPositiveButton("是", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

@@ -498,6 +498,8 @@ public class Teacher implements Teacher_init {
 
     }
 
+
+
     //更新教师特长
     @Override
     public void Teacher_speciality(int uid, String speciality) {
@@ -539,7 +541,25 @@ public class Teacher implements Teacher_init {
         });
     }
 
-
+    //更新备注
+    public void TeacherUpdateRemark(int uid,String remark){
+        Call<Demtest> call=teacher_http.UpdateRemark(uid,remark);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    Log.e("aa","更新在校时间成功");
+                }else {
+                    Log.e("aa","更新在校时间失败");
+                }
+            }
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                Log.e("aa","更新在校时间异常失败"+t.toString());
+            }
+        });
+    }
 
     //更新教师毕业学校
     @Override

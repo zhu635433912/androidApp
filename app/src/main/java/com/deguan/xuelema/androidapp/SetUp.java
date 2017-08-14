@@ -99,7 +99,7 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
                 startActivity(intent1);
                 break;
             case R.id.wodezhaop:
-                new AlertDialog.Builder(SetUp.this).setTitle("学了么提示!").setMessage("确定退出?")
+                new AlertDialog.Builder(SetUp.this).setTitle("学了吗提示!").setMessage("确定退出?")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

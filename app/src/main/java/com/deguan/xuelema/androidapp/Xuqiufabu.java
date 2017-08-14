@@ -265,7 +265,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
                             if (Subject.getText().toString().equals("年级") || grade.getText().toString().equals("科目")) {
                                 Toast.makeText(Xuqiufabu.this, "请选择年级和科目！", Toast.LENGTH_SHORT).show();
                             } else {
-                                new AlertDialog.Builder(Xuqiufabu.this).setTitle("学了么提示!").setMessage("确定发布需求?")
+                                new AlertDialog.Builder(Xuqiufabu.this).setTitle("学了吗提示!").setMessage("确定发布需求?")
                                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {

@@ -218,7 +218,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="24px"
                     android:textColor="#6c7070"
-                    android:textSize="50px" />
+                    android:textSize="40px" />
 
                 <TextView
                     android:id="@+id/studentneirongtext"
@@ -229,7 +229,7 @@
                     android:layout_marginTop="10px"
                     android:gravity="center"
                     android:textColor="#6c7070"
-                    android:textSize="40px" />
+                    android:textSize="30px" />
             </RelativeLayout>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>

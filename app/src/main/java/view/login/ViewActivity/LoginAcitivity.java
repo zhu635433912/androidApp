@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -72,15 +73,25 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
     private SharedPreferences sharedPreferences = null;
     private AVLoadingIndicatorView loginLoading;
     private TextView loginLoadingTv;
+    private ImageView guideImage1,guideImage2,guideImage3;
+
+    private String myydy;
+    private ActivityOptionsCompat activityOptionsCompat;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logion_wan);
-
+        guideImage1  = (ImageView) findViewById(R.id.guide1);
+        guideImage2 = (ImageView) findViewById(R.id.guide2);
+        guideImage3 = (ImageView) findViewById(R.id.guide3);
         //过渡动画
 //        getWindow().setExitTransition(TransitionInflater.from(this).inflateTransition(R.transition.slide));
         inint();
+        SharedPreferences sp = getSharedPreferences("ydy", MODE_PRIVATE);
+        //判断记录是第一次就是"t",不是就是"1"
+        myydy = sp.getString("booled", "t");
         DemoHelper.getInstance().logout(true,new EMCallBack() {
 
             @Override
@@ -301,19 +312,68 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
 
 
 
-
+        if (myydy.equals("1")){
+            getsj(role);
+            SharedPreferences sharepre = getSharedPreferences("ydy", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharepre.edit();
+            //第一次进入
+            editor.putString("booled", "2");
+            editor.commit();
+            myydy = "2";
+        }else {
+            startActivity(intent);
+            finish();
+        }
 
 
 
         //进入动画
-        ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+        activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
         if (loginLoading.getVisibility()==View.VISIBLE) {
             loginLoading.setVisibility(View.GONE);
             loginLoadingTv.setVisibility(View.GONE);
         }
-        startActivity(intent,activityOptionsCompat.toBundle());
-        finish();
+//        startActivity(intent, activityOptionsCompat.toBundle());
+//        finish();
     }
+
+    private void getsj(String roles) {
+        if (roles.equals("1")){
+            guideImage1.setVisibility(View.VISIBLE);
+            guideImage1.setImageResource(R.drawable.student_guide1);
+            guideImage2.setImageResource(R.drawable.student_guide2);
+            guideImage3.setImageResource(R.drawable.student_guide3);
+        }else {
+            guideImage1.setVisibility(View.VISIBLE);
+            guideImage1.setImageResource(R.drawable.teacher_guide1);
+            guideImage2.setImageResource(R.drawable.teacher_guide2);
+            guideImage3.setImageResource(R.drawable.teacher_guide3);
+        }
+        guideImage1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guideImage1.setVisibility(View.GONE);
+                guideImage2.setVisibility(View.VISIBLE);
+            }
+        });
+        guideImage2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guideImage2.setVisibility(View.GONE);
+                guideImage3.setVisibility(View.VISIBLE);
+            }
+        });
+        guideImage3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                guideImage3.setVisibility(View.GONE);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+
+
     //获取用户参数
     public User_id getUser_id() {
         return ((User_id)getApplicationContext());

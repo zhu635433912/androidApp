@@ -354,7 +354,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
                 break;
             case R.id.xuqiudianh:
                 if (ispass) {
-                    new AlertDialog.Builder(Xuqiuxiangx.this).setTitle("学了么提示!").setMessage("是否确定接取需求?")
+                    new AlertDialog.Builder(Xuqiuxiangx.this).setTitle("学了吗提示!").setMessage("是否确定接取需求?")
                             .setPositiveButton("是", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

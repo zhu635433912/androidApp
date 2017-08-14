@@ -109,6 +109,8 @@ public interface Teacher_http {
     @POST("index.php?s=/Service/Teacher/update_information")
     Call<Demtest> UpdateTime(@Query("uid")int uid,@Query("starttime")String starttime,@Query("endtime")String endtime);
 
+    @POST("index.php?s=/Service/Teacher/update_information")
+    Call<Demtest> UpdateRemark(@Query("uid")int uid,@Query("remark")String remark);
     /*
         教师资料更新个人毕业学校
     */
