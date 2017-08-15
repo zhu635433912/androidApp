@@ -56,9 +56,9 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/xuxian"
         android:textSize="30px"
-        android:text="我的推广"
+        android:text="支付密码"
         android:layout_width="match_parent"
-        android:layout_height="0px" />
+        android:layout_height="90px" />
     <TextView
         android:id="@+id/xuqiufenggexian0"
         android:background="#d7d7d7"

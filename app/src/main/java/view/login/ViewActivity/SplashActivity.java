@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 
 import com.deguan.xuelema.androidapp.NewMainActivity_;
+import com.deguan.xuelema.androidapp.PayPswActivity_;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.utils.PermissUtil;
 import com.hyphenate.chat.EMClient;
@@ -165,8 +166,12 @@ public class SplashActivity extends AutoLayoutActivity implements View.OnClickLi
 
     @Override
     public void successRegister(String msg) {
-        startActivity(intent);
-        finish();
+        if (msg.equals("0")){
+            startActivity(PayPswActivity_.intent(this).get());
+        }else {
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override

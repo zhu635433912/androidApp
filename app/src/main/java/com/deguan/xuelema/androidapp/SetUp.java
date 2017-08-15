@@ -88,8 +88,10 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
                 break;
             case R.id.wodetuiguang:
                 //我的推广
-                Intent intentb=new Intent(SetUp.this,Distribution_Activty.class);
-                startActivity(intentb);
+//                Intent intentb=new Intent(SetUp.this,Distribution_Activty.class);
+//                startActivity(intentb);
+
+                startActivity(PayPswActivity_.intent(SetUp.this).extra("type",2).get());
                 break;
             case R.id.finalsz:
                 SetUp.this.finish();

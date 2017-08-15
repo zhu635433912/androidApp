@@ -156,7 +156,7 @@ public class S_wan_login implements Modle_wan_login {
                             String error=response.body().getError();
                             if (error.equals("ok")) {
                                 map = response.body().getContent();
-                                Log.e("aa","用户id为"+map.get("id")+"用角色为"+ map.get("role"));
+                                Log.e("aa","用户id为"+map.get("id")+"用角色为"+ map.get("role")+map.get("has_paypassword")+"");
                                 map.put("username",username);
                                 map.put("password",password);
                                 swan.loginchenggong(map);
@@ -193,7 +193,7 @@ public class S_wan_login implements Modle_wan_login {
             }
         }
     }
-    //环信短信验证
+    //短信验证
     class MySMS extends AsyncTask<String,Void,Void>{
         private String error;
         private String errmsg;

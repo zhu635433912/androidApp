@@ -141,6 +141,7 @@ public class EducationActivity extends MyBaseActivity implements View.OnClickLis
                     }
                     teacher.TeacherUpdateTime(Integer.parseInt(User_id.getUid()),startEdit.getText()+"",endEdit.getText()+"");
                     teacher.Teacher_graduated_school(Integer.parseInt(User_id.getUid()),schoolEdit.getText().toString());
+
                     finish();
                 }
                 break;

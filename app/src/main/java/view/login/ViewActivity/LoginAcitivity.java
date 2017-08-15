@@ -27,6 +27,7 @@ import android.widget.ToggleButton;
 import com.deguan.xuelema.androidapp.NewMainActivity;
 import com.deguan.xuelema.androidapp.NewMainActivity_;
 //import com.deguan.xuelema.androidapp.New_StudentActivity_;
+import com.deguan.xuelema.androidapp.PayPswActivity_;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.SetUp;
 import com.deguan.xuelema.androidapp.utils.APPConfig;
@@ -225,9 +226,11 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
         }
     }
 
+    private double isSetup;
+
     @Override
     public void loginture(Map<String,Object> map) {
-
+        isSetup = Double.parseDouble(map.get("has_paypassword")+"");
         final String role= (String) map.get("role");
         final String id= (String) map.get("id");
 //        intent.putExtra("id",id);
@@ -321,8 +324,12 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
             editor.commit();
             myydy = "2";
         }else {
-            startActivity(intent);
-            finish();
+            if (isSetup == 0) {
+                startActivity(PayPswActivity_.intent(LoginAcitivity.this).get());
+            } else{
+                startActivity(intent);
+                finish();
+            }
         }
 
 
@@ -367,8 +374,12 @@ public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View
             @Override
             public void onClick(View v) {
                 guideImage3.setVisibility(View.GONE);
-                startActivity(intent);
-                finish();
+                if (isSetup == 0){
+                    startActivity(PayPswActivity_.intent(LoginAcitivity.this).get());
+                }else {
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }

@@ -67,7 +67,7 @@ public class RegisterUtil {
             @Override
             public void onResponse(Call<RegisterEntity> call, Response<RegisterEntity> response) {
                 if (response.body().getError().equals("ok")) {
-                    registerView.successRegister(response.body().getUser_id());
+                    registerView.successRegister(response.body().getHas_paypassword());
                 }else {
                     registerView.failRegister(response.body().getErrmsg());
                 }
@@ -116,4 +116,24 @@ public class RegisterUtil {
             }
         });
     }
+
+    public void setPaypsd(int id, String pay_password, String old_password, int type, final MobileView mobileView){
+        Call<User_Modle> call = data.getPayPwd(id,pay_password,old_password,type);
+        call.enqueue(new Callback<User_Modle>() {
+            @Override
+            public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {
+                if (response.body().getError().equals("ok")){
+                    mobileView.successRegister("修改成功");
+                }else {
+                    mobileView.failRegister(response.body().getErrmsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User_Modle> call, Throwable t) {
+                mobileView.failRegister("网络错误");
+            }
+        });
+    }
+
 }

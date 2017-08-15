@@ -77,7 +77,7 @@ public class ManagerActivity extends MyBaseActivity implements View.OnClickListe
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final int course_id=kechengAdapter.getcourse_id(position);
+                final int course_id=kechengAdapter.getcourse_id(position-1);
 //                Log.e("aa","删除"+course_id);
                 new AlertDialog.Builder(ManagerActivity.this).setTitle("学了么提示!").setMessage("确定删除课程吗?")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {

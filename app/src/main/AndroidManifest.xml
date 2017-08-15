@@ -960,7 +960,9 @@
         <activity android:name=".HonorActivity_" />
         <activity android:name=".ManagerActivity_" />
         <activity android:name=".ExampleActivity_" />
-        <activity android:name=".ExerActivity_"></activity>
+        <activity android:name=".ExerActivity_" />
+        <activity android:name=".CompleteOrderActivity_" />
+        <activity android:name=".PayPswActivity_"></activity>
     </application>
 
 </manifest>

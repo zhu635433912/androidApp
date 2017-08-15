@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#fff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/complete_back"
+        android:layout_width="120px"
+        android:layout_height="80px">
+    </RelativeLayout>
+    <ImageButton
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/add19"
+        android:layout_width="20px"
+        android:layout_height="30px" />
+
+    <TextView
+        android:textSize="30px"
+        android:layout_marginTop="20px"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="完成授课"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/xuqiufenggexian"
+        android:background="#d7d7d7"
+        android:layout_marginTop="80px"
+        android:layout_below="@+id/neirongtext"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+
+
+    <TextView
+        android:id="@+id/refund_desc"
+        android:textColor="#111111"
+        android:layout_below="@+id/xuqiufenggexian"
+        android:text="教学内容"
+        android:singleLine="true"
+        android:gravity="center"
+        android:layout_marginLeft="50px"
+        android:layout_width="wrap_content"
+        android:layout_height="60px" />
+    <EditText
+        android:id="@+id/complete_desc_edit"
+        android:background="@drawable/refund_edit_back"
+        android:layout_below="@+id/refund_desc"
+        android:layout_marginLeft="100px"
+        android:layout_marginRight="30px"
+        android:hint="此处填写教学内容，课程重点等等..."
+        android:maxLength="200"
+        android:textSize="25px"
+        android:layout_width="600px"
+        android:layout_height="200px" />
+    <TextView
+        android:id="@+id/complete_talk"
+        android:textColor="#111111"
+        android:layout_below="@+id/complete_desc_edit"
+        android:text="教师寄语"
+        android:singleLine="true"
+        android:gravity="center"
+        android:layout_marginLeft="50px"
+        android:layout_width="wrap_content"
+        android:layout_height="60px" />
+    <EditText
+        android:id="@+id/complete_talk_edit"
+        android:background="@drawable/refund_edit_back"
+        android:layout_below="@+id/complete_talk"
+        android:layout_marginLeft="100px"
+        android:layout_marginRight="30px"
+        android:hint="此处填写您对学生的评价，优缺点建议等等..."
+        android:maxLength="200"
+        android:textSize="25px"
+        android:layout_width="600px"
+        android:layout_height="200px" />
+    <TextView
+        android:id="@+id/xuqiufenggexian4"
+        android:background="#d7d7d7"
+        android:layout_marginTop="30px"
+        android:layout_below="@+id/complete_talk_edit"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <TextView
+        android:id="@+id/refund_update"
+        android:layout_below="@+id/xuqiufenggexian4"
+        android:text="教学图片"
+        android:gravity="center"
+        android:layout_marginLeft="50px"
+        android:layout_width="wrap_content"
+        android:layout_height="60px" />
+    <LinearLayout
+        android:id="@+id/refund_update_linear"
+        android:orientation="horizontal"
+        android:layout_marginLeft="120px"
+        android:layout_marginRight="120px"
+        android:layout_below="@+id/refund_update"
+        android:layout_width="match_parent"
+        android:layout_height="150px">
+        <ImageView
+            android:id="@+id/complete_picture1"
+            android:src="@drawable/refund_camera"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/complete_picture2"
+            android:src="@drawable/refund_addpic"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/complete_picture3"
+
+            android:src="@drawable/refund_addpic"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/complete_picture4"
+            android:src="@drawable/refund_addpic"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/xuqiufenggexian5"
+        android:background="#d7d7d7"
+        android:layout_marginTop="30px"
+        android:layout_below="@+id/refund_update_linear"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <RelativeLayout
+        android:id="@+id/complete_sure_btn"
+        android:layout_marginTop="50px"
+        android:layout_below="@+id/xuqiufenggexian5"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/add15"
+        android:layout_width="556px"
+        android:layout_height="70px" >
+        <TextView
+            android:textColor="#fff"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:text="完成授课"
+            android:textSize="35px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/complete_telphone"
+        android:layout_marginLeft="20px"
+        android:layout_below="@+id/complete_sure_btn"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50px">
+        <ImageView
+            android:src="@drawable/refund_tel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:text="联系客服:0576-82073666"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</RelativeLayout>

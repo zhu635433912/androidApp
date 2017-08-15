@@ -115,12 +115,12 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
         hode.yaoqiukemu.setText(listmap.get(position).get("course_name")+"");
         hode.keshifei.setText("￥"+keshifee+"/节");
 
-        switch (listmap.get(position).get("status").toString()){
+        switch (listmap.get(position).get("status").toString()) {
             case "1":
                 if (User_id.getRole().equals("1")) {
                     hode.studentkechengzhuangtai.setText("未付款");
                     hode.querenshouhuo.setText("确认付款");
-                }else {
+                } else {
                     hode.studentkechengzhuangtai.setText("未付款");
                     hode.querenshouhuo.setText("等待付款");
                 }
@@ -129,9 +129,13 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
                 if (User_id.getRole().equals("1")) {
                     hode.studentkechengzhuangtai.setText("进行中");
                     hode.querenshouhuo.setText("确认授课");
-                }else {
+                } else {
+                    if (listmap.get(position).get("is_complete").equals("1")){
+                        hode.querenshouhuo.setText("已确认授课");
+                    }else {
+                        hode.querenshouhuo.setText("等待授课");
+                    }
                     hode.studentkechengzhuangtai.setText("进行中");
-                    hode.querenshouhuo.setText("等待授课");
                 }
                 break;
             case "3":

@@ -38,7 +38,16 @@ public class RegisterEntity {
 
     private String error;
     private String user_id;
+    private String has_paypassword;
     private String errmsg;
+
+    public String getHas_paypassword() {
+        return has_paypassword;
+    }
+
+    public void setHas_paypassword(String has_paypassword) {
+        this.has_paypassword = has_paypassword;
+    }
 
     public String getError() {
         return error;

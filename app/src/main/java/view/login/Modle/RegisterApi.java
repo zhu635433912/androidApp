@@ -51,4 +51,7 @@ public interface RegisterApi {
 
     @POST("index.php?s=/Service/Accounts/signin")
     Call<RegisterEntity> getLoginEntity(@Query("username")String username,@Query("password")String password);
+
+    @POST("index.php?s=/Service/Accounts/update_paypassword")
+    Call<User_Modle> getPayPwd(@Query("id")int id,@Query("pay_password")String pay_password,@Query("oldpay_password")String oldpay_password,@Query("type")int type);
 }

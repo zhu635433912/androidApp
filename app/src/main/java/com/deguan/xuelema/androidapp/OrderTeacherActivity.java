@@ -66,6 +66,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
     private String telphone;
     private double changeFee ;
     private ImageView teacher_detail_tel;
+    private String is_complete;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -121,7 +122,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
                 statuse.setText("修改订单价格");
                 break;
             case "2":
-                statuse.setText("待授课");
+                statuse.setText("授课完成？");
                 break;
             case "3":
                 statuse.setText("待评价");
@@ -248,7 +249,7 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
         closingtime.setText(created);
         dizhi.setText(requirement_address);
         zongjijine.setText("￥"+map.get("order_price"));
-
+        is_complete = map.get("is_complete")+"";
 
 
 
@@ -259,7 +260,11 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
                 order_status.setText("未付款");
                 break;
             case "2":
-                statuse.setText("待授课");
+                if (is_complete.equals("1")){
+                    statuse.setText("已确认授课");
+                }else {
+                    statuse.setText("完成授课？");
+                }
                 order_status.setText("进行中");
                 break;
             case "3":
@@ -382,27 +387,14 @@ public class OrderTeacherActivity extends AutoLayoutActivity implements Ordercon
 
 
                 }
-//                if (status.equals("2")){
-//                    //进行中
-//                    new AlertDialog.Builder(OrderTeacherActivity.this).setTitle("学了么提示!").setMessage("确定完成交易?")
-//                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                                @Override
-//                                public void onClick(DialogInterface dialog, int which) {
-//                                    Order_init order_init = new Order();
-//                                    String password = User_id.getPassword();
-//                                    order_init.Update_Order(uid, order_id, 3, password, duration * fee);
-//                                    Intent intent = new Intent(OrderTeacherActivity.this, Student_Activty.class);
-//                                    startActivity(intent);
-//                                    Toast.makeText(OrderTeacherActivity.this, "赶快去评价这位老师吧~", Toast.LENGTH_LONG).show();
-//
-//                                }
-//                            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//                        @Override
-//                        public void onClick(DialogInterface dialog, int which) {
-//
-//                        }
-//                    }).show();
-//                }
+                if (status.equals("2")){
+                    if (is_complete.equals("1")){
+                        Toast.makeText(this, "已确认授课", Toast.LENGTH_SHORT).show();
+                    }else {
+                        startActivity(CompleteOrderActivity_.intent(OrderTeacherActivity.this).extra("orderId",order_id).get());
+                        finish();
+                    }
+                }
 //                if (status.equals("3")){
 //                    //待评价
 //                    Intent intent2=new Intent(OrderTeacherActivity.this,Student_assessment.class);

@@ -254,8 +254,8 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
                                new PayUtil().getPayDetails(order_id, 1, mianfee,"", this);
                            } else {
                                if ((order_fee - mianfee) <= tolFee) {
-                                    new PayUtil().getPayDetails(order_id, 2, mianfee, "", Payment_Activty.this);
-//                                   payPopwindow.showAsDropDown(view);
+//                                    new PayUtil().getPayDetails(order_id, 2, mianfee, "", Payment_Activty.this);
+                                   payPopwindow.showAsDropDown(view);
                                } else {
                                    Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
                                }
@@ -267,8 +267,8 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
                                new PayUtil().getPayDetails(order_id, 1, order_fee / 2.0,"", this);
                            } else {
                                if ((order_fee / 2) <= tolFee) {
-                                   new PayUtil().getPayDetails(order_id, 2, order_fee / 2.0, "", Payment_Activty.this);
-//                                   payPopwindow.showAsDropDown(view);
+//                                   new PayUtil().getPayDetails(order_id, 2, order_fee / 2.0, "", Payment_Activty.this);
+                                   payPopwindow.showAsDropDown(view);
                                } else {
                                    Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
                                }
@@ -282,8 +282,8 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
                            new PayUtil().getPayDetails(order_id, 1, 0,"", this);
                        } else {
                            if (order_fee <= tolFee) {
-                               new PayUtil().getPayDetails(order_id, 2, 0, "", Payment_Activty.this);
-//                               payPopwindow.showAsDropDown(view);
+//                               new PayUtil().getPayDetails(order_id, 2, 0, "", Payment_Activty.this);
+                               payPopwindow.showAsDropDown(view);
                            } else {
                                Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
                            }
