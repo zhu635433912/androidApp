@@ -21,6 +21,8 @@ import com.deguan.xuelema.androidapp.NewMainActivity;
 import com.deguan.xuelema.androidapp.Personal_Activty;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.SetUp;
+import com.deguan.xuelema.androidapp.TeacherManActivity;
+import com.deguan.xuelema.androidapp.TeacherManActivity_;
 import com.deguan.xuelema.androidapp.Teacher_management;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
@@ -87,6 +89,8 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
     ImageView chatImage;
     @ViewById(R.id.teacher_my)
     ImageView mychatImage;
+    @ViewById(R.id.teacher_manager_image)
+    ImageView teahcerManagerImage;
 
     private int uid;
     private int role;
@@ -118,6 +122,7 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
         huanxin_but.setOnClickListener(this);
         chatImage.setOnClickListener(this);
         mychatImage.setOnClickListener(this);
+        teahcerManagerImage.setOnClickListener(this);
 
     }
 
@@ -160,6 +165,9 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.teacher_manager_image:
+                startActivity(TeacherManActivity_.intent(getContext()).get());
+                break;
             case R.id.teacher_chat:
                 Intent intent3 = new Intent();
                 intent3.setClass(getActivity(), modle.Huanxing.ui.NewHuanxinMainActivity.class);

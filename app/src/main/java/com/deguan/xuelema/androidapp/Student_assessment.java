@@ -228,7 +228,7 @@ public class Student_assessment extends AutoLayoutActivity implements View.OnCli
                 break;
             case R.id.quality_but3:
                 pingfenxinji2.setBackgroundResource(R.drawable.three);
-                rantoke=2;
+//                rantoke=2;
                 rank2 = 3;
                 pingfenTv2.setText("3.0");
                 break;

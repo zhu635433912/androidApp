@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
+import com.deguan.xuelema.androidapp.utils.PhotoBitmapUtils;
 import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
@@ -197,7 +198,9 @@ public class CompleteOrderActivity extends MyBaseActivity implements View.OnClic
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CODE_CAMERA) { // capture new image
                 if (cameraFile != null && cameraFile.exists()) {
-                    setuseryoux(cameraFile);
+                    String filepath = PhotoBitmapUtils.amendRotatePhoto(cameraFile.getAbsolutePath(),this);
+                    setuseryoux(new File(filepath));
+//                    setuseryoux(cameraFile);
                 }
 
             }else if (requestCode == REQUEST_CODE_LOCAL) { // send local image
@@ -279,7 +282,9 @@ public class CompleteOrderActivity extends MyBaseActivity implements View.OnClic
                 toast.show();
                 return;
             }
-            setuseryoux(new File(picturePath));
+            String filepath = PhotoBitmapUtils.amendRotatePhoto(picturePath,this);
+            setuseryoux(new File(filepath));
+//            setuseryoux(new File(picturePath));
         } else {
             File file = new File(selectedImage.getPath());
             if (!file.exists()) {
@@ -289,7 +294,9 @@ public class CompleteOrderActivity extends MyBaseActivity implements View.OnClic
                 return;
 
             }
-            setuseryoux(file);
+            String filepath = PhotoBitmapUtils.amendRotatePhoto(selectedImage.getPath(),this);
+            setuseryoux(new File(filepath));
+//            setuseryoux(file);
         }
 
     }

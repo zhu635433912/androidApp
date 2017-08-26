@@ -96,7 +96,11 @@ public class PayPswActivity extends MyBaseActivity implements MobileView {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(this, LoginAcitivity.class));
-        finish();
+        if (type == 2){
+            finish();
+        }else {
+            startActivity(new Intent(this, LoginAcitivity.class));
+            finish();
+        }
     }
 }

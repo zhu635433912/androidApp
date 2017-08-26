@@ -33,8 +33,8 @@ public class ParseManager {
 
 	private static final String CONFIG_TABLE_NAME = "hxuser";
 	private static final String CONFIG_USERNAME = "username";
-	private static final String CONFIG_NICK = "nickname";
-	private static final String CONFIG_AVATAR = "avatar";
+	private static final String CONFIG_NICK = "userNick";
+	private static final String CONFIG_AVATAR = "userAvatar";
 	
 	private static final String parseServer = "http://parse.easemob.com/parse/";
 

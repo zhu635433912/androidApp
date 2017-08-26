@@ -88,26 +88,27 @@ public class NotFinishFragment extends BaseFragment implements OrderView, SwipeR
 
         adapter.setOnTopClickListener(this);
         adapter.setOnItemLongClickListener(this);
-//        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-//        listView.setOnRefreshListener(this);
         listView.setAdapter(adapter);
-
-//        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//                if (!isLoading) {
-//                    RecyclerView.Adapter adapter1 = recyclerView.getAdapter();
-//                    View childAt = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
-//                    int position = recyclerView.getChildAdapterPosition(childAt);
-//                    if (adapter1.getItemCount() - position < 5) {
-//                        isLoading = true;
-//                        page++;
-////                        NetworkUtil.getService().getTopList(id, ++page, 20).enqueue(TopListFragment.this);
-//                    }
-//                }
-//            }
-//        });
+        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (!isLoading) {
+                    RecyclerView.Adapter adapter1 = recyclerView.getAdapter();
+                    View childAt = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
+                    int position = recyclerView.getChildAdapterPosition(childAt);
+                    if (adapter1.getItemCount() - position < 5) {
+                        isLoading = true;
+                        page++;
+                        if (User_id.getRole().equals("1")) {
+                            new OrderPresenterImpl(NotFinishFragment.this, Integer.parseInt(User_id.getUid()), 0, page).getNofinishOrderEntity(1);
+                        }else {
+                            new OrderPresenterImpl(NotFinishFragment.this, Integer.parseInt(User_id.getUid()), 1, page).getNofinishOrderEntity(1);
+                        }
+                    }
+                }
+            }
+        });
         swipeRefreshLayout.setOnRefreshListener(this);
 
         if (User_id.getRole().equals("1")){
@@ -120,62 +121,30 @@ public class NotFinishFragment extends BaseFragment implements OrderView, SwipeR
         else {
             tuijianPresenter.getNofinishOrderEntity(1);
         }
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    //跳转我的订单页面
-//                    Intent intent=new Intent(getActivity(),MyOrderActivity.class);
-//                    startActivity(intent);
-//            }
-//        });
+
     }
 
 
     @Override
     public void successOrder(List<Map<String, Object>> maps) {
 //        listView.onRefreshComplete();
-        if (page == 1) {
-            adapter.clear();
-            list.clear();
-        }
         if (maps != null) {
-//            for (int i = 0; i < maps.size(); i++) {
-//                if (!maps.get(i).get("status").equals("9")) {
-//                    list.add(maps.get(i));
-//                }
-//            }
+            if (page == 1) {
+                adapter.clear();
+            }
+            list.clear();
+
             for (int i = 0; i < maps.size(); i++) {
                 if (maps.get(i).get("status").equals("1")) {
                     list.add(maps.get(i));
                 }
             }
 
-        }
-        adapter.addAll(list);
-        swipeRefreshLayout.setRefreshing(false);
+            adapter.addAll(list);
             isLoading = false;
-//        list.addAll(maps);
-//        for (int i = 0; i < maps.size(); i++) {
-//            TuijianEntity entity = new TuijianEntity();
-//            entity.setNickname((String) maps.get(i).get("nickname"));
-//            entity.setSpeciality_name((String) maps.get(i).get("speciality_name"));
-//            entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
-//            entity.setSignature((String) maps.get(i).get("signature"));
-//            entity.setOrder_rank((String.valueOf(maps.get(i).get("order_rank"))));
-//            entity.setUser_headimg((String) maps.get(i).get("user_headimg"));
-//            entity.setUser_id((String) maps.get(i).get("user_id"));
-//            entity.setGender((String) maps.get(i).get("gender"));
-////            entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
-//            entity.setDistance((String) maps.get(i).get("distance"));
-//            entity.setFee(String.valueOf(maps.get(i).get("fee")));
-//            entity.setSpeciality(String.valueOf(maps.get(i).get("speciality")));
-//            entity.setUsername(String.valueOf(maps.get(i).get("username")));
-//            entity.setHaoping_num(String.valueOf(maps.get(i).get("haoping_num")));
-//            list.add(entity);
-//        }
-//        adapter.notifyDataSetChanged();
         }
-//    }
+        swipeRefreshLayout.setRefreshing(false);
+    }
 
     @Override
     public void failOrder(String msg) {
@@ -185,10 +154,11 @@ public class NotFinishFragment extends BaseFragment implements OrderView, SwipeR
 
     @Override
     public void onRefresh() {
+        page = 1;
         if (User_id.getRole().equals("1")) {
-            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 0, 1).getNofinishOrderEntity(1);
+            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 0, page).getNofinishOrderEntity(1);
         }else {
-            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 1, 1).getNofinishOrderEntity(1);
+            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 1, page).getNofinishOrderEntity(1);
         }
     }
 

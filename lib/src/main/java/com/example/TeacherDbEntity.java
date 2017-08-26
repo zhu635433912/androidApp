@@ -70,6 +70,7 @@ public class TeacherDbEntity {
         teacherEntity.addStringProperty("haoping_num");
         teacherEntity.addStringProperty("order_rank");
         teacherEntity.addStringProperty("distance");
+        teacherEntity.addStringProperty("click");
         teacherEntity.addStringProperty("status1");
         teacherEntity.addStringProperty("status2");
         teacherEntity.addStringProperty("signature");

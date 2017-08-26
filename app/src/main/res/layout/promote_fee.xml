@@ -255,7 +255,7 @@
         android:layout_marginTop="30px"
         android:layout_below="@+id/xuqiufenggexian3"
         android:layout_centerHorizontal="true"
-        android:text="         每个用户的上下级关系确立，二级分享奖励1%（普通用户0.5%，老师用户0.5%）其第一级0.1%，第二级0.4%的分配值,自动生成分享链接计算奖励额度"
+        android:text="         每个用户的上下级关系确立，二级分享奖励2%（普通用户1%，老师用户1%）其第一级0.6%，第二级0.4%的分配值,自动生成分享链接计算奖励额度"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView

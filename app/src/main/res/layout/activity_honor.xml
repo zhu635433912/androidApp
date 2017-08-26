@@ -38,9 +38,10 @@
             android:layout_centerHorizontal="true"
             android:layout_weight="1"
             android:gravity="center"
+            android:textColor="#111111"
             android:paddingRight="60px"
             android:text="荣誉证书"
-            android:textSize="40px" />
+            android:textSize="35px" />
 
         <TextView
             android:id="@+id/honor_save"
@@ -58,9 +59,10 @@
         android:layout_height="1px" />
     <TextView
         android:text="证书上传"
+        android:textColor="#000000"
         android:layout_marginTop="40px"
         android:layout_marginLeft="50px"
-        android:textSize="40px"
+        android:textSize="30px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <RelativeLayout
@@ -74,58 +76,62 @@
             android:layout_marginLeft="30px"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="330px">
+
+
             <ImageView
                 android:id="@+id/honor_image1"
                 android:gravity="center"
-                android:background="@drawable/education_edit_bg"
+                android:background="@drawable/education_image_bg"
                 android:layout_width="match_parent"
-                android:layout_height="300px" />
+                android:layout_height="330px" />
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/honor_add1"
+                android:src="@drawable/education_add"
+                android:layout_centerInParent="true"
+                android:layout_width="100px"
+                android:layout_height="100px" />
 
             <ImageView
+                android:visibility="gone"
+
+                android:id="@+id/honor_delete1"
+                android:layout_margin="15px"
+                android:src="@drawable/honor_del"
+                android:layout_alignParentRight="true"
+                android:layout_width="50px"
+                android:layout_height="50px" />
+            </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="30px"
+            android:layout_width="match_parent"
+            android:layout_height="330px">
+            <ImageView
                 android:id="@+id/honor_image2"
-                android:layout_marginTop="30px"
                 android:gravity="center"
-                android:background="@drawable/education_edit_bg"
+                android:background="@drawable/education_image_bg"
                 android:layout_width="match_parent"
-                android:layout_height="300px" />
-
+                android:layout_height="330px" />
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/honor_add2"
+                android:src="@drawable/education_add"
+                android:layout_centerInParent="true"
+                android:layout_width="100px"
+                android:layout_height="100px" />
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/honor_delete2"
+                android:layout_alignParentRight="true"
+                android:layout_margin="15px"
+                android:src="@drawable/honor_del"
+                android:layout_width="50px"
+                android:layout_height="50px" />
+            </RelativeLayout>
         </LinearLayout>
-        <ImageView
-            android:visibility="gone"
-            android:id="@+id/honor_add1"
-            android:layout_marginTop="95px"
-            android:src="@drawable/hly62"
-            android:layout_centerHorizontal="true"
-            android:layout_width="100px"
-            android:layout_height="100px" />
-        <ImageView
-            android:visibility="gone"
 
-            android:id="@+id/honor_add2"
-            android:layout_marginTop="425px"
-            android:src="@drawable/hly62"
-            android:layout_centerHorizontal="true"
-            android:layout_width="100px"
-            android:layout_height="100px" />
-        <ImageView
-            android:visibility="gone"
-
-            android:id="@+id/honor_delete1"
-            android:layout_marginTop="15px"
-            android:src="@drawable/honor_del"
-            android:layout_marginRight="60px"
-            android:layout_alignParentRight="true"
-            android:layout_width="50px"
-            android:layout_height="50px" />
-        <ImageView
-            android:visibility="gone"
-
-            android:id="@+id/honor_delete2"
-            android:layout_marginRight="60px"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="355px"
-            android:src="@drawable/honor_del"
-            android:layout_width="50px"
-            android:layout_height="50px" />
     </RelativeLayout>
 </LinearLayout>

@@ -75,6 +75,14 @@ public interface Teacher_init {
     public Map<String,Object> Teacher_years(int uid, int years);
     //更新备注
     public void TeacherUpdateRemark(int uid,String remark);
+
+    /**
+     * 更新教师个人经历
+     * @param uid
+     * @param exper
+     * @param exper_url
+     */
+    public void Teacher_exper(int uid,String exper,String exper_url);
     /**
      *教师资料更新个人简介
      */
@@ -112,4 +120,7 @@ public interface Teacher_init {
      */
     public void gettuijian_Teacher1(String name, String lat, String lng);
 
+
+    /*教学案例*/
+    public void getExampleList(int id,int page);
 }

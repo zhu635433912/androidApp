@@ -167,7 +167,7 @@ public class New_StudentFragment extends BaseFragment implements View.OnClickLis
         tabLayout.setTabMode(TabLayout.MODE_FIXED);
 //        viewPager.setOffscreenPageLimit(0);
 
-        demand_init.getMyDemand_list(id,4,this);
+        demand_init.getMyDemand_list(id,4,this,1);
         user_init.User_Data(id,User_id.getLat()+"",User_id.getLng()+"",this);
         new Thread(new Runnable() {
             @Override

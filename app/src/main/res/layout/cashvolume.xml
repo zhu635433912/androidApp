@@ -76,19 +76,19 @@
     <TextView
         android:visibility="visible"
         android:id="@+id/tixianjieshao"
-        android:textSize="30px"
-
+        android:textSize="25px"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50px"
-        android:text="现金券提现到余额，将于每周四处理，3个工作日之内处理完毕。"
+        android:layout_marginTop="20px"
+        android:text="    消费时，现金券最多代用50%的金额，学生不得提现现金券，老师可以以最低100元的整数倍数提现。分享一人，只要对方登录即可获得5元现金券，现金券提现到余额，将于每周四处理，3个工作日之内处理完毕。"
         android:layout_below="@+id/zheshituiguanjine"
         android:layout_width="700px"
         android:layout_height="wrap_content" />
-    <!--android:text="@string/tuiguangjieshao"-->
+    <!--ndroid:text="@string/tuiguangjieshao"a-->
     <TextView
+
         android:id="@+id/xuqiufenggexian1"
         android:background="#d7d7d7"
-        android:layout_marginTop="40px"
+        android:layout_marginTop="20px"
         android:layout_below="@+id/tixianjieshao"
         android:layout_width="match_parent"
         android:layout_height="1px" />

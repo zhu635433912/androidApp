@@ -204,7 +204,7 @@ public class ManagerActivity extends MyBaseActivity implements View.OnClickListe
 //                                         int xuesfee = 0;
 
                                         inc.Addcourse(uid, kcid, chooseDescTv.getText().toString(), laoshifee, xuesfee, 6, grade_id, ManagerActivity.this);
-                                        Toast.makeText(ManagerActivity.this, "增加课程成功", Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(ManagerActivity.this, "增加课程成功", Toast.LENGTH_SHORT).show();
 
                                     //刷新课程
 //                                    getmCourse();
@@ -231,7 +231,7 @@ public class ManagerActivity extends MyBaseActivity implements View.OnClickListe
     }
     @Override
     public void failTurnover(String msg) {
-
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override

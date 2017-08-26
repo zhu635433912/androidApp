@@ -143,7 +143,13 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="74px"
                     android:src="@drawable/hold_head" />
-
+                <ImageView
+                    android:src="@drawable/hly62"
+                    android:layout_marginLeft="170px"
+                    android:layout_marginTop="230px"
+                    android:layout_toRightOf="@+id/student_my"
+                    android:layout_width="60px"
+                    android:layout_height="60px"/>
                 <TextView
                     android:id="@+id/studentxxitexutview"
                     android:layout_width="wrap_content"

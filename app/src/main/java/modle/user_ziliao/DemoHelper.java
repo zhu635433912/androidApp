@@ -934,9 +934,14 @@ public class DemoHelper {
 			@Override
 			public void onMessageReceived(List<EMMessage> messages) {
 			    for (EMMessage message : messages) {
-                    EMLog.d(TAG, "onMessageReceived id : " + message.getMsgId());
+                    Log.d("aa", "onMessageReceived id : " + message.getFrom());
+                    message.ext().put("userId",message.getFrom()+"");
                     // in background, do not refresh UI, notify it in notification bar
-                    UserCacheManager.save(message.ext());
+                    String msi = message.getFrom();
+                    String msa = message.getStringAttribute("userNick","");
+                    String mss = message.getStringAttribute("userAvatar","");
+//                    UserCacheManager.save(message.ext());
+                    UserCacheManager.save(msi,msa,mss);
                     if(!easeUI.hasForegroundActivies()){
                         getNotifier().onNewMsg(message);
                     }

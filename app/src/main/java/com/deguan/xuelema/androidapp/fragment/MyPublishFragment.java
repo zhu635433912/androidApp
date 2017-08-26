@@ -61,7 +61,7 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
     private int filter_type;
     private PublishPresenter publishPresenter;
     private boolean isLoading = false;
-    private int page = 0;
+    private int page = 1;
 
     @Override
     public void before() {
@@ -83,25 +83,25 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
 //        listView.setAdapter(adapter);
         adapter.setOnTopClickListener(this);
         adapter.setOnItemLongClickListener(this);
-//        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//                if (!isLoading) {
-//                    RecyclerView.Adapter adapter1 = recyclerView.getAdapter();
-//                    View childAt = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
-//                    int position = recyclerView.getChildAdapterPosition(childAt);
-//                    if (adapter1.getItemCount() - position < 5) {
-//                        isLoading = true;
-//                        page++;
-////                        NetworkUtil.getService().getTopList(id, ++page, 20).enqueue(TopListFragment.this);
-//                    }
-//                }
-//            }
-//        });
+        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (!isLoading) {
+                    RecyclerView.Adapter adapter1 = recyclerView.getAdapter();
+                    View childAt = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
+                    int position = recyclerView.getChildAdapterPosition(childAt);
+                    if (adapter1.getItemCount() - position < 5) {
+                        isLoading = true;
+                        page++;
+                        new PublishPresenterImpl(MyPublishFragment.this, Integer.parseInt(User_id.getUid()),4,page).getPublishEntity();
+                    }
+                }
+            }
+        });
         swipeRefreshLayout.setOnRefreshListener(this);
         listView.setAdapter(adapter);
-        publishPresenter =  new PublishPresenterImpl(this, Integer.parseInt(User_id.getUid()),4);
+        publishPresenter =  new PublishPresenterImpl(this, Integer.parseInt(User_id.getUid()),4,page);
         if (list.size() > 0){
 
         }else {

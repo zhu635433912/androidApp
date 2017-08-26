@@ -71,22 +71,26 @@ public class ConductFragment extends BaseFragment implements OrderView, SwipeRef
 //        listView.setOnRefreshListener(this);
         listView.setAdapter(adapter);
 
-//        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//                if (!isLoading) {
-//                    RecyclerView.Adapter adapter1 = recyclerView.getAdapter();
-//                    View childAt = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
-//                    int position = recyclerView.getChildAdapterPosition(childAt);
-//                    if (adapter1.getItemCount() - position < 5) {
-//                        isLoading = true;
-//                        page++;
-////                        NetworkUtil.getService().getTopList(id, ++page, 20).enqueue(TopListFragment.this);
-//                    }
-//                }
-//            }
-//        });
+        listView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (!isLoading) {
+                    RecyclerView.Adapter adapter1 = recyclerView.getAdapter();
+                    View childAt = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
+                    int position = recyclerView.getChildAdapterPosition(childAt);
+                    if (adapter1.getItemCount() - position < 5) {
+                        isLoading = true;
+                        page++;
+                        if (User_id.getRole().equals("1")) {
+                            new OrderPresenterImpl(ConductFragment.this, Integer.parseInt(User_id.getUid()), 0, page).getOrderEntity();
+                        }else {
+                            new OrderPresenterImpl(ConductFragment.this, Integer.parseInt(User_id.getUid()), 1, page).getOrderEntity();
+                        }
+                    }
+                }
+            }
+        });
         swipeRefreshLayout.setOnRefreshListener(this);
 
         if (User_id.getRole().equals("1")){
@@ -119,11 +123,11 @@ public class ConductFragment extends BaseFragment implements OrderView, SwipeRef
     @Override
     public void successOrder(List<Map<String, Object>> maps) {
 //        listView.onRefreshComplete();
-        if (page == 1) {
-            adapter.clear();
-            list.clear();
-        }
         if (maps != null) {
+            if (page == 1) {
+                adapter.clear();
+            }
+            list.clear();
 //            for (int i = 0; i < maps.size(); i++) {
 //                if (!maps.get(i).get("status").equals("9")) {
 //                    list.add(maps.get(i));
@@ -140,10 +144,10 @@ public class ConductFragment extends BaseFragment implements OrderView, SwipeRef
                 }
             }
 
+            adapter.addAll(list);
+            isLoading = false;
         }
-        adapter.addAll(list);
         swipeRefreshLayout.setRefreshing(false);
-        isLoading = false;
 //        list.addAll(maps);
 //        for (int i = 0; i < maps.size(); i++) {
 //            TuijianEntity entity = new TuijianEntity();
@@ -175,10 +179,11 @@ public class ConductFragment extends BaseFragment implements OrderView, SwipeRef
 
     @Override
     public void onRefresh() {
+        page = 1;
         if (User_id.getRole().equals("1")) {
-            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 0, 1).getOrderEntity();
+            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 0, page).getOrderEntity();
         }else {
-            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 1, 1).getOrderEntity();
+            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 1, page).getOrderEntity();
         }
     }
 

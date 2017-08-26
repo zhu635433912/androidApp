@@ -36,5 +36,5 @@ import retrofit2.Callback;
  * 修改备注：
  */
 public interface PublishModel {
-    void getPublishData(Callback<ContentModle> callback,int uid, int filter_type);
+    void getPublishData(Callback<ContentModle> callback,int uid, int filter_type,int page);
 }

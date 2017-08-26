@@ -12,16 +12,8 @@ public class XuqiuEntity {
     private String publisher_gender;
     private String id;
     private String content;
+    private String address;
     private String service_type;
-
-    public String getService_type() {
-        return service_type;
-    }
-
-    public void setService_type(String service_type) {
-        this.service_type = service_type;
-    }
-
     private String service_type_txt;
     private String grade_id;
     private String grade_name;
@@ -38,26 +30,19 @@ public class XuqiuEntity {
     private String lat;
     private String distance;
     private String status;
-    private String address;
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
 
     public XuqiuEntity() {
     }
 
-    public XuqiuEntity(String publisher_id, String publisher_name, String publisher_headimg, String publisher_gender, String id, String content, String service_type_txt, String grade_id, String grade_name, String course_id, String course_name, String education_id, String education_name, String fee, String duration, String gender, String age, String created, String lng, String lat, String distance, String status) {
+    public XuqiuEntity(String publisher_id, String publisher_name, String publisher_headimg, String publisher_gender, String id, String content, String address, String service_type, String service_type_txt, String grade_id, String grade_name, String course_id, String course_name, String education_id, String education_name, String fee, String duration, String gender, String age, String created, String lng, String lat, String distance, String status) {
         this.publisher_id = publisher_id;
         this.publisher_name = publisher_name;
         this.publisher_headimg = publisher_headimg;
         this.publisher_gender = publisher_gender;
         this.id = id;
         this.content = content;
+        this.address = address;
+        this.service_type = service_type;
         this.service_type_txt = service_type_txt;
         this.grade_id = grade_id;
         this.grade_name = grade_name;
@@ -122,6 +107,22 @@ public class XuqiuEntity {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getService_type() {
+        return service_type;
+    }
+
+    public void setService_type(String service_type) {
+        this.service_type = service_type;
     }
 
     public String getService_type_txt() {

@@ -29,22 +29,24 @@ public class XuqiuEntityDao extends AbstractDao<XuqiuEntity, Void> {
         public final static Property Publisher_gender = new Property(3, String.class, "publisher_gender", false, "PUBLISHER_GENDER");
         public final static Property Id = new Property(4, String.class, "id", false, "ID");
         public final static Property Content = new Property(5, String.class, "content", false, "CONTENT");
-        public final static Property Service_type_txt = new Property(6, String.class, "service_type_txt", false, "SERVICE_TYPE_TXT");
-        public final static Property Grade_id = new Property(7, String.class, "grade_id", false, "GRADE_ID");
-        public final static Property Grade_name = new Property(8, String.class, "grade_name", false, "GRADE_NAME");
-        public final static Property Course_id = new Property(9, String.class, "course_id", false, "COURSE_ID");
-        public final static Property Course_name = new Property(10, String.class, "course_name", false, "COURSE_NAME");
-        public final static Property Education_id = new Property(11, String.class, "education_id", false, "EDUCATION_ID");
-        public final static Property Education_name = new Property(12, String.class, "education_name", false, "EDUCATION_NAME");
-        public final static Property Fee = new Property(13, String.class, "fee", false, "FEE");
-        public final static Property Duration = new Property(14, String.class, "duration", false, "DURATION");
-        public final static Property Gender = new Property(15, String.class, "gender", false, "GENDER");
-        public final static Property Age = new Property(16, String.class, "age", false, "AGE");
-        public final static Property Created = new Property(17, String.class, "created", false, "CREATED");
-        public final static Property Lng = new Property(18, String.class, "lng", false, "LNG");
-        public final static Property Lat = new Property(19, String.class, "lat", false, "LAT");
-        public final static Property Distance = new Property(20, String.class, "distance", false, "DISTANCE");
-        public final static Property Status = new Property(21, String.class, "status", false, "STATUS");
+        public final static Property Address = new Property(6, String.class, "address", false, "ADDRESS");
+        public final static Property Service_type = new Property(7, String.class, "service_type", false, "SERVICE_TYPE");
+        public final static Property Service_type_txt = new Property(8, String.class, "service_type_txt", false, "SERVICE_TYPE_TXT");
+        public final static Property Grade_id = new Property(9, String.class, "grade_id", false, "GRADE_ID");
+        public final static Property Grade_name = new Property(10, String.class, "grade_name", false, "GRADE_NAME");
+        public final static Property Course_id = new Property(11, String.class, "course_id", false, "COURSE_ID");
+        public final static Property Course_name = new Property(12, String.class, "course_name", false, "COURSE_NAME");
+        public final static Property Education_id = new Property(13, String.class, "education_id", false, "EDUCATION_ID");
+        public final static Property Education_name = new Property(14, String.class, "education_name", false, "EDUCATION_NAME");
+        public final static Property Fee = new Property(15, String.class, "fee", false, "FEE");
+        public final static Property Duration = new Property(16, String.class, "duration", false, "DURATION");
+        public final static Property Gender = new Property(17, String.class, "gender", false, "GENDER");
+        public final static Property Age = new Property(18, String.class, "age", false, "AGE");
+        public final static Property Created = new Property(19, String.class, "created", false, "CREATED");
+        public final static Property Lng = new Property(20, String.class, "lng", false, "LNG");
+        public final static Property Lat = new Property(21, String.class, "lat", false, "LAT");
+        public final static Property Distance = new Property(22, String.class, "distance", false, "DISTANCE");
+        public final static Property Status = new Property(23, String.class, "status", false, "STATUS");
     };
 
 
@@ -66,22 +68,24 @@ public class XuqiuEntityDao extends AbstractDao<XuqiuEntity, Void> {
                 "\"PUBLISHER_GENDER\" TEXT," + // 3: publisher_gender
                 "\"ID\" TEXT," + // 4: id
                 "\"CONTENT\" TEXT," + // 5: content
-                "\"SERVICE_TYPE_TXT\" TEXT," + // 6: service_type_txt
-                "\"GRADE_ID\" TEXT," + // 7: grade_id
-                "\"GRADE_NAME\" TEXT," + // 8: grade_name
-                "\"COURSE_ID\" TEXT," + // 9: course_id
-                "\"COURSE_NAME\" TEXT," + // 10: course_name
-                "\"EDUCATION_ID\" TEXT," + // 11: education_id
-                "\"EDUCATION_NAME\" TEXT," + // 12: education_name
-                "\"FEE\" TEXT," + // 13: fee
-                "\"DURATION\" TEXT," + // 14: duration
-                "\"GENDER\" TEXT," + // 15: gender
-                "\"AGE\" TEXT," + // 16: age
-                "\"CREATED\" TEXT," + // 17: created
-                "\"LNG\" TEXT," + // 18: lng
-                "\"LAT\" TEXT," + // 19: lat
-                "\"DISTANCE\" TEXT," + // 20: distance
-                "\"STATUS\" TEXT);"); // 21: status
+                "\"ADDRESS\" TEXT," + // 6: address
+                "\"SERVICE_TYPE\" TEXT," + // 7: service_type
+                "\"SERVICE_TYPE_TXT\" TEXT," + // 8: service_type_txt
+                "\"GRADE_ID\" TEXT," + // 9: grade_id
+                "\"GRADE_NAME\" TEXT," + // 10: grade_name
+                "\"COURSE_ID\" TEXT," + // 11: course_id
+                "\"COURSE_NAME\" TEXT," + // 12: course_name
+                "\"EDUCATION_ID\" TEXT," + // 13: education_id
+                "\"EDUCATION_NAME\" TEXT," + // 14: education_name
+                "\"FEE\" TEXT," + // 15: fee
+                "\"DURATION\" TEXT," + // 16: duration
+                "\"GENDER\" TEXT," + // 17: gender
+                "\"AGE\" TEXT," + // 18: age
+                "\"CREATED\" TEXT," + // 19: created
+                "\"LNG\" TEXT," + // 20: lng
+                "\"LAT\" TEXT," + // 21: lat
+                "\"DISTANCE\" TEXT," + // 22: distance
+                "\"STATUS\" TEXT);"); // 23: status
     }
 
     /** Drops the underlying database table. */
@@ -125,84 +129,94 @@ public class XuqiuEntityDao extends AbstractDao<XuqiuEntity, Void> {
             stmt.bindString(6, content);
         }
  
+        String address = entity.getAddress();
+        if (address != null) {
+            stmt.bindString(7, address);
+        }
+ 
+        String service_type = entity.getService_type();
+        if (service_type != null) {
+            stmt.bindString(8, service_type);
+        }
+ 
         String service_type_txt = entity.getService_type_txt();
         if (service_type_txt != null) {
-            stmt.bindString(7, service_type_txt);
+            stmt.bindString(9, service_type_txt);
         }
  
         String grade_id = entity.getGrade_id();
         if (grade_id != null) {
-            stmt.bindString(8, grade_id);
+            stmt.bindString(10, grade_id);
         }
  
         String grade_name = entity.getGrade_name();
         if (grade_name != null) {
-            stmt.bindString(9, grade_name);
+            stmt.bindString(11, grade_name);
         }
  
         String course_id = entity.getCourse_id();
         if (course_id != null) {
-            stmt.bindString(10, course_id);
+            stmt.bindString(12, course_id);
         }
  
         String course_name = entity.getCourse_name();
         if (course_name != null) {
-            stmt.bindString(11, course_name);
+            stmt.bindString(13, course_name);
         }
  
         String education_id = entity.getEducation_id();
         if (education_id != null) {
-            stmt.bindString(12, education_id);
+            stmt.bindString(14, education_id);
         }
  
         String education_name = entity.getEducation_name();
         if (education_name != null) {
-            stmt.bindString(13, education_name);
+            stmt.bindString(15, education_name);
         }
  
         String fee = entity.getFee();
         if (fee != null) {
-            stmt.bindString(14, fee);
+            stmt.bindString(16, fee);
         }
  
         String duration = entity.getDuration();
         if (duration != null) {
-            stmt.bindString(15, duration);
+            stmt.bindString(17, duration);
         }
  
         String gender = entity.getGender();
         if (gender != null) {
-            stmt.bindString(16, gender);
+            stmt.bindString(18, gender);
         }
  
         String age = entity.getAge();
         if (age != null) {
-            stmt.bindString(17, age);
+            stmt.bindString(19, age);
         }
  
         String created = entity.getCreated();
         if (created != null) {
-            stmt.bindString(18, created);
+            stmt.bindString(20, created);
         }
  
         String lng = entity.getLng();
         if (lng != null) {
-            stmt.bindString(19, lng);
+            stmt.bindString(21, lng);
         }
  
         String lat = entity.getLat();
         if (lat != null) {
-            stmt.bindString(20, lat);
+            stmt.bindString(22, lat);
         }
  
         String distance = entity.getDistance();
         if (distance != null) {
-            stmt.bindString(21, distance);
+            stmt.bindString(23, distance);
         }
  
         String status = entity.getStatus();
         if (status != null) {
-            stmt.bindString(22, status);
+            stmt.bindString(24, status);
         }
     }
 
@@ -222,22 +236,24 @@ public class XuqiuEntityDao extends AbstractDao<XuqiuEntity, Void> {
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // publisher_gender
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // id
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // content
-            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // service_type_txt
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // grade_id
-            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // grade_name
-            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // course_id
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // course_name
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // education_id
-            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // education_name
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // fee
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // duration
-            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // gender
-            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // age
-            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // created
-            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // lng
-            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // lat
-            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // distance
-            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21) // status
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // address
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // service_type
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // service_type_txt
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // grade_id
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // grade_name
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // course_id
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // course_name
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // education_id
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // education_name
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // fee
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // duration
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // gender
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // age
+            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // created
+            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // lng
+            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // lat
+            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // distance
+            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23) // status
         );
         return entity;
     }
@@ -251,22 +267,24 @@ public class XuqiuEntityDao extends AbstractDao<XuqiuEntity, Void> {
         entity.setPublisher_gender(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setId(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setContent(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
-        entity.setService_type_txt(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setGrade_id(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
-        entity.setGrade_name(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
-        entity.setCourse_id(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setCourse_name(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setEducation_id(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setEducation_name(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
-        entity.setFee(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
-        entity.setDuration(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
-        entity.setGender(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
-        entity.setAge(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setCreated(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
-        entity.setLng(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
-        entity.setLat(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
-        entity.setDistance(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
-        entity.setStatus(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
+        entity.setAddress(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
+        entity.setService_type(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setService_type_txt(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
+        entity.setGrade_id(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
+        entity.setGrade_name(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setCourse_id(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setCourse_name(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setEducation_id(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setEducation_name(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setFee(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setDuration(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setGender(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setAge(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setCreated(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
+        entity.setLng(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
+        entity.setLat(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
+        entity.setDistance(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
+        entity.setStatus(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
      }
     
     /** @inheritdoc */

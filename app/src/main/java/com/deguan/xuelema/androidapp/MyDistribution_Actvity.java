@@ -16,6 +16,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -94,13 +95,29 @@ public class MyDistribution_Actvity extends AutoLayoutActivity implements View.O
 
         if (!map.get("TotalUser").equals("0")){
             if (level == 1) {
-                zongrogin.setText(map.get("TotalUser1")+"人");
-                zongordet.setText("共交易了"+map.get("TotalBill1")+"单");
+                if ((double)map.get("TotalUser1") != 0) {
+                    zongrogin.setText(BigDecimal.valueOf((Double) map.get("TotalUser1")).stripTrailingZeros().toPlainString() + "人");
+                }else {
+                    zongrogin.setText("0人");
+                }if ((double)map.get("TotalBill1") != 0) {
+                    zongordet.setText("共交易了" + BigDecimal.valueOf((Double) map.get("TotalBill1")).stripTrailingZeros().toPlainString() + "单");
+                }else {
+                    zongordet.setText("共交易了0单");
+
+                }
                 yijifenxiaofee.setText(map.get("TotalFee1")+"");
             }
             if (level == 2) {
-                zongrogin.setText(map.get("TotalUser2")+"人");
-                zongordet.setText("共交易了"+map.get("TotalBill2")+"单");
+                if ((double)map.get("TotalUser2") != 0) {
+                    zongrogin.setText(BigDecimal.valueOf((Double) map.get("TotalUser2")).stripTrailingZeros().toPlainString() + "人");
+                }else{
+                    zongrogin.setText("0人");
+                }
+                if ((double)map.get("TotalBill2") != 0) {
+                    zongordet.setText("共交易了" + BigDecimal.valueOf((Double) map.get("TotalBill2")).stripTrailingZeros().toPlainString() + "单");
+                }else{
+                    zongordet.setText("共交易了0单");
+                }
                 yijifenxiaofee.setText(map.get("TotalFee2")+"");
             }
         }else {

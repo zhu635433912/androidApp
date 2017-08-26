@@ -64,7 +64,7 @@ public interface Demand_http {
          获取用户自己的需求列表
     */
     @POST("index.php?s=/Service/Requirement/gets_requirement")
-    Call<ContentModle> getMyDemandlist(@Query("publisher_id") int publisher_id, @Query("filter_type") int filter_type);
+    Call<ContentModle> getMyDemandlist(@Query("publisher_id") int publisher_id, @Query("filter_type") int filter_type,@Query("page")int page);
 
     //推荐需求
     @POST("index.php?s=/Service/Requirement/recommend_requirement_commend")
@@ -76,5 +76,5 @@ public interface Demand_http {
 
 
     @POST("index.php?s=/Service/Requirement/gets_requirement_byorder")
-    Call<ContentModle> getMyReceptDemand(@Query("uid") int uid);
+    Call<ContentModle> getMyReceptDemand(@Query("uid") int uid,@Query("page")int page);
 }

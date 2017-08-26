@@ -24,6 +24,8 @@ public class DbEntity {
         xuqiuEntity.addStringProperty("publisher_gender");
         xuqiuEntity.addStringProperty("id");
         xuqiuEntity.addStringProperty("content");
+        xuqiuEntity.addStringProperty("address");
+        xuqiuEntity.addStringProperty("service_type");
         xuqiuEntity.addStringProperty("service_type_txt");
         xuqiuEntity.addStringProperty("grade_id");
         xuqiuEntity.addStringProperty("grade_name");
@@ -54,6 +56,7 @@ public class DbEntity {
         teacherEntity.addStringProperty("speciality_name");
         teacherEntity.addStringProperty("fee");
         teacherEntity.addStringProperty("years");
+        teacherEntity.addStringProperty("click");
         teacherEntity.addStringProperty("apply_job");
         teacherEntity.addStringProperty("demand_fee");
         teacherEntity.addStringProperty("service_type");

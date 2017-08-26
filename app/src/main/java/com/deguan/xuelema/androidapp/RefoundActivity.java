@@ -35,6 +35,7 @@ import com.deguan.xuelema.androidapp.fragment.StudentFragment;
 import com.deguan.xuelema.androidapp.init.Ordercontent_init;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
+import com.deguan.xuelema.androidapp.utils.PhotoBitmapUtils;
 import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
@@ -281,6 +282,7 @@ public class RefoundActivity extends MyBaseActivity implements View.OnClickListe
         orderfeeTv.setText("￥"+map.get("order_price"));
         refundOrderfeeTv.setText("￥"+map.get("order_price"));
 //        refund_fee = map.get("order_fee")+"";
+        telphone = map.get("placer_mobile")+"";
     }
 
     @Override
@@ -330,7 +332,9 @@ public class RefoundActivity extends MyBaseActivity implements View.OnClickListe
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CODE_CAMERA) { // capture new image
                 if (cameraFile != null && cameraFile.exists()) {
-                    setuseryoux(cameraFile);
+                    String filepath = PhotoBitmapUtils.amendRotatePhoto(cameraFile.getAbsolutePath(),this);
+                    setuseryoux(new File(filepath));
+//                    setuseryoux(cameraFile);
                 }
 
             }else if (requestCode == REQUEST_CODE_LOCAL) { // send local image
@@ -412,7 +416,9 @@ public class RefoundActivity extends MyBaseActivity implements View.OnClickListe
                 toast.show();
                 return;
             }
-            setuseryoux(new File(picturePath));
+            String filepath = PhotoBitmapUtils.amendRotatePhoto(picturePath,this);
+            setuseryoux(new File(filepath));
+//            setuseryoux(new File(picturePath));
         } else {
             File file = new File(selectedImage.getPath());
             if (!file.exists()) {
@@ -422,7 +428,9 @@ public class RefoundActivity extends MyBaseActivity implements View.OnClickListe
                 return;
 
             }
-            setuseryoux(file);
+            String filepath = PhotoBitmapUtils.amendRotatePhoto(selectedImage.getPath(),this);
+            setuseryoux(new File(filepath));
+//            setuseryoux(file);
         }
 
     }

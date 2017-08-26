@@ -106,6 +106,21 @@
                     android:layout_width="220px"
                     android:layout_height="220px"/>
                 <ImageView
+                    android:id="@+id/teacher_manager_image"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="180px"
+                    android:layout_marginRight="100px"
+                    android:src="@drawable/teacher_renzhen"
+                    android:layout_width="100px"
+                    android:layout_height="100px" />
+                <ImageView
+                    android:src="@drawable/hly62"
+                    android:layout_marginLeft="170px"
+                    android:layout_marginTop="250px"
+                    android:layout_toRightOf="@+id/teacher_my"
+                    android:layout_width="60px"
+                    android:layout_height="60px"/>
+                <ImageView
                     android:id="@+id/huanxin_but"
                     android:layout_marginTop="40px"
                     android:layout_marginLeft="95px"

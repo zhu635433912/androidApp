@@ -33,6 +33,7 @@ import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
+import com.deguan.xuelema.androidapp.utils.PhotoBitmapUtils;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.util.PathUtil;
@@ -67,10 +68,6 @@ public class EducationActivity extends MyBaseActivity implements View.OnClickLis
     ImageView imageAdd2;
     @ViewById(R.id.education_save)
     TextView saveTv;
-    @ViewById(R.id.education_start_time)
-    EditText startEdit;
-    @ViewById(R.id.education_end_time)
-    EditText endEdit;
     @ViewById(R.id.education_choose)
     TextView chooseTv;
     @ViewById(R.id.education_back)
@@ -139,9 +136,7 @@ public class EducationActivity extends MyBaseActivity implements View.OnClickLis
                     if (!TextUtils.isEmpty(otherEdit.getText())){
                         teacher.TeacherUpdateRemark(Integer.parseInt(User_id.getUid()),otherEdit.getText().toString());
                     }
-                    teacher.TeacherUpdateTime(Integer.parseInt(User_id.getUid()),startEdit.getText()+"",endEdit.getText()+"");
                     teacher.Teacher_graduated_school(Integer.parseInt(User_id.getUid()),schoolEdit.getText().toString());
-
                     finish();
                 }
                 break;
@@ -281,7 +276,9 @@ public class EducationActivity extends MyBaseActivity implements View.OnClickLis
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CODE_CAMERA) { // capture new image
                 if (cameraFile != null && cameraFile.exists()) {
-                        setuseryoux(cameraFile);
+                    String filepath = PhotoBitmapUtils.amendRotatePhoto(cameraFile.getAbsolutePath(),this);
+                    setuseryoux(new File(filepath));
+//                    setuseryoux(cameraFile);
                 }
 
             }else if (requestCode == REQUEST_CODE_LOCAL) { // send local image
@@ -374,12 +371,6 @@ public class EducationActivity extends MyBaseActivity implements View.OnClickLis
 
     @Override
     public void Updatecontent(Map<String, Object> map) {
-        if (!TextUtils.isEmpty(map.get("starttime")+"")){
-            startEdit.setText(map.get("starttime")+"");
-        }
-        if (!TextUtils.isEmpty(map.get("endtime")+"")){
-            endEdit.setText(map.get("endtime")+"");
-        }
         if (!TextUtils.isEmpty(map.get("graduated_school")+"")){
             schoolEdit.setText(map.get("graduated_school")+"");
         }
@@ -452,7 +443,9 @@ public class EducationActivity extends MyBaseActivity implements View.OnClickLis
                 toast.show();
                 return;
             }
-            setuseryoux(new File(picturePath));
+            String filepath = PhotoBitmapUtils.amendRotatePhoto(picturePath,this);
+            setuseryoux(new File(filepath));
+//            setuseryoux(new File(picturePath));
         } else {
             File file = new File(selectedImage.getPath());
             if (!file.exists()) {
@@ -462,7 +455,9 @@ public class EducationActivity extends MyBaseActivity implements View.OnClickLis
                 return;
 
             }
-            setuseryoux(file);
+            String filepath = PhotoBitmapUtils.amendRotatePhoto(selectedImage.getPath(),this);
+            setuseryoux(new File(filepath));
+//            setuseryoux(file);
         }
 
     }

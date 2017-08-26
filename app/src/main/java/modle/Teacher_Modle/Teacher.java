@@ -168,14 +168,14 @@ public class Teacher implements Teacher_init {
             state, int gender, int speciality, int grade_type, int order_rank, final Requirdetailed requirdetailed, int page,int course_id) {
         Call<ContentModle> call=teacher_http.getTeacherlist(uid,lat,lng,order,state,gender,speciality,grade_type,order_rank,page,course_id);
         listmap=new ArrayList<Map<String, Object>>();
-        call.enqueue(new Callback<ContentModle>() {
-            @Override
-            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
-                String error=response.body().getError();
-                if (error.equals("ok")){
-                    if (response.body().getContent() .size() == 0){
-                        teacherView.failTeacher("无数据");
-                    }
+                        call.enqueue(new Callback<ContentModle>() {
+                            @Override
+                            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                                String error=response.body().getError();
+                                if (error.equals("ok")){
+                                    if (response.body().getContent() .size() == 0){
+                                        teacherView.failTeacher("无数据");
+                                    }
                         listmap = response.body().getContent();
                         teacherView.successTeacher(listmap);
 
@@ -473,6 +473,28 @@ public class Teacher implements Teacher_init {
     }
 
 
+    //更新教师个人经历
+    public void Teacher_exper(int uid,String exper,String exper_url){
+        Call<Demtest> call = teacher_http.setExper(uid,exper,exper_url);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    Log.e("aa","更新教师个人简介成功");
+                }else {
+                    Log.e("aa","更新教师个人简介失败");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+
+            }
+        });
+
+    }
+
     //更新教师个人简介
     @Override
     public void Teacher_resume(int uid, String resume) {
@@ -665,7 +687,6 @@ public class Teacher implements Teacher_init {
                 String error=response.body().getError();
                 if (error.equals("ok")){
                     Log.e("aa","获取推荐教师成功");
-
                         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
                         list = response.body().getContent();
                         teacherView.successTeacher(list);
@@ -683,5 +704,32 @@ public class Teacher implements Teacher_init {
         });
     }
 
+    //获取教学案例
+    public void getExampleList(int id,int page){
+        Call<ContentModle> call=teacher_http.getExample(id,page);
+        listmap=new ArrayList<Map<String, Object>>();
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    if (response.body().getContent()  == null){
+//                        teacherView.failTeacher("无数据");
+                    }
+                    listmap = response.body().getContent();
+                    teacherView.successTeacher(listmap);
+                }else {
+//                    String errmsg=response.body().getErrmsg();
+//                    Log.e("aa","获取教师列表错误"+errmsg);
+                    teacherView.failTeacher("无数据");
+                }
+            }
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                Log.e("aa","获取教师列表异常错误="+t.toString());
+                teacherView.failTeacher("网络错误");
+            }
+        });
+    }
 
 }

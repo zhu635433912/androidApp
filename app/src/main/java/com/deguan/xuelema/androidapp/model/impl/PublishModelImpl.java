@@ -53,7 +53,7 @@ public class PublishModelImpl extends BasePublishModel implements PublishModel {
         return instance;
     }
     @Override
-    public void getPublishData(Callback<ContentModle> callback, int uid, int filter_type) {
-        service.getMyDemandlist(uid,filter_type).enqueue(callback);
+    public void getPublishData(Callback<ContentModle> callback, int uid, int filter_type,int page) {
+        service.getMyDemandlist(uid,filter_type,page).enqueue(callback);
     }
 }

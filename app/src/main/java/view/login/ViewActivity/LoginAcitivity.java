@@ -60,7 +60,7 @@ import static modle.user_ziliao.User_id.getUsername;
  * 登陆页面
  * 登录问题 点击登录的时候要判断是否记住密码 此时再去做存储记录
  */
-public class LoginAcitivity extends AutoLayoutActivity implements wan_inint,View.OnClickListener {
+public class  LoginAcitivity extends AutoLayoutActivity implements wan_inint,View.OnClickListener {
     private ImageButton loginBtn;//登陆
     private ImageButton returnBtn;//返回
     private TextView loginTv;//注册

@@ -51,11 +51,13 @@ public class PublishPresenterImpl implements PublishPresenter {
     private MyPublishView myPublishView;
     private int uid;
     private int filter_type;
+    private int page;
 
-    public PublishPresenterImpl(MyPublishView myPublishView, int uid, int filter_type) {
+    public PublishPresenterImpl(MyPublishView myPublishView, int uid, int filter_type,int page) {
         this.myPublishView = myPublishView;
         this.uid = uid;
         this.filter_type = filter_type;
+        this.page = page;
     }
 
     @Override
@@ -82,6 +84,6 @@ public class PublishPresenterImpl implements PublishPresenter {
             public void onFailure(Call<ContentModle> call, Throwable t) {
                 myPublishView.failMyPublish("网络错误");
             }
-        },uid,filter_type);
+        },uid,filter_type,page);
     }
 }

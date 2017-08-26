@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="100px">
         <RelativeLayout
-            android:id="@+id/teacher_back"
             android:layout_width="120px"
             android:layout_height="100px">
             <ImageButton
@@ -23,14 +22,19 @@
                 android:background="@drawable/add19"
                 android:layout_width="30px"
                 android:layout_height="40px" />
+        <RelativeLayout
+            android:id="@+id/teacher_back"
+            android:layout_width="120px"
+            android:layout_height="100px"/>
         </RelativeLayout>
         <TextView
+            android:textColor="#111111"
             android:paddingRight="60px"
             android:gravity="center"
-            android:textSize="40px"
+            android:textSize="35px"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="个人简介"
+            android:text="身份认证"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent" />
@@ -49,80 +53,19 @@
         android:layout_width="match_parent"
         android:layout_height="1px" />
 
-
-
-        <LinearLayout
-            android:layout_marginTop="20px"
-            android:layout_width="match_parent"
-            android:layout_height="80px">
-            <TextView
-                style="@style/manager_text_style"
-                android:text="    *教龄    "/>
-            <TextView
-                android:gravity="center"
-                android:id="@+id/teacher_year"
-                android:text="请选择教龄"
-                android:layout_marginRight="50px"
-                android:layout_marginLeft="30px"
-                android:background="@drawable/education_edit_bg"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="20px"
-        android:layout_width="match_parent"
-        android:layout_height="120px">
-
-        <TextView
-            style="@style/manager_text_style"
-            android:text="     特长    "/>
-        <EditText
-            android:id="@+id/teacher_special"
-            android:textSize="35px"
-            android:gravity="center"
-            android:hint=""
-            android:layout_marginRight="50px"
-            android:layout_marginLeft="30px"
-            android:background="@drawable/education_edit_bg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-        <LinearLayout
-            android:layout_marginTop="20px"
-            android:layout_width="match_parent"
-            android:layout_height="200px">
-
-            <TextView
-                style="@style/manager_text_style"
-                android:text=" 个人介绍"/>
-            <EditText
-                android:id="@+id/teacher_desc"
-                android:textSize="35px"
-                android:gravity="center"
-                android:hint="请输入个人简介..."
-                android:layout_marginRight="50px"
-                android:layout_marginLeft="30px"
-                android:background="@drawable/education_edit_bg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
     <TextView
-        android:textColor="#000000"
-        android:layout_marginTop="20px"
+        android:layout_marginTop="38px"
         android:layout_marginLeft="40px"
-        android:textSize="40px"
+        android:textSize="35px"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="*上传身份证(手持身份证正反面)"/>
+        android:text="      拍摄您的手持二代身份证原件，请确保证件清晰、四角完整"/>
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_marginTop="20px"
+            android:layout_marginTop="30px"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
 
             <RelativeLayout
@@ -131,63 +74,90 @@
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:layout_marginRight="50px"
-                    android:layout_marginLeft="30px"
+                    android:layout_marginRight="117px"
+                    android:layout_marginLeft="117px"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="330px">
                     <ImageView
                         android:id="@+id/teacher_pic1"
                         android:gravity="center"
-                        android:background="@drawable/education_edit_bg"
+                        android:src="@mipmap/name_example2"
+                        android:background="@drawable/education_image_bg"
                         android:layout_width="match_parent"
-                        android:layout_height="250px" />
+                        android:layout_height="320px" />
+                        <ImageView
+                            android:visibility="gone"
+                            android:id="@+id/teacher_del1"
+                            android:layout_margin="15px"
+                            android:src="@drawable/honor_del"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="50px"
+                            android:layout_height="50px" />
+                    </RelativeLayout>
+                    <ImageView
+                        android:visibility="gone"
+                        android:id="@+id/teacher_add1"
+                        android:layout_marginTop="10px"
+                        android:src="@mipmap/name_add"
+                        android:layout_gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="200px"
+                        android:layout_height="100px" />
+                    <RelativeLayout
+                        android:layout_marginTop="30px"
+                        android:layout_width="match_parent"
+                        android:layout_height="330px">
+
 
                     <ImageView
                         android:id="@+id/teacher_pic2"
-                        android:layout_marginTop="30px"
                         android:gravity="center"
-                        android:background="@drawable/education_edit_bg"
+                        android:src="@mipmap/name_example1"
+                        android:background="@drawable/education_image_bg"
                         android:layout_width="match_parent"
-                        android:layout_height="250px" />
-
+                        android:layout_height="320px" />
+                        <ImageView
+                            android:visibility="gone"
+                            android:id="@+id/teacher_del2"
+                            android:layout_margin="15px"
+                            android:src="@drawable/honor_del"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="50px"
+                            android:layout_height="50px" />
+                    </RelativeLayout>
+                    <ImageView
+                        android:visibility="gone"
+                        android:layout_gravity="center"
+                        android:id="@+id/teacher_add2"
+                        android:layout_marginTop="10px"
+                        android:src="@mipmap/name_add"
+                        android:layout_centerHorizontal="true"
+                        android:layout_width="200px"
+                        android:layout_height="100px" />
                 </LinearLayout>
-                <ImageView
-                    android:visibility="gone"
-                    android:id="@+id/teacher_add1"
-                    android:layout_marginTop="75px"
-                    android:src="@drawable/hly62"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="100px"
-                    android:layout_height="100px" />
-                <ImageView
-                    android:visibility="gone"
 
-                    android:id="@+id/teacher_add2"
-                    android:layout_marginTop="355px"
-                    android:src="@drawable/hly62"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="100px"
-                    android:layout_height="100px" />
 
-                <ImageView
-                    android:visibility="gone"
-                    android:id="@+id/teacher_del1"
-                    android:layout_marginTop="15px"
-                    android:layout_marginRight="160px"
-                    android:src="@drawable/honor_del"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="50px"
-                    android:layout_height="50px" />
-                <ImageView
-                    android:visibility="gone"
-                    android:id="@+id/teacher_del2"
-                    android:layout_marginTop="295px"
-                    android:layout_marginRight="160px"
-                    android:src="@drawable/honor_del"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="50px"
-                    android:layout_height="50px" />
+
             </RelativeLayout>
         </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <ImageView
+            android:layout_marginLeft="50px"
+            android:src="@mipmap/safe_icon"
+            android:layout_width="60px"
+            android:layout_height="100px" />
+        <TextView
+            android:gravity="center"
+            android:textSize="25px"
+            android:text="信息仅用于身份验证，学了吗保障您的信息安全"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
     </LinearLayout>
 

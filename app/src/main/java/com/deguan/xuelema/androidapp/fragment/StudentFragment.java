@@ -159,11 +159,11 @@ public class StudentFragment extends BaseFragment implements Gaodehuidiao_init, 
         id=Integer.parseInt(User_id.getUid());
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        gaode_dinwei = new Gaode_dinwei(this,getActivity());
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        gaode_dinwei = new Gaode_dinwei(this,getActivity());
+//    }
 
     @Override
     public void initView() {
@@ -557,7 +557,7 @@ public class StudentFragment extends BaseFragment implements Gaodehuidiao_init, 
                     .request();
 //
         }else{
-//  定位
+            //  定位
             if (gaode_dinwei == null)
                 gaode_dinwei = new Gaode_dinwei(this,getActivity());
         }
@@ -591,7 +591,7 @@ public class StudentFragment extends BaseFragment implements Gaodehuidiao_init, 
             }
 
             EventBus.getDefault().post(map.get("address") + "", "status");
-//
+
             teacher.Get_Teacher_list(id, Integer.parseInt(User_id.getRole()), User_id.getLat() + "", "" + User_id.getLng(), recyclerView, getActivity(), order, "",  genderId, 0, gradeId, order_rank, this, page,subjectId);
 
 

@@ -32,7 +32,7 @@
         <TextView
             android:paddingRight="60px"
             android:gravity="center"
-            android:textSize="40px"
+            android:textSize="35px"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:text="学历信息"
@@ -47,20 +47,76 @@
             android:layout_width="100px"
             android:layout_height="match_parent" />
     </LinearLayout>
-
     <View
-        android:id="@+id/xuqiufenggexian"
-        android:background="#b9b6b6"
+        android:background="#303030"
+        android:layout_width="wrap_content"
+        android:layout_height="1px"/>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1px" />
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:layout_marginTop="30px">
+
+        <TextView
+            style="@style/manager_text_style"
+            android:textColor="#b4b4b4"
+            android:text="毕业院校" />
+        <TextView
+            android:text="*"
+            android:textSize="30px"
+            android:textColor="#e45858"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:textColor="#e7d47f"
+            android:textSize="30px"
+            android:id="@+id/education_school"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:layout_marginRight="50px"
+            android:gravity="center"
+            android:hint="请输入毕业学校" />
+
+    </LinearLayout>
 
         <LinearLayout
-            android:background="#ffffff"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:layout_marginTop="20px">
 
+        <TextView
+            style="@style/manager_text_style"
+            android:textColor="#b4b4b4"
+
+            android:text="最高学历" />
+            <TextView
+                android:text="*"
+                android:textSize="30px"
+                android:textColor="#e45858"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:clickable="true"
+                android:focusable="false"
+                android:textColor="#e7d47f"
+                android:id="@+id/education_choose"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="50px"
+                android:gravity="center"
+                android:hint="选择学历"
+                android:textSize="30px" />
+
+
+    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="100px"
@@ -68,159 +124,127 @@
 
             <TextView
                 style="@style/manager_text_style"
-                android:text="在校时间" />
+                android:textColor="#b4b4b4"
 
-            <EditText
-                android:id="@+id/education_start_time"
-                android:textSize="30px"
-                android:layout_width="200px"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="30px"
-                android:background="@drawable/education_edit_bg"
-                android:gravity="center"
-                android:hint="" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="30px"
-                android:text="到"
-                android:textSize="38px" />
+                android:text="        备注" />
 
             <EditText
                 android:textSize="30px"
-                android:id="@+id/education_end_time"
-                android:layout_width="200px"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="30px"
-                android:background="@drawable/education_edit_bg"
-                android:gravity="center"
-                android:hint="" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginTop="50px"
-            android:layout_width="match_parent"
-            android:layout_height="100px">
-            <TextView
-                style="@style/manager_text_style"
-                android:text="*毕业院校"/>
-            <EditText
-                android:gravity="center"
-                android:id="@+id/education_school"
-                android:hint="请输入毕业学校"
-                android:layout_marginRight="50px"
-                android:layout_marginLeft="30px"
-                android:background="@drawable/education_edit_bg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_marginTop="50px"
-            android:layout_width="match_parent"
-            android:layout_height="100px">
-
-            <TextView
-                style="@style/manager_text_style"
-                android:text="*最高学历"/>
-            <TextView
-                android:id="@+id/education_choose"
-                android:textSize="35px"
-                android:gravity="center"
-                android:hint="本科"
-                android:layout_marginRight="10px"
-                android:layout_marginLeft="30px"
-                android:background="@drawable/education_edit_bg"
-                android:layout_width="300px"
-                android:layout_height="match_parent" />
-            <EditText
                 android:id="@+id/education_other"
-                android:gravity="center"
-                android:hint="备注"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="50px"
                 android:layout_marginRight="50px"
-                android:layout_marginLeft="30px"
-                android:background="@drawable/education_edit_bg"
-                android:layout_width="150px"
-                android:layout_height="match_parent" />
+                android:gravity="center"
+                 />
+
         </LinearLayout>
+
         <LinearLayout
-            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginTop="40px"
+            android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30px"
+            android:text="学历证书"
+            android:textColor="#b4b4b4"
+
+            android:textSize="30px" />
+            <TextView
+                android:text="*"
+                android:textSize="30px"
+                android:textColor="#e45858"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:layout_marginLeft="30px"
-                android:textSize="40px"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="*学历证书"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_marginRight="50px"
-                android:layout_marginLeft="30px"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:id="@+id/education_pic1"
-                    android:gravity="center"
-                    android:background="@drawable/education_edit_bg"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="250px" />
-
-                <ImageView
-                    android:id="@+id/education_pic2"
-                    android:layout_marginTop="30px"
-                    android:gravity="center"
-                    android:background="@drawable/education_edit_bg"
-                    android:layout_width="match_parent"
-                    android:layout_height="250px" />
-
-            </LinearLayout>
-                <ImageView
-                    android:visibility="gone"
-                    android:id="@+id/education_add1"
-                    android:layout_marginTop="75px"
-                    android:src="@drawable/hly62"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="100px"
-                    android:layout_height="100px" />
-                <ImageView
-                    android:visibility="gone"
-                    android:id="@+id/education_add2"
-                    android:layout_marginTop="355px"
-                    android:src="@drawable/hly62"
-                    android:layout_centerHorizontal="true"
-                    android:layout_width="100px"
-                    android:layout_height="100px" />
-                <ImageView
-                    android:visibility="gone"
-                    android:id="@+id/education_del1"
-                    android:layout_marginTop="15px"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="50px"
                     android:layout_marginRight="70px"
-                    android:src="@drawable/honor_del"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="50px"
-                    android:layout_height="50px"
-                    android:layout_alignLeft="@+id/education_del2"
-                    android:layout_alignStart="@+id/education_del2" />
-                <ImageView
-                    android:visibility="gone"
-                    android:id="@+id/education_del2"
-                    android:layout_marginTop="295px"
-                    android:layout_marginRight="70px"
-                    android:src="@drawable/honor_del"
-                    android:layout_alignParentRight="true"
-                    android:layout_width="50px"
-                    android:layout_height="50px" />
-            </RelativeLayout>
-         </LinearLayout>
-       </LinearLayout>
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="300px">
+
+                    <ImageView
+                        android:background="@drawable/education_image_bg"
+                        android:id="@+id/education_pic1"
+                        android:layout_width="match_parent"
+                        android:layout_height="300px"
+                        android:src="@mipmap/education1_example"
+                        android:gravity="center" />
+                        <ImageView
+                            android:id="@+id/education_add1"
+                            android:layout_width="100px"
+                            android:layout_height="100px"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/education_add"
+                            android:visibility="gone"
+                            />
+                    <ImageView
+                        android:id="@+id/education_del1"
+                        android:layout_width="50px"
+                        android:layout_height="50px"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="15px"
+                        android:src="@drawable/honor_del"
+                        android:visibility="gone" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_marginTop="30px"
+                        android:layout_width="match_parent"
+                        android:layout_height="300px">
+
+                    <ImageView
+                        android:background="@drawable/education_image_bg"
+                        android:id="@+id/education_pic2"
+                        android:layout_width="match_parent"
+                        android:layout_height="300px"
+                        android:src="@mipmap/education2_example"
+                        android:gravity="center" />
+                        <ImageView
+                            android:id="@+id/education_add2"
+                            android:layout_width="100px"
+                            android:layout_height="100px"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/education_add"
+                            android:visibility="gone"
+                            />
+                    <ImageView
+                        android:id="@+id/education_del2"
+                        android:layout_width="50px"
+                        android:layout_height="50px"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="15px"
+                        android:src="@drawable/honor_del"
+                        android:visibility="gone" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+
+
+
+
+
+
+
+        </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/xuqiufenggexian"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#b9b6b6" />
+
 
 </LinearLayout>

@@ -19,11 +19,16 @@
             <!-- 取消按钮 -->
 
             <ImageView
-                android:id="@+id/img_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:layout_marginLeft="20px"
+                android:layout_width="20px"
+                android:layout_height="30px"
                 android:background="@drawable/add19" />
-
+            <ImageView
+                android:id="@+id/img_cancel"
+                android:layout_width="60px"
+                android:layout_height="60px"
+                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

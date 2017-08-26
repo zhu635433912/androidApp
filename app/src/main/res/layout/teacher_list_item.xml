@@ -11,7 +11,7 @@
         android:background="@drawable/mianlistview"
         android:layout_gravity="center"
         android:layout_width="700px"
-        android:layout_height="280px"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
         <!--<modle.toos.CircleImageView-->
@@ -121,32 +121,33 @@
             android:layout_marginTop="10px"
             android:layout_below="@+id/text5"
             android:layout_width="570px"
-            android:layout_height="70px" />
+            android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/text7"
+            android:layout_below="@+id/text6"
             android:layout_marginLeft="14px"
-            android:layout_marginBottom="30px"
+            android:layout_marginTop="8px"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
             android:text="14km"
-            android:textSize="25px"
+            android:textSize="24px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:layout_below="@+id/text6"
             android:id="@+id/text8"
             android:layout_marginRight="14px"
             android:layout_marginBottom="4px"
-            android:layout_marginTop="20px"
-            android:layout_alignParentBottom="true"
+            android:layout_marginTop="25px"
             android:layout_alignParentRight="true"
             android:textSize="26px"
+            android:text="11111"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <ImageView
+            android:layout_below="@+id/text6"
             android:layout_marginRight="20px"
-            android:layout_alignBottom="@+id/text8"
             android:layout_toLeftOf="@+id/text8"
-            android:layout_marginBottom="5px"
+            android:layout_marginTop="30px"
             android:id="@+id/imagehaop"
             android:layout_width="150px"
             android:layout_height="20px" />

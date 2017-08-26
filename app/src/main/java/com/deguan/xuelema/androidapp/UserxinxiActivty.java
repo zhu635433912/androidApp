@@ -95,7 +95,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private TextView jubaoTv;
     private ImageView iamgeview;
     private RelativeLayout gerxxTob;
-    private PopupWindow buyPopWindow;
+    private PopupWindow buyPopWindow,experPop;
     private TextView courseMoney;
     private TextView zongfee;
     private TextView keshi;
@@ -110,6 +110,8 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private String content = "";
     private TextView signTv;
     private String xueliUrl ;
+    private String exper;
+    private String exper_url;
 
     private TextView diqu;
     private TextView xinjijiaoshi;
@@ -121,6 +123,8 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private ImageView starImage;
     private ImageView teacherCardImage;
     private TextView educationPassTv,cardPassTv;
+
+
 
 
     @Override
@@ -268,7 +272,47 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
 //        }).start();
     }
 
-
+    private void showExperPop() {
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.exper_pop, null);
+        TextView experTv = (TextView) view.findViewById(R.id.pop_exper_tv);
+        ImageView experImage = (ImageView) view.findViewById(R.id.pop_exper_image);
+        experPop = new PopupWindow(view);
+        experPop.setFocusable(true);
+        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        int height = wm.getDefaultDisplay().getHeight();
+        int width = wm.getDefaultDisplay().getWidth();
+        if (TextUtils.isEmpty(exper)){
+            experTv.setText("暂无个人经历介绍");
+        }else {
+            experTv.setText("    " + exper);
+        }
+        if (!TextUtils.isEmpty(exper_url))
+        Glide.with(getApplicationContext()).load(exper_url).into(experImage);
+        experPop.setWidth(width / 10 * 8);
+        experPop.setHeight(height / 2);
+        experPop.setBackgroundDrawable(new BitmapDrawable());
+        backgroundAlpha(this, 0.5f);//0.0-1.0  ;
+        experPop.setOutsideTouchable(true);
+        experPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(UserxinxiActivty.this, 1f);
+            }
+        });
+        experTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                experPop.dismiss();
+            }
+        });
+        experImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                experPop.dismiss();
+            }
+        });
+    }
     private TextView studentShangmen,teacherShangmen;
     private int coursefee,teacherId,courseNumber,servicetype,studentfee,teacherfee;
     private String courseId,gradeId,serviceType,courseName;
@@ -398,6 +442,8 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     @Override
     public void Updatecontent(Map<String, Object> map) {
         jiaoyishuax.setVisibility(View.GONE);
+        exper = map.get("exper")+"";
+        exper_url = map.get("exper_img")+"";
         String nickname = (String) map.get("nickname");
         String resume = (String) map.get("resume");
         username = (String) map.get("username");
@@ -458,10 +504,16 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.gerxxjinl:
-                Toast.makeText(this, "暂无", Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(exper)&&TextUtils.isEmpty(exper_url)) {
+                    Toast.makeText(this, "暂无", Toast.LENGTH_SHORT).show();
+                }else {
+                    showExperPop();
+                    experPop.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+                }
                 break;
             case R.id.gerxxjiaoxueanl:
-                Toast.makeText(this, "暂无", Toast.LENGTH_SHORT).show();
+                startActivity(ExampleActivity_.intent(UserxinxiActivty.this).extra("teacherId",teacherId).get());
+//                Toast.makeText(this, "暂无", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.teacher_card_pic:
 

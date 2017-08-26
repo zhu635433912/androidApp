@@ -4,6 +4,7 @@ import android.*;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,8 +13,10 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
@@ -39,6 +42,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.deguan.xuelema.androidapp.utils.PhotoBitmapUtils;
 import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
@@ -189,7 +193,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
             case R.id.xueli_text:
 
                 //所在地
-                new  AlertDialog.Builder(this).setTitle("请输入(一旦确定无法修改)").setIcon(android.R.drawable.btn_star).setView(edit)
+                new  AlertDialog.Builder(this).setTitle("请输入(一旦确定无法修改,将作为找回支付密码的重要依据)").setIcon(android.R.drawable.btn_star).setView(edit)
                         .setPositiveButton("确认",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -315,7 +319,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                                     user.Updatenickname(uid,edit.getText().toString());
                                     emage.setText(edit.getText().toString());
                                 }else {
-                                    Toast.makeText(Personal_Activty.this,"昵称不能太短也不能太长哦!!",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Personal_Activty.this,"昵称不能超过10个字!!",Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }).setNegativeButton("取消",new DialogInterface.OnClickListener() {
@@ -375,7 +379,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                                     user_init.Upsignature(uid,signature);
                                     biyexuexiao.setText(signature);
                                 }else {
-                                    Toast.makeText(Personal_Activty.this, "签名不能太长也不能没有啊", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Personal_Activty.this, "签名不能超过20个字哦", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }).setNegativeButton("取消",new DialogInterface.OnClickListener() {
@@ -492,8 +496,13 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CODE_CAMERA) { // capture new image
                 if (cameraFile != null && cameraFile.exists()) {
-                    setuseryoux(cameraFile);
-                    Bitmap bitmap = getSmallBitmap(cameraFile.getAbsolutePath(), 600, 600);
+                    String filepath = PhotoBitmapUtils.amendRotatePhoto(cameraFile.getAbsolutePath(),this);
+                    setuseryoux(new File(filepath));
+//                    setuseryoux(cameraFile);
+                    Bitmap bitmap
+//                            = setImage(data.getData()) ;
+                            = getSmallBitmap(cameraFile.getAbsolutePath(), 600, 600);
+
                     usertoux.setImageBitmap(bitmap);
 //                    sendImageMessage(cameraFile.getAbsolutePath());
                 }
@@ -513,6 +522,43 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         }
 
     }
+
+    private Bitmap setImage(Uri mImageCaptureUri) {
+
+        // 不管是拍照还是选择图片每张图片都有在数据中存储也存储有对应旋转角度orientation值
+        // 所以我们在取出图片是把角度值取出以便能正确的显示图片,没有旋转时的效果观看
+
+        ContentResolver cr = this.getContentResolver();
+        Cursor cursor = cr.query(mImageCaptureUri, null, null, null, null);// 根据Uri从数据库中找
+        if (cursor != null) {
+            cursor.moveToFirst();// 把游标移动到首位，因为这里的Uri是包含ID的所以是唯一的不需要循环找指向第一个就是了
+            String filePath = cursor.getString(cursor.getColumnIndex("_data"));// 获取图片路
+            String orientation = cursor.getString(cursor
+                    .getColumnIndex("orientation"));// 获取旋转的角度
+            cursor.close();
+            if (filePath != null) {
+                Bitmap bitmap = BitmapFactory.decodeFile(filePath);//根据Path读取资源图片
+                int angle = 0;
+                if (orientation != null && !"".equals(orientation)) {
+                    angle = Integer.parseInt(orientation);
+                }
+                if (angle != 0) {
+                    // 下面的方法主要作用是把图片转一个角度，也可以放大缩小等
+                    Matrix m = new Matrix();
+                    int width = bitmap.getWidth();
+                    int height = bitmap.getHeight();
+                    m.setRotate(angle); // 旋转angle度
+                    bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height,
+                            m, true);// 从新生成图片
+
+                }
+//                photo.setImageBitmap(bitmap);
+                return  bitmap;
+            }
+        }
+        return null;
+    }
+
     /**
      * send image
      *
@@ -523,6 +569,8 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
+//            String orientation = cursor.getString(cursor
+//                    .getColumnIndex("orientation"));// 获取旋转的角度
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
@@ -534,7 +582,9 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                 toast.show();
                 return;
             }
-            setuseryoux(new File(picturePath));
+            String filepath = PhotoBitmapUtils.amendRotatePhoto(picturePath,this);
+            setuseryoux(new File(filepath));
+//            setuseryoux(new File(picturePath));
             Bitmap bitmap = getSmallBitmap(picturePath, 600, 600);
             usertoux.setImageBitmap(bitmap);
         } else {
@@ -546,7 +596,9 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                 return;
 
             }
-            setuseryoux(file);
+            String filepath = PhotoBitmapUtils.amendRotatePhoto(selectedImage.getPath(),this);
+            setuseryoux(new File(filepath));
+//            setuseryoux(file);
             Bitmap bitmap = getSmallBitmap(file.getAbsolutePath(), 600, 600);
             usertoux.setImageBitmap(bitmap);
         }

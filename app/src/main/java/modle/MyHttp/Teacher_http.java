@@ -87,6 +87,9 @@ public interface Teacher_http {
     @POST("index.php?s=/Service/Teacher/update_information")
     Call<Demtest> getyears(@Query("uid") int uid,@Query("years") int years);
 
+    @POST("index.php?s=/Service/Teacher/update_information")
+    Call<Demtest> setExper(@Query("uid")int uid,@Query("exper")String exper,@Query("exper_img")String exper_img);
+
     /*
     教师资料更新个人简介
     */
@@ -140,5 +143,7 @@ public interface Teacher_http {
     @POST("index.php?s=/Service/Teacher/recommend_teacher")
     Call<ContentModle> gettuijianjiaoshi1(  @Query("name") String name,@Query("lat")String lat,@Query("lng")String lng);
 
+    @POST("index.php?s=/Service/Order/gets_order_complete")
+    Call<ContentModle> getExample(@Query("id")int id,@Query("page")int page);
 
 }

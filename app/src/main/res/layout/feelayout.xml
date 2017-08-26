@@ -172,8 +172,8 @@
             android:layout_marginLeft="20px"
             android:text="提现低于1300元每笔支付宝将收取2元服务费,高于1300元每笔支付宝将按0.15%收取服务费(暂时只能整百提现)"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20px"
-            android:textSize="29px"
+            android:layout_marginBottom="30px"
+            android:textSize="25px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>

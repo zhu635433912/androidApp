@@ -10,6 +10,7 @@ import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.UserxinxiActivty;
 import com.deguan.xuelema.androidapp.Xuqiuxiangx;
 import com.deguan.xuelema.androidapp.entities.TuijianEntity;
+import com.deguan.xuelema.androidapp.presenter.impl.OrderPresenterImpl;
 import com.deguan.xuelema.androidapp.presenter.impl.TuijianPresenterImpl;
 import com.deguan.xuelema.androidapp.viewimpl.SimilarXuqiuView;
 import com.deguan.xuelema.androidapp.viewimpl.TuijianView;
@@ -62,12 +63,14 @@ import modle.user_ziliao.User_id;
  */
 
 @EFragment(R.layout.teacher_list_fragement)
-public class MyReceptFragment  extends BaseFragment implements SimilarXuqiuView {
+public class MyReceptFragment  extends BaseFragment implements SimilarXuqiuView, SwipeRefreshLayout.OnRefreshListener {
 
     private List<Map<String,Object>> list=new ArrayList<>();
     private int uid;
     private DmadAdapter dmadAdapter;
     private Demand_init demand;
+    private int page = 1;
+    private boolean isLoading = false;
 
     @ViewById
     SwipeRefreshLayout tacher_top_list_swipe;
@@ -100,6 +103,24 @@ public class MyReceptFragment  extends BaseFragment implements SimilarXuqiuView 
                 startActivity(intent);
             }
         });
+
+        tacher_fragment_list.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (!isLoading) {
+                    RecyclerView.Adapter adapter1 = recyclerView.getAdapter();
+                    View childAt = recyclerView.getChildAt(recyclerView.getChildCount() - 1);
+                    int position = recyclerView.getChildAdapterPosition(childAt);
+                    if (adapter1.getItemCount() - position < 5) {
+                        isLoading = true;
+                        page++;
+                        demand.getReceptDemand(Integer.parseInt(User_id.getUid()),page);
+                    }
+                }
+            }
+        });
+        tacher_top_list_swipe.setOnRefreshListener(this);
     }
 
     @Override
@@ -110,13 +131,13 @@ public class MyReceptFragment  extends BaseFragment implements SimilarXuqiuView 
         if (list.size() > 0){
 
         }else {
-            demand.getReceptDemand(Integer.parseInt(User_id.getUid()));
+            demand.getReceptDemand(Integer.parseInt(User_id.getUid()),page);
         }
 
         tacher_top_list_swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                demand.getReceptDemand(Integer.parseInt(User_id.getUid()));
+                demand.getReceptDemand(Integer.parseInt(User_id.getUid()),page);
             }
         });
     }
@@ -124,18 +145,21 @@ public class MyReceptFragment  extends BaseFragment implements SimilarXuqiuView 
 
     @Override
     public void successSimilarXuqiu(List<Map<String, Object>> maps) {
-        list.clear();
         if (maps != null) {
+            if (page == 1) {
+                list.clear();
+            }
             for (int i = 0; i < maps.size(); i++) {
                 if ((maps.get(i).get("status")).equals("1")||maps.get(i).get("status").equals("2")){
                     continue;
                 }
                 list.add(maps.get(i));
             }
+            isLoading = false;
+            dmadAdapter.notifyDataSetChanged();
         }
 
 //        list.addAll(maps);
-        dmadAdapter.notifyDataSetChanged();
         tacher_top_list_swipe.setRefreshing(false);
     }
 
@@ -143,5 +167,11 @@ public class MyReceptFragment  extends BaseFragment implements SimilarXuqiuView 
     public void failSimilarXuqiu(String msg) {
         tacher_top_list_swipe.setRefreshing(false);
         Toast.makeText(getActivity(),msg+"!",Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onRefresh() {
+        page = 1;
+        demand.getReceptDemand(Integer.parseInt(User_id.getUid()),page);
     }
 }

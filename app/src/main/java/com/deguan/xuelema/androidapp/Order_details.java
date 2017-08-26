@@ -66,6 +66,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
     private String telphone;
     private double tolFee;
     private ImageView detail_tel;
+    private TextView payTv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         EventBus.getDefault().register(this);
         setContentView(R.layout.dindanxxi);
         User_id.getInstance().addActivity(this);
+        payTv = (TextView) findViewById(R.id.textView6);
         detail_tel = (ImageView) findViewById(R.id.detail_tel);
         headImage = (ImageView) findViewById(R.id.order_detail_headimg);
         telTv = (TextView) findViewById(R.id.dianhuahaoma);
@@ -216,7 +218,7 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
         kechengjieshu.setText("x"+ duration1 +"节");
         keshishufee.setText("￥"+fee+"/节");
 
-
+        payTv.setText(map.get("pay_desc")+"");
         course.setText(requirement_course);
         grade.setText(requirement_grade);
 
@@ -335,10 +337,10 @@ public class Order_details extends AutoLayoutActivity implements Ordercontent_in
                                 Intent intent = new Intent(Order_details.this,Student_assessment.class);
                                 intent.putExtra("oredr_id", order_id+"");
                                 intent.putExtra("teacher_id",teacherId);
-                                new Getdata().sendMessage(User_id.getNickName()+"已经确认授课完成了哦!",telphone);
+                                new Getdata().sendMessage(User_id.getNickName()+"已经确认授课完成了哦",telphone);
                                 EventBus.getDefault().post(1,"changeStatus");
                                 startActivity(intent);
-                                Toast.makeText(Order_details.this, "赶快去评价这位老师吧~", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Order_details.this, "赶快去评价这位老师吧", Toast.LENGTH_LONG).show();
                                 finish();
 
                             }

@@ -212,8 +212,8 @@ public class Demand implements Demand_init {
     }
 
     @Override
-    public void getMyDemand_list(int publisher_iint,int filter_type, final Student_init student_init) {
-        Call<ContentModle> call=demand_http.getMyDemandlist(publisher_iint,filter_type);
+    public void getMyDemand_list(int publisher_iint,int filter_type, final Student_init student_init,int page) {
+        Call<ContentModle> call=demand_http.getMyDemandlist(publisher_iint,filter_type,page);
         call.enqueue(new Callback<ContentModle>() {
             @Override
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
@@ -308,8 +308,8 @@ public class Demand implements Demand_init {
     }
 
     //获取用户自己的接取的需求
-    public void getReceptDemand(int uid){
-        Call<ContentModle> call=demand_http.getMyReceptDemand(uid);
+    public void getReceptDemand(int uid,int page){
+        Call<ContentModle> call=demand_http.getMyReceptDemand(uid,page);
         call.enqueue(new Callback<ContentModle>() {
             @Override
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {

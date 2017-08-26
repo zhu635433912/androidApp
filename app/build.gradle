@@ -6,7 +6,7 @@ apply plugin: 'android-apt'
 //}
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "26.0.1"
     defaultConfig {
         applicationId "com.deguan.xuelema.androidapp"
         minSdkVersion 16

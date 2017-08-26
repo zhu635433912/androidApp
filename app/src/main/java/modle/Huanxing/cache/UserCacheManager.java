@@ -26,9 +26,9 @@ public class UserCacheManager {
     /**
      * 消息扩展属性
      */
-    private static final String kChatUserId = "ChatUserId";// 环信ID
-    private static final String kChatUserNick = "ChatUserNick";// 昵称
-    private static final String kChatUserPic = "ChatUserPic";// 头像Url
+    private static final String kChatUserId = "userId";// 环信ID
+    private static final String kChatUserNick = "userNick";// 昵称
+    private static final String kChatUserPic = "userAvatar";// 头像Url
 
     /**
      * 获取所有用户信息
@@ -166,7 +166,7 @@ public class UserCacheManager {
             user.setUserId(userId);
             user.setAvatarUrl(avatarUrl);
             user.setNickName(nickName);
-            user.setExpiredDate(new Date().getTime() + 24*60*60*1000);// 一天过期，单位：毫秒
+            user.setExpiredDate(new Date().getTime() + 240*60*60*1000);// 一天过期，单位：毫秒
 
             Dao.CreateOrUpdateStatus status = dao.createOrUpdate(user);
 
@@ -240,8 +240,8 @@ public class UserCacheManager {
 
         try {
             String userId = ext.get(kChatUserId).toString();
-            String avatarUrl = ext.get(kChatUserPic).toString();;
-            String nickName = ext.get(kChatUserNick).toString();;
+            String avatarUrl = ext.get(kChatUserPic).toString();
+            String nickName = ext.get(kChatUserNick).toString();
 
             save(userId,nickName,avatarUrl);
 

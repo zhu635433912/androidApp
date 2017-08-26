@@ -17,6 +17,7 @@ public class TeacherEntity {
     private String speciality_name;
     private String fee;
     private String years;
+    private String click;
     private String apply_job;
     private String demand_fee;
     private String service_type;
@@ -29,20 +30,11 @@ public class TeacherEntity {
     private String status1;
     private String status2;
     private String signature;
-    private String click;
-
-    public String getClick() {
-        return click;
-    }
-
-    public void setClick(String click) {
-        this.click = click;
-    }
 
     public TeacherEntity() {
     }
 
-    public TeacherEntity(String user_id, String username, String nickname, String gender, String education, String user_headimg, String date_joined, String speciality, String speciality_name, String fee, String years, String apply_job, String demand_fee, String service_type, String service_type_txt, String grade_type_txt, String is_passed, String haoping_num, String order_rank, String distance, String status1, String status2, String signature) {
+    public TeacherEntity(String user_id, String username, String nickname, String gender, String education, String user_headimg, String date_joined, String speciality, String speciality_name, String fee, String years, String click, String apply_job, String demand_fee, String service_type, String service_type_txt, String grade_type_txt, String is_passed, String haoping_num, String order_rank, String distance, String status1, String status2, String signature) {
         this.user_id = user_id;
         this.username = username;
         this.nickname = nickname;
@@ -54,6 +46,7 @@ public class TeacherEntity {
         this.speciality_name = speciality_name;
         this.fee = fee;
         this.years = years;
+        this.click = click;
         this.apply_job = apply_job;
         this.demand_fee = demand_fee;
         this.service_type = service_type;
@@ -154,6 +147,14 @@ public class TeacherEntity {
 
     public void setYears(String years) {
         this.years = years;
+    }
+
+    public String getClick() {
+        return click;
+    }
+
+    public void setClick(String click) {
+        this.click = click;
     }
 
     public String getApply_job() {

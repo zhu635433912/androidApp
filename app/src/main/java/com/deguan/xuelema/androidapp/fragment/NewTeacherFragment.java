@@ -131,11 +131,11 @@ public class NewTeacherFragment extends BaseFragment implements Gaodehuidiao_ini
         id=Integer.parseInt(User_id.getUid());
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        gaode_dinwei = new Gaode_dinwei(this,getActivity());
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        gaode_dinwei = new Gaode_dinwei(this,getActivity());
+//    }
 
     @Override
     public void initView() {

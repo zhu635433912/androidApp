@@ -48,7 +48,6 @@ public class Payment_tureActivty extends AutoLayoutActivity implements View.OnCl
                 EventBus.getDefault().post(1,"changeStatus");
                 Intent intent= new Intent(this,MyOrderActivity.class);
                 startActivity(intent);
-
                 finish();
                 Toast.makeText(this,"赶快去学习吧~",Toast.LENGTH_SHORT).show();
                 break;

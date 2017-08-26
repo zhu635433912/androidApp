@@ -40,6 +40,7 @@ import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
+import com.deguan.xuelema.androidapp.utils.PhotoBitmapUtils;
 import com.deguan.xuelema.androidapp.viewimpl.Baseinit;
 import com.deguan.xuelema.androidapp.viewimpl.TuijianView;
 import com.hyphenate.chat.EMClient;
@@ -94,13 +95,6 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
     ImageView educationImage1;
     @ViewById(R.id.teacher_pic2)
     ImageView educationImage2;
-    @ViewById(R.id.teacher_year)
-    TextView yearTv;
-    @ViewById(R.id.teacher_special)
-    EditText specialEdit;
-    @ViewById(R.id.teacher_desc)
-    EditText descEdit;
-
 
 
     protected File cameraFile;
@@ -112,7 +106,6 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
     private Teacher teacher;
     private String other_1;
     private String other_2;
-    private int education_id;
 
     @Override
     public void before() {
@@ -135,55 +128,25 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
         imageDel1.setOnClickListener(this);
         imageDel2.setOnClickListener(this);
         saveTv.setOnClickListener(this);
-        yearTv.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.teacher_year:
-                AlertDialog.Builder serviceTypeDialog = new AlertDialog.Builder(TeacherActivity.this);
-                serviceTypeDialog.setIcon(R.drawable.add04);
-                serviceTypeDialog.setTitle("请选择服务类型");
-                //    指定下拉列表的显示数据
-                final String[] fuwuType = {"1年", "2年", "3年" ,"4年", "5年","6年","7年" ,"8年", "9年","10年",
-                        "11年", "12年", "13年" ,"14年", "15年","16年","17年" ,"18年", "19年","20年",
-                        "21年", "22年", "23年" ,"24年", "25年","26年","27年" ,"28年", "29年","30年",
-                        "31年", "32年", "33年" ,"34年", "35年","36年","37年" ,"38年", "39年","40年",
-                        "41年", "42年", "43年" ,"44年", "45年","46年","47年" ,"48年", "49年","50年"
-
-                };
-                //    设置一个下拉的列表选择项
-                serviceTypeDialog.setItems(fuwuType, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        yearTv.setText(fuwuType[which]);
-//                        int years=Integer.parseInt(edit.getText().toString());
-                        teacher.Teacher_years(Integer.parseInt(User_id.getUid()),which+1);
-                    }
-                });
-                serviceTypeDialog.show();
-                break;
             case R.id.teacher_save:
-                if (yearTv.getText().equals("请选择教龄")){
-                    Toast.makeText(this, "请完善学历", Toast.LENGTH_SHORT).show();
-                }else if (TextUtils.isEmpty(specialEdit.getText())){
-                    Toast.makeText(this, "请完善特长", Toast.LENGTH_SHORT).show();
-                }else if (TextUtils.isEmpty(other_1)&&TextUtils.isEmpty(other_2)){
+                if (TextUtils.isEmpty(other_1)&&TextUtils.isEmpty(other_2)){
                     Toast.makeText(this, "请上传身份证", Toast.LENGTH_SHORT).show();
                 }else {
-                    teacher.Teacher_resume(Integer.parseInt(User_id.getUid()),descEdit.getText()+"");
-                    teacher.Teacher_speciality(Integer.parseInt(User_id.getUid()),specialEdit.getText()+"");
                     finish();
                 }
                 break;
             case R.id.teacher_del1:
-                new AlertDialog.Builder(TeacherActivity.this).setTitle("学了么提示!").setMessage("确认删除身份证书吗")
+                new AlertDialog.Builder(TeacherActivity.this).setTitle("学了么提示!").setMessage("确认删除身份证吗")
                         .setPositiveButton("是", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 teacher.Teacher_update5(Integer.parseInt(User_id.getUid()),"");
-                                educationImage1.setImageResource(R.drawable.education_edit_bg);
+                                educationImage1.setImageResource(R.mipmap.name_example1);
                                 imageAdd1.setVisibility(View.VISIBLE);
                             }
                         }).setNegativeButton("否", new DialogInterface.OnClickListener() {
@@ -194,12 +157,12 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
                 }).show();
                 break;
             case R.id.teacher_del2:
-                new AlertDialog.Builder(TeacherActivity.this).setTitle("学了么提示!").setMessage("确认删除证书吗")
+                new AlertDialog.Builder(TeacherActivity.this).setTitle("学了么提示!").setMessage("确认删除身份证吗")
                         .setPositiveButton("是", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 teacher.Teacher_update6(Integer.parseInt(User_id.getUid()),"");
-                                educationImage2.setImageResource(R.drawable.education_edit_bg);
+                                educationImage2.setImageResource(R.mipmap.name_example2);
                                 imageAdd2.setVisibility(View.VISIBLE);
                             }
                         }).setNegativeButton("否", new DialogInterface.OnClickListener() {
@@ -296,7 +259,9 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CODE_CAMERA) { // capture new image
                 if (cameraFile != null && cameraFile.exists()) {
-                    setuseryoux(cameraFile);
+                    String filepath = PhotoBitmapUtils.amendRotatePhoto(cameraFile.getAbsolutePath(),this);
+                    setuseryoux(new File(filepath));
+//                    setuseryoux(cameraFile);
                 }
 
             }else if (requestCode == REQUEST_CODE_LOCAL) { // send local image
@@ -389,16 +354,6 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
 
     @Override
     public void Updatecontent(Map<String, Object> map) {
-        if (!TextUtils.isEmpty(map.get("speciality")+"")){
-            specialEdit.setText(map.get("speciality")+"");
-        }
-        if (!TextUtils.isEmpty(map.get("years")+"年")){
-            yearTv.setText(map.get("years")+"年");
-        }
-        if (!TextUtils.isEmpty(map.get("resume")+"")){
-            descEdit.setText(map.get("resume")+"");
-        }
-
 
         if (!TextUtils.isEmpty(map.get("others_5")+"")){
             other_1 = map.get("others_5")+"";
@@ -455,7 +410,9 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
                 toast.show();
                 return;
             }
-            setuseryoux(new File(picturePath));
+            String filepath = PhotoBitmapUtils.amendRotatePhoto(picturePath,this);
+            setuseryoux(new File(filepath));
+//            setuseryoux(new File(picturePath));
         } else {
             File file = new File(selectedImage.getPath());
             if (!file.exists()) {
@@ -465,7 +422,9 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
                 return;
 
             }
-            setuseryoux(file);
+            String filepath = PhotoBitmapUtils.amendRotatePhoto(selectedImage.getPath(),this);
+            setuseryoux(new File(filepath));
+//            setuseryoux(file);
         }
 
     }

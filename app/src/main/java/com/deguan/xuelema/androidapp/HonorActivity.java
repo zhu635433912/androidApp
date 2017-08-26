@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
+import com.deguan.xuelema.androidapp.utils.PhotoBitmapUtils;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.easeui.utils.EaseCommonUtils;
 import com.hyphenate.util.PathUtil;
@@ -123,7 +124,7 @@ public class HonorActivity extends MyBaseActivity implements View.OnClickListene
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 teacher.Teacher_update3(Integer.parseInt(User_id.getUid()),"");
-                                honorImage1.setImageResource(R.drawable.education_edit_bg);
+                                honorImage1.setImageResource(R.drawable.education_image_bg);
                                 addImage1.setVisibility(View.VISIBLE);
                             }
                         }).setNegativeButton("否", new DialogInterface.OnClickListener() {
@@ -139,7 +140,7 @@ public class HonorActivity extends MyBaseActivity implements View.OnClickListene
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 teacher.Teacher_update4(Integer.parseInt(User_id.getUid()),"");
-                                honorImage2.setImageResource(R.drawable.education_edit_bg);
+                                honorImage2.setImageResource(R.drawable.education_image_bg);
                                 addImage2.setVisibility(View.VISIBLE);
                             }
                         }).setNegativeButton("否", new DialogInterface.OnClickListener() {
@@ -224,7 +225,9 @@ public class HonorActivity extends MyBaseActivity implements View.OnClickListene
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == REQUEST_CODE_CAMERA) { // capture new image
                 if (cameraFile != null && cameraFile.exists()) {
-                    setuseryoux(cameraFile);
+                    String filepath = PhotoBitmapUtils.amendRotatePhoto(cameraFile.getAbsolutePath(),this);
+                    setuseryoux(new File(filepath));
+//                    setuseryoux(cameraFile);
                 }
 
             }else if (requestCode == REQUEST_CODE_LOCAL) { // send local image
@@ -259,7 +262,9 @@ public class HonorActivity extends MyBaseActivity implements View.OnClickListene
                 toast.show();
                 return;
             }
-            setuseryoux(new File(picturePath));
+            String filepath = PhotoBitmapUtils.amendRotatePhoto(picturePath,this);
+            setuseryoux(new File(filepath));
+//            setuseryoux(new File(picturePath));
         } else {
             File file = new File(selectedImage.getPath());
             if (!file.exists()) {
@@ -269,7 +274,9 @@ public class HonorActivity extends MyBaseActivity implements View.OnClickListene
                 return;
 
             }
-            setuseryoux(file);
+            String filepath = PhotoBitmapUtils.amendRotatePhoto(selectedImage.getPath(),this);
+            setuseryoux(new File(filepath));
+//            setuseryoux(file);
         }
 
     }

@@ -24,22 +24,23 @@
         <!--android:layout_width="56px"-->
         <!--android:layout_height="56px" />-->
         <TextView
-            android:layout_marginLeft="25px"
-            android:layout_marginTop="35px"
+            android:layout_marginTop="25px"
+            android:layout_marginLeft="30px"
             android:layout_alignTop="@+id/lognhost"
-            android:layout_toRightOf="@+id/lognhost"
             android:textSize="24px"
+            android:layout_toRightOf="@+id/order_type_tv"
             android:id="@+id/order_id_tv"
             android:text="订单id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:layout_marginTop="25px"
-            android:layout_marginLeft="30px"
+            android:layout_marginLeft="25px"
+            android:layout_marginTop="20px"
+            android:layout_alignTop="@+id/lognhost"
+            android:layout_toRightOf="@+id/lognhost"
             android:textColor="#4b4b4b"
             android:textSize="40px"
             android:text="提现"
-            android:layout_toRightOf="@+id/order_id_tv"
             android:id="@+id/order_type_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -72,9 +73,9 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tlucahwodjawf"
-            android:layout_marginTop="20px"
+            android:layout_marginTop="10px"
             android:background="#a0d9fe"
-            android:layout_below="@+id/text3"
+            android:layout_below="@+id/order_type_tv"
             android:layout_width="match_parent"
             android:layout_height="1px" />
 
@@ -94,7 +95,7 @@
             android:text="100元"
             android:layout_marginTop="10px"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/order_type_tv"
+            android:layout_below="@+id/tlucahwodjawf"
             android:layout_width="570px"
             android:layout_height="50px" />
         <TextView

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="12dp"
@@ -8,195 +9,215 @@
         <!--android:background="@drawable/mask"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent" />-->
- <RelativeLayout
-     android:layout_width="match_parent"
-     android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/kechengname"
-        android:layout_marginTop="44px"
-        android:layout_marginLeft="44px"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:textColor="#767676"
-        android:textSize="35px"
-        android:text="英语"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/course_explain"
-        android:textColor="#767676"
-        android:textSize="25px"
-        android:layout_marginLeft="40px"
-        android:maxEms="14"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:layout_toRightOf="@+id/kechengname"
-        android:layout_alignBottom="@+id/kechengname"
-        android:text="课程说明111111111111e22222222222eeeeeeeee"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:background="#f2f2f2"
-        android:layout_marginTop="20px"
-        android:layout_below="@+id/kechengname"
-        android:layout_centerHorizontal="true"
-        android:layout_width="706px"
-        android:layout_height="1px" />
-    <TextView
-        android:id="@+id/jieshufee"
-        android:textColor="#45b5fd"
-        android:layout_marginTop="45px"
-        android:layout_marginRight="44px"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:textSize="40px"
-        android:text="40元/节"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/shangkefnagshi"
-        android:layout_marginTop="30px"
-        android:layout_below="@+id/kechengname"
-        android:layout_alignLeft="@+id/kechengname"
-        android:text="上课方式"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <LinearLayout
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/shangkefnagshi"
-        android:id="@+id/feeleixinitme"
-        android:layout_marginTop="15px"
-        android:layout_width="706px"
-        android:layout_height="70px">
-        <RelativeLayout
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
         <TextView
-            android:id="@+id/xuessm"
-            android:gravity="center"
-            style="@style/text_flag_03"
-            android:textColor="#fd1245"
-            android:text="学生上门" />
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:id="@+id/kechengname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="44px"
+            android:layout_marginTop="44px"
+            android:text="英语"
+            android:textColor="#767676"
+            android:textSize="35px" />
+
         <TextView
-            android:id="@+id/laoshism"
+            android:id="@+id/course_explain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/kechengname"
+            android:layout_marginLeft="40px"
+            android:layout_toRightOf="@+id/kechengname"
+            android:ellipsize="end"
+            android:maxEms="14"
+            android:maxLines="1"
+            android:text="课程说明111111111111e22222222222eeeeeeeee"
+            android:textColor="#767676"
+            android:textSize="25px" />
+
+        <TextView
+            android:layout_width="706px"
+            android:layout_height="1px"
+            android:layout_below="@+id/kechengname"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20px"
+            android:background="#f2f2f2" />
+
+        <TextView
+            android:id="@+id/jieshufee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="44px"
+            android:layout_marginTop="45px"
+            android:text="40元/节"
+            android:textColor="#45b5fd"
+            android:textSize="40px" />
+
+        <TextView
+            android:id="@+id/shangkefnagshi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/kechengname"
+            android:layout_below="@+id/kechengname"
+            android:layout_marginTop="30px"
+            android:text="上课方式" />
+
+        <LinearLayout
+            android:id="@+id/feeleixinitme"
+            android:layout_width="706px"
+            android:layout_height="70px"
+            android:layout_below="@+id/shangkefnagshi"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15px">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/xuessm"
+                    style="@style/text_flag_03"
+                    android:gravity="center"
+                    android:text="学生上门"
+                    android:textColor="#fd1245" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/laoshism"
+                    android:layout_width="175px"
+                    android:layout_height="50px"
+                    android:layout_margin="10px"
+                    android:background="@drawable/xuqiufabuitme"
+                    android:gravity="center"
+                    android:text="老师上门"
+                    android:textColor="#8b8b8b"
+                    android:textSize="30px" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/fengexianfee"
+            android:layout_width="706px"
+            android:layout_height="1px"
+            android:layout_below="@+id/feeleixinitme"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20px"
+            android:background="#f2f2f2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/kechengname"
+            android:layout_below="@+id/fengexianfee"
+            android:layout_marginTop="16px"
+            android:text="课时数量"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/jia"
+            android:layout_width="40px"
+            android:layout_height="64px"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/fengexianfee"
+            android:layout_marginRight="44px"
             android:gravity="center"
-            android:textSize= "30px"
-            android:background="@drawable/xuqiufabuitme"
-            android:layout_width="175px"
+            android:text="+"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/fee"
+            android:layout_width="wrap_content"
+            android:layout_height="64px"
+            android:layout_below="@+id/fengexianfee"
+            android:layout_marginRight="10px"
+            android:layout_toLeftOf="@+id/jia"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="#dac11d"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/jian"
+            android:layout_width="40px"
+            android:layout_height="64px"
+            android:layout_below="@+id/fengexianfee"
+            android:layout_marginRight="10px"
+            android:layout_toLeftOf="@+id/fee"
+            android:gravity="center"
+            android:text="一"
+            android:textSize="20px" />
+
+        <TextView
+            android:id="@+id/fengexianfee1"
+            android:layout_width="706px"
+            android:layout_height="1px"
+            android:layout_below="@+id/fengexianfee"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="64px"
+            android:background="#f2f2f2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/shangkefnagshi"
+            android:layout_below="@+id/fengexianfee1"
+            android:layout_marginLeft="20px"
+            android:text="备注"
+            android:textSize="25px" />
+
+        <EditText
+
+            android:id="@+id/buy_course_desc"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:layout_alignLeft="@+id/shangkefnagshi"
+            android:layout_below="@+id/fengexianfee1"
+            android:layout_marginTop="25px"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/zonggongjine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/shangkefnagshi"
+            android:layout_below="@+id/buy_course_desc"
+            android:layout_marginTop="24px"
+            android:text="共计: ￥"
+            android:textSize="35px" />
+
+        <TextView
+            android:id="@+id/zongfee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/zonggongjine"
+            android:layout_marginLeft="10px"
+            android:layout_toRightOf="@+id/zonggongjine"
+            android:text="00.00"
+            android:textSize="35px" />
+
+        <Button
+            android:id="@+id/goumai"
+            android:layout_width="160px"
             android:layout_height="50px"
-            android:layout_margin="10px"
-            android:textColor="#8b8b8b"
-            android:text="老师上门" />
-        </RelativeLayout>
-    </LinearLayout>
-    <TextView
-        android:id="@+id/fengexianfee"
-        android:background="#f2f2f2"
-        android:layout_marginTop="20px"
-        android:layout_below="@+id/feeleixinitme"
-        android:layout_centerHorizontal="true"
-        android:layout_width="706px"
-        android:layout_height="1px" />
-    <TextView
-        android:layout_marginTop="16px"
-        android:layout_alignLeft="@+id/kechengname"
-        android:layout_below="@+id/fengexianfee"
-        android:textSize="30px"
-        android:text="课时数量"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/jia"
-        android:layout_marginEnd="44px"
-        android:gravity="center"
-        android:layout_below="@+id/fengexianfee"
-        android:layout_alignParentEnd="true"
-        android:textSize="30px"
-        android:text="+"
-        android:layout_width="40px"
-        android:layout_height="64px" />
-    <TextView
-        android:id="@+id/fee"
-        android:textColor="#dac11d"
-        android:layout_marginRight="10px"
-        android:gravity="center"
-        android:textSize="30px"
-        android:text="1"
-        android:layout_toLeftOf="@+id/jia"
-        android:layout_below="@+id/fengexianfee"
-        android:layout_width="wrap_content"
-        android:layout_height="64px" />
-    <TextView
-        android:id="@+id/jian"
-        android:gravity="center"
-        android:textSize="20px"
-        android:text="一"
-        android:layout_marginRight="10px"
-        android:layout_toLeftOf="@+id/fee"
-        android:layout_below="@+id/fengexianfee"
-        android:layout_width="40px"
-        android:layout_height="64px" />
-    <TextView
-        android:id="@+id/fengexianfee1"
-        android:background="#f2f2f2"
-        android:layout_marginTop="64px"
-        android:layout_below="@+id/fengexianfee"
-        android:layout_centerHorizontal="true"
-        android:layout_width="706px"
-        android:layout_height="1px" />
-    <TextView
-        android:layout_marginLeft="20px"
-        android:text="备注"
-        android:textSize="25px"
-        android:layout_below="@+id/fengexianfee1"
-        android:layout_alignLeft="@+id/shangkefnagshi"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
+            android:layout_alignBottom="@+id/zonggongjine"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="44px"
+            android:background="@drawable/hongse"
+            android:text="确定"
+            android:textColor="#fff"
+            android:textSize="30px" />
 
-        android:textSize="30px"
-        android:layout_marginTop="25px"
-        android:layout_below="@+id/fengexianfee1"
-        android:layout_alignLeft="@+id/shangkefnagshi"
-        android:id="@+id/buy_course_desc"
-        android:layout_width="match_parent"
-        android:layout_height="100px" />
-    <TextView
-        android:id="@+id/zonggongjine"
-        android:textSize="35px"
-        android:layout_marginTop="24px"
-        android:layout_below="@+id/buy_course_desc"
-        android:layout_alignLeft="@+id/shangkefnagshi"
-        android:text="共计: ￥"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/zongfee"
-        android:layout_marginLeft="10px"
-        android:layout_toRightOf="@+id/zonggongjine"
-        android:layout_alignBottom="@+id/zonggongjine"
-        android:textSize="35px"
-        android:text="00.00"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/goumai"
-        android:layout_marginRight="44px"
-        android:textSize="30px"
-        android:textColor="#fff"
-        android:text="确定"
-        android:layout_alignBottom="@+id/zonggongjine"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/hongse"
-        android:layout_width="160px"
-        android:layout_height="50px" />
-
- </RelativeLayout>
+    </RelativeLayout>
 </android.support.v7.widget.CardView>

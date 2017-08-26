@@ -1,5 +1,6 @@
 package view.login.ViewActivity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
@@ -16,6 +17,8 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -62,7 +65,7 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
     private int role = 1;
     private String username;
     private String password;
-    private PopupWindow popupWindow;
+    private PopupWindow popupWindow,registerPop;
     private TextView descTv;
 
     @Override
@@ -75,8 +78,97 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
         descTv.setOnClickListener(this);
         inint();
         showPop();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(500);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            showChoosePop();
+                            registerPop.showAtLocation(descTv, Gravity.CENTER,0,0);
+                        }
+                    });
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
     }
 
+    private void showChoosePop() {
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.register_pop,null);
+        ImageView studentImage = (ImageView) view.findViewById(R.id.register_student);
+        ImageView teacherImage = (ImageView) view.findViewById(R.id.register_teacher);
+        LinearLayout studentLl = (LinearLayout) view.findViewById(R.id.register_teacher_ll);
+        LinearLayout teacherLl = (LinearLayout) view.findViewById(R.id.register_teacher_ll);
+        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        registerPop = new PopupWindow(view);
+//        registerPop.setFocusable(true);
+//        registerPop.setOutsideTouchable(true);
+        int height = wm.getDefaultDisplay().getHeight();
+        int width = wm.getDefaultDisplay().getWidth();
+        registerPop.setWidth(width/10*8);
+        registerPop.setHeight(height/2);
+        registerPop.setBackgroundDrawable(new BitmapDrawable());
+        backgroundAlpha(this, 0.5f);//0.0-1.0  ;
+        registerPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(RegisterActivity.this, 1f);
+            }
+        });
+        studentLl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                role = 1;
+                Rdbutton1.setChecked(false);
+                registerPop.dismiss();
+            }
+        });
+        teacherLl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                role = 2;
+                Rdbutton1.setChecked(true);
+                Rdbutton.setChecked(false);
+                registerPop.dismiss();
+            }
+        });
+        studentImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                role = 1;
+                Rdbutton1.setChecked(false);
+                registerPop.dismiss();
+            }
+        });
+        teacherImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                role = 2;
+                Rdbutton1.setChecked(true);
+                Rdbutton.setChecked(false);
+                registerPop.dismiss();
+            }
+        });
+
+    }
+    /**
+     * 设置添加屏幕的背景透明度
+     *
+     * @param bgAlpha
+     */
+    public void backgroundAlpha(Activity context, float bgAlpha) {
+        WindowManager.LayoutParams lp = context.getWindow().getAttributes();
+        lp.alpha = bgAlpha;
+        context.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        context.getWindow().setAttributes(lp);
+    }
     private void showPop() {
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.user_shuoming_pop,null);
