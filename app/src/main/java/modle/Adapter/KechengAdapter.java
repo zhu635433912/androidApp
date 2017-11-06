@@ -69,7 +69,7 @@ public class KechengAdapter extends BaseAdapter{
 //        madbt.kechengType.setVisibility(View.GONE);
                 madbt.gerxxyiduiyi.setText(listmap.get(position).get("service_type_txt")+"");
         madbt.gerxxyiduiyi.setVisibility(View.GONE);
-                madbt.kechengfeee.setText(listmap.get(position).get("unvisit_fee")+"￥/课时费");
+                madbt.kechengfeee.setText(listmap.get(position).get("unvisit_fee")+"¥/小时");
         return convertView;
     }
 
@@ -82,7 +82,7 @@ public class KechengAdapter extends BaseAdapter{
 
     //返回用户点击的课程id
     public int getcourse_id(int pisson){
-        int courseid=Integer.parseInt(listmap.get(pisson).get("course_id").toString());
+        int courseid=Integer.parseInt(listmap.get(pisson).get("id").toString());
         return courseid;
     }
 

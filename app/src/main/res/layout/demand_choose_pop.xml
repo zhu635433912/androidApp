@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        style="@style/teacher_choose_text"
+        android:id="@+id/choose_zonghe"
+        android:text="综合排序"
+         />
+
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+        style="@style/teacher_choose_text"
+        android:id="@+id/choose_distance"
+        android:text="离我最近"
+        />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+        style="@style/teacher_choose_text"
+
+        android:id="@+id/choose_time"
+        android:text="发布时间"
+        />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+       style="@style/teacher_choose_text"
+        android:id="@+id/choose_grade"
+        android:text="最热需求"
+        />
+
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+        style="@style/teacher_choose_text"
+        android:id="@+id/choose_gender_male"
+        android:text="男"
+        />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+        style="@style/teacher_choose_text"
+        android:id="@+id/choose_gender_female"
+        android:text="女"
+        />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <View
+        android:id="@+id/pop_cancel"
+        android:background="#e0dadada"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

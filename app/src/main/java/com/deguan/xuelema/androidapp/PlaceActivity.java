@@ -26,6 +26,11 @@ public class PlaceActivity extends MyBaseActivity {
     ImageView imageView;
 
     @Override
+    public void before() {
+        super.before();
+    }
+
+    @Override
     public void initView() {
 //        imageView.setImage(ImageSource.resource(R.mipmap.how_to_place));
         backRl.setOnClickListener(new View.OnClickListener() {

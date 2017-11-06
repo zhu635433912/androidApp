@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         android:id="@+id/myindex_listrelayout"
         android:background="@drawable/add08"
         android:layout_centerHorizontal="true"
         android:layout_width="match_parent"
         android:layout_height="370px">
-    <modle.toos.CircleImageView
+    <com.facebook.drawee.view.SimpleDraweeView
+        app:roundAsCircle="true"
         android:id="@+id/myinde_usertoux"
         android:layout_marginTop="36px"
         android:layout_marginLeft="32px"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:src="@drawable/ox2"
+        app:placeholderImage="@drawable/ox2"
         android:layout_width="70px"
         android:layout_height="70px" />
 

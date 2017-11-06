@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -18,14 +19,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.utils.EaseCommonUtils;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
+import com.deguan.xuelema.androidapp.utils.PathUtil;
 import com.deguan.xuelema.androidapp.utils.PhotoBitmapUtils;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.easeui.utils.EaseCommonUtils;
-import com.hyphenate.util.PathUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
@@ -49,7 +50,7 @@ public class ExerActivity extends MyBaseActivity implements Requirdetailed, View
     @ViewById(R.id.exer_back)
     RelativeLayout backRl;
     @ViewById(R.id.exer_image)
-    ImageView exerImage;
+    SimpleDraweeView exerImage;
     @ViewById(R.id.exer_add)
     ImageView addImage;
 
@@ -59,6 +60,10 @@ public class ExerActivity extends MyBaseActivity implements Requirdetailed, View
     protected static final int REQUEST_CODE_LOCAL = 3;
     private android.app.AlertDialog mPickDialog;
 
+    @Override
+    public void before() {
+        super.before();
+    }
 
     @Override
     public void initData() {
@@ -80,11 +85,12 @@ public class ExerActivity extends MyBaseActivity implements Requirdetailed, View
     @Override
     public void Updatecontent(Map<String, Object> map) {
         if (!TextUtils.isEmpty(map.get("exper")+"")){
-            descEdit.setText(map.get("exper")+"");
+            descEdit.setText(""+map.get("exper"));
         }
-        if (!TextUtils.isEmpty(map.get("exper_img")+"")){
-            image_url = map.get("exper_img")+"";
-            Glide.with(getApplicationContext()).load(image_url).into(exerImage);
+        if (!TextUtils.isEmpty(map.get("img1")+"")){
+            image_url = map.get("img1")+"";
+//            Glide.with(getApplicationContext()).load(image_url).into(exerImage);
+            exerImage.setImageURI(Uri.parse(image_url));
         }
     }
 
@@ -104,10 +110,10 @@ public class ExerActivity extends MyBaseActivity implements Requirdetailed, View
                 break;
             case R.id.exer_save:
                 if (!TextUtils.isEmpty(descEdit.getText())) {
-                    new Teacher().Teacher_exper(Integer.parseInt(User_id.getUid()), "    "+descEdit.getText() + "",image_url);
+                    new Teacher().Teacher_exper(Integer.parseInt(User_id.getUid()), ""+descEdit.getText() + "",image_url);
                     finish();
                 }else {
-                    Toast.makeText(ExerActivity.this, "请说下你传奇的个人经历吧", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ExerActivity.this, "请说下你兴趣爱好吧", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.picture_dialog_pick: {
@@ -163,19 +169,18 @@ public class ExerActivity extends MyBaseActivity implements Requirdetailed, View
         startActivityForResult(intent, REQUEST_CODE_LOCAL);
     }
 
+    String mFilePath;
     /**
      * capture new image
      */
-    protected void selectPicFromCamera() {
+    public void selectPicFromCamera() {
+        mFilePath = Environment.getExternalStorageDirectory().getPath();// 获取SD卡路径
+        mFilePath = mFilePath + "/"+ User_id.getUid()
+                + System.currentTimeMillis() + ".jpg";// 指定路径
         if (!EaseCommonUtils.isSdcardExist()) {
-            Toast.makeText(this, com.hyphenate.easeui.R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
             return;
         }
-
-        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
-                + System.currentTimeMillis() + ".jpg");
-        //noinspection ResultOfMethodCallIgnored
-        cameraFile.getParentFile().mkdirs();
+        cameraFile = new File( mFilePath);
         startActivityForResult(
                 new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
                 REQUEST_CODE_CAMERA);
@@ -218,9 +223,6 @@ public class ExerActivity extends MyBaseActivity implements Requirdetailed, View
             cursor = null;
 
             if (picturePath == null || picturePath.equals("null")) {
-                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
                 return;
             }
             String filepath = PhotoBitmapUtils.amendRotatePhoto(picturePath,this);
@@ -229,9 +231,6 @@ public class ExerActivity extends MyBaseActivity implements Requirdetailed, View
         } else {
             File file = new File(selectedImage.getPath());
             if (!file.exists()) {
-                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
                 return;
 
             }
@@ -249,7 +248,9 @@ public class ExerActivity extends MyBaseActivity implements Requirdetailed, View
     @Override
     public void setListview1(List<Map<String, Object>> listmap) {
             image_url = listmap.get(0).get("imageurl")+"";
-            Glide.with(getApplicationContext()).load(listmap.get(0).get("imageurl")+"").into(exerImage);
+//            Glide.with(getApplicationContext()).load(listmap.get(0).get("imageurl")+"").
+//                    into(exerImage);
+        exerImage.setImageURI(Uri.parse(listmap.get(0).get("imageurl")+""));
         Toast.makeText(this,"更新成功",Toast.LENGTH_LONG).show();
     }
 

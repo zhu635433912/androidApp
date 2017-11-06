@@ -101,9 +101,10 @@
             android:layout_below="@+id/text5"
             android:layout_width="570px"
             android:layout_height="70px" />
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:layout_marginLeft="50px"
-            android:src="@drawable/ox2"
+            app:roundAsCircle="true"
+            app:placeholderImage="@drawable/ox2"
             android:id="@+id/turn_head_image"
             android:layout_centerVertical="true"
             android:layout_width="75px"

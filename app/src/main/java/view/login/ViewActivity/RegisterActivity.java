@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -26,18 +27,31 @@ import android.widget.Toast;
 
 
 import com.deguan.xuelema.androidapp.NewMainActivity_;
+import com.deguan.xuelema.androidapp.PayPswActivity_;
 import com.deguan.xuelema.androidapp.R;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.exceptions.HyphenateException;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 
-
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Map;
 
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.UserInfo;
+import cn.jpush.im.api.BasicCallback;
+import jiguang.chat.activity.FinishRegisterActivity;
+import jiguang.chat.activity.MainActivity;
+import jiguang.chat.database.UserEntry;
+import jiguang.chat.utils.SharePreferenceManager;
+import jiguang.chat.utils.ToastUtil;
 import modle.user_ziliao.User_id;
 import view.login.Modle.MobileView;
 import view.login.Modle.Modle_user;
+import view.login.Modle.RegisterEntity;
 import view.login.Modle.RegisterUtil;
 import view.login.Modle.RegisterView;
 import view.login.presenter.S_wan_presenter;
@@ -56,7 +70,7 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
     private EditText dei_editext;//手机号码
     private EditText dei_editext1;//密码
     private EditText dei_Verfic;//验证码
-    private ImageButton dei_toview;//获取验证码
+    private Button dei_toview;//获取验证码
     private ImageButton dei_Verificatgion;//查看
     private EditText dei_yqm;//邀请码
     private login_wan_presenter dwan;
@@ -104,7 +118,7 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
         View view = layoutInflater.inflate(R.layout.register_pop,null);
         ImageView studentImage = (ImageView) view.findViewById(R.id.register_student);
         ImageView teacherImage = (ImageView) view.findViewById(R.id.register_teacher);
-        LinearLayout studentLl = (LinearLayout) view.findViewById(R.id.register_teacher_ll);
+        LinearLayout studentLl = (LinearLayout) view.findViewById(R.id.register_student_ll);
         LinearLayout teacherLl = (LinearLayout) view.findViewById(R.id.register_teacher_ll);
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
         registerPop = new PopupWindow(view);
@@ -113,7 +127,7 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
         int height = wm.getDefaultDisplay().getHeight();
         int width = wm.getDefaultDisplay().getWidth();
         registerPop.setWidth(width/10*8);
-        registerPop.setHeight(height/2);
+        registerPop.setHeight(height / 3 * 2);
         registerPop.setBackgroundDrawable(new BitmapDrawable());
         backgroundAlpha(this, 0.5f);//0.0-1.0  ;
         registerPop.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -143,6 +157,7 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
             @Override
             public void onClick(View v) {
                 role = 1;
+                Rdbutton.setChecked(true);
                 Rdbutton1.setChecked(false);
                 registerPop.dismiss();
             }
@@ -203,7 +218,7 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
         dei_editext1= (EditText) findViewById(R.id.dei_password);
         dei_Verfic= (EditText) findViewById(R.id.dei_editextyansema);
         payPsdEdit = (EditText) findViewById(R.id.dei_pay_password);
-        dei_toview= (ImageButton) findViewById(R.id.dei_VictButton);
+        dei_toview= (Button) findViewById(R.id.dei_VictButton);
         dei_Verificatgion= (ImageButton) findViewById(R.id.dei_imagSess);
         text= (TextView) findViewById(R.id.dei_yzm);
         dei_toview.setOnClickListener(this);
@@ -233,13 +248,14 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
                                 @Override
                                 public void onTick(long millisUntilFinished) {
                                     dei_toview.setClickable(false);
-                                    text.setText((millisUntilFinished / 1000) + "s");
+                                    dei_toview.setBackground(getResources().getDrawable(R.mipmap.register_un_yzm));
+                                    dei_toview.setText("重新发送"+(millisUntilFinished / 1000) + "s");
                                 }
 
                                 @Override
                                 public void onFinish() {
-                                    dei_toview.setClickable(true);
-                                    text.setText("");
+                                     dei_toview.setClickable(true);
+                                    dei_toview.setText("重新发送");
                                 }
                             }.start();
                         }
@@ -279,6 +295,32 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
                 }else if (dei_Verfic.getText().length() != 4){
                     Toast.makeText(this, "请输入正确的验证码", Toast.LENGTH_SHORT).show();
                 }else {
+                    JMessageClient.register(username, "123456", new BasicCallback() {
+                        @Override
+                        public void gotResult(int i, String s) {
+
+                        }
+                    });
+                    final String uri = "https://api.im.jpush.cn/v1" + "/users/" + username;
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String httpGet = executeHttpPost(uri);
+                            if (httpGet == null) {
+                                SharePreferenceManager.setRegisterName(username);
+                                SharePreferenceManager.setRegistePass("123456");
+//                    mContext.startActivity(new Intent(mContext, FinishRegisterActivity.class));
+                            } else {
+//                    mContext.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            ToastUtil.shortToast(mContext, "该用户已经存在");
+//                        }
+//                    });
+                            }
+
+                        }
+                    }).start();
                     username = dei_editext.getText().toString();
                     password = dei_editext1.getText().toString();
                     new RegisterUtil().getRegisterEntity(role,dei_editext.getText().toString(),dei_editext1.getText().toString()
@@ -333,17 +375,48 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
     }
 
     @Override
-    public void setReatture(Map<String,Object> map) {
-        Toast.makeText(this,"注册成功",Toast.LENGTH_LONG).show();
-        Intent intent = NewMainActivity_.intent(this).get();
-        String role= (String) map.get("role");
-        String id= (String) map.get("id");
-        intent.putExtra("id",id);
-        intent.putExtra("role",role);
-        getUser_id().setRole(role);
-        getUser_id().setUid(id);
-        startActivity(intent);
-        finish();
+    public void setReatture(final Map<String,Object> map) {
+        JMessageClient.login(getusername(), "123456", new BasicCallback() {
+            @Override
+            public void gotResult(int responseCode, String responseMessage) {
+                if (responseCode == 0) {
+                    SharePreferenceManager.setCachedPsw("123456");
+                    UserInfo myInfo = JMessageClient.getMyInfo();
+                    File avatarFile = myInfo.getAvatarFile();
+                    //登陆成功,如果用户有头像就把头像存起来,没有就设置null
+                    if (avatarFile != null) {
+                        SharePreferenceManager.setCachedAvatarPath(avatarFile.getAbsolutePath());
+                    } else {
+                        SharePreferenceManager.setCachedAvatarPath(null);
+                    }
+                    String username = myInfo.getUserName();
+                    String appKey = myInfo.getAppKey();
+                    UserEntry user = UserEntry.getUser(username, appKey);
+                    if (null == user) {
+                        user = new UserEntry(username, appKey);
+                        user.save();
+                    }
+//                    mContext.goToActivity(mContext, MainActivity.class);
+                    Toast.makeText(RegisterActivity.this,"注册成功",Toast.LENGTH_LONG).show();
+                    Intent intent = NewMainActivity_.intent(RegisterActivity.this).get();
+                    String role= (String) map.get("role");
+                    String id= (String) map.get("id");
+                    intent.putExtra("id",id);
+                    intent.putExtra("role",role);
+                    getUser_id().setRole(role);
+                    getUser_id().setUid(id);
+                    startActivity(intent);
+                    finish();
+                    Log.d("aa", "登陆成功");
+//                    mContext.finish();
+                } else {
+                    Log.d("aa", "登陆失败"+responseMessage);
+//                    ToastUtil.shortToast(mContext, "登陆失败" + responseMessage);
+                }
+            }
+        });
+
+
     }
 
     @Override
@@ -360,21 +433,50 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
     public void successRegister(String msg) {
         Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    EMClient.getInstance().createAccount(username,
-                            //                            password
-                            "123456"
-                    );//同步方法
-                } catch (HyphenateException e) {
-                    e.printStackTrace();
-                }
-                Log.e("aa", "环信注册成功");
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    EMClient.getInstance().createAccount(username,
+//                            //                            password
+//                            "123456"
+//                    );//同步方法
+//                } catch (HyphenateException e) {
+//                    e.printStackTrace();
+//                }
+//                Log.e("aa", "环信注册成功");
+//            }
+//        }).start();
 
+        JMessageClient.login(username, "123456", new BasicCallback() {
+            @Override
+            public void gotResult(int responseCode, String responseMessage) {
+                if (responseCode == 0) {
+                    SharePreferenceManager.setCachedPsw(password);
+                    UserInfo myInfo = JMessageClient.getMyInfo();
+                    File avatarFile = myInfo.getAvatarFile();
+                    //登陆成功,如果用户有头像就把头像存起来,没有就设置null
+                    if (avatarFile != null) {
+                        SharePreferenceManager.setCachedAvatarPath(avatarFile.getAbsolutePath());
+                    } else {
+                        SharePreferenceManager.setCachedAvatarPath(null);
+                    }
+                    String username = myInfo.getUserName();
+                    String appKey = myInfo.getAppKey();
+                    UserEntry user = UserEntry.getUser(username, appKey);
+                    if (null == user) {
+                        user = new UserEntry(username, appKey);
+                        user.save();
+                    }
+                    Log.d("aa","登陆成功");
+//                    ToastUtil.shortToast(, "登陆成功");
+//                    mContext.finish();
+                } else {
+                    Log.d("aa","登陆失败");
+//                    ToastUtil.shortToast(mContext, "登陆失败" + responseMessage);
+                }
+            }
+        });
         User_id.setUsername(username);
         User_id.setPassword(password);
         Intent intent = NewMainActivity_.intent(this).get();
@@ -385,12 +487,55 @@ public class RegisterActivity extends AutoLayoutActivity implements Dei_init,Vie
         startActivity(intent);
         finish();
     }
-
+    public String executeHttpPost(final String uid) {
+        BufferedReader in = null;
+        StringBuilder result = new StringBuilder();
+        try {
+            //GET请求直接在链接后面拼上请求参数
+            URL url = new URL(uid);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            //Get请求不需要DoOutPut
+            conn.setDoOutput(false);
+            conn.setDoInput(true);
+            //设置连接超时时间和读取超时时间
+            conn.setConnectTimeout(10000);
+            conn.setReadTimeout(10000);
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Authorization", "Basic NGY3YWVmMzRmYjM2MTI5MmM1NjZhMWNkOjA1NGQ2MTAzODIzYTcyNmZjMTJkMDQ2Ng==");
+            //连接服务器
+            conn.connect();
+            // 取得输入流，并使用Reader读取
+            in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            String line;
+            while ((line = in.readLine()) != null) {
+                result.append(line);
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        //关闭输入流
+        finally {
+            try {
+                if (in != null) {
+                    in.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return result.toString();
+    }
     @Override
     public void failRegister(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void successLogin(RegisterEntity entity) {
+
+    }
 
 
     //获取用户参数

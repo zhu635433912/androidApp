@@ -20,6 +20,10 @@ public class FragmentTabUtils implements RadioGroup.OnCheckedChangeListener {
     private OnTabCheckListener listener;
     private Context context;
 
+    public static void set(int id){
+
+    }
+
     public FragmentTabUtils(Context context, FragmentManager manager, RadioGroup radioGroup, List<Fragment> fragments, int containerId) {
         this(context,manager, radioGroup, fragments, containerId,null);
     }

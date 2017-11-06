@@ -1,6 +1,7 @@
 package modle.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.text.SimpleDateFormat;
@@ -23,6 +25,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import modle.user_ziliao.User_id;
+import retrofit2.http.Url;
 
 /**
  * 　　　　　　　　┏┓　　　┏┓
@@ -99,11 +102,12 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
         String  orderid=listmap.get(position).get("id").toString();
         if (User_id.getRole().equals("1")) {
             hode.studentlistname.setText(listmap.get(position).get("teacher_name") + "");
-
-            Glide.with(context.getApplicationContext()).load(listmap.get(position).get("teacher_headimg")).transform(new GlideCircleTransform(context)).into(hode.headImage);
+            hode.headImage.setImageURI(Uri.parse(""+listmap.get(position).get("teacher_headimg")));
+//            Glide.with(context.getApplicationContext()).load(listmap.get(position).get("teacher_headimg")).transform(new GlideCircleTransform(context)).into(hode.headImage);
         }else {
             hode.studentlistname.setText(listmap.get(position).get("placer_name")+"");
-            Glide.with(context.getApplicationContext()).load(listmap.get(position).get("placer_headimg")).transform(new GlideCircleTransform(context)).into(hode.headImage);
+            hode.headImage.setImageURI(Uri.parse(""+listmap.get(position).get("placer_headimg")));
+//            Glide.with(context.getApplicationContext()).load(listmap.get(position).get("placer_headimg")).transform(new GlideCircleTransform(context)).into(hode.headImage);
 
         }
 //        hode.xdsj.setText(listmap.get(position).get("created")+"");
@@ -131,7 +135,7 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
                     hode.querenshouhuo.setText("确认授课");
                 } else {
                     if (listmap.get(position).get("is_complete").equals("1")){
-                        hode.querenshouhuo.setText("已确认授课");
+                        hode.querenshouhuo.setText("已结束授课");
                     }else {
                         hode.querenshouhuo.setText("等待授课");
                     }
@@ -139,7 +143,8 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
                 }
                 break;
             case "3":
-                hode.studentkechengzhuangtai.setText("交易完成");
+
+                hode.studentkechengzhuangtai.setText("待评价");
                 hode.querenshouhuo.setText("去评价");
                 break;
             case "4":
@@ -160,8 +165,20 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
                 hode.querenshouhuo.setText("退款失败");
                 break;
             case "7":
+                hode.studentkechengzhuangtai.setText("授课完成");
+                if (User_id.getRole().equals("1")) {
+                    hode.querenshouhuo.setText("确认支付");
+                }else {
+                    hode.querenshouhuo.setText("已授课完成");
+                }
+                break;
+            case "8":
                 hode.studentkechengzhuangtai.setText("交易完成");
-                hode.querenshouhuo.setText("完成评价");
+                if (User_id.getRole().equals("1")) {
+                    hode.querenshouhuo.setText("确认支付");
+                }else {
+                    hode.querenshouhuo.setText("完成评价");
+                }
                 break;
 
         }
@@ -221,21 +238,21 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.OrderN
         private TextView kechengjieshua;//课程节数
         private TextView orde_id;//订单id
         private TextView querenshouhuo;//付款状态
-        private ImageView headImage;//头像图片
+        private SimpleDraweeView headImage;//头像图片
 
         public OrderNewViewHolder(View itemView) {
             super(itemView);
             AutoUtils.autoSize(itemView);
-            headImage = (ImageView) itemView.findViewById(R.id.dianputubiao1);
+            headImage = (SimpleDraweeView) itemView.findViewById(R.id.dianputubiao1);
             studentlistname= (TextView) itemView.findViewById(R.id.studentlistname);
-            xdsj= (TextView) itemView.findViewById(R.id.xdsj);
+            xdsj= (TextView) itemView.findViewById(R.id.orde_id);
             nianji= (TextView) itemView.findViewById(R.id.nianji);
             yaoqiukemu= (TextView) itemView.findViewById(R.id.yaoqiukemu);
             keshifei= (TextView) itemView.findViewById(R.id.keshifei);
             studentkechengzhuangtai= (TextView) itemView.findViewById(R.id.studentkechengzhuangtai);
             kechengfee= (TextView) itemView.findViewById(R.id.kechengfee);
             kechengjieshua= (TextView) itemView.findViewById(R.id.kechengjieshua);
-            orde_id= (TextView) itemView.findViewById(R.id.orde_id);
+            orde_id= (TextView) itemView.findViewById(R.id.xdsj);
             querenshouhuo= (TextView) itemView.findViewById(R.id.querenshouhuo);
         }
     }

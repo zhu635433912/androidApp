@@ -4,8 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff">
-
+    android:background="#fffffe">
+    <View
+        android:background="#e0c6c6c6"
+        android:layout_above="@+id/pwd_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
     <com.deguan.xuelema.androidapp.viewimpl.PasswordView
         android:id="@+id/pwd_view"
         android:layout_width="match_parent"

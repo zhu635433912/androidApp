@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.viewimpl.CashView;
 import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
@@ -45,7 +46,7 @@ import modle.user_ziliao.User_id;
  * 钱包
  */
 
-public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed ,CashView{
+public class FeeqianbaoActivty extends MyBaseActivity implements View.OnClickListener,Requirdetailed ,CashView{
     private TextView chongzhi;
     private TextView xianjinjuan;
     private TextView tixian;
@@ -57,6 +58,9 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
     private int flag = 0;
     private Getdata getdata;
     private int uid;
+    private TextView redTv,dongjieTv,text5,xianjinred,vipTv;
+    private ImageView helpImage,rechargeImage,rechargeRight;
+    private String  isvip;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,6 +69,13 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         EventBus.getDefault().register(this);
         User_id.getInstance().addActivity(this);
 
+        vipTv = (TextView) findViewById(R.id.wode_vip_tv);
+        rechargeImage = (ImageView) findViewById(R.id.recharge_image);
+        rechargeRight = (ImageView) findViewById(R.id.recharge_right);
+        text5 = (TextView) findViewById(R.id.textView5);
+        helpImage = (ImageView) findViewById(R.id.red_help_image);
+        dongjieTv = (TextView) findViewById(R.id.dongjie_money_tv);
+        redTv = (TextView) findViewById(R.id.xianjinred_tv);
         myPushTv = (TextView) findViewById(R.id.wodetuiguang);
         myBillTv = (TextView) findViewById(R.id.my_bill);
         yuer= (TextView) findViewById(R.id.yuer);
@@ -72,20 +83,31 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         chongzhi= (TextView) findViewById(R.id.textView4);
         tixian= (TextView) findViewById(R.id.tixian);
         mingofee= (TextView) findViewById(R.id.mingofee);
+        xianjinred = (TextView) findViewById(R.id.xianjinred);
         qianbaohuitui= (RelativeLayout) findViewById(R.id.qianbaohuitui);
         qianbaohuitui.bringToFront();
         yuer.setOnClickListener(this);
         qianbaohuitui.setOnClickListener(this);
         tixian.setOnClickListener(this);
-        xianjinjuan.setOnClickListener(this);
+//        xianjinjuan.setOnClickListener(this);
         chongzhi.setOnClickListener(this);
         myPushTv.setOnClickListener(this);
         textView4= (TextView) findViewById(R.id.textView4);
-
-
+        mingofee.setOnClickListener(this);
+        yuer.setOnClickListener(this);
+        vipTv.setOnClickListener(this);
 
         //获取用户余额
         uid = Integer.parseInt(User_id.getUid());
+        if (User_id.getRole().equals("1")){
+            xianjinjuan.setVisibility(View.VISIBLE);
+            mingofee.setVisibility(View.VISIBLE);
+            redTv.setVisibility(View.VISIBLE);
+            xianjinred.setVisibility(View.VISIBLE);
+            rechargeImage.setVisibility(View.VISIBLE);
+            rechargeRight.setVisibility(View.VISIBLE);
+            chongzhi.setVisibility(View.VISIBLE);
+        }
         getdata = new Getdata();
         getdata.getFee(uid,this);
 
@@ -96,6 +118,18 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
 
         initPopwindow();
         initCashPopwindow();
+        helpImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FeeqianbaoActivty.this, "成为会员即可使用", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        new Getdata().getFee(Integer.parseInt(User_id.getUid()),this);
     }
 
     private int cashFlag = 1;
@@ -152,7 +186,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
                     }else {
                         if (Double.parseDouble(cashFee.getText().toString()) %100 == 0) {
                             getdata.getCash(Integer.parseInt(User_id.getUid()), cashNmae.getText().toString(),
-                                    cashId.getText().toString(), cashFlag, Float.parseFloat(cashFee.getText().toString()), FeeqianbaoActivty.this);
+                                    cashId.getText().toString(), cashFlag, Float.parseFloat(cashFee.getText().toString()),"", FeeqianbaoActivty.this);
                             cashFee.setText("");
                             Toast.makeText(FeeqianbaoActivty.this, "已提交提现申请", Toast.LENGTH_SHORT).show();
                             cashPopwindow.dismiss();
@@ -267,31 +301,57 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
         });
     }
 
-
+    private String userHeadUrl;
+    private String nickname;
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.wodetuiguang:
-                //我的推广
-                Intent intentb=new Intent(FeeqianbaoActivty.this,Distribution_Activty.class);
-                startActivity(intentb);
+            case R.id.wode_vip_tv:
+                if (User_id.getRole().equals("1")) {
+                    startActivity(StudentVipActivity_.intent(this).extra("headurl", userHeadUrl).extra("nickname", nickname).get());
+                }else {
+                    startActivity(TeacherVipActivity_.intent(this).extra("headurl", userHeadUrl).extra("nickname", nickname).get());
+                }
+
                 break;
             case R.id.my_bill:
+                if (User_id.getRole().equals("1")) {
+                    startActivity(VipDescActivity_.intent(this).extra("type",1).get());
+                }else {
+                    startActivity(VipDescActivity_.intent(this).extra("type",2).get());
+                }
+                break;
+            case R.id.wodetuiguang:
+                //我的推广
+//                Intent intentb=new Intent(FeeqianbaoActivty.this,Distribution_Activty.class);
+//                startActivity(intentb);
+//                startActivity(StudentVipActivity_.intent(this).extra("headurl",userHeadUrl).extra("nickname",nickname).get());
+                startActivity(MyExtentActivity_.intent(this).get());
+                break;
+            case R.id.yuer:
                 startActivity(BillActivity_.intent(this).get());
                 break;
             case R.id.textView4:
                 //充值
-                rechargePopwindow.showAtLocation(textView4, Gravity.CENTER,0,0);
+//                rechargePopwindow.showAtLocation(textView4, Gravity.CENTER,0,0);
+                startActivity(RechargeActivity_.intent(FeeqianbaoActivty.this).get());
                 break;
+            case R.id.mingofee:
+                //跳转现金券
+//                Intent intent33=new Intent(FeeqianbaoActivty.this,Cashvolume_Activty.class);
+//                startActivity(intent33);
+                break;
+
             case R.id.xianjinjuan:
                 //跳转现金券
-                Intent intent=new Intent(FeeqianbaoActivty.this,Cashvolume_Activty.class);
-                startActivity(intent);
+//                Intent intent=new Intent(FeeqianbaoActivty.this,Cashvolume_Activty.class);
+//                startActivity(intent);
 
                 break;
             case R.id.tixian:
                 //提现
-                cashPopwindow.showAtLocation(tixian,Gravity.CENTER,0,0);
+                startActivity(WithDrawActivity_.intent(FeeqianbaoActivty.this).get());
+//                cashPopwindow.showAtLocation(tixian,Gravity.CENTER,0,0);
                 break;
             case R.id.qianbaohuitui:
                 //返回
@@ -391,9 +451,31 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
                 yuer.setText("¥" + myBalance);
             }
 
-            if (map.get("TotalFee") != null) {
-                String minfee = (String) map.get("TotalFee");
-                mingofee.setText(minfee);
+            if (map.get("reward") != null) {
+                String minfee = (String) map.get("reward");
+                redTv.setText(minfee+"");
+            }
+            if (map.get("credit") != null) {
+                String credit = (String) map.get("credit") ;
+                mingofee.setText(credit+"");
+            }
+            if (map.get("brozen_fee") != null) {
+                double brozen_fee =  (double)map.get("brozen_fee") ;
+                dongjieTv.setText(brozen_fee+"");
+            }
+            if (map.get("headimg") != null){
+                userHeadUrl = map.get("headimg")+"";
+            }
+            if (map.get("nickname") != null){
+                nickname = map.get("nickname")+"";
+            }
+            if (map.get("level") != null){
+                isvip = map.get("level")+"";
+                if (isvip.equals("1")){
+                    redTv.setVisibility(View.GONE);
+                    text5.setVisibility(View.GONE);
+                    helpImage.setVisibility(View.GONE);
+                }
             }
         }
     }
@@ -462,7 +544,7 @@ public class FeeqianbaoActivty extends AutoLayoutActivity implements View.OnClic
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().register(this);
 

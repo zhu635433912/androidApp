@@ -63,6 +63,52 @@ public class Increase_course {
                 .build();
         releaseCourseHttp=retrofit.create(Release_course_http.class);
     }
+
+    public void changeCourse(String uid, String id,int course_id,  int grade_id,String text, int visit_fee, int unvisit_fee, int kechentType, String address,final TurnoverView turnoverView,String lat,String lng) {
+        Call<Demtest> call = releaseCourseHttp.changeCourse(uid,id, course_id, grade_id, text, visit_fee, unvisit_fee, kechentType, address,lat,lng);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error = response.body().getError();
+                if (error.equals("ok")) {
+                    Log.e("aa", "增加课程成功");
+                    turnoverView.failTurnover("修改课程成功");
+                } else {
+                    turnoverView.failTurnover(response.body().getErrmsg());
+                    Log.e("aa", "修改课程失败" + response.body().getErrmsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                turnoverView.failTurnover("网络异常");
+                Log.e("aa", "增加课程异常错误");
+            }
+        });
+    }
+
+    public void publishCourse(String uid, int course_id,  int grade_id,String text, int visit_fee, int unvisit_fee, int kechentType, String address,final TurnoverView turnoverView,String lat,String lng) {
+        Call<Demtest> call = releaseCourseHttp.publishCourse(uid, course_id, grade_id, text, visit_fee, unvisit_fee, kechentType, address,lat,lng);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error = response.body().getError();
+                if (error.equals("ok")) {
+                    Log.e("aa", "增加课程成功");
+                    turnoverView.failTurnover("发布课程成功");
+                } else {
+                    turnoverView.failTurnover(response.body().getErrmsg());
+                    Log.e("aa", "增加课程失败" + response.body().getErrmsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                turnoverView.failTurnover("网络异常");
+                Log.e("aa", "增加课程异常错误");
+            }
+        });
+    }
     //增加课程
     public void Addcourse(int uid, int course_id, String text, int visit_fee, int unvisit_fee, int kechentType, int grade_id, final TurnoverView turnoverView){
         Call<Demtest> call=releaseCourseHttp.Addcourse(uid,course_id,text,visit_fee,unvisit_fee,kechentType,grade_id);
@@ -72,13 +118,15 @@ public class Increase_course {
                 String error=response.body().getError();
                 if (error.equals("ok")){
                     Log.e("aa","增加课程成功");
-                    turnoverView.successTurnover(null);
+                    turnoverView.failTurnover("发布课程成功");
                 }else {
+                    turnoverView.failTurnover(response.body().getErrmsg());
                     Log.e("aa","增加课程失败"+response.body().getErrmsg());
                 }
             }
             @Override
             public void onFailure(Call<Demtest> call, Throwable t) {
+                turnoverView.failTurnover("网络异常");
                 Log.e("aa","增加课程异常错误");
             }
         });

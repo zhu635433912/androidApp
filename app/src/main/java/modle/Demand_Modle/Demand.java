@@ -8,7 +8,10 @@ import android.widget.ListView;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
+import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
+import com.deguan.xuelema.androidapp.viewimpl.PayView;
 import com.deguan.xuelema.androidapp.viewimpl.SimilarXuqiuView;
+import com.deguan.xuelema.androidapp.viewimpl.TeacherView;
 import com.deguan.xuelema.androidapp.viewimpl.XuqiuView;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
@@ -31,6 +34,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Query;
+import view.login.Modle.RegisterView;
 
 /**
  * 需求接口实现类
@@ -79,9 +84,9 @@ public class Demand implements Demand_init {
     获取需求列表
      */
     @Override
-    public List<Map<String, Object>> getDemand_list(int uid, final int role, int filter_type, int filter_id, final String start_time, int end_time, int page, double lat,double lng,final PullToRefreshListView listView, final Context context, final Student_init student_init
+    public List<Map<String, Object>> getDemand_list(int uid, final int role, int filter_type, int gender, final String start_time, int end_time, int page, double lat,double lng,final PullToRefreshListView listView, final Context context, final Student_init student_init
     ,int grade_id,int course_id,String order,String order_desc) {
-        Call<ContentModle> call=demand_http.getDemandlist(uid,filter_type,filter_id,start_time,end_time,page,lat,lng,grade_id,course_id,order,order_desc);
+        Call<ContentModle> call=demand_http.getDemandlist(uid,filter_type,gender,start_time,end_time,page,lat,lng,grade_id,course_id,order,order_desc);
         call.enqueue(new Callback<ContentModle>() {
             @Override
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
@@ -168,6 +173,53 @@ public class Demand implements Demand_init {
             });
         return null;
     }
+
+    public void publishDemand(final ChangeOrderView orderView, int uid, String content, int grade_id, int course_id, int gender,
+                              String province, String city, String state, int service_type, double lat,
+                              double lng, String address, String low_price, String high_price, String teacher_version){
+        Call<Demtest> call=demand_http.publishDemand(uid,content,grade_id,course_id,
+                gender,province,city,state,service_type,lat,lng,address,low_price,high_price,teacher_version);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String errpr = response.body().getError();
+                if (errpr.equals("ok")) {
+                    orderView.successOrder("发布需求成功");
+                    Log.e("aa", "发布需求成功");
+                } else {
+                    String errmsg = response.body().getErrmsg();
+                    orderView.failOrder(errmsg);
+                    Log.e("aa", "发布需求错误=" + errmsg);
+                }
+            }
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                orderView.failOrder("网络错误");
+                Log.e("aa", "发布需求异常错误=" + t.toString());
+            }
+        });
+    }
+
+    public void getLastDemand(int uid, final PayView payView){
+        Call<User_Modle> call = demand_http.getMyDemand(uid);
+        call.enqueue(new Callback<User_Modle>() {
+            @Override
+            public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {
+                if (response.body().getError().equals("ok")){
+                    payView.successPay(response.body().getContent());
+                }else {
+                    payView.failPay(response.body().getErrmsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User_Modle> call, Throwable t) {
+                payView.failPay("网络错误");
+            }
+        });
+    }
+
+
 
     /*
     更新需求
@@ -331,4 +383,61 @@ public class Demand implements Demand_init {
             }
         });
     }
+
+    //首页推荐需求
+    public void getBestDemand(int uid, String lat, String lng, String province, String city, String state, final SimilarXuqiuView xuqiuView){
+        Call<ContentModle> call=demand_http.getBestDemand(uid,lat,lng,province,city,state);
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                String errpr=response.body().getError();
+                if (errpr.equals("ok")) {
+                    List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
+                    listmap = response.body().getContent();
+                    xuqiuView.successSimilarXuqiu(listmap);
+                }else {
+                    String errmsg=response.body().getErrmsg();
+                    Log.e("aa","获取我的需求列表="+errmsg);
+                    xuqiuView.failSimilarXuqiu(errmsg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                xuqiuView.failSimilarXuqiu("网络错误");
+            }
+        });
+    }
+
+    @Override
+    public void getBestTeacher(int uid, String lat, String lng, String province, String city, String state, final TeacherView teacherView) {
+        Call<ContentModle> call=demand_http.getBestTeacher(uid,lat,lng,province,city,state);
+
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    List<Map<String, Object>>  listmap=new ArrayList<Map<String, Object>>();
+                    if (response.body().getContent() .size() == 0){
+                        teacherView.failTeacher("无数据");
+                    }
+                    listmap = response.body().getContent();
+                    teacherView.successTeacher(listmap);
+
+                }else {
+//                    String errmsg=response.body().getErrmsg();
+//                    Log.e("aa","获取教师列表错误"+errmsg);
+                    teacherView.failTeacher("无数据");
+                }
+            }
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                Log.e("aa","获取教师列表异常错误="+t.toString());
+                teacherView.failTeacher("网络错误");
+            }
+        });
+    }
+
+
 }

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="#fffffe"
     android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/finalsz"
         android:layout_width="120px"
-        android:layout_height="80px">
+        android:layout_height="100px">
     </RelativeLayout>
     <ImageButton
         android:layout_marginLeft="30px"
-        android:layout_marginTop="20px"
+        android:layout_marginTop="30px"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:background="@drawable/add19"
@@ -18,7 +19,7 @@
 
     <TextView
         android:textSize="35px"
-        android:layout_marginTop="20px"
+        android:layout_marginTop="30px"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="设置"
@@ -27,41 +28,40 @@
     <TextView
         android:id="@+id/xuqiufenggexian"
         android:background="#d7d7d7"
-        android:layout_marginTop="80px"
+        android:layout_marginTop="100px"
         android:layout_below="@+id/neirongtext"
         android:layout_width="match_parent"
         android:layout_height="1px" />
 
     <ImageView
         android:id="@+id/shezhitubiao"
-        android:layout_marginTop="126px"
+        android:layout_marginTop="0px"
         android:layout_below="@+id/xuqiufenggexian"
             android:layout_centerHorizontal="true"
         android:background="@drawable/add20"
-        android:layout_width="170px"
-        android:layout_height="170px" />
-    <TextView
+        android:layout_width="0px"
+        android:layout_height="0px" />
+    <View
         android:id="@+id/xuxian"
-        android:layout_marginTop="140px"
+        android:background="#e7e7e7"
+        android:layout_marginTop="0px"
         android:layout_below="@+id/shezhitubiao"
         android:layout_centerHorizontal="true"
-        android:textSize="40px"
-        android:text="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -"
         android:layout_width="match_parent"
-        android:layout_height="40px" />
+        android:layout_height="48px" />
     <TextView
         android:paddingTop="30px"
         android:id="@+id/wodetuiguang"
         android:layout_marginLeft="50px"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/xuxian"
-        android:textSize="30px"
-        android:text="支付密码"
+        android:textSize="32px"
+        android:text="修改支付密码"
         android:layout_width="match_parent"
         android:layout_height="90px" />
     <TextView
         android:id="@+id/xuqiufenggexian0"
-        android:background="#d7d7d7"
+        android:background="#f9e447"
         android:layout_below="@+id/wodetuiguang"
         android:layout_width="match_parent"
         android:layout_height="1px" />
@@ -75,27 +75,52 @@
         android:textSize="30px"
         android:text="教师认证"
         android:layout_width="match_parent"
-        android:layout_height="90px" />
+        android:layout_height="0px" />
     <TextView
+        android:layout_marginTop="0px"
         android:id="@+id/xuqiufenggexian1"
-        android:background="#d7d7d7"
+        android:background="#f9e447"
         android:layout_below="@+id/xuqiufenggexian0"
         android:layout_width="match_parent"
-        android:layout_height="1px" />
+        android:layout_height="0px" />
+
+    <ImageView
+        android:paddingTop="30px"
+        android:layout_marginRight="50px"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/xuqiufenggexian1"
+        android:src="@mipmap/right_jiantou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <TextView
         android:paddingTop="30px"
-        android:id="@+id/wodezhaop"
+        android:id="@+id/cache_tv"
         android:layout_marginLeft="50px"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/xuqiufenggexian1"
-        android:textSize="30px"
-        android:text="退出登录"
+        android:textSize="32px"
+        android:text="当前缓存"
         android:layout_width="match_parent"
         android:layout_height="90px" />
+
+    <TextView
+        android:paddingTop="30px"
+        android:gravity="right"
+        android:id="@+id/clear_cache_tv"
+        android:layout_marginRight="80px"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/xuqiufenggexian1"
+        android:textSize="32px"
+        android:text="清除缓存"
+        android:layout_width="match_parent"
+        android:layout_height="90px" />
+
+
     <TextView
         android:id="@+id/xuqiufenggexian2"
-        android:background="#d7d7d7"
-        android:layout_below="@+id/wodezhaop"
+        android:background="#f9e447"
+        android:layout_below="@+id/cache_tv"
         android:layout_width="match_parent"
         android:layout_height="1px" />
     <TextView
@@ -105,61 +130,96 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/xuqiufenggexian2"
         android:textSize="30px"
-        android:text="修改密码"
+        android:text="修改登录密码"
         android:layout_width="match_parent"
         android:layout_height="90px" />
     <TextView
         android:id="@+id/xuqiufenggexian3"
-        android:background="#d7d7d7"
+        android:background="#dfdfdf"
         android:layout_below="@+id/xiugaimima"
         android:layout_width="match_parent"
-        android:layout_height="1px" />
+        android:layout_height="48px" />
+    <ImageView
+        android:paddingTop="30px"
+        android:layout_marginRight="50px"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/xuqiufenggexian3"
+        android:src="@mipmap/right_jiantou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <TextView
         android:paddingTop="30px"
         android:id="@+id/fankuixinxi"
         android:layout_marginLeft="50px"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/xuqiufenggexian3"
-        android:textSize="30px"
+        android:textSize="32px"
         android:text="反馈信息"
         android:layout_width="match_parent"
         android:layout_height="90px" />
+
     <TextView
         android:id="@+id/xuqiufenggexian4"
-        android:background="#d7d7d7"
+        android:background="#f9e447"
         android:layout_below="@+id/fankuixinxi"
         android:layout_width="match_parent"
         android:layout_height="1px" />
+    <ImageView
+        android:paddingTop="30px"
+        android:layout_marginRight="50px"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/xuqiufenggexian4"
+        android:src="@mipmap/right_jiantou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <TextView
         android:paddingTop="30px"
         android:id="@+id/guanyuwomen"
         android:layout_marginLeft="50px"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/xuqiufenggexian4"
-        android:textSize="30px"
+        android:textSize="32px"
         android:text="关于我们"
         android:layout_width="match_parent"
         android:layout_height="90px" />
     <TextView
         android:id="@+id/xuqiufenggexian5"
-        android:background="#d7d7d7"
+        android:background="#f9e447"
         android:layout_below="@+id/guanyuwomen"
         android:layout_width="match_parent"
         android:layout_height="1px" />
+    <ImageView
+        android:paddingTop="30px"
+        android:layout_marginRight="50px"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/xuqiufenggexian5"
+        android:src="@mipmap/right_jiantou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <TextView
         android:paddingTop="30px"
         android:id="@+id/xunqiubangzhu"
         android:layout_marginLeft="50px"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/xuqiufenggexian5"
-        android:textSize="30px"
+        android:textSize="32px"
         android:text="寻求帮助"
         android:layout_width="match_parent"
         android:layout_height="90px" />
     <TextView
         android:id="@+id/xuqiufenggexian6"
-        android:background="#d7d7d7"
+        android:background="#f9e447"
         android:layout_below="@+id/xunqiubangzhu"
         android:layout_width="match_parent"
         android:layout_height="1px" />
+
+    <TextView
+        android:id="@+id/wodezhaop"
+        android:background="@mipmap/login_out_btn"
+        android:layout_marginBottom="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

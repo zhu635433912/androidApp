@@ -39,7 +39,7 @@ import modle.user_ziliao.User_id;
  */
 
 @EFragment(R.layout.tuijian_new_fragment)
-public class ConductFragment extends BaseFragment implements OrderView, SwipeRefreshLayout.OnRefreshListener, OrderNewAdapter.OnTopClickListener {
+public class ConductFragment extends MyBaseFragment implements OrderView, SwipeRefreshLayout.OnRefreshListener, OrderNewAdapter.OnTopClickListener {
 
     @ViewById(R.id.tuijian_listview)
     RecyclerView listView;
@@ -54,6 +54,7 @@ public class ConductFragment extends BaseFragment implements OrderView, SwipeRef
 
     @Override
     public void before() {
+        super.before();
         EventBus.getDefault().register(this);
     }
     @Override
@@ -83,9 +84,9 @@ public class ConductFragment extends BaseFragment implements OrderView, SwipeRef
                         isLoading = true;
                         page++;
                         if (User_id.getRole().equals("1")) {
-                            new OrderPresenterImpl(ConductFragment.this, Integer.parseInt(User_id.getUid()), 0, page).getOrderEntity();
+                            new OrderPresenterImpl(ConductFragment.this, Integer.parseInt(User_id.getUid()), 0, page).getOrderEntity(2);
                         }else {
-                            new OrderPresenterImpl(ConductFragment.this, Integer.parseInt(User_id.getUid()), 1, page).getOrderEntity();
+                            new OrderPresenterImpl(ConductFragment.this, Integer.parseInt(User_id.getUid()), 1, page).getOrderEntity(2);
                         }
                     }
                 }
@@ -102,7 +103,7 @@ public class ConductFragment extends BaseFragment implements OrderView, SwipeRef
 //        tuijianPresenter.getNofinishOrderEntity(2);
         if (list.size() > 0){}
         else {
-            tuijianPresenter.getOrderEntity();
+            tuijianPresenter.getOrderEntity(2);
         }
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -117,7 +118,7 @@ public class ConductFragment extends BaseFragment implements OrderView, SwipeRef
     @Subscriber(tag = "changeStatus")
     public void updateList(int msg){
         if (msg == 1){
-            tuijianPresenter.getOrderEntity();
+            tuijianPresenter.getOrderEntity(2);
         }
     }
     @Override
@@ -133,41 +134,36 @@ public class ConductFragment extends BaseFragment implements OrderView, SwipeRef
 //                    list.add(maps.get(i));
 //                }
 //            }
-            for (int i = 0; i < maps.size(); i++) {
-                if (maps.get(i).get("status").equals("2")) {
-                    list.add(maps.get(i));
+            if (User_id.getRole().equals("1")){
+                for (int i = 0; i < maps.size(); i++) {
+                    if (maps.get(i).get("status").equals("2") ) {
+                        list.add(maps.get(i));
+                    }
+                    if (maps.get(i).get("status").equals("4")
+                            //                        ||maps.get(i).get("status").equals("5")
+                            || maps.get(i).get("status").equals("6")
+                            || maps.get(i).get("status").equals("7")) {
+                        list.add(0, maps.get(i));
+                    }
                 }
-                if (maps.get(i).get("status").equals("4")
-//                        ||maps.get(i).get("status").equals("5")
-                        ||maps.get(i).get("status").equals("6")) {
-                    list.add(0,maps.get(i));
+            }else{
+                for (int i = 0; i < maps.size(); i++) {
+                    if (maps.get(i).get("status").equals("2") ) {
+                        list.add(maps.get(i));
+                    }
+                    if (maps.get(i).get("status").equals("4")
+                            || maps.get(i).get("status").equals("6")) {
+                        list.add(0, maps.get(i));
+                    }
+
                 }
             }
+
 
             adapter.addAll(list);
             isLoading = false;
         }
         swipeRefreshLayout.setRefreshing(false);
-//        list.addAll(maps);
-//        for (int i = 0; i < maps.size(); i++) {
-//            TuijianEntity entity = new TuijianEntity();
-//            entity.setNickname((String) maps.get(i).get("nickname"));
-//            entity.setSpeciality_name((String) maps.get(i).get("speciality_name"));
-//            entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
-//            entity.setSignature((String) maps.get(i).get("signature"));
-//            entity.setOrder_rank((String.valueOf(maps.get(i).get("order_rank"))));
-//            entity.setUser_headimg((String) maps.get(i).get("user_headimg"));
-//            entity.setUser_id((String) maps.get(i).get("user_id"));
-//            entity.setGender((String) maps.get(i).get("gender"));
-////            entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
-//            entity.setDistance((String) maps.get(i).get("distance"));
-//            entity.setFee(String.valueOf(maps.get(i).get("fee")));
-//            entity.setSpeciality(String.valueOf(maps.get(i).get("speciality")));
-//            entity.setUsername(String.valueOf(maps.get(i).get("username")));
-//            entity.setHaoping_num(String.valueOf(maps.get(i).get("haoping_num")));
-//            list.add(entity);
-//        }
-//        adapter.notifyDataSetChanged();
     }
 //}
 
@@ -181,9 +177,9 @@ public class ConductFragment extends BaseFragment implements OrderView, SwipeRef
     public void onRefresh() {
         page = 1;
         if (User_id.getRole().equals("1")) {
-            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 0, page).getOrderEntity();
+            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 0, page).getOrderEntity(2);
         }else {
-            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 1, page).getOrderEntity();
+            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 1, page).getOrderEntity(2);
         }
     }
 
@@ -209,73 +205,4 @@ public class ConductFragment extends BaseFragment implements OrderView, SwipeRef
         intent.putExtra("teacher_headimg",teacherImage);
         startActivity(intent);
     }
-//    @ViewById(R.id.tuijian_listview)
-//    PullToRefreshListView listView;
-//    private Order_StudionAdabt studionAdabt;
-//    private List<Map<String,Object>> list=new ArrayList<>();
-//    private Order_init orderInit;
-//    private int uid;
-//
-//
-//    @Override
-//    public void initView() {
-//        studionAdabt=new Order_StudionAdabt(list,getContext());
-//        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-//        listView.setOnRefreshListener(this);
-//        listView.setAdapter(studionAdabt);
-//        uid=Integer.parseInt(User_id.getUid());
-//        orderInit=new Order();
-//        if (User_id.getRole().equals("1")) {
-//            orderInit.getOrder_list(uid, 0, 2, 1, null, null, this, 0, 3);
-//        }else {
-//            orderInit.getOrder_list(uid, 1, 2, 1, null, null, this, 0, 3);
-//        }
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Map<String,Object> map=studionAdabt.getmap(i-1);
-//                String status= (String) map.get("status");
-//                String ida = (String) map.get("id");
-//                String duration = (String) map.get("duration");
-//                Intent intent = null;
-//                if (User_id.getRole().equals("1")) {
-//                    intent = new Intent(getActivity(), Order_details.class);
-//                }else {
-//                    intent = new Intent(getActivity(), OrderTeacherActivity.class);
-//                }
-////                Intent intent = new Intent(getActivity(), Order_details.class);
-//                intent.putExtra("oredr_id", ida);
-//                intent.putExtra("duration", duration);
-//                intent.putExtra("status", status);
-//                startActivity(intent);
-//
-//            }
-//        });
-//
-//    }
-//
-//    @Override
-//    public void onRefresh(PullToRefreshBase refreshView) {
-//        //下拉刷新
-//        orderInit.getOrder_list(uid,0,2,1,null,null,this,0,3);
-//    }
-//    @Override
-//    public void setListview(List<Map<String, Object>> listmap) {
-//        //取消下拉刷新
-//        listView.onRefreshComplete();
-//        //清空list数据
-//        list.clear();
-//        for (int i = 0; i < listmap.size(); i++) {
-//            if (listmap.get(i).get("status").equals("2")||listmap.get(i).get("status").equals("4")){
-//                list.add(listmap.get(i));
-//            }
-//        }
-//        //刷新适配器
-//        studionAdabt.notifyDataSetChanged();
-//    }
-//
-//    @Override
-//    public void setListview1(List<Map<String, Object>> listmap) {
-//
-//    }
 }

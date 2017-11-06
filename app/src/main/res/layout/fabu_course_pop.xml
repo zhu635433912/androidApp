@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    app:cardCornerRadius="16px"
+    android:background="#f9f8f8"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:background="#ffffff"
+        android:layout_marginTop="20px"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+
+        <ImageView
+            android:layout_marginLeft="50px"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/add04"
+            android:layout_width="60px"
+            android:layout_height="60px" />
+        <TextView
+            android:text="请选择一个科目"
+            android:layout_marginRight="100px"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:background="#a7a7a7"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <ExpandableListView
+        android:background="#f9f8f8"
+
+        android:id="@+id/choose_course_eplist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

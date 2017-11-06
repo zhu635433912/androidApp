@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.entities.TuijianEntity;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 
 import java.util.List;
 
@@ -85,7 +85,7 @@ public class MyOrderAdapter extends ListBaseAdapter {
         holder.speciality.setText(""+list.get(position).getSpeciality());
         holder.username.setText(""+list.get(position).getUsername());
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
-        Glide.with(context.getApplicationContext()).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+//        Glide.with(context.getApplicationContext()).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
         String dist = list.get(position).getDistance();
         int myDist = 0;
         if (!dist.equals("")){

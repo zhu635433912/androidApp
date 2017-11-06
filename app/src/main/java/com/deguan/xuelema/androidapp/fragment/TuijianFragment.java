@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Toast;
 
+import com.deguan.xuelema.androidapp.NewTeacherPersonActivity_;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.UserxinxiActivty;
 import com.deguan.xuelema.androidapp.Xuqiuxiangx;
@@ -32,7 +33,7 @@ import modle.user_ziliao.User_id;
  * 推荐教师
  */
 @EFragment(R.layout.tuijian_new_fragment)
-public class TuijianFragment extends BaseFragment implements  TuijianView, SwipeRefreshLayout.OnRefreshListener, TuijianNewAdapter.OnTopClickListener {
+public class TuijianFragment extends MyBaseFragment implements  TuijianView, SwipeRefreshLayout.OnRefreshListener, TuijianNewAdapter.OnTopClickListener {
 
     @ViewById(R.id.tuijian_listview)
     RecyclerView listView;
@@ -109,6 +110,7 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
                 list.clear();
             }
             for (int i = 0; i < maps.size(); i++) {
+
                 TuijianEntity entity = new TuijianEntity();
                 entity.setNickname((String) maps.get(i).get("nickname"));
                 entity.setSpeciality((String)maps.get(i).get("speciality"));
@@ -171,12 +173,16 @@ public class TuijianFragment extends BaseFragment implements  TuijianView, Swipe
 
     @Override
     public void onTopClick(TuijianEntity entity) {
-        Intent intent = new Intent(getActivity(), UserxinxiActivty.class);
-//                    intent.putExtra("user_id", uid);
-        intent.putExtra("head_image",entity.getUser_headimg());
-        intent.putExtra("user_id",entity.getUser_id());
-        intent.putExtra("myid","0");
-        startActivity(intent);
+        startActivity(NewTeacherPersonActivity_.intent(getActivity()).
+                extra("myid","0")
+                .extra("head_image",entity.getUser_headimg())
+                .extra("user_id",entity.getUser_id()).get());
+//        Intent intent = new Intent(getActivity(), UserxinxiActivty.class);
+////                    intent.putExtra("user_id", uid);
+//        intent.putExtra("head_image",entity.getUser_headimg());
+//        intent.putExtra("user_id",entity.getUser_id());
+//        intent.putExtra("myid","0");
+//        startActivity(intent);
     }
 
 }

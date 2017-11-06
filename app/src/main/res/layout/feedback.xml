@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="#fffffe"
     android:layout_height="match_parent">
-    <ImageButton
+    <ImageView
         android:id="@+id/fankui_back"
-        android:layout_width="20px"
-        android:layout_height="30px"
+        android:layout_width="60px"
+        android:layout_height="70px"
+        android:padding="20px"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="30px"
-        android:layout_marginTop="20px"
-        android:background="@drawable/add19" />
+        android:layout_marginTop="10px"
+        android:src="@drawable/add19" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -18,7 +20,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20px"
-        android:text="反馈"
+        android:text="反馈信息"
         android:textSize="30px" />
     <TextView
         android:id="@+id/xuqiufenggexian"
@@ -32,7 +34,7 @@
         android:paddingTop="10px"
         android:layout_marginTop="20px"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/gerxxkk"
+        android:background="@mipmap/fankui_bg"
         android:id="@+id/fankuineirong"
         android:hint="请简要描述您的问题和意见"
         android:textSize="30px"
@@ -62,13 +64,12 @@
         android:id="@+id/tijiaofankui"
         android:gravity="center"
         android:textColor="#fff"
-        android:text="保存"
-        android:background="@drawable/add15"
+        android:background="@mipmap/fankui_send"
         android:layout_marginBottom="20px"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="300px"
         android:layout_below="@+id/tianjaitupian"
-        android:layout_width="500px"
+        android:layout_width="400px"
         android:layout_height="80px" />
     
 </RelativeLayout>

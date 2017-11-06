@@ -14,17 +14,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.hyphenate.EMCallBack;
+import com.deguan.xuelema.androidapp.utils.AlertDialogUtil;
+import com.deguan.xuelema.androidapp.utils.DeviceUtil;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.Set;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
-import modle.Huanxing.cache.UserCacheManager;
-import modle.Order_Modle.Order;
-import modle.Order_Modle.Order_init;
-import modle.user_ziliao.DemoHelper;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.UserInfo;
+import jiguang.chat.utils.SharePreferenceManager;
+import modle.MyUrl;
 import modle.user_ziliao.User_id;
 import view.login.ViewActivity.RevisePsdActivity;
 import view.login.ViewActivity.LoginAcitivity;
@@ -33,7 +35,7 @@ import view.login.ViewActivity.LoginAcitivity;
  * 设置
  */
 
-public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
+public class SetUp extends MyBaseActivity implements View.OnClickListener {
     private TextView guanyuwomen;
     private TextView xunqiubangzhu;
     private TextView wodetuiguang;
@@ -42,11 +44,18 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
     private TextView wodezhaop;
     private TextView jiaoshirenzheng;
     private TextView fankuixinxi;
+    private TextView cacheTv;
+    private TextView clearCacheTv;
+    private AlertDialog clearDialog;
+    private ProgressDialog pd;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setup);
         User_id.getInstance().addActivity(this);
+        cacheTv = (TextView) findViewById(R.id.cache_tv);
+        clearCacheTv = (TextView) findViewById(R.id.clear_cache_tv);
         wodetuiguang= (TextView) findViewById(R.id.wodetuiguang);
         guanyuwomen = (TextView) findViewById(R.id.guanyuwomen);
         xunqiubangzhu = (TextView) findViewById(R.id.xunqiubangzhu);
@@ -71,6 +80,15 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
         xiugaimima.setOnClickListener(this);
         jiaoshirenzheng.setOnClickListener(this);
 
+        String s = "当前缓存"+ DeviceUtil.getFormatSize(DeviceUtil.getFolderSize(MyUrl.getCacheFile()));
+        cacheTv.setText(s);
+        clearDialog = AlertDialogUtil.setClearDialog(this,cacheTv);
+        clearCacheTv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    clearDialog.show();
+                }
+            });
     }
 
     @Override
@@ -101,7 +119,7 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
                 startActivity(intent1);
                 break;
             case R.id.wodezhaop:
-                new AlertDialog.Builder(SetUp.this).setTitle("学了吗提示!").setMessage("确定退出?")
+                new AlertDialog.Builder(SetUp.this).setTitle("学习吧提示!").setMessage("确定退出?")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -121,9 +139,13 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
                                 editor.commit();
                                 logout();
 
+//                                JMessageClient.logout();
                                 Intent intent2=new Intent(SetUp.this, LoginAcitivity.class);
                                 startActivity(intent2);
-                                User_id.getInstance().exit();
+                                pd.dismiss();
+                                finish();
+                                User_id.deleteActivity();
+//                                User_id.getInstance().exit();
                                 Toast.makeText(SetUp.this,"退出成功！",Toast.LENGTH_LONG).show();
 
                             }
@@ -133,7 +155,6 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
 
                     }
                 }).show();
-
 
                 break;
             case R.id.jiaoshirenzheng:
@@ -150,43 +171,22 @@ public class SetUp extends AutoLayoutActivity implements View.OnClickListener {
     }
 
     void logout() {
-        final ProgressDialog pd = new ProgressDialog(this);
-        String st = getResources().getString(R.string.Are_logged_out);
-        pd.setMessage(st);
+        pd = new ProgressDialog(this);
+//        String st = getResources().getString("退出登录");
+        pd.setMessage("退出登录");
         pd.setCanceledOnTouchOutside(false);
         pd.show();
-        DemoHelper.getInstance().logout(false,new EMCallBack() {
 
-            @Override
-            public void onSuccess() {
-                runOnUiThread(new Runnable() {
-                    public void run() {
-                        pd.dismiss();
-                        // show login screen
-                        finish();
-//                        startActivity(new Intent(SetUp.this, LoginAcitivity.class));
-                    }
-                });
-            }
+//        UserInfo info = JMessageClient.getMyInfo();
+//        if (null != info) {
+//            SharePreferenceManager.setCachedUsername(info.getUserName());
+//            if (info.getAvatarFile() != null) {
+//                SharePreferenceManager.setCachedAvatarPath(info.getAvatarFile().getAbsolutePath());
+//            }
 
-            @Override
-            public void onProgress(int progress, String status) {
-
-            }
-
-            @Override
-            public void onError(int code, String message) {
-                runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        // TODO Auto-generated method stub
-                        pd.dismiss();
-//                        Toast.makeText(SetUp.this, "unbind devicetokens failed", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
+//        } else {
+//            Log.d("aa","退出登录失败");
+//        }
     }
     private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
         @Override

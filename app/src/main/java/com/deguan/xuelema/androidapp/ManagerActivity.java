@@ -12,12 +12,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.deguan.xuelema.androidapp.fragment.MyBaseFragment;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.utils.SubjectUtil;
 import com.deguan.xuelema.androidapp.viewimpl.TurnoverView;
 
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ import modle.Adapter.KechengAdapter;
 import modle.Increase_course.Increase_course;
 import modle.user_ziliao.User_id;
 import view.login.Modle.MobileView;
+import view.login.Modle.RegisterEntity;
 
 @EActivity(R.layout.activity_manager)
 public class ManagerActivity extends MyBaseActivity implements View.OnClickListener, TurnoverView, Student_init, MobileView {
@@ -52,7 +55,7 @@ public class ManagerActivity extends MyBaseActivity implements View.OnClickListe
 
     @Override
     public void before() {
-
+        super.before();
     }
 
 
@@ -73,11 +76,12 @@ public class ManagerActivity extends MyBaseActivity implements View.OnClickListe
         backR.setOnClickListener(this);
         kechengAdapter = new KechengAdapter(lists,this);
         listView.setAdapter(kechengAdapter);
-        listView.addHeaderView(view);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//        listView.addHeaderView(view);
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final int course_id=kechengAdapter.getcourse_id(position-1);
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                final int course_id=kechengAdapter.getcourse_id(position);
 //                Log.e("aa","删除"+course_id);
                 new AlertDialog.Builder(ManagerActivity.this).setTitle("学了么提示!").setMessage("确定删除课程吗?")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -91,6 +95,28 @@ public class ManagerActivity extends MyBaseActivity implements View.OnClickListe
 
                     }
                 }).show();
+
+                return true;
+            }
+        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                startActivity(CourseActivity_.intent(ManagerActivity.this)
+                        .extra("uid",User_id.getUid())
+                        .extra("id",lists.get(position).get("id")+"")
+                        .extra("course_id",lists.get(position).get("course_id")+"")
+                        .extra("course_name",lists.get(position).get("course_name")+"")
+                        .extra("grade_id",lists.get(position).get("grade_id")+"")
+                        .extra("grade_name",lists.get(position).get("grade_name")+"")
+                        .extra("course_remark",lists.get(position).get("course_remark")+"")
+                        .extra("visit_fee",lists.get(position).get("visit_fee")+"")
+                        .extra("unvisit_fee",lists.get(position).get("unvisit_fee")+"")
+                        .extra("service_type",lists.get(position).get("service_type")+"")
+                        .extra("address",lists.get(position).get("address")+"")
+                        .extra("lat",lists.get(position).get("lat")+"")
+                        .extra("lng",lists.get(position).get("lng")+"")
+                        .get());
             }
         });
     }
@@ -110,7 +136,7 @@ public class ManagerActivity extends MyBaseActivity implements View.OnClickListe
             case R.id.manager_choose_subject:
 //获取数据
 //                Getdata getdata=new Getdata(); //课程种类
-                final AlertDialog.Builder subjectDialog = new AlertDialog.Builder(ManagerActivity.this);
+                final AlertDialog.Builder subjectDialog = new AlertDialog.Builder(this);
                 subjectDialog.setIcon(R.drawable.add04);
                 subjectDialog.setTitle("请选择一个科目");
                 //    指定下拉列表的显示数据
@@ -131,7 +157,7 @@ public class ManagerActivity extends MyBaseActivity implements View.OnClickListe
                 break;
             case R.id.manager_choose_grade:
 //                科目
-                AlertDialog.Builder kemuza = new AlertDialog.Builder(ManagerActivity.this);
+                AlertDialog.Builder kemuza = new AlertDialog.Builder(this);
                 kemuza.setIcon(R.drawable.add04);
                 kemuza.setTitle("请选择一个年级");
                 //    指定下拉列表的显示数据
@@ -185,7 +211,7 @@ public class ManagerActivity extends MyBaseActivity implements View.OnClickListe
             case R.id.manager_fabu:
                 //增加课程
                 if (chooseSubjetTv.getText().toString().equals("选择课程")||chooseGradeTv.getText().toString().equals("选择年级")
-                        ||chooseDescTv.getText().toString().equals("选择课程说明")||visitEdit.getText().toString().equals("课时费")
+                        ||chooseDescTv.getText().toString().equals("选择课程说明")
 //                        ||serviceTv.getText().toString().equals("服务类型")
                         ||unvisitEdit.getText().toString().equals("")
                         ||visitEdit.getText().toString().equals("")){
@@ -231,7 +257,10 @@ public class ManagerActivity extends MyBaseActivity implements View.OnClickListe
     }
     @Override
     public void failTurnover(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        if (msg.equals("发布课程成功")){
+            getmCourse();
+        }
+        Toast.makeText(ManagerActivity.this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -248,12 +277,17 @@ public class ManagerActivity extends MyBaseActivity implements View.OnClickListe
 
     @Override
     public void successRegister(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ManagerActivity.this, msg, Toast.LENGTH_SHORT).show();
         getmCourse();
     }
 
     @Override
     public void failRegister(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(ManagerActivity.this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void successLogin(RegisterEntity entity) {
+
     }
 }

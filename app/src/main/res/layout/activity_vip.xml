@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fffffe"
+    tools:context="com.deguan.xuelema.androidapp.StudentVipActivity">
+    <RelativeLayout
+        android:background="#fffffe"
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <ImageButton
+            android:layout_marginLeft="34px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/add19"
+            android:layout_width="25px"
+            android:layout_height="35px" />
+        <RelativeLayout
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/back_rl"
+            android:layout_width="120px"
+            android:layout_height="90px">
+        </RelativeLayout>
+
+        <TextView
+            android:layout_marginLeft="120px"
+            android:layout_centerVertical="true"
+            android:textSize="40px"
+            android:layout_centerInParent="true"
+            android:text="会员中心"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/vip_desc_tv"
+            android:text="说明"
+            android:textSize="35px"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <View
+        android:background="#8f8f8f"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <View
+        android:background="#ececec"
+        android:layout_width="match_parent"
+        android:layout_height="15px"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="130px">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:layout_width="100px"
+            android:layout_marginLeft="50px"
+            android:layout_centerVertical="true"
+            app:placeholderImage="@drawable/hold_head"
+            app:roundAsCircle="true"
+            android:id="@+id/vip_head_image"
+            android:layout_height="100px" />
+        <TextView
+            android:id="@+id/vip_nickname_tv"
+            android:textSize="36px"
+            android:text="皮皮迪"
+            android:layout_marginLeft="40px"
+            android:layout_marginTop="20px"
+            android:layout_toRightOf="@+id/vip_head_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="32px"
+            android:textColor="#eda73c"
+            android:layout_below="@+id/vip_nickname_tv"
+            android:layout_marginLeft="40px"
+            android:text="会员专享三大特权"
+            android:layout_marginTop="20px"
+            android:layout_toRightOf="@+id/vip_head_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <TextView
+        android:textSize="35px"
+        android:text="会员套餐"
+        android:gravity="center_vertical"
+        android:paddingLeft="50px"
+        android:background="#ececec"
+        android:layout_width="match_parent"
+        android:layout_height="60px" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:paddingRight="50px"
+        android:layout_width="match_parent"
+        android:layout_height="201px">
+        <LinearLayout
+            android:id="@+id/five_yuan_ll"
+            android:background="#fffffe"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:orientation="horizontal">
+            <ImageView
+                android:src="@mipmap/two_star_vip"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="50px"
+                android:layout_width="50px"
+                android:layout_height="50px" />
+            <TextView
+                android:text="二心会员"
+                android:textSize="33px"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="30px"
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <TextView
+                android:textSize="33px"
+                android:text="400元"
+                android:textColor="#ec9945"
+                android:gravity="center_vertical"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="100px" />
+            <TextView
+                android:text=""
+                android:layout_marginRight="30px"
+                android:gravity="center"
+                android:textColor="#e22f2f"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/choose_five_image"
+                android:src="@mipmap/choose_ok_gou"
+                android:layout_width="40px"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginLeft="60px"
+            android:background="#7b7b7b"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+        <LinearLayout
+            android:id="@+id/two_yuan_ll"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:orientation="horizontal">
+            <ImageView
+                android:src="@mipmap/one_star_vip"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="50px"
+                android:layout_width="50px"
+                android:layout_height="50px" />
+            <TextView
+                android:textSize="33px"
+                android:text="一心会员"
+                android:gravity="center_vertical"
+                android:paddingLeft="50px"
+                android:background="#fffffe"
+                android:layout_width="wrap_content"
+                android:layout_height="100px" />
+            <TextView
+                android:textSize="33px"
+                android:text="30元"
+                android:textColor="#ec9945"
+                android:gravity="center_vertical"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="100px" />
+            <TextView
+                android:text=""
+                android:layout_marginRight="30px"
+                android:gravity="center"
+                android:textColor="#e22f2f"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/choose_two_image"
+
+                android:layout_width="40px"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:textSize="35px"
+        android:text="会员特权"
+        android:gravity="center_vertical"
+        android:paddingLeft="50px"
+        android:background="#ececec"
+        android:layout_width="match_parent"
+        android:layout_height="60px" />
+    <LinearLayout
+        android:padding="26px"
+        android:layout_width="match_parent"
+        android:layout_height="180px">
+
+        <ImageView
+            android:id="@+id/vip_ad_image1"
+            android:src="@mipmap/vip_ad1"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:src="@mipmap/vip_ad2"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:src="@mipmap/vip_ad3"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <TextView
+        android:textSize="35px"
+        android:text="支付方式"
+        android:gravity="center_vertical"
+        android:paddingLeft="50px"
+        android:background="#ececec"
+        android:layout_width="match_parent"
+        android:layout_height="60px" />
+    <LinearLayout
+        android:orientation="vertical"
+        android:paddingRight="50px"
+        android:layout_width="match_parent"
+        android:layout_height="201px">
+        <LinearLayout
+            android:id="@+id/alipay_ll"
+            android:background="#fffffe"
+            android:paddingLeft="50px"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:orientation="horizontal">
+            <ImageView
+                android:gravity="center_vertical"
+                android:src="@mipmap/alipay_icon"
+                android:layout_width="50px"
+                android:layout_height="match_parent" />
+            <TextView
+                android:textSize="33px"
+                android:text="支付宝支付"
+                android:paddingLeft="30px"
+                android:gravity="center_vertical"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="100px" />
+            <ImageView
+                android:id="@+id/alipay_choose_image"
+                android:src="@mipmap/choose_ok_gou"
+                android:layout_width="40px"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginLeft="60px"
+            android:background="#7b7b7b"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+        <LinearLayout
+            android:id="@+id/weixinpay_ll"
+            android:background="#fffffe"
+            android:paddingLeft="50px"
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:orientation="horizontal">
+            <ImageView
+                android:gravity="center_vertical"
+                android:src="@mipmap/weixinpay_icon"
+                android:layout_width="50px"
+                android:layout_height="match_parent" />
+            <TextView
+                android:textSize="33px"
+                android:text="微信支付"
+                android:paddingLeft="30px"
+                android:gravity="center_vertical"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="100px" />
+            <ImageView
+                android:id="@+id/wxpay_choose_image"
+                android:layout_width="40px"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+    <RelativeLayout
+        android:background="#f1f1f1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/sure_btn"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30px"
+            android:src="@mipmap/kaitong_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+</LinearLayout>

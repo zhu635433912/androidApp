@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
@@ -11,12 +12,13 @@
         android:layout_height="350px"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
-    <modle.toos.CircleImageView
+    <com.facebook.drawee.view.SimpleDraweeView
+        app:roundAsCircle="true"
         android:id="@+id/liebiaoname"
         android:layout_alignParentTop="true"
         android:layout_marginTop="30px"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ox2"
+        app:placeholderImage="@drawable/ox2"
         android:layout_width="100px"
         android:layout_height="100px" />
     <TextView
@@ -41,7 +43,7 @@
         <TextView
             android:id="@+id/address_tv"
             android:textSize="30px"
-            android:layout_marginTop="20px"
+            android:layout_marginTop="10px"
             android:text="浙江省"
             android:layout_below="@+id/coursename"
             android:layout_width="match_parent"

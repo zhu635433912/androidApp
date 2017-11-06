@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
@@ -24,14 +25,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.utils.EaseCommonUtils;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
+import com.deguan.xuelema.androidapp.utils.PathUtil;
 import com.deguan.xuelema.androidapp.utils.PhotoBitmapUtils;
 import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.easeui.utils.EaseCommonUtils;
-import com.hyphenate.util.PathUtil;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
@@ -58,13 +60,13 @@ public class CompleteOrderActivity extends MyBaseActivity implements View.OnClic
     @ViewById(R.id.complete_talk_edit)
     EditText talkEdit;
     @ViewById(R.id.complete_picture1)
-    ImageView image1;
+    SimpleDraweeView image1;
     @ViewById(R.id.complete_picture2)
-    ImageView image2;
+    SimpleDraweeView image2;
     @ViewById(R.id.complete_picture3)
-    ImageView image3;
+    SimpleDraweeView image3;
     @ViewById(R.id.complete_picture4)
-    ImageView image4;
+    SimpleDraweeView image4;
     @ViewById(R.id.complete_sure_btn)
     RelativeLayout sureBtn;
     private int orderId ;
@@ -80,11 +82,14 @@ public class CompleteOrderActivity extends MyBaseActivity implements View.OnClic
     private Order_init order_init;
     private String talk = "";
     private String desc = "";
+    private android.app.AlertDialog mPickDialog;
 
     @Override
     public void before() {
+        super.before();
         User_id.getInstance().addActivity(this);
         orderId = getIntent().getIntExtra("orderId",0);
+        telphone = getIntent().getStringExtra("telPhone");
         EventBus.getDefault().register(this);
     }
 
@@ -97,8 +102,11 @@ public class CompleteOrderActivity extends MyBaseActivity implements View.OnClic
         image4.setOnClickListener(this);
         sureBtn.setOnClickListener(this);
     }
+
     @Override
     public void initView() {
+        View view = getLayoutInflater().inflate(R.layout.layout_dialog_pick, null);
+        mPickDialog = new android.app.AlertDialog.Builder(this).setView(view).create();
         //根据订单号用户id去后台获取订单详细信息
         order_init = new Order();
     }
@@ -110,42 +118,58 @@ public class CompleteOrderActivity extends MyBaseActivity implements View.OnClic
                 finish();
                 break;
             case R.id.complete_picture1:
+                mPickDialog.show();
+                flag = 1;
+                break;
+            case R.id.complete_picture2:
+                mPickDialog.show();
+                flag = 2;
+                break;
+            case R.id.complete_picture3:
+                mPickDialog.show();
+                flag = 3;
+                break;
+            case R.id.complete_picture4:
+                mPickDialog.show();
+                flag = 4;
+                break;
+            case R.id.complete_sure_btn:
+                if (TextUtils.isEmpty(descEdit.getText())){
+                    Toast.makeText(this, "请填写授课内容", Toast.LENGTH_SHORT).show();
+                }
+                if (TextUtils.isEmpty(talkEdit.getText())){
+                    Toast.makeText(this, "对学生说点什么吧", Toast.LENGTH_SHORT).show();
+                }else {
+                    talk = talkEdit.getText().toString();
+                    desc = descEdit.getText().toString();
+                    order_init.complete_order(orderId, desc, talk, imageurl1, imageurl2, imageurl3, imageurl4, this);
+                }
+                break;
+            case R.id.picture_dialog_pick: {
+                selectPicFromLocal();
+                mPickDialog.dismiss();
+            }
+            break;
+            case R.id.camera_dialog_pick: {
                 if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED) {
                     PermissionGen.with(this)
                             .addRequestCode(100)
                             .permissions(
                                     android.Manifest.permission.READ_EXTERNAL_STORAGE,
                                     android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                    android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                                    android.Manifest.permission.ACCESS_FINE_LOCATION,
                                     android.Manifest.permission.READ_PHONE_STATE,
                                     android.Manifest.permission.CAMERA
                             )
                             .request();
+//
                 }else{
+//  定位
                     selectPicFromCamera();
                 }
-                flag = 1;
-                break;
-            case R.id.complete_picture2:
-                selectPicFromLocal();
-                flag = 2;
-                break;
-            case R.id.complete_picture3:
-                selectPicFromLocal();
-                flag = 3;
-                break;
-            case R.id.complete_picture4:
-                selectPicFromLocal();
-                flag = 4;
-                break;
-            case R.id.complete_sure_btn:
-                if (!TextUtils.isEmpty(descEdit.getText())){
-                    desc = descEdit.getText().toString();
-                }
-                if (!TextUtils.isEmpty(talkEdit.getText())){
-                    talk = talkEdit.getText().toString();
-                }
-                order_init.complete_order(orderId,desc,talk,imageurl1,imageurl2,imageurl3,imageurl4,this);
-                break;
+                mPickDialog.dismiss();
+            }
         }
 
     }
@@ -175,19 +199,18 @@ public class CompleteOrderActivity extends MyBaseActivity implements View.OnClic
         startActivityForResult(intent, REQUEST_CODE_LOCAL);
     }
 
+    String mFilePath;
     /**
      * capture new image
      */
-    protected void selectPicFromCamera() {
+    public void selectPicFromCamera() {
+        mFilePath = Environment.getExternalStorageDirectory().getPath();// 获取SD卡路径
+        mFilePath = mFilePath + "/"+ User_id.getUid()
+                + System.currentTimeMillis() + ".jpg";// 指定路径
         if (!EaseCommonUtils.isSdcardExist()) {
-            Toast.makeText(this, com.hyphenate.easeui.R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
             return;
         }
-
-        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
-                + System.currentTimeMillis() + ".jpg");
-        //noinspection ResultOfMethodCallIgnored
-        cameraFile.getParentFile().mkdirs();
+        cameraFile = new File( mFilePath);
         startActivityForResult(
                 new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
                 REQUEST_CODE_CAMERA);
@@ -225,16 +248,20 @@ public class CompleteOrderActivity extends MyBaseActivity implements View.OnClic
         Map<String,Object> map=listmap.get(0);
         if (flag == 1) {
             imageurl1 = map.get("imageurl")+"";
-            Glide.with(getApplicationContext()).load(imageurl1).into(image1);
+            image1.setImageURI(Uri.parse(imageurl1));
+//            Glide.with(getApplicationContext()).load(imageurl1).into(image1);
         }else if (flag == 2){
             imageurl2 = map.get("imageurl")+"";
-            Glide.with(getApplicationContext()).load(imageurl2).into(image2);
+            image2.setImageURI(Uri.parse(imageurl2));
+//            Glide.with(getApplicationContext()).load(imageurl2).into(image2);
         }else if (flag == 3){
             imageurl3 = map.get("imageurl")+"";
-            Glide.with(getApplicationContext()).load(imageurl3).into(image3);
+            image3.setImageURI(Uri.parse(imageurl3));
+//            Glide.with(getApplicationContext()).load(imageurl3).into(image3);
         }else if (flag == 4){
             imageurl4 = map.get("imageurl")+"";
-            Glide.with(getApplicationContext()).load(imageurl4).into(image4);
+            image4.setImageURI(Uri.parse(imageurl4));
+//            Glide.with(getApplicationContext()).load(imageurl4).into(image4);
         }
 
         Toast.makeText(this,"更新成功",Toast.LENGTH_LONG).show();
@@ -244,7 +271,7 @@ public class CompleteOrderActivity extends MyBaseActivity implements View.OnClic
     @Override
     public void successOrder(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-//        new Getdata().sendMessage(User_id.getNickName()+"已提交完成授课",telphone);
+        new Getdata().sendMessage(User_id.getNickName()+"有给你的建议哦，快去看看吧",telphone);
         EventBus.getDefault().post(1,"changeStatus");
         Intent intent= new Intent(CompleteOrderActivity.this,MyOrderActivity.class);
         startActivity(intent);
@@ -256,7 +283,7 @@ public class CompleteOrderActivity extends MyBaseActivity implements View.OnClic
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
@@ -277,9 +304,6 @@ public class CompleteOrderActivity extends MyBaseActivity implements View.OnClic
             cursor = null;
 
             if (picturePath == null || picturePath.equals("null")) {
-                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
                 return;
             }
             String filepath = PhotoBitmapUtils.amendRotatePhoto(picturePath,this);
@@ -288,9 +312,6 @@ public class CompleteOrderActivity extends MyBaseActivity implements View.OnClic
         } else {
             File file = new File(selectedImage.getPath());
             if (!file.exists()) {
-                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
                 return;
 
             }

@@ -33,14 +33,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.viewimpl.Baseinit;
 import com.deguan.xuelema.androidapp.viewimpl.TuijianView;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.easeui.EaseConstant;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -53,8 +52,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.jpush.im.android.api.ContactManager;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.UserInfo;
+import cn.jpush.im.api.BasicCallback;
+import jiguang.chat.activity.ChatActivity;
+import jiguang.chat.application.JGApplication;
+import jiguang.chat.database.FriendRecommendEntry;
+import jiguang.chat.database.UserEntry;
+import jiguang.chat.entity.FriendInvitation;
+import jiguang.chat.utils.ToastUtil;
 import modle.Adapter.KechengAdapter;
-import modle.Huanxing.ui.ChatActivity;
+//import modle.Huanxing.ui.ChatActivity;
 import modle.Increase_course.Increase_course;
 import modle.Order_Modle.Order;
 import modle.Order_Modle.Order_init;
@@ -70,7 +79,7 @@ import static com.deguan.xuelema.androidapp.R.id.teacher_star;
  * 老师个人信息
  */
 
-public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetailed,View.OnClickListener,Baseinit, TuijianView {
+public class UserxinxiActivty extends MyBaseActivity implements Requirdetailed,View.OnClickListener,Baseinit, TuijianView {
     private TextView Requiname;
     private TextView Requitext;
     private TextView Teachergerjianjie,gerxxjiaoxueanl,gerxxjinl;
@@ -89,7 +98,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
     private String username;//教师id
     private ImageButton imageButton;
     private KechengAdapter kechengAdapter;
-    private ImageView gerxxtoux;
+    private SimpleDraweeView gerxxtoux;
     private AVLoadingIndicatorView jiaoyishuax;
     private String userHeadUrl = "";
     private TextView jubaoTv;
@@ -121,9 +130,9 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
 
     private TextView starNumberTv;
     private ImageView starImage;
-    private ImageView teacherCardImage;
+    private SimpleDraweeView teacherCardImage;
     private TextView educationPassTv,cardPassTv;
-
+    private UserInfo mMyInfo;
 
 
 
@@ -137,7 +146,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         cardPassTv = (TextView) findViewById(R.id.user_card_pass);
         gerxxjinl = (TextView) findViewById(R.id.gerxxjinl);
         gerxxjiaoxueanl = (TextView) findViewById(R.id.gerxxjiaoxueanl);
-        teacherCardImage = (ImageView) findViewById(R.id.teacher_card_pic);
+        teacherCardImage = (SimpleDraweeView) findViewById(R.id.teacher_card_pic);
         starNumberTv = (TextView) findViewById(R.id.teacher_star_number);
         starImage = (ImageView) findViewById(teacher_star);
         signTv = (TextView) findViewById(R.id.textView2);
@@ -157,7 +166,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         gerrxxedintext= (ListView) findViewById(R.id.gerrxxedintext);
         bohao= (ImageButton) findViewById(R.id.bohao);
         imageButton2= (ImageButton) findViewById(R.id.imageButton2);
-        gerxxtoux= (ImageView) findViewById(R.id.gerxxtoux);
+        gerxxtoux= (SimpleDraweeView) findViewById(R.id.gerxxtoux);
         jiaoyishuax= (AVLoadingIndicatorView) findViewById(R.id.jiaoyishuax);
         iamgeview= (ImageView) findViewById(R.id.curr_backe);
         gerxxTob= (RelativeLayout) findViewById(R.id.gerxxTob);
@@ -167,7 +176,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         jiaoling= (TextView) findViewById(R.id.jiaoling);
         diqu= (TextView) findViewById(R.id.diqu);
 
-
+        mMyInfo = JMessageClient.getMyInfo();
         gerxxTob.bringToFront();
         jiaoyishuax.bringToFront();
         gerxxxuexiquan.bringToFront();
@@ -205,8 +214,9 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         teacherId = Requir_id;
         userHeadUrl = getIntent().getStringExtra("head_image");
         if (!userHeadUrl.equals(""))
-            Glide.with(getApplicationContext()).load(userHeadUrl).transform(new GlideCircleTransform(this)).into(gerxxtoux);
-
+//            Glide.with(getApplicationContext()).load(userHeadUrl).transform(
+//                    new GlideCircleTransform(this)).into(gerxxtoux);
+        gerxxtoux.setImageURI(Uri.parse(userHeadUrl));
         //加载数据
         Teacher_init teacher=new Teacher();
         teacher.Get_Teacher_detailed(id,Requir_id,this,0,1);
@@ -238,7 +248,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 courseNumber = 1;
 
                 keshi.setText(courseNumber+"");
-                courseMoney.setText(coursefee+"元/节");
+                courseMoney.setText(coursefee+"元/小时");
                 courseNametV.setText(courseName);
 //                courseType.setText((String)map.get("service_type_txt"));
                 courseExplain.setText((String)map.get("course_remark"));
@@ -276,7 +286,7 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.exper_pop, null);
         TextView experTv = (TextView) view.findViewById(R.id.pop_exper_tv);
-        ImageView experImage = (ImageView) view.findViewById(R.id.pop_exper_image);
+        SimpleDraweeView experImage = (SimpleDraweeView) view.findViewById(R.id.pop_exper_image);
         experPop = new PopupWindow(view);
         experPop.setFocusable(true);
         WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
@@ -285,12 +295,15 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
         if (TextUtils.isEmpty(exper)){
             experTv.setText("暂无个人经历介绍");
         }else {
-            experTv.setText("    " + exper);
+            experTv.setText("" + exper);
         }
-        if (!TextUtils.isEmpty(exper_url))
-        Glide.with(getApplicationContext()).load(exper_url).into(experImage);
+        if (!TextUtils.isEmpty(exper_url)) {
+//        Glide.with(getApplicationContext()).load(exper_url).into(experImage);
+            experImage.setVisibility(View.VISIBLE);
+            experImage.setImageURI(Uri.parse(exper_url));
+        }
         experPop.setWidth(width / 10 * 8);
-        experPop.setHeight(height / 2);
+        experPop.setHeight(height / 5 *4 );
         experPop.setBackgroundDrawable(new BitmapDrawable());
         backgroundAlpha(this, 0.5f);//0.0-1.0  ;
         experPop.setOutsideTouchable(true);
@@ -313,9 +326,9 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
             }
         });
     }
-    private TextView studentShangmen,teacherShangmen;
     private int coursefee,teacherId,courseNumber,servicetype,studentfee,teacherfee;
     private String courseId,gradeId,serviceType,courseName;
+    private TextView studentShangmen,teacherShangmen;
     private void showBuyPop() {
 
         LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -481,7 +494,8 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
 
         if (map.get("others_1")!=null) {
             xueliUrl = map.get("others_1").toString() + "";
-            Glide.with(getApplicationContext()).load(xueliUrl).into(teacherCardImage);
+//            Glide.with(getApplicationContext()).load(xueliUrl).into(teacherCardImage);
+            teacherCardImage.setImageURI(Uri.parse(xueliUrl));
         }
         if (map.get("is_passed").equals("1")){
             educationPassTv.setTextColor(Color.parseColor("#f76d1d"));
@@ -534,9 +548,9 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 break;
             case R.id.gerxxxuexiquana:
                 //跳转成交率
-                Intent intent1 = new Intent(UserxinxiActivty.this, Closing.class);
-                intent1.putExtra("Requir_id",Requir_id+"");
-                startActivity(intent1);
+//                Intent intent1 = new Intent(UserxinxiActivty.this, Closing.class);
+//                intent1.putExtra("Requir_id",Requir_id+"");
+//                startActivity(intent1);
                 break;
             case R.id.userxinxi_back:
                 finish();
@@ -550,9 +564,9 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 break;
             case R.id.gerxxxuexiquan:
                 //跳转成交率
-                Intent intent = new Intent(UserxinxiActivty.this, Closing.class);
-                intent.putExtra("Requir_id",Requir_id+"");
-                startActivity(intent);
+//                Intent intent = new Intent(UserxinxiActivty.this, Closing.class);
+//                intent.putExtra("Requir_id",Requir_id+"");
+//                startActivity(intent);
                 break;
 //            case R.id.gerjianjie:
 //                //跳转个人简介
@@ -577,25 +591,52 @@ public class UserxinxiActivty extends AutoLayoutActivity implements Requirdetail
                 break;
             case R.id.imageButton2:
                 //聊天
+                Intent intent = new Intent(this, ChatActivity.class);
+                intent.putExtra(JGApplication.CONV_TITLE, mobile);
+                intent.putExtra(JGApplication.TARGET_ID, mobile);
+                intent.putExtra(JGApplication.TARGET_APP_KEY, mMyInfo.getAppKey());
+                startActivity(intent);
 //                Intent intent1 = new Intent(UserxinxiActivty.this, HuihuaActivity.class);
-                Intent intent2 = new Intent(UserxinxiActivty.this, ChatActivity.class);
-                intent2.putExtra(EaseConstant.EXTRA_USER_ID, mobile);
-                intent2.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
-                startActivity(intent2);
+//                Intent intent2 = new Intent(UserxinxiActivty.this, ChatActivity.class);
+//                intent2.putExtra(EaseConstant.EXTRA_USER_ID, mobile);
+//                intent2.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
+//                startActivity(intent2);
                 break;
             case R.id.imageButton:
-                Toast.makeText(this, "已发送好友申请", Toast.LENGTH_SHORT).show();
-                new Thread(new Runnable() {
-                    public void run() {
-                    try {
-                        //demo use a hardcode reason here, you need let user to input if you like
-                        String s = getResources().getString(R.string.Add_a_friend);
-                        EMClient.getInstance().contactManager().addContact(username, s);
-                    } catch (final Exception e) {
-
+                ContactManager.sendInvitationRequest(username, null, "老师加个好友吧", new BasicCallback() {
+                    @Override
+                    public void gotResult(int responseCode, String responseMessage) {
+                        if (responseCode == 0) {
+                            UserEntry userEntry = UserEntry.getUser(mMyInfo.getUserName(), mMyInfo.getAppKey());
+                            FriendRecommendEntry entry = FriendRecommendEntry.getEntry(userEntry,
+                                    username, mMyInfo.getAppKey());
+                            if (null == entry) {
+                                entry = new FriendRecommendEntry(username, "", "", mMyInfo.getAppKey(),
+                                        "", "", "老师加个好友吧", FriendInvitation.INVITING.getValue(), userEntry, 100);
+                            } else {
+                                entry.state = FriendInvitation.INVITING.getValue();
+                                entry.reason =  "老师加个好友吧";
+                            }
+                            entry.save();
+                            ToastUtil.shortToast(UserxinxiActivty.this, "申请成功");
+                            finish();
+                        } else if (responseCode == 871317) {
+                            ToastUtil.shortToast(UserxinxiActivty.this, "不能添加自己为好友");
+                        } else {
+                            ToastUtil.shortToast(UserxinxiActivty.this, "申请失败");
+                        }
                     }
-                    }
-                }).start();
+                });//                new Thread(new Runnable() {
+//                    public void run() {
+//                    try {
+//                        //demo use a hardcode reason here, you need let user to input if you like
+//                        String s = getResources().getString(R.string.Add_a_friend);
+//                        EMClient.getInstance().contactManager().addContact(username, s);
+//                    } catch (final Exception e) {
+//
+//                    }
+//                    }
+//                }).start();
                 break;
         }
     }

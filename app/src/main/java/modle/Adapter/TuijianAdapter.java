@@ -1,18 +1,20 @@
 package modle.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.entities.OrderEntity;
 import com.deguan.xuelema.androidapp.entities.TuijianEntity;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
 import com.deguan.xuelema.androidapp.utils.SubjectUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -89,7 +91,8 @@ public class TuijianAdapter extends ListBaseAdapter {
         holder.speciality.setText(""+list.get(position).getSpeciality());
         holder.username.setText(""+list.get(position).getUsername());
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
-        Glide.with(context.getApplicationContext()).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+//        Glide.with(context.getApplicationContext()).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getUser_headimg()));
         String dist = list.get(position).getDistance();
         double myDist = 0;
         if (!dist.equals("")){
@@ -118,7 +121,7 @@ public class TuijianAdapter extends ListBaseAdapter {
     }
 
     static class ViewHolder{
-        private ImageView user_headimg;
+        private SimpleDraweeView user_headimg;
         //        private CircleImageView user_headimg;//用户头像
         private TextView nickname;//昵称
         private TextView service_type;//服务类型
@@ -131,7 +134,7 @@ public class TuijianAdapter extends ListBaseAdapter {
         private TextView nianji;
 
         public ViewHolder(View itemView) {
-            user_headimg = (ImageView) itemView.findViewById(R.id.lognhost);
+            user_headimg = (SimpleDraweeView) itemView.findViewById(R.id.lognhost);
             nickname = (TextView) itemView.findViewById(R.id.text1);
             service_type = (TextView) itemView.findViewById(R.id.text9);
             fee = (TextView) itemView.findViewById(R.id.text3);

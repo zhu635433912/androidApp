@@ -24,7 +24,7 @@ import modle.user_ziliao.User_id;
  * A simple {@link Fragment} subclass.
  */
 @EFragment(R.layout.fragment_new_order)
-public class NewOrderFragment extends BaseFragment {
+public class NewOrderFragment extends MyBaseFragment {
     @ViewById(R.id.my_order_tablayout)
     TabLayout tableLayout;
     @ViewById(R.id.my_order_vp)
@@ -32,16 +32,41 @@ public class NewOrderFragment extends BaseFragment {
     private List<String> titles = new ArrayList<>();
     private List<Fragment> fragments = new ArrayList<>();
 
-    public void initData() {
+    @Override
+    public void before() {
+        super.before();
+    }
 
-        titles.add("未完成");
-        titles.add("进行中");
-        titles.add("待评价");
-        titles.add("已完成");
-        fragments.add(NotFinishFragment_.builder().build());
-        fragments.add(ConductFragment_.builder().build());
-        fragments.add(EvaluationFragment_.builder().build());
-        fragments.add(Completefragment_.builder().build());
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void initView() {
+        super.initView();
+    }
+
+    public void initData() {
+        if (User_id.getRole().equals("1")) {
+            titles.add("未完成");
+            titles.add("进行中");
+            titles.add("已完成");
+            titles.add("已评价");
+            fragments.add(NotFinishFragment_.builder().build());
+            fragments.add(ConductFragment_.builder().build());
+            fragments.add(EvaluationFragment_.builder().build());
+            fragments.add(Completefragment_.builder().build());
+        }else {
+            titles.add("未完成");
+            titles.add("待授课");
+            titles.add("待收款");
+            titles.add("已评价");
+            fragments.add(NotFinishFragment_.builder().build());
+            fragments.add(ConductFragment_.builder().build());
+            fragments.add(EvaluationFragment_.builder().build());
+            fragments.add(Completefragment_.builder().build());
+        }
         HomeTitleAdapter adapter = new HomeTitleAdapter(getFragmentManager(),fragments,titles);
         viewPager.setAdapter(adapter);
         tableLayout.setupWithViewPager(viewPager);

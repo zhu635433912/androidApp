@@ -55,7 +55,12 @@ public interface Data {
     //获取支付宝订单
     @POST("index.php?s=/Service/Order/dopay")
     Call<PayEntity> getpayMsg(@Query("id") int id, @Query("paytype") int paytype
-            ,@Query("reward_fee")double reward_fee,@Query("pay_password")String payPsd);
+            ,@Query("reward_fee")double reward_fee,@Query("pay_password")String payPsd,@Query("credit")String credit);
+
+    //type 会员类型 1 200  2  500yuan
+    @POST("index.php?s=/Service/Accounts/vipbuy")
+    Call<PayEntity> getVippay(@Query("uid") int uid, @Query("type") int type
+            ,@Query("channel")int channel ,@Query("code")String code);
 
 
     @POST("index.php?s=/Service/Order/cancel_pay")
@@ -75,7 +80,7 @@ public interface Data {
 
     //提现
     @POST("index.php?s=/Service/Finance/withdraw")
-    Call<User_Modle>  getcash(@Query("uid")int uid,@Query("bank_name")String bank_name,@Query("bank_account")String bank_account,@Query("type")int type,@Query("fee")float fee);
+    Call<User_Modle>  getcash(@Query("uid")int uid,@Query("bank_name")String bank_name,@Query("bank_account")String bank_account,@Query("type")int type,@Query("fee")float fee,@Query("pay_password")String pay_password);
 
     //现金券提现列表
     @POST("index.php?s=/Service/Finance/reward_list")
@@ -97,10 +102,19 @@ public interface Data {
     @POST("index.php?s=/Service/Finance/gets_billing")
     Call<ContentModle> getBillList(@Query("uid")int uid);
 
+    //获取客服列表
+    @POST("index.php?s=/Service/Accounts/customservice")
+    Call<ContentModle> getService();
+
     //发送消息
     @POST("index.php?s=/Service/Public/sendToUid")
     Call<ContentModle> sendMsg(@Query("content")String content,@Query("tel")String tel);
     //获取1 2级分销
     @POST("index.php?s=/Service/Finance/remember_list")
     Call<ContentModle> getDistribution(@Query("uid")int uid,@Query("type")int type,@Query("page")int page);
+
+    @POST("index.php?s=/Service/Order/sign_read")
+    Call<User_Modle> setRead(@Query("uid")int uid,@Query("status")int status);
+
+
 }

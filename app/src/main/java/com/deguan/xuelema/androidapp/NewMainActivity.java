@@ -1,27 +1,49 @@
 package com.deguan.xuelema.androidapp;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.mapapi.SDKInitializer;
+import com.deguan.xuelema.androidapp.entities.CourseEntity;
 import com.deguan.xuelema.androidapp.entities.DownloadEntity;
-import com.deguan.xuelema.androidapp.fragment.BaseFragment_;
+import com.deguan.xuelema.androidapp.fragment.CourseFragment;
+import com.deguan.xuelema.androidapp.fragment.CourseFragment_;
+import com.deguan.xuelema.androidapp.fragment.FabuFragment_;
+import com.deguan.xuelema.androidapp.fragment.MyStudentFragment_;
+import com.deguan.xuelema.androidapp.fragment.MyTeacherFragment;
+import com.deguan.xuelema.androidapp.fragment.MyTeacherFragment_;
+import com.deguan.xuelema.androidapp.fragment.NewStudentFragment2_;
 import com.deguan.xuelema.androidapp.fragment.NewTeacherFragment;
+import com.deguan.xuelema.androidapp.fragment.NewTeacherFragment2_;
 import com.deguan.xuelema.androidapp.fragment.NewTeacherFragment_;
+import com.deguan.xuelema.androidapp.fragment.StudentFabuFragment;
+import com.deguan.xuelema.androidapp.fragment.StudentFabuFragment_;
 import com.deguan.xuelema.androidapp.fragment.StudentFragment_;
 import com.deguan.xuelema.androidapp.fragment.Teacher_infofragment;
 import com.deguan.xuelema.androidapp.fragment.Teacher_infofragment_;
@@ -31,40 +53,48 @@ import com.deguan.xuelema.androidapp.utils.APPConfig;
 import com.deguan.xuelema.androidapp.utils.FragmentTabUtils;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.utils.SharedPreferencesUtils;
+import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
 import com.deguan.xuelema.androidapp.viewimpl.DownloadView;
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.exceptions.HyphenateException;
+import com.deguan.xuelema.androidapp.viewimpl.MyPublishView;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.loveplusplus.update.UpdateChecker;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import cn.jiguang.api.JCoreInterface;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
-import modle.Huanxing.cache.UserCacheManager;
+import jiguang.chat.activity.fragment.ContactsFragment;
+import modle.Order_Modle.Order;
 import modle.getdata.Getdata;
 import modle.user_ziliao.User_id;
 import view.login.ViewActivity.LoginAcitivity;
 //import view.index.Teacher_fragment;
 
 @EActivity(R.layout.activity_new_main)
-public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,DownloadView{
+public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,DownloadView, MyPublishView, ChangeOrderView {
     @ViewById(R.id.main_bottom_radiogp)
     RadioGroup radioGroup;
     private ArrayList<Fragment> fragments = new ArrayList<>();
-    @ViewById(R.id.new_main_image)
-    ImageView imageView;
+//    @ViewById(R.id.new_main_image)
+//    ImageView imageView;
     @ViewById(R.id.main_bottom_name)
     RadioButton radioButton1;
     @ViewById(R.id.main_bottom_mine)
     RadioButton radioButton2;
+    @ViewById(R.id.main_bottom_fabu)
+    RadioButton radioButton3;
     private String ids;
     private String roles;
     @ViewById(R.id.guide1)
@@ -75,8 +105,232 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
     ImageView guideImage3;
     private String myydy;
 
+
+    TextView baseTv;
+    private PopupWindow messageWindow,buycoursePopwindow,buyPopwindow;
+    private TextView titleTv;
+    private TextView contentTv;
+    private String user_id;
+    private String user_headimg;
+    private String id;
+    private String courseId,gradeId;
+    private String content;
+    private String teacherName;
+    private TextView nameTv,signTv,resumeTv,numberTv,distanceTv,scoreTv,nextTv,buyTv;
+    private SimpleDraweeView headImage;
+    private ImageView starImage;
+    private String distance;
+    private String fee;
+    private String visit_fee;
+    private String unvisit_fee;
+    private String resume;
+    private double order_rank;
+    private String teach_count;
+    private String grade_name;
+    private String signature;
+    private String course_remark;
+    private String course_name;
+    private List<Map<String,Object>> datas = new ArrayList<>();
+
+
+    @Subscriber(tag = "MyReceiver")
+    public void getMessage(String msg){
+        try {
+            JSONObject object = new JSONObject(msg);
+            user_id = object.getString("teacher_id");
+            user_headimg = object.getString("user_headimg");
+            id = object.getString("id");
+            content = object.getString("content");
+            courseId = object.getString("course_id");
+//            courseId = "208";
+            teacherName = object.getString("nickname");
+            distance = object.getString("distance");
+            gradeId = object.getString("grade_id");
+            fee = object.getString("fee");
+            resume = object.getString("resume");
+            course_remark = object.getString("course_remark");
+            order_rank = object.getDouble("order_rank");
+            teach_count = object.getString("teach_count");
+            grade_name = object.getString("grade_name");
+            signature = object.getString("signature");
+            course_name = object.getString("course_name");
+            visit_fee = object.getString("visit_fee");
+            unvisit_fee = object.getString("unvisit_fee");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        showmyDialog();
+        buycoursePopwindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER,0,0);
+        nameTv.setText(teacherName);
+        signTv.setText(signature);
+        resumeTv.setText(resume);
+        numberTv.setText(teach_count);
+
+        if (order_rank<1.5){
+            starImage.setImageResource(R.drawable.one);
+        }else if (order_rank >= 1.5 && order_rank <2.5){
+            starImage.setImageResource(R.drawable.two);
+        }else if (order_rank >= 2.5 && order_rank <3.5){
+            starImage.setImageResource(R.drawable.three);
+        }else if (order_rank >= 3.5 && order_rank <4.5){
+            starImage.setImageResource(R.drawable.four);
+        }else if (order_rank >= 4.5 ){
+            starImage.setImageResource(R.drawable.five);
+        }
+
+        double myDist1 = 0;
+        if (!distance.equals("")){
+            myDist1 = Double.parseDouble(distance)/1000;
+        }
+        DecimalFormat df = new DecimalFormat("#0.0");
+        distanceTv.setText("    距我"+df.format(myDist1) + "km");
+        scoreTv.setText(order_rank+"");
+        headImage.setImageURI(Uri.parse(user_headimg));
+//        starImage
+    }
+    private void showmyDialog() {
+
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.student_buy_pop, null);
+//        View backView = view.findViewById(R.id.message_back);
+        ImageView closeImage = (ImageView) view.findViewById(R.id.buy_pop_close);
+
+        nameTv = (TextView) view.findViewById(R.id.buy_nickname_tv);
+        signTv = (TextView) view.findViewById(R.id.buy_sign_tv);
+        resumeTv = (TextView) view.findViewById(R.id.buy_resume_tv);
+        numberTv = (TextView) view.findViewById(R.id.buy_number_tv);
+        distanceTv = (TextView) view.findViewById(R.id.buy_distance_tv);
+        scoreTv = (TextView) view.findViewById(R.id.buy_score_tv);
+        nextTv = (TextView) view.findViewById(R.id.buy_next_tv);
+        buyTv = (TextView) view.findViewById(R.id.buy_buy_tv);
+        headImage = (SimpleDraweeView) view.findViewById(R.id.buy_head_image);
+        starImage = (ImageView) view.findViewById(R.id.buy_star_image);
+        buycoursePopwindow = new PopupWindow(view);
+        buycoursePopwindow.setFocusable(false);
+        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        int height = wm.getDefaultDisplay().getHeight();
+        int width = wm.getDefaultDisplay().getWidth();
+        buycoursePopwindow.setWidth(width / 10 * 8);
+        buycoursePopwindow.setHeight(height / 5 * 3 );
+        buycoursePopwindow.setBackgroundDrawable(new BitmapDrawable());
+        backgroundAlpha(this, 0.4f);//0.0-1.0  ;
+        buycoursePopwindow.setOutsideTouchable(false);
+        buycoursePopwindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(NewMainActivity.this, 1f);
+            }
+        });
+        nextTv.setText("暂时不要");
+        nextTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                buycoursePopwindow.dismiss();
+            }
+        });
+        closeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buycoursePopwindow.dismiss();
+            }
+        });
+        buyTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                EventBus.getDefault().post();
+                CourseEntity entity = new CourseEntity();
+                entity.setContent(content);
+                entity.setCourse_id(courseId);
+                entity.setCourse_name(course_name);
+                entity.setCourse_remark(course_remark);
+                entity.setGrade_id(gradeId);
+                entity.setUnvisit_fee(unvisit_fee);
+                entity.setVisit_fee(visit_fee);
+
+                buycoursePopwindow.dismiss();
+                EventBus.getDefault().post(entity,"buycourse");
+                startActivity(NewTeacherPersonActivity_.intent(NewMainActivity.this)
+                        .extra("courseId",courseId)
+                        .extra("course_name",course_name)
+                        .extra("course_remark",course_remark)
+                        .extra("gradeId",gradeId)
+                        .extra("unvisit_fee",unvisit_fee)
+                        .extra("visit_fee",visit_fee)
+
+                        .extra("myid","0")
+                        .extra("content", content)
+                        .extra("head_image",user_headimg)
+                        .extra("user_id",user_id)
+                        .get());
+            }
+        });
+    }
+
+    @Subscriber(tag = "fabusuccess")
+    public void successFabu(String msg){
+        getSupportFragmentManager().beginTransaction().show(fragments.get(0));
+    }
+    @Subscriber(tag = "message")
+    public void getNotice(String msg){
+
+        showMessagePop();
+        messageWindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER,0,0);
+        titleTv.setText(msg);
+        contentTv.setText(msg);
+    }
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event){
+        if(messageWindow!=null&&messageWindow.isShowing()){
+            return false;
+        }
+        return super.dispatchTouchEvent(event);
+    }
+    private void showMessagePop() {
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.message_pop, null);
+        View backView = view.findViewById(R.id.message_back);
+        titleTv = (TextView) view.findViewById(R.id.message_title_tv);
+        contentTv = (TextView) view.findViewById(R.id.message_content_tv);
+        messageWindow = new PopupWindow(view);
+        messageWindow.setFocusable(false);
+        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        int height = wm.getDefaultDisplay().getHeight();
+        int width = wm.getDefaultDisplay().getWidth();
+        messageWindow.setWidth(width / 10 * 8);
+        messageWindow.setHeight(height / 3 );
+        messageWindow.setBackgroundDrawable(new BitmapDrawable());
+        backgroundAlpha(this, 0.4f);//0.0-1.0  ;
+        messageWindow.setOutsideTouchable(false);
+        messageWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(NewMainActivity.this, 1f);
+            }
+        });
+        backView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                messageWindow.dismiss();
+            }
+        });
+    }
+    /**
+     * 设置添加屏幕的背景透明度
+     *
+     * @param bgAlpha
+     */
+    public void backgroundAlpha(Activity context, float bgAlpha) {
+        WindowManager.LayoutParams lp = context.getWindow().getAttributes();
+        lp.alpha = bgAlpha;
+        context.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+        context.getWindow().setAttributes(lp);
+    }
+
     @Override
     public void before() {
+        super.before();
         //获取用户是教师还是学生展示相应的参数
         ids=User_id.getUid();
         roles=User_id.getRole();
@@ -85,89 +339,70 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
         //判断记录是第一次就是"t",不是就是"1"
         myydy = sp.getString("booled", "t");
     }
+    @Override
+    protected void onPause() {
+        JCoreInterface.onPause(this);
+        super.onPause();
+    }
+
 
     @Override
+    protected void onResume() {
+        JCoreInterface.onResume(this);
+        super.onResume();
+    }
+    @Override
     public void initView() {
+        SDKInitializer.initialize(getApplicationContext());
         User_id.getInstance().addActivity(this);
+         User_id.getInstance().setActivity(this);
         //定义底部标签图片大小
-//        Drawable drawableFirst = getResources().getDrawable(R.drawable.bottom_home_icon);
-//        drawableFirst.setBounds(0, 0, 60, 60);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
-//        radioButton1.setCompoundDrawables(null, drawableFirst, null, null);//只放上面
-//        radioButton1.setPadding(0,0,0,0);
-//
-//        Drawable drawableSearch = getResources().getDrawable(R.drawable.bottom_follow_icon);
-//        drawableSearch.setBounds(0, 0, 60, 60);//第一0是距左右边距离，第二0是距上下边距离，第三69长度,第四宽度
-//        radioButton2.setCompoundDrawables(null, drawableSearch, null, null);//只放上面
-//        radioButton2.setPadding(0,0,0,0);
-
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        EMClient.getInstance().createAccount(User_id.getUsername(),
-                                //                            password
-                                "123456"
-                        );//同步方法
-                    } catch (HyphenateException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }).start();
-
-
 
 //jpush设置id
         setAlias("hly_"+ids);
         new Getdata().getDownloadUrl(this);
         if (User_id.getRole().equals("1")){
             radioButton1.setText("找老师");
-            imageView.setImageResource(R.drawable.hly03);
+//            imageView.setImageResource(R.drawable.hly03);
         }else {
             radioButton1.setText("找学生");
-            imageView.setImageResource(R.drawable.logo);
+//            imageView.setImageResource(R.drawable.logo);
         }
         fragments.clear();
         if (User_id.getRole().equals("1")) {
-            fragments.add(StudentFragment_.builder().build());
-            fragments.add(BaseFragment_.builder().build());
-            fragments.add(New_StudentFragment_.builder().build());
+
+//            User_id.setFragment( new ContactsFragment());
+            fragments.add(NewStudentFragment2_.builder().build());
+//            fragments.add(User_id.getFragment());
+            fragments.add(StudentFabuFragment_.builder().build());
+            fragments.add(MyStudentFragment_.builder().build());
+//            fragments.add(New_StudentFragment_.builder().build());
+
         }else {
-            fragments.add(NewTeacherFragment_.builder().build());
-            fragments.add(BaseFragment_.builder().build());
-            fragments.add(Teacher_infofragment_.builder().build());
+//            User_id.setFragment( new ContactsFragment());
+            fragments.add(NewTeacherFragment2_.builder().build());
+//            fragments.add(User_id.getFragment());
+            fragments.add(CourseFragment_.builder().build());
+            fragments.add(MyTeacherFragment_.builder().build());
+//            fragments.add(Teacher_infofragment_.builder().build());
         }
+
         //底部按钮切换fragment的工具类
         new FragmentTabUtils(this,getSupportFragmentManager(),radioGroup,fragments, R.id.main_contaner);
 
-
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //需求发布
-                if (User_id.getRole().equals("1")){
-                    Intent intent = new Intent(NewMainActivity.this, Xuqiufabu.class);
-                    startActivity(intent);
-                }else {
-//                    Intent intentTeacher = new Intent(NewMainActivity.this,Teacher_management.class);
-//                    startActivity(intentTeacher);
-                    startActivity(ManagerActivity_.intent(NewMainActivity.this).get());
-                }
-            }
-        });
-
         new Getdata().getmobieke(User_id.getUsername(),this);
 
-//        if (myydy.equals("1")){
-//            getsj();
-//            SharedPreferences sp = getSharedPreferences("ydy", Context.MODE_PRIVATE);
-//            SharedPreferences.Editor ddite = sp.edit();
-//            //第一次进入
-//            ddite.putString("booled", "2");
-//            ddite.commit();
-//            myydy = "2";
-//        }
     }
 
+    @Subscriber(tag = "updateAddress")
+    public void getAddress(String msg){
+        new Order().getReceptOrder(Integer.parseInt(User_id.getUid()),User_id.getLat()+"",User_id.getLng()+"",this);
+    }
+
+    @Subscriber(tag = "fabu")
+    public void setFragment(String msg){
+        radioGroup.check(R.id.main_bottom_name);
+    }
     private void getsj() {
         if (roles.equals("1")){
             guideImage1.setVisibility(View.VISIBLE);
@@ -203,6 +438,7 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
         });
     }
 
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {
@@ -219,30 +455,6 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
 //        Log.e("aa","头像地址"+imageUrl);
         SharedPreferencesUtils.setParam(this, APPConfig.USER_HEAD_IMG,imageUrl);
         getUser_id().setImageUrl(imageUrl);
-        // 登录成功，将用户的环信ID、昵称和头像缓存在本地
-        UserCacheManager.save(User_id.getUsername(), map.get("nickname")+"", imageUrl);
-        EMClient.getInstance().login(User_id.getUsername(),
-//                User_id.getPassword()
-                "123456"
-
-                ,new EMCallBack() {//回调
-            @Override
-            public void onSuccess() {
-                EMClient.getInstance().groupManager().loadAllGroups();
-                EMClient.getInstance().chatManager().loadAllConversations();
-//                Log.e("aa", "登录聊天服务器成功！");
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-
-            }
-
-            @Override
-            public void onError(int code, String message) {
-//                Log.e("aa", code+"登录聊天服务器失败！"+message);
-            }
-        });
     }
 
     @Override
@@ -255,7 +467,7 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
@@ -339,4 +551,209 @@ public class NewMainActivity extends MyBaseActivity implements Requirdetailed ,D
             }
         }
     };
+
+
+    private void showbuyDialog() {
+
+        LayoutInflater layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.student_buy_pop, null);
+//        View backView = view.findViewById(R.id.message_back);
+        ImageView closeImage = (ImageView) view.findViewById(R.id.buy_pop_close);
+        nameTv = (TextView) view.findViewById(R.id.buy_nickname_tv);
+        signTv = (TextView) view.findViewById(R.id.buy_sign_tv);
+        resumeTv = (TextView) view.findViewById(R.id.buy_resume_tv);
+        numberTv = (TextView) view.findViewById(R.id.buy_number_tv);
+        distanceTv = (TextView) view.findViewById(R.id.buy_distance_tv);
+        scoreTv = (TextView) view.findViewById(R.id.buy_score_tv);
+        nextTv = (TextView) view.findViewById(R.id.buy_next_tv);
+        buyTv = (TextView) view.findViewById(R.id.buy_buy_tv);
+        headImage = (SimpleDraweeView) view.findViewById(R.id.buy_head_image);
+        starImage = (ImageView) view.findViewById(R.id.buy_star_image);
+        buyPopwindow = new PopupWindow(view);
+        buyPopwindow.setFocusable(false);
+        WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+        int height = wm.getDefaultDisplay().getHeight();
+        int width = wm.getDefaultDisplay().getWidth();
+        buyPopwindow.setWidth(width / 10 * 8);
+        buyPopwindow.setHeight(height / 5 * 3 );
+        buyPopwindow.setBackgroundDrawable(new BitmapDrawable());
+        backgroundAlpha(this, 0.4f);//0.0-1.0  ;
+        buyPopwindow.setOutsideTouchable(false);
+        buyPopwindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(NewMainActivity.this, 1f);
+            }
+        });
+//        backView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                messageWindow.dismiss();
+//            }
+//        });
+        closeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buyPopwindow.dismiss();
+            }
+        });
+        nextTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Order().cancel_order(Integer.parseInt(User_id.getUid()),Integer.parseInt(id),NewMainActivity.this);
+                flag ++;
+                if (flag < datas.size()) {
+                    user_id = ""+datas.get(flag).get("teacher_id");
+                    user_headimg = ""+datas.get(flag).get("teacher_headimg");
+                    id = ""+datas.get(flag).get("id");
+                    content = ""+datas.get(flag).get("content");
+                    teacherName = ""+datas.get(flag).get("teacher_name");
+                    distance = ""+datas.get(flag).get("distance");
+                    fee = ""+datas.get(flag).get("visit_fee");
+                    resume = ""+datas.get(flag).get("teacher_resume");
+                    order_rank = Double.parseDouble(datas.get(flag).get("order_rank")+"");
+                    teach_count = ""+datas.get(flag).get("teach_count");
+                    grade_name = ""+datas.get(flag).get("grade_name");
+                    signature = ""+datas.get(flag).get("teacher_signature");
+                    course_name = ""+datas.get(flag).get("course_name");
+                    courseId = "" + datas.get(flag).get("course_id");
+                    course_remark = ""+datas.get(flag).get("course_remark");
+                    gradeId  = "" + datas.get(flag).get("grade_id");
+                    visit_fee = "" + datas.get(flag).get("visit_fee");
+                    unvisit_fee = "" + datas.get(flag).get("unvisit_fee");
+
+                    nameTv.setText(teacherName);
+                    signTv.setText(signature);
+                    resumeTv.setText(resume);
+                    numberTv.setText(teach_count);
+
+
+                    if (order_rank<1.5){
+                        starImage.setImageResource(R.drawable.one);
+                    }else if (order_rank >= 1.5 && order_rank <2.5){
+                        starImage.setImageResource(R.drawable.two);
+                    }else if (order_rank >= 2.5 && order_rank <3.5){
+                        starImage.setImageResource(R.drawable.three);
+                    }else if (order_rank >= 3.5 && order_rank <4.5){
+                        starImage.setImageResource(R.drawable.four);
+                    }else if (order_rank >= 4.5 ){
+                        starImage.setImageResource(R.drawable.five);
+                    }
+
+                    double myDist1 = 0;
+                    if (!distance.equals("")){
+                        myDist1 = Double.parseDouble(distance)/1000;
+                    }
+                    DecimalFormat df = new DecimalFormat("#0.0");
+                    distanceTv.setText("    距我"+df.format(myDist1) + "km");
+                    scoreTv.setText(order_rank+"");
+                    headImage.setImageURI(Uri.parse(user_headimg));
+
+                }else {
+                    buyPopwindow.dismiss();
+                }
+            }
+        });
+
+        buyTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CourseEntity entity = new CourseEntity();
+                entity.setContent(content);
+                entity.setCourse_id(courseId);
+                entity.setCourse_name(course_name);
+                entity.setCourse_remark(course_remark);
+                entity.setGrade_id(gradeId);
+                entity.setUnvisit_fee(unvisit_fee);
+                entity.setVisit_fee(visit_fee);
+
+                buyPopwindow.dismiss();
+                startActivity(NewTeacherPersonActivity_.intent(NewMainActivity.this)
+                        .extra("courseId",courseId)
+                        .extra("course_name",course_name)
+                        .extra("course_remark",course_remark)
+                        .extra("gradeId",gradeId)
+                        .extra("unvisit_fee",unvisit_fee)
+                        .extra("visit_fee",visit_fee)
+
+                        .extra("myid","0")
+                        .extra("content", content)
+                        .extra("head_image",user_headimg)
+                        .extra("user_id",user_id).get());
+//                EventBus.getDefault().post(entity,"buycourse");
+            }
+        });
+    }
+    private int flag = 0;
+    @Override
+    public void successMyPublish(List<Map<String, Object>> maps) {
+        if (maps != null) {
+            datas = maps;
+            if (datas.size()>= 1){
+                user_id = ""+datas.get(0).get("teacher_id");
+                user_headimg = ""+datas.get(0).get("teacher_headimg");
+                id = ""+datas.get(0).get("id");
+                content = ""+datas.get(0).get("requirement_content");
+                teacherName = ""+datas.get(0).get("teacher_name");
+                distance = ""+datas.get(0).get("distance");
+                fee = ""+datas.get(0).get("visit_fee");
+                courseId = ""+datas.get(0).get("course_id");
+                resume = ""+datas.get(0).get("teacher_resume");
+                order_rank = Double.parseDouble(datas.get(0).get("order_rank")+"");
+                teach_count = ""+datas.get(0).get("teach_count");
+                grade_name = ""+datas.get(0).get("grade_name");
+                signature = ""+datas.get(0).get("teacher_signature");
+                course_name = ""+datas.get(0).get("course_name");
+                course_remark = ""+datas.get(0).get("course_remark");
+                gradeId  = "" + datas.get(0).get("grade_id");
+                visit_fee = "" + datas.get(0).get("visit_fee");
+                unvisit_fee = "" + datas.get(0).get("unvisit_fee");
+
+                showbuyDialog();
+                buyPopwindow.showAtLocation(getWindow().getDecorView(), Gravity.CENTER,0,0);
+                nameTv.setText(teacherName);
+                signTv.setText(signature);
+                resumeTv.setText(resume);
+                numberTv.setText(teach_count);
+
+
+                if (order_rank<1.5){
+                    starImage.setImageResource(R.drawable.one);
+                }else if (order_rank >= 1.5 && order_rank <2.5){
+                    starImage.setImageResource(R.drawable.two);
+                }else if (order_rank >= 2.5 && order_rank <3.5){
+                    starImage.setImageResource(R.drawable.three);
+                }else if (order_rank >= 3.5 && order_rank <4.5){
+                    starImage.setImageResource(R.drawable.four);
+                }else if (order_rank >= 4.5 ){
+                    starImage.setImageResource(R.drawable.five);
+                }
+
+                double myDist1 = 0;
+                if (!distance.equals("")){
+                    myDist1 = Double.parseDouble(distance)/1000;
+                }
+                DecimalFormat df = new DecimalFormat("#0.0");
+                distanceTv.setText("    距我"+df.format(myDist1) + "km");
+                scoreTv.setText(order_rank+"");
+
+                headImage.setImageURI(Uri.parse(user_headimg));
+            }
+        }
+    }
+
+    @Override
+    public void failMyPublish(String msg) {
+
+    }
+
+    @Override
+    public void successOrder(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void failOrder(String msg) {
+
+    }
 }

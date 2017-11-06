@@ -5,40 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#fffffe"
     tools:context="com.deguan.xuelema.androidapp.MyOrderActivity">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80px">
-    <RelativeLayout
-        android:id="@+id/stuentordentfanhui"
-        android:layout_width="100px"
-        android:layout_height="80px"></RelativeLayout>
-    <ImageButton
-        android:id="@+id/my_order_back"
-        android:layout_marginLeft="30px"
-        android:layout_marginTop="20px"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/add19"
-        android:layout_width="20px"
-        android:layout_height="30px" />
 
-    <TextView
-        android:textSize="35px"
-        android:layout_marginTop="20px"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="我的订单"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/xuqiufenggexian"
-        android:background="#d7d7d7"
-        android:layout_marginTop="80px"
-        android:layout_below="@+id/neirongtext"
-        android:layout_width="match_parent"
-        android:layout_height="1px" />
+        <RelativeLayout
+            android:id="@+id/stuentordentfanhui"
+            android:layout_width="100px"
+            android:layout_height="80px">
+
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/my_order_back"
+            android:layout_width="20px"
+            android:layout_height="30px"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="20px"
+            android:background="@drawable/add19" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20px"
+            android:text="我的订单"
+            android:textSize="35px" />
+
+        <TextView
+            android:id="@+id/xuqiufenggexian"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_below="@+id/neirongtext"
+            android:layout_marginTop="80px"
+            android:background="#d7d7d7" />
     </RelativeLayout>
+    <View
+        android:background="#b4b4b4"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
     <android.support.design.widget.TabLayout
         android:id="@+id/my_order_tablayout"
         app:tabTextColor="#8b8b8b"

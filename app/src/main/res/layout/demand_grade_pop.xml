@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        style="@style/teacher_choose_text"
+        android:id="@+id/grade0"
+        android:text="不限"
+        />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+        style="@style/teacher_choose_text"
+
+        android:id="@+id/grade1"
+        android:text="小学"
+        />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+        style="@style/teacher_choose_text"
+
+        android:id="@+id/grade2"
+        android:text="初中"
+        />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+        style="@style/teacher_choose_text"
+
+        android:id="@+id/grade3"
+        android:text="高中"
+        />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+        style="@style/teacher_choose_text"
+
+        android:id="@+id/grade4"
+        android:text="大学"
+        />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <View
+        android:id="@+id/grade5"
+        android:background="#e0c6c6c6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

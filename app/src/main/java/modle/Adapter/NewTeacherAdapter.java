@@ -1,6 +1,8 @@
 package modle.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -9,10 +11,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.entities.TeacherEntity;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.text.DecimalFormat;
@@ -94,7 +97,8 @@ public class NewTeacherAdapter extends RecyclerView.Adapter<NewTeacherAdapter.Ne
         holder.username.setText("" + list.get(position).getSignature());
 
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
-        Glide.with(context.getApplicationContext()).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+//        Glide.with(context.getApplicationContext()).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getUser_headimg()));
         String dist = list.get(position).getDistance();
         holder.stats.setText(""+list.get(position).getStatus2());
         double myDist = 0;
@@ -108,18 +112,21 @@ public class NewTeacherAdapter extends RecyclerView.Adapter<NewTeacherAdapter.Ne
 //            myDist = Integer.parseInt(dist) ;
 //        }
 //        int lat = myDist / 1000;
-        holder.distance.setText(df.format(myDist) + "km");
+        holder.distance.setText(list.get(position).getSpeciality_name()+"    距我"+df.format(myDist) + "km");
         if (!TextUtils.isEmpty(list.get(position).getGender())){
             String gender = list.get(position).getGender();
-            if (gender.equals("1")) {
+            if (gender.equals("1")||gender.equals("男")) {
                 holder.nianji.setText("男");
-            } else if (gender.equals("2")) {
+                holder.nianji.setTextColor(Color.parseColor("#2dd0fd"));
+            } else if (gender.equals("2")||gender.equals("女")) {
                 holder.nianji.setText("女");
+                holder.nianji.setTextColor(Color.parseColor("#f926e0"));
             }
         }else {
             holder.nianji.setText(" ");
         }
-        holder.haoping_numtext.setText(list.get(position).getClick()+"人看过  好评: "+list.get(position).getHaoping_num());
+        holder.haoping_numtext.setText(list.get(position).getClick()+"人看过  ");
+        holder.goodTv.setText("好评率: "+list.get(position).getHaoping_num());
 //        holder.haoping_numtext.setText("");
         double rank = Double.parseDouble(list.get(position).getOrder_rank());
         if (0 <= rank && rank <1.5){
@@ -159,6 +166,49 @@ public class NewTeacherAdapter extends RecyclerView.Adapter<NewTeacherAdapter.Ne
 
     }
 
+
+    public static class NewTeacherViewHolder extends RecyclerView.ViewHolder {
+
+        private SimpleDraweeView user_headimg;
+        //        private CircleImageView user_headimg;//用户头像
+        private TextView nickname;//昵称
+        private TextView service_type;//服务类型
+        private TextView fee;//课时费
+        private TextView speciality;//课程
+        private TextView username;//内容
+        private TextView distance;//距离
+        private ImageView haoping_num;//好评数
+        private TextView haoping_numtext;//好评分
+        private TextView nianji;
+        private TextView stats;
+        private TextView goodTv;
+        private TextView education;
+
+        public NewTeacherViewHolder(View itemView) {
+            super(itemView);
+            AutoUtils.autoSize(itemView);
+            goodTv = (TextView) itemView.findViewById(R.id.text31);
+            education = (TextView) itemView.findViewById(R.id.education_tv);
+            user_headimg = (SimpleDraweeView) itemView.findViewById(R.id.lognhost);
+            nickname = (TextView) itemView.findViewById(R.id.text1);
+            service_type = (TextView) itemView.findViewById(R.id.text9);
+            fee = (TextView) itemView.findViewById(R.id.text3);
+            stats = (TextView) itemView.findViewById(R.id.text5);
+            speciality = (TextView) itemView.findViewById(R.id.text4);
+            username = (TextView) itemView.findViewById(R.id.text6);
+            distance = (TextView) itemView.findViewById(R.id.text7);
+            haoping_numtext = (TextView) itemView.findViewById(R.id.text8);
+            haoping_num = (ImageView) itemView.findViewById(R.id.imagehaop);
+            distance = (TextView) itemView.findViewById(R.id.text7);
+            nianji = (TextView) itemView.findViewById(R.id.text2);
+        }
+    }
+
+    public interface OnTopClickListener {
+        void onTopClick(TeacherEntity entity);
+    }
+
+
     @Override
     public int getItemCount() {
         return list.size();
@@ -194,44 +244,5 @@ public class NewTeacherAdapter extends RecyclerView.Adapter<NewTeacherAdapter.Ne
                 listener.onTopClick(list.get(position));
             }
         }
-    }
-
-    public static class NewTeacherViewHolder extends RecyclerView.ViewHolder {
-
-        private ImageView user_headimg;
-        //        private CircleImageView user_headimg;//用户头像
-        private TextView nickname;//昵称
-        private TextView service_type;//服务类型
-        private TextView fee;//课时费
-        private TextView speciality;//课程
-        private TextView username;//内容
-        private TextView distance;//距离
-        private ImageView haoping_num;//好评数
-        private TextView haoping_numtext;//好评分
-        private TextView nianji;
-        private TextView stats;
-        private TextView education;
-
-        public NewTeacherViewHolder(View itemView) {
-            super(itemView);
-            AutoUtils.autoSize(itemView);
-            education = (TextView) itemView.findViewById(R.id.education_tv);
-            user_headimg = (ImageView) itemView.findViewById(R.id.lognhost);
-            nickname = (TextView) itemView.findViewById(R.id.text1);
-            service_type = (TextView) itemView.findViewById(R.id.text9);
-            fee = (TextView) itemView.findViewById(R.id.text3);
-            stats = (TextView) itemView.findViewById(R.id.text5);
-            speciality = (TextView) itemView.findViewById(R.id.text4);
-            username = (TextView) itemView.findViewById(R.id.text6);
-            distance = (TextView) itemView.findViewById(R.id.text7);
-            haoping_numtext = (TextView) itemView.findViewById(R.id.text8);
-            haoping_num = (ImageView) itemView.findViewById(R.id.imagehaop);
-            distance = (TextView) itemView.findViewById(R.id.text7);
-            nianji = (TextView) itemView.findViewById(R.id.text2);
-        }
-    }
-
-    public interface OnTopClickListener {
-        void onTopClick(TeacherEntity entity);
     }
 }

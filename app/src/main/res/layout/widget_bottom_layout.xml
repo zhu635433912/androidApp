@@ -16,10 +16,16 @@
         style="@style/bottom_radio_btn"
         android:drawableTop="@drawable/bottom_home_icon"
         android:text="找教师" />
-
+    <!--<RadioButton-->
+        <!--android:drawableTop="@drawable/bottom_home_icon"-->
+        <!--android:id="@+id/main_bottom_text"-->
+        <!--android:layout_width="1px"-->
+        <!--android:layout_height="match_parent" />-->
     <RadioButton
+        android:drawableTop="@drawable/bottom_fabu_icon"
         style="@style/bottom_radio_btn"
-
+        android:id="@+id/main_bottom_fabu"
+        android:text="发布"
         />
     <RadioButton
         android:id="@+id/main_bottom_mine"

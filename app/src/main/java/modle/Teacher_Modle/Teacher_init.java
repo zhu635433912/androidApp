@@ -31,7 +31,8 @@ public interface Teacher_init {
      uid    用户id
      id     操作教师id
      */
-    public Map<String,Object> Get_Teacher_detailed(int uid, int id, Requirdetailed requirdetailed, int ztm,int number);
+    public Map<String, Object> getTeacherDetailed(String lat,String lng,int uid, int id, final Requirdetailed requirdetailed, final int ztm,int number) ;
+        public Map<String,Object> Get_Teacher_detailed(int uid, int id, Requirdetailed requirdetailed, int ztm,int number);
     /**
      * 获取教师列表
      * uid    用户id
@@ -87,6 +88,8 @@ public interface Teacher_init {
      *教师资料更新个人简介
      */
     public void Teacher_resume(int uid, String resume);
+    //个人图片
+    public void UpdatePic(int uid, String img1,String img2,String img3);
     /**
      *教师资料更新特长
      */

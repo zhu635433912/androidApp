@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#fffffe"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <RelativeLayout
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -30,7 +32,10 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -42,25 +47,19 @@
             android:layout_below="@+id/neirongtext"
             android:layout_width="match_parent"
             android:layout_height="1px" />
-    <ImageView
+    <com.facebook.drawee.view.SimpleDraweeView
+        app:roundAsCircle="true"
         android:id="@+id/usertoux"
         android:layout_marginTop="30px"
         android:layout_below="@+id/xuqiufenggexian"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ox2"
+        app:placeholderImage="@drawable/ox2"
         android:layout_width="200px"
         android:layout_height="200px" />
-    <!--<ImageView-->
-        <!--android:id="@+id/usertoux"-->
-        <!--android:layout_marginTop="30px"-->
-        <!--android:layout_below="@+id/xuqiufenggexian"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:src="@drawable/ox2"-->
-        <!--android:layout_width="200px"-->
-        <!--android:layout_height="200px" />-->
+
 
     <TextView
-        android:layout_marginTop="50px"
+        android:layout_marginTop="0px"
         android:id="@+id/diqu"
         android:layout_marginLeft="50px"
         android:layout_alignParentLeft="true"
@@ -68,14 +67,15 @@
         android:textSize="30px"
         android:text="地区"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp" />
     <TextView
+        android:layout_marginLeft="70px"
         android:id="@+id/xuqiufenggexian1"
-        android:background="#d7d7d7"
+        android:background="#f7d54c"
         android:layout_marginTop="30px"
         android:layout_below="@+id/diqu"
         android:layout_width="match_parent"
-        android:layout_height="1px" />
+        android:layout_height="0px" />
     <TextView
         android:id="@+id/userdizhi"
         android:textColor="#1e1e1e"
@@ -85,12 +85,40 @@
         android:layout_alignParentRight="true"
         android:gravity="end|center"
         android:layout_width="500px"
-        android:layout_height="100px" />
+        android:layout_height="0px" />
+        <TextView
+            android:id="@+id/eilmaer"
+            android:layout_marginLeft="50px"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/xuqiufenggexian1"
+            android:textSize="30px"
+            android:text="*昵称"
+            android:layout_marginTop="30px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:gravity="end|center"
+            android:id="@+id/emage"
+            android:textColor="#1e1e1e"
+            android:layout_marginRight="50px"
+            android:layout_alignBottom="@+id/xuqiufenggexian5"
+            android:textSize="30px"
+            android:layout_alignParentRight="true"
+            android:layout_width="500px"
+            android:layout_height="100px" />
+        <View
+            android:layout_marginLeft="70px"
+            android:background="#f7d54c"
+            android:layout_marginTop="30px"
+            android:layout_below="@+id/eilmaer"
+            android:id="@+id/xuqiufenggexian9"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
     <TextView
         android:id="@+id/xinbie"
         android:layout_marginLeft="50px"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/xuqiufenggexian1"
+        android:layout_below="@+id/xuqiufenggexian9"
         android:textSize="30px"
         android:text="性别"
         android:layout_marginTop="30px"
@@ -107,8 +135,9 @@
         android:layout_width="500px"
         android:layout_height="100px" />
     <TextView
+        android:layout_marginLeft="70px"
         android:id="@+id/xuqiufenggexian2"
-        android:background="#d7d7d7"
+        android:background="#f7d54c"
         android:layout_marginTop="30px"
         android:layout_below="@+id/xinbie"
         android:layout_width="match_parent"
@@ -124,13 +153,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/xuqiufenggexian3"
-        android:background="#d7d7d7"
-        android:layout_marginTop="30px"
-        android:layout_below="@+id/shengri"
-        android:layout_width="match_parent"
-        android:layout_height="1px" />
+
     <TextView
         android:gravity="end|center"
         android:id="@+id/usershenr"
@@ -141,19 +164,28 @@
         android:layout_alignParentRight="true"
         android:layout_width="500px"
         android:layout_height="100px" />
+        <TextView
+            android:layout_marginLeft="70px"
+            android:id="@+id/xuqiufenggexian3"
+            android:background="#f7d54c"
+            android:layout_marginTop="30px"
+            android:layout_below="@+id/shengri"
+            android:layout_width="match_parent"
+            android:layout_height="1px" />
     <TextView
         android:id="@+id/zhiye"
         android:layout_marginLeft="50px"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/xuqiufenggexian3"
+        android:layout_below="@+id/fuwuleia"
         android:textSize="30px"
         android:text="*姓名"
         android:layout_marginTop="30px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
+        android:layout_marginLeft="70px"
         android:id="@+id/xuqiufenggexian4"
-        android:background="#d7d7d7"
+        android:background="#f7d54c"
         android:layout_marginTop="30px"
         android:layout_below="@+id/zhiye"
         android:layout_width="match_parent"
@@ -169,65 +201,16 @@
         android:layout_width="500px"
         android:layout_height="100px" />
 
-    <TextView
-        android:id="@+id/eilmaer"
-        android:layout_marginLeft="50px"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/xuqiufenggexian4"
-        android:textSize="30px"
-        android:text="*昵称"
-        android:layout_marginTop="30px"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/xuqiufenggexian5"
-        android:background="#d7d7d7"
-        android:layout_marginTop="30px"
-        android:layout_below="@+id/eilmaer"
-        android:layout_width="match_parent"
-        android:layout_height="1px" />
-    <TextView
-        android:gravity="end|center"
-        android:id="@+id/emage"
-        android:textColor="#1e1e1e"
-        android:layout_marginRight="50px"
-        android:layout_alignBottom="@+id/xuqiufenggexian5"
-        android:textSize="30px"
-        android:layout_alignParentRight="true"
-        android:layout_width="500px"
-        android:layout_height="100px" />
-    <!--<RelativeLayout-->
-        <!--android:id="@+id/fuwuleia"-->
-        <!--android:layout_below="@+id/emage"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="100px">-->
-        <!--<TextView-->
-            <!--android:id="@+id/tonxuezeng"-->
-            <!--android:layout_marginLeft="50px"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:textSize="30px"-->
-            <!--android:text="服务类型"-->
-            <!--android:layout_marginTop="30px"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content" />-->
-        <!--<TextView-->
-            <!--android:id="@+id/xuqiufenggexian6"-->
-            <!--android:background="#d7d7d7"-->
-            <!--android:layout_marginTop="30px"-->
-            <!--android:layout_below="@+id/tonxuezeng"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="1px" />-->
-        <!--<TextView-->
-            <!--android:gravity="end|center"-->
-            <!--android:id="@+id/biyexuexiao"-->
-            <!--android:textColor="#1e1e1e"-->
-            <!--android:layout_marginRight="50px"-->
-            <!--android:layout_alignBottom="@+id/xuqiufenggexian6"-->
-            <!--android:textSize="30px"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_width="500px"-->
-            <!--android:layout_height="100px" />-->
-    <!--</RelativeLayout>-->
+
+        <TextView
+            android:layout_marginLeft="70px"
+            android:id="@+id/xuqiufenggexian5"
+            android:background="#f7d54c"
+            android:layout_marginTop="30px"
+            android:layout_below="@+id/eilmaer"
+            android:layout_width="match_parent"
+            android:layout_height="1px" />
+
     <RelativeLayout
         android:visibility="gone"
         android:id="@+id/jiaolinlayout"
@@ -244,8 +227,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:layout_marginLeft="70px"
             android:id="@+id/xuqiufenggexian7"
-            android:background="#d7d7d7"
+            android:background="#f7d54c"
             android:layout_marginTop="30px"
             android:layout_below="@+id/jiaolin"
             android:layout_width="match_parent"
@@ -263,7 +247,7 @@
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/fuwuleia"
-        android:layout_below="@+id/jiaolinlayout"
+        android:layout_below="@+id/xuqiufenggexian3"
         android:layout_width="match_parent"
         android:layout_height="100px">
         <TextView
@@ -277,7 +261,8 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/xuqiufenggexian6"
-            android:background="#d7d7d7"
+            android:background="#f7d54c"
+            android:layout_marginLeft="70px"
             android:layout_marginTop="30px"
             android:layout_below="@+id/tonxuezeng"
             android:layout_width="match_parent"
@@ -294,9 +279,9 @@
             android:layout_height="100px" />
     </RelativeLayout>
         <RelativeLayout
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/xuelie_rl"
-            android:layout_below="@+id/fuwuleia"
+            android:layout_below="@+id/xuqiufenggexian4"
             android:layout_width="match_parent"
             android:layout_height="100px">
             <TextView
@@ -331,13 +316,10 @@
         android:layout_below="@+id/xuelie_rl"
         android:id="@+id/baocun"
         android:layout_marginBottom="40px"
-        android:textSize="40px"
-        android:textColor="#fff"
-        android:text="保存"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/add15"
-        android:layout_width="700px"
+        android:background="@mipmap/save_btn"
+        android:layout_width="400px"
         android:layout_height="100px" />
     </RelativeLayout>
     </ScrollView>

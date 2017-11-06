@@ -9,9 +9,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import modle.Onteh;
@@ -23,12 +25,12 @@ import modle.user_ziliao.User_id;
  * Created by Administrator on 2017/6/6.
  */
 
-public class Feedback_Activity extends AutoLayoutActivity implements View.OnClickListener{
+public class Feedback_Activity extends MyBaseActivity implements View.OnClickListener{
     private EditText editText;
     private RelativeLayout relativeLayout;
     private Button imageButton;
     private int uid;
-    private ImageButton backBtn;
+    private ImageView backBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +41,7 @@ public class Feedback_Activity extends AutoLayoutActivity implements View.OnClic
         editText= (EditText) findViewById(R.id.fankuineirong);
         relativeLayout= (RelativeLayout) findViewById(R.id.tianjaitupian);
         imageButton= (Button) findViewById(R.id.tijiaofankui);
-        backBtn = (ImageButton) findViewById(R.id.fankui_back);
+        backBtn = (ImageView) findViewById(R.id.fankui_back);
         relativeLayout.setVisibility(View.GONE);
         //获取用户id
         uid=Integer.parseInt(User_id.getUid());

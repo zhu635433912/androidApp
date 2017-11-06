@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -35,6 +36,7 @@
 
 
     <TextView
+        android:layout_marginTop="20px"
         android:id="@+id/refund_desc"
         android:textColor="#111111"
         android:layout_below="@+id/xuqiufenggexian"
@@ -45,21 +47,71 @@
         android:layout_width="wrap_content"
         android:layout_height="60px" />
     <EditText
+        android:layout_marginTop="20px"
         android:id="@+id/complete_desc_edit"
         android:background="@drawable/refund_edit_back"
         android:layout_below="@+id/refund_desc"
         android:layout_marginLeft="100px"
         android:layout_marginRight="30px"
-        android:hint="此处填写教学内容，课程重点等等..."
+        android:hint="您发现学生在哪些方面容易出错，课程中教会学生哪些方法，请您叙述相关内容"
         android:maxLength="200"
         android:textSize="25px"
         android:layout_width="600px"
         android:layout_height="200px" />
     <TextView
-        android:id="@+id/complete_talk"
-        android:textColor="#111111"
+        android:id="@+id/refund_update"
         android:layout_below="@+id/complete_desc_edit"
-        android:text="教师寄语"
+        android:text="教学图片(上传出错的内容或收获内容)"
+        android:gravity="center"
+        android:layout_marginTop="30px"
+        android:textColor="#464646"
+        android:layout_marginLeft="50px"
+        android:layout_width="wrap_content"
+        android:layout_height="60px" />
+    <LinearLayout
+        android:layout_marginTop="20px"
+        android:id="@+id/refund_update_linear"
+        android:orientation="horizontal"
+        android:layout_marginLeft="80px"
+        android:layout_marginRight="80px"
+        android:layout_below="@+id/refund_update"
+        android:layout_width="match_parent"
+        android:layout_height="150px">
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/complete_picture1"
+            app:placeholderImage="@drawable/refund_camera"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+
+            android:layout_height="match_parent" />
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/complete_picture2"
+            app:placeholderImage="@drawable/refund_addpic"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_marginLeft="20px"
+            android:layout_height="match_parent" />
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/complete_picture3"
+            app:placeholderImage="@drawable/refund_addpic"
+            android:layout_weight="1"
+            android:layout_marginLeft="20px"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/complete_picture4"
+            app:placeholderImage="@drawable/refund_addpic"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_marginLeft="20px"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/complete_talk"
+        android:textColor="#464646"
+        android:layout_below="@+id/xuqiufenggexian5"
+        android:text="成长树建议"
         android:singleLine="true"
         android:gravity="center"
         android:layout_marginLeft="50px"
@@ -71,7 +123,8 @@
         android:layout_below="@+id/complete_talk"
         android:layout_marginLeft="100px"
         android:layout_marginRight="30px"
-        android:hint="此处填写您对学生的评价，优缺点建议等等..."
+        android:hint="填写您对学生的评价和发现的优缺点，建议进步的方向等.."
+
         android:maxLength="200"
         android:textSize="25px"
         android:layout_width="600px"
@@ -83,49 +136,7 @@
         android:layout_below="@+id/complete_talk_edit"
         android:layout_width="match_parent"
         android:layout_height="1px" />
-    <TextView
-        android:id="@+id/refund_update"
-        android:layout_below="@+id/xuqiufenggexian4"
-        android:text="教学图片"
-        android:gravity="center"
-        android:layout_marginLeft="50px"
-        android:layout_width="wrap_content"
-        android:layout_height="60px" />
-    <LinearLayout
-        android:id="@+id/refund_update_linear"
-        android:orientation="horizontal"
-        android:layout_marginLeft="120px"
-        android:layout_marginRight="120px"
-        android:layout_below="@+id/refund_update"
-        android:layout_width="match_parent"
-        android:layout_height="150px">
-        <ImageView
-            android:id="@+id/complete_picture1"
-            android:src="@drawable/refund_camera"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-        <ImageView
-            android:id="@+id/complete_picture2"
-            android:src="@drawable/refund_addpic"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-        <ImageView
-            android:id="@+id/complete_picture3"
 
-            android:src="@drawable/refund_addpic"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-        <ImageView
-            android:id="@+id/complete_picture4"
-            android:src="@drawable/refund_addpic"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
     <TextView
         android:id="@+id/xuqiufenggexian5"
         android:background="#d7d7d7"
@@ -136,7 +147,7 @@
     <RelativeLayout
         android:id="@+id/complete_sure_btn"
         android:layout_marginTop="50px"
-        android:layout_below="@+id/xuqiufenggexian5"
+        android:layout_below="@+id/xuqiufenggexian4"
         android:layout_centerHorizontal="true"
         android:background="@drawable/add15"
         android:layout_width="556px"
@@ -151,6 +162,7 @@
             android:layout_height="wrap_content" />
     </RelativeLayout>
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/complete_telphone"
         android:layout_marginLeft="20px"
         android:layout_below="@+id/complete_sure_btn"

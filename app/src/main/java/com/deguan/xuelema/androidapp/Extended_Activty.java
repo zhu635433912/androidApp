@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import modle.user_ziliao.User_id;
@@ -14,7 +15,7 @@ import modle.user_ziliao.User_id;
  * 学了吗推广说明
  */
 
-public class Extended_Activty extends AutoLayoutActivity implements View.OnClickListener{
+public class Extended_Activty extends MyBaseActivity implements View.OnClickListener{
     private ImageView tuiguangshuoming;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

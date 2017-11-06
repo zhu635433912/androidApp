@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
 import com.deguan.xuelema.androidapp.viewimpl.OnPasswordInputFinish;
 import com.deguan.xuelema.androidapp.viewimpl.PasswordView;
@@ -52,7 +53,7 @@ import modle.user_ziliao.User_id;
  * 支付
  */
 
-public class Payment_Activty extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed, PayView, ChangeOrderView {
+public class Payment_Activty extends MyBaseActivity implements View.OnClickListener,Requirdetailed, PayView, ChangeOrderView {
     private Button querenzhifu;
     private TextView zhifufeeTv;
     private TextView ordetbianhao;
@@ -64,6 +65,7 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
     private int order_id;
     private double order_fee;
     private double tolFee = 0;
+    private double nowFee;
     int durationa;
     //支付宝回调
     private final int SDK_PAY_FLAG = 1;
@@ -118,7 +120,10 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
     private IWXAPI iwxapi;
     private String telphone;
     private PopupWindow payPopwindow;
+    private TextView redTv;
     private View view;
+    private double credit;
+    private String level;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -129,6 +134,7 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
         iwxapi = WXAPIFactory.createWXAPI(this,APP_ID);
         iwxapi.registerApp(APP_ID);
         User_id.getInstance().addActivity(this);
+        redTv = (TextView) findViewById(R.id.red_pay_tv);
         querenzhifu= (Button) findViewById(R.id.querenzhifu);
         zhifufeeTv= (TextView) findViewById(R.id.zhifufee);
         ordetbianhao= (TextView) findViewById(R.id.ordetbianhao);
@@ -185,14 +191,34 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
         passwordView.setOnFinishInput(new OnPasswordInputFinish() {
             @Override
             public void inputFinish() {
-                if (mianfee > 0) {
-                    if (order_fee - mianfee >= mianfee) {
-                        new PayUtil().getPayDetails(order_id, 2, mianfee, passwordView.getStrPassword(), Payment_Activty.this);
-                    }else {
-                        new PayUtil().getPayDetails(order_id, 2, order_fee / 2.0, passwordView.getStrPassword(), Payment_Activty.this);
+                if (level.equals("0")) {
+                    if (mianfee > 0) {
+                        if (order_fee - mianfee >= 0) {
+                            new PayUtil().getPayDetails(order_id, 2, mianfee, passwordView.getStrPassword(), Payment_Activty.this,0+"");
+                        } else {
+                            new PayUtil().getPayDetails(order_id, 2, order_fee, passwordView.getStrPassword(), Payment_Activty.this,0+"");
+                        }
+                    } else {
+                        new PayUtil().getPayDetails(order_id, 2, 0, passwordView.getStrPassword(), Payment_Activty.this,0+"");
                     }
                 }else {
-                    new PayUtil().getPayDetails(order_id, 2, 0, passwordView.getStrPassword(), Payment_Activty.this);
+                    if (mianfee > 0) {
+                        if (order_fee - mianfee >= 0) {
+                            new PayUtil().getPayDetails(order_id, 2, mianfee, passwordView.getStrPassword(), Payment_Activty.this,0+"");
+                        } else {
+                            new PayUtil().getPayDetails(order_id, 2, order_fee, passwordView.getStrPassword(), Payment_Activty.this,0+"");
+                        }
+                    } else {
+                        if (credit >0){
+                            if ((order_fee * 0.05 - credit)>0){
+                                new PayUtil().getPayDetails(order_id, 2, 0, passwordView.getStrPassword(), Payment_Activty.this,credit+"");
+                            }else {
+                                new PayUtil().getPayDetails(order_id, 2, 0, passwordView.getStrPassword(), Payment_Activty.this,order_fee * 0.05+"");
+                            }
+                        }else {
+                            new PayUtil().getPayDetails(order_id, 2, 0, passwordView.getStrPassword(), Payment_Activty.this,0+"");
+                        }
+                    }
                 }
 //                new Getdata().sendMessage(User_id.getNickName()+"已经支付了订单哦",telphone);
 //                Intent intent = new Intent(Payment_Activty.this, Payment_tureActivty.class);
@@ -216,6 +242,7 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 Toast.makeText(Payment_Activty.this, "忘记密码请联系客服", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Payment_Activty.this,Hepl.class));
             }
         });
     }
@@ -245,51 +272,129 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
 
                 break;
             case R.id.querenzhifu:
-
-                   if (mianfee > 0){
-                       if (order_fee - mianfee >= mianfee){
-                           if (flag == 2) {
-                               new PayUtil().getPayDetails(order_id, 0, mianfee,"", this);
-                           } else if (flag == 1) {
-                               new PayUtil().getPayDetails(order_id, 1, mianfee,"", this);
-                           } else {
-                               if ((order_fee - mianfee) <= tolFee) {
+                if (level.equals("1")){
+                    //是会员
+                    if (mianfee > 0){
+                        if ((order_fee - mianfee )>= 0){
+                            if (flag == 2) {
+                                new PayUtil().getPayDetails(order_id, 0, mianfee,"", this,0+"");
+                            } else if (flag == 1) {
+                                new PayUtil().getPayDetails(order_id, 1, mianfee,"", this,0+"");
+                            } else {
+                                if ((order_fee - mianfee) <= tolFee) {
 //                                    new PayUtil().getPayDetails(order_id, 2, mianfee, "", Payment_Activty.this);
-                                   payPopwindow.showAsDropDown(view);
-                               } else {
-                                   Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
-                               }
-                           }
-                       }else {
-                           if (flag == 2) {
-                               new PayUtil().getPayDetails(order_id, 0, order_fee / 2.0,"", this);
-                           } else if (flag == 1) {
-                               new PayUtil().getPayDetails(order_id, 1, order_fee / 2.0,"", this);
-                           } else {
-                               if ((order_fee / 2) <= tolFee) {
+                                    payPopwindow.showAsDropDown(view);
+                                } else {
+                                    Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }else {
+//                            if (flag == 2) {
+//                                new PayUtil().getPayDetails(order_id, 0, order_fee / 2.0,"", this,0+"");
+//                            } else if (flag == 1) {
+//                                new PayUtil().getPayDetails(order_id, 1, order_fee / 2.0,"", this,0+"");
+//                            } else {
+//                                if ((order_fee / 2) <= tolFee) {
 //                                   new PayUtil().getPayDetails(order_id, 2, order_fee / 2.0, "", Payment_Activty.this);
-                                   payPopwindow.showAsDropDown(view);
-                               } else {
-                                   Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
-                               }
-                           }
-                       }
-        //
-                   }else {
-                       if (flag == 2) {
-                           new PayUtil().getPayDetails(order_id, 0, 0,"", this);
-                       } else if (flag == 1) {
-                           new PayUtil().getPayDetails(order_id, 1, 0,"", this);
-                       } else {
-                           if (order_fee <= tolFee) {
+                                    payPopwindow.showAsDropDown(view);
+//                                } else {
+//                                    Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
+//                                }
+//                            }
+                        }
+                        //
+                    }else {
+                        if (credit > 0) {
+                            if ((order_fee * 0.05 - credit)>0){
+                                if (flag == 2) {
+                                    new PayUtil().getPayDetails(order_id, 0, 0, "", this, credit + "");
+                                } else if (flag == 1) {
+                                    new PayUtil().getPayDetails(order_id, 1, 0, "", this, credit + "");
+                                } else {
+                                    if ((order_fee - credit) <= tolFee) {
 //                               new PayUtil().getPayDetails(order_id, 2, 0, "", Payment_Activty.this);
-                               payPopwindow.showAsDropDown(view);
-                           } else {
-                               Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
-                           }
-                       }
+                                        payPopwindow.showAsDropDown(view);
+                                    } else {
+                                        Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }else {
+                                if (flag == 2) {
+                                    new PayUtil().getPayDetails(order_id, 0, 0, "", this, order_fee * 0.05 + "");
+                                } else if (flag == 1) {
+                                    new PayUtil().getPayDetails(order_id, 1, 0, "", this, order_fee * 0.05 + "");
+                                } else {
+                                    if (order_fee * 0.95 <= tolFee) {
+//                               new PayUtil().getPayDetails(order_id, 2, 0, "", Payment_Activty.this);
+                                        payPopwindow.showAsDropDown(view);
+                                    } else {
+                                        Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                        }else {
+                            if (flag == 2) {
+                                new PayUtil().getPayDetails(order_id, 0, 0, "", this, 0 + "");
+                            } else if (flag == 1) {
+                                new PayUtil().getPayDetails(order_id, 1, 0, "", this, 0 + "");
+                            } else {
+                                if (order_fee <= tolFee) {
+//                               new PayUtil().getPayDetails(order_id, 2, 0, "", Payment_Activty.this);
+                                    payPopwindow.showAsDropDown(view);
+                                } else {
+                                    Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    }
+                }else {
+                    //不是会员
+                    if (mianfee > 0){
+                        if ((order_fee - mianfee) >= 0){
+                            if (flag == 2) {
+                                new PayUtil().getPayDetails(order_id, 0, mianfee,"", this,0+"");
+                            } else if (flag == 1) {
+                                new PayUtil().getPayDetails(order_id, 1, mianfee,"", this,0+"");
+                            } else {
+                                if ((order_fee - mianfee) <= tolFee) {
+//                                    new PayUtil().getPayDetails(order_id, 2, mianfee, "", Payment_Activty.this);
+                                    payPopwindow.showAsDropDown(view);
+                                } else {
+                                    Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }else {
+//                            if (flag == 2) {
+//                                new PayUtil().getPayDetails(order_id, 0, order_fee,"", this,0+"");
+//                            } else if (flag == 1) {
+//                                new PayUtil().getPayDetails(order_id, 1, order_fee,"", this,0+"");
+//                            } else {
+//                                if ((order_fee) <= tolFee) {
+//                                   new PayUtil().getPayDetails(order_id, 2, order_fee / 2.0, "", Payment_Activty.this);
+                                    payPopwindow.showAsDropDown(view);
+//                                } else {
+//                                    Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
+//                                }
+//                            }
+                        }
+                        //
+                    }else {
+                        if (flag == 2) {
+                            new PayUtil().getPayDetails(order_id, 0, 0,"", this,0+"");
+                        } else if (flag == 1) {
+                            new PayUtil().getPayDetails(order_id, 1, 0,"", this,0+"");
+                        } else {
+                            if (order_fee <= tolFee) {
+//                               new PayUtil().getPayDetails(order_id, 2, 0, "", Payment_Activty.this);
+                                payPopwindow.showAsDropDown(view);
+                            } else {
+                                Toast.makeText(this, "余额不足,请充值", Toast.LENGTH_SHORT).show();
+                            }
+                        }
 
-                   }
+                    }
+                }
+
 //           int cashPayfee = 0
                 break;
             case R.id.querendindanfanhui:
@@ -306,21 +411,52 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
         if (map.get("fee") != null) {
             tolFee = Double.parseDouble(map.get("fee")+"");
         }
-        if (map.get("TotalFee")!=null){
+        if (map.get("reward")!=null){
 //            mogint.setText("0");
-            mianfee =  Double.parseDouble(map.get("TotalFee")+"");
+            mianfee =  Double.parseDouble(map.get("reward")+"");
 //            mianfee = 0;
         }
-        if (mianfee != 0){
-            if ((order_fee - mianfee) >= mianfee){
-                    cashPayEdit.setText("现金券抵扣:" + df.format(mianfee));
+        if (map.get("credit")!=null){
+//            mogint.setText("0");
+            credit =  Double.parseDouble(map.get("credit")+"");
+//
+//  mianfee = 0;
+        }
+        if ((map.get("level")+"").equals("0")){
+            level = map.get("level")+"";
+
+            if (mianfee != 0){
+                if ((order_fee - mianfee) >= 0){
+                    cashPayEdit.setText("代金券抵用:" + df.format(mianfee));
+                }else {
+                    cashPayEdit.setText("代金券抵用:" + df.format(order_fee));
+                }
+            }
+
+
+        }else {
+            level = map.get("level")+"";
+            if (mianfee != 0){
+                if ((order_fee - mianfee) >=0 ){
+                    cashPayEdit.setText("代金券抵用:" + df.format(mianfee));
+                }else {
+                    cashPayEdit.setText("代金券抵用:" + df.format(order_fee));
+                }
             }else {
-                    cashPayEdit.setText("现金券抵扣:" + df.format(order_fee / 2.0));
+                if (credit != 0){
+                    if ((order_fee * 0.05 - credit) >0){
+                        redTv.setText("红包抵用："+df.format(credit));
+                    }else {
+                        redTv.setText("红包抵用："+df.format(order_fee * 0.05));
+                    }
+                }
             }
         }
 
 
+
     }
+
 
 
 
@@ -331,6 +467,7 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
 
     @Override
     public void successPay(Map<String, Object> map) {
+        EventBus.getDefault().post(1,"changeStatus");
         if (flag == 1){
 
             PayReq payReq = new PayReq();
@@ -394,7 +531,7 @@ public class Payment_Activty extends AutoLayoutActivity implements View.OnClickL
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }

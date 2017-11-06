@@ -64,9 +64,12 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
     private List<TeacherEntity> teachers = new ArrayList<>();
     private TuijianNewAdapter teacherAdapter;
     private Teacher_init teacher_init;
+    private String search;
 
     @Override
     public void before() {
+        super.before();
+        search = getIntent().getStringExtra("search");
     }
 
     @Override
@@ -84,11 +87,14 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
             teacherAdapter.setOnTopClickListener(new TuijianNewAdapter.OnTopClickListener() {
                 @Override
                 public void onTopClick(TuijianEntity entity) {
-                    Intent intent = new Intent(SearchActivity.this, UserxinxiActivty.class);
-//                    intent.putExtra("user_id", uid);
-                    intent.putExtra("head_image",entity.getUser_headimg());
-                    intent.putExtra("user_id",entity.getUser_id());
-                    startActivity(intent);
+                    startActivity(NewTeacherPersonActivity_.intent(SearchActivity.this)
+                            .extra("head_image",entity.getUser_headimg())
+                            .extra("user_id",entity.getUser_id()).get());
+//                    Intent intent = new Intent(SearchActivity.this, UserxinxiActivty.class);
+////                    intent.putExtra("user_id", uid);
+//                    intent.putExtra("head_image",entity.getUser_headimg());
+//                    intent.putExtra("user_id",entity.getUser_id());
+//                    startActivity(intent);
                 }
             });
         }else {
@@ -101,17 +107,30 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
                     String user_id = list.get(position).get("id") + "";
                     String fee = list.get(position).get("fee") + "";
 //                Toast.makeText(getActivity(),publisher_id,Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(SearchActivity.this, Xuqiuxiangx.class);
-                    intent.putExtra("publisher_id", publisher_id);
-                    intent.putExtra("user_id", user_id);
-                    intent.putExtra("fee", fee);
-                    intent.putExtra("course_id", list.get(position).get("course_id").toString());
-                    intent.putExtra("grade_id", list.get(position).get("grade_id").toString());
-                    startActivity(intent);
+//                    Intent intent = new Intent(SearchActivity.this, Xuqiuxiangx.class);
+//                    intent.putExtra("publisher_id", publisher_id);
+//                    intent.putExtra("user_id", user_id);
+//                    intent.putExtra("fee", fee);
+//                    intent.putExtra("course_id", list.get(position).get("course_id").toString());
+//                    intent.putExtra("grade_id", list.get(position).get("grade_id").toString());
+//                    startActivity(intent);
+
+                    startActivity(DemandDetailActivity_.intent(SearchActivity.this)
+                            .extra("user_id",user_id)
+                            .extra("fee",fee)
+                            .extra("publisher_id",publisher_id)
+                            .extra("course_id",list.get(position).get("course_id").toString())
+                            .extra("grade_id",list.get(position).get("grade_id").toString())
+                            .get());
+
                 }
             });
         }
-
+        if (role == 1) {
+            teacher_init.gettuijian_Teacher1(search,User_id.getLat()+"",""+User_id.getLng());
+        } else {
+            demand_init.getTuijianDemand_list1(search,User_id.getLat()+"",""+User_id.getLng());
+        }
         backRl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,6 +165,12 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
             Toast.makeText(this, "无搜索结果", Toast.LENGTH_SHORT).show();
         }
         list.clear();
+        for (int i = 0; i < maps.size(); i++) {
+            if ((maps.get(i).get("status")).equals("1")||maps.get(i).get("status").equals("2")){
+                maps.remove(i);
+            }
+        }
+
         list.addAll(maps);
         xuqiuAdapter.notifyDataSetChanged();
         swipeRefreshLayout.setRefreshing(false);
@@ -169,8 +194,8 @@ public class SearchActivity extends MyBaseActivity implements SimilarXuqiuView, 
             TuijianEntity entity = new TuijianEntity();
             entity.setNickname((String) maps.get(i).get("nickname"));
             entity.setSpeciality((String)maps.get(i).get("speciality"));
-            entity.setSpeciality_name((String) maps.get(i).get("speciality_name"));
-            entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
+            entity.setSpeciality_name(maps.get(i).get("city")+"  "+maps.get(i).get("state"));
+//            entity.setService_type_txt((String) maps.get(i).get("service_type_txt"));
             entity.setSignature((String) maps.get(i).get("resume"));
             entity.setOrder_rank((String.valueOf(maps.get(i).get("order_rank"))));
             entity.setUser_headimg((String) maps.get(i).get("user_headimg"));

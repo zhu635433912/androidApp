@@ -31,6 +31,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.simple.eventbus.EventBus;
 import org.simple.eventbus.Subscriber;
@@ -51,7 +52,7 @@ import modle.user_ziliao.User_id;
  * 未完成
  */
 @EFragment(R.layout.tuijian_new_fragment)
-public class NotFinishFragment extends BaseFragment implements OrderView, SwipeRefreshLayout.OnRefreshListener, OrderNewAdapter.OnTopClickListener, OrderNewAdapter.OnTopLongClickListener, Requirdetailed {
+public class NotFinishFragment extends MyBaseFragment implements OrderView, SwipeRefreshLayout.OnRefreshListener, OrderNewAdapter.OnTopClickListener, OrderNewAdapter.OnTopLongClickListener, Requirdetailed {
 
     @ViewById(R.id.tuijian_listview)
     RecyclerView listView;
@@ -77,8 +78,15 @@ public class NotFinishFragment extends BaseFragment implements OrderView, SwipeR
 
     @Subscriber(tag = "changeStatus")
     public void updateList(int msg){
+
         if (msg == 1){
-            tuijianPresenter.getNofinishOrderEntity(1);
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tuijianPresenter.getNofinishOrderEntity(1);
+                }
+            });
+
         }
     }
 

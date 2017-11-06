@@ -21,7 +21,7 @@
         <TextView
             android:id="@+id/manager_choose_subject"
             android:gravity="center"
-            android:hint="选择课程"
+            android:text="选择课程"
             android:textSize="30px"
             android:layout_marginRight="50px"
             android:layout_marginLeft="30px"
@@ -40,7 +40,7 @@
         <TextView
             android:id="@+id/manager_choose_grade"
             android:gravity="center"
-            android:hint="选择年级"
+            android:text="选择年级"
             android:textSize="30px"
             android:layout_marginRight="50px"
             android:layout_marginLeft="30px"
@@ -121,7 +121,7 @@
         <TextView
             android:id="@+id/manager_choose_desc"
             android:gravity="center"
-            android:hint="选择课程说明"
+            android:text="选择课程说明"
             android:textSize="30px"
             android:layout_marginRight="50px"
             android:layout_marginLeft="30px"

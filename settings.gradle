@@ -1,1 +1,1 @@
-include ':app', ':PullToRefresh', ':lib', ':easeui', ':update'
+include ':app', ':PullToRefresh', ':lib', ':update', ':reclib-qq', ':reclib-testemoticons'

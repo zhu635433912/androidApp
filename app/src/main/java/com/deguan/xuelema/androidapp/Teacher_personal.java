@@ -3,6 +3,7 @@ package com.deguan.xuelema.androidapp;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -14,9 +15,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.io.IOException;
@@ -36,7 +39,7 @@ import modle.user_ziliao.User_id;
  * 教师个人简介
  */
 
-public class Teacher_personal extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed {
+public class Teacher_personal extends MyBaseActivity implements View.OnClickListener,Requirdetailed {
     private TextView pingjia;
     private RelativeLayout grfanhui;
 
@@ -48,7 +51,7 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
     private TextView teachername;
 
     private int teacher_id;
-    private ImageView teachertoux;
+    private SimpleDraweeView teachertoux;
     private ImageButton jianjiebohao;
     private ImageView xueliImage;
     private ImageView zhengshuImage;
@@ -74,7 +77,7 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
         xueliImage = (ImageView) findViewById(R.id.xueli_imageview);
         zhengshuImage = (ImageView) findViewById(R.id.zhengshu_imageview);
         jianjiebohao= (ImageButton) findViewById(R.id.jianjiebohao);
-        teachertoux= (ImageView) findViewById(R.id.teachertoux);
+        teachertoux= (SimpleDraweeView) findViewById(R.id.teachertoux);
         pingjia= (TextView) findViewById(R.id.pingjia);
 
         techaertec = (TextView) findViewById(R.id.techaertec);
@@ -104,7 +107,9 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
         //获取教师详细资料
         teacher_init.Get_Teacher_detailed(uid,teacher_id,this,0,0);
         if (!TextUtils.isEmpty(headUrl)) {
-            Glide.with(getApplicationContext()).load(headUrl).transform(new GlideCircleTransform(this)).into(teachertoux);
+//            Glide.with(getApplicationContext()).load(headUrl).transform(
+//                    new GlideCircleTransform(this)).into(teachertoux);
+            teachertoux.setImageURI(Uri.parse(headUrl));
         }
     }
 
@@ -180,11 +185,11 @@ public class Teacher_personal extends AutoLayoutActivity implements View.OnClick
 //        teachername.setText(map.get("nickname").toString()+"");
         if (map.get("others_1")!=null) {
             xueliUrl = map.get("others_1").toString() + "";
-            Glide.with(getApplicationContext()).load(xueliUrl).into(xueliImage);
+//            Glide.with(getApplicationContext()).load(xueliUrl).into(xueliImage);
         }
         if (map.get("others_3")!=null) {
             zhengshuUrl = map.get("others_3").toString() + "";
-            Glide.with(getApplicationContext()).load(zhengshuUrl).into(zhengshuImage);
+//            Glide.with(getApplicationContext()).load(zhengshuUrl).into(zhengshuImage);
         }
     }
 

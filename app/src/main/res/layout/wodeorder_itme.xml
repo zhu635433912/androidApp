@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#e0eaf1"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#fffffe"
     android:layout_height="wrap_content">
+    <View
+        android:background="#e1e1e1"
+        android:layout_width="match_parent"
+        android:layout_height="15px"/>
     <RelativeLayout
-        android:layout_marginTop="20px"
-        android:background="@drawable/mianlistview"
+        android:layout_marginTop="30px"
         android:layout_gravity="center"
         android:layout_width="700px"
-        android:layout_height="340px"
+        android:layout_height="320px"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
-<ImageView
+<com.facebook.drawee.view.SimpleDraweeView
+    app:roundAsCircle="true"
     android:id="@+id/dianputubiao1"
     android:layout_marginLeft="40px"
-    android:layout_marginTop="30px"
-    android:src="@drawable/ox2"
+    android:layout_marginTop="20px"
+    app:placeholderImage="@drawable/ox2"
     android:layout_alignParentTop="true"
     android:layout_alignParentLeft="true"
-    android:layout_width="44px"
-    android:layout_height="44px" />
+    android:layout_width="70px"
+    android:layout_height="70px" />
 
     <TextView
         android:id="@+id/studentlistname"
         android:layout_marginLeft="35px"
+        android:layout_marginBottom="20px"
         android:layout_toRightOf="@+id/dianputubiao1"
         android:layout_alignBottom="@+id/dianputubiao1"
-        android:textColor="#5c5e67"
+        android:textColor="#9e9e9e"
         android:textSize="30px"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -35,18 +42,24 @@
         android:layout_alignBottom="@+id/xiadan_time"
         android:layout_marginRight="40px"
         android:layout_alignParentRight="true"
-        android:textColor="#5c5e67"
+        android:textColor="#949494"
         android:textSize="30px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+        <View
+            android:layout_marginLeft="120px"
+            android:layout_below="@+id/dianputubiao1"
+            android:background="#facc4c"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
     <TextView
         android:id="@+id/xiadan_time"
-        android:textColor="#5c5e67"
+        android:textColor="#949494"
         android:textSize="30px"
         android:layout_marginTop="30px"
         android:layout_marginRight="10px"
         android:layout_toLeftOf="@+id/xdsj"
-        android:text=" "
+        android:text="订单编号："
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -68,19 +81,20 @@
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/studentkechengzhuangtai"
-        android:textColor="#ea869d"
+        android:textColor="#fa1aaf"
         android:layout_marginRight="40px"
         android:layout_alignParentRight="true"
-        android:textSize="30px"
+        android:textSize="32px"
         android:layout_alignBottom="@+id/nianji"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/kechengjieshua"
-        android:textColor="#5c5e67"
-        android:layout_marginRight="40px"
-        android:layout_alignParentRight="true"
+        android:textColor="#949494"
+        android:text=""
+        android:layout_marginLeft="40px"
+        android:layout_toRightOf="@+id/keshifei"
         android:textSize="25px"
         android:layout_below="@+id/nianji"
         android:layout_marginTop="16px"
@@ -88,10 +102,11 @@
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/keshifei"
-        android:textColor="#5c5e67"
+        android:textColor="#949494"
         android:layout_marginLeft="40px"
         android:layout_alignParentLeft="true"
         android:textSize="30px"
+        android:text=""
         android:layout_below="@+id/nianji"
         android:layout_marginTop="16px"
         android:layout_width="wrap_content"
@@ -102,7 +117,7 @@
         android:layout_marginRight="40px"
         android:layout_alignParentRight="true"
         android:textSize="30px"
-        android:layout_below="@+id/kechengjieshua"
+        android:layout_below="@+id/nianji"
         android:layout_marginTop="16px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -111,7 +126,7 @@
         android:layout_toLeftOf="@+id/kechengfee"
         android:textColor="#5c5e67"
         android:textSize="30px"
-        android:layout_below="@+id/kechengjieshua"
+        android:layout_below="@+id/nianji"
         android:layout_marginTop="16px"
         android:text="总计:"
         android:layout_width="wrap_content"
@@ -120,32 +135,35 @@
         android:gravity="center"
         android:id="@+id/querenshouhuo"
         android:layout_marginTop="20px"
+        android:layout_marginBottom="20px"
         android:layout_below="@+id/kechengfee"
         android:layout_marginRight="40px"
         android:layout_alignParentRight="true"
-        android:textColor="#e7728c"
+        android:textColor="#fcfcfc"
         android:textSize="30px"
-        android:layout_width="166px"
+        android:text="完成评价"
+        android:paddingLeft="12px"
+        android:paddingRight="12px"
+        android:layout_width="wrap_content"
+        android:background="@mipmap/status_bg"
         android:layout_height="48px" />
-<!--        android:background="@drawable/wodeorderitme"-->
+
     <TextView
-        android:layout_marginBottom="15px"
         android:id="@+id/dindanbianhao"
-        android:textColor="#5c5e67"
+        android:textColor="#949494"
         android:layout_marginLeft="40px"
         android:layout_alignParentLeft="true"
         android:layout_alignBottom="@+id/querenshouhuo"
         android:textSize="30px"
-        android:text="订单编号:"
+        android:text=" "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
-        android:layout_marginBottom="15px"
         android:id="@+id/orde_id"
         android:layout_marginLeft="10px"
         android:layout_toRightOf="@+id/dindanbianhao"
         android:layout_alignBottom="@+id/querenshouhuo"
-        android:textColor="#5c5e67"
+        android:textColor="#949494"
         android:textSize="30px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -157,4 +175,5 @@
         android:layout_width="match_parent"
         android:layout_height="1px" />
         </RelativeLayout>
+
 </RelativeLayout>

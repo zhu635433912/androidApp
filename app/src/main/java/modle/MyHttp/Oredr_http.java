@@ -34,10 +34,10 @@ public interface Oredr_http {
      */
     @POST("index.php?s=/Service/Order/create_order")
     Call<Erre> setOredr(@Query("uid") int uid, @Query("teacher_id") int teacher_id, @Query("requirement_id") int requirement_id, @Query("fee") float fee,@Query("duration") int duration,
-                        @Query("course_id")int course_id
-            ,@Query("grade_id")int grade_id
-                       ,@Query("service_type")int service_type
-                        ,@Query("address")String address,
+                        @Query("course_id")int course_id,
+                        @Query("grade_id")int grade_id,
+                        @Query("service_type")int service_type,
+                        @Query("address")String address,
                         @Query("province")String province,
                         @Query("city")String city,
                         @Query("district")String district,
@@ -104,4 +104,17 @@ public interface Oredr_http {
                                @Query("content")String content,@Query("evaluate")String evaluate,
                                @Query("img1")String img1,@Query("img2")String img2,@Query("img3")String img3,@Query("img4")String img4);
 
+    //进入获取有几个老师接取了自己的需求
+    @POST("index.php?s=/Service/Order/gets_temp_order")
+    Call<ContentModle> getReceptOrder(@Query("uid")int uid,@Query("lat")String lat,@Query("lng")String lng);
+
+    //看过这个老师
+    //完成授课
+    @POST("index.php?s=/Service/Order/cancel_temp_order")
+    Call<Demtest> cancel_order(@Query("uid") int uid,
+                                @Query("id")int id);
+
+    //查看自己需求的接单老师
+    @POST("index.php?s=/Service/Requirement/gets_order_byrequirement")
+    Call<ContentModle> getDemandOrder(@Query("uid")int uid,@Query("requirement_id")String requirement_id,@Query("lat")String lat,@Query("lng")String lng);
 }

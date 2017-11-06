@@ -3,10 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#ffffff"
+    android:background="#fffffe"
     android:orientation="vertical"
-    android:layout_height="match_parent"
-    tools:context="com.deguan.xuelema.androidapp.ManagerActivity">
+    android:layout_height="match_parent">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -16,6 +15,7 @@
             android:layout_height="100px">
 
             <ImageButton
+
                 android:layout_marginLeft="30px"
                 android:layout_marginTop="25px"
                 android:layout_alignParentTop="true"
@@ -40,6 +40,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent" />
         <TextView
+            android:visibility="gone"
             android:id="@+id/manager_fabu"
             android:gravity="center"
             android:text="发布"

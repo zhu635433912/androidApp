@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:layout_height="match_parent"
+    tools:context="com.deguan.xuelema.androidapp.TeacherActivity2">
+    <RelativeLayout
+        android:background="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_marginLeft="30px"
+            android:layout_marginTop="20px"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/add19"
+            android:layout_width="20px"
+            android:layout_height="30px" />
+        <RelativeLayout
+            android:id="@+id/teacher_back"
+            android:layout_width="120px"
+            android:layout_height="80px">
+        </RelativeLayout>
+        <TextView
+            android:textSize="35px"
+            android:layout_marginTop="20px"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="教师推荐"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:background="#d7d7d7"
+            android:layout_marginTop="80px"
+            android:layout_below="@+id/neirongtext"
+            android:layout_width="match_parent"
+            android:layout_height="1px" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:background="#eadf85"
+        android:layout_width="match_parent"
+        android:layout_height="80px">
+        <RelativeLayout
+            android:layout_marginLeft="120px"
+            android:layout_marginRight="120px"
+            android:background="@mipmap/search_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:layout_marginLeft="30px"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:hint="搜索需求，科目"
+                android:textSize="28px"
+                android:textColorHint="#878787"
+                android:id="@+id/search_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:background="@null"
+                android:maxLength="8"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+            <ImageView
+                android:layout_gravity="right"
+                android:id="@+id/search_image"
+                android:layout_marginRight="20px"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/fangdajing_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/choose_ll"
+        android:background="#f2f2f2"
+        android:layout_width="match_parent"
+        android:layout_height="80px">
+        <TextView
+            android:id="@+id/teacher_choose_tv"
+            android:gravity="center"
+            android:text="综合排序"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_marginRight="50px"
+            android:layout_marginTop="30px"
+            android:src="@mipmap/next_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/teacher_choose_course"
+            android:text="选择科目"
+            android:gravity="center"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_marginRight="50px"
+            android:layout_marginTop="30px"
+            android:src="@mipmap/next_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/teacher_choose_grade"
+            android:text="选择年级"
+            android:gravity="center"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:layout_marginRight="50px"
+            android:layout_marginTop="30px"
+            android:src="@mipmap/next_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <View
+        android:background="#d7d7d7"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:background="#e0eaf1"
+        android:id="@+id/teacher_swiperefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <android.support.v7.widget.RecyclerView
+            android:background="#e0eaf1"
+            android:divider="@null"
+            android:scrollbars="none"
+            app:layoutManager="LinearLayoutManager"
+            android:id="@+id/teacher_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

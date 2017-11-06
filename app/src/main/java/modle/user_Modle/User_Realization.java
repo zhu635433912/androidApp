@@ -12,7 +12,7 @@ import android.util.Log;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
-import com.hyphenate.util.FileUtils;
+//import com.hyphenate.util.FileUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.BufferedOutputStream;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="#fffffe"
     android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/jubaoclos"
@@ -36,7 +37,7 @@
         android:paddingTop="10px"
         android:layout_marginTop="20px"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/gerxxkk"
+        android:background="@mipmap/fankui_bg"
         android:id="@+id/jubaoneirong"
         android:hint="请详细描述你要举报的内容"
         android:textSize="30px"

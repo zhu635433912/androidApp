@@ -16,6 +16,7 @@ import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.sina.weibo.SinaWeibo;
 import cn.sharesdk.tencent.qq.QQ;
+import modle.MyUrl;
 import modle.user_ziliao.User_id;
 import okhttp3.internal.Util;
 import onekeyshare.OnekeyShare;
@@ -45,8 +46,8 @@ public class ShareUtil {
         OnekeyShare onekeyShare = new OnekeyShare();
         //关闭sso授权
         onekeyShare.disableSSOWhenAuthorize();
-        onekeyShare.setTitle("学了吗");
-        onekeyShare.setText("精英领航 筑梦飞翔");
+        onekeyShare.setTitle("学习吧");
+        onekeyShare.setText("精英领航 筑梦飞翔 \n快速对接周边老师上门服务，看得见的实惠");
 
         //网络图片的url：所有平台
 //        onekeyShare.setImageUrl("http://deguanjiaoyu.com/Public\\static\\register1\\image\\title1.png" );//网络图片rul
@@ -55,12 +56,12 @@ public class ShareUtil {
 //        onekeyShare.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
         onekeyShare.setImageUrl("http://f1.sdk.mob.com/web/images/e79/bd1/6359340c97e8819de16ab2fde6.png");
         // url：仅在微信（包括好友和朋友圈）中使用
-        onekeyShare.setUrl("http://deguanjiaoyu.com/index.php?s=/Home/users/index/tel/"+User_id.getUsername());   //网友点进链接后，可以看到分享的详情
+        onekeyShare.setUrl(MyUrl.URL+"index.php?s=/Home/users/index/tel/"+User_id.getUsername());   //网友点进链接后，可以看到分享的详情
 //        onekeyShare.setUrl("http://sharesdk.cn");
         // Url：仅在QQ空间使用
 //        onekeyShare.setTitleUrl("http://sharesdk.cn");
 
-        onekeyShare.setTitleUrl("http://deguanjiaoyu.com/index.php?s=/Home/users/index/tel/"+User_id.getUsername());  //网友点进链接后，可以看到分享的详情
+        onekeyShare.setTitleUrl(MyUrl.URL+"index.php?s=/Home/users/index/tel/"+User_id.getUsername());  //网友点进链接后，可以看到分享的详情
         onekeyShare.show(context);
     }
     public void shareXinlang(Context context){

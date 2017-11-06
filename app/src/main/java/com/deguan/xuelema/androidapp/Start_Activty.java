@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.List;
@@ -20,7 +21,7 @@ import modle.user_ziliao.User_id;
  * 星级教师
  */
 
-public class Start_Activty extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed{
+public class Start_Activty extends MyBaseActivity implements View.OnClickListener,Requirdetailed{
     private RelativeLayout xinjijiaoshihuitui;
     private TextView jjiaoshi;
     private int teacher_id;

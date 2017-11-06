@@ -42,8 +42,10 @@ public class JubaoActivity extends MyBaseActivity implements UpReportView {
 
     @Override
     public void before() {
+        super.before();
         teacherId = getIntent().getIntExtra("teacher_id",411);
     }
+
 
     @Override
     public void initView() {

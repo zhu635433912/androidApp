@@ -33,9 +33,19 @@
         <!--android:layout_height="1px" />-->
     <com.deguan.xuelema.androidapp.viewimpl.ZoomImageView
         android:id="@+id/himagr"
-        android:layout_below="@+id/picture_fanhui"
         android:background="#000"
         android:scaleType="matrix"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/save_tv"
+        android:textSize="40px"
+        android:text="保存到相册"
+        android:padding="20px"
+        android:gravity="center"
+        android:background="#ffffff"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </RelativeLayout>

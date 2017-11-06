@@ -2,13 +2,23 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="#efefef"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <RelativeLayout
         android:id="@+id/feehost"
-        android:background="#f7f7fa"
+        android:background="#e7d47f"
         android:layout_width="match_parent"
-        android:layout_height="100px">
+        android:layout_height="100px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <ImageButton
+            android:layout_marginLeft="34px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/add19"
+            android:layout_width="25px"
+            android:layout_height="35px" />
         <RelativeLayout
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -18,53 +28,34 @@
             </RelativeLayout>
 
         <TextView
+            android:layout_marginLeft="120px"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
             android:textSize="40px"
             android:text="钱包"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <ImageButton
-
-            android:layout_marginLeft="34px"
-            android:layout_alignParentLeft="true"
+        <TextView
+            android:id="@+id/my_bill"
+            android:layout_marginRight="40px"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/add19"
-            android:layout_width="25px"
-            android:layout_height="35px" />
+            android:textSize="40px"
+            android:text="说明"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
-    <LinearLayout
-        android:background="#9eebda"
-        android:layout_below="@+id/feehost"
-        android:layout_width="match_parent"
-        android:layout_height="1px"/>
 
-    <ImageView
-        android:id="@+id/feeimagv"
-        android:layout_marginTop="88px"
-        android:layout_below="@+id/feehost"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/hly17"
-        android:layout_width="160px"
-        android:layout_height="160px" />
 <RelativeLayout
     android:id="@+id/feechongzhi"
-    android:layout_marginTop="20px"
-    android:layout_below="@+id/feeimagv"
+    android:background="#e7d47f"
+    android:layout_below="@+id/feehost"
     android:layout_centerVertical="true"
     android:layout_width="match_parent"
-    android:layout_height="400px">
-    <LinearLayout
-        android:id="@+id/feefenggexian"
-        android:layout_marginTop="100px"
-        android:background="#9eebda"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:orientation="horizontal" />
+    android:layout_height="wrap_content">
+
     <ImageView
         android:id="@+id/qianbao_icon"
-        android:layout_alignBottom="@+id/feefenggexian"
         android:layout_alignParentLeft="true"
         android:layout_marginRight="0px"
         android:layout_marginBottom="30px"
@@ -72,176 +63,256 @@
         android:layout_width="0px"
         android:layout_height="0px" />
     <TextView
-
+        android:layout_marginTop="60px"
         android:layout_marginBottom="24px"
-        android:layout_marginLeft="40px"
+        android:layout_marginLeft="60px"
         android:textSize="40px"
         android:textColor="#808080"
-        android:text="余额"
+        android:text="账户余额（元）"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/feefenggexian"
         android:layout_alignParentLeft="true"
         android:id="@+id/textView3" />
     <TextView
-        android:id="@+id/yuer"
-        android:layout_alignBottom="@+id/feefenggexian"
+        android:layout_marginTop="60px"
+        android:layout_marginBottom="24px"
+        android:layout_marginRight="20px"
+        android:layout_toLeftOf="@+id/red_help_image"
+        android:textSize="30px"
+        android:textColor="#808080"
+        android:text="暂不可用(元)"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5" />
+    <ImageView
+        android:layout_marginRight="40px"
+        android:id="@+id/red_help_image"
+        android:src="@mipmap/money_help"
+        android:layout_marginTop="60px"
         android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/yuer"
+        android:layout_marginLeft="60px"
         android:layout_marginRight="50px"
         android:layout_marginBottom="24px"
+        android:layout_below="@+id/textView3"
+        android:textSize="60px"
+        android:textColor="#fffffe"
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/dongjie_money_tv"
+        android:layout_marginRight="50px"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="24px"
+        android:layout_below="@+id/textView5"
         android:textSize="40px"
-        android:textColor="#808080"
+        android:textColor="#fffffe"
         android:text=""
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <ImageView
-        android:layout_alignBottom="@+id/feefenggexian"
         android:layout_alignParentRight="true"
         android:layout_marginRight="0px"
         android:layout_marginBottom="30px"
         android:src="@drawable/fanxinjiantou"
         android:layout_width="0px"
         android:layout_height="0px" />
-
-    <LinearLayout
-        android:id="@+id/feefenggexian1"
-        android:layout_marginTop="100px"
-        android:background="#9eebda"
-        android:layout_below="@+id/feefenggexian"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:orientation="horizontal" />
-
+    <TextView
+        android:visibility="gone"
+        android:paddingTop="25px"
+        android:id="@+id/xianjinjuan"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_below="@+id/yuer"
+        android:text="代金券(元)"
+        android:textSize="40px"
+        android:layout_width="wrap_content"
+        android:layout_height="100px" />
 
     <TextView
+        android:visibility="gone"
+        android:id="@+id/mingofee"
+        android:text=""
+        android:layout_marginLeft="60px"
+        android:layout_marginRight="50px"
+        android:textSize="50px"
+        android:textColor="#fffffe"
+        android:layout_below="@+id/xianjinjuan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:visibility="gone"
+        android:paddingTop="25px"
+        android:id="@+id/xianjinred"
+        android:layout_marginLeft="120px"
+        android:layout_toRightOf="@+id/xianjinjuan"
+        android:layout_below="@+id/yuer"
+        android:text="现金红包(元)"
+        android:textSize="40px"
+        android:layout_width="wrap_content"
+        android:layout_height="100px" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/xianjinred_tv"
+        android:text=""
+        android:layout_alignLeft="@+id/xianjinred"
+        android:layout_marginLeft="10px"
+        android:layout_marginRight="50px"
+        android:textSize="50px"
+        android:textColor="#fffffe"
+        android:layout_below="@+id/xianjinred"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_marginTop="50px"
+        android:layout_below="@+id/mingofee"
+        android:background="#b9a253"
+        android:layout_width="match_parent"
+        android:layout_height="70px"/>
+
+    <TextView
+        android:visibility="gone"
+        android:background="#fffffe"
         android:paddingTop="25px"
         android:textSize="40px"
+        android:paddingLeft="110px"
         android:text="充值"
+        android:layout_below="@+id/tixian"
         android:layout_width="match_parent"
         android:layout_height="100px"
-        android:layout_alignBottom="@+id/feefenggexian1"
-        android:layout_alignLeft="@+id/textView3"
         android:id="@+id/textView4" />
     <ImageView
-        android:layout_alignBottom="@+id/feefenggexian1"
+        android:id="@+id/recharge_image"
+        android:visibility="gone"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:src="@mipmap/chongzhi_icon"
+        android:layout_below="@+id/tixian"
+        android:layout_width="60px"
+        android:layout_height="60px" />
+    <ImageView
+        android:id="@+id/recharge_right"
+        android:visibility="gone"
+        android:layout_below="@+id/tixian"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="0px"
-        android:layout_marginBottom="30px"
+        android:layout_marginRight="10px"
+        android:layout_marginTop="20px"
         android:src="@drawable/fanxinjiantou"
         android:layout_width="50px"
         android:layout_height="50px" />
-    <LinearLayout
-        android:id="@+id/feefenggexian2"
-        android:layout_marginTop="100px"
-        android:background="#9eebda"
-        android:layout_below="@+id/feefenggexian1"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:orientation="horizontal" />
+
     <TextView
         android:id="@+id/tixian"
         android:paddingTop="25px"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignBottom="@+id/feefenggexian2"
+        android:layout_marginTop="120px"
+        android:layout_below="@+id/mingofee"
         android:text="提现"
+        android:paddingLeft="110px"
+        android:background="#fffffe"
         android:textSize="40px"
         android:layout_width="match_parent"
         android:layout_height="100px" />
     <ImageView
-        android:layout_alignBottom="@+id/feefenggexian2"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="0px"
-        android:layout_marginBottom="30px"
-        android:src="@drawable/fanxinjiantou"
-        android:layout_width="50px"
-        android:layout_height="50px" />
-    <TextView
-        android:paddingTop="25px"
-        android:id="@+id/xianjinjuan"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_below="@+id/feefenggexian2"
-        android:text="现金券"
-        android:textSize="40px"
-        android:layout_width="match_parent"
-        android:layout_height="100px" />
+        android:layout_marginLeft="30px"
+        android:src="@mipmap/tixian_icon"
+        android:layout_marginTop="140px"
+        android:layout_below="@+id/mingofee"
+        android:layout_width="60px"
+        android:layout_height="60px" />
     <ImageView
-        android:layout_alignBottom="@+id/xianjinjuan"
+        android:layout_below="@+id/mingofee"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="0px"
+        android:layout_marginRight="10px"
+        android:layout_marginTop="140px"
         android:layout_marginBottom="30px"
         android:src="@drawable/fanxinjiantou"
         android:layout_width="50px"
         android:layout_height="50px" />
-    <LinearLayout
-        android:id="@+id/feefenggexian3"
-        android:background="#9eebda"
-        android:layout_below="@+id/xianjinjuan"
+
+    <View
+        android:layout_below="@+id/textView4"
+        android:background="#c4c4c4"
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:orientation="horizontal" />
-    <TextView
-        android:id="@+id/mingofee"
-        android:text=""
-        android:layout_marginBottom="25px"
-        android:layout_marginRight="50px"
-        android:layout_alignParentRight="true"
-        android:layout_alignBottom="@+id/xianjinjuan"
-        android:textSize="40px"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="1px"/>
+
 
 </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/feefenggexian4"
-        android:background="#9eebda"
         android:layout_below="@+id/feechongzhi"
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="30px"
         android:orientation="horizontal" />
+
     <TextView
+        android:background="#fffffe"
         android:paddingTop="30px"
+        android:paddingLeft="110px"
         android:id="@+id/wodetuiguang"
-        android:layout_marginLeft="40px"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/feefenggexian4"
         android:textSize="40px"
         android:text="我的推广"
         android:layout_width="match_parent"
-        android:layout_height="80px" />
+        android:layout_height="100px" />
+    <ImageView
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:layout_below="@+id/feefenggexian4"
+        android:src="@mipmap/tuiguang_icon"
+        android:layout_width="60px"
+        android:layout_height="60px" />
     <ImageView
         android:layout_below="@+id/feefenggexian4"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="0px"
+        android:layout_marginRight="10px"
         android:layout_marginTop="20px"
         android:layout_marginBottom="20px"
         android:src="@drawable/fanxinjiantou"
         android:layout_width="50px"
         android:layout_height="50px" />
+
+    <TextView
+        android:background="#fffffe"
+        android:paddingTop="30px"
+        android:paddingLeft="110px"
+        android:id="@+id/wode_vip_tv"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/wodetuiguang"
+        android:textSize="40px"
+        android:text="我的会员"
+        android:textColor="#f1b732"
+        android:layout_width="match_parent"
+        android:layout_height="100px" />
+    <ImageView
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="20px"
+        android:layout_below="@+id/wodetuiguang"
+        android:src="@mipmap/viplogo"
+        android:layout_width="60px"
+        android:layout_height="60px" />
+    <ImageView
+        android:layout_below="@+id/wodetuiguang"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10px"
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="20px"
+        android:src="@drawable/fanxinjiantou"
+        android:layout_width="50px"
+        android:layout_height="50px" />
+
     <LinearLayout
         android:id="@+id/feefenggexian5"
         android:background="#9eebda"
         android:layout_marginTop="20px"
         android:layout_below="@+id/wodetuiguang"
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="0px"
         android:orientation="horizontal" />
-    <TextView
-        android:layout_marginLeft="40px"
-        android:id="@+id/my_bill"
-        android:text="我的账单"
-        android:layout_marginTop="20px"
-        android:textSize="40px"
-        android:layout_marginRight="40px"
-        android:layout_below="@+id/feefenggexian5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <ImageView
-        android:layout_below="@+id/feefenggexian5"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="0px"
-        android:layout_marginTop="10px"
-        android:layout_marginBottom="20px"
-        android:src="@drawable/fanxinjiantou"
-        android:layout_width="50px"
-        android:layout_height="50px" />
+
 </RelativeLayout>

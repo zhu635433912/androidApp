@@ -2,64 +2,62 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="#e0eaf1"
+    android:background="#fdfdfd"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
+    <View
+        android:id="@+id/text23"
+        android:background="#e6e6e6"
+        android:layout_width="match_parent"
+        android:layout_height="15px"/>
     <RelativeLayout
+        android:layout_below="@+id/text23"
         android:layout_marginTop="20px"
-        android:background="@drawable/mianlistview"
         android:layout_gravity="center"
         android:layout_width="700px"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
-        <!--<modle.toos.CircleImageView-->
-        <!--android:id="@+id/lognhost"-->
-        <!--android:layout_alignParentTop="true"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_marginTop="14px"-->
-        <!--android:layout_marginLeft="14px"-->
-        <!--android:src="@drawable/ox2"-->
-        <!--android:layout_width="56px"-->
-        <!--android:layout_height="56px" />-->
-        <ImageView
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            app:roundAsCircle="true"
             android:id="@+id/lognhost"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="14px"
             android:scaleType="centerInside"
-            android:layout_marginTop="14px"
-            android:src="@drawable/ox2"
-            android:layout_width="56px"
-            android:layout_height="56px" />
+            android:layout_marginTop="10px"
+            app:placeholderImage="@drawable/ox2"
+            android:layout_width="80px"
+            android:layout_height="80px" />
         <TextView
             android:layout_marginLeft="25px"
             android:layout_marginTop="16px"
             android:layout_alignTop="@+id/lognhost"
             android:layout_toRightOf="@+id/lognhost"
-            android:textSize="24px"
+            android:textSize="28px"
             android:id="@+id/text1"
-            android:text="名字"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:layout_marginRight="20px"
-            android:layout_alignTop="@+id/text9"
-            android:layout_toLeftOf="@+id/text9"
+            android:layout_marginLeft="30px"
+            android:layout_alignTop="@+id/text1"
+            android:layout_toRightOf="@+id/text1"
             android:id="@+id/text2"
             android:textSize="24px"
-            android:text="年级"
+            android:textColor="#2dd0fd"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:textColor="#ea993c"
+            android:textColor="#fbb805"
             android:textSize="25px"
             android:text=""
-            android:layout_toLeftOf="@+id/text2"
+            android:layout_toLeftOf="@+id/text9"
             android:layout_alignTop="@+id/text9"
-            android:layout_marginRight="10px"
+            android:layout_marginRight="20px"
             android:id="@+id/education_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -68,10 +66,10 @@
             android:layout_marginTop="16px"
             android:layout_alignTop="@+id/text3"
             android:layout_toLeftOf="@+id/text3"
-            android:textColor="#a0d9fe"
+            android:textColor="#383738"
             android:id="@+id/text9"
             android:textSize="24px"
-            android:text="服务类型"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -79,16 +77,27 @@
             android:layout_marginRight="25px"
             android:layout_marginTop="20px"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@+id/text31"
             android:textColor="#a0d9fe"
             android:textSize="40px"
             android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/text31"
+            android:layout_marginRight="25px"
+            android:layout_marginTop="36px"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:textSize="25px"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
             android:id="@+id/tlucahwodjawf"
             android:layout_marginTop="20px"
-            android:background="#a0d9fe"
+            android:layout_marginLeft="120px"
+            android:background="#fbb805"
             android:layout_below="@+id/text3"
             android:layout_width="match_parent"
             android:layout_height="1px" />
@@ -102,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:layout_marginTop="8px"
+            android:layout_marginTop="20px"
             android:layout_marginLeft="20px"
             android:textColor="#4b4b4b"
             android:textSize="33px"
@@ -114,42 +123,52 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:layout_marginLeft="40px"
-            android:textSize="26px"
+            android:textSize="28px"
             android:id="@+id/text6"
             android:maxLines="2"
-            android:layout_marginTop="10px"
-            android:layout_below="@+id/text5"
             android:layout_width="570px"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text5"
+            android:layout_toRightOf="@+id/teacher_address_icon"
+            />
+            <!--android:layout_toEndOf="@+id/teacher_address_icon" />-->
+        <ImageView
+            android:layout_below="@+id/text6"
+            android:id="@+id/teacher_address_icon"
+            android:layout_marginLeft="14px"
+            android:layout_marginTop="20px"
+            android:layout_alignParentLeft="true"
+            android:src="@mipmap/main_address_icon"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/text7"
             android:layout_below="@+id/text6"
             android:layout_marginLeft="14px"
-            android:layout_marginTop="8px"
-            android:layout_alignParentLeft="true"
-            android:text="14km"
-            android:textSize="24px"
+            android:layout_marginTop="20px"
+            android:layout_marginBottom="20px"
+            android:layout_toRightOf="@+id/teacher_address_icon"
+            android:text=""
+            android:textSize="20px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:layout_below="@+id/text6"
             android:id="@+id/text8"
-            android:layout_marginRight="14px"
-            android:layout_marginBottom="4px"
-            android:layout_marginTop="25px"
-            android:layout_alignParentRight="true"
-            android:textSize="26px"
-            android:text="11111"
+            android:textSize="20px"
+            android:text=""
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/text7"
+            android:layout_alignParentRight="true"/>
         <ImageView
             android:layout_below="@+id/text6"
             android:layout_marginRight="20px"
             android:layout_toLeftOf="@+id/text8"
             android:layout_marginTop="30px"
             android:id="@+id/imagehaop"
-            android:layout_width="150px"
+            android:layout_width="0px"
             android:layout_height="20px" />
+
     </RelativeLayout>
+
 </RelativeLayout>

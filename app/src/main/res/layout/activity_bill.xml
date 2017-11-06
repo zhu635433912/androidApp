@@ -38,10 +38,12 @@
     <LinearLayout
         android:id="@+id/bill_title"
         android:orientation="horizontal"
-        android:background="#e2e2e2"
-        android:layout_below="@id/xuqiufenggexian"
+        android:background="#e2d276"
         android:layout_width="match_parent"
-        android:layout_height="80px">
+        android:layout_height="80px"
+        android:layout_below="@+id/bill_back"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"

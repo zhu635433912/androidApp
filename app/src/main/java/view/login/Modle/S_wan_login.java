@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.exceptions.HyphenateException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -321,20 +319,20 @@ public class S_wan_login implements Modle_wan_login {
                     //注册环信账号
                     //注册失败会抛出HyphenateException
                     if (i == 1) {
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    EMClient.getInstance().createAccount(username,
-    //                            password
-                                            "123456"
-                                    );//同步方法
-                                } catch (HyphenateException e) {
-                                    e.printStackTrace();
-                                }
-                                Log.e("aa", "环信注册成功");
-                            }
-                        }).start();
+//                        new Thread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                try {
+//                                    EMClient.getInstance().createAccount(username,
+//    //                            password
+//                                            "123456"
+//                                    );//同步方法
+//                                } catch (HyphenateException e) {
+//                                    e.printStackTrace();
+//                                }
+//                                Log.e("aa", "环信注册成功");
+//                            }
+//                        }).start();
 
                     }
                     User_id.setUsername(username);

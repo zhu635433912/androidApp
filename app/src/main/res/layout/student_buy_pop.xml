@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="16dp"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/buy_pop_close"
+        android:layout_gravity="right"
+        android:layout_marginRight="15px"
+        android:layout_marginTop="15px"
+        android:src="@drawable/honor_del"
+        android:layout_width="60px"
+        android:layout_height="60px" />
+    <LinearLayout
+        android:layout_marginTop="20px"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+       <TextView
+           android:layout_marginTop="20px"
+           android:textSize="26px"
+           android:layout_gravity="center"
+           android:text="有老师想给你上课啦"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content" />
+        <View
+            android:layout_marginTop="20px"
+            android:background="#eaea72"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120px">
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/buy_head_image"
+                app:placeholderImage="@drawable/hold_head"
+                android:layout_marginTop="20px"
+                android:layout_marginLeft="50px"
+                android:layout_width="80px"
+                android:layout_height="80px" />
+            <TextView
+                android:id="@+id/buy_nickname_tv"
+                android:text="名字"
+                android:layout_marginTop="20px"
+                android:layout_marginLeft="50px"
+                android:textSize="30px"
+                android:layout_toRightOf="@+id/buy_head_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/buy_sign_tv"
+                android:text="名字dqwdqdqwdqdqwdqdqwdqwdqwd"
+                android:layout_marginRight="50px"
+                android:layout_marginTop="20px"
+                android:layout_marginLeft="50px"
+                android:textSize="28px"
+                android:layout_below="@+id/buy_nickname_tv"
+                android:layout_toRightOf="@+id/buy_head_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <View
+            android:layout_marginLeft="200px"
+            android:background="#eaea72"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+        <TextView
+            android:textSize="28px"
+            android:text="个人简介"
+            android:layout_marginLeft="50px"
+            android:layout_marginTop="20px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/buy_resume_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="100px"
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            android:layout_marginTop="10px"
+            android:maxLines="3"
+            android:text="      个人大青蛙多群无多群无多群无多大青蛙多群无多群无大青蛙多群无多群无多群无多简介"
+            android:textColor="#b1b1b1"
+            android:textSize="25px" />
+
+        <View
+        android:layout_marginTop="20px"
+        android:background="#eaea72"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+        <LinearLayout
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="70px">
+            <TextView
+                android:text="教学案例"
+                android:layout_width="0px"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:text="20"
+                android:id="@+id/buy_number_tv"
+                android:gravity="center"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+            <View
+
+                android:layout_marginTop="10px"
+                android:layout_marginBottom="10px"
+                android:layout_width="1px"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/buy_distance_tv"
+                android:text="距我1.5km"
+                android:gravity="center"
+                android:layout_width="0px"
+                android:layout_weight="2"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="20px"
+            android:background="#eaea72"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+        <LinearLayout
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="70px">
+            <TextView
+                android:text="星级评价"
+                android:layout_width="0px"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+            <ImageView
+                android:id="@+id/buy_star_image"
+                android:text="20"
+                android:layout_margin="15px"
+                android:src="@drawable/five"
+                android:gravity="center"
+                android:layout_width="0px"
+                android:layout_weight="2"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/buy_score_tv"
+                android:text="4.6分"
+                android:gravity="center"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="20px"
+            android:background="#eaea72"
+            android:layout_width="match_parent"
+            android:layout_height="1px"/>
+        <TextView
+            android:layout_marginTop="20px"
+            android:text="被接单课程"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_marginLeft="20px"
+            android:layout_marginRight="20px"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="80px">
+            <TextView
+                android:id="@+id/buy_course_tv"
+                android:textSize="30px"
+                android:text="小学（语文）"
+                android:layout_width="0px"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/buy_fee_tv"
+                android:textSize="30px"
+                android:textColor="#f22a5c"
+                android:text="¥50/小时"
+                android:gravity="center"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@mipmap/buy_btn"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/buy_next_tv"
+                android:gravity="center"
+                android:text="下一个"
+                android:layout_weight="1"
+                android:layout_width="0px"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/buy_buy_tv"
+                android:gravity="center"
+                android:text="购买"
+                android:layout_weight="1"
+                android:layout_width="0px"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

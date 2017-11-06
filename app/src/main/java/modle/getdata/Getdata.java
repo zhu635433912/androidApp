@@ -286,8 +286,8 @@ public class Getdata {
 
     }
     //提现
-    public void getCash(int uid , String bank_name, String back_number, int type, float fee, final CashView cashView){
-        Call<User_Modle> call = data.getcash(uid,bank_name,back_number,type,fee);
+    public void getCash(int uid , String bank_name, String back_number, int type, float fee,String paypsw, final CashView cashView){
+        Call<User_Modle> call = data.getcash(uid,bank_name,back_number,type,fee,paypsw);
         call.enqueue(new Callback<User_Modle>() {
             @Override
             public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {
@@ -417,6 +417,25 @@ public class Getdata {
             }
         });
     }
+    //获取客服列表
+    public void getServiceList(final TurnoverView turnoverView){
+        Call<ContentModle> call = data.getService();
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                if (response.body().getError().equals("ok")){
+                    turnoverView.successTurnover(response.body().getContent());
+                }else {
+                    turnoverView.failTurnover("获取失败");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                turnoverView.failTurnover("网络错误");
+            }
+        });
+    }
 
     //发送消息
     public void sendMessage(String content,String tel){
@@ -443,6 +462,7 @@ public class Getdata {
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
                 if (response.body().getError().equals("ok")){
                     distributionView.successDistribution(response.body().getContent());
+                    distributionView.successMoney(response.body().getContent2());
                 }else {
                     distributionView.failDistribution("获取失败");
                 }

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="#ffffff"
+tools:context="com.deguan.xuelema.androidapp.DemandDetailActivity">
+<com.deguan.xuelema.androidapp.viewimpl.FlexibleScrollView
+    android:id="@+id/flexible_scroll_vew"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fadingEdge="none"
+    android:background="#ffffff"
+    android:fadingEdgeLength="0dp"
+    android:fillViewport="true"
+    android:scrollbars="none" >
+
+    <LinearLayout
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <include
+            android:id="@+id/flexible_header_view"
+            layout="@layout/demand_header_layout" />
+
+        <LinearLayout
+            android:layout_marginLeft="80px"
+            android:layout_marginTop="30px"
+            android:layout_marginRight="80px"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/demand_course_tv"
+                android:layout_weight="1"
+                android:text="语文"
+                android:textSize="35px"
+                android:textColor="#6f6f6f"
+                android:layout_width="0px"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/demand_grade_tv"
+                android:text="人教版   小学三年级"
+                android:textSize="35px"
+                android:textColor="#6f6f6f"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginLeft="80px"
+            android:layout_marginRight="80px"
+            android:layout_marginTop="30px"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="26px"
+                android:textColor="#696969"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="预计课时费用" />
+            <TextView
+                android:id="@+id/demand_fee_tv"
+                android:textSize="26px"
+                android:textColor="#f90925"
+                android:text="199元/小时"
+                android:gravity="center"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/demand_stats_tv"
+                android:textSize="26px"
+                android:textColor="#4ea0fc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="暂未接取" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="30px"
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            android:background="#ece25e"
+            android:layout_width="match_parent"
+            android:layout_height="2px" />
+        <LinearLayout
+            android:id="@+id/demand_address_ll"
+            android:layout_marginTop="25px"
+            android:layout_marginLeft="80px"
+            android:layout_marginRight="100px"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50px">
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@mipmap/main_address_icon"
+                android:layout_width="25px"
+                android:layout_height="25px" />
+
+            <TextView
+                android:id="@+id/demand_address_tv"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:textColor="#606060"
+                android:layout_marginLeft="30px"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="浙江台州路桥泉井... ..."
+                android:textSize="30px" />
+
+            <TextView
+                android:id="@+id/demand_distance_tv"
+                android:textColor="#606060"
+                android:textSize="25px"
+                android:gravity="center_vertical"
+                android:text="距我12km"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="25px"
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            android:background="#ece25e"
+            android:layout_width="match_parent"
+            android:layout_height="1px" />
+        <LinearLayout
+            android:layout_marginTop="25px"
+            android:layout_marginLeft="80px"
+            android:layout_marginRight="100px"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50px">
+            <TextView
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textSize="32px"
+
+                android:gravity="center_vertical"
+                android:text="对教师的要求" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/demand_gender_ll"
+            android:layout_marginTop="25px"
+            android:layout_marginLeft="80px"
+            android:layout_marginRight="100px"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50px">
+            <TextView
+                android:id="@+id/demand_gender_tv"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textSize="25px"
+                android:layout_marginLeft="30px"
+                android:gravity="center_vertical"
+                android:text="教师性别： 男" />
+            <TextView
+                android:textSize="25px"
+                android:id="@+id/demand_service_tv"
+                android:gravity="center_vertical"
+                android:text="服务方式： 教师上门"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:layout_marginTop="25px"
+            android:layout_marginLeft="50px"
+            android:layout_marginRight="50px"
+            android:background="#ece25e"
+            android:layout_width="match_parent"
+            android:layout_height="1px" />
+        <LinearLayout
+            android:layout_marginTop="25px"
+            android:layout_marginLeft="80px"
+            android:layout_marginRight="100px"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50px">
+            <TextView
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textSize="32px"
+                android:textColor="#606060"
+                android:gravity="center_vertical"
+                android:text="备注信息" />
+            <TextView
+                android:textColor="#606060"
+                android:textSize="25px"
+                android:id="@+id/demand_time_tv"
+                android:gravity="center_vertical"
+                android:text="2017-09-22  13:41"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="25px"
+            android:layout_marginLeft="80px"
+            android:layout_marginRight="100px"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/demand_content_tv"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textSize="25px"
+                android:layout_marginLeft="30px"
+                android:gravity="center_vertical"
+                android:text="      教师性别男jdiqjiojd大青蛙qiojdqiowjiodqwjiodwjqiodjqwihdiqwohdioqwhidqhwiohdqiowhdqiowdqiowhdioqwhdio" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_marginTop="30px"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:textSize="32px"
+            android:background="#e9db95"
+            android:gravity="center_vertical"
+            android:paddingLeft="50px"
+            android:text="相似需求" />
+
+            <com.deguan.xuelema.androidapp.utils.ScrollListview
+                android:layout_width="match_parent"
+                android:id="@+id/demand_list"
+                android:layout_height="wrap_content">
+
+            </com.deguan.xuelema.androidapp.utils.ScrollListview>
+        </LinearLayout>
+
+</com.deguan.xuelema.androidapp.viewimpl.FlexibleScrollView>
+<include
+    android:id="@+id/custom_action_bar"
+    layout="@layout/demand_bar_layout" />
+    <ImageButton
+        android:id="@+id/bohao"
+        android:layout_marginLeft="30px"
+        android:layout_marginBottom="50px"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/xuqiuweix"
+        android:background="@drawable/hly44"
+        android:layout_width="80px"
+        android:layout_height="80px" />
+    <ImageButton
+        android:id="@+id/xuqiuweix"
+        android:layout_marginLeft="30px"
+        android:layout_marginBottom="50px"
+        android:layout_toRightOf="@+id/add_friend"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/hly49"
+        android:layout_width="80px"
+        android:layout_height="80px" />
+
+    <ImageButton
+        android:id="@+id/add_friend"
+        android:layout_marginLeft="18dp"
+        android:background="@drawable/hly33"
+        android:layout_width="80px"
+        android:layout_height="80px"
+        android:layout_alignTop="@+id/xuqiuweix"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="18dp" />
+    <ImageButton
+        android:id="@+id/xuqiudianh"
+        android:layout_marginRight="40px"
+        android:layout_alignBottom="@+id/xuqiuweix"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/order02"
+        android:layout_width="150px"
+        android:layout_height="150px" />
+</RelativeLayout>

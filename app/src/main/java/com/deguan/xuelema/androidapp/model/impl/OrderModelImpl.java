@@ -52,8 +52,8 @@ public class OrderModelImpl extends BaseOrderModel implements OrderModel {
         return instance;
     }
     @Override
-    public void getOrderData(Callback<ContentModle> callback, int uid, int filter_type, int page) {
-        service.getOredrlist(uid,filter_type,page).enqueue(callback);
+    public void getOrderData(Callback<ContentModle> callback, int uid, int filter_type, int page,int status) {
+        service.getOredrlist(uid,filter_type,page,status).enqueue(callback);
     }
     @Override
     public void getNoFinishOrderData(Callback<ContentModle> callback, int uid, int filter_type, int page,int status) {
@@ -63,4 +63,11 @@ public class OrderModelImpl extends BaseOrderModel implements OrderModel {
     public void getEvaluateOrderData(Callback<ContentModle> callback, int uid, int filter_type, int page,int status,int order_rank) {
         service.getEvaluateOredrlist(uid,filter_type,page,status,order_rank).enqueue(callback);
     }
+
+    @Override
+    public void getTeacherEvaOrderData(Callback<ContentModle> callback, int id,int page) {
+        service.getTeacherEvaOrderlist(id,page).enqueue(callback);
+    }
+
+
 }

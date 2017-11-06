@@ -33,6 +33,11 @@ public class HowToPublishActivity extends MyBaseActivity {
     ImageView imageView;
 
     @Override
+    public void before() {
+        super.before();
+    }
+
+    @Override
     public void initView() {
         ProvinceAreaHelper provinceAreaHelper = new ProvinceAreaHelper(this);
         provinceAreaHelper.initProvinceData();

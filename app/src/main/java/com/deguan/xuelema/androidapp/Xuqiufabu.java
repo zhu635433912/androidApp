@@ -30,8 +30,8 @@ import com.amap.api.location.AMapLocationListener;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.deguan.xuelema.androidapp.init.Gaodehuidiao_init;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.utils.SubjectUtil;
-import com.hyphenate.easeui.ui.EaseBaiduMapActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 
@@ -55,7 +55,7 @@ import modle.user_ziliao.User_id;
  * 需求发布
  */
 
-public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed ,Gaodehuidiao_init {
+public class  Xuqiufabu extends MyBaseActivity implements View.OnClickListener,Requirdetailed ,Gaodehuidiao_init {
     private TextView nan;
     private TextView nv;
     private TextView genderlimited;
@@ -229,6 +229,7 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
 
     }
     protected static final int REQUEST_CODE_MAP = 1;
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -236,6 +237,8 @@ public class  Xuqiufabu extends AutoLayoutActivity implements View.OnClickListen
             if (requestCode == REQUEST_CODE_MAP) { // location
                 String latitude = data.getStringExtra("latitude");
                 String longitude = data.getStringExtra("longitude");
+                lat = Double.parseDouble(latitude);
+                lng =  Double.parseDouble(longitude);
                 String locationAddress = data.getStringExtra("address");
                 if (locationAddress != null && !locationAddress.equals("")) {
                     userweizhi.setText(locationAddress);

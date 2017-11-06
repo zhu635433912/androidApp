@@ -56,10 +56,17 @@ public class MyOrderActivity extends AutoLayoutActivity {
     }
 
     private void initData() {
-        titles.add("未完成");
-        titles.add("进行中");
-        titles.add("待评价");
-        titles.add("已完成");
+        if (User_id.getRole().equals("1")) {
+            titles.add("待支付");
+            titles.add("进行中");
+            titles.add("待评价");
+            titles.add("已完成");
+        }else {
+            titles.add("待支付");
+            titles.add("待授课");
+            titles.add("已授课");
+            titles.add("已完成");
+        }
         fragments.add(NotFinishFragment_.builder().build());
         fragments.add(ConductFragment_.builder().build());
         fragments.add(EvaluationFragment_.builder().build());
@@ -68,5 +75,6 @@ public class MyOrderActivity extends AutoLayoutActivity {
         viewPager.setAdapter(adapter);
         tableLayout.setupWithViewPager(viewPager);
         tableLayout.setTabMode(TabLayout.MODE_FIXED);
+        viewPager.setOffscreenPageLimit(4);
     }
 }

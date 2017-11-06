@@ -115,7 +115,7 @@ public class PhotoBitmapUtils {
         try {
             outStream = new FileOutputStream(fileName);
             // 把数据写入文件，100表示不压缩
-            mbitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+            mbitmap.compress(Bitmap.CompressFormat.PNG, 33, outStream);
             return fileName;
         } catch (Exception e) {
             e.printStackTrace();
@@ -144,7 +144,7 @@ public class PhotoBitmapUtils {
     public static Bitmap getCompressPhoto(String path) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = false;
-        options.inSampleSize = 1;  // 图片的大小设置为原来的十分之一
+        options.inSampleSize = 3;  // 图片的大小设置为原来的十分之一
         Bitmap bmp = BitmapFactory.decodeFile(path, options);
         options = null;
         return bmp;

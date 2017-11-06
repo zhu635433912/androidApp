@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.deguan.xuelema.androidapp.SuggestActivity">
+
+    <RelativeLayout
+        android:id="@+id/feehost"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <ImageButton
+            android:layout_marginLeft="34px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/add19"
+            android:layout_width="25px"
+            android:layout_height="35px" />
+        <RelativeLayout
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/withdraw_back"
+            android:layout_width="120px"
+            android:layout_height="100px">
+        </RelativeLayout>
+
+        <TextView
+            android:layout_marginLeft="120px"
+            android:layout_centerVertical="true"
+            android:textSize="40px"
+            android:text="宝贵的建议"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+    <View
+        android:layout_below="@+id/feehost"
+        android:id="@+id/feefenggexian4"
+        android:background="#f1f1f1"
+        android:layout_width="match_parent"
+        android:layout_height="30px"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</RelativeLayout>

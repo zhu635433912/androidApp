@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#f9f9f9"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <View
+        android:background="#cecece"
+        android:layout_width="match_parent"
+        android:layout_height="10px"/>
+    <RelativeLayout
+        android:layout_marginTop="20px"
+        android:background="#f9f9f9"
+        android:layout_gravity="center"
+        android:layout_width="700px"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+        <com.facebook.drawee.view.SimpleDraweeView
+            app:roundAsCircle="true"
+            android:id="@+id/lognhost"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="14px"
+            app:actualImageScaleType="focusCrop"
+            android:layout_marginTop="14px"
+            app:placeholderImage="@drawable/ox2"
+            android:layout_width="56px"
+            android:layout_height="56px" />
+        <TextView
+            android:layout_marginLeft="25px"
+            android:layout_marginTop="16px"
+            android:layout_alignTop="@+id/lognhost"
+            android:layout_toRightOf="@+id/lognhost"
+            android:textSize="28px"
+            android:textColor="#9c9c9c"
+            android:id="@+id/text1"
+            android:text="名字"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginRight="20px"
+            android:layout_alignTop="@+id/text9"
+            android:layout_toLeftOf="@+id/text9"
+            android:id="@+id/text2"
+            android:textSize="26px"
+            android:textColor="#fbb805"
+            android:text="年级"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textColor="#ea993c"
+            android:textSize="25px"
+            android:text=""
+            android:layout_toLeftOf="@+id/text2"
+            android:layout_alignTop="@+id/text9"
+            android:layout_marginRight="10px"
+            android:id="@+id/education_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginRight="20px"
+            android:layout_marginTop="16px"
+            android:layout_alignTop="@+id/text3"
+            android:layout_toLeftOf="@+id/text3"
+            android:textColor="#484848"
+            android:id="@+id/text9"
+            android:textSize="24px"
+            android:text="服务类型"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/text3"
+            android:layout_marginRight="25px"
+            android:layout_marginTop="20px"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:textColor="#a0d9fe"
+            android:textSize="40px"
+            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/text33"
+            android:textSize="25px"
+            android:textColor="#a0d9fe"
+            android:layout_marginTop="20px"
+            android:layout_marginRight="50px"
+            android:layout_below="@+id/tlucahwodjawf"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tlucahwodjawf"
+            android:layout_marginTop="20px"
+            android:layout_marginLeft="80px"
+            android:layout_marginRight="80px"
+            android:background="#fbb805"
+            android:layout_below="@+id/text3"
+            android:layout_width="match_parent"
+            android:layout_height="1px" />
+        <TextView
+            android:layout_marginLeft="20px"
+            android:textColor="#4b4b4b"
+            android:textSize="40px"
+            android:layout_marginTop="20px"
+            android:layout_below="@+id/tlucahwodjawf"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="20px"
+            android:layout_marginLeft="20px"
+            android:textColor="#4b4b4b"
+            android:textSize="33px"
+            android:text=""
+            android:layout_below="@+id/tlucahwodjawf"
+            android:layout_toRightOf="@+id/text4"
+            android:id="@+id/text5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginLeft="40px"
+            android:textSize="25px"
+            android:id="@+id/text6"
+            android:maxLines="2"
+            android:layout_marginTop="15px"
+            android:layout_below="@+id/text5"
+            android:layout_width="570px"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:layout_below="@+id/text6"
+            android:id="@+id/tuijian_demand_address_icon"
+            android:layout_marginLeft="14px"
+            android:layout_marginTop="10px"
+            android:layout_alignParentLeft="true"
+            android:src="@mipmap/main_address_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_toRightOf="@+id/tuijian_demand_address_icon"
+            android:layout_below="@+id/text6"
+            android:id="@+id/text7"
+            android:layout_marginBottom="20px"
+            android:layout_marginLeft="14px"
+            android:layout_marginTop="10px"
+            android:text="14km"
+            android:textSize="25px"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_below="@+id/text6"
+            android:id="@+id/text8"
+            android:layout_marginRight="14px"
+            android:layout_marginBottom="20px"
+            android:layout_marginTop="10px"
+            android:layout_alignParentRight="true"
+            android:textSize="26px"
+            android:text="2122112"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_below="@+id/text6"
+            android:layout_marginRight="20px"
+            android:layout_alignBottom="@+id/text8"
+            android:layout_toLeftOf="@+id/text8"
+            android:layout_marginTop="30px"
+            android:id="@+id/imagehaop"
+            android:layout_width="150px"
+            android:layout_height="20px" />
+
+    </RelativeLayout>
+</RelativeLayout>

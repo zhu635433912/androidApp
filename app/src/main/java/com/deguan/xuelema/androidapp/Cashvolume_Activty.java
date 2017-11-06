@@ -17,13 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.viewimpl.CashListView;
 import com.deguan.xuelema.androidapp.viewimpl.CashView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.hyphenate.chat.EMChatManager;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMConversation;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.ArrayList;
@@ -38,7 +36,7 @@ import modle.user_ziliao.User_id;
  * 现金卷
  */
 
-public class Cashvolume_Activty extends AutoLayoutActivity implements PullToRefreshBase.OnRefreshListener2,View.OnClickListener,Requirdetailed,CashView,CashListView{
+public class Cashvolume_Activty extends MyBaseActivity implements PullToRefreshBase.OnRefreshListener2,View.OnClickListener,Requirdetailed,CashView,CashListView{
     private Button xinjinjuantixian;
     private RelativeLayout xianjinjbufanhui;
     private TextView mogint;
@@ -114,7 +112,7 @@ public class Cashvolume_Activty extends AutoLayoutActivity implements PullToRefr
                     if (Double.parseDouble(cashId.getText().toString())>myBalance){
                         Toast.makeText(Cashvolume_Activty.this, "可提现金额不足", Toast.LENGTH_SHORT).show();
                     }else if(cashFee % 100 == 0){
-                        getdata.getCash(Integer.parseInt(User_id.getUid()), User_id.getUsername(), "现金券提现", 3, Float.parseFloat(cashId.getText().toString()), Cashvolume_Activty.this);
+                        getdata.getCash(Integer.parseInt(User_id.getUid()), User_id.getUsername(), "现金券提现", 3, Float.parseFloat(cashId.getText().toString()), "",Cashvolume_Activty.this);
                                         Toast.makeText(Cashvolume_Activty.this,"已提交提现申请",Toast.LENGTH_LONG).show();
 
                     }else {

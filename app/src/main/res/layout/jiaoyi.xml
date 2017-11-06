@@ -14,9 +14,9 @@
         android:layout_height="0px" />
     <RelativeLayout
         android:id="@+id/grfanhui"
-    android:background="#fdfdfe"
-    android:layout_width="match_parent"
-    android:layout_height="100px">
+        android:background="#fdfdfe"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
         <TextView
             android:id="@+id/jiaoyi_jubao"
             android:layout_centerVertical="true"
@@ -72,13 +72,14 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
-             <ImageView
+             <com.facebook.drawee.view.SimpleDraweeView
+                app:roundAsCircle="true"
                  android:id="@+id/gerxxtoux"
                  android:layout_marginTop="58px"
                  android:layout_alignParentTop="true"
                  android:layout_centerHorizontal="true"
                  android:scaleType="centerInside"
-                 android:src="@drawable/ox2"
+                 app:placeholderImage="@drawable/ox2"
                  android:layout_width="110px"
                  android:layout_height="110px" />
             <TextView
@@ -314,7 +315,7 @@
                 android:layout_height="50px"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:src="@drawable/hly47" />
+                android:src="@drawable/hly57" />
 
             <ImageView
                 android:layout_width="50px"
@@ -416,7 +417,7 @@
             android:text="证书"
             android:textColor="#f8d07d"
             android:textSize="35px" />
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:layout_marginBottom="250px"
             android:id="@+id/teacher_card_pic"
             android:layout_toRightOf="@+id/textView7"

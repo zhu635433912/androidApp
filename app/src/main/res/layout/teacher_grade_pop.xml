@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/grade0"
+        android:padding="20px"
+        android:background="#f9f8f8"
+        android:textSize="30px"
+        android:text="不限"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="100px" />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+        android:id="@+id/grade1"
+        android:padding="20px"
+        android:background="#f9f8f8"
+
+        android:textSize="30px"
+        android:text="小学"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="100px" />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+        android:id="@+id/grade2"
+        android:padding="20px"
+        android:background="#f9f8f8"
+
+        android:textSize="30px"
+        android:text="初中"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="100px" />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+        android:id="@+id/grade3"
+        android:padding="20px"
+        android:background="#f9f8f8"
+
+        android:textSize="30px"
+        android:text="高中"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="100px" />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+        android:background="#f9f8f8"
+        android:id="@+id/grade4"
+        android:padding="20px"
+        android:textSize="30px"
+        android:text="大学"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <View
+        android:id="@+id/pop_cancel"
+        android:background="#e0dadada"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

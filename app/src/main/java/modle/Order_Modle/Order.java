@@ -9,6 +9,7 @@ import com.deguan.xuelema.androidapp.init.Ordercontent_init;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
+import com.deguan.xuelema.androidapp.viewimpl.MyPublishView;
 import com.deguan.xuelema.androidapp.viewimpl.TuijianView;
 
 import java.util.ArrayList;
@@ -417,4 +418,84 @@ public class Order implements Order_init {
             }
         });
     }
+
+    public void cancel_order(int uid,int id, final ChangeOrderView changeOrderView){
+        Call<Demtest> call=oredr_http.cancel_order(uid,id);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+//                    changeOrderView.successOrder("已提交完成授课");
+//                    Log.e("aa","订单退款成功");
+                }else {
+                    String errmsg=response.body().getErrmsg();
+//                    Log.e("aa","评论退款失败="+errmsg);
+//                    changeOrderView.successOrder(errmsg);
+                }
+            }
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                changeOrderView.failOrder("网络错误");
+
+            }
+        });
+    }
+
+    public void getReceptOrder(int uid, String lat, String lng, final MyPublishView myPublishView){
+        Call<ContentModle> call = oredr_http.getReceptOrder(uid,lat,lng);
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    Log.e("aa","获取推荐教师成功");
+                    if (response.body().getContent() .size() == 0) {
+//                        myPublishView.failMyPublish("您还未发布");
+                    }
+                    List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+                    list = response.body().getContent();
+                    myPublishView.successMyPublish(list);
+
+                }else {
+//                    myPublishView.failMyPublish("您还未发布");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                myPublishView.failMyPublish("网络错误");
+            }
+        });
+
+    }
+
+    public void getDemandOrder(int uid,String requiment_id ,String lat, String lng, final MyPublishView myPublishView){
+        Call<ContentModle> call = oredr_http.getDemandOrder(uid,requiment_id,lat,lng);
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    Log.e("aa","获取推荐教师成功");
+                    if (response.body().getContent() .size() == 0) {
+//                        myPublishView.failMyPublish("您还未发布");
+                    }
+                    List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+                    list = response.body().getContent();
+                    myPublishView.successMyPublish(list);
+
+                }else {
+//                    myPublishView.failMyPublish("您还未发布");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                myPublishView.failMyPublish("网络错误");
+            }
+        });
+
+    }
+
 }

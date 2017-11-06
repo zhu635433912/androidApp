@@ -19,6 +19,10 @@ public interface Teacher_http {
     */
     @POST("index.php?s=/Service/Teacher/get_information")
     Call<User_Modle> getTeacherziliao(@Query("uid") int id);
+    //学生获取教师
+    @POST("index.php?s=/Service/Teacher/get_teacher")
+    Call<User_Modle> getTeacherDetail( @Query("lat") String lat, @Query("lng") String lng,@Query("uid") int uid,@Query("id") int id,@Query("number")int number);
+
     /*
     获取教师详细个人资料
      */
@@ -88,13 +92,17 @@ public interface Teacher_http {
     Call<Demtest> getyears(@Query("uid") int uid,@Query("years") int years);
 
     @POST("index.php?s=/Service/Teacher/update_information")
-    Call<Demtest> setExper(@Query("uid")int uid,@Query("exper")String exper,@Query("exper_img")String exper_img);
+    Call<Demtest> setExper(@Query("uid")int uid,@Query("exper")String exper,@Query("img1")String exper_img);
 
     /*
     教师资料更新个人简介
     */
     @POST("index.php?s=/Service/Teacher/update_information")
     Call<Demtest> getresume(@Query("uid") int uid,@Query("resume") String resume);
+    //教师个人照片
+
+    @POST("index.php?s=/Service/Teacher/update_information")
+    Call<Demtest> updatePic(@Query("uid")int uid,@Query("img1")String img1,@Query("img2")String img2,@Query("img3")String img3);
     /*
     教师资料更新个人特长
     */
@@ -112,6 +120,7 @@ public interface Teacher_http {
     @POST("index.php?s=/Service/Teacher/update_information")
     Call<Demtest> UpdateTime(@Query("uid")int uid,@Query("starttime")String starttime,@Query("endtime")String endtime);
 
+    //备注
     @POST("index.php?s=/Service/Teacher/update_information")
     Call<Demtest> UpdateRemark(@Query("uid")int uid,@Query("remark")String remark);
     /*
@@ -145,5 +154,7 @@ public interface Teacher_http {
 
     @POST("index.php?s=/Service/Order/gets_order_complete")
     Call<ContentModle> getExample(@Query("id")int id,@Query("page")int page);
+
+
 
 }

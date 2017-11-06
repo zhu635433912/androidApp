@@ -1,6 +1,7 @@
 package modle.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -9,9 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.text.DecimalFormat;
@@ -83,8 +85,10 @@ public class DmadAdapter extends RecyclerView.Adapter<DmadAdapter.MyViewHolder> 
             }
         }
         if (listmap.get(position).get("publisher_headimg") != null) {
-            Glide.with(context.getApplicationContext()).load(listmap.get(position).get("publisher_headimg").toString())
-                    .transform(new GlideCircleTransform(context)).into(holder.lognhost);
+//            Glide.with(context.getApplicationContext()).load(
+//                    listmap.get(position).get("publisher_headimg").toString())
+//                    .transform(new GlideCircleTransform(context)).into(holder.lognhost);
+            holder.lognhost.setImageURI(Uri.parse(listmap.get(position).get("publisher_headimg")+""));
         }
         if (listmap.get(position).get("grade_name")!=null) {
             holder.text2.setText(listmap.get(position).get("grade_name").toString() + "");
@@ -104,10 +108,10 @@ public class DmadAdapter extends RecyclerView.Adapter<DmadAdapter.MyViewHolder> 
 //            myDist = Integer.parseInt(dist)/1000;
 //        }
 //        int lat = myDist/1000;
-        if (!TextUtils.isEmpty(listmap.get(position).get("address")+"")) {
+        if ((listmap.get(position).get("address")+"").length()>7) {
             holder.text7.setText(df.format(myDist) + "km       " + ((String) listmap.get(position).get("address")).substring(0, 7) + "......");
         }else {
-            holder.text7.setText(df.format(myDist) + "km       " );
+            holder.text7.setText(df.format(myDist) + "km       " + listmap.get(position).get("address") );
         }
         holder.text8.setText(""+listmap.get(position).get("created"));
         holder.itemView.setTag(position);
@@ -123,7 +127,7 @@ public class DmadAdapter extends RecyclerView.Adapter<DmadAdapter.MyViewHolder> 
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView lognhost;
+        SimpleDraweeView lognhost;
         TextView text1;//name
         TextView text9;//服务类型
         TextView text2;//年级
@@ -135,7 +139,7 @@ public class DmadAdapter extends RecyclerView.Adapter<DmadAdapter.MyViewHolder> 
         public MyViewHolder(View view) {
             super(view);
             AutoUtils.autoSize(itemView);
-            lognhost = (ImageView) view.findViewById(R.id.lognhost);
+            lognhost = (SimpleDraweeView) view.findViewById(R.id.lognhost);
             text1= (TextView) view.findViewById(R.id.text1);
             text9= (TextView) view.findViewById(R.id.text9);
             text2= (TextView) view.findViewById(R.id.text2);
@@ -144,7 +148,6 @@ public class DmadAdapter extends RecyclerView.Adapter<DmadAdapter.MyViewHolder> 
             text7= (TextView) view.findViewById(R.id.text7);
             text8= (TextView) view.findViewById(R.id.text8);
             imagehaop= (ImageView) view.findViewById(R.id.imagehaop);
-            lognhost= (ImageView) view.findViewById(R.id.lognhost);
         }
     }
 }

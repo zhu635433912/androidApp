@@ -15,39 +15,51 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.deguan.xuelema.androidapp.huanxin.HuihuaActivity;
-import com.deguan.xuelema.androidapp.huanxin.HuihuaList;
+import com.activeandroid.ActiveAndroid;
+import com.baidu.mapapi.SDKInitializer;
+import com.deguan.xuelema.androidapp.entities.AddFriendEntity;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.utils.DbUtil;
 import com.deguan.xuelema.androidapp.utils.TeacherDbUtil;
-import com.hyphenate.EMMessageListener;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMCmdMessageBody;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.chat.EMOptions;
-import com.hyphenate.easeui.EaseConstant;
-import com.hyphenate.easeui.EaseUI;
-import com.hyphenate.easeui.domain.EaseUser;
-import com.hyphenate.easeui.model.EaseNotifier;
-import com.hyphenate.easeui.utils.EaseCommonUtils;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.GroupInfo;
+import cn.jpush.im.android.api.model.Message;
+import cn.jpush.im.android.api.model.UserInfo;
+import jiguang.chat.activity.fragment.ContactsFragment;
+import jiguang.chat.application.JGApplication;
+import jiguang.chat.database.UserEntry;
+import jiguang.chat.entity.NotificationClickEventReceiver;
+import jiguang.chat.location.service.LocationService;
+import jiguang.chat.pickerimage.utils.StorageUtil;
+import jiguang.chat.utils.SharePreferenceManager;
+import jiguang.chat.utils.imagepicker.GlideImageLoader;
+import jiguang.chat.utils.imagepicker.ImagePicker;
+import jiguang.chat.utils.imagepicker.view.CropImageView;
 import modle.getdata.Getdata;
 
-import static com.hyphenate.easeui.utils.EaseUserUtils.getUserInfo;
 
 /**
  * 登陆成功用户的全局资料
  */
 
-public class User_id extends Application {
+public class User_id extends JGApplication {
+
+    public static final String CONV_TITLE = "conv_title";
+
+    private static final String JCHAT_CONFIGS = "JChat_configs";
+
     private static String uid;
     private static String role;
     private static String password;
@@ -61,6 +73,16 @@ public class User_id extends Application {
     private static String nickName;
     private static String province;
     private static String city;
+    private static ContactsFragment fragment;
+    private static List<AddFriendEntity> datas = new ArrayList<>();
+
+    public static ContactsFragment getFragment() {
+        return fragment;
+    }
+
+    public static void setFragment(ContactsFragment fragment) {
+        User_id.fragment = fragment;
+    }
 
     public static String getProvince() {
         return province;
@@ -87,11 +109,19 @@ public class User_id extends Application {
     }
 
     private Context appContext;
-    EMMessageListener messageListener = null;
     private List<Activity> activityList = new LinkedList<Activity>();
+
+    public static void deleteActivity() {
+        activity.finish();
+    }
+
+    public static void setActivity(Activity activity) {
+        User_id.activity = activity;
+    }
+
+    private static Activity activity;
     private static User_id instance;
     private static Map<String, Object> map;
-    private EaseUI easeUI;
     public static Map<String, Object> getMap() {
         return map;
     }
@@ -106,8 +136,7 @@ public class User_id extends Application {
         super.onCreate();
         applicationContent = this;
         instance = this;
-
-        DemoHelper.getInstance().init(applicationContent);
+        Fresco.initialize(getApplicationContext());
         //初始化Fresco
 //        FrescoHelper.getInstance().init(this);
 //        Fresco.initialize(this);
@@ -117,36 +146,28 @@ public class User_id extends Application {
         IWXAPI iwxapi = WXAPIFactory.createWXAPI(this,"wx3815ad6bb05c5aca");
         iwxapi.registerApp("wx3815ad6bb05c5aca");
         appContext = this;
-//        EMOptions options = new EMOptions();
-//        // 默认添加好友时，是不需要验证的，改成需要验证
-//        options.setAcceptInvitationAlways(true);
-//        int pid = android.os.Process.myPid();
-//        String processAppName = getAppName(pid);
-//        // 如果APP启用了远程的service，此application:onCreate会被调用2次
-//        // 为了防止环信SDK被初始化2次，加此判断会保证SDK被初始化1次
-//        // 默认的APP会在以包名为默认的process name下运行，如果查到的process name不是APP的process name就立即返回
-//        if (processAppName == null || !processAppName.equalsIgnoreCase(appContext.getPackageName())) {
-//            Log.e("aa", "enter the service process!");
-//
-//            // 则此application::onCreate 是被service 调用的，直接返回
-//            return;
-//        }
-//        //初始化环形
-//        EaseUI.getInstance().init(appContext, options);
-//        EMClient.getInstance().setDebugMode(false);
-//        easeUI = EaseUI.getInstance();
 
         //初始化极光推送
         JPushInterface.setDebugMode(false);
         JPushInterface.init(this);
-//
-//        //注册聊天监听器
-//        registerMessageListener();
-//        //聊天提示
-//        liaotiantishi();
 
+        context = getApplicationContext();
+        StorageUtil.init(context, null);
+
+        Fresco.initialize(getApplicationContext());
+        SDKInitializer.initialize(getApplicationContext());
+        locationService = new LocationService(getApplicationContext());
+
+        JMessageClient.init(getApplicationContext(), true);
+        JMessageClient.setDebugMode(true);
+        SharePreferenceManager.init(getApplicationContext(), JCHAT_CONFIGS);
+        //设置Notification的模式
+        JMessageClient.setNotificationFlag(JMessageClient.FLAG_NOTIFY_WITH_SOUND | JMessageClient.FLAG_NOTIFY_WITH_LED | JMessageClient.FLAG_NOTIFY_WITH_VIBRATE);
+        //注册Notification点击的接收器
+        new NotificationClickEventReceiver(getApplicationContext());
 
     }
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -164,12 +185,25 @@ public class User_id extends Application {
         activityList.add(activity);
     }
 
+    public void addFriend(AddFriendEntity entity){
+        datas.add(entity);
+    }
+
+    public void deleteFriend(){
+        datas.clear();
+    }
+
+    public List<AddFriendEntity> getFriends(){
+        return datas;
+    }
+
+
     // 遍历所有Activity并finish
     public void exit() {
         for (Activity activity : activityList) {
             activity.finish();
         }
-        System.exit(0);
+//        System.exit(0);
     }
 
     public static String getAddress() {
@@ -251,115 +285,5 @@ public class User_id extends Application {
             }
         }
         return processName;
-    }
-
-    //环信注册聊天提示监听器
-    protected void registerMessageListener() {
-        messageListener = new EMMessageListener() {
-            @Override
-            public void onMessageReceived(List<EMMessage> list) {
-                for (EMMessage message : list) {
-                    Log.e("aa", "onMessageReceived id : " + message.getMsgId());
-                    // in background, do not refresh UI, notify it in notification bar
-                    if (!easeUI.hasForegroundActivies()) {
-                        easeUI.getNotifier().onNewMsg(message);
-                        Log.e("aa","环信聊天监听器已设置");
-                    }
-                }
-            }
-
-            @Override
-            public void onCmdMessageReceived(List<EMMessage> list) {
-                for (EMMessage message : list) {
-                    Log.e("aa", "receive command message");
-                    //get message body
-                    EMCmdMessageBody cmdMsgBody = (EMCmdMessageBody) message.getBody();
-                    final String action = cmdMsgBody.action();//获取自定义action
-                    //red packet code : 处理红包回执透传消息
-                    if (!easeUI.hasForegroundActivies()) {
-
-                    }
-
-                    if (action.equals("__Call_ReqP2P_ConferencePattern")) {
-                        String title = message.getStringAttribute("em_apns_ext", "conference call");
-                        Toast.makeText(appContext, title, Toast.LENGTH_LONG).show();
-                    }
-                    //end of red packet code
-                    //获取扩展属性 此处省略
-                    //maybe you need get extension of your message
-                    //message.getStringAttribute("");
-                    Log.e("aa", String.format("Command：action:%s,message:%s", action, message.toString()));
-                }
-            }
-            @Override
-            public void onMessageRead(List<EMMessage> list) {
-
-            }
-            @Override
-            public void onMessageDelivered(List<EMMessage> list) {
-
-            }
-
-            @Override
-            public void onMessageChanged(EMMessage emMessage, Object o) {
-                Log.e("aa", "change:");
-                Log.e("aa", "change:" + o);
-            }
-
-        };
-    }
-
-    public void liaotiantishi(){
-        Log.e("aa","环信聊天监听器准备就绪");
-        easeUI.getNotifier().setNotificationInfoProvider(new EaseNotifier.EaseNotificationInfoProvider() {
-            @Override
-            public String getDisplayedText(EMMessage message) {
-                // 设置状态栏的消息提示，可以根据message的类型做相应提示
-                String ticker = EaseCommonUtils.getMessageDigest(message,appContext);
-                Log.e("aa","收到一条短信"+ticker);
-
-                if(message.getType() == EMMessage.Type.TXT){
-                    ticker = ticker.replaceAll("\\[.{2,3}\\]", "[表情]");
-                }
-                EaseUser user = new EaseUser(message.getFrom());
-                if(user != null){
-                    return getUserInfo(message.getFrom()).getNick() + ": " + ticker;
-                }else{
-                    return message.getFrom() + ": " + ticker;
-                }
-            }
-
-            @Override
-            public String getLatestText(EMMessage message, int fromUsersNum, int messageNum) {
-                Log.e("aa","收到"+fromUsersNum+"消息");
-                return "有个基友给你发来了一条短信";
-            }
-
-            @Override
-            public String getTitle(EMMessage message) {
-                Log.e("aa","getTitle");
-                return null;
-            }
-
-            @Override
-            public int getSmallIcon(EMMessage message) {
-                Log.e("aa","message");
-                return 0;
-            }
-
-            @Override
-            public Intent getLaunchIntent(EMMessage message) {
-                Log.e("aa","getLaunchIntent");
-                //设置点击通知栏跳转事件
-                Intent intent = new Intent(appContext, HuihuaActivity.class);
-                //进入单聊界面
-                EMMessage.ChatType chatType = message.getChatType();
-                if (chatType == EMMessage.ChatType.Chat) { // 单聊信息
-                    intent.putExtra(EaseConstant.EXTRA_CHAT_TYPE, message.getFrom());
-                    intent.putExtra(EaseConstant.EXTRA_USER_ID, EaseConstant.CHATTYPE_SINGLE);
-                }
-                return intent;
-            }
-        });
     }
 }

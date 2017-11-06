@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#ffffff"
     android:layout_marginBottom="30px"
@@ -12,7 +13,8 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="100px">
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
+            app:roundAsCircle="true"
             android:id="@+id/example_head_image"
             android:layout_gravity="center"
             android:src="@drawable/hold_head"
@@ -55,14 +57,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/example_image1"
             android:layout_width="0dp"
             android:scaleType="fitXY"
             android:layout_weight="1"
             android:adjustViewBounds="true"
             android:layout_height="150px"/>
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/example_image2"
             android:adjustViewBounds="true"
             android:layout_marginLeft="20px"
@@ -70,14 +72,14 @@
             android:layout_weight="1"
             android:scaleType="fitXY"
             android:layout_height="150px" />
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/example_image3"
             android:layout_marginLeft="20px"
             android:scaleType="fitXY"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="150px" />
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/example_image4"
             android:layout_marginLeft="20px"
             android:scaleType="fitXY"

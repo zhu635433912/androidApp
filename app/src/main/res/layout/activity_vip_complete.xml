@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fffffe"
+    tools:context="com.deguan.xuelema.androidapp.VipCompleteActivity">
+    <TextView
+        android:background="@color/main_yellow"
+        android:text="充值完成"
+        android:textColor="#fffffe"
+        android:textSize="35px"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="80px" />
+    <ImageView
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/vip_complete_icon"
+        android:layout_marginTop="120px"
+        android:layout_width="140px"
+        android:layout_height="140px" />
+    <TextView
+        android:layout_marginTop="36px"
+        android:gravity="center_horizontal"
+        android:text="充值成功"
+        android:textSize="35px"
+        android:textColor="#111111"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="36px"
+        android:gravity="center_horizontal"
+        android:text="恭喜您成为尊贵的VIP会员"
+        android:textSize="32px"
+        android:textColor="#f5a056"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:background="#efefef"
+        android:layout_marginTop="200px"
+        android:textSize="34px"
+        android:text="充值金额                                500元"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="80px" />
+
+    <ImageView
+        android:id="@+id/vip_complete_image"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="78px"
+        android:src="@mipmap/vip_complete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>

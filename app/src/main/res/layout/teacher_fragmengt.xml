@@ -18,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:titleEnabled="false"
-            app:contentScrim="#9fe7f4"
-            app:statusBarScrim="#a2e6f2"
+            app:contentScrim="#f5ea6b"
+            app:statusBarScrim="#f5ea6b"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <android.support.v7.widget.Toolbar
@@ -61,7 +61,6 @@
                     android:text="2"
                     android:gravity="center"
                     android:textSize="10sp"
-                    android:background="@drawable/em_unread_dot"
                     android:visibility="gone" />
                 <ImageView
                     android:id="@+id/teacher_my"
@@ -80,7 +79,6 @@
                     android:text="2"
                     android:gravity="center"
                     android:textSize="10sp"
-                    android:background="@drawable/em_unread_dot"
                     android:visibility="gone" />
                 <ImageView
                     android:id="@+id/teacher_setup"

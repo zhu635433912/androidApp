@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="#fffffe"
     android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/querendindanfanhui"
         android:layout_width="150px"
-        android:layout_height="80px"></RelativeLayout>
+        android:layout_height="80px">
+
+    </RelativeLayout>
     <ImageButton
         android:layout_marginLeft="30px"
         android:layout_marginTop="20px"
@@ -125,27 +128,41 @@
         android:layout_below="@+id/qianbao"
         android:layout_width="match_parent"
         android:layout_height="1px" />
+    <LinearLayout
+        android:id="@+id/red_money_ll"
+        android:layout_below="@+id/xuqiufenggexian1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <TextView
+            android:id="@+id/red_pay_tv"
+            android:textSize="25px"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="红包抵用:0"
+            android:layout_height="match_parent" />
+        <TextView
+            android:text="现金券抵扣:0"
+            android:gravity="center"
+            android:id="@+id/cash_pay_edit"
+            android:layout_below="@+id/xuqiufenggexian1"
+            android:textSize="25px"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="100px" />
+    </LinearLayout>
 <TextView
     android:id="@+id/fukuanjine"
     android:layout_marginLeft="50px"
     android:layout_alignParentLeft="true"
     android:layout_marginTop="51px"
-    android:layout_below="@+id/xuqiufenggexian1"
+    android:layout_below="@+id/red_money_ll"
     android:textSize="35px"
     android:text="支付金额:"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
-    <TextView
-        android:layout_marginLeft="300px"
-        android:layout_marginTop="31px"
-        android:hint="现金券抵扣:0"
-        android:gravity="center"
-        android:id="@+id/cash_pay_edit"
-        android:inputType="number"
-        android:layout_below="@+id/xuqiufenggexian1"
-        android:textSize="20px"
-        android:layout_width="wrap_content"
-        android:layout_height="100px" />
+
     <TextView
         android:id="@+id/zhifufee"
         android:layout_marginRight="20px"

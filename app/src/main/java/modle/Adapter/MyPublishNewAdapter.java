@@ -1,6 +1,7 @@
 package modle.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -8,12 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhy.autolayout.utils.AutoUtils;
+
+import org.simple.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -79,16 +84,16 @@ public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapte
 
     @Override
     public MyPublishNewViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.teacher_list_item, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.publish_list_item, parent, false);
         view.setOnClickListener(this);
         view.setOnLongClickListener(this);
         return new MyPublishNewViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(MyPublishNewViewHolder holder, int position) {
+    public void onBindViewHolder(MyPublishNewViewHolder holder, final int position) {
         XuqiuEntity entity = list.get(position);
-        holder.nickname.setText(""+list.get(position).getPublisher_name());
+//        holder.nickname.setText(""+list.get(position).getPublisher_name());
         String serviceType = ""+list.get(position).getService_type();
         if (serviceType.equals("1")){
             holder.service_type.setText("老师上门");
@@ -99,15 +104,12 @@ public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapte
         }else {
             holder.service_type.setText("不限");
         }
-//        holder.service_type.setVisibility(View.GONE);
-        holder.fee.setText(""
-//                +list.get(position).getFee()
-        );
-//        holder.fee.setVisibility(View.GONE);
         holder.speciality.setText(""+list.get(position).getCourse_name());
         holder.username.setText(""+list.get(position).getContent());
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
-        Glide.with(context.getApplicationContext()).load(list.get(position).getPublisher_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+//        Glide.with(context.getApplicationContext()).load(list.get(position).getPublisher_headimg()).
+//                transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
         String dist = list.get(position).getDistance();
         int myDist = 0;
         if (!dist.equals("")){
@@ -118,6 +120,26 @@ public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapte
         holder.distance.setText(" ");
         holder.haoping_numtext.setText(""+list.get(position).getCreated());
         holder.nianji.setText(""+list.get(position).getGrade_name());
+        if (list.get(position).getImages().size()>0)
+        holder.teacherImage1.setImageURI(Uri.parse(list.get(position).getImages().get(0)));
+        if (list.get(position).getImages().size()>1)
+        holder.teacherImage2.setImageURI(Uri.parse(list.get(position).getImages().get(1)));
+        if (list.get(position).getImages().size()>2)
+        holder.teacherImage3.setImageURI(Uri.parse(list.get(position).getImages().get(2)));
+
+        holder.fee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EventBus.getDefault().post(list.get(position).getId(),"demandId");
+                Toast.makeText(context, "接取信息", Toast.LENGTH_SHORT).show();
+            }
+        });
+        if (list.get(position).getStatus().equals("3")){
+            holder.completeImage.setVisibility(View.VISIBLE);
+        }else {
+            holder.completeImage.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
@@ -162,7 +184,7 @@ public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapte
 
      class MyPublishNewViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView user_headimg;
+        private SimpleDraweeView user_headimg;
         //        private CircleImageView user_headimg;//用户头像
         private TextView nickname;//昵称
         private TextView service_type;//服务类型
@@ -173,15 +195,21 @@ public class MyPublishNewAdapter extends RecyclerView.Adapter<MyPublishNewAdapte
         private ImageView haoping_num;//好评数
         private TextView haoping_numtext;//好评分
         private TextView nianji;
+         private ImageView completeImage;
+         private SimpleDraweeView teacherImage1,teacherImage2,teacherImage3;
 
         public MyPublishNewViewHolder(View itemView) {
             super(itemView);
             AutoUtils.autoSize(itemView);
-            user_headimg = (ImageView) itemView.findViewById(R.id.lognhost);
-            nickname = (TextView) itemView.findViewById(R.id.text1);
+            completeImage = (ImageView) itemView.findViewById(R.id.complete_image);
+            teacherImage1 = (SimpleDraweeView) itemView.findViewById(R.id.teacher_head_image3);
+            teacherImage2 = (SimpleDraweeView) itemView.findViewById(R.id.teacher_head_image2);
+            teacherImage3 = (SimpleDraweeView) itemView.findViewById(R.id.teacher_head_image1);
+            user_headimg = (SimpleDraweeView) itemView.findViewById(R.id.lognhost);
+//            nickname = (TextView) itemView.findViewById(R.id.text1);
             service_type = (TextView) itemView.findViewById(R.id.text9);
             fee = (TextView) itemView.findViewById(R.id.text3);
-            speciality = (TextView) itemView.findViewById(R.id.text4);
+            speciality = (TextView) itemView.findViewById(R.id.text1);
             username = (TextView) itemView.findViewById(R.id.text6);
             distance = (TextView) itemView.findViewById(R.id.text7);
             haoping_numtext = (TextView) itemView.findViewById(R.id.text8);

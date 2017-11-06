@@ -38,7 +38,7 @@ import modle.user_ziliao.User_id;
  * 评价
  */
 @EFragment(R.layout.tuijian_new_fragment)
-public class EvaluationFragment extends BaseFragment implements OrderView, SwipeRefreshLayout.OnRefreshListener, OrderNewAdapter.OnTopClickListener {
+public class EvaluationFragment extends MyBaseFragment implements OrderView, SwipeRefreshLayout.OnRefreshListener, OrderNewAdapter.OnTopClickListener {
 
     @ViewById(R.id.tuijian_listview)
     RecyclerView listView;
@@ -84,7 +84,7 @@ public class EvaluationFragment extends BaseFragment implements OrderView, Swipe
                         if (User_id.getRole().equals("1")) {
                             new OrderPresenterImpl(EvaluationFragment.this, Integer.parseInt(User_id.getUid()), 0, page).getEvaluateOrderEntity(3, 1);
                         }else {
-                            new OrderPresenterImpl(EvaluationFragment.this, Integer.parseInt(User_id.getUid()), 1, page).getEvaluateOrderEntity(3, 1);
+                            new OrderPresenterImpl(EvaluationFragment.this, Integer.parseInt(User_id.getUid()), 1, page).getTeacherEvaOrderEntity();
                         }
                     }
                 }
@@ -93,29 +93,23 @@ public class EvaluationFragment extends BaseFragment implements OrderView, Swipe
         swipeRefreshLayout.setOnRefreshListener(this);
 
         if (User_id.getRole().equals("1")){
-
             tuijianPresenter =  new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()),0,page);
+            tuijianPresenter.getEvaluateOrderEntity(3, 1);
         }else {
             tuijianPresenter = new OrderPresenterImpl(this,Integer.parseInt(User_id.getUid()),1,page);
+            tuijianPresenter.getTeacherEvaOrderEntity();
         }
-        if (list.size() > 0){}
-        else {
-            tuijianPresenter.getEvaluateOrderEntity(3, 1);
-        }
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    //跳转我的订单页面
-//                    Intent intent=new Intent(getActivity(),MyOrderActivity.class);
-//                    startActivity(intent);
-//            }
-//        });
     }
 
     @Subscriber(tag = "changeStatus")
     public void updateList(int msg){
         if (msg == 1){
-            tuijianPresenter.getEvaluateOrderEntity(3, 1);
+            if (User_id.getRole().equals("1")) {
+                tuijianPresenter.getEvaluateOrderEntity(3, 1);
+            }
+            else {
+                tuijianPresenter.getTeacherEvaOrderEntity();
+            }
         }
     }
     @Override
@@ -132,14 +126,21 @@ public class EvaluationFragment extends BaseFragment implements OrderView, Swipe
 //                    list.add(maps.get(i));
 //                }
 //            }
-            for (int i = 0; i < maps.size(); i++) {
-                if (maps.get(i).get("status").equals("3")||maps.get(i).get("status").equals("5")
-                        ||maps.get(i).get("status").equals("6")) {
-                    list.add(maps.get(i));
+            List<Map<String, Object>> lists = new ArrayList<>();
+            if (User_id.getRole().equals("1")) {
+                for (int i = 0; i < maps.size(); i++) {
+                    if (maps.get(i).get("status").equals("3")) {
+                        lists.add(maps.get(i));
+                    }
+                }
+            }else {
+                for (int i = 0; i < maps.size(); i++) {
+                    if (maps.get(i).get("status").equals("7")) {
+                        lists.add(maps.get(i));
+                    }
                 }
             }
-
-            adapter.addAll(list);
+            adapter.addAll(lists);
             isLoading = false;
         }
         swipeRefreshLayout.setRefreshing(false);
@@ -159,7 +160,7 @@ public class EvaluationFragment extends BaseFragment implements OrderView, Swipe
         if (User_id.getRole().equals("1")) {
             new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 0, page).getEvaluateOrderEntity(3,1);
         }else {
-            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 1, page).getEvaluateOrderEntity(3,1);
+            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 1, page).getOrderEntity(7);
         }
     }
 
@@ -186,88 +187,5 @@ public class EvaluationFragment extends BaseFragment implements OrderView, Swipe
         startActivity(intent);
     }
 
-
-
-
-
-//        BaseFragment implements PullToRefreshBase.OnRefreshListener,Student_init {
-//
-//    @ViewById(R.id.tuijian_listview)
-//    PullToRefreshListView listView;
-//    private Order_StudionAdabt studionAdabt;
-//    private List<Map<String,Object>> list=new ArrayList<>();
-//    private Order_init orderInit;
-//    private int uid;
-//
-//    @Override
-//    public void initView() {
-//        studionAdabt=new Order_StudionAdabt(list,getContext());
-//        listView.setMode(PullToRefreshBase.Mode.PULL_FROM_START);
-//        listView.setOnRefreshListener(this);
-//        listView.setAdapter(studionAdabt);
-//        uid=Integer.parseInt(User_id.getUid());
-//        orderInit=new Order();
-//        if (User_id.getRole().equals("1")){
-//
-//            orderInit.getOrder_list(uid,0,3,1,null,null,this,0,1);
-//        }else {
-//            orderInit.getOrder_list(uid,1,3,1,null,null,this,0,1);
-//        }
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-////                Log.e("aa","aa点击了");
-////                Map<String,Object> map=studionAdabt.getmap(i-1);
-////                String ida = (String) map.get("id");
-////                Intent intent2=new Intent(getActivity(),Student_assessment.class);
-////                intent2.putExtra("oredr_id", ida);
-////                startActivity(intent2);
-//                Map<String,Object> map=studionAdabt.getmap(i-1);
-//                String status= (String) map.get("status");
-//                String ida = (String) map.get("id");
-//                String duration = (String) map.get("duration");
-//                Intent intent = null;
-//                if (User_id.getRole().equals("1")) {
-//                    intent = new Intent(getActivity(), Order_details.class);
-//                }else {
-//                    intent = new Intent(getActivity(), OrderTeacherActivity.class);
-//                }
-////                Intent intent = new Intent(getActivity(), Order_details.class);
-//                intent.putExtra("oredr_id", ida);
-//                intent.putExtra("duration", duration);
-//                intent.putExtra("status", status);
-//                startActivity(intent);
-//
-//            }
-//        });
-//    }
-//
-//    @Override
-//    public void onRefresh(PullToRefreshBase refreshView) {
-//        //下拉刷新
-//        orderInit.getOrder_list(uid,0,3,1,null,null,this,0,1);
-//    }
-//    @Override
-//    public void setListview(List<Map<String, Object>> listmap) {
-//        //取消下拉刷新
-//        listView.onRefreshComplete();
-//        //清空list数据
-//        list.clear();
-//        for (int i = 0; i < listmap.size(); i++) {
-//            if (listmap.get(i).get("status").equals("3")
-//                    ||listmap.get(i).get("status").equals("5")
-//                    ||listmap.get(i).get("status").equals("6")
-//                    ){
-//                list.add(listmap.get(i));
-//            }
-//        }
-//        //刷新适配器
-//        studionAdabt.notifyDataSetChanged();
-//    }
-//
-//    @Override
-//    public void setListview1(List<Map<String, Object>> listmap) {
-//
-//    }
 
 }

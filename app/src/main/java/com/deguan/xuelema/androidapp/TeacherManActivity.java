@@ -3,6 +3,7 @@ package com.deguan.xuelema.androidapp;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
@@ -12,11 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.baidu.platform.comapi.map.E;
-import com.bumptech.glide.Glide;
+//import com.baidu.platform.comapi.map.E;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
-import com.deguan.xuelema.androidapp.utils.GlideRoundTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideRoundTransform;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
@@ -44,7 +46,7 @@ public class TeacherManActivity extends MyBaseActivity implements Requirdetailed
     @ViewById(R.id.teacher_man_exper)
     LinearLayout experLl;
     @ViewById(R.id.man_head)
-    ImageView headImage;
+    SimpleDraweeView headImage;
     @ViewById(R.id.teacher_man_sign)
     TextView signTv;
     @ViewById(R.id.teacher_man_back)
@@ -170,7 +172,9 @@ public class TeacherManActivity extends MyBaseActivity implements Requirdetailed
     @Override
     public void Updatecontent(Map<String, Object> map) {
         if (!TextUtils.isEmpty(map.get("user_headimg")+""))
-        Glide.with(getApplicationContext()).load(map.get("user_headimg")).transform(new GlideRoundTransform(this,12)).into(headImage);
+//        Glide.with(getApplicationContext()).load(map.get("user_headimg")).
+//                transform(new GlideRoundTransform(this,12)).into(headImage);
+        headImage.setImageURI(Uri.parse(map.get("user_headimg")+""));
         if (!TextUtils.isEmpty(map.get("signature")+""))
             signTv.setText(map.get("signature")+"");
 

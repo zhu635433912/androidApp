@@ -1,15 +1,17 @@
 package modle.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -53,12 +55,14 @@ public class Evalunton_Adapdter extends ListBaseAdapter {
             convertView.setTag(viewhod);
         }
             viewhod= (Viewhod) convertView.getTag();
-        Glide.with(context.getApplicationContext())
-                .load(listmap.get(position).get("headimg").toString())
-                .transform(new GlideCircleTransform(context))
-                .into(viewhod.evalunton_name);
+//        Glide.with(context.getApplicationContext())
+//                .load(listmap.get(position).get("headimg").toString())
+//                .transform(new GlideCircleTransform(context))
+//                .into(viewhod.evalunton_name);
+        viewhod.evalunton_name.setImageURI(Uri.parse(listmap.get(position).get("headimg")+""));
         viewhod.evalunton_username.setText(listmap.get(position).get("nickname")+"");
         int rank = Integer.parseInt(listmap.get(position).get("rank")+"");
+        viewhod.rankTv.setText(rank+"");
         if (rank == 1){
             viewhod.evaluntion_star.setBackgroundResource(R.drawable.one);
         }else if (rank==2){
@@ -81,16 +85,18 @@ public class Evalunton_Adapdter extends ListBaseAdapter {
 
     class Viewhod{
         ImageView evaluntion_star;
-        ImageView evalunton_name;
+        SimpleDraweeView evalunton_name;
         TextView evalunton_username;
         TextView evalunton_time;
-        TextView evalunton_text;
+        TextView evalunton_text,rankTv;
         public Viewhod(View itemView){
             evaluntion_star = (ImageView) itemView.findViewById(R.id.evaluaton_star);
-            evalunton_name = (ImageView) itemView.findViewById(R.id.evaluaton_name);
+            evalunton_name = (SimpleDraweeView) itemView.findViewById(R.id.evaluaton_name);
             evalunton_username = (TextView) itemView.findViewById(R.id.evalunaton_username);
             evalunton_time = (TextView) itemView.findViewById(R.id.evalunaton_time);
             evalunton_text = (TextView) itemView.findViewById(R.id.evaluaton_text);
+            rankTv = (TextView) itemView.findViewById(R.id.evaluaton_rank_tv);
+
         }
     }
 

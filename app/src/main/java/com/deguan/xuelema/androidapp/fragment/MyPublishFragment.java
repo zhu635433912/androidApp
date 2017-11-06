@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.deguan.xuelema.androidapp.MyOrderActivity;
 import com.deguan.xuelema.androidapp.Pick_singleActivty;
 import com.deguan.xuelema.androidapp.R;
+import com.deguan.xuelema.androidapp.RePublishActivity_;
 import com.deguan.xuelema.androidapp.entities.TuijianEntity;
 import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
 import com.deguan.xuelema.androidapp.presenter.PublishPresenter;
@@ -32,6 +33,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
+import org.simple.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,13 +50,12 @@ import modle.user_ziliao.User_id;
  * A simple {@link Fragment} subclass.
  */
 @EFragment(R.layout.tuijian_new_fragment)
-public class MyPublishFragment extends BaseFragment implements  MyPublishView, MyPublishNewAdapter.OnTopClickListener, SwipeRefreshLayout.OnRefreshListener, MyPublishNewAdapter.OnTopLongClickListener {
+public class MyPublishFragment extends MyBaseFragment implements  MyPublishView, MyPublishNewAdapter.OnTopClickListener, SwipeRefreshLayout.OnRefreshListener, MyPublishNewAdapter.OnTopLongClickListener {
 
     @ViewById(R.id.tuijian_listview)
     RecyclerView listView;
     @ViewById(R.id.tuijian_swipe)
     SwipeRefreshLayout swipeRefreshLayout;
-
 
     private MyPublishNewAdapter adapter;
     private List<XuqiuEntity> list = new ArrayList<>();
@@ -63,9 +64,18 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
     private boolean isLoading = false;
     private int page = 1;
 
+
+
+
     @Override
     public void before() {
+        EventBus.getDefault().register(this);
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -107,28 +117,10 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
         }else {
             publishPresenter.getPublishEntity();
         }
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                //跳转接单列表
-////                    String uid=adapter.getuid(position-1);
-//                    String uid = (String)list.get(position-1).getId();
-//                    String headUrl = (String) list.get(position-1).getPublisher_headimg();
-//                    Intent intent=new Intent(getContext(),Pick_singleActivty.class);
-//                    intent.putExtra("id",uid);
-//                    intent.putExtra("teacher_headimg",headUrl);
-//                    startActivity(intent);
-//            }
-//        });
 
     }
 
 
-
-//    @Override
-//    public void onRefresh() {
-//        new PublishPresenterImpl(this,Integer.parseInt(User_id.getUid()),4).getPublishEntity();
-//    }
 
     @Override
     public void successMyPublish(List<Map<String, Object>> maps) {
@@ -147,12 +139,27 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
                 entity.setCourse_name((String) maps.get(i).get("course_name"));
                 entity.setContent((String) maps.get(i).get("content"));
                 entity.setCreated((String) maps.get(i).get("created"));
+                entity.setGender(maps.get(i).get("gender")+"");
                 entity.setId((String) maps.get(i).get("id"));
                 entity.setPublisher_headimg((String) maps.get(i).get("publisher_headimg"));
                 entity.setDistance((String) maps.get(i).get("distance"));
                 entity.setFee(String.valueOf(maps.get(i).get("fee")));
                 entity.setGrade_name((String) maps.get(i).get("grade_name"));
-                
+                entity.setStatus(maps.get(i).get("status")+"");
+                entity.setVersion(maps.get(i).get("teacher_version")+"");
+                entity.setAddress(maps.get(i).get("address")+"");
+                entity.setLat(maps.get(i).get("lat")+"");
+                entity.setLng(maps.get(i).get("lng")+"");
+                entity.setProvince(maps.get(i).get("province")+"");
+                entity.setCity(maps.get(i).get("city")+"");
+                entity.setStats(maps.get(i).get("state")+"");
+                entity.setLowPrice(maps.get(i).get("low_price")+"");
+                entity.setHighPrice(maps.get(i).get("high_price")+"");
+                entity.setCourse_id(maps.get(i).get("course_id")+"");
+                entity.setGrade_id(maps.get(i).get("grade_id")+"");
+                entity.setPublisher_headimg(maps.get(i).get("publisher_headimg")+"");
+
+                entity.setImages((List<String>) maps.get(i).get("teacher_imgs"));
                 if ((maps.get(i).get("status")).equals("1")) {
                     continue;
                 }
@@ -160,7 +167,7 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
             }
             list.addAll(lists);
             adapter.addAll(lists);
-//        adapter.notifyDataSetChanged();
+//          adapter.notifyDataSetChanged();
             swipeRefreshLayout.setRefreshing(false);
             isLoading = false;
         }
@@ -174,6 +181,9 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
 
     @Override
     public void onTopClick(XuqiuEntity entity) {
+
+
+
 //跳转接单列表
 //                    String uid=adapter.getuid(position-1);
                     String uid = entity.getId();
@@ -183,13 +193,39 @@ public class MyPublishFragment extends BaseFragment implements  MyPublishView, M
              content = entity.getContent();
         }else {
              content = "";}
-                    Intent intent=new Intent(getContext(),Pick_singleActivty.class);
-                    intent.putExtra("id",uid);
+//                    Intent intent=new Intent(getContext(),Pick_singleActivty.class);
+//                    intent.putExtra("id",uid);
+//
+//                    intent.putExtra("content",content);
+//                    intent.putExtra("teacher_headimg",headUrl);
+//
+//                    startActivity(intent);
 
-                    intent.putExtra("content",content);
-                    intent.putExtra("teacher_headimg",headUrl);
 
-                    startActivity(intent);
+
+
+
+
+
+        startActivity(RePublishActivity_.intent(this)
+                .extra("content",content)
+                .extra("gradeId",entity.getGrade_id())
+                .extra("courseId",entity.getCourse_id())
+                .extra("province",entity.getProvince())
+                .extra("location",entity.getCity())
+                .extra("city",entity.getStats())
+                .extra("service_type",entity.getService_type())
+                .extra("lat",entity.getLat())
+                .extra("lng",entity.getLng())
+                .extra("address",entity.getAddress())
+                .extra("lowPrice",entity.getLowPrice())
+                .extra("highPrice",entity.getHighPrice())
+                .extra("version",entity.getVersion())
+                .extra("headurl",entity.getPublisher_headimg())
+                .extra("courseName",entity.getCourse_name())
+                .extra("gradeName",entity.getGrade_name())
+                .extra("genderId",entity.getGender())
+                .get());
     }
 
     @Override

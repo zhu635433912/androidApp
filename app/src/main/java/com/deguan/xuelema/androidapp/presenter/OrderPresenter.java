@@ -33,7 +33,8 @@ package com.deguan.xuelema.androidapp.presenter;
  * 修改备注：
  */
 public interface OrderPresenter {
-    void getOrderEntity();
+    void getOrderEntity(int status);
     void getNofinishOrderEntity(int status);
     void getEvaluateOrderEntity(int status,int order_rank);
+    void getTeacherEvaOrderEntity();
 }

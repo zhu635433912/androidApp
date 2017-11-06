@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    app:cardCornerRadius="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ListView
+        android:divider="@null"
+        android:id="@+id/teacher_course_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</android.support.v7.widget.CardView>

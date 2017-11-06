@@ -1,5 +1,6 @@
 package view.login.presenter;
 
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -37,7 +38,7 @@ public interface login_wan_presenter {
     /*
     短信验证
      */
-    public void SMSverification(ImageButton but2, TextView text, String yz);
+    public void SMSverification(Button but2, TextView text, String yz);
     /*
     短信验证成功
      */

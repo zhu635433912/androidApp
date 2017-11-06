@@ -41,7 +41,7 @@ import modle.user_ziliao.User_id;
  * 已完成
  */
 @EFragment(R.layout.tuijian_new_fragment)
-public class Completefragment extends BaseFragment implements OrderView, SwipeRefreshLayout.OnRefreshListener, OrderNewAdapter.OnTopClickListener, OrderNewAdapter.OnTopLongClickListener, Requirdetailed {
+public class Completefragment extends MyBaseFragment implements OrderView, SwipeRefreshLayout.OnRefreshListener, OrderNewAdapter.OnTopClickListener, OrderNewAdapter.OnTopLongClickListener, Requirdetailed {
 
     @ViewById(R.id.tuijian_listview)
     RecyclerView listView;
@@ -57,6 +57,7 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
 
     @Override
     public void before() {
+        super.before();
         EventBus.getDefault().register(this);
     }
     @Override
@@ -141,7 +142,7 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
                 if (maps.get(i).get("status").equals("3")
 //                        ||maps.get(i).get("status").equals("6")
                         ) {
-                    maps.get(i).put("status","7");
+                    maps.get(i).put("status","8");
                     list.add(maps.get(i));
                 }
                 if (maps.get(i).get("status").equals("5")){
@@ -214,7 +215,7 @@ public class Completefragment extends BaseFragment implements OrderView, SwipeRe
         intent.putExtra("oredr_id", ida);
         intent.putExtra("duration", duration);
 //        intent.putExtra("status", status);
-        intent.putExtra("status", 7+"");
+        intent.putExtra("status", 8+"");
         intent.putExtra("teacher_headimg",teacherImage);
         startActivity(intent);
     }

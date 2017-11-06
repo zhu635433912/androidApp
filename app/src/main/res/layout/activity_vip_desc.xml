@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fffffe"
+    tools:context="com.deguan.xuelema.androidapp.StudentVipActivity">
+    <RelativeLayout
+        android:background="#fffffe"
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <ImageButton
+            android:layout_marginLeft="34px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/add19"
+            android:layout_width="25px"
+            android:layout_height="35px" />
+        <RelativeLayout
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/back_rl"
+            android:layout_width="120px"
+            android:layout_height="90px">
+        </RelativeLayout>
+
+        <TextView
+            android:layout_marginLeft="120px"
+            android:layout_centerVertical="true"
+            android:textSize="40px"
+            android:layout_centerInParent="true"
+            android:text="说明内容"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <View
+        android:background="#8c8c8c"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:layout_marginLeft="60px"
+        android:layout_marginRight="60px"
+        android:layout_width="match_parent"
+        android:id="@+id/vip_desc_image"
+        app:actualImageScaleType="fitXY"
+        android:layout_height="match_parent" />
+</LinearLayout>

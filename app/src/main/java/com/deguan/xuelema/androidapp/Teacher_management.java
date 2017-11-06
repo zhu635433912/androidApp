@@ -37,14 +37,12 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.utils.SubjectUtil;
 import com.deguan.xuelema.androidapp.viewimpl.TurnoverView;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.easeui.utils.EaseCommonUtils;
-import com.hyphenate.util.PathUtil;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 
@@ -76,7 +74,7 @@ import modle.user_ziliao.User_id;
  * 教师管理
  */
 
-public class Teacher_management extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed,Student_init, TurnoverView {
+public class Teacher_management extends MyBaseActivity implements View.OnClickListener,Requirdetailed,Student_init, TurnoverView {
     private TextView zhonglei;
     private RelativeLayout jiaoshiguanlifanhui;
     private TextView kemuzhonglei;
@@ -622,32 +620,32 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         if (classimage != null){
 //            Glide.with(this).load(classimage).into(classImage);
         }
-        Glide.with(getApplicationContext()).load(map.get("others_5")).into(postuserimage1);
-        Glide.with(getApplicationContext()).load(map.get("others_6")).into(postuserimage2);
+//        Glide.with(getApplicationContext()).load(map.get("others_5")).into(postuserimage1);
+//        Glide.with(getApplicationContext()).load(map.get("others_6")).into(postuserimage2);
 
         //判断服务器返回是否由照片
        if (others_1!=null&&others_2!=null){
 //        String[] ot1={others_1,others_2};
 //           setbitmap(ot1);/
-           Glide.with(getApplicationContext()).load(others_1).into(xueliImage1);
-           Glide.with(getApplicationContext()).load(others_2).into(xueliImage2);
+//           Glide.with(getApplicationContext()).load(others_1).into(xueliImage1);
+//           Glide.with(getApplicationContext()).load(others_2).into(xueliImage2);
        }else if (others_1!=null){
 //           String[] ot1={others_1};
 //           setbitmap(ot1);
-           Glide.with(getApplicationContext()).load(others_1).into(xueliImage1);
+//           Glide.with(getApplicationContext()).load(others_1).into(xueliImage1);
        }else {
 //           String[] ot1={others_2};
 //           setbitmap(ot1);
-           Glide.with(getApplicationContext()).load(others_2).into(xueliImage2);
+//           Glide.with(getApplicationContext()).load(others_2).into(xueliImage2);
        }
 //        判断服务器返回是否有照片
         if (others_3!=null&&others_4!=null){
-            Glide.with(getApplicationContext()).load(others_3).into(rongyuImage1);
-            Glide.with(getApplicationContext()).load(others_4).into(rongyuImage2);
+//            Glide.with(getApplicationContext()).load(others_3).into(rongyuImage1);
+//            Glide.with(getApplicationContext()).load(others_4).into(rongyuImage2);
         }else if (others_3!=null){
-            Glide.with(getApplicationContext()).load(others_3).into(rongyuImage1);
-        }else {
-            Glide.with(getApplicationContext()).load(others_4).into(rongyuImage2);
+//            Glide.with(getApplicationContext()).load(others_3).into(rongyuImage1);
+//        }else {
+//            Glide.with(getApplicationContext()).load(others_4).into(rongyuImage2);
         }
 
     }
@@ -738,13 +736,13 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
     protected File cameraFile;
 
     private void dispatchTakePictureIntent() {
-        if (!EaseCommonUtils.isSdcardExist()) {
-            Toast.makeText(this, com.hyphenate.easeui.R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        if (!EaseCommonUtils.isSdcardExist()) {
+//            Toast.makeText(this, com.hyphenate.easeui.R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
+//            return;
+//        }
 
-        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
-                + System.currentTimeMillis() + ".jpg");
+//        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
+//                + System.currentTimeMillis() + ".jpg");
         //noinspection ResultOfMethodCallIgnored
         cameraFile.getParentFile().mkdirs();
         startActivityForResult(
@@ -854,12 +852,12 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         if (TAGE_ISRONT == 1) {
             if (flag == 1) {
                 teacher_init.Teacher_update(uid, map.get("imageurl").toString());
-                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(xueliImage1);
+//                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(xueliImage1);
 //                Glide.with(this).load(map.get("imageurl")).into(tianjiaxueli);
             } else if (flag == 2) {
                 teacher_init.Teacher_update2(uid, map.get("imageurl").toString());
 //                Glide.with(this).load(map.get("imageurl")).into(classImage);
-                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(xueliImage2);
+//                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(xueliImage2);
             }
         }else if (TAGE_ISRONT == 3){
             teacher_init.Teacher_updateSubjectBg(uid, map.get("imageurl").toString());
@@ -867,20 +865,20 @@ public class Teacher_management extends AutoLayoutActivity implements View.OnCli
         }else if (TAGE_ISRONT == 2){
             if (flag == 1) {
                 teacher_init.Teacher_update3(uid, map.get("imageurl").toString());
-                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(rongyuImage1);
+//                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(rongyuImage1);
 //                Glide.with(this).load(map.get("imageurl")).into(tianjiaxueli);
             } else if (flag == 2) {
                 teacher_init.Teacher_update4(uid, map.get("imageurl").toString());
 //                Glide.with(this).load(map.get("imageurl")).into(classImage);
-                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(rongyuImage2);
+//                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(rongyuImage2);
             }
         }else if (TAGE_ISRONT == 4){
             if (flag == 1) {
                 teacher_init.Teacher_update5(uid, map.get("imageurl").toString());
-                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(postuserimage1);
+//                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(postuserimage1);
             }else  if (flag == 2){
                 teacher_init.Teacher_update6(uid, map.get("imageurl").toString());
-                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(postuserimage2);
+//                Glide.with(getApplicationContext()).load(map.get("imageurl")).into(postuserimage2);
             }
 
         }

@@ -7,11 +7,8 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
-import android.text.TextUtils;
-import android.transition.TransitionInflater;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,48 +16,48 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
-import com.deguan.xuelema.androidapp.NewMainActivity;
 import com.deguan.xuelema.androidapp.NewMainActivity_;
 //import com.deguan.xuelema.androidapp.New_StudentActivity_;
 import com.deguan.xuelema.androidapp.PayPswActivity_;
 import com.deguan.xuelema.androidapp.R;
-import com.deguan.xuelema.androidapp.SetUp;
 import com.deguan.xuelema.androidapp.utils.APPConfig;
 import com.deguan.xuelema.androidapp.utils.PermissUtil;
 import com.deguan.xuelema.androidapp.utils.SharedPreferencesUtils;
-import com.hyphenate.EMCallBack;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.exceptions.HyphenateException;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 
+import java.io.File;
 import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
-import modle.Huanxing.cache.UserCacheManager;
-import modle.Huanxing.db.DemoDBManager;
-import modle.user_ziliao.DemoHelper;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.UserInfo;
+import cn.jpush.im.api.BasicCallback;
+import jiguang.chat.activity.LoginActivity;
+import jiguang.chat.activity.MainActivity;
+import jiguang.chat.database.UserEntry;
+import jiguang.chat.utils.SharePreferenceManager;
+import jiguang.chat.utils.ToastUtil;
 import modle.user_ziliao.User_id;
+import view.login.Modle.MobileView;
+import view.login.Modle.RegisterEntity;
+import view.login.Modle.RegisterUtil;
 import view.login.presenter.S_wan_presenter;
 import view.login.presenter.login_wan_presenter;
-
-import static modle.user_ziliao.User_id.getUsername;
 
 /**
  * 登陆页面
  * 登录问题 点击登录的时候要判断是否记住密码 此时再去做存储记录
  */
-public class  LoginAcitivity extends AutoLayoutActivity implements wan_inint,View.OnClickListener {
+public class  LoginAcitivity extends AutoLayoutActivity implements wan_inint,View.OnClickListener, MobileView {
     private ImageButton loginBtn;//登陆
     private ImageButton returnBtn;//返回
     private TextView loginTv;//注册
@@ -75,6 +72,7 @@ public class  LoginAcitivity extends AutoLayoutActivity implements wan_inint,Vie
     private AVLoadingIndicatorView loginLoading;
     private TextView loginLoadingTv;
     private ImageView guideImage1,guideImage2,guideImage3;
+    private ProgressBar progressBar;
 
     private String myydy;
     private ActivityOptionsCompat activityOptionsCompat;
@@ -84,6 +82,7 @@ public class  LoginAcitivity extends AutoLayoutActivity implements wan_inint,Vie
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logion_wan);
+        progressBar = (ProgressBar) findViewById(R.id.login_progress);
         guideImage1  = (ImageView) findViewById(R.id.guide1);
         guideImage2 = (ImageView) findViewById(R.id.guide2);
         guideImage3 = (ImageView) findViewById(R.id.guide3);
@@ -93,39 +92,39 @@ public class  LoginAcitivity extends AutoLayoutActivity implements wan_inint,Vie
         SharedPreferences sp = getSharedPreferences("ydy", MODE_PRIVATE);
         //判断记录是第一次就是"t",不是就是"1"
         myydy = sp.getString("booled", "t");
-        DemoHelper.getInstance().logout(true,new EMCallBack() {
-
-            @Override
-            public void onSuccess() {
-//                runOnUiThread(new Runnable() {
-//                    public void run() {
-//                        pd.dismiss();
-//                        // show login screen
-//                        finish();
-////                        startActivity(new Intent(SetUp.this, LoginAcitivity.class));
-//                    }
-//                });
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-
-            }
-
-            @Override
-            public void onError(int code, String message) {
-//                runOnUiThread(new Runnable() {
+//        DemoHelper.getInstance().logout(true,new EMCallBack() {
 //
-//                    @Override
-//                    public void run() {
-//                        // TODO Auto-generated method stub
-//                        pd.dismiss();
-//                        Toast.makeText(SetUp.this, "unbind devicetokens failed", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-            }
-        });
-
+//            @Override
+//            public void onSuccess() {
+////                runOnUiThread(new Runnable() {
+////                    public void run() {
+////                        pd.dismiss();
+////                        // show login screen
+////                        finish();
+//////                        startActivity(new Intent(SetUp.this, LoginAcitivity.class));
+////                    }
+////                });
+//            }
+//
+//            @Override
+//            public void onProgress(int progress, String status) {
+//
+//            }
+//
+//            @Override
+//            public void onError(int code, String message) {
+////                runOnUiThread(new Runnable() {
+////
+////                    @Override
+////                    public void run() {
+////                        // TODO Auto-generated method stub
+////                        pd.dismiss();
+////                        Toast.makeText(SetUp.this, "unbind devicetokens failed", Toast.LENGTH_SHORT).show();
+////                    }
+////                });
+//            }
+//        });
+        JMessageClient.logout();
         PermissUtil.startPermiss(this);
         //从xml里取保存的账号
         sharedPreferences=getSharedPreferences("userxml",MODE_PRIVATE);
@@ -138,7 +137,16 @@ public class  LoginAcitivity extends AutoLayoutActivity implements wan_inint,Vie
             psdEdit.setText(pass);
             phoneEdit.setSelection(phoneEdit.getText().length());
         }
+//        UserInfo info = JMessageClient.getMyInfo();
+//        if (null != info) {
+//            SharePreferenceManager.setCachedUsername(info.getUserName());
+//            if (info.getAvatarFile() != null) {
+//                SharePreferenceManager.setCachedAvatarPath(info.getAvatarFile().getAbsolutePath());
+//            }
 
+//        } else {
+//            Log.d("aa","退出登录失败");
+//        }
 
     }
 
@@ -177,16 +185,17 @@ public class  LoginAcitivity extends AutoLayoutActivity implements wan_inint,Vie
         switch (v.getId()){
             //登录button
             case R.id.wan_login:
-
+//                JMessageClient.register(get
                 Log.d("aa","登陆");
-                if (loginLoading.getVisibility()==View.GONE) {
-                    loginLoading.setVisibility(View.VISIBLE);
-                    loginLoadingTv.setVisibility(View.VISIBLE);
-                }
+
                 //判断网络连接
                 if (isNetworkAvailable(this))
                 {
-                    swan.getlogin();
+//                    swan.getlogin();
+                    new RegisterUtil().getLogin(getusername(),getpassword(),this);
+                    progressBar.setVisibility(View.VISIBLE);
+                    loginBtn.setEnabled(false);
+                    loginBtn.setClickable(false);
                 }
                 else
                 {
@@ -200,6 +209,7 @@ public class  LoginAcitivity extends AutoLayoutActivity implements wan_inint,Vie
                 break;
             //lookPsd查看密码
             case  R.id.wan_imagetoview:
+
                 Log.d("aa","查看");
                 swan.hidden(psdEdit);
                 break;
@@ -230,6 +240,7 @@ public class  LoginAcitivity extends AutoLayoutActivity implements wan_inint,Vie
 
     @Override
     public void loginture(Map<String,Object> map) {
+
         isSetup = Double.parseDouble(map.get("has_paypassword")+"");
         final String role= (String) map.get("role");
         final String id= (String) map.get("id");
@@ -259,63 +270,43 @@ public class  LoginAcitivity extends AutoLayoutActivity implements wan_inint,Vie
 
 
 
-        // After logout，the DemoDB may still be accessed due to async callback, so the DemoDB will be re-opened again.
-        // close it before login to make sure DemoDB not overlap
-        DemoDBManager.getInstance().closeDB();
-
-        // reset current user name before login
-        DemoHelper.getInstance().setCurrentUserName(map.get("username")+"");
         final String name = map.get("username")+"";
         User_id.setUsername(name);
         final long start = System.currentTimeMillis();
-        // call login method
-//        Log.d(TAG, "EMClient.getInstance().login");
-        EMClient.getInstance().login(map.get("username")+"",
-//                map.get("password")+""
-                "123456"
-                , new EMCallBack() {
 
-            @Override
-            public void onSuccess() {
-//                Log.d(TAG, "login: onSuccess");
-                EMClient.getInstance().groupManager().loadAllGroups();
-                EMClient.getInstance().chatManager().loadAllConversations();
-
-                String nick = "";
-                try {
-                    nick = EMClient.getInstance().pushManager().getPushConfigsFromServer().getDisplayNickname();
-                } catch (HyphenateException e) {
-                    e.printStackTrace();
-                }
-
-                // update current user's display name for APNs
-                boolean updatenick = EMClient.getInstance().pushManager().updatePushNickname(name);
-                if (!updatenick) {
-//                    Log.e("LoginActivity", "update current user nick fail");
-                }
-
-
-                // get user's info (this should be get from App's server or 3rd party service)
-                DemoHelper.getInstance().getUserProfileManager().asyncGetCurrentUserInfo();
-
-            }
-
-            @Override
-            public void onProgress(int progress, String status) {
-            }
-
-            @Override
-            public void onError(final int code, final String message) {
-            }
-        });
-
-
-
-
-
+//        JMessageClient.login(name, "123456", new BasicCallback() {
+//            @Override
+//            public void gotResult(int responseCode, String responseMessage) {
+//                if (responseCode == 0) {
+//                    SharePreferenceManager.setCachedPsw("123456");
+//                    UserInfo myInfo = JMessageClient.getMyInfo();
+//                    File avatarFile = myInfo.getAvatarFile();
+//                    //登陆成功,如果用户有头像就把头像存起来,没有就设置null
+//                    if (avatarFile != null) {
+//                        SharePreferenceManager.setCachedAvatarPath(avatarFile.getAbsolutePath());
+//                    } else {
+//                        SharePreferenceManager.setCachedAvatarPath(null);
+//                    }
+//                    String username = myInfo.getUserName();
+//                    String appKey = myInfo.getAppKey();
+//                    UserEntry user = UserEntry.getUser(username, appKey);
+//                    if (null == user) {
+//                        user = new UserEntry(username, appKey);
+//                        user.save();
+//                    }
+////                    mContext.goToActivity(mContext, MainActivity.class);
+//                    Log.d("aa", "登陆成功");
+////                    mContext.finish();
+//                } else {
+//                    Log.d("aa", "登陆失败"+responseMessage);
+////                    ToastUtil.shortToast(mContext, "登陆失败" + responseMessage);
+//                }
+//            }
+//        });
 
 
         if (myydy.equals("1")){
+            progressBar.setVisibility(View.GONE);
             getsj(role);
             SharedPreferences sharepre = getSharedPreferences("ydy", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharepre.edit();
@@ -324,12 +315,45 @@ public class  LoginAcitivity extends AutoLayoutActivity implements wan_inint,Vie
             editor.commit();
             myydy = "2";
         }else {
-            if (isSetup == 0) {
-                startActivity(PayPswActivity_.intent(LoginAcitivity.this).get());
-            } else{
-                startActivity(intent);
-                finish();
-            }
+            JMessageClient.login(name, "123456", new BasicCallback() {
+                @Override
+                public void gotResult(int responseCode, String responseMessage) {
+                    if (responseCode == 0) {
+                        SharePreferenceManager.setCachedPsw("123456");
+                        UserInfo myInfo = JMessageClient.getMyInfo();
+                        File avatarFile = myInfo.getAvatarFile();
+                        //登陆成功,如果用户有头像就把头像存起来,没有就设置null
+                        if (avatarFile != null) {
+                            SharePreferenceManager.setCachedAvatarPath(avatarFile.getAbsolutePath());
+                        } else {
+                            SharePreferenceManager.setCachedAvatarPath(null);
+                        }
+                        String username = myInfo.getUserName();
+                        String appKey = myInfo.getAppKey();
+                        UserEntry user = UserEntry.getUser(username, appKey);
+                        if (null == user) {
+                            user = new UserEntry(username, appKey);
+                            user.save();
+                        }
+//                    mContext.goToActivity(mContext, MainActivity.class);
+                        if (isSetup == 0) {
+                            startActivity(PayPswActivity_.intent(LoginAcitivity.this).get());
+                        } else{
+                            startActivity(intent);
+                            finish();
+                        }
+                        loginBtn.setEnabled(true);
+                        loginBtn.setClickable(true);
+                        progressBar.setVisibility(View.GONE);
+                        Log.d("aa", "登陆成功");
+//                    mContext.finish();
+                    } else {
+                        Log.d("aa", "登陆失败"+responseMessage);
+//                    ToastUtil.shortToast(mContext, "登陆失败" + responseMessage);
+                    }
+                }
+            });
+
         }
 
 
@@ -374,12 +398,44 @@ public class  LoginAcitivity extends AutoLayoutActivity implements wan_inint,Vie
             @Override
             public void onClick(View v) {
                 guideImage3.setVisibility(View.GONE);
-                if (isSetup == 0){
-                    startActivity(PayPswActivity_.intent(LoginAcitivity.this).get());
-                }else {
-                    startActivity(intent);
-                    finish();
-                }
+                JMessageClient.login(getusername(), "123456", new BasicCallback() {
+                    @Override
+                    public void gotResult(int responseCode, String responseMessage) {
+                        if (responseCode == 0) {
+                            SharePreferenceManager.setCachedPsw("123456");
+                            UserInfo myInfo = JMessageClient.getMyInfo();
+                            File avatarFile = myInfo.getAvatarFile();
+                            //登陆成功,如果用户有头像就把头像存起来,没有就设置null
+                            if (avatarFile != null) {
+                                SharePreferenceManager.setCachedAvatarPath(avatarFile.getAbsolutePath());
+                            } else {
+                                SharePreferenceManager.setCachedAvatarPath(null);
+                            }
+                            String username = myInfo.getUserName();
+                            String appKey = myInfo.getAppKey();
+                            UserEntry user = UserEntry.getUser(username, appKey);
+                            if (null == user) {
+                                user = new UserEntry(username, appKey);
+                                user.save();
+                            }
+                            if (isSetup == 0){
+                                startActivity(PayPswActivity_.intent(LoginAcitivity.this).get());
+                            }else {
+                                startActivity(intent);
+                                finish();
+                            }
+                            loginBtn.setEnabled(true);
+                            loginBtn.setClickable(true);
+                            progressBar.setVisibility(View.GONE);
+                            Log.d("aa", "登陆成功");
+                        } else {
+                            Log.d("aa", "登陆失败"+responseMessage);
+//                    ToastUtil.shortToast(mContext, "登陆失败" + responseMessage);
+                        }
+                    }
+                });
+
+
             }
         });
     }
@@ -394,6 +450,9 @@ public class  LoginAcitivity extends AutoLayoutActivity implements wan_inint,Vie
     //登录失败
     @Override
     public void loginflase(String user) {
+        loginBtn.setEnabled(true);
+        loginBtn.setClickable(true);
+        progressBar.setVisibility(View.GONE);
 //        Log.d("aa","登陆状态="+user);
         if (loginLoading.getVisibility()==View.VISIBLE) {
             loginLoading.setVisibility(View.GONE);
@@ -498,5 +557,138 @@ public class  LoginAcitivity extends AutoLayoutActivity implements wan_inint,Vie
         return false;
     }
 
+    private static boolean mBackKeyPressed = false;//记录是否有首次按键
 
+    @Override
+    public void onBackPressed() {
+        if(!mBackKeyPressed){
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            mBackKeyPressed = true;
+            new Timer().schedule(new TimerTask() {
+                //延时两秒，如果超出则擦错第一次按键记录
+                // @Override
+                public void run() {
+                    mBackKeyPressed = false;
+                }
+             }, 2000);
+        }
+        else{
+        //退出程序
+            this.finish();
+            System.exit(0);
+
+        }
+    }
+
+    @Override
+    public void successRegister(String msg) {
+
+    }
+
+    @Override
+    public void failRegister(String msg) {
+        loginBtn.setEnabled(true);
+        loginBtn.setClickable(true);
+        progressBar.setVisibility(View.GONE);
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void successLogin(RegisterEntity entity) {
+
+        if (loginLoading.getVisibility()==View.GONE) {
+            loginLoading.setVisibility(View.VISIBLE);
+            loginLoadingTv.setVisibility(View.VISIBLE);
+        }
+
+        isSetup = Double.parseDouble(entity.getHas_paypassword());
+        final String role= entity.getRole();
+        final String id= entity.getUser_id();
+//        intent.putExtra("id",id);
+//        intent.putExtra("role",role);
+        intent= NewMainActivity_.intent(this).extra("id",id).extra("role",role).get();
+        getUser_id().setRole(role);
+        getUser_id().setUid(id);
+        User_id.setNickName(entity.getNickname());
+
+        if (rememberBtn.isChecked()){
+            rememberPssword();
+        }else {
+            SharedPreferences userxml=getSharedPreferences("userxml",MODE_PRIVATE);
+            userxml.edit().remove("username").remove("password").commit();
+        }
+        SharedPreferencesUtils.setParam(this, APPConfig.USRE_PHONE,getusername());
+        SharedPreferences sp = getSharedPreferences("userstate", Context.MODE_PRIVATE);
+        SharedPreferences.Editor ddite = sp.edit();
+        ddite.putString("state", "1"); //1以登录
+        ddite.putString("id", id);
+        ddite.putString("role", role);
+        ddite.putString("username",getusername());
+        ddite.putString("password", getpassword());
+        ddite.putString("nickname", entity.getNickname());
+        ddite.commit();
+
+
+
+        final String name = getusername();
+        User_id.setUsername(name);
+
+        if (myydy.equals("1")){
+            getsj(role);
+            SharedPreferences sharepre = getSharedPreferences("ydy", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharepre.edit();
+            //第一次进入
+            editor.putString("booled", "2");
+            editor.commit();
+            myydy = "2";
+        }else {
+            JMessageClient.login(name, "123456", new BasicCallback() {
+                @Override
+                public void gotResult(int responseCode, String responseMessage) {
+                    if (responseCode == 0) {
+                        SharePreferenceManager.setCachedPsw("123456");
+                        UserInfo myInfo = JMessageClient.getMyInfo();
+                        File avatarFile = myInfo.getAvatarFile();
+                        //登陆成功,如果用户有头像就把头像存起来,没有就设置null
+                        if (avatarFile != null) {
+                            SharePreferenceManager.setCachedAvatarPath(avatarFile.getAbsolutePath());
+                        } else {
+                            SharePreferenceManager.setCachedAvatarPath(null);
+                        }
+                        String username = myInfo.getUserName();
+                        String appKey = myInfo.getAppKey();
+                        UserEntry user = UserEntry.getUser(username, appKey);
+                        if (null == user) {
+                            user = new UserEntry(username, appKey);
+                            user.save();
+                        }
+//                    mContext.goToActivity(mContext, MainActivity.class);
+                        if (isSetup == 0) {
+                            startActivity(PayPswActivity_.intent(LoginAcitivity.this).get());
+                        } else{
+                            startActivity(intent);
+                            finish();
+                        }
+                        Log.d("aa", "登陆成功");
+//                    mContext.finish();
+                    } else {
+                        Log.d("aa", "登陆失败"+responseMessage);
+//                    ToastUtil.shortToast(mContext, "登陆失败" + responseMessage);
+                    }
+                }
+            });
+
+        }
+
+
+
+        //进入动画
+        activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+        if (loginLoading.getVisibility()==View.VISIBLE) {
+            loginLoading.setVisibility(View.GONE);
+            loginLoadingTv.setVisibility(View.GONE);
+        }
+//        startActivity(intent, activityOptionsCompat.toBundle());
+//        finish();
+    }
 }

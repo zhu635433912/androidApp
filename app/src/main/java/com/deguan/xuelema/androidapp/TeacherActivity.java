@@ -12,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -35,19 +36,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.deguan.xuelema.androidapp.utils.EaseCommonUtils;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
+import com.deguan.xuelema.androidapp.utils.PathUtil;
 import com.deguan.xuelema.androidapp.utils.PhotoBitmapUtils;
 import com.deguan.xuelema.androidapp.viewimpl.Baseinit;
 import com.deguan.xuelema.androidapp.viewimpl.TuijianView;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.easeui.EaseConstant;
-import com.hyphenate.easeui.utils.EaseCommonUtils;
-import com.hyphenate.util.PathUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -65,7 +64,6 @@ import java.util.Map;
 
 import kr.co.namee.permissiongen.PermissionGen;
 import modle.Adapter.KechengAdapter;
-import modle.Huanxing.ui.ChatActivity;
 import modle.Increase_course.Increase_course;
 import modle.Order_Modle.Order;
 import modle.Order_Modle.Order_init;
@@ -92,9 +90,9 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
     @ViewById(R.id.teacher_del2)
     ImageView imageDel2;
     @ViewById(R.id.teacher_pic1)
-    ImageView educationImage1;
+    SimpleDraweeView educationImage1;
     @ViewById(R.id.teacher_pic2)
-    ImageView educationImage2;
+    SimpleDraweeView educationImage2;
 
 
     protected File cameraFile;
@@ -109,6 +107,7 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
 
     @Override
     public void before() {
+        super.before();
         teacher = new Teacher();
     }
 
@@ -236,19 +235,18 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
         startActivityForResult(intent, REQUEST_CODE_LOCAL);
     }
 
+    String mFilePath;
     /**
      * capture new image
      */
-    protected void selectPicFromCamera() {
+    public void selectPicFromCamera() {
+        mFilePath = Environment.getExternalStorageDirectory().getPath();// 获取SD卡路径
+        mFilePath = mFilePath + "/"+ User_id.getUid()
+                + System.currentTimeMillis() + ".jpg";// 指定路径
         if (!EaseCommonUtils.isSdcardExist()) {
-            Toast.makeText(this, com.hyphenate.easeui.R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
             return;
         }
-
-        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
-                + System.currentTimeMillis() + ".jpg");
-        //noinspection ResultOfMethodCallIgnored
-        cameraFile.getParentFile().mkdirs();
+        cameraFile = new File( mFilePath);
         startActivityForResult(
                 new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
                 REQUEST_CODE_CAMERA);
@@ -286,12 +284,16 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
         if (flag == 1){
             teacher.Teacher_update5(Integer.parseInt(User_id.getUid()), listmap.get(0).get("imageurl")+"");
             other_1 = listmap.get(0).get("imageurl")+"";
-            Glide.with(getApplicationContext()).load(listmap.get(0).get("imageurl")+"").into(educationImage1);
+//            Glide.with(getApplicationContext()).load(listmap.get(0).get("imageurl")+"").
+//                    into(educationImage1);
+            educationImage1.setImageURI(Uri.parse(listmap.get(0).get("imageurl")+""));
             imageAdd1.setVisibility(View.GONE);
         }else {
             other_2 = listmap.get(0).get("imageurl")+"";
             teacher.Teacher_update6(Integer.parseInt(User_id.getUid()), listmap.get(0).get("imageurl")+"");
-            Glide.with(getApplicationContext()).load(listmap.get(0).get("imageurl")).into(educationImage2);
+//            Glide.with(getApplicationContext()).load(listmap.get(0).get
+//                    ("imageurl")).into(educationImage2);
+            educationImage2.setImageURI(Uri.parse(listmap.get(0).get("imageurl")+""));
             imageAdd2.setVisibility(View.GONE);
         }
         Toast.makeText(this,"更新成功",Toast.LENGTH_LONG).show();
@@ -357,7 +359,9 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
 
         if (!TextUtils.isEmpty(map.get("others_5")+"")){
             other_1 = map.get("others_5")+"";
-            Glide.with(getApplicationContext()).load(map.get("others_5")+"").into(educationImage1);
+//            Glide.with(getApplicationContext()).load(map.get("others_5")+"").
+//                    into(educationImage1);
+            educationImage1.setImageURI(Uri.parse(map.get("others_5")+""));
             imageAdd1.setVisibility(View.GONE);
             if (map.get("is_passed").equals("1")){
                 imageDel1.setVisibility(View.GONE);
@@ -370,7 +374,8 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
         }
         if (!TextUtils.isEmpty(map.get("others_6")+"")){
             other_2 = map.get("others_6")+"";
-            Glide.with(getApplicationContext()).load(map.get("others_6")+"").into(educationImage2);
+            educationImage2.setImageURI(Uri.parse(map.get("others_6")+""));
+//            Glide.with(getApplicationContext()).load(map.get("others_6")+"").into(educationImage2);
             imageAdd2.setVisibility(View.GONE);
             if (map.get("is_passed").equals("1")){
                 imageDel2.setVisibility(View.GONE);
@@ -405,9 +410,6 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
             cursor = null;
 
             if (picturePath == null || picturePath.equals("null")) {
-                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
                 return;
             }
             String filepath = PhotoBitmapUtils.amendRotatePhoto(picturePath,this);
@@ -416,9 +418,6 @@ public class TeacherActivity extends MyBaseActivity implements View.OnClickListe
         } else {
             File file = new File(selectedImage.getPath());
             if (!file.exists()) {
-                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
                 return;
 
             }

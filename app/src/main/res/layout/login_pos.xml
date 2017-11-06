@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/login_backgroud"
     android:layout_width="match_parent"
+    android:background="#fffffe"
     android:layout_height="match_parent">
     <ImageView
         android:layout_width="110px"
@@ -13,11 +13,20 @@
 
     <RelativeLayout
         android:id="@+id/pos_relativelayout1"
-        android:background="@drawable/mask"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
         android:layout_width="534px"
         android:layout_height="782px">
+        <ImageView
+            android:id="@+id/register_logo"
+            android:src="@mipmap/login_logo"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15px"
+            android:layout_marginEnd="16px"
+            android:layout_width="150px"
+            android:layout_centerHorizontal="true"
+            android:layout_height="0px"
+            android:layout_marginRight="15px" />
         <TextView
             android:id="@+id/pos_textviewxiu"
             android:layout_marginLeft="70px"
@@ -28,7 +37,7 @@
             android:textSize="48px"
             android:text="@string/login_xiugai"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="0px" />
         <ImageView
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -39,39 +48,47 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="15px" />
         <EditText
+            android:maxLength="11"
             android:inputType="number"
             android:singleLine="true"
             android:textSize="30px"
-            android:hint="  手机号码"
-            android:layout_alignLeft="@+id/pos_textviewxiu"
+            android:hint="请输入手机号"
+            android:textColorHint="#c2c2c2"
+            android:paddingLeft="70px"
+            android:background="@mipmap/login_phone"
             android:layout_below="@+id/pos_textviewxiu"
-            android:background="@drawable/login_wan_connllat"
             android:id="@+id/pos_username"
             android:layout_marginTop="42px"
-            android:layout_width="400px"
-            android:layout_height="80px" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <EditText
+            android:maxLength="6"
+            android:textSize="30px"
+            android:textColorHint="#c2c2c2"
+            android:paddingLeft="70px"
+            android:background="@mipmap/login_yzm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40px"
+            android:hint="请输入验证码"
             android:inputType="number"
             android:singleLine="true"
-            android:textSize="30px"
-            android:background="@drawable/login_wan_connllat"
             android:id="@+id/pos_editextyansema"
-            android:layout_width="400px"
-            android:layout_height="80px"
-            android:layout_marginTop="24px"
-            android:hint=" 点击获取验证码"
             android:layout_below="@+id/pos_username"
             android:layout_alignLeft="@+id/pos_username"
             android:layout_alignStart="@+id/pos_username" />
-        <ImageButton
+        <Button
             android:id="@+id/pos_vicat"
             android:layout_alignBottom="@+id/pos_editextyansema"
             android:layout_alignEnd="@+id/pos_editextyansema"
-            android:layout_marginBottom="20px"
+            android:layout_marginBottom="8px"
             android:layout_marginEnd="14px"
-            android:background="@drawable/butoon_charex"
-            android:layout_width="40px"
-            android:layout_height="40px"
+            android:text="获取验证码"
+            android:textSize="25px"
+            android:textColor="#ffffff"
+            android:background="@mipmap/register_get_yzm"
+            android:layout_width="150px"
+            android:layout_height="50px"
             android:layout_alignRight="@+id/pos_editextyansema"
             android:layout_marginRight="14px" />
         <TextView
@@ -85,15 +102,18 @@
             android:layout_toRightOf="@+id/pos_editextyansema" />
         <EditText
             android:id="@+id/pos_password"
-            android:textSize="30px"
             android:password="true"
-            android:hint="密码"
-            android:background="@drawable/login_wan_connllat"
-            android:layout_marginTop="24px"
+            android:textSize="30px"
+            android:hint="请设置新密码(长度6-16位)"
+            android:textColorHint="#c2c2c2"
+            android:paddingLeft="70px"
+            android:background="@mipmap/login_psw"
+            android:layout_marginTop="40px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/pos_editextyansema"
             android:layout_alignLeft="@+id/pos_editextyansema"
-            android:layout_width="400px"
-            android:layout_height="80px"/>
+            />
         <ImageButton
             android:id="@+id/pos_chakan"
             android:layout_marginBottom="20px"
@@ -102,16 +122,18 @@
             android:layout_alignBottom="@+id/pos_password"
             android:background="@drawable/hly46"
             android:layout_width="40px"
-            android:layout_height="40px"
+            android:layout_height="0px"
             android:layout_alignRight="@+id/pos_password" />
-        <ImageButton
+        <Button
+            android:text="确认修改"
+            android:textColor="#ffffff"
             android:id="@+id/pos_login"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/hly60"
+            android:background="@mipmap/register_get_yzm"
             android:layout_marginBottom="66px"
-            android:layout_width="104px"
-            android:layout_height="104px" />
+            android:layout_width="match_parent"
+            android:layout_height="80px" />
         </RelativeLayout>
     <TextView
         android:textSize="30px"

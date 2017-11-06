@@ -1,14 +1,15 @@
 package modle.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.text.SimpleDateFormat;
@@ -66,8 +67,10 @@ public class TurnoverAdapter extends ListBaseAdapter {
         }else {
             holder.turnStatsTv.setText(" ");
         }
-        Glide.with(context.getApplicationContext()).load(list.get(position).get("headimg")+"").transform(new GlideCircleTransform(context)).into(holder.turnHeadImage);
-
+//        Glide.with(context.getApplicationContext()).load
+//                (list.get(position).get("headimg")+"").
+//                transform(new GlideCircleTransform(context)).into(holder.turnHeadImage);
+        holder.turnHeadImage.setImageURI(Uri.parse(list.get(position).get("headimg")+""));
 
         return convertView;
     }
@@ -75,14 +78,14 @@ public class TurnoverAdapter extends ListBaseAdapter {
 
     static class ViewHolder{
         TextView turnIdTv,turnTimeTv,turnNameTv,turnStatsTv;
-        ImageView turnHeadImage;
+        SimpleDraweeView turnHeadImage;
 
          ViewHolder(View itemview) {
             turnIdTv = (TextView) itemview.findViewById(R.id.text1);
              turnTimeTv = (TextView) itemview.findViewById(R.id.turn_time_tv);
              turnNameTv = (TextView) itemview.findViewById(R.id.turn_name_tv);
              turnStatsTv = (TextView) itemview.findViewById(R.id.turn_status_tv);
-             turnHeadImage = (ImageView) itemview.findViewById(R.id.turn_head_image);
+             turnHeadImage = (SimpleDraweeView) itemview.findViewById(R.id.turn_head_image);
          }
     }
 }

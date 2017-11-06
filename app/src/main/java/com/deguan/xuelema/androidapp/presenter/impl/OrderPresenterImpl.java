@@ -61,7 +61,7 @@ public class OrderPresenterImpl implements OrderPresenter {
     }
 
     @Override
-    public void getOrderEntity() {
+    public void getOrderEntity(int status) {
         ModelFactory.getInstance().getOrderModelImpl().getOrderData(new Callback<ContentModle>() {
             @Override
             public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
@@ -90,7 +90,7 @@ public class OrderPresenterImpl implements OrderPresenter {
             public void onFailure(Call<ContentModle> call, Throwable t) {
                 orderView.failOrder("网络错误");
             }
-        },uid,filter_type,page);
+        },uid,filter_type,page,status);
     }
     @Override
     public void getNofinishOrderEntity(int status) {
@@ -157,5 +157,39 @@ public class OrderPresenterImpl implements OrderPresenter {
                 orderView.failOrder("网络错误");
             }
         },uid,filter_type,page,status,order_rank);
+    }
+
+    @Override
+    public void getTeacherEvaOrderEntity() {
+        ModelFactory.getInstance().getOrderModelImpl().getTeacherEvaOrderData(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+                if (response.body() == null){
+                    orderView.successOrder(list);
+                }else {
+                    String error = response.body().getError();
+                    if (error.equals("ok")) {
+                        if (response.body().getContent() .size() == 0){
+//                            orderView.failOrder("无订单");
+//                            Log.e("aa", "获取推荐教师失败");
+                        }
+                        Log.e("aa", "获取推荐教师成功");
+                        list = response.body().getContent();
+                        orderView.successOrder(list);
+
+
+                    } else {
+                        orderView.failOrder("无订单");
+                        Log.e("aa", "获取推荐教师失败");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                orderView.failOrder("网络错误");
+            }
+        },uid,page);
     }
 }

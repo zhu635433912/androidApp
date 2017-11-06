@@ -22,21 +22,20 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
-import com.deguan.xuelema.androidapp.huanxin.HuihuaActivity;
+//import com.deguan.xuelema.androidapp.huanxin.HuihuaActivity;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.viewimpl.PayView;
 import com.deguan.xuelema.androidapp.viewimpl.SimilarXuqiuView;
 import com.deguan.xuelema.androidapp.viewimpl.XuqiuView;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.easeui.EaseConstant;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -50,10 +49,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.jpush.im.android.api.ContactManager;
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.Conversation;
+import cn.jpush.im.android.api.model.UserInfo;
+import cn.jpush.im.api.BasicCallback;
+import jiguang.chat.activity.ChatActivity;
+import jiguang.chat.activity.VerificationActivity;
+import jiguang.chat.application.JGApplication;
+import jiguang.chat.database.FriendRecommendEntry;
+import jiguang.chat.database.UserEntry;
+import jiguang.chat.entity.FriendInvitation;
+import jiguang.chat.utils.ToastUtil;
 import modle.Adapter.XuqiuAdapter;
 import modle.Demand_Modle.Demand;
 import modle.Demand_Modle.Demand_init;
-import modle.Huanxing.ui.*;
+//import modle.Huanxing.ui.*;
 import modle.Order_Modle.Order;
 import modle.Order_Modle.Order_init;
 import modle.Teacher_Modle.Teacher;
@@ -66,7 +77,7 @@ import modle.user_ziliao.User_id;
  * 需求详细
  */
 
-public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,View.OnClickListener,Requirdetailed,PullToRefreshBase.OnRefreshListener, Student_init, SimilarXuqiuView, PayView {
+public class Xuqiuxiangx extends MyBaseActivity implements Xuqiuxiangx_init,View.OnClickListener,Requirdetailed,PullToRefreshBase.OnRefreshListener, Student_init, SimilarXuqiuView, PayView {
     private PullToRefreshListView listview;
     private List<Map<String, Object>> listamap;
     private TextView textView;
@@ -82,7 +93,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     private TextView shijianduan;
     private String username;
     private TextView diqu;
-    private ImageView xuqiuimage;
+    private SimpleDraweeView xuqiuimage;
     private AVLoadingIndicatorView xuqiushuax;
     private int fee;
     private int id;
@@ -102,7 +113,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
     private ImageButton addFriend;
     private ImageButton bohaoImage;
     private boolean ispass = false;
-
+    private UserInfo mMyInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -129,7 +140,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         fuwufang= (TextView) findViewById(R.id.fuwufang);
         shijianduan= (TextView) findViewById(R.id.shijianduan);
         diqu= (TextView) findViewById(R.id.diqu);
-        xuqiuimage= (ImageView) findViewById(R.id.xuqiuimage);
+        xuqiuimage= (SimpleDraweeView) findViewById(R.id.xuqiuimage);
         xuqiushuax= (AVLoadingIndicatorView) findViewById(R.id.xuqiushuax);
         Demandcontent.setMovementMethod(ScrollingMovementMethod.getInstance());
 
@@ -139,6 +150,7 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         xuqiufanhui.setOnClickListener(this);
         addFriend.setOnClickListener(this);
         bohaoImage.setOnClickListener(this);
+        mMyInfo = JMessageClient.getMyInfo();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -253,11 +265,13 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
         diqu.setText(state+"");
         username = (String) map.get("publisher_mobile");
 
-        Glide.with(getApplicationContext()).load(map.get("publisher_headimg")+"").transform(new GlideCircleTransform(this)).into(xuqiuimage);
+//        Glide.with(getApplicationContext()).load(map.get("publisher_headimg")+"").
+//                transform(new GlideCircleTransform(this)).into(xuqiuimage);
+        xuqiuimage.setImageURI(Uri.parse(map.get("publisher_headimg")+""));
         phoneTv.setText(username);
         String desc=start+" - "+end;
 
-        if (gender.equals("1")) {
+        if (gender.equals("1")||gender.equals("男")) {
             xingbie.setText("男性");
         }else {
             xingbie.setText("女性");
@@ -299,6 +313,9 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
 
 
     }
+
+    public static final String TARGET_ID = "targetId";
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -319,19 +336,44 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
                 }
                 break;
             case R.id.add_friend:
-                if (ispass) {
-                    Toast.makeText(this, "已发送好友申请", Toast.LENGTH_SHORT).show();
-                    new Thread(new Runnable() {
-                        public void run() {
-                            try {
-                                //demo use a hardcode reason here, you need let user to input if you like
-                                String s = getResources().getString(R.string.Add_a_friend);
-                                EMClient.getInstance().contactManager().addContact(username, s);
-                            } catch (final Exception e) {
 
+                if (ispass) {
+                    ContactManager.sendInvitationRequest(username, null, "我对你的需求有兴趣，加个好友吧", new BasicCallback() {
+                        @Override
+                        public void gotResult(int responseCode, String responseMessage) {
+                            if (responseCode == 0) {
+                                UserEntry userEntry = UserEntry.getUser(mMyInfo.getUserName(), mMyInfo.getAppKey());
+                                FriendRecommendEntry entry = FriendRecommendEntry.getEntry(userEntry,
+                                        username, mMyInfo.getAppKey());
+                                if (null == entry) {
+                                    entry = new FriendRecommendEntry(username, "", "", mMyInfo.getAppKey(),
+                                            "", "", "我对你的需求有兴趣，加个好友吧", FriendInvitation.INVITING.getValue(), userEntry, 100);
+                                } else {
+                                    entry.state = FriendInvitation.INVITING.getValue();
+                                    entry.reason =  "我对你的需求有兴趣，加个好友吧";
+                                }
+                                entry.save();
+                                ToastUtil.shortToast(Xuqiuxiangx.this, "申请成功");
+                                finish();
+                            } else if (responseCode == 871317) {
+                                ToastUtil.shortToast(Xuqiuxiangx.this, "不能添加自己为好友");
+                            } else {
+                                ToastUtil.shortToast(Xuqiuxiangx.this, "申请失败");
                             }
                         }
-                    }).start();
+                    });
+//                    Toast.makeText(this, "已发送好友申请", Toast.LENGTH_SHORT).show();
+//                    new Thread(new Runnable() {
+//                        public void run() {
+//                            try {
+//                                //demo use a hardcode reason here, you need let user to input if you like
+//                                String s = getResources().getString(R.string.Add_a_friend);
+//                                EMClient.getInstance().contactManager().addContact(username, s);
+//                            } catch (final Exception e) {
+//
+//                            }
+//                        }
+//                    }).start();
                 }else {
                     Toast.makeText(this, "请完善教师管理信息等待审核通过", Toast.LENGTH_SHORT).show();
                 }
@@ -342,12 +384,17 @@ public class Xuqiuxiangx extends AutoLayoutActivity implements Xuqiuxiangx_init,
                 break;
             case R.id.xuqiuweix:
                 if (ispass) {
+                    Intent intent = new Intent(this, ChatActivity.class);
+                    intent.putExtra(JGApplication.CONV_TITLE, username);
+                    intent.putExtra(JGApplication.TARGET_ID, username);
+                    intent.putExtra(JGApplication.TARGET_APP_KEY, mMyInfo.getAppKey());
+                    startActivity(intent);
                     //聊天
 //                Intent intent1=new Intent(Xuqiuxiangx.this, HuihuaActivity.class);
-                    Intent intent1 = new Intent(Xuqiuxiangx.this, ChatActivity.class);
-                    intent1.putExtra(EaseConstant.EXTRA_USER_ID, username);
-                    intent1.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
-                    startActivity(intent1);
+//                    Intent intent1 = new Intent(Xuqiuxiangx.this, ChatActivity.class);
+//                    intent1.putExtra(EaseConstant.EXTRA_USER_ID, username);
+//                    intent1.putExtra(EaseConstant.EXTRA_CHAT_TYPE, EMMessage.ChatType.Chat);
+//                    startActivity(intent1);
                 }else {
                     Toast.makeText(this, "请完善教师管理信息等待审核通过", Toast.LENGTH_SHORT).show();
                 }

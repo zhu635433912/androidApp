@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
      android:layout_width="match_parent"
+    android:background="#fffffe"
     android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/guanyuwmenfanhui"
@@ -45,7 +46,7 @@
         android:layout_below="@+id/logo"
         android:layout_centerHorizontal="true"
         android:textSize="40px"
-        android:text="学了吗"
+        android:text="共享老师"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -53,14 +54,14 @@
         android:layout_toRightOf="@+id/hanlingyuan"
         android:layout_alignBottom="@+id/hanlingyuan"
         android:textSize="30px"
-        android:text="v2.1"
+        android:text="v1.0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/zhishigaibianmingyun"
         android:layout_marginTop="46px"
         android:layout_below="@+id/hanlingyuan"
-        android:text="知识改变命运,德冠促进成长"
+        android:text="知识改变命运,共享促进成长"
         android:layout_centerHorizontal="true"
         android:textSize="40px"
         android:layout_width="wrap_content"
@@ -81,7 +82,7 @@
         android:layout_marginBottom="12px"
         android:layout_toRightOf="@+id/weibo"
         android:layout_alignBottom="@+id/weibo"
-        android:text="官方微博:    学了吗教育资源平台"
+        android:text="官方微博:    共享老师教育资源平台"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -107,7 +108,7 @@
         android:layout_marginBottom="12px"
         android:layout_toRightOf="@+id/weixin"
         android:layout_alignBottom="@+id/weixin"
-        android:text="官方微信:   学了吗学习平台"
+        android:text="官方微信:   共享老师学习平台"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -185,7 +186,7 @@
         android:layout_marginBottom="12px"
         android:layout_toRightOf="@+id/web"
         android:layout_alignBottom="@+id/web"
-        android:text="官方网址:  www.deguanjiaoyu.com"
+        android:text="官方网址:  www.deguanjiaoyu.cn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView

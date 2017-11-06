@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -32,11 +33,11 @@ import view.login.presenter.login_wan_presenter;
  */
 
 public class RevisePsdActivity extends AutoLayoutActivity implements Pos_inint,View.OnClickListener {
-    private ImageButton pos_loginbutton;
+    private Button pos_loginbutton;
     private EditText pos_username;
     private EditText pos_password;
     private EditText pos_Verfic;//验证码
-    private ImageButton pos_toview;//获取验证码
+    private Button pos_toview;//获取验证码
     private ImageButton pos_Verificatgion;//查看
     private  ImageButton pos_extic;//返回
     private login_wan_presenter dwan;
@@ -54,10 +55,10 @@ public class RevisePsdActivity extends AutoLayoutActivity implements Pos_inint,V
 
     private void init() {
         dwan=new S_wan_presenter(this);
-        pos_loginbutton= (ImageButton) findViewById(R.id.pos_login);
+        pos_loginbutton= (Button) findViewById(R.id.pos_login);
         pos_username= (EditText) findViewById(R.id.pos_username);
         pos_password= (EditText) findViewById(R.id.pos_password);
-        pos_toview= (ImageButton) findViewById(R.id.pos_vicat);
+        pos_toview= (Button) findViewById(R.id.pos_vicat);
         pos_Verificatgion= (ImageButton) findViewById(R.id.pos_chakan);
         pos_Verfic= (EditText) findViewById(R.id.pos_editextyansema);
         pos_extic= (ImageButton) findViewById(R.id.pos_imageButton);

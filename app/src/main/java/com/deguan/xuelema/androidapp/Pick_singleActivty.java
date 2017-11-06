@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.deguan.xuelema.androidapp.init.Picksinge_init;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ import modle.user_ziliao.User_id;
  * 接单列表
  */
 
-public class Pick_singleActivty  extends AutoLayoutActivity implements View.OnClickListener,Student_init{
+public class Pick_singleActivty  extends MyBaseActivity implements View.OnClickListener,Student_init{
     private RecyclerView mRecyclerView;
     private List<Map<String,Object>> mDatas;
     private RelativeLayout jiedanliebiaofanhui;
@@ -81,12 +82,16 @@ public class Pick_singleActivty  extends AutoLayoutActivity implements View.OnCl
                 Map<String,Object> map= listmap.get(i);
                 String teacher_id= (String) map.get("teacher_id");
                 String head_image= (String) map.get("teacher_headimg");
-                Intent intent=new Intent(Pick_singleActivty.this,UserxinxiActivty.class);
-                intent.putExtra("user_id",teacher_id);
-                intent.putExtra("head_image",head_image);
-                intent.putExtra("content",content);
-                intent.putExtra("myid",myid);
-                startActivity(intent);
+                startActivity(NewTeacherPersonActivity_.intent(Pick_singleActivty.this).
+                        extra("content",content).extra("myid",myid)
+                        .extra("head_image",head_image)
+                        .extra("user_id",teacher_id).get());
+//                Intent intent=new Intent(Pick_singleActivty.this,UserxinxiActivty.class);
+//                intent.putExtra("user_id",teacher_id);
+//                intent.putExtra("head_image",head_image);
+//                intent.putExtra("content",content);
+//                intent.putExtra("myid",myid);
+//                startActivity(intent);
 
             }
         });

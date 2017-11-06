@@ -58,10 +58,54 @@
         android:background="#ffffff"
         android:id="@+id/teacher_desc"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="20px"
-        android:layout_marginRight="20px"
+        android:layout_height="500px"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
         android:gravity="start"
-        android:hint="请介绍下自己..."
+        android:hint="    请介绍下自己...个人信息、教育历程、所获荣誉、特长等"
         android:textSize="30px" />
+    <LinearLayout
+        android:layout_margin="30px"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="200px">
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0px"
+            android:layout_height="match_parent">
+            <com.facebook.drawee.view.SimpleDraweeView
+                app:actualImageScaleType="focusCrop"
+                android:layout_width="match_parent"
+                android:id="@+id/teacher_zone_image1"
+                app:placeholderImage="@drawable/refund_camera"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0px"
+            android:layout_height="match_parent">
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:layout_width="match_parent"
+                app:actualImageScaleType="focusCrop"
+                android:visibility="gone"
+                android:id="@+id/teacher_zone_image2"
+                app:placeholderImage="@drawable/refund_addpic"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0px"
+            android:layout_height="match_parent">
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:visibility="gone"
+                app:actualImageScaleType="focusCrop"
+                android:layout_width="match_parent"
+                android:id="@+id/teacher_zone_image3"
+                app:placeholderImage="@drawable/refund_addpic"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
 </LinearLayout>

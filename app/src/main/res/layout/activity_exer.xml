@@ -33,7 +33,7 @@
             android:textSize="35px"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="个人经历"
+            android:text="个人空间"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
@@ -54,9 +54,9 @@
     <EditText
         android:background="#ffffff"
         android:id="@+id/exer_desc"
-        android:layout_marginLeft="20px"
-        android:layout_marginRight="20px"
-        android:hint="    你有哪些经历呢"
+        android:layout_marginLeft="30px"
+        android:layout_marginRight="30px"
+        android:hint="    兴趣爱好是什么呢？"
         android:gravity="start"
         android:layout_width="match_parent"
         android:layout_weight="1"
@@ -66,7 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/exer_image"
             android:background="@drawable/education_image_bg"
             android:layout_weight="1"

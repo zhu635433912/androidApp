@@ -1,7 +1,9 @@
 package com.deguan.xuelema.androidapp;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.utils.ShareUtil;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -26,7 +29,7 @@ import modle.user_ziliao.User_id;
  * 我的分销
  */
 
-public class Distribution_Activty extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed{
+public class Distribution_Activty extends MyBaseActivity implements View.OnClickListener,Requirdetailed{
     private RelativeLayout jiantou;
     private RelativeLayout wodeffenxiao;
     private ImageView erweima;
@@ -39,6 +42,9 @@ public class Distribution_Activty extends AutoLayoutActivity implements View.OnC
     private TextView yqm;
     private int z=1;
     private ImageView weichatImage,xinlangImage,weichatCoreImage,qqImage;
+    private RelativeLayout yiji;
+    private RelativeLayout erji;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,7 +52,8 @@ public class Distribution_Activty extends AutoLayoutActivity implements View.OnC
         setContentView(R.layout.distribution);
         User_id.getInstance().addActivity(this);
 
-
+        erji= (RelativeLayout) findViewById(R.id.erji);
+        yiji= (RelativeLayout) findViewById(R.id.yiji);
         weichatImage = (ImageView) findViewById(R.id.share_to_weixin_image);
         xinlangImage = (ImageView) findViewById(R.id.share_to_xinlang_image);
         weichatCoreImage = (ImageView) findViewById(R.id.share_to_weixincore_image);
@@ -76,15 +83,44 @@ public class Distribution_Activty extends AutoLayoutActivity implements View.OnC
         xinlangImage.setOnClickListener(this);
         weichatCoreImage.setOnClickListener(this);
         qqImage.setOnClickListener(this);
-
+        erji.setOnClickListener(this);
+        yiji.setOnClickListener(this);
 
         wodeffenxiao.setOnClickListener(this);
         jiantou.setOnClickListener(this);
+        erweima.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.erweima:
+                Resources res=getResources();
+//                Bitmap bmp= BitmapFactory.decodeResource(res, R.drawable.ic_launcher);
+
+                Bundle b = new Bundle();
+                b.putParcelable("bitmap", bitmap);
+
+                Intent intent9 = new Intent(this, PictureZoo.class);
+                intent9.putExtras(b);
+                intent9.putExtra("hide","");
+                startActivity(intent9);
+
+
+                break;
+            case R.id.yiji:
+                //一二级分销
+                Intent intent=new Intent(Distribution_Activty.this,MyDistribution_Actvity.class);
+                intent.putExtra("level","1");
+                startActivity(intent);
+
+                break;
+            case R.id.erji:
+
+                Intent intentc=new Intent(Distribution_Activty.this,MyDistribution_Actvity.class);
+                intentc.putExtra("level","2");
+                startActivity(intentc);
+                break;
             case R.id.share_to_weixin_image:
                 ShareUtil.getInstance().share(this);
 //                ShareUtil.getInstance().shareQQ(this);
@@ -103,8 +139,8 @@ public class Distribution_Activty extends AutoLayoutActivity implements View.OnC
                 break;
             case R.id.jiantou:
                 //推广金额
-                Intent intent=new Intent(Distribution_Activty.this,Promote_Acitvty.class);
-                startActivity(intent);
+                Intent intent4=new Intent(Distribution_Activty.this,Promote_Acitvty.class);
+                startActivity(intent4);
                 break;
             case R.id.wodeffenxiao:
                 Distribution_Activty.this.finish();
@@ -143,7 +179,7 @@ public class Distribution_Activty extends AutoLayoutActivity implements View.OnC
 
         if (map.get("mobile")!=null) {
             Erweima erweimac = new Erweima();
-            Bitmap bitmap = erweimac.generateBitmap("http://deguanjiaoyu.com/index.php?s=/Home/users/index/tel/"+User_id.getUsername(), 440, 440);
+            bitmap = erweimac.generateBitmap("http://deguanjiaoyu.com/index.php?s=/Home/users/index/tel/"+ User_id.getUsername(), 440, 440);
 //            http://deguanjiaoyu.com/index.php?s=/Home/users/index/tel/"+User_id.getUsername()
 //            Bitmap bitmap = erweimac.generateBitmap("邀请码为:" + map.get("mobile"), 440, 440);
             erweima.setImageBitmap(bitmap);

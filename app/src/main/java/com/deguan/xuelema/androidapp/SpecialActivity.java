@@ -32,6 +32,11 @@ public class SpecialActivity extends MyBaseActivity implements Requirdetailed {
     RelativeLayout backRl;
 
     @Override
+    public void before() {
+        super.before();
+    }
+
+    @Override
     public void initData() {
         new Teacher().Get_Teacher_detailed(Integer.parseInt(User_id.getUid()),
                 Integer.parseInt(User_id.getUid()),this,2,0);
@@ -64,7 +69,7 @@ public class SpecialActivity extends MyBaseActivity implements Requirdetailed {
     @Override
     public void Updatecontent(Map<String, Object> map) {
         if (!TextUtils.isEmpty(map.get("speciality")+"")){
-            descEdit.setText(map.get("speciality")+"");
+            descEdit.setText(""+map.get("speciality")+"");
         }
     }
 

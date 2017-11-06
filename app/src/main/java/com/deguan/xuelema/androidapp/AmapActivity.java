@@ -31,7 +31,10 @@ import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeQuery;
 import com.amap.api.services.geocoder.RegeocodeResult;
 import com.deguan.xuelema.androidapp.R;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
+
+import modle.user_ziliao.User_id;
 
 
 /**
@@ -39,7 +42,7 @@ import com.zhy.autolayout.AutoLayoutActivity;
  */
 
 
-public class AmapActivity extends AutoLayoutActivity implements LocationSource,AMapLocationListener {
+public class AmapActivity extends MyBaseActivity implements LocationSource,AMapLocationListener {
     MapView mMapView = null;
     AMap aMap;
     MyLocationStyle myLocationStyle;
@@ -58,6 +61,13 @@ public class AmapActivity extends AutoLayoutActivity implements LocationSource,A
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.baseact);
+        lat = User_id.getLat()+"";
+        lng = User_id.getLng()+"";
+        address = User_id.getAddress()+"";
+        city = User_id.getStatus()+"";
+        location = User_id.getCity()+"";
+        province = User_id.getProvince()+"";
+
 
         sendTv = (TextView) findViewById(R.id.map_send);
         backImage = (ImageView) findViewById(R.id.map_back);
@@ -139,6 +149,9 @@ public class AmapActivity extends AutoLayoutActivity implements LocationSource,A
             @Override
             public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
                 address = regeocodeResult.getRegeocodeAddress().getFormatAddress();
+                city = regeocodeResult.getRegeocodeAddress().getDistrict();
+                province = regeocodeResult.getRegeocodeAddress().getProvince();
+                location = regeocodeResult.getRegeocodeAddress().getCity();
             }
 
             @Override
@@ -147,20 +160,25 @@ public class AmapActivity extends AutoLayoutActivity implements LocationSource,A
             }
         });
     }
-
+    private String city;
+    private String province;
+    private String location;
     private void backRecept() {
         Intent intent = this.getIntent();
         intent.putExtra("latitude", lat);
         intent.putExtra("longitude", lng);
         intent.putExtra("address", address);
+        intent.putExtra("city",city);
+        intent.putExtra("location",location);
+        intent.putExtra("province",province);
         this.setResult(RESULT_OK, intent);
         finish();
-        overridePendingTransition(com.hyphenate.easeui.R.anim.slide_in_from_left, com.hyphenate.easeui.R.anim.slide_out_to_right);
+        overridePendingTransition(R.anim.slide_in_from_left, R.anim.slide_out_to_right);
 
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
         mMapView.onDestroy();

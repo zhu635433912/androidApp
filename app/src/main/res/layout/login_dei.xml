@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/login_backgroud"
      android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageButton
@@ -12,21 +11,22 @@
         android:background="@drawable/add07"
         android:layout_width="70px"
         android:layout_height="70px" />
+
     <RelativeLayout
         android:id="@+id/dei_relatvelayout"
-        android:background="@drawable/mask"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:layout_width="534px"
-        android:layout_height="900px">
+        android:layout_marginTop="100px"
+        android:layout_height="800px">
         <ImageView
+            android:id="@+id/register_logo"
+            android:src="@mipmap/login_logo"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
             android:layout_marginTop="15px"
             android:layout_marginEnd="16px"
-            android:layout_width="210px"
-            android:layout_height="250px"
-            android:layout_alignParentRight="true"
+            android:layout_width="150px"
+            android:layout_centerHorizontal="true"
+            android:layout_height="150px"
             android:layout_marginRight="15px" />
         <TextView
             android:id="@+id/dei_textviewdeng"
@@ -38,54 +38,23 @@
             android:textSize="48px"
             android:text="@string/login_zhuce"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="0dp" />
 
-        <RadioButton
-            android:layout_marginTop="42px"
-            android:layout_below="@+id/dei_textviewdeng"
-            android:layout_alignLeft="@+id/dei_textviewdeng"
-            android:id="@+id/dei_RadioGrooup"
-            android:checked="true"
-            android:gravity="center"
-            android:button="@null"
-            android:background="@drawable/radiobutton"
-            android:layout_width="50px"
-            android:layout_height="50px" />
-            <TextView
-                android:id="@+id/deiw_textxues"
-                android:layout_alignBottom="@+id/dei_RadioGrooup"
-                android:layout_toRightOf="@+id/dei_RadioGrooup"
-                android:textSize="30px"
-                android:text="    学生     "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-            <RadioButton
-                android:layout_alignBottom="@+id/dei_RadioGrooup"
-                android:layout_toRightOf="@+id/deiw_textxues"
-                android:id="@+id/dei_radiobutton1"
-                android:button="@null"
-                android:background="@drawable/radiobutton"
-                android:layout_width="50px"
-                android:layout_height="50px" />
-            <TextView
-                android:layout_alignBottom="@+id/dei_RadioGrooup"
-                android:layout_toRightOf="@+id/dei_radiobutton1"
-                android:textSize="30px"
-                android:text="    老师    "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+
         <EditText
+            android:maxLength="11"
             android:inputType="number"
             android:singleLine="true"
             android:textSize="30px"
-            android:hint="  手机号码"
-            android:background="@drawable/login_wan_connllat"
+            android:hint="请输入手机号"
+            android:textColorHint="#c2c2c2"
+            android:paddingLeft="70px"
+            android:background="@mipmap/login_phone"
             android:id="@+id/dei_username"
-            android:layout_marginTop="30px"
-            android:layout_below="@+id/dei_RadioGrooup"
-            android:layout_alignLeft="@+id/dei_textviewdeng"
-            android:layout_width="400px"
-            android:layout_height="80px" />
+            android:layout_marginTop="40px"
+            android:layout_below="@+id/register_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <TextView
             android:layout_marginLeft="10px"
             android:layout_toEndOf="@+id/dei_editextyansema"
@@ -97,46 +66,56 @@
             android:layout_toRightOf="@+id/dei_editextyansema" />
         <EditText
             android:textSize="30px"
-            android:background="@drawable/login_wan_connllat"
+            android:textColorHint="#c2c2c2"
+            android:paddingLeft="70px"
+            android:background="@mipmap/login_yzm"
             android:id="@+id/dei_editextyansema"
-            android:layout_width="400px"
-            android:layout_height="80px"
-            android:layout_marginTop="16px"
-            android:hint=" 点击获取验证码"
-            android:layout_below="@+id/dei_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40px"
+            android:hint="请输入验证码"
+            android:layout_below="@+id/dei_password"
             android:layout_alignLeft="@+id/dei_username"
-            android:layout_alignStart="@+id/dei_username" />
-        <ImageButton
+             />
+        <Button
             android:id="@+id/dei_VictButton"
             android:layout_alignBottom="@+id/dei_editextyansema"
             android:layout_alignEnd="@+id/dei_editextyansema"
-            android:layout_marginBottom="14px"
+            android:layout_marginBottom="8px"
             android:layout_marginEnd="14px"
-            android:background="@drawable/butoon_charex"
-            android:layout_width="40px"
-            android:layout_height="40px"
+            android:text="获取验证码"
+            android:textSize="25px"
+            android:textColor="#ffffff"
+            android:background="@mipmap/register_get_yzm"
+            android:layout_width="150px"
+            android:layout_height="50px"
             android:layout_alignRight="@+id/dei_editextyansema"
             android:layout_marginRight="14px" />
         <EditText
             android:password="true"
             android:id="@+id/dei_password"
             android:textSize="30px"
-            android:hint=" 密码"
-            android:background="@drawable/login_wan_connllat"
-            android:layout_marginTop="24px"
-            android:layout_below="@+id/dei_editextyansema"
+            android:hint="请设置密码(长度6-16位)"
+            android:textColorHint="#c2c2c2"
+            android:paddingLeft="70px"
+            android:background="@mipmap/login_psw"
+            android:layout_marginTop="40px"
+            android:layout_below="@+id/dei_username"
             android:layout_alignLeft="@+id/dei_editextyansema"
-            android:layout_width="400px"
-            android:layout_height="80px" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/dei_tuijianma"
             android:textSize="30px"
-            android:background="@drawable/login_wan_connllat"
-            android:layout_marginTop="24px"
-            android:layout_below="@+id/dei_password"
+            android:textColorHint="#c2c2c2"
+            android:paddingLeft="70px"
+            android:hint="请输入邀请码(可不填)"
+            android:background="@mipmap/login_yaoqing"
+            android:layout_marginTop="40px"
+            android:layout_below="@+id/dei_editextyansema"
             android:layout_alignLeft="@+id/dei_password"
-            android:layout_width="400px"
-            android:layout_height="80px" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/dei_pay_password"
             android:textSize="30px"
@@ -165,7 +144,7 @@
             android:text="邀请码"
             android:textSize="30px"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="0px" />
         <ImageButton
             android:id="@+id/dei_imagSess"
             android:layout_marginBottom="20px"
@@ -174,15 +153,58 @@
             android:layout_alignBottom="@+id/dei_password"
             android:background="@drawable/hly46"
             android:layout_width="40px"
-            android:layout_height="40px"
+            android:layout_height="0px"
             android:layout_alignRight="@+id/dei_password" />
-
+        <TextView
+            android:id="@+id/register_shenfen"
+            android:text="请选择注册身份"
+            android:layout_marginTop="35px"
+            android:layout_below="@+id/dei_tuijianma"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:textSize="25px"
+            android:layout_height="50px" />
+        <RadioButton
+            android:layout_marginLeft="20px"
+            android:layout_marginTop="30px"
+            android:layout_below="@+id/dei_tuijianma"
+            android:layout_toRightOf="@+id/register_shenfen"
+            android:id="@+id/dei_RadioGrooup"
+            android:checked="true"
+            android:gravity="center"
+            android:button="@null"
+            android:background="@drawable/radiobutton"
+            android:layout_width="50px"
+            android:layout_height="50px" />
+        <TextView
+            android:id="@+id/deiw_textxues"
+            android:layout_alignBottom="@+id/dei_RadioGrooup"
+            android:layout_toRightOf="@+id/dei_RadioGrooup"
+            android:textSize="30px"
+            android:text="  学生  "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:layout_alignBottom="@+id/dei_RadioGrooup"
+            android:layout_toRightOf="@+id/deiw_textxues"
+            android:id="@+id/dei_radiobutton1"
+            android:button="@null"
+            android:background="@drawable/radiobutton"
+            android:layout_width="50px"
+            android:layout_height="50px" />
+        <TextView
+            android:layout_alignBottom="@+id/dei_RadioGrooup"
+            android:layout_toRightOf="@+id/dei_radiobutton1"
+            android:textSize="30px"
+            android:text="  老师  "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <ImageButton
-            android:layout_marginTop="50px"
-            android:background="@drawable/hly60"
-            android:layout_width="104px"
-            android:layout_height="104px"
-            android:layout_below="@+id/dei_pay_password"
+            android:layout_marginTop="30px"
+            android:background="@mipmap/register_sure"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:layout_below="@+id/dei_radiobutton1"
             android:layout_centerHorizontal="true"
             android:id="@+id/dei_login" />
     </RelativeLayout>
@@ -195,13 +217,22 @@
         android:layout_marginLeft="13px"
         android:layout_marginBottom="10dp"
         android:id="@+id/imageView" />
+    <ImageView
+        android:src="@mipmap/login_lang1"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="250px" />
+    <ImageView
+        android:src="@mipmap/login_lang2"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="250px" />
     <TextView
         android:id="@+id/register_user"
-        android:textSize="30px"
-        android:layout_centerHorizontal="true"
+        android:background="@mipmap/register_xieyi"
         android:layout_alignParentBottom="true"
-        android:text="@string/login_xuelema"
-        android:layout_marginBottom="10px"
-        android:layout_width="wrap_content"
+        android:text=""
+        android:layout_marginBottom="80px"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </RelativeLayout>

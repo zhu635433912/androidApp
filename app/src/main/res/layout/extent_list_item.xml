@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="140px">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0px"
+            android:layout_height="match_parent">
+            <com.facebook.drawee.view.SimpleDraweeView
+                app:roundAsCircle="true"
+                android:id="@+id/extent_head_image1"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10px"
+                android:layout_width="70px"
+                android:layout_height="70px" />
+            <TextView
+                android:id="@+id/extent_user_nickname1"
+                android:text="134441133"
+                android:textSize="25px"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0px"
+            android:layout_height="match_parent">
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/extent_head_image2"
+                android:layout_gravity="center_horizontal"
+                app:roundAsCircle="true"
+                android:layout_margin="10px"
+                android:layout_width="70px"
+                android:layout_height="70px" />
+            <TextView
+                android:id="@+id/extent_user_nickname2"
+                android:text="134441133"
+                android:gravity="center"
+                android:textSize="25px"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="0px"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/extent_money_tv"
+                android:text="134441133"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_marginTop="10px"
+        android:background="#f5bd53"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+</LinearLayout>

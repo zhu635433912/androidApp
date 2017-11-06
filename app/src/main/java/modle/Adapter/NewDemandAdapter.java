@@ -1,6 +1,7 @@
 package modle.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.text.DecimalFormat;
@@ -76,7 +78,7 @@ public class NewDemandAdapter extends RecyclerView.Adapter<NewDemandAdapter.NewD
 
     @Override
     public NewDemandViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.listview_itme, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.demand_list_item, parent, false);
         view.setOnClickListener(this);
         return new NewDemandViewHolder(view);
     }
@@ -97,13 +99,15 @@ public class NewDemandAdapter extends RecyclerView.Adapter<NewDemandAdapter.NewD
         }
 //        holder.service_type.setVisibility(View.GONE);
         holder.fee.setText(""
-//                +list.get(position).getFee()
+                +list.get(position).getFee()
         );
 //        holder.fee.setVisibility(View.GONE);
-        holder.speciality.setText(""+list.get(position).getCourse_name());
+        holder.speciality.setText(""+list.get(position).getCourse_name()+"    "+list.get(position).getVersion()+"");
         holder.username.setText(""+list.get(position).getContent());
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
-        Glide.with(context.getApplicationContext()).load(list.get(position).getPublisher_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+//        Glide.with(context.getApplicationContext()).load(list.get(position).getPublisher_headimg()).
+//                transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
         String dist = list.get(position).getDistance();
         double myDist = 0;
         if (!dist.equals("")){
@@ -155,7 +159,7 @@ public class NewDemandAdapter extends RecyclerView.Adapter<NewDemandAdapter.NewD
 
     public static class NewDemandViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView user_headimg;
+        private SimpleDraweeView user_headimg;
         //        private CircleImageView user_headimg;//用户头像
         private TextView nickname;//昵称
         private TextView service_type;//服务类型
@@ -170,10 +174,10 @@ public class NewDemandAdapter extends RecyclerView.Adapter<NewDemandAdapter.NewD
         public NewDemandViewHolder(View itemView) {
             super(itemView);
             AutoUtils.autoSize(itemView);
-            user_headimg = (ImageView) itemView.findViewById(R.id.lognhost);
+            user_headimg = (SimpleDraweeView) itemView.findViewById(R.id.lognhost);
             nickname = (TextView) itemView.findViewById(R.id.text1);
             service_type = (TextView) itemView.findViewById(R.id.text9);
-            fee = (TextView) itemView.findViewById(R.id.text3);
+            fee = (TextView) itemView.findViewById(R.id.text33);
             speciality = (TextView) itemView.findViewById(R.id.text4);
             username = (TextView) itemView.findViewById(R.id.text6);
             distance = (TextView) itemView.findViewById(R.id.text7);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="190px">
@@ -7,7 +8,8 @@
     <RelativeLayout
         android:layout_width="800px"
         android:layout_height="200px">
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
+            app:roundAsCircle="true"
             android:id="@+id/evaluaton_name"
             android:layout_marginLeft="20px"
             android:layout_marginTop="10px"
@@ -47,11 +49,17 @@
             android:textSize="30px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <ImageView
-            android:layout_below="@+id/evalunaton_username"
-            android:layout_marginRight="20px"
-            android:layout_toLeftOf="@+id/evalunaton_time"
+        <TextView
             android:layout_marginTop="10px"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="50px"
+            android:id="@+id/evaluaton_rank_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_marginRight="50px"
+            android:layout_toLeftOf="@+id/evaluaton_rank_tv"
+            android:layout_marginTop="30px"
             android:id="@+id/evaluaton_star"
             android:layout_width="150px"
             android:layout_height="20px" />

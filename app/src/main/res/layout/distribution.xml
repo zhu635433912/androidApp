@@ -21,7 +21,7 @@
         android:layout_marginTop="20px"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="我的分享"
+        android:text="我的奖励"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <TextView
@@ -32,41 +32,182 @@
         android:layout_width="match_parent"
         android:layout_height="1px" />
      <RelativeLayout
-         android:id="@+id/leijinjinlayout"
-         android:layout_centerHorizontal="true"
-         android:background="@drawable/wodefenxiao"
          android:layout_below="@+id/xuqiufenggexian"
+         android:id="@+id/leijinjinlayout"
+         android:background="@drawable/wodefenxiao"
          android:layout_width="700px"
-         android:layout_height="match_parent">
-        <RelativeLayout
+         android:layout_height="match_parent"
+         android:layout_alignParentBottom="true"
+         android:layout_centerHorizontal="true">
+         <TextView
+             android:id="@+id/jinbifuhao"
+             android:textColor="#222328"
+             android:textSize="40px"
+             android:text="￥"
+             android:paddingTop="10px"
+             android:layout_marginLeft="50px"
+             android:layout_alignParentLeft="true"
+             android:layout_marginTop="120px"
+             android:layout_below="@+id/tuiguangjinelayout"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <TextView
+             android:id="@+id/yijifee"
+             android:textColor="#4a4a4a"
+             android:textSize="60px"
+             android:text="0.00"
+             android:layout_marginLeft="10px"
+             android:layout_toRightOf="@+id/jinbifuhao"
+             android:layout_alignTop="@+id/jinbifuhao"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <ImageView
+             android:id="@+id/luanqibazaodetubiao"
+             android:layout_marginTop="20px"
+             android:layout_below="@+id/jinbifuhao"
+             android:layout_alignLeft="@+id/jinbifuhao"
+             android:background="@drawable/yhkbaise"
+             android:layout_width="50px"
+             android:layout_height="40px" />
+         <TextView
+             android:layout_toRightOf="@+id/luanqibazaodetubiao"
+             android:layout_alignBottom="@+id/luanqibazaodetubiao"
+             android:text="推广奖励"
+             android:layout_marginLeft="30px"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <RelativeLayout
+             android:id="@+id/yiji"
+             android:layout_width="match_parent"
+             android:layout_height="150px"
+             android:layout_alignTop="@+id/jiantou"
+             android:layout_alignParentLeft="true"
+             android:layout_alignParentStart="true" />
+         <ImageView
+             android:layout_alignBottom="@+id/yijifee"
+             android:layout_alignParentRight="true"
+             android:layout_marginRight="60px"
+             android:background="@drawable/teacher_man_right"
+             android:layout_width="20px"
+             android:layout_height="30px" />
+         <TextView
+             android:id="@+id/xuqiufenggexian1"
+             android:background="#d7d7d7"
+             android:layout_marginLeft="50px"
+             android:layout_marginRight="50px"
+             android:layout_marginTop="30px"
+             android:layout_below="@+id/luanqibazaodetubiao"
+             android:layout_width="match_parent"
+             android:layout_height="1px" />
+         <TextView
+             android:id="@+id/jinbifuhao1"
+             android:textColor="#222328"
+             android:textSize="40px"
+             android:text="￥"
+             android:paddingTop="10px"
+             android:layout_marginLeft="50px"
+             android:layout_alignParentLeft="true"
+             android:layout_marginTop="30px"
+             android:layout_below="@+id/xuqiufenggexian1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <TextView
+             android:id="@+id/erjifee"
+             android:textColor="#4a4a4a"
+             android:textSize="60px"
+             android:text="0.00"
+             android:layout_marginLeft="10px"
+             android:layout_toRightOf="@+id/jinbifuhao1"
+             android:layout_alignTop="@+id/jinbifuhao1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <ImageView
+             android:id="@+id/luanqibazaodetubiao1"
+             android:layout_marginTop="20px"
+             android:layout_below="@+id/jinbifuhao1"
+             android:layout_alignLeft="@+id/jinbifuhao1"
+             android:src="@drawable/yhkbaise"
+             android:layout_width="50px"
+             android:layout_height="40px" />
+         <TextView
+             android:layout_toRightOf="@+id/luanqibazaodetubiao1"
+             android:layout_alignBottom="@+id/luanqibazaodetubiao1"
+             android:text="团队奖励"
+             android:layout_marginLeft="30px"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+
+         <RelativeLayout
+             android:id="@+id/erji"
+             android:layout_below="@+id/yiji"
+             android:layout_width="match_parent"
+             android:layout_height="150px"/>
+         <ImageView
+             android:layout_alignBottom="@+id/erjifee"
+             android:layout_alignParentRight="true"
+             android:layout_marginRight="60px"
+             android:background="@drawable/teacher_man_right"
+             android:layout_width="20px"
+             android:layout_height="30px" />
+
+         <TextView
+             android:id="@+id/xuqiufenggexian2"
+             android:background="#d7d7d7"
+             android:layout_marginTop="30px"
+             android:layout_marginRight="50px"
+             android:layout_marginLeft="50px"
+             android:layout_below="@+id/luanqibazaodetubiao1"
+             android:layout_width="match_parent"
+             android:layout_height="1px" />
+
+         <RelativeLayout
             android:id="@+id/jiantou"
             android:layout_marginTop="100px"
             android:layout_alignParentTop="true"
             android:layout_width="match_parent"
-            android:layout_height="350px"></RelativeLayout>
+            android:layout_height="0px"></RelativeLayout>
          <ImageView
-             android:layout_marginEnd="60px"
-             android:layout_alignParentEnd="true"
+             android:layout_marginRight="60px"
+             android:layout_alignParentRight="true"
              android:layout_alignBottom="@+id/leijifee"
              android:background="@drawable/fanxianjiantou"
+             android:layout_width="0dp"
+             android:layout_height="0dp" />
+        <TextView
+            android:id="@+id/leijijine"
+            android:textSize="30px"
+            android:text="累积金额"
+            android:layout_marginLeft="80px"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+         <TextView
+             android:layout_marginTop="100px"
+             android:id="@+id/wodeyaoqingma"
+             android:layout_above="@+id/yqm"
+             android:layout_alignLeft="@+id/erweima"
+             android:text="我的邀请码"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content" />
+         <TextView
+             android:id="@+id/yqm"
+             android:textColor="#363c43"
+             android:textSize="25px"
+             android:layout_marginTop="20px"
+             android:layout_above="@+id/erweima"
+             android:layout_alignLeft="@+id/erweima"
+             android:text=""
              android:layout_width="wrap_content"
              android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/leijijine"
-            android:layout_marginTop="200px"
-            android:textSize="30px"
-            android:text="累积金额"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
             android:id="@+id/leijifee"
-            android:textColor="#222328"
-            android:layout_marginTop="20px"
+            android:textColor="#363c43"
+            android:textSize="33px"
+            android:layout_marginTop="10px"
             android:layout_below="@+id/leijijine"
-            android:layout_centerHorizontal="true"
-            android:textSize="50px"
-            android:text="$0.00"
+            android:layout_alignLeft="@+id/yijifenxiao"
+            android:text="￥ 0.00"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
          <TextView
@@ -76,56 +217,39 @@
              android:layout_centerVertical="true"
              android:layout_alignParentLeft="true"
              android:text="一级分享"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content" />
+             android:layout_width="0dp"
+             android:layout_height="0dp" />
          <TextView
              android:id="@+id/erjifenxiao"
              android:textSize="25px"
              android:text="二级分享"
              android:layout_marginLeft="80px"
-             android:layout_toEndOf="@+id/yijifenxiao"
+             android:layout_toRightOf="@+id/yijifenxiao"
              android:layout_alignBottom="@+id/yijifenxiao"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content" />
-         <TextView
-             android:id="@+id/wodeyaoqingma"
-             android:layout_marginLeft="80px"
-             android:layout_toEndOf="@+id/erjifenxiao"
-             android:layout_alignBottom="@+id/yijifenxiao"
-             android:text="我的邀请码"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content" />
+             android:layout_width="0dp"
+             android:layout_height="0dp" />
+
         <TextView
-            android:id="@+id/yijifee"
             android:textColor="#363c43"
             android:textSize="25px"
             android:layout_marginTop="10px"
             android:layout_below="@+id/yijifenxiao"
             android:layout_alignLeft="@+id/yijifenxiao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
          <TextView
-             android:id="@+id/erjifee"
              android:textColor="#363c43"
              android:textSize="25px"
              android:layout_marginTop="10px"
              android:layout_below="@+id/erjifenxiao"
              android:layout_alignLeft="@+id/erjifenxiao"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content" />
-         <TextView
-             android:id="@+id/yqm"
-             android:textColor="#363c43"
-             android:textSize="25px"
-             android:layout_marginTop="10px"
-             android:layout_below="@+id/wodeyaoqingma"
-             android:layout_alignLeft="@+id/wodeyaoqingma"
-             android:text=""
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content" />
+             android:layout_width="0dp"
+             android:layout_height="0dp" />
+
+
          <ImageView
              android:id="@+id/erweima"
-             android:layout_marginBottom="80px"
+             android:layout_marginBottom="60px"
              android:layout_marginLeft="80px"
              android:layout_alignParentLeft="true"
              android:layout_alignParentBottom="true"
@@ -135,7 +259,7 @@
              android:id="@+id/saomiaoerweima"
              android:textSize="30px"
              android:layout_marginLeft="80px"
-             android:layout_toEndOf="@+id/erweima"
+             android:layout_toRightOf="@+id/erweima"
              android:layout_alignTop="@+id/erweima"
              android:text="扫描二维码"
              android:layout_width="wrap_content"
@@ -161,7 +285,7 @@
          <ImageView
              android:id="@+id/share_to_weixin_image"
              android:layout_marginLeft="20px"
-             android:layout_toEndOf="@+id/fenxiang"
+             android:layout_toRightOf="@+id/fenxiang"
              android:layout_alignBottom="@+id/erweima"
              android:background="@drawable/hly22"
             android:layout_width="40px"
@@ -170,7 +294,7 @@
                  android:id="@+id/share_to_xinlang_image"
                  android:background="@drawable/hly27"
                  android:layout_marginLeft="80px"
-                 android:layout_toEndOf="@+id/fenxiang"
+                 android:layout_toRightOf="@+id/fenxiang"
                  android:layout_alignBottom="@+id/erweima"
                  android:layout_width="40px"
                  android:layout_height="40px"/>
@@ -178,7 +302,7 @@
                  android:id="@+id/share_to_weixincore_image"
                  android:background="@drawable/hly38"
                  android:layout_marginLeft="140px"
-                 android:layout_toEndOf="@+id/fenxiang"
+                 android:layout_toRightOf="@+id/fenxiang"
                  android:layout_alignBottom="@+id/erweima"
                  android:layout_width="40px"
                  android:layout_height="40px" />
@@ -186,7 +310,7 @@
                  android:id="@+id/share_to_qq_image"
                  android:background="@drawable/hly52"
                  android:layout_marginLeft="200px"
-                 android:layout_toEndOf="@+id/fenxiang"
+                 android:layout_toRightOf="@+id/fenxiang"
                  android:layout_alignBottom="@+id/erweima"
                  android:layout_width="40px"
                  android:layout_height="40px"/>

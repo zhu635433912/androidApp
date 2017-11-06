@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.viewimpl.CashListView;
 import com.deguan.xuelema.androidapp.viewimpl.DistributionView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -29,7 +30,7 @@ import modle.user_ziliao.User_id;
  * 一级二级分销
  */
 
-public class MyDistribution_Actvity extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed,PullToRefreshListView.OnRefreshListener2 , DistributionView {
+public class MyDistribution_Actvity extends MyBaseActivity implements View.OnClickListener,Requirdetailed,PullToRefreshListView.OnRefreshListener2 , DistributionView {
     private RelativeLayout fenxiaofanhui;
     Getdata getdata;
     private TextView zongordet;
@@ -59,9 +60,9 @@ public class MyDistribution_Actvity extends AutoLayoutActivity implements View.O
         uid=Integer.parseInt(User_id.getUid());
 
         if (level==1){
-            myleve_name.setText("一级分享");
+            myleve_name.setText("推广奖励");
         }else {
-            myleve_name.setText("二级分享");
+            myleve_name.setText("团队奖励");
         }
         adapter = new DistributionAdapter(listmap,this);
         simpleAdapter=new SimpleAdapter(this,listmap,R.layout.distibution_itme,new String[]{"level","fee"},new int[]{R.id.fenxiaostatus,R.id.fenxiaofee});
@@ -161,5 +162,10 @@ public class MyDistribution_Actvity extends AutoLayoutActivity implements View.O
     public void failDistribution(String msg) {
         pullToRefreshListView.onRefreshComplete();
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void successMoney(Map<String, Object> map) {
+
     }
 }

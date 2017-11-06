@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deguan.xuelema.androidapp.MyOrderActivity;
@@ -40,14 +41,22 @@ public class WXPayEntryActivity extends AutoLayoutActivity implements IWXAPIEven
 	private int flag = 1;
 	private int recharge = 0;
 	private int orderId;
+	private TextView dindanzhifucgongg;
+
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+
+	}
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 		EventBus.getDefault().register(this);
         setContentView(R.layout.paycomplete);
-        
-    	api = WXAPIFactory.createWXAPI(this, "wx3815ad6bb05c5aca");
+		dindanzhifucgongg = (TextView) findViewById(R.id.dindanzhifucgongg);
+		api = WXAPIFactory.createWXAPI(this, "wx3815ad6bb05c5aca");
         api.handleIntent(getIntent(), this);
 		ImageButton backBtn = (ImageButton) findViewById(R.id.wancheng_back);
 		backBtn.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +104,7 @@ public class WXPayEntryActivity extends AutoLayoutActivity implements IWXAPIEven
 	public void getRecharge(int msg){
 		if (msg == 1){
 			recharge = 1;
+			dindanzhifucgongg.setText("充值成功");
 		}
 
 	}

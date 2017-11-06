@@ -22,7 +22,10 @@
             android:scaleType="fitXY"
             android:src="@drawable/demand_background"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
         <RelativeLayout
             android:id="@+id/xuqiufanhui"
             android:layout_width="120px"
@@ -58,17 +61,18 @@
         <TextView
             android:id="@+id/nianjia"
             android:textColor="#403f3f"
-            android:text="一年级"
+            android:text=""
             android:layout_centerHorizontal="true"
             android:layout_alignBottom="@+id/kemuleibie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
+            app:roundAsCircle="true"
             android:id="@+id/xuqiuimage"
             android:layout_below="@+id/nianjia"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/ox2"
-            android:scaleType="centerInside"
+            app:placeholderImage="@drawable/ox2"
+            app:actualImageScaleType="focusCrop"
             android:layout_marginTop="20px"
             android:layout_width="120px"
             android:layout_height="120px" />
@@ -78,7 +82,7 @@
             android:layout_centerHorizontal="true"
             android:textSize="35px"
             android:textColor="#403f3f"
-            android:text="德冠教育"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
@@ -119,7 +123,7 @@
             android:layout_alignParentBottom="true"
             android:textColor="#403f3f"
             android:textSize="30px"
-            android:text="2016-7-25"
+            android:text=""
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
@@ -230,7 +234,7 @@
             android:layout_centerHorizontal="true"
             android:textSize="30px"
             android:layout_below="@+id/xuqiuxinbie"
-            android:text="女性"
+            android:text="不限"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>

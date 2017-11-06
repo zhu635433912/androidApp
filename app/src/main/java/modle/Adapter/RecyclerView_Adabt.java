@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.deguan.xuelema.androidapp.R;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public class RecyclerView_Adabt extends RecyclerView.Adapter<MyViewHolder>{
     }
 
     public RecyclerView_Adabt(Context context,List<Map<String,Object>> listmapl){
-        map=new ArrayMap<String ,Object>();
+        map=new HashMap<>();
         this.context=context;
         this.listmapl=listmapl;
         layoutInflater=LayoutInflater.from(context);

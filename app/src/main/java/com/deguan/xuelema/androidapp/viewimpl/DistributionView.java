@@ -40,4 +40,5 @@ import java.util.Map;
 public interface DistributionView {
     void successDistribution(List<Map<String,Object>> list);
     void failDistribution(String msg);
+    void successMoney(Map<String,Object> map);
 }

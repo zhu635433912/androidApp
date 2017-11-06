@@ -126,14 +126,14 @@
                 style="@style/manager_text_style"
                 android:textColor="#b4b4b4"
 
-                android:text="        备注" />
+                android:text="    备注" />
 
             <EditText
                 android:textSize="30px"
                 android:id="@+id/education_other"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="50px"
+                android:layout_marginLeft="65px"
                 android:layout_marginRight="50px"
                 android:gravity="center"
                  />
@@ -174,12 +174,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="300px">
 
-                    <ImageView
+                    <com.facebook.drawee.view.SimpleDraweeView
                         android:background="@drawable/education_image_bg"
                         android:id="@+id/education_pic1"
                         android:layout_width="match_parent"
                         android:layout_height="300px"
-                        android:src="@mipmap/education1_example"
+                        app:placeholderImage="@mipmap/education1_example"
                         android:gravity="center" />
                         <ImageView
                             android:id="@+id/education_add1"
@@ -203,12 +203,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="300px">
 
-                    <ImageView
+                    <com.facebook.drawee.view.SimpleDraweeView
                         android:background="@drawable/education_image_bg"
                         android:id="@+id/education_pic2"
                         android:layout_width="match_parent"
                         android:layout_height="300px"
-                        android:src="@mipmap/education2_example"
+                        app:placeholderImage="@mipmap/education2_example"
                         android:gravity="center" />
                         <ImageView
                             android:id="@+id/education_add2"

@@ -39,7 +39,7 @@ import modle.user_ziliao.User_id;
  * A simple {@link Fragment} subclass.
  */
 @EFragment(R.layout.tuijian_new_fragment)
-public class OrderFragment extends BaseFragment implements OrderView , SwipeRefreshLayout.OnRefreshListener, OrderNewAdapter.OnTopClickListener {
+public class OrderFragment extends MyBaseFragment implements OrderView , SwipeRefreshLayout.OnRefreshListener, OrderNewAdapter.OnTopClickListener {
 
     @ViewById(R.id.tuijian_listview)
     RecyclerView listView;
@@ -94,7 +94,7 @@ public class OrderFragment extends BaseFragment implements OrderView , SwipeRefr
         }else {
             tuijianPresenter = new OrderPresenterImpl(this,Integer.parseInt(User_id.getUid()),1,page);
         }
-        tuijianPresenter.getOrderEntity();
+        tuijianPresenter.getOrderEntity(2);
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -154,9 +154,9 @@ public class OrderFragment extends BaseFragment implements OrderView , SwipeRefr
     @Override
     public void onRefresh() {
         if (User_id.getRole().equals("1")) {
-            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 0, 1).getOrderEntity();
+            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 0, 1).getOrderEntity(2);
         }else {
-            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 1, 1).getOrderEntity();
+            new OrderPresenterImpl(this, Integer.parseInt(User_id.getUid()), 1, 1).getOrderEntity(2);
         }
     }
 

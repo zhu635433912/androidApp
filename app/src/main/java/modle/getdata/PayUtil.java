@@ -8,6 +8,7 @@ import com.deguan.xuelema.androidapp.viewimpl.PayView;
 import java.util.HashMap;
 import java.util.Map;
 
+import modle.JieYse.User_Modle;
 import modle.MyHttp.Data;
 import modle.MyUrl;
 import retrofit2.Call;
@@ -66,9 +67,40 @@ public class PayUtil {
         data=retrofit.create(Data.class);
     }
 
+    public void getVipPay(int uid, int type, final int channl, String code, final PayView payView){
+        Call<PayEntity> call = data.getVippay(uid,type,channl,code);
+        call.enqueue(new Callback<PayEntity>() {
+            @Override
+            public void onResponse(Call<PayEntity> call, Response<PayEntity> response) {
+                Log.d("aa",response.body().getError()+"pay_response"+response.body().getErrmsg());
+                Map<String,Object> maps=new HashMap<>();
+                if (response.body().getError().equals("no")){
+                    payView.failPay(response.body().getErrmsg());
+                }else {
+                    if (channl == 2) {
+                        maps = response.body().getContent();
+                    } else if (channl == 1) {
+                        maps.put("info", response.body().getContent().toString() + "");
+//                    maps.put("info", response.body().getErrmsg()+"");
+                    } else if (channl == 3) {
+                        maps.put("error", response.body().getError() + "");
+                        maps.put("errmsg", response.body().getErrmsg() + "");
+                    }
+                    payView.successPay(maps);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PayEntity> call, Throwable t) {
+                payView.failPay("网络错误");
+            }
+        });
+    }
+
+
     //获取订单详细
-    public void getPayDetails(int id, final int paytype,double reward_fee ,String payPsw,final PayView payView){
-        Call<PayEntity> call=data.getpayMsg(id,paytype,reward_fee,payPsw);
+    public void getPayDetails(int id, final int paytype,double reward_fee ,String payPsw,final PayView payView,String credit){
+        Call<PayEntity> call=data.getpayMsg(id,paytype,reward_fee,payPsw,credit);
 
         call.enqueue(new Callback<PayEntity>() {
             @Override
@@ -96,6 +128,21 @@ public class PayUtil {
             public void onFailure(Call<PayEntity> call, Throwable t) {
                 payView.failPay("网络错误");
                 Log.e("aa","获取订单错误");
+            }
+        });
+    }
+
+    public void setRead(int uid,int status){
+        Call<User_Modle> call=data.setRead(uid,status);
+        call.enqueue(new Callback<User_Modle>() {
+            @Override
+            public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<User_Modle> call, Throwable t) {
+
             }
         });
     }

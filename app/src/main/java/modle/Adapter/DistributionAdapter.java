@@ -1,14 +1,17 @@
 package modle.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.deguan.xuelema.androidapp.viewimpl.SimilarXuqiuView;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 import java.util.Map;
@@ -65,7 +68,9 @@ public class DistributionAdapter extends ListBaseAdapter {
             convertView.setTag(holder);
         }
         holder = (ViewHolder) convertView.getTag();
-        Glide.with(context.getApplicationContext()).load(list.get(position).get("user_headimg")+"").transform(new GlideCircleTransform(context)).into(holder.headImage);
+//        Glide.with(context.getApplicationContext()).load(list.get(position).get("user_headimg")+"")
+//                .transform(new GlideCircleTransform(context)).into(holder.headImage);
+        holder.headImage.setImageURI(Uri.parse(list.get(position).get("user_headimg")+""));
         holder.nameTv.setText(list.get(position).get("user_name")+"");
         holder.moneyTv.setText(list.get(position).get("fee")+"");
 
@@ -73,10 +78,10 @@ public class DistributionAdapter extends ListBaseAdapter {
     }
 
     static class ViewHolder{
-        private ImageView headImage;
+        private SimpleDraweeView headImage;
         private TextView moneyTv,nameTv;
         ViewHolder(View itemview){
-            headImage = (ImageView) itemview.findViewById(R.id.distribution_head_image);
+            headImage = (SimpleDraweeView) itemview.findViewById(R.id.distribution_head_image);
             moneyTv = (TextView) itemview.findViewById(R.id.distribution_money);
             nameTv = (TextView) itemview.findViewById(R.id.distribution_name);
         }

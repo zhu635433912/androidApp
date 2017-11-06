@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.viewimpl.Baseinit;
 import com.deguan.xuelema.androidapp.viewimpl.TurnoverView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -25,7 +26,7 @@ import modle.user_ziliao.User_id;
  * 成交率
  */
 
-public class Closing extends AutoLayoutActivity implements View.OnClickListener,Baseinit,PullToRefreshListView.OnRefreshListener2, TurnoverView {
+public class Closing extends MyBaseActivity implements View.OnClickListener,Baseinit,PullToRefreshListView.OnRefreshListener2, TurnoverView {
     private RelativeLayout chengjiaolvfanhui;
     private TextView chengjiaolv;
     private TextView size_imte;

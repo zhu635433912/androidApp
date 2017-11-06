@@ -43,7 +43,7 @@ public interface OrderApi {
     */
     @POST("index.php?s=/Service/Order/gets_order")
     Call<ContentModle> getOredrlist(@Query("uid") int uid, @Query("filter_type") int filter_type,
-                                     @Query("page") int page);
+                                     @Query("page") int page,@Query("status")int status);
 
     //
     /*
@@ -62,5 +62,7 @@ public interface OrderApi {
     Call<ContentModle> getEvaluateOredrlist(@Query("uid") int uid, @Query("filter_type") int filter_type,
                                             @Query("page") int page,@Query("status")int status,@Query("order_rank")int order_rank);
 
-    //
+    //教师完成授课
+    @POST("index.php?s=/Service/Order/gets_order_uncomplete")
+    Call<ContentModle> getTeacherEvaOrderlist(@Query("id")int uid,@Query("page")int page);
 }

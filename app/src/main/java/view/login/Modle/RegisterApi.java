@@ -1,5 +1,6 @@
 package view.login.Modle;
 
+import modle.JieYse.ContentModle;
 import modle.JieYse.User_Modle;
 import retrofit2.Call;
 import retrofit2.http.POST;
@@ -54,4 +55,29 @@ public interface RegisterApi {
 
     @POST("index.php?s=/Service/Accounts/update_paypassword")
     Call<User_Modle> getPayPwd(@Query("id")int id,@Query("pay_password")String pay_password,@Query("oldpay_password")String oldpay_password,@Query("type")int type);
+
+    @POST("index.php?s=/Service/Accounts/ad")
+    Call<ContentModle> getAd();
+    //学生钱包说明
+    @POST("index.php?s=/Service/Accounts/s_wallet_des")
+    Call<PicEntity> getsWalletPic();
+
+    //老师钱包说明
+    @POST("index.php?s=/Service/Accounts/t_wallet_des")
+    Call<PicEntity> gettWalletPic();
+
+    //学生vip说明
+    @POST("index.php?s=/Service/Accounts/s_vip_des")
+    Call<PicEntity> getsVipPic();
+
+
+    //教师vip说明
+    @POST("index.php?s=/Service/Accounts/t_vip_des")
+    Call<PicEntity> gettVipPic();
+
+
+    //用户说明
+    @POST("index.php?s=/Service/Accounts/user_des")
+    Call<PicEntity> getUserPic();
+
 }

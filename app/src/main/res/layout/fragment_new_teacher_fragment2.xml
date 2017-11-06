@@ -1,0 +1,766 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="#fffffe"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.deguan.xuelema.androidapp.fragment.NewTeacherFragment2">
+
+    <LinearLayout
+        android:id="@+id/teacher_head_ll"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <LinearLayout
+            android:layout_marginLeft="30px"
+            android:orientation="vertical"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/teacher_address_image"
+                android:layout_width="50px"
+                android:layout_height="50px"
+                android:layout_gravity="center"
+                android:layout_marginTop="10px"
+                android:src="@mipmap/fabu_address_icon" />
+
+            <TextView
+            android:id="@+id/teacher_address_tv"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_below="@+id/teacher_address_image"
+            android:layout_width="wrap_content"
+            android:text="路桥区"
+            android:layout_height="wrap_content" />
+        </LinearLayout>
+    <android.support.v7.widget.CardView
+        android:layout_width="0px"
+        app:cardCornerRadius="36px"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="10px"
+        android:layout_marginLeft="20px"
+        android:layout_weight="1"
+        app:cardBackgroundColor="#d6d6d6"
+        >
+            <EditText
+                android:layout_marginLeft="30px"
+                android:imeOptions="actionSearch"
+                android:singleLine="true"
+                android:hint="搜索需求，科目"
+                android:textSize="33px"
+                android:textColorHint="#878787"
+                android:id="@+id/search_edit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:background="@null"
+                android:maxLength="8"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+            <ImageView
+                android:layout_gravity="right"
+                android:id="@+id/search_image"
+                android:layout_marginRight="20px"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/fangdajing_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </android.support.v7.widget.CardView>
+        <ImageView
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="10px"
+            android:layout_marginLeft="20px"
+            android:src="@mipmap/search_icon" />
+
+        <RelativeLayout
+            android:layout_marginRight="20px"
+            android:layout_marginLeft="20px"
+            android:layout_width="100px"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_marginTop="10px"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/teacher_my"
+                android:src="@mipmap/message_icon"
+                android:layout_width="50px"
+                android:layout_height="50px" />
+            <TextView
+                android:id="@+id/teacher_message"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_below="@+id/teacher_my"
+                android:layout_width="wrap_content"
+                android:text="消息"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="10px"
+                android:id="@+id/unread_address_number"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:text=""
+                android:background="@drawable/em_unread_dot"
+                android:gravity="center"
+                android:visibility="gone"
+                android:textSize="10sp"
+                 />
+        </RelativeLayout>
+    </LinearLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_below="@+id/teacher_head_ll"
+        android:id="@+id/student_swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <ScrollView
+        android:id="@+id/student_scroll"
+
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.bigkoo.convenientbanner.ConvenientBanner
+                android:id="@+id/teacher_convenientBanner"
+                android:layout_width="match_parent"
+                android:layout_height="300px"
+                app:canLoop="true"
+                />
+            <LinearLayout
+                android:background="#fffffe"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="330px">
+                <LinearLayout
+                    android:layout_marginTop="20px"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60px">
+                    <View
+                        android:layout_width="10px"
+                        android:background="#9de772"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:textSize="35px"
+                        android:layout_marginLeft="40px"
+                        android:text="科目分类"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_marginTop="20px"
+                        android:layout_marginLeft="80px"
+                        android:layout_marginRight="50px"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="100px"
+                        >
+                        <ImageView
+                            android:gravity="center"
+                            android:src="@mipmap/chinese_icon"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+                        <ImageView
+                            android:layout_marginLeft="50px"
+                            android:gravity="center"
+                            android:src="@mipmap/math_icon"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+                        <ImageView
+                            android:layout_marginLeft="50px"
+                            android:gravity="center"
+                            android:src="@mipmap/english_icon"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+                        <ImageView
+                            android:layout_marginLeft="50px"
+                            android:gravity="center"
+                            android:src="@mipmap/wuli_icon"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="20px"
+                        android:layout_marginLeft="80px"
+                        android:layout_marginRight="50px"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="100px"
+                        >
+                        <Button
+
+                            android:background="@null"
+                            android:id="@+id/text208"
+                            android:textSize="35px"
+                            android:textColor="#ffffff"
+                            android:gravity="center"
+                            android:text="语文"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+                        <Button
+                            android:id="@+id/text212"
+                            android:layout_marginLeft="50px"
+                            android:textSize="35px"
+                            android:textColor="#ffffff"
+                            android:gravity="center"
+                            android:text="数学"
+                            android:background="@null"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+                        <Button
+                            android:id="@+id/text213"
+                            android:layout_marginLeft="50px"
+                            android:textSize="35px"
+                            android:textColor="#ffffff"
+                            android:gravity="center"
+                            android:text="英语"
+                            android:background="@null"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+                        <Button
+                            android:id="@+id/text217"
+                            android:layout_marginLeft="50px"
+                            android:textSize="35px"
+                            android:textColor="#ffffff"
+                            android:gravity="center"
+                            android:text="物理"
+                            android:background="@null"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_marginTop="20px"
+                        android:layout_marginLeft="80px"
+                        android:layout_marginRight="50px"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="100px"
+                        >
+                        <ImageView
+                            android:gravity="center"
+                            android:src="@mipmap/huaxue_icon"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+                        <ImageView
+                            android:layout_marginLeft="50px"
+                            android:gravity="center"
+                            android:src="@mipmap/zhengzhi_icon"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+                        <ImageView
+                            android:layout_marginLeft="50px"
+                            android:gravity="center"
+                            android:src="@mipmap/history_icon"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+                        <ImageView
+                            android:layout_marginLeft="50px"
+                            android:gravity="center"
+                            android:src="@mipmap/more_icon"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_marginLeft="80px"
+                        android:layout_marginRight="50px"
+                        android:layout_marginTop="20px"
+                        android:layout_marginBottom="20px"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="100px"
+                        >
+                        <Button
+                            android:id="@+id/text218"
+                            android:textSize="35px"
+                            android:textColor="#ffffff"
+                            android:gravity="center"
+                            android:text="化学"
+                            android:background="@null"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+                        <Button
+                            android:id="@+id/text221"
+                            android:layout_marginLeft="50px"
+                            android:textSize="35px"
+                            android:textColor="#ffffff"
+                            android:gravity="center"
+                            android:text="政治"
+                            android:background="@null"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+                        <Button
+                            android:id="@+id/text220"
+                            android:layout_marginLeft="50px"
+                            android:textSize="35px"
+                            android:textColor="#ffffff"
+                            android:gravity="center"
+                            android:text="历史"
+                            android:background="@null"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+                        <Button
+                            android:id="@+id/text200"
+                            android:layout_marginLeft="50px"
+                            android:textSize="35px"
+                            android:textColor="#ffffff"
+                            android:gravity="center"
+                            android:text="其他"
+                            android:background="@null"
+                            android:layout_width="100px"
+                            android:layout_height="100px" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_marginTop="20px"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60px">
+                    <View
+                        android:layout_width="10px"
+                        android:background="#f72432"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:textSize="35px"
+                        android:layout_marginLeft="40px"
+                        android:text="需求推荐"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginRight="20px"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="35px"
+                        android:text="更多>>"
+                        android:id="@+id/teacher_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="20px"
+                    android:layout_width="match_parent"
+                    android:background="#d2d2d2"
+                    android:layout_height="1px"/>
+                <RelativeLayout
+
+                    android:layout_marginLeft="30px"
+                    android:layout_marginRight="30px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:onClick="onClick"
+                        android:id="@+id/tuijian_demand_rl1"
+                        android:layout_marginTop="10px"
+                        android:background="@drawable/mianlistview"
+                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true">
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            android:id="@+id/tuijian_demand_head1"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="14px"
+                            app:actualImageScaleType="focusCrop"
+                            android:layout_marginTop="10px"
+                            app:roundAsCircle="true"
+                            app:placeholderImage="@drawable/ox2"
+                            android:layout_width="80px"
+                            android:layout_height="80px" />
+                        <TextView
+                            android:layout_marginLeft="25px"
+                            android:layout_marginTop="16px"
+                            android:layout_alignTop="@+id/tuijian_demand_head1"
+                            android:layout_toRightOf="@+id/tuijian_demand_head1"
+                            android:textSize="28px"
+                            android:id="@+id/tuijian_demand_name1"
+                            android:text=""
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_marginRight="20px"
+                            android:layout_alignTop="@+id/tuijian_demand_servicetype1"
+                            android:layout_toLeftOf="@+id/tuijian_demand_servicetype1"
+                            android:id="@+id/tuijian_demand_grade1"
+                            android:textSize="26px"
+                            android:text=""
+                            android:textColor="#fbb805"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textColor="#ea993c"
+                            android:textSize="25px"
+                            android:text=""
+                            android:layout_toLeftOf="@+id/tuijian_demand_grade1"
+                            android:layout_alignTop="@+id/tuijian_demand_servicetype1"
+                            android:layout_marginRight="10px"
+                            android:id="@+id/tuijian_demand_education_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_marginRight="20px"
+                            android:layout_marginTop="16px"
+                            android:layout_alignTop="@+id/text31"
+                            android:layout_toLeftOf="@+id/text31"
+                            android:textColor="#3e3e3e"
+                            android:id="@+id/tuijian_demand_servicetype1"
+                            android:textSize="24px"
+                            android:text=""
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/text31"
+                            android:layout_marginRight="25px"
+                            android:layout_marginTop="20px"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:textColor="#a0d9fe"
+                            android:textSize="40px"
+                            android:text=""
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/tlucahwodjawf1"
+                            android:layout_marginTop="20px"
+                            android:background="#fbb805"
+                            android:layout_marginLeft="120px"
+                            android:layout_below="@+id/text31"
+                            android:layout_width="match_parent"
+                            android:layout_height="1px" />
+                        <TextView
+                            android:layout_marginTop="20px"
+                            android:layout_marginLeft="20px"
+                            android:textColor="#4b4b4b"
+                            android:textSize="40px"
+                            android:layout_below="@+id/tlucahwodjawf1"
+                            android:layout_alignParentLeft="true"
+                            android:id="@+id/tuijian_demand_course1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_marginTop="20px"
+                            android:layout_marginLeft="20px"
+                            android:textColor="#4b4b4b"
+                            android:textSize="33px"
+                            android:text=""
+                            android:layout_below="@+id/tlucahwodjawf1"
+                            android:layout_toRightOf="@+id/tuijian_demand_course1"
+                            android:id="@+id/text51"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/text331"
+                            android:textSize="25px"
+                            android:textColor="#a0d9fe"
+                            android:layout_marginTop="20px"
+                            android:layout_marginRight="50px"
+                            android:layout_below="@+id/tlucahwodjawf1"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_marginLeft="40px"
+                            android:textSize="28px"
+                            android:id="@+id/tuijian_demand_content1"
+                            android:maxLines="2"
+                            android:layout_marginTop="15px"
+                            android:layout_below="@+id/text51"
+                            android:layout_width="570px"
+                            android:layout_height="wrap_content" />
+                        <ImageView
+                            android:layout_below="@+id/tuijian_demand_content1"
+                            android:id="@+id/tuijian_demand_address_icon"
+                            android:layout_marginLeft="14px"
+                            android:layout_marginTop="10px"
+                            android:layout_alignParentLeft="true"
+                            android:src="@mipmap/main_address_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_toRightOf="@+id/tuijian_demand_address_icon"
+                            android:layout_below="@+id/tuijian_demand_content1"
+                            android:id="@+id/tuijian_demand_distance1"
+                            android:layout_marginLeft="14px"
+                            android:layout_marginTop="10px"
+                            android:layout_marginBottom="20px"
+                            android:text=""
+                            android:textSize="20px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_below="@+id/tuijian_demand_content1"
+                            android:id="@+id/tuijian_demand_haoping1"
+                            android:layout_marginRight="14px"
+                            android:layout_marginBottom="20px"
+                            android:layout_marginTop="10px"
+                            android:layout_alignParentRight="true"
+                            android:textSize="20px"
+                            android:text=""
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <ImageView
+                            android:layout_below="@+id/tuijian_demand_content1"
+                            android:layout_marginRight="20px"
+                            android:layout_alignBottom="@+id/tuijian_demand_haoping1"
+                            android:layout_toLeftOf="@+id/tuijian_demand_haoping1"
+                            android:layout_marginTop="30px"
+                            android:id="@+id/tuijian_demand_imagehaop1"
+                            android:layout_width="150px"
+                            android:layout_height="20px" />
+                    </RelativeLayout>
+                </RelativeLayout>
+                <View
+                    android:layout_marginTop="20px"
+                    android:layout_width="match_parent"
+                    android:background="#d2d2d2"
+                    android:layout_height="1px"/>
+                <RelativeLayout
+                    android:id="@+id/tuijian_demand_rl2"
+                    android:layout_marginBottom="20px"
+                    android:layout_marginLeft="30px"
+                    android:layout_marginRight="30px"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_marginTop="10px"
+                        android:background="@drawable/mianlistview"
+                        android:layout_gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true">
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            android:id="@+id/tuijian_demand_head2"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="14px"
+                            app:actualImageScaleType="focusCrop"
+                            android:layout_marginTop="10px"
+                            app:roundAsCircle="true"
+                            app:placeholderImage="@drawable/ox2"
+                            android:layout_width="80px"
+                            android:layout_height="80px" />
+                        <TextView
+                            android:layout_marginLeft="25px"
+                            android:layout_marginTop="16px"
+                            android:layout_alignTop="@+id/tuijian_demand_head2"
+                            android:layout_toRightOf="@+id/tuijian_demand_head2"
+                            android:textSize="28px"
+                            android:id="@+id/tuijian_demand_name2"
+                            android:text=""
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_marginRight="20px"
+                            android:layout_alignTop="@+id/tuijian_demand_servicetype2"
+                            android:layout_toLeftOf="@+id/tuijian_demand_servicetype2"
+                            android:id="@+id/tuijian_demand_grade2"
+                            android:textSize="26px"
+                            android:text=""
+                            android:textColor="#fbb805"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textColor="#ea993c"
+                            android:textSize="25px"
+                            android:text=""
+                            android:layout_toLeftOf="@+id/tuijian_demand_grade2"
+                            android:layout_alignTop="@+id/tuijian_demand_servicetype2"
+                            android:layout_marginRight="10px"
+                            android:id="@+id/tuijian_demand_education_tv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:textColor="#3e3e3e"
+                            android:id="@+id/tuijian_demand_servicetype2"
+                            android:textSize="24px"
+                            android:text=""
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/text32"
+                            android:layout_alignBottom="@+id/text32"
+                            android:layout_alignRight="@+id/tuijian_demand_content2"
+                            android:layout_alignEnd="@+id/tuijian_demand_content2" />
+                        <TextView
+                            android:id="@+id/text32"
+                            android:layout_marginRight="25px"
+                            android:layout_marginTop="20px"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentRight="true"
+                            android:textColor="#a0d9fe"
+                            android:textSize="40px"
+                            android:text=""
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/tlucahwodjawf2"
+                            android:layout_marginTop="20px"
+                            android:background="#fbb805"
+                            android:layout_marginLeft="120px"
+                            android:layout_below="@+id/text32"
+                            android:layout_width="match_parent"
+                            android:layout_height="1px" />
+                        <TextView
+                            android:layout_marginTop="20px"
+                            android:layout_marginLeft="20px"
+                            android:textColor="#4b4b4b"
+                            android:textSize="40px"
+                            android:layout_below="@+id/tlucahwodjawf2"
+                            android:layout_alignParentLeft="true"
+                            android:id="@+id/tuijian_demand_course2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_marginTop="20px"
+                            android:layout_marginLeft="20px"
+                            android:textColor="#4b4b4b"
+                            android:textSize="33px"
+                            android:text=""
+                            android:layout_below="@+id/tlucahwodjawf2"
+                            android:layout_toRightOf="@+id/tuijian_demand_course2"
+                            android:id="@+id/text52"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/text332"
+                            android:textSize="25px"
+                            android:textColor="#a0d9fe"
+                            android:layout_marginTop="20px"
+                            android:layout_marginRight="50px"
+                            android:layout_below="@+id/tlucahwodjawf2"
+                            android:layout_alignParentRight="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_marginLeft="40px"
+                            android:textSize="28px"
+                            android:id="@+id/tuijian_demand_content2"
+                            android:maxLines="2"
+                            android:layout_marginTop="15px"
+                            android:layout_below="@+id/text52"
+                            android:layout_width="570px"
+                            android:layout_height="wrap_content" />
+                        <ImageView
+                            android:layout_below="@+id/tuijian_demand_content2"
+                            android:id="@+id/tuijian_demand_address_icon2"
+                            android:layout_marginLeft="14px"
+                            android:layout_marginTop="10px"
+                            android:layout_alignParentLeft="true"
+                            android:src="@mipmap/main_address_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_below="@+id/tuijian_demand_content2"
+                            android:id="@+id/tuijian_demand_distance2"
+                            android:layout_marginLeft="14px"
+                            android:layout_marginTop="10px"
+                            android:layout_toRightOf="@+id/tuijian_demand_address_icon2"
+                            android:text=""
+                            android:textSize="20px"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:layout_below="@+id/tuijian_demand_content2"
+                            android:id="@+id/tuijian_demand_haoping2"
+                            android:layout_marginRight="14px"
+                            android:layout_marginBottom="20px"
+                            android:layout_marginTop="10px"
+                            android:layout_alignParentRight="true"
+                            android:textSize="20px"
+                            android:text=""
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <ImageView
+                            android:layout_below="@+id/tuijian_demand_content2"
+                            android:layout_marginRight="20px"
+                            android:layout_alignBottom="@+id/tuijian_demand_haoping2"
+                            android:layout_toLeftOf="@+id/tuijian_demand_haoping2"
+                            android:layout_marginTop="30px"
+                            android:id="@+id/tuijian_demand_imagehaop2"
+                            android:layout_width="150px"
+                            android:layout_height="20px" />
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+            <View
+                android:layout_marginTop="20px"
+                android:layout_width="match_parent"
+                android:background="#d2d2d2"
+                android:layout_height="1px"/>
+            <LinearLayout
+                android:background="#fffffe"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_marginTop="20px"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60px">
+                    <View
+                        android:layout_width="10px"
+                        android:background="#f57722"
+                        android:layout_height="match_parent"/>
+                    <TextView
+                        android:textSize="35px"
+                        android:layout_marginLeft="40px"
+                        android:text="优惠活动"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="0px"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+                <ImageView
+                    android:layout_marginTop="10px"
+                    android:scaleType="fitXY"
+                    android:id="@+id/huodong_image"
+                    android:src="@mipmap/huodong_pic"
+                    android:layout_width="match_parent"
+                    android:layout_height="250px" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</RelativeLayout>

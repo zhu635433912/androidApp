@@ -31,6 +31,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.deguan.xuelema.androidapp.NewTeacherPersonActivity_;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.SearchActivity_;
 import com.deguan.xuelema.androidapp.UserxinxiActivty;
@@ -102,7 +103,7 @@ import static com.deguan.xuelema.androidapp.R.id.otherTv;
  * A simple {@link Fragment} subclass.
  */
 @EFragment(R.layout.fragment_student)
-public class StudentFragment extends BaseFragment implements Gaodehuidiao_init, View.OnClickListener, TeacherView, Requirdetailed, NewTeacherAdapter.OnTopClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class StudentFragment extends MyBaseFragment implements Gaodehuidiao_init, View.OnClickListener, TeacherView, Requirdetailed, NewTeacherAdapter.OnTopClickListener, SwipeRefreshLayout.OnRefreshListener {
 
     @ViewById(R.id.student_city_btn)
     ImageButton cityBtn;
@@ -720,13 +721,17 @@ public class StudentFragment extends BaseFragment implements Gaodehuidiao_init, 
     @Override
     public void onTopClick(TeacherEntity entity) {
         //进入老师
+        startActivity(NewTeacherPersonActivity_.intent(getActivity()).
+                extra("myid","0")
+                .extra("head_image",entity.getUser_headimg())
+                .extra("user_id",entity.getUser_id()).get());
 //                    String uid = requirdapter.geiuiserid(position-1);
-                    Intent intent = new Intent(getActivity(), UserxinxiActivty.class);
-//                    intent.putExtra("user_id", uid);
-                    intent.putExtra("head_image",entity.getUser_headimg());
-                    intent.putExtra("user_id",entity.getUser_id());
-                    intent.putExtra("myid","0");
-                    startActivity(intent);
+//                    Intent intent = new Intent(getActivity(), UserxinxiActivty.class);
+////                    intent.putExtra("user_id", uid);
+//                    intent.putExtra("head_image",entity.getUser_headimg());
+//                    intent.putExtra("user_id",entity.getUser_id());
+//                    intent.putExtra("myid","0");
+//                    startActivity(intent);
     }
 
     @Override

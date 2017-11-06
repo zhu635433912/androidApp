@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/new_techaer_viewpage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    </android.support.v4.view.ViewPager>
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y170"
+        android:background="#d7cb7f">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="#f5ea6b"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:statusBarScrim="#f5ea6b"
+            app:titleEnabled="false">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y30"
+                app:layout_collapseMode="pin" />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/new_teacher_tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y30"
+                android:layout_gravity="bottom"
+                android:background="#d7cb7f"
+                app:tabIndicatorColor="#ff1188"
+                app:tabSelectedTextColor="#ff1188"
+                app:tabTextColor="#8b8b8b" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y140"
+                android:background="@drawable/studentback">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="150px"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="80px"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/my_circle_bg" />
+
+                <ImageView
+                    android:id="@+id/techaer_massge"
+                    android:layout_width="0px"
+                    android:layout_height="0px"
+                    android:padding="35px"
+                    android:src="@drawable/hly005" />
+
+                <ImageView
+                    android:id="@+id/teacher_chat"
+                    android:layout_width="0px"
+                    android:layout_height="0px"
+                    android:layout_toRightOf="@+id/techaer_massge"
+                    android:padding="35px"
+                    android:src="@drawable/chat_icon" />
+
+                <TextView
+                    android:id="@+id/unread_address_number"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="100px"
+                    android:layout_marginRight="100px"
+                    android:layout_marginTop="30px"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/teacher_my"
+                    android:layout_width="0px"
+                    android:layout_height="0px"
+                    android:layout_toRightOf="@+id/teacher_chat"
+                    android:padding="35px"
+                    android:src="@drawable/chat_my_icon" />
+
+                <TextView
+                    android:id="@+id/unread_message_number"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginLeft="200px"
+                    android:layout_marginRight="100px"
+                    android:layout_marginTop="30px"
+                    android:gravity="center"
+                    android:text="2"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+
+                <ImageView
+
+                    android:layout_width="0px"
+                    android:layout_height="0px"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:padding="35px"
+                    android:src="@drawable/hly20" />
+
+                <TextView
+                    android:id="@+id/teacher_setup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_margin="30px"
+                    android:text="设置"
+                    android:textSize="35px" />
+
+                <ImageView
+                    android:id="@+id/myfee"
+                    android:layout_width="120px"
+                    android:layout_height="120px"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="120px"
+                    android:layout_marginRight="60px"
+                    android:src="@drawable/teacher_money_icon" />
+
+                <ImageView
+                    android:layout_width="220px"
+                    android:layout_height="220px"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="80px"
+                    android:padding="5px"
+                    android:src="@drawable/teahcer_head_bg" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    app:roundAsCircle="true"
+                    app:actualImageScaleType="focusCrop"
+                    app:placeholderImage="@drawable/hold_head"
+                    android:id="@+id/teacher_loc"
+                    android:layout_width="200px"
+                    android:layout_height="200px"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="90px"
+                    />
+                <TextView
+                    android:id="@+id/teacher_look"
+                    android:layout_margin="30px"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/teacher_manager_image"
+                    android:layout_width="120px"
+                    android:layout_height="120px"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="120px"
+                    android:layout_marginLeft="60px"
+                    android:layout_marginTop="200px"
+                    android:src="@drawable/teacher_renzhen" />
+
+                <TextView
+                    android:id="@+id/teacher_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text=" " />
+
+                <ImageView
+                    android:layout_width="0px"
+                    android:layout_height="0px"
+                    android:layout_marginLeft="30px"
+                    android:layout_marginTop="230px"
+                    android:layout_toRightOf="@+id/teacher_text"
+                    android:src="@drawable/hly62" />
+
+                <ImageView
+                    android:id="@+id/huanxin_but"
+                    android:layout_width="0px"
+                    android:layout_height="0px"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/teacher_setup"
+                    android:layout_marginLeft="95px"
+                    android:layout_marginRight="100px"
+                    android:layout_marginTop="40px"
+                    android:src="@mipmap/chat_icon" />
+
+                <TextView
+                    android:layout_width="0px"
+                    android:layout_height="0px"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/huanxin_but"
+                    android:layout_marginRight="75px"
+                    android:text="聊天管理"
+                    android:textColor="#6c7070"
+                    android:textSize="30px" />
+
+                <TextView
+                    android:id="@+id/teacher_name"
+                    android:layout_width="300px"
+                    android:layout_height="50px"
+                    android:layout_below="@+id/teacher_loc"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15px"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="#6c7070"
+                    android:textSize="40px" />
+
+                <TextView
+                    android:id="@+id/teacher_autograph"
+                    android:layout_width="match_parent"
+                    android:layout_height="80px"
+                    android:layout_alignParentBottom="true"
+                    android:background="#efefef"
+                    android:gravity="center"
+                    android:text="书山有路勤为径，勤飞笨鸟先入林"
+                    android:textColor="#6c7070"
+                    android:textSize="30px" />
+            </RelativeLayout>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

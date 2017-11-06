@@ -1,6 +1,7 @@
 package com.deguan.xuelema.androidapp.model;
 
 import modle.JieYse.ContentModle;
+import retrofit2.Call;
 import retrofit2.Callback;
 
 /**
@@ -36,9 +37,11 @@ import retrofit2.Callback;
  * 修改备注：
  */
 public interface OrderModel {
-    void getOrderData(Callback<ContentModle> callback, int uid, int filter_type, int page);
+    void getOrderData(Callback<ContentModle> callback, int uid, int filter_type, int page,int status);
 
      void getNoFinishOrderData(Callback<ContentModle> callback, int uid, int filter_type, int page,int status);
 
      void getEvaluateOrderData(Callback<ContentModle> callback, int uid, int filter_type, int page,int status,int order_rank);
+
+    void getTeacherEvaOrderData(Callback<ContentModle> callback,int id,int page);
 }

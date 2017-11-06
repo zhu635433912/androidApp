@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import modle.user_ziliao.User_id;
  * 关于我们
  */
 
-public class About_us extends AutoLayoutActivity implements View.OnClickListener ,Requirdetailed{
+public class About_us extends MyBaseActivity implements View.OnClickListener ,Requirdetailed{
     private RelativeLayout guanyuwmenfanhui;
     private User_id application;
     private TextView webo;//微博

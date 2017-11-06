@@ -1,8 +1,11 @@
 package view.login.Modle;
 
+import com.deguan.xuelema.androidapp.viewimpl.TurnoverView;
+
 import java.util.HashMap;
 import java.util.Map;
 
+import modle.JieYse.ContentModle;
 import modle.JieYse.User_Modle;
 import modle.MyUrl;
 import retrofit2.Call;
@@ -68,6 +71,7 @@ public class RegisterUtil {
             public void onResponse(Call<RegisterEntity> call, Response<RegisterEntity> response) {
                 if (response.body().getError().equals("ok")) {
                     registerView.successRegister(response.body().getHas_paypassword());
+                    registerView.successLogin(response.body());
                 }else {
                     registerView.failRegister(response.body().getErrmsg());
                 }
@@ -131,6 +135,55 @@ public class RegisterUtil {
 
             @Override
             public void onFailure(Call<User_Modle> call, Throwable t) {
+                mobileView.failRegister("网络错误");
+            }
+        });
+    }
+
+    public void getAdpicture(final TurnoverView turnoverView){
+        Call<ContentModle> call = data.getAd();
+        call.enqueue(new Callback<ContentModle>() {
+            @Override
+            public void onResponse(Call<ContentModle> call, Response<ContentModle> response) {
+                if (response.body().getError().equals("ok")){
+                    turnoverView.successTurnover(response.body().getContent());
+                }else {
+                    turnoverView.failTurnover(response.body().getErrmsg());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ContentModle> call, Throwable t) {
+                turnoverView.failTurnover("网络错误");
+
+            }
+        });
+    }
+
+    public void getDescPic(int type, final MobileView mobileView){
+        //钱包学生1  老师2  vip学生3 老师4 用户说明5
+        Call<PicEntity>  call = null;
+        if (type == 1){
+            call = data.getsWalletPic();
+        }else if (type == 2){
+             call = data.gettWalletPic();
+        }else if (type == 3){
+             call = data.getsVipPic();
+        }else if (type == 4){
+           call = data.gettVipPic();
+        }else if (type == 5){
+           call = data.getUserPic();
+        }
+        call.enqueue(new Callback<PicEntity>() {
+            @Override
+            public void onResponse(Call<PicEntity> call, Response<PicEntity> response) {
+                if (response.body().getError().equals("ok")){
+                    mobileView.successRegister(response.body().getContent());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PicEntity> call, Throwable t) {
                 mobileView.failRegister("网络错误");
             }
         });

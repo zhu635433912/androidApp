@@ -1,6 +1,7 @@
 package modle.Adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -9,10 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.entities.TuijianEntity;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.text.DecimalFormat;
@@ -91,7 +93,8 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
         holder.speciality.setText("" + list.get(position).getSpeciality());
         holder.username.setText("" + list.get(position).getSignature());
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
-        Glide.with(context.getApplicationContext()).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+//        Glide.with(context.getApplicationContext()).load(list.get(position).getUser_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getUser_headimg()));
         String dist = list.get(position).getDistance();
         holder.stats.setText(""+list.get(position).getStatus2());
         double myDist = 0;
@@ -105,7 +108,9 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
 //            myDist = Integer.parseInt(dist) ;
 //        }
 //        int lat = myDist / 1000;
-        holder.distance.setText(df.format(myDist) + "km");
+        holder.distance.setText(list.get(position).getSpeciality_name()+"    距我"+df.format(myDist) + "km");
+
+//        holder.distance.setText(df.format(myDist) + "km");
         if (!TextUtils.isEmpty(list.get(position).getGender())){
             String gender = list.get(position).getGender();
             if (gender.equals("1")) {
@@ -116,7 +121,9 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
         }else {
             holder.nianji.setText("未知");
         }
-        holder.haoping_numtext.setText(list.get(position).getClick()+"  好评:"+list.get(position).getHaoping_num());
+        holder.haoping_numtext.setText(list.get(position).getClick()+"人看过  好评率: "+list.get(position).getHaoping_num());
+
+//        holder.haoping_numtext.setText(list.get(position).getClick()+"  好评:"+list.get(position).getHaoping_num());
 //        holder.haoping_numtext.setText("");
 //        holder.haoping_numtext.setVisibility(View.GONE);
         double rank = Double.parseDouble(list.get(position).getOrder_rank());
@@ -191,7 +198,7 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
 
     public static class TuijianNewViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView user_headimg;
+        private SimpleDraweeView user_headimg;
         //        private CircleImageView user_headimg;//用户头像
         private TextView nickname;//昵称
         private TextView service_type;//服务类型
@@ -209,7 +216,7 @@ public class TuijianNewAdapter extends RecyclerView.Adapter<TuijianNewAdapter.Tu
             super(itemView);
             AutoUtils.autoSize(itemView);
             education = (TextView) itemView.findViewById(R.id.education_tv);
-            user_headimg = (ImageView) itemView.findViewById(R.id.lognhost);
+            user_headimg = (SimpleDraweeView) itemView.findViewById(R.id.lognhost);
             nickname = (TextView) itemView.findViewById(R.id.text1);
             service_type = (TextView) itemView.findViewById(R.id.text9);
             fee = (TextView) itemView.findViewById(R.id.text3);

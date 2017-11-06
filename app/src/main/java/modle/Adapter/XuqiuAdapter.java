@@ -12,11 +12,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
+//import com.bumptech.glide.Glide;
+//import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.entities.XuqiuEntity;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhy.autolayout.utils.AutoUtils;
 
 import java.text.DecimalFormat;
@@ -104,10 +105,11 @@ public class XuqiuAdapter extends ListBaseAdapter {
 //                +list.get(position).getFee()
         );
 //        holder.fee.setVisibility(View.GONE);
-        holder.speciality.setText(""+list.get(position).getCourse_name());
+        holder.speciality.setText(""+list.get(position).getCourse_name()+"    "+list.get(position).getVersion()+"");
         holder.username.setText(""+list.get(position).getContent());
 //        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
-        Glide.with(context.getApplicationContext()).load(list.get(position).getPublisher_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+//        Glide.with(context.getApplicationContext()).load(list.get(position).getPublisher_headimg()).transform(new GlideCircleTransform(context)).into(holder.user_headimg);
+        holder.user_headimg.setImageURI(Uri.parse(list.get(position).getPublisher_headimg()));
         String dist = list.get(position).getDistance();
         double myDist = 0;
         if (!dist.equals("")){
@@ -115,14 +117,15 @@ public class XuqiuAdapter extends ListBaseAdapter {
         }
         DecimalFormat df = new DecimalFormat("#0.0");
 
-        holder.distance.setText(df.format(myDist)+"km     "+list.get(position).getAddress());
-        holder.haoping_numtext.setText(""+list.get(position).getCreated());
+//        holder.distance.setText(list.get(position).getAddress());
+        holder.distance.setText(list.get(position).getProvince()+"   "+list.get(position).getCity());
+        holder.haoping_numtext.setText("距我"+df.format(myDist)+"km     "+list.get(position).getCreated());
         holder.nianji.setText(""+list.get(position).getGrade_name());
         return convertView;
     }
 
     static class ViewHolder{
-        private ImageView user_headimg;
+        private SimpleDraweeView user_headimg;
         //        private CircleImageView user_headimg;//用户头像
         private TextView nickname;//昵称
         private TextView service_type;//服务类型
@@ -135,7 +138,7 @@ public class XuqiuAdapter extends ListBaseAdapter {
         private TextView nianji;
 
         public ViewHolder(View itemView) {
-            user_headimg = (ImageView) itemView.findViewById(R.id.lognhost);
+            user_headimg = (SimpleDraweeView) itemView.findViewById(R.id.lognhost);
             nickname = (TextView) itemView.findViewById(R.id.text1);
             service_type = (TextView) itemView.findViewById(R.id.text9);
             fee = (TextView) itemView.findViewById(R.id.text3);

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="#fffffe"
     android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/bangzhufanhui"
@@ -30,79 +31,121 @@
         android:layout_below="@+id/neirongtext"
         android:layout_width="match_parent"
         android:layout_height="1px" />
-    <RelativeLayout
-        android:id="@+id/xuqiuwenti"
-        android:layout_marginTop="20px"
-        android:layout_below="@+id/xuqiufenggexian"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/hepl1"
-        android:layout_width="712px"
-        android:layout_height="370px">
-        <TextView
-            android:textColor="#b4b9c1"
-            android:textSize="40px"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:text="如何在需求大厅发布需求?"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/howto_place"
-        android:layout_marginTop="20px"
-        android:layout_below="@+id/xuqiuwenti"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/hepl2"
-        android:layout_width="712px"
-        android:layout_height="370px">
-        <TextView
-            android:textColor="#b4b9c1"
-            android:textSize="40px"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:text="如何下单助教老师?"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
-    <TextView
-        android:layout_marginLeft="30px"
-        android:textSize="35px"
-        android:layout_marginTop="20px"
-        android:layout_below="@+id/howto_place"
-        android:text="客服1   QQ:2598902354"
-        android:layout_width="match_parent"
+        <RelativeLayout
+            android:id="@+id/help_rl"
+            android:layout_below="@+id/xuqiufenggexian"
+            android:layout_margin="30px"
+            android:background="@mipmap/help_bg"
+            android:layout_width="match_parent"
+            android:layout_height="400px">
+            <TextView
+
+                android:id="@+id/xuqiuwenti"
+                android:textColor="#999999"
+                android:textSize="36px"
+                android:layout_marginLeft="20px"
+                android:layout_marginBottom="120px"
+                android:layout_alignParentBottom="true"
+                android:text="如何在需求大厅发布需求?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginLeft="20px"
+                android:layout_marginBottom="20px"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/howto_place"
+                android:textColor="#999999"
+                android:textSize="36px"
+                android:text="如何下单助教老师?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    <ImageView
+        android:layout_marginTop="10px"
+        android:layout_marginLeft="80px"
+        android:id="@+id/kefu_help"
+        android:layout_below="@+id/help_rl"
+        android:src="@mipmap/kefu_head"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <TextView
-        android:layout_marginLeft="30px"
-        android:textSize="35px"
-        android:layout_marginTop="80px"
-        android:layout_below="@+id/howto_place"
-        android:text="客服2   QQ:2578899636"
+    <!--<ImageView-->
+        <!--android:id="@+id/kefu_icon1"-->
+        <!--android:layout_marginLeft="30px"-->
+        <!--android:layout_marginTop="30px"-->
+        <!--android:layout_below="@+id/kefu_help"-->
+        <!--android:src="@mipmap/kefu_icon"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+    <!--<TextView-->
+        <!--android:id="@+id/help_tv1"-->
+        <!--android:layout_marginLeft="20px"-->
+        <!--android:layout_toRightOf="@+id/kefu_icon1"-->
+        <!--android:textSize="35px"-->
+        <!--android:layout_marginTop="30px"-->
+        <!--android:layout_below="@+id/kefu_help"-->
+        <!--android:text="客服1   2578899636"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+    <!--<ImageView-->
+        <!--android:id="@+id/kefu_icon2"-->
+        <!--android:layout_marginLeft="30px"-->
+        <!--android:layout_marginTop="20px"-->
+        <!--android:layout_below="@+id/help_tv1"-->
+        <!--android:src="@mipmap/kefu_icon"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+    <!--<TextView-->
+        <!--android:layout_toRightOf="@+id/kefu_icon2"-->
+        <!--android:id="@+id/help_tv2"-->
+        <!--android:layout_marginLeft="20px"-->
+        <!--android:textSize="35px"-->
+        <!--android:layout_marginTop="20px"-->
+        <!--android:layout_below="@+id/help_tv1"-->
+        <!--android:text="客服2   793593393"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+    <!--<ImageView-->
+        <!--android:id="@+id/kefu_icon3"-->
+        <!--android:layout_marginLeft="30px"-->
+        <!--android:layout_marginTop="20px"-->
+        <!--android:layout_below="@+id/help_tv2"-->
+        <!--android:src="@mipmap/kefu_icon"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+    <!--<TextView-->
+        <!--android:layout_toRightOf="@+id/kefu_icon3"-->
+        <!--android:id="@+id/help_tv3"-->
+        <!--android:layout_marginLeft="20px"-->
+        <!--android:textSize="35px"-->
+        <!--android:layout_marginTop="20px"-->
+        <!--android:layout_below="@+id/help_tv2"-->
+        <!--android:text="客服3   656708043"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+    <ListView
+        android:layout_marginTop="30px"
+        android:layout_marginLeft="20px"
+        android:id="@+id/help_list"
+        android:layout_below="@+id/kefu_help"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_marginLeft="30px"
-        android:textSize="35px"
-        android:layout_marginTop="140px"
-        android:layout_below="@+id/howto_place"
-        android:text="客服3   QQ:793593393"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_marginLeft="30px"
-        android:textSize="35px"
-        android:layout_marginTop="200px"
-        android:layout_below="@+id/howto_place"
-        android:text="客服4   QQ:656708043"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_marginLeft="30px"
-        android:textSize="35px"
-        android:layout_marginTop="250px"
-        android:layout_below="@+id/howto_place"
-        android:text="客服5   QQ:2764765396"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
+    </ListView>
+    <!--<TextView-->
+        <!--android:layout_marginLeft="30px"-->
+        <!--android:textSize="35px"-->
+        <!--android:layout_marginTop="200px"-->
+        <!--android:layout_below="@+id/howto_place"-->
+        <!--android:text="客服4   QQ:656708043"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
+    <!--<TextView-->
+        <!--android:layout_marginLeft="30px"-->
+        <!--android:textSize="35px"-->
+        <!--android:layout_marginTop="250px"-->
+        <!--android:layout_below="@+id/howto_place"-->
+        <!--android:text="客服5   QQ:2764765396"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
 </RelativeLayout>

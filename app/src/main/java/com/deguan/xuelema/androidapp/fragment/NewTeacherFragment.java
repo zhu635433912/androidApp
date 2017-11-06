@@ -29,6 +29,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.deguan.xuelema.androidapp.DemandDetailActivity_;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.SearchActivity_;
 import com.deguan.xuelema.androidapp.UserxinxiActivty;
@@ -76,7 +77,7 @@ import static com.deguan.xuelema.androidapp.R.id.otherTv;
  * A simple {@link Fragment} subclass.
  */
 @EFragment(R.layout.fragment_new_teacher)
-public class NewTeacherFragment extends BaseFragment implements Gaodehuidiao_init, View.OnClickListener, XuqiuView, Requirdetailed, NewDemandAdapter.OnTopClickListener, SwipeRefreshLayout.OnRefreshListener, Student_init {
+public class NewTeacherFragment extends MyBaseFragment implements Gaodehuidiao_init, View.OnClickListener, XuqiuView, Requirdetailed, NewDemandAdapter.OnTopClickListener, SwipeRefreshLayout.OnRefreshListener, Student_init {
 
     @ViewById(R.id.teacher_city_btn)
     ImageButton cityBtn;
@@ -538,13 +539,20 @@ public class NewTeacherFragment extends BaseFragment implements Gaodehuidiao_ini
     @Override
     public void onTopClick(XuqiuEntity entity) {
         //进入学生
-        Intent intent = new Intent(getActivity(), Xuqiuxiangx.class);
-        intent.putExtra("user_id",entity.getId());
-        intent.putExtra("fee",entity.getFee());
-        intent.putExtra("publisher_id",entity.getPublisher_id());
-        intent.putExtra("course_id",entity.getCourse_id());
-        intent.putExtra("grade_id",entity.getGrade_id());
-        startActivity(intent);
+//        Intent intent = new Intent(getActivity(), Xuqiuxiangx.class);
+//        intent.putExtra("user_id",entity.getId());
+//        intent.putExtra("fee",entity.getFee());
+//        intent.putExtra("publisher_id",entity.getPublisher_id());
+//        intent.putExtra("course_id",entity.getCourse_id());
+//        intent.putExtra("grade_id",entity.getGrade_id());
+//        startActivity(intent);
+        startActivity(DemandDetailActivity_.intent(getActivity())
+                .extra("user_id",entity.getId())
+                .extra("fee",entity.getFee())
+                .extra("publisher_id",entity.getPublisher_id())
+                .extra("course_id",entity.getCourse_id())
+                .extra("grade_id",entity.getGrade_id())
+                .get());
     }
 
     @Override

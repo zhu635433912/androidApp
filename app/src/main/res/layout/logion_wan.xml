@@ -4,22 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/wan_relaivtlayout"
     android:fitsSystemWindows="false"
-    android:background="@drawable/login_backgroud"
     android:layout_height="match_parent">
 
     <ImageButton
         android:visibility="gone"
-     android:id="@+id/wan_imagebutton"
-    android:layout_alignParentLeft="true"
-    android:layout_alignParentTop="true"
-    android:layout_marginLeft="30px"
-    android:layout_marginTop="60px"
-    android:background="@drawable/add07"
-    android:layout_width="70px"
-    android:layout_height="70px" />
+        android:id="@+id/wan_imagebutton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="60px"
+        android:background="@drawable/add07"
+        android:layout_width="70px"
+        android:layout_height="70px" />
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/denglulogo"
-
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
             app:indicator="BallBeat"
@@ -29,6 +27,7 @@
     <TextView
         android:textColor="#d43414"
         android:textSize="30px"
+        android:visibility="gone"
         android:id="@+id/denglulogotext"
         android:text="登陆中......"
         android:layout_centerHorizontal="true"
@@ -48,13 +47,16 @@
 
 
     <RelativeLayout
-        android:background="@drawable/mask"
         android:id="@+id/wan_relativelayout1"
         android:layout_width="534px"
-        android:layout_height="782px"
-        android:layout_centerVertical="true"
+        android:layout_height="602px"
+        android:layout_marginTop="150px"
         android:layout_centerHorizontal="true">
-
+        <ImageView
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/login_logo"
+            android:layout_width="150px"
+            android:layout_height="150px" />
     <TextView
         android:id="@+id/wan_textviewdeng"
         android:layout_marginLeft="70px"
@@ -65,17 +67,8 @@
         android:textSize="48px"
         android:text="@string/login_wan_denglu"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/wan_textviewzhu"
-            android:layout_marginLeft="36px"
-            android:textColor="@color/login_zitiyanse"
-            android:layout_alignBottom="@+id/wan_textviewdeng"
-            android:layout_toRightOf="@+id/wan_textviewdeng"
-            android:textSize="36px"
-            android:text="@string/login_zhuce"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        android:layout_height="0px" />
+
         <ImageView
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -85,31 +78,36 @@
             android:layout_height="250px"
             android:layout_alignParentRight="true"
             android:layout_marginRight="15px" />
+
         <EditText
+            style="@style/loginEditText"
             android:inputType="number"
             android:singleLine="true"
             android:textColor="@color/login_zitiyanse"
-            android:textSize="40px"
-            android:hint="  手机号码"
-            android:background="@drawable/login_wan_connllat"
+            android:textSize="35px"
+            android:paddingLeft="70px"
+            android:hint="请输入手机号码"
+            android:textColorHint="#c2c2c2"
             android:id="@+id/wan_username"
+            android:background="@mipmap/login_phone"
             android:layout_marginTop="42px"
             android:layout_below="@+id/wan_textviewdeng"
-            android:layout_alignLeft="@+id/wan_textviewdeng"
-            android:layout_width="400px"
-            android:layout_height="100px" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <EditText
+            android:background="@mipmap/login_psw"
             android:password="true"
             android:id="@+id/wan_password"
             android:textColor="@color/login_zitiyanse"
-            android:textSize="40px"
-            android:hint="  密码"
-            android:background="@drawable/login_wan_connllat"
-            android:layout_marginTop="24px"
+            android:textSize="35px"
+            android:paddingLeft="70px"
+            android:hint="请输入密码"
+            android:textColorHint="#c2c2c2"
+            android:layout_marginTop="60px"
             android:layout_below="@+id/wan_username"
             android:layout_alignLeft="@+id/wan_username"
-            android:layout_width="400px"
-            android:layout_height="100px" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <ImageButton
             android:id="@+id/wan_imagetoview"
             android:layout_marginBottom="30px"
@@ -118,7 +116,7 @@
             android:layout_alignBottom="@+id/wan_password"
             android:background="@drawable/hly46"
             android:layout_width="40px"
-            android:layout_height="40px"
+            android:layout_height="0px"
             android:layout_alignRight="@+id/wan_password" />
         <ToggleButton
             android:id="@+id/wan_togglebutton"
@@ -129,7 +127,7 @@
             android:textOn=""
             android:background="@drawable/toggobutton_login"
             android:layout_width="54px"
-            android:layout_height="30px" />
+            android:layout_height="0px" />
         <TextView
             android:id="@+id/wan_textviewwang"
             android:textSize="22px"
@@ -137,15 +135,18 @@
             android:layout_alignBottom="@+id/wan_togglebutton"
             android:layout_marginLeft="20px"
             android:text="@string/login_jizhumima"
+
             android:textColor="@color/login_zitiyanse"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="0dp" />
         <TextView
             android:id="@+id/wan_wangjimima"
             android:text="@string/login_wangjimima"
-            android:textSize="22px"
+            android:textSize="30px"
+            android:textColor="#b3b3b3"
+            android:layout_marginTop="70px"
+            android:layout_below="@+id/wan_username"
             android:layout_alignEnd="@+id/wan_password"
-            android:layout_alignBottom="@+id/wan_textviewwang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/wan_password" />
@@ -153,11 +154,38 @@
             android:id="@+id/wan_login"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/hly60"
-            android:layout_marginBottom="66px"
-            android:layout_width="104px"
-            android:layout_height="104px" />
+            android:background="@mipmap/login_in"
+            android:layout_marginBottom="0px"
+            android:layout_width="match_parent"
+            android:layout_height="80px" />
     </RelativeLayout>
+    <ImageView
+        android:src="@mipmap/login_lang1"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="250px" />
+    <ImageView
+        android:src="@mipmap/login_lang2"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="250px" />
+    <ImageView
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80px"
+        android:src="@mipmap/login_register"
+        android:layout_width="match_parent"
+        android:layout_height="50px" />
+    <TextView
+        android:id="@+id/wan_textviewzhu"
+        android:layout_marginLeft="36px"
+        android:textColor="@color/login_zitiyanse"
+        android:layout_marginBottom="80px"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:textSize="36px"
+        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <ImageView
         android:visibility="visible"
         android:id="@+id/guide1"
@@ -176,4 +204,10 @@
         android:scaleType="fitXY"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/login_progress"
+        android:layout_width="80px"
+        android:layout_centerInParent="true"
+        android:layout_height="80px" />
 </RelativeLayout>

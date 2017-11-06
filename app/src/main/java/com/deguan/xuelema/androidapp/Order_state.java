@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
@@ -33,7 +34,7 @@ import modle.user_ziliao.User_id;
 /**
  * 学生订单状态
  */
-public class Order_state extends AutoLayoutActivity implements View.OnClickListener,Student_init{
+public class Order_state extends MyBaseActivity implements View.OnClickListener,Student_init{
     private List<Map<String,Object>> listmap;
     private TextView stuentweiwanc;
     private TextView stuentyiwanc;

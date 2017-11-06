@@ -6,6 +6,8 @@ import android.widget.ListView;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
 import com.deguan.xuelema.androidapp.init.Xuqiuxiangx_init;
+import com.deguan.xuelema.androidapp.viewimpl.SimilarXuqiuView;
+import com.deguan.xuelema.androidapp.viewimpl.TeacherView;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.List;
@@ -95,4 +97,11 @@ public interface Demand_init {
 
     //获取我接取的需求
     public void getReceptDemand(int uid,int page);
+
+    //首页推荐需求
+    public void getBestDemand(int uid, String lat, String lng, String province, String city, String state, SimilarXuqiuView xuqiuView);
+
+    //首页推荐需求
+    public void getBestTeacher(int uid, String lat, String lng, String province, String city, String state, TeacherView teacherView);
+
 }

@@ -4,34 +4,28 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.FeeqianbaoActivty;
-import com.deguan.xuelema.androidapp.NewMainActivity;
-import com.deguan.xuelema.androidapp.Personal_Activty;
+import com.deguan.xuelema.androidapp.PictureZoo;
 import com.deguan.xuelema.androidapp.R;
 import com.deguan.xuelema.androidapp.SetUp;
-import com.deguan.xuelema.androidapp.TeacherManActivity;
 import com.deguan.xuelema.androidapp.TeacherManActivity_;
 import com.deguan.xuelema.androidapp.Teacher_management;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
-import com.hyphenate.EMContactListener;
-import com.hyphenate.EMMessageListener;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.chat.EMCmdMessageBody;
-import com.hyphenate.chat.EMMessage;
-import com.hyphenate.easeui.utils.EaseCommonUtils;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
@@ -44,31 +38,28 @@ import java.util.List;
 import java.util.Map;
 
 import modle.Adapter.HomeTitleAdapter;
-import modle.Huanxing.db.InviteMessgeDao;
-import modle.Huanxing.ui.ChatActivity;
-import modle.Huanxing.ui.GroupsActivity;
-import modle.Huanxing.ui.MainActivity;
-import modle.Huanxing.ui.NewHuanxinMainActivity;
-import modle.toos.CircleImageView;
+//import modle.Huanxing.db.InviteMessgeDao;
+//import modle.Huanxing.ui.ChatActivity;
+//import modle.Huanxing.ui.GroupsActivity;
+//import modle.Huanxing.ui.MainActivity;
+//import modle.Huanxing.ui.NewHuanxinMainActivity;
 import modle.user_Modle.User_Realization;
 import modle.user_Modle.User_init;
-import modle.user_ziliao.Constant;
-import modle.user_ziliao.DemoHelper;
 import modle.user_ziliao.User_id;
 
 /**
  * Created by Administrator on 2017/6/23 0023.
  */
-@EFragment(R.layout.teacher_fragmengt)
-public class Teacher_infofragment extends BaseFragment implements Requirdetailed ,View.OnClickListener{
+@EFragment(R.layout.teacher_feagment2)
+public class Teacher_infofragment extends MyBaseFragment implements Requirdetailed ,View.OnClickListener{
     @ViewById(R.id.techaer_massge)
     ImageView techaer_massge;
     @ViewById(R.id.teacher_setup)
-    ImageView teacher_setup;
+    TextView teacher_setup;
     @ViewById(R.id.myfee)
     ImageView myfee;
     @ViewById(R.id.teacher_loc)
-    ImageView teacher_loc;
+    SimpleDraweeView teacher_loc;
     @ViewById(R.id.huanxin_but)
     ImageView huanxin_but;
     @ViewById(R.id.teacher_name)
@@ -91,6 +82,8 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
     ImageView mychatImage;
     @ViewById(R.id.teacher_manager_image)
     ImageView teahcerManagerImage;
+    @ViewById(R.id.teacher_look)
+    TextView lookTv;
 
     private int uid;
     private int role;
@@ -104,10 +97,8 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
         uid = Integer.parseInt(User_id.getUid());
         role = Integer.parseInt(User_id.getRole());
         EventBus.getDefault().register(this);
-        DemoHelper sdkHelper = DemoHelper.getInstance();
-        sdkHelper.pushActivity(getActivity());
 
-        EMClient.getInstance().chatManager().addMessageListener(messageListener);
+//        EMClient.getInstance().chatManager().addMessageListener(messageListener);
     }
 
     @Override
@@ -131,10 +122,10 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
         user_init = new User_Realization();
         user_init.User_Data(uid,User_id.getLat()+"",User_id.getLng()+"", this);
 
-        tlebat.add("推荐需求");
+//        tlebat.add("推荐需求");
         tlebat.add("我的订单");
         tlebat.add("我的接取");
-        fragments.add(DmadFragmengt_.builder().build());
+//        fragments.add(DmadFragmengt_.builder().build());
 //        fragments.add(OrderFragment_.builder().build());
         fragments.add(NewOrderFragment_.builder().build());
         fragments.add(MyReceptFragment_.builder().build());
@@ -143,22 +134,21 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
         new_teacher_tablayout.setupWithViewPager(new_techaer_viewpage);
         new_teacher_tablayout.setTabMode(TabLayout.MODE_FIXED);
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i = 1; i > 0; i++) {
-                    try {
-                        Thread.sleep(100000);
-                        updateUnreadLabel();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
-        inviteMessgeDao = new InviteMessgeDao(getContext());
-        registerBroadcastReceiver();
-        EMClient.getInstance().contactManager().setContactListener(new MyContactListener());
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                for (int i = 1; i > 0; i++) {
+//                    try {
+//                        Thread.sleep(100000);
+////                        updateUnreadLabel();
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        }).start();
+//        registerBroadcastReceiver();
+//        EMClient.getInstance().contactManager().setContactListener(new MyContactListener());
 //        new_techaer_viewpage.setOffscreenPageLimit(0);
     }
 
@@ -170,12 +160,12 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
                 break;
             case R.id.teacher_chat:
                 Intent intent3 = new Intent();
-                intent3.setClass(getActivity(), modle.Huanxing.ui.NewHuanxinMainActivity.class);
+//                intent3.setClass(getActivity(), modle.Huanxing.ui.NewHuanxinMainActivity.class);
                 startActivity(intent3);
                 break;
             case R.id.teacher_my:
                 Intent intent13 = new Intent();
-                intent13.setClass(getActivity(), modle.Huanxing.ui.MainActivity.class);
+//                intent13.setClass(getActivity(), modle.Huanxing.ui.MainActivity.class);
                 startActivity(intent13);
                 break;
             case R.id.techaer_massge:
@@ -195,33 +185,48 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
                 break;
             case R.id.huanxin_but:
                 Intent intent23 = new Intent();
-                intent23.setClass(getActivity(), modle.Huanxing.ui.MainActivity.class);
+//                intent23.setClass(getActivity(), modle.Huanxing.ui.MainActivity.class);
                 startActivity(intent23);
                 break;
             case R.id.teacher_loc:
-                Intent intent4 = new Intent(getActivity(), Personal_Activty.class);
-                startActivity(intent4);
+                if (!TextUtils.isEmpty(userHeadUrl)) {
+                    Intent intent5 = new Intent(getActivity(), PictureZoo.class);
+                    intent5.putExtra("hide",userHeadUrl);
+                    startActivity(intent5);
+                }
+//                Intent intent4 = new Intent(getActivity(), Personal_Activty.class);
+//                startActivity(intent4);
+                break;
         }
     }
 
     @Subscriber(tag = "headUrl")
     private void updateHead(File msg){
 //        Glide.with(this).load(msg).into(teacher_loc);
-        Glide.with(getContext().getApplicationContext()).load(msg).transform(new GlideCircleTransform(getContext())).into(teacher_loc);
+//        Glide.with(getContext().getApplicationContext()).load(msg).
+//                transform(new GlideCircleTransform(getContext())).into(teacher_loc);
+        teacher_loc.setImageURI(Uri.fromFile(msg));
     }
     @Subscriber(tag = "update")
     public void updateMsg(String msg){
         user_init.User_Data(uid,User_id.getLat()+"",User_id.getLng()+"",this);
     }
+    private String userHeadUrl;
     /**
      * 获取用户资料成功回调并设置
      * @param map
      */
     @Override
     public void Updatecontent(Map<String, Object> map) {
-        Glide.with(getContext().getApplicationContext()).load(map.get("headimg").toString()).transform(new GlideCircleTransform(getContext())).into(teacher_loc);
+        userHeadUrl = map.get("headimg")+"";
+//        Glide.with(getContext().getApplicationContext()).load(map.get("headimg").
+//                toString()).transform(new GlideCircleTransform(getContext())).into(teacher_loc);
+        teacher_loc.setImageURI(Uri.parse(map.get("headimg")+""));
         teacher_name.setText(map.get("nickname")+"");
-        teacher_autograph.setText(map.get("signature")+"");
+        if (!TextUtils.isEmpty(map.get("signature")+"")) {
+            teacher_autograph.setText(map.get("signature") + "");
+        }
+        lookTv.setText(map.get("click")+"人看过");
     }
 
     @Override
@@ -235,142 +240,142 @@ public class Teacher_infofragment extends BaseFragment implements Requirdetailed
         super.onDestroy();
     }
 
-    public int getUnreadMsgCountTotal() {
-        return EMClient.getInstance().chatManager().getUnreadMsgsCount();
-    }
+//    public int getUnreadMsgCountTotal() {
+//        return EMClient.getInstance().chatManager().getUnreadMsgsCount();
+//    }
 
     @Override
     public void onResume() {
         super.onResume();
-        updateUnreadLabel();
-        updateUnreadAddressLable();
+//        updateUnreadLabel();
+//        updateUnreadAddressLable();
     }
 
-    @Subscriber(tag = "refresh")
-    public void getrefresh(String msg){
-        final int count = getUnreadMsgCountTotal();
-        if (count > 0) {
-            unreadLabel.setText(count +"");
-            unreadLabel.setVisibility(View.VISIBLE);
-        } else {
-            unreadLabel.setVisibility(View.INVISIBLE);
-        }
-    }
-    @Subscriber(tag = "refresh1")
-    public void getrefresh1(String msg){
-        final int count = getUnreadAddressCountTotal();
-        if (count > 0) {
-            unreadAddressLable.setText(count +"");
-            unreadAddressLable.setVisibility(View.VISIBLE);
-        } else {
-            unreadAddressLable.setVisibility(View.INVISIBLE);
-        }
-    }
-    private InviteMessgeDao inviteMessgeDao;
-    /**
-     * get unread event notification count, including application, accepted, etc
-     *
-     * @return
-     */
-    public int getUnreadAddressCountTotal() {
-        int unreadAddressCountTotal = 0;
-        unreadAddressCountTotal = inviteMessgeDao.getUnreadMessagesCount();
-        return unreadAddressCountTotal;
-    }
-    /**
-     * update the total unread count
-     */
-    public void updateUnreadAddressLable() {
-        EventBus.getDefault().post("123","refresh1");
-    }
-    public class MyContactListener implements EMContactListener {
-        @Override
-        public void onContactAdded(String username) {}
-        @Override
-        public void onContactDeleted(final String username) {
-            updateUnreadAddressLable();
-        }
-        @Override
-        public void onContactInvited(String username, String reason) {}
-        @Override
-        public void onFriendRequestAccepted(String username) {}
-        @Override
-        public void onFriendRequestDeclined(String username) {}
-    }
-    public void updateUnreadLabel() {
-        EventBus.getDefault().post("123","refresh");
-    }
-    private BroadcastReceiver broadcastReceiver;
-    private LocalBroadcastManager broadcastManager;
-    private void registerBroadcastReceiver() {
-        broadcastManager = LocalBroadcastManager.getInstance(getActivity());
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(Constant.ACTION_CONTACT_CHANAGED);
-        intentFilter.addAction(Constant.ACTION_GROUP_CHANAGED);
-//		intentFilter.addAction(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION);
-        broadcastReceiver = new BroadcastReceiver() {
-
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                updateUnreadLabel();
-                updateUnreadAddressLable();
-
-                String action = intent.getAction();
-                if(action.equals(Constant.ACTION_GROUP_CHANAGED)){
-                    if (EaseCommonUtils.getTopActivity(getActivity()).equals(GroupsActivity.class.getName())) {
-                        GroupsActivity.instance.onResume();
-                    }
-                }
-                //red packet code : 处理红包回执透传消息
-//				if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
-//					if (conversationListFragment != null){
-//						conversationListFragment.refresh();
-//					}
-//				}
-                //end of red packet code
-            }
-        };
-        broadcastManager.registerReceiver(broadcastReceiver, intentFilter);
-    }
-    EMMessageListener messageListener = new EMMessageListener() {
-
-        @Override
-        public void onMessageReceived(List<EMMessage> messages) {
-            // notify new message
-            for (EMMessage message : messages) {
-                DemoHelper.getInstance().getNotifier().onNewMsg(message);
-            }
-            refreshUIWithMessage();
-        }
-
-        @Override
-        public void onCmdMessageReceived(List<EMMessage> messages) {
-            //red packet code : 处理红包回执透传消息
-            for (EMMessage message : messages) {
-                EMCmdMessageBody cmdMsgBody = (EMCmdMessageBody) message.getBody();
-            }
-            refreshUIWithMessage();
-        }
-
-        @Override
-        public void onMessageRead(List<EMMessage> messages) {
-        }
-
-        @Override
-        public void onMessageDelivered(List<EMMessage> message) {
-        }
-
-        @Override
-        public void onMessageChanged(EMMessage message, Object change) {}
-    };
-
-    private void refreshUIWithMessage() {
-        getActivity().runOnUiThread(new Runnable() {
-            public void run() {
-                // refresh unread count
-                updateUnreadLabel();
-            }
-        });
-    }
+//    @Subscriber(tag = "refresh")
+//    public void getrefresh(String msg){
+//        final int count = getUnreadMsgCountTotal();
+//        if (count > 0) {
+//            unreadLabel.setText(count +"");
+//            unreadLabel.setVisibility(View.VISIBLE);
+//        } else {
+//            unreadLabel.setVisibility(View.INVISIBLE);
+//        }
+//    }
+//    @Subscriber(tag = "refresh1")
+//    public void getrefresh1(String msg){
+//        final int count = getUnreadAddressCountTotal();
+//        if (count > 0) {
+//            unreadAddressLable.setText(count +"");
+//            unreadAddressLable.setVisibility(View.VISIBLE);
+//        } else {
+//            unreadAddressLable.setVisibility(View.INVISIBLE);
+//        }
+//    }
+////    private InviteMessgeDao inviteMessgeDao;
+//    /**
+//     * get unread event notification count, including application, accepted, etc
+//     *
+//     * @return
+//     */
+//    public int getUnreadAddressCountTotal() {
+//        int unreadAddressCountTotal = 0;
+////        unreadAddressCountTotal = inviteMessgeDao.getUnreadMessagesCount();
+//        return unreadAddressCountTotal;
+//    }
+//    /**
+//     * update the total unread count
+//     */
+//    public void updateUnreadAddressLable() {
+//        EventBus.getDefault().post("123","refresh1");
+//    }
+//    public class MyContactListener implements EMContactListener {
+//        @Override
+//        public void onContactAdded(String username) {}
+//        @Override
+//        public void onContactDeleted(final String username) {
+//            updateUnreadAddressLable();
+//        }
+//        @Override
+//        public void onContactInvited(String username, String reason) {}
+//        @Override
+//        public void onFriendRequestAccepted(String username) {}
+//        @Override
+//        public void onFriendRequestDeclined(String username) {}
+//    }
+//    public void updateUnreadLabel() {
+//        EventBus.getDefault().post("123","refresh");
+//    }
+//    private BroadcastReceiver broadcastReceiver;
+//    private LocalBroadcastManager broadcastManager;
+//    private void registerBroadcastReceiver() {
+//        broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+//        IntentFilter intentFilter = new IntentFilter();
+////        intentFilter.addAction(Constant.ACTION_CONTACT_CHANAGED);
+////        intentFilter.addAction(Constant.ACTION_GROUP_CHANAGED);
+////		intentFilter.addAction(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION);
+//        broadcastReceiver = new BroadcastReceiver() {
+//
+//            @Override
+//            public void onReceive(Context context, Intent intent) {
+//                updateUnreadLabel();
+//                updateUnreadAddressLable();
+//
+//                String action = intent.getAction();
+////                if(action.equals(Constant.ACTION_GROUP_CHANAGED)){
+////                    if (EaseCommonUtils.getTopActivity(getActivity()).equals(GroupsActivity.class.getName())) {
+////                        GroupsActivity.instance.onResume();
+////                    }
+////                }
+//                //red packet code : 处理红包回执透传消息
+////				if (action.equals(RPConstant.REFRESH_GROUP_RED_PACKET_ACTION)){
+////					if (conversationListFragment != null){
+////						conversationListFragment.refresh();
+////					}
+////				}
+//                //end of red packet code
+//            }
+//        };
+//        broadcastManager.registerReceiver(broadcastReceiver, intentFilter);
+//    }
+//    EMMessageListener messageListener = new EMMessageListener() {
+//
+//        @Override
+//        public void onMessageReceived(List<EMMessage> messages) {
+//            // notify new message
+//            for (EMMessage message : messages) {
+////                DemoHelper.getInstance().getNotifier().onNewMsg(message);
+//            }
+//            refreshUIWithMessage();
+//        }
+//
+//        @Override
+//        public void onCmdMessageReceived(List<EMMessage> messages) {
+//            //red packet code : 处理红包回执透传消息
+//            for (EMMessage message : messages) {
+//                EMCmdMessageBody cmdMsgBody = (EMCmdMessageBody) message.getBody();
+//            }
+//            refreshUIWithMessage();
+//        }
+//
+//        @Override
+//        public void onMessageRead(List<EMMessage> messages) {
+//        }
+//
+//        @Override
+//        public void onMessageDelivered(List<EMMessage> message) {
+//        }
+//
+//        @Override
+//        public void onMessageChanged(EMMessage message, Object change) {}
+//    };
+//
+//    private void refreshUIWithMessage() {
+//        getActivity().runOnUiThread(new Runnable() {
+//            public void run() {
+//                // refresh unread count
+//                updateUnreadLabel();
+//            }
+//        });
+//    }
 
 }

@@ -10,10 +10,12 @@ import android.widget.Toast;
 
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.viewimpl.TeacherView;
+import com.google.zxing.oned.rss.RSSUtils;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +42,7 @@ public class ExampleActivity extends MyBaseActivity implements SwipeRefreshLayou
 
     @Override
     public void before() {
+        super.before();
         id = getIntent().getIntExtra("teacherId",Integer.parseInt(User_id.getUid()));
     }
 
@@ -66,7 +69,6 @@ public class ExampleActivity extends MyBaseActivity implements SwipeRefreshLayou
         });
         new Teacher(this).getExampleList(id,page);
     }
-
     @Override
     public void initView() {
         backRl.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +87,7 @@ public class ExampleActivity extends MyBaseActivity implements SwipeRefreshLayou
 
     @Override
     public void successTeacher(List<Map<String, Object>> maps) {
-        if (maps != null){
+        if (maps != null && maps.size()>0){
             if (page == 1){
                 list.clear();
             }

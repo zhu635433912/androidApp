@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#fffffe"
+    tools:context="com.deguan.xuelema.androidapp.StudentVipActivity">
+    <RelativeLayout
+        android:background="#fffffe"
+        android:layout_width="match_parent"
+        android:layout_height="90px"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <ImageButton
+            android:layout_marginLeft="34px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/add19"
+            android:layout_width="25px"
+            android:layout_height="35px" />
+        <RelativeLayout
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/back_rl"
+            android:layout_width="120px"
+            android:layout_height="90px">
+        </RelativeLayout>
+
+        <TextView
+            android:layout_marginLeft="120px"
+            android:layout_centerVertical="true"
+            android:textSize="40px"
+            android:layout_centerInParent="true"
+            android:text="我的推广"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="#edd66f"
+        android:layout_width="match_parent"
+        android:layout_height="300px">
+        <TextView
+            android:textSize="40px"
+            android:text="累积奖励"
+            android:layout_marginTop="55px"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/extent_total_tv"
+            android:layout_marginTop="45px"
+            android:text="0.00(元)"
+            android:textSize="80px"
+            android:textColor="#fffffe"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:background="#333333"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="140px">
+        <LinearLayout
+            android:id="@+id/one_money_ll"
+            android:layout_weight="1"
+            android:layout_width="0px"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:textColor="#fffffe"
+                android:text="推广奖励"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0px" />
+
+            <TextView
+                android:id="@+id/one_money_tv"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="0.00(元)0(人)"
+                android:textColor="#fffffe" />
+        </LinearLayout>
+        <View
+            android:background="#bfbfbf"
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            />
+        <LinearLayout
+            android:id="@+id/two_money_ll"
+            android:layout_weight="1"
+            android:layout_width="0px"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:textColor="#fffffe"
+                android:text="团队奖励"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0px" />
+            <TextView
+                android:id="@+id/two_money_tv"
+                android:layout_weight="1"
+                android:textColor="#fffffe"
+                android:gravity="center"
+                android:text="0.00(元)0(人)"
+                android:layout_width="match_parent"
+                android:layout_height="0px" />
+        </LinearLayout>
+    </LinearLayout>
+    <android.support.v7.widget.CardView
+        android:id="@+id/one_card_view"
+        app:cardCornerRadius="18px"
+        android:layout_margin="20px"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <LinearLayout
+            android:background="#e2e2e2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="用户"
+                android:textSize="32px"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="会员邀请人"
+                android:textSize="32px"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="金额(元)"
+                android:textSize="32px"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.RecyclerView
+        android:layout_margin="20px"
+        android:divider="@null"
+        android:scrollbars="none"
+        app:layoutManager="LinearLayoutManager"
+        android:id="@+id/extent_recycler_view1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+    <android.support.v7.widget.CardView
+        android:id="@+id/two_card_view"
+        android:visibility="gone"
+        app:cardCornerRadius="18px"
+        android:layout_margin="20px"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <LinearLayout
+            android:background="#e2e2e2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:text="用户"
+                android:textSize="32px"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text=""
+                android:textSize="32px"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="金额(元)"
+                android:textSize="32px"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.RecyclerView
+        android:visibility="gone"
+        android:layout_margin="20px"
+        android:divider="@null"
+        android:scrollbars="none"
+        app:layoutManager="LinearLayoutManager"
+        android:id="@+id/extent_recycler_view2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

@@ -6,7 +6,7 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/add08"
         android:layout_width="750px"
-        android:layout_height="620px">
+        android:layout_height="600px">
 
         <TextView
             android:layout_marginTop="20px"
@@ -170,7 +170,6 @@
             android:layout_height="wrap_content" />
         <TextView
             android:layout_marginLeft="20px"
-            android:text="提现低于1300元每笔支付宝将收取2元服务费,高于1300元每笔支付宝将按0.15%收取服务费(暂时只能整百提现)"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="30px"
             android:textSize="25px"

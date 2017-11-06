@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import modle.Adapter.BillAdapter;
-import modle.Huanxing.ui.BaseActivity;
 import modle.getdata.Getdata;
 import modle.user_ziliao.User_id;
 
@@ -38,6 +37,11 @@ public class BillActivity extends MyBaseActivity implements TurnoverView {
 
     private List<Map<String,Object>> data = new ArrayList<>();
     private BillAdapter adapter;
+
+    @Override
+    public void before() {
+        super.before();
+    }
 
     @Override
     public void initData() {

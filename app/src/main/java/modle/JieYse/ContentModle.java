@@ -9,9 +9,18 @@ import java.util.Map;
 
 public class ContentModle {
     private List<Map<String,Object>> content;
+    private Map<String,Object> content2;
     private String error;
     private String errmsg;
     private String loadMore;
+
+    public Map<String, Object> getContent2() {
+        return content2;
+    }
+
+    public void setContent2(Map<String, Object> content2) {
+        this.content2 = content2;
+    }
 
     public List<Map<String, Object>> getContent(){
         return content;

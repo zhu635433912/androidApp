@@ -1,5 +1,7 @@
 package view.login.Modle;
 
+import java.util.Map;
+
 /**
  * 　　　　　　　　┏┓　　　┏┓
  * 　　　　　　　┏┛┻━━━┛┻┓
@@ -38,5 +40,5 @@ public interface MobileView {
 
     void successRegister(String msg);
     void failRegister(String msg);
-
+    void successLogin(RegisterEntity entity);
 }

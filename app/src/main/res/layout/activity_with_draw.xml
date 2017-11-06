@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.deguan.xuelema.androidapp.WithDrawActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/feehost"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <ImageButton
+            android:layout_marginLeft="34px"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/add19"
+            android:layout_width="25px"
+            android:layout_height="35px" />
+        <RelativeLayout
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/withdraw_back"
+            android:layout_width="120px"
+            android:layout_height="100px">
+        </RelativeLayout>
+
+        <TextView
+            android:layout_marginLeft="120px"
+            android:layout_centerVertical="true"
+            android:textSize="40px"
+            android:text="提现"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+   <View
+       android:layout_below="@+id/feehost"
+       android:id="@+id/feefenggexian4"
+       android:background="#f1f1f1"
+       android:layout_width="match_parent"
+       android:layout_height="30px"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <TextView
+            android:id="@+id/feekaihuyh"
+            android:layout_marginLeft="50px"
+            android:textSize="40px"
+            android:text="用户名称"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:textColorHint="#bfbfbf"
+            android:id="@+id/cash_name"
+            android:background="@null"
+            android:hint="请输入支付宝账户名..."
+            android:textSize="30px"
+            android:layout_marginLeft="40px"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+    <View
+        android:layout_below="@+id/feehost"
+        android:background="#f1f1f1"
+        android:layout_width="match_parent"
+        android:layout_height="30px"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <TextView
+            android:id="@+id/feeyhzhanghao"
+            android:layout_marginLeft="50px"
+            android:textSize="40px"
+            android:text="提现账号"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:textColorHint="#bfbfbf"
+            android:id="@+id/cash_id"
+            android:background="@null"
+            android:hint="请输入支付宝账号..."
+            android:textSize="30px"
+            android:layout_marginLeft="40px"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:layout_below="@+id/feehost"
+        android:background="#f1f1f1"
+        android:layout_width="match_parent"
+        android:layout_height="30px"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="100px">
+        <TextView
+            android:id="@+id/zhuanchufeee"
+            android:layout_marginLeft="50px"
+            android:textSize="40px"
+            android:text="提现金额"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <EditText
+            android:inputType="number"
+            android:textColorHint="#bfbfbf"
+            android:id="@+id/cash_fee"
+            android:background="@null"
+            android:hint="请输入提现金额..."
+            android:textSize="30px"
+            android:layout_marginLeft="40px"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:layout_below="@+id/feehost"
+        android:background="#f1f1f1"
+        android:layout_width="match_parent"
+        android:layout_height="30px"/>
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/feeweixzhifurelayout"
+        android:layout_marginLeft="30px"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="38px"
+        android:layout_below="@+id/zhuanchufeee"
+        android:layout_centerVertical="true"
+        android:background="@drawable/feeshape"
+        android:layout_width="220px"
+        android:layout_height="150px">
+        <ImageView
+            android:id="@+id/cash_wechat"
+            android:background="@drawable/hly13"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20px"
+            android:layout_centerHorizontal="true"
+            android:layout_width="80px"
+            android:layout_height="80px" />
+        <TextView
+            android:id="@+id/tixian_weixin"
+            android:textSize="27px"
+            android:layout_marginTop="10px"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/cash_wechat"
+            android:text="微信支付"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_marginTop="50px"
+        android:layout_gravity="center"
+        android:background="@drawable/feeshape"
+        android:layout_width="220px"
+        android:layout_height="150px">
+        <ImageView
+            android:id="@+id/cash_alpay"
+            android:layout_marginTop="20px"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/hly08"
+            android:layout_width="80px"
+            android:layout_height="80px" />
+        <TextView
+            android:id="@+id/tixian_alipay"
+            android:layout_marginTop="10px"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/cash_alpay"
+            android:textSize="27px"
+            android:textColor="#e92c2c"
+            android:text="支付宝"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+    <android.support.v7.widget.CardView
+        android:id="@+id/cash_type"
+        android:layout_margin="80px"
+        app:cardBackgroundColor="#d9d9d9"
+        android:clickable="false"
+        app:cardCornerRadius="22px"
+        android:layout_below="@+id/cash_fee"
+        android:layout_width="match_parent"
+        android:layout_height="80px">
+        <TextView
+            android:textSize="45px"
+            android:textColor="#a3a3a3"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="下一步"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:layout_marginLeft="20px"
+        android:text="提现低于1300元每笔支付宝将收取2元服务费,高于1300元每笔支付宝将按0.15%收取服务费(暂时只能整百提现)"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30px"
+        android:textSize="25px"
+        android:layout_width="0px"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
+    <View
+        android:id="@+id/withdraw_line"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="0.5px"/>
+</RelativeLayout>

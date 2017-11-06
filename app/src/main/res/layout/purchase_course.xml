@@ -27,7 +27,7 @@
 
         <TextView
             android:id="@+id/course_explain"
-            android:layout_width="wrap_content"
+            android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/kechengname"
             android:layout_marginLeft="40px"
@@ -35,7 +35,7 @@
             android:ellipsize="end"
             android:maxEms="14"
             android:maxLines="1"
-            android:text="课程说明111111111111e22222222222eeeeeeeee"
+            android:text=""
             android:textColor="#767676"
             android:textSize="25px" />
 
@@ -55,7 +55,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginRight="44px"
             android:layout_marginTop="45px"
-            android:text="40元/节"
+            android:text="40元/小时"
             android:textColor="#45b5fd"
             android:textSize="40px" />
 
@@ -194,7 +194,7 @@
             android:layout_alignLeft="@+id/shangkefnagshi"
             android:layout_below="@+id/buy_course_desc"
             android:layout_marginTop="24px"
-            android:text="共计: ￥"
+            android:text="共计: ¥"
             android:textSize="35px" />
 
         <TextView
@@ -204,7 +204,7 @@
             android:layout_alignBottom="@+id/zonggongjine"
             android:layout_marginLeft="10px"
             android:layout_toRightOf="@+id/zonggongjine"
-            android:text="00.00"
+            android:text=""
             android:textSize="35px" />
 
         <Button

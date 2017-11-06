@@ -10,8 +10,8 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/my_order_tablayout"
         app:tabTextColor="#8b8b8b"
-        app:tabIndicatorColor="#fd1245"
-        app:tabSelectedTextColor="#fd1245"
+        app:tabIndicatorColor="#ff1188"
+        app:tabSelectedTextColor="#ff1188"
         android:layout_width="match_parent"
         android:layout_height="100px"/>
     <android.support.v4.view.ViewPager

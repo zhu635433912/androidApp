@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#ffffff" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="#ffffff"
+        android:id="@+id/course_pop_ll"
+        android:layout_marginTop="25px"
+        android:layout_marginLeft="80px"
+        android:layout_marginRight="100px"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50px">
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@mipmap/teacher_red_circle"
+            android:layout_width="25px"
+            android:layout_height="25px" />
+
+        <TextView
+            android:id="@+id/course_pop_course"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30px"
+            android:layout_weight="1"
+            android:background="#ffffff"
+            android:gravity="center_vertical"
+            android:text="数学     小学"
+            android:textSize="30px" />
+
+        <TextView
+            android:id="@+id/course_pop_fee"
+            android:textColor="#ff1245"
+            android:gravity="center_vertical"
+            android:text="100元/小时"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <View
+        android:layout_marginTop="25px"
+        android:layout_marginLeft="50px"
+        android:layout_marginRight="50px"
+        android:background="#ece25e"
+        android:layout_width="match_parent"
+        android:layout_height="1px" />
+</LinearLayout>

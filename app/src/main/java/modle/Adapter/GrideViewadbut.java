@@ -3,6 +3,7 @@ package modle.Adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.deguan.xuelema.androidapp.R;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,7 +62,7 @@ public class GrideViewadbut extends BaseAdapter {
         if (view==null){
             view=layoutInflater.inflate(R.layout.pick_singleitme,null);
             viewhode=new Viewhode(view);
-            viewhode.liebiaoname= (CircleImageView) view.findViewById(R.id.liebiaoname);
+            viewhode.liebiaoname= (SimpleDraweeView) view.findViewById(R.id.liebiaoname);
             viewhode.listname= (TextView) view.findViewById(R.id.listname);
             viewhode.coursename= (TextView) view.findViewById(R.id.coursename);
             viewhode.xiadans= (TextView) view.findViewById(R.id.xiadans);
@@ -90,14 +92,15 @@ public class GrideViewadbut extends BaseAdapter {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         viewhode.xiadans.setText(sdf.format(d));
 
-        setbitmap(listmap.get(i).get("teacher_headimg").toString(),viewhode.liebiaoname);
+//        setbitmap(listmap.get(i).get("teacher_headimg").toString(),viewhode.liebiaoname);
+        viewhode.liebiaoname.setImageURI(Uri.parse(listmap.get(i).get("teacher_headimg")+""));
 
         return view;
     }
 
     class Viewhode {
         TextView address;
-        CircleImageView liebiaoname;
+        SimpleDraweeView liebiaoname;
         TextView listname;
         TextView coursename;
         TextView xiadans;

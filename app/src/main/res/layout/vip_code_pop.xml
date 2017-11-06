@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="#fffffe"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="16dp"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="50px"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="20px"
+            android:textSize="30px"
+            android:layout_gravity="center"
+            android:text="请填写11位邀请码"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+
+            android:id="@+id/vip_code_edit"
+            android:layout_margin="50px"
+            android:background="@mipmap/vip_code_bg"
+            android:layout_width="match_parent"
+            android:layout_height="100px" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="20px"
+            android:layout_marginLeft="25px"
+            android:layout_marginRight="25px"
+            android:layout_marginBottom="20px"
+            android:layout_width="match_parent"
+            android:layout_height="100px">
+            <TextView
+                android:background="@mipmap/vip_code_sure_bg"
+                android:id="@+id/vip_next_tv"
+                android:gravity="center"
+                android:text="跳过"
+                android:textSize="34px"
+                android:textColor="#fffffe"
+                android:layout_weight="1"
+                android:layout_width="0px"
+                android:layout_height="match_parent" />
+            <View
+                android:background="#fffffe"
+                android:layout_width="50px"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:background="@mipmap/vip_code_sure_bg"
+                android:id="@+id/vip_sure_tv"
+                android:gravity="center"
+                android:text="确认"
+                android:textSize="34px"
+                android:textColor="#fffffe"
+                android:layout_weight="1"
+                android:layout_width="0px"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <View
+            android:background="#fffffe"
+            android:layout_width="match_parent"
+            android:layout_height="20px"/>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

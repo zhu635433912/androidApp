@@ -69,7 +69,7 @@ public class PublishPresenterImpl implements PublishPresenter {
                 if (error.equals("ok")){
                     Log.e("aa","获取推荐教师成功");
                     if (response.body().getContent() .size() == 0) {
-                        myPublishView.failMyPublish("您还未发布");
+//                        myPublishView.failMyPublish("您还未发布");
                     }
                         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
                         list = response.body().getContent();

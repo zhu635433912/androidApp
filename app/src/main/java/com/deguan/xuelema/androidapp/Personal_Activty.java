@@ -39,18 +39,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
-import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+//import com.deguan.xuelema.androidapp.utils.GlideCircleTransform;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.deguan.xuelema.androidapp.utils.PhotoBitmapUtils;
+import com.deguan.xuelema.androidapp.utils.PhotoUtils1;
 import com.deguan.xuelema.androidapp.viewimpl.ChangeOrderView;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.easeui.utils.EaseCommonUtils;
-import com.hyphenate.util.PathUtil;
-import com.hyphenate.util.Utils;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import org.simple.eventbus.EventBus;
+import org.simple.eventbus.Subscriber;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -68,10 +67,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.UserInfo;
+import cn.jpush.im.api.BasicCallback;
+import jiguang.chat.activity.PersonalActivity;
+import jiguang.chat.utils.ThreadUtil;
+import jiguang.chat.utils.ToastUtil;
+import jiguang.chat.utils.photochoose.ChoosePhoto;
+import jiguang.chat.utils.photochoose.PhotoUtils;
 import kr.co.namee.permissiongen.PermissionGen;
 import modle.Gaode.Gaode_dinwei;
-import modle.Huanxing.cache.UserCacheManager;
-import modle.Huanxing.ui.UserProfileActivity;
 import modle.Teacher_Modle.Teacher;
 import modle.Teacher_Modle.Teacher_init;
 import modle.toos.CircleImageView;
@@ -84,7 +89,7 @@ import retrofit2.Call;
 /**
  * 个人信息
  */
-public class Personal_Activty extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed,ChangeOrderView {
+public class Personal_Activty extends MyBaseActivity implements View.OnClickListener,Requirdetailed,ChangeOrderView {
     private RelativeLayout gerxxhuitui;
     private TextView userdizhi;
     private TextView userage;
@@ -92,7 +97,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     private TextView ziyouzhiye;
     private EditText edit1;
     private TextView emage;
-    private ImageView usertoux;
+    private SimpleDraweeView usertoux;
     private String address;//用户地区
     private String gender;//用户年龄
     private String age;//用户性别
@@ -112,6 +117,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     private Button baocun;
     private Teacher_init teacher;
     private String mCurrentPhotoPath;
+    private ChoosePhoto mChoosePhoto;
 
 
     private static final int REQUEST_IMAGE_GET = 5;
@@ -127,7 +133,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     protected static final int REQUEST_CODE_CAMERA = 2;
     protected static final int REQUEST_CODE_LOCAL = 3;
     private static final int REQUESTCODE_CUTTING = 4;
-
+    private UserInfo mMyInfo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -139,7 +145,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         xueliRl = (RelativeLayout) findViewById(R.id.xuelie_rl);
         xueliTv = (TextView) findViewById(R.id.xueli_text);
         gerxxhuitui= (RelativeLayout) findViewById(R.id.gerxxhuitui);
-        usertoux= (ImageView) findViewById(R.id.usertoux);
+        usertoux= (SimpleDraweeView) findViewById(R.id.usertoux);
         userdizhi= (TextView) findViewById(R.id.userdizhi);
         userage= (TextView) findViewById(R.id.userage);
         usershenr= (TextView) findViewById(R.id.usershenr);
@@ -182,7 +188,9 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
 
         View view = getLayoutInflater().inflate(R.layout.layout_dialog_pick, null);
         mPickDialog = new android.app.AlertDialog.Builder(this).setView(view).create();
-
+        mMyInfo = JMessageClient.getMyInfo();
+        mChoosePhoto = new ChoosePhoto();
+        mChoosePhoto.setPortraitChangeListener(this, usertoux, 1);
 
     }
     private int education_id = 0;
@@ -193,7 +201,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
             case R.id.xueli_text:
 
                 //所在地
-                new  AlertDialog.Builder(this).setTitle("请输入(一旦确定无法修改,将作为找回支付密码的重要依据)").setIcon(android.R.drawable.btn_star).setView(edit)
+                new  AlertDialog.Builder(this).setTitle("身份证号码(无法修改,将作为找回支付密码的依据)").setIcon(android.R.drawable.btn_star).setView(edit)
                         .setPositiveButton("确认",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -223,6 +231,22 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                                 if (!edit.getText().toString().equals("")) {
                                     user.Updateaddress(uid, edit.getText().toString());
                                     userdizhi.setText(edit.getText().toString());
+                                    ThreadUtil.runInThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            mMyInfo.setAddress( edit.getText().toString());
+                                            JMessageClient.updateMyInfo(UserInfo.Field.address, mMyInfo, new BasicCallback() {
+                                                @Override
+                                                public void gotResult(int responseCode, String responseMessage) {
+                                                    if (responseCode == 0) {
+                                                        ToastUtil.shortToast(Personal_Activty.this, "更新成功");
+                                                    } else {
+                                                        ToastUtil.shortToast(Personal_Activty.this, "更新失败" + responseMessage);
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    });
                                 }else {
                                     Toast.makeText(Personal_Activty.this,"所在地不能为空",Toast.LENGTH_SHORT).show();
                                 }
@@ -240,7 +264,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                 AlertDialog.Builder rolage=new AlertDialog.Builder(Personal_Activty.this);
                 rolage.setIcon(android.R.drawable.btn_star);
                 rolage.setTitle("选择您的性别!");
-                rolage.setSingleChoiceItems(sex, 1, new DialogInterface.OnClickListener() {
+                rolage.setSingleChoiceItems(sex, 0, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                       z=which+1;
@@ -249,13 +273,31 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                 rolage.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (z!=0||z==1) {
-                            user.Updategender(uid, z + "");
-                            userage.setText(sex[z - 1]);
+                        if (z==0||z==1) {
+                            user.Updategender(uid, "1");
+                            userage.setText("男");
+                            mMyInfo.setGender(UserInfo.Gender.male);
                         }else {
-                            user.Updategender(uid, 2 + "");
-                            userage.setText(sex[1]);
+                            user.Updategender(uid, "2");
+                            userage.setText("女");
+                            mMyInfo.setGender(UserInfo.Gender.female);
                         }
+                        ThreadUtil.runInThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                JMessageClient.updateMyInfo(UserInfo.Field.gender, mMyInfo, new BasicCallback() {
+                                    @Override
+                                    public void gotResult(int responseCode, String responseMessage) {
+                                        if (responseCode == 0) {
+                                            ToastUtil.shortToast(Personal_Activty.this, "更新成功");
+                                        } else {
+                                            ToastUtil.shortToast(Personal_Activty.this, "更新失败" + responseMessage);
+                                        }
+                                    }
+                                });
+                            }
+                        });
                         Toast.makeText(Personal_Activty.this,"修改性别成功",Toast.LENGTH_LONG).show();
                     }
                 });
@@ -270,7 +312,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                 break;
             case R.id.usershenr:
                 //年龄
-                new  AlertDialog.Builder(this).setTitle("请输入!").setIcon(android.R.drawable.btn_star).setView(edit)
+                new  AlertDialog.Builder(this).setTitle("请输入年龄!").setIcon(android.R.drawable.btn_star).setView(edit)
                         .setPositiveButton("确认",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -290,7 +332,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                 break;
             case R.id.ziyouzhiye:
                 //姓名
-                new  AlertDialog.Builder(this).setTitle("请输入!").setIcon(android.R.drawable.btn_star).setView(edit)
+                new  AlertDialog.Builder(this).setTitle("请输入姓名!").setIcon(android.R.drawable.btn_star).setView(edit)
                         .setPositiveButton("确认",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -298,6 +340,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                                 if (!edit.getText().toString().equals("")&&edit.getText().toString().length()<=4) {
                                     user.Updatename(uid,edit.getText().toString());
                                     ziyouzhiye.setText(edit.getText().toString());
+
                                 }else {
                                     Toast.makeText(Personal_Activty.this,"姓名输入有误!",Toast.LENGTH_SHORT).show();
                                 }
@@ -311,13 +354,29 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                 break;
             case R.id.emage:
                 //昵称
-                new  AlertDialog.Builder(this).setTitle("请输入!").setIcon(android.R.drawable.btn_star).setView(edit)
+                new  AlertDialog.Builder(this).setTitle("请输入昵称!").setIcon(android.R.drawable.btn_star).setView(edit)
                         .setPositiveButton("确认",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if (!edit.getText().toString().equals("")&&edit.getText().length()<10) {
                                     user.Updatenickname(uid,edit.getText().toString());
                                     emage.setText(edit.getText().toString());
+                                    ThreadUtil.runInThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            mMyInfo.setNickname(edit.getText().toString());
+                                            JMessageClient.updateMyInfo(UserInfo.Field.nickname, mMyInfo, new BasicCallback() {
+                                                @Override
+                                                public void gotResult(int responseCode, String responseMessage) {
+                                                    if (responseCode == 0) {
+                                                        ToastUtil.shortToast(Personal_Activty.this, "更新成功");
+                                                    } else {
+                                                        ToastUtil.shortToast(Personal_Activty.this, "更新失败,请正确输入");
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    });
                                 }else {
                                     Toast.makeText(Personal_Activty.this,"昵称不能超过10个字!!",Toast.LENGTH_SHORT).show();
                                 }
@@ -330,7 +389,9 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                 }).show();
                 break;
             case R.id.usertoux:
-                mPickDialog.show();
+                mChoosePhoto.setInfo(this, true);
+                mChoosePhoto.showPhotoDialog(this);
+//                mPickDialog.show();
                 break;
             //dialog
             case R.id.picture_dialog_pick: {
@@ -351,7 +412,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                             .request();
 //
                 }else{
-                    selectPicFromCamera();
+//                    selectPicFromCamera();
 //                    dispatchTakePictureIntent();
                 }
                 mPickDialog.dismiss();
@@ -363,14 +424,23 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                     EventBus.getDefault().post(image, "headUrl");
                 }
                     EventBus.getDefault().post("update","update");
-
-                finish();
-                Toast.makeText(this,"更新资料成功！",Toast.LENGTH_SHORT).show();
+                if (TextUtils.isEmpty(ziyouzhiye.getText())) {
+                    Toast.makeText(this, "请完善姓名", Toast.LENGTH_SHORT).show();
+                }else if (TextUtils.isEmpty(emage.getText())){
+                    Toast.makeText(this, "请填写昵称", Toast.LENGTH_SHORT).show();
+                }else {
+                    finish();
+                }
+                if (User_id.getRole().equals("1")) {
+                    Toast.makeText(this, "更新资料成功,快去发布需求找老师吧", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(this, "更新资料成功", Toast.LENGTH_SHORT).show();
+                }
 
                 break;
             case R.id.biyexuexiao:
                 //个人签名
-                new  AlertDialog.Builder(this).setTitle("请输入!").setIcon(android.R.drawable.btn_star).setView(edit)
+                new  AlertDialog.Builder(this).setTitle("请输入个人签名!").setIcon(android.R.drawable.btn_star).setView(edit)
                         .setPositiveButton("确认",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -378,6 +448,22 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
                                     String signature = edit.getText().toString();
                                     user_init.Upsignature(uid,signature);
                                     biyexuexiao.setText(signature);
+                                    ThreadUtil.runInThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            mMyInfo.setNickname(edit.getText().toString());
+                                            JMessageClient.updateMyInfo(UserInfo.Field.signature, mMyInfo, new BasicCallback() {
+                                                @Override
+                                                public void gotResult(int responseCode, String responseMessage) {
+                                                    if (responseCode == 0) {
+                                                        ToastUtil.shortToast(Personal_Activty.this, "更新成功");
+                                                    } else {
+                                                        ToastUtil.shortToast(Personal_Activty.this, "更新失败,请正确输入");
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    });
                                 }else {
                                     Toast.makeText(Personal_Activty.this, "签名不能超过20个字哦", Toast.LENGTH_SHORT).show();
                                 }
@@ -423,7 +509,7 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
                                            int[] grantResults) {
-        selectPicFromCamera();
+//        selectPicFromCamera();
     }
     public void updateuserdata(){
         //获取用户昵称与资料
@@ -439,23 +525,82 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
 
     @Override
     public void Updatecontent(Map<String, Object> map) {
+
 //        UserCacheManager.save(User_id.getUsername(), map.get("nickname")+"", map.get("headimg")+"");
-        UserCacheManager.updateMyNick( map.get("nickname")+"");
-        UserCacheManager.updateMyAvatar(map.get("headimg")+"");
+//        UserCacheManager.updateMyNick( map.get("nickname")+"");
+//        UserCacheManager.updateMyAvatar(map.get("headimg")+"");
             address = (String) map.get("address");
             gender = (String) map.get("gender");
             age = (String) map.get("age");
             userdizhi.setText((String) map.get("address"));
-            if (map.get("gender").equals("1")) {
+
+        if (map.get("gender") != null) {
+            if (map.get("gender").equals("1")||map.get("gender").equals("男")) {
                 userage.setText("男");
+                mMyInfo.setGender(UserInfo.Gender.male);
             } else {
                 userage.setText("女");
+                mMyInfo.setGender(UserInfo.Gender.female);
             }
+        }
+
+        ThreadUtil.runInThread(new Runnable() {
+            @Override
+            public void run() {
+                JMessageClient.updateMyInfo(UserInfo.Field.gender, mMyInfo, new BasicCallback() {
+                    @Override
+                    public void gotResult(int responseCode, String responseMessage) {
+                        if (responseCode == 0) {
+//                            ToastUtil.shortToast(Personal_Activty.this, "更新成功");
+                        } else {
+//                            ToastUtil.shortToast(Personal_Activty.this, "更新失败" + responseMessage);
+                        }
+                    }
+                });
+            }
+        });
         if (map.get("signature") != null) {
             biyexuexiao.setText(map.get("signature") +"");
+            mMyInfo.setSignature(map.get("signature")+"");
+            ThreadUtil.runInThread(new Runnable() {
+                @Override
+                public void run() {
+                    JMessageClient.updateMyInfo(UserInfo.Field.signature, mMyInfo, new BasicCallback() {
+                        @Override
+                        public void gotResult(int responseCode, String responseMessage) {
+                            if (responseCode == 0) {
+//                            ToastUtil.shortToast(Personal_Activty.this, "更新成功");
+                            } else {
+//                            ToastUtil.shortToast(Personal_Activty.this, "更新失败" + responseMessage);
+                            }
+                        }
+                    });
+                }
+            });
         }
             userdizhi.setText((String) map.get("address"));
+        if (map.get("mobile").equals(map.get("nickname"))){
+            emage.setText("");
+        }else {
             emage.setText((String) map.get("nickname"));
+            mMyInfo.setNickname(map.get("nickname")+"");
+            ThreadUtil.runInThread(new Runnable() {
+                @Override
+                public void run() {
+                    JMessageClient.updateMyInfo(UserInfo.Field.nickname, mMyInfo, new BasicCallback() {
+                        @Override
+                        public void gotResult(int responseCode, String responseMessage) {
+                            if (responseCode == 0) {
+//                            ToastUtil.shortToast(Personal_Activty.this, "更新成功");
+                            } else {
+//                            ToastUtil.shortToast(Personal_Activty.this, "更新失败" + responseMessage);
+                            }
+                        }
+                    });
+                }
+            });
+
+        }
             usershenr.setText((String) map.get("age"));
             ziyouzhiye.setText((String) map.get("name"));
         if (!TextUtils.isEmpty(map.get("idcard")+"")) {
@@ -468,7 +613,8 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         if (TextUtils.isEmpty(idCard)){
             xueliRl.setVisibility(View.VISIBLE);
         }
-            Glide.with(getApplicationContext()).load(map.get("headimg")+"").transform(new GlideCircleTransform(this)).into(usertoux);
+        usertoux.setImageURI(Uri.parse(map.get("headimg")+""));
+//            Glide.with(getApplicationContext()).load(map.get("headimg")+"").transform(new GlideCircleTransform(this)).into(usertoux);
     }
 
     @Override
@@ -487,41 +633,51 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
 
     }
 
-
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        super.onActivityResult(requestCode, resultCode, data);
-        // 回调成功
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == REQUEST_CODE_CAMERA) { // capture new image
-                if (cameraFile != null && cameraFile.exists()) {
-                    String filepath = PhotoBitmapUtils.amendRotatePhoto(cameraFile.getAbsolutePath(),this);
-                    setuseryoux(new File(filepath));
-//                    setuseryoux(cameraFile);
-                    Bitmap bitmap
-//                            = setImage(data.getData()) ;
-                            = getSmallBitmap(cameraFile.getAbsolutePath(), 600, 600);
-
-                    usertoux.setImageBitmap(bitmap);
-//                    sendImageMessage(cameraFile.getAbsolutePath());
-                }
-
-            }else if (requestCode == REQUEST_CODE_LOCAL) { // send local image
-                if (data != null) {
-                    sendPicByUri(data.getData());
-//     startPhotoZoom(data.getData());
-                }
-            }else if (requestCode == REQUESTCODE_CUTTING){
-                if (data != null) {
-                    setPicToView(data);
-//                    sendPicByUri(data.getData());
-                }
-            }
-
+    protected void onActivityResult(final int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case PhotoUtils.INTENT_CROP:
+            case PhotoUtils.INTENT_TAKE:
+            case PhotoUtils.INTENT_SELECT:
+                mChoosePhoto.photoUtils.onActivityResult(this, requestCode, resultCode, data);
+                break;
         }
-
     }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//
+//        super.onActivityResult(requestCode, resultCode, data);
+//        // 回调成功
+//        if (resultCode == Activity.RESULT_OK) {
+//            if (requestCode == REQUEST_CODE_CAMERA) { // capture new image
+//                if (cameraFile != null && cameraFile.exists()) {
+//                    String filepath = PhotoUtils1.amendRotatePhoto(cameraFile.getAbsolutePath(),this);
+//                    setuseryoux(new File(filepath));
+////                    setuseryoux(cameraFile);
+//                    Bitmap bitmap
+////                            = setImage(data.getData()) ;
+//                            = getSmallBitmap(cameraFile.getAbsolutePath(), 600, 600);
+//
+//                    usertoux.setImageBitmap(bitmap);
+//
+////                    sendImageMessage(cameraFile.getAbsolutePath());
+//                }
+//
+//            }else if (requestCode == REQUEST_CODE_LOCAL) { // send local image
+//                if (data != null) {
+//                    sendPicByUri(data.getData());
+////     startPhotoZoom(data.getData());
+//                }
+//            }else if (requestCode == REQUESTCODE_CUTTING){
+//                if (data != null) {
+//                    setPicToView(data);
+////                    sendPicByUri(data.getData());
+//                }
+//            }
+//
+//        }
+//
+//    }
 
     private Bitmap setImage(Uri mImageCaptureUri) {
 
@@ -558,7 +714,11 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         }
         return null;
     }
-
+    @Subscriber(tag = "headUrl")
+    public void updateHeadImage(String msg){
+        Log.d("aa","headUrl---------->"+msg);
+        setuseryoux(new File(msg));
+    }
     /**
      * send image
      *
@@ -577,12 +737,9 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
             cursor = null;
 
             if (picturePath == null || picturePath.equals("null")) {
-                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
                 return;
             }
-            String filepath = PhotoBitmapUtils.amendRotatePhoto(picturePath,this);
+            String filepath = PhotoUtils1.amendRotatePhoto(picturePath,this);
             setuseryoux(new File(filepath));
 //            setuseryoux(new File(picturePath));
             Bitmap bitmap = getSmallBitmap(picturePath, 600, 600);
@@ -590,13 +747,10 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
         } else {
             File file = new File(selectedImage.getPath());
             if (!file.exists()) {
-                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
                 return;
 
             }
-            String filepath = PhotoBitmapUtils.amendRotatePhoto(selectedImage.getPath(),this);
+            String filepath = PhotoUtils1.amendRotatePhoto(selectedImage.getPath(),this);
             setuseryoux(new File(filepath));
 //            setuseryoux(file);
             Bitmap bitmap = getSmallBitmap(file.getAbsolutePath(), 600, 600);
@@ -719,20 +873,20 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     /**
      * capture new image
      */
-    protected void selectPicFromCamera() {
-        if (!EaseCommonUtils.isSdcardExist()) {
-            Toast.makeText(this, com.hyphenate.easeui.R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
-                + System.currentTimeMillis() + ".jpg");
-        //noinspection ResultOfMethodCallIgnored
-        cameraFile.getParentFile().mkdirs();
-        startActivityForResult(
-                new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
-                REQUEST_CODE_CAMERA);
-    }
+//    protected void selectPicFromCamera() {
+//        if (!EaseCommonUtils.isSdcardExist()) {
+//            Toast.makeText(this, com.hyphenate.easeui.R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+//
+//        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
+//                + System.currentTimeMillis() + ".jpg");
+//        //noinspection ResultOfMethodCallIgnored
+//        cameraFile.getParentFile().mkdirs();
+//        startActivityForResult(
+//                new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
+//                REQUEST_CODE_CAMERA);
+//    }
 
     private void showToast(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
@@ -854,14 +1008,14 @@ public class Personal_Activty extends AutoLayoutActivity implements View.OnClick
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }
 
     @Override
     public void successOrder(String msg) {
-        Glide.with(getApplicationContext()).load(msg).transform(new GlideCircleTransform(this)).into(usertoux);
+//        Glide.with(getApplicationContext()).load(msg).transform(new GlideCircleTransform(this)).into(usertoux);
     }
 
     @Override

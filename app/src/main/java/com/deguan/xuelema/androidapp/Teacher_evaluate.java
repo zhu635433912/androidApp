@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.zhy.autolayout.AutoLayoutActivity;
@@ -30,7 +31,7 @@ import modle.user_ziliao.User_id;
  * 教师评价
  */
 
-public class Teacher_evaluate extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed,PullToRefreshBase.OnRefreshListener2,Student_init {
+public class Teacher_evaluate extends MyBaseActivity implements View.OnClickListener,Requirdetailed,PullToRefreshBase.OnRefreshListener2,Student_init {
     private TextView gerenjianjie;
     private RelativeLayout pingjiafanhui;
     private int teacher_id;

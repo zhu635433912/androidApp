@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import java.util.List;
@@ -23,7 +24,7 @@ import modle.user_ziliao.User_id;
  * 推广金额
  */
 
-public class Promote_Acitvty  extends AutoLayoutActivity implements View.OnClickListener,Requirdetailed{
+public class Promote_Acitvty  extends MyBaseActivity implements View.OnClickListener,Requirdetailed{
     private ImageButton xuelematuiguangshuoming;
     private RelativeLayout yiji;
     private RelativeLayout qianbaofanhui;

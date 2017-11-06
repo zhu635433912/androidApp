@@ -21,7 +21,7 @@ public interface Demand_http {
     获取需求列表
      */
     @POST("index.php?s=/Service/Requirement/gets_requirement")
-    Call<ContentModle> getDemandlist(@Query("uid") int uid, @Query("filter_type") int filter_type, @Query("filter_id") int filter_id, @Query("start_time") String start_time,
+    Call<ContentModle> getDemandlist(@Query("uid") int uid, @Query("filter_type") int filter_type, @Query("gender") int gender, @Query("start_time") String start_time,
                                      @Query("end_time") int end_time, @Query("page") int page,@Query("lat")double lat,@Query("lng")double lng
                                 ,@Query("grade_id")int grade_id,@Query("course_id")int course_id,@Query("order")String order,@Query("order_desc")String order_desc);
     /*
@@ -39,6 +39,21 @@ public interface Demand_http {
                             @Query("state") String state, @Query("service_type") int service_type,
                             @Query("start") String start,@Query("end") String end,@Query("lat") double lat, @Query("lng") double lng
     ,@Query("address")String address);
+
+    @POST("index.php?s=/Service/Requirement/create_requirement")
+    Call<Demtest> publishDemand(@Query("uid") int uid, @Query("content") String content,
+                                @Query("grade_id") int grade_id, @Query("course_id") int course_id,
+                            @Query("gender") int gender,  @Query("province") String province, @Query("city") String city,
+                            @Query("state") String state, @Query("service_type") int service_type,
+                           @Query("lat") double lat, @Query("lng") double lng
+            ,@Query("address")String address,@Query("low_price") String low_price,@Query("high_price")String high_price
+    ,@Query("teacher_version")String teacher_version);
+
+    /*
+    获取上次需求信息
+     */
+    @POST("index.php?s=/Service/Requirement/get_requirement_bylatest")
+    Call<User_Modle> getMyDemand(@Query("uid")int uid);
 
     /*
     更新需求
@@ -77,4 +92,12 @@ public interface Demand_http {
 
     @POST("index.php?s=/Service/Requirement/gets_requirement_byorder")
     Call<ContentModle> getMyReceptDemand(@Query("uid") int uid,@Query("page")int page);
+
+    @POST("index.php?s=/Service/Requirement/best_requirement_student")
+    Call<ContentModle> getBestDemand(@Query("uid")int uid,@Query("lat")String lat,@Query("lng")String lng,
+                                     @Query("province") String province, @Query("city") String city,@Query("state") String state);
+
+    @POST("index.php?s=/Service/Requirement/best_recommend_teacher")
+    Call<ContentModle> getBestTeacher(@Query("uid") int uid, @Query("lat") String lat, @Query("lng") String lng,
+                                      @Query("province") String province,@Query("city") String city,@Query("state") String state);
 }

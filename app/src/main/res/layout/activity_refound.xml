@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#fff"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -27,7 +28,7 @@
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/xuqiufenggexian"
-        android:background="#d7d7d7"
+        android:background="#ffeb51"
         android:layout_marginTop="80px"
         android:layout_below="@+id/neirongtext"
         android:layout_width="match_parent"
@@ -61,8 +62,8 @@
     <TextView
         android:id="@+id/refund_number"
         android:layout_marginTop="24px"
-        android:layout_marginRight="36px"
-        android:layout_alignParentRight="true"
+        android:layout_marginLeft="36px"
+        android:layout_toRightOf="@+id/refund_fee"
         android:layout_below="@+id/refund_stats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -80,7 +81,7 @@
         android:layout_marginTop="24px"
         android:layout_marginRight="20px"
         android:layout_toLeftOf="@+id/orderfee"
-        android:layout_below="@+id/refund_number"
+        android:layout_below="@+id/refund_stats"
         android:textSize="30px"
         android:text="总计:"
         android:layout_width="wrap_content"
@@ -94,7 +95,7 @@
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/xuqiufenggexian2"
-        android:background="#d7d7d7"
+        android:background="#ffeb51"
         android:layout_marginTop="20px"
         android:layout_below="@+id/orderfee"
         android:layout_width="match_parent"
@@ -110,16 +111,16 @@
     <TextView
         android:id="@+id/refund_orderfee"
         android:layout_below="@+id/xuqiufenggexian2"
-        android:text="$0.00"
-        android:layout_toRightOf="@+id/refund_tuikuan"
+        android:text="￥0.00"
         android:gravity="center"
         android:textColor="#f5513c"
-        android:layout_marginLeft="30px"
         android:layout_width="wrap_content"
-        android:layout_height="80px" />
+        android:layout_height="80px"
+        android:layout_alignLeft="@+id/refund_sure_btn"
+        android:layout_alignStart="@+id/refund_sure_btn" />
     <TextView
         android:id="@+id/xuqiufenggexian3"
-        android:background="#d7d7d7"
+        android:background="#ffeb51"
         android:layout_below="@+id/refund_tuikuan"
         android:layout_width="match_parent"
         android:layout_height="1px" />
@@ -139,7 +140,7 @@
         android:layout_height="60px" />
     <TextView
         android:id="@+id/xuqiufenggexian6"
-        android:background="#d7d7d7"
+        android:background="#ffeb51"
         android:layout_below="@+id/refund_choose_reason"
         android:layout_width="match_parent"
         android:layout_height="1px" />
@@ -174,7 +175,7 @@
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/xuqiufenggexian4"
-        android:background="#d7d7d7"
+        android:background="#ffeb51"
         android:layout_marginTop="30px"
         android:layout_below="@+id/refund_reason_edit"
         android:layout_width="match_parent"
@@ -195,36 +196,38 @@
         android:layout_below="@+id/refund_update"
         android:layout_width="match_parent"
         android:layout_height="150px">
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/refund_picture1"
-            android:src="@drawable/refund_camera"
+            app:placeholderImage="@drawable/refund_camera"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/refund_picture2"
-            android:src="@drawable/refund_addpic"
+            android:layout_marginLeft="30px"
+            app:placeholderImage="@drawable/refund_addpic"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/refund_picture3"
-
-            android:src="@drawable/refund_addpic"
+            android:layout_marginLeft="30px"
+            app:placeholderImage="@drawable/refund_addpic"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/refund_picture4"
-            android:src="@drawable/refund_addpic"
+            app:placeholderImage="@drawable/refund_addpic"
             android:layout_weight="1"
+            android:layout_marginLeft="30px"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
 
     </LinearLayout>
     <TextView
         android:id="@+id/xuqiufenggexian5"
-        android:background="#d7d7d7"
+        android:background="#ffeb51"
         android:layout_marginTop="30px"
         android:layout_below="@+id/refund_update_linear"
         android:layout_width="match_parent"
@@ -234,14 +237,14 @@
         android:layout_marginTop="20px"
         android:layout_below="@+id/xuqiufenggexian5"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/add15"
-        android:layout_width="556px"
-        android:layout_height="70px" >
+        android:background="@mipmap/sure_refound_btn"
+        android:layout_width="350px"
+        android:layout_height="80px" >
         <TextView
             android:textColor="#fff"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:text="确认退款"
+            android:text=""
             android:textSize="35px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100px"
+    android:background="#ffffff"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:paddingLeft="10dp">
+    <ImageView
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/add19"
+        android:layout_width="25px"
+        android:layout_height="35px" />
+    <TextView
+        android:id="@+id/demand_person_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+
+        android:text="     "
+        android:textColor="#5e5e5e"
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="需求详情"
+        android:textColor="#5e5e5e"
+        android:textSize="17sp" />
+
+</FrameLayout>

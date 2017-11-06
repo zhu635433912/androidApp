@@ -125,9 +125,45 @@ public class Teacher implements Teacher_init {
         return null;
     }
 
+
+    //获取教师详细资料
+    @Override
+    public Map<String, Object> getTeacherDetailed(String lat,String lng,int uid, int id, final Requirdetailed requirdetailed, final int ztm,int number) {
+        Call<User_Modle> call=teacher_http.getTeacherDetail(lat,lng,uid,id,number);
+        call.enqueue(new Callback<User_Modle>() {
+            @Override
+            public void onResponse(Call<User_Modle> call, Response<User_Modle> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    map = response.body().getContent();
+                    Log.e("aa", "获取教师个人信息map" + map.toString());
+                    if (ztm!=1) {
+                        requirdetailed.Updatecontent(map);
+                    }else {
+                        List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
+                        listmap.add(map);
+                        requirdetailed.Updatefee(listmap);
+                    }
+                }else {
+                    String errmsg=response.body().getErrmsg();
+                    Log.e("aa","获取教师详细资料错误="+errmsg);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User_Modle> call, Throwable t) {
+                Log.e("aa","获取教师详细资料异常错误="+t.toString());
+            }
+        });
+        return null;
+    }
+
+
+
         /*
        获取教师详细资料  ztm 1启动listview
        */
+
 
     @Override
     public Map<String, Object> Get_Teacher_detailed(int uid, int id, final Requirdetailed requirdetailed, final int ztm,int number) {
@@ -473,7 +509,7 @@ public class Teacher implements Teacher_init {
     }
 
 
-    //更新教师个人经历
+    //更新教师个人空间
     public void Teacher_exper(int uid,String exper,String exper_url){
         Call<Demtest> call = teacher_http.setExper(uid,exper,exper_url);
         call.enqueue(new Callback<Demtest>() {
@@ -519,7 +555,29 @@ public class Teacher implements Teacher_init {
 
 
     }
+    //更新教师个人图片
+    public void UpdatePic(int uid, String img1,String img2,String img3) {
+        Call<Demtest> call=teacher_http.updatePic(uid,img1,img2,img3);
+        call.enqueue(new Callback<Demtest>() {
+            @Override
+            public void onResponse(Call<Demtest> call, Response<Demtest> response) {
+                String error=response.body().getError();
+                if (error.equals("ok")){
+                    Log.e("aa","更新教师个人照片成功");
+                }else {
+                    Log.e("aa","更新教师个人照片失败");
+                }
 
+            }
+
+            @Override
+            public void onFailure(Call<Demtest> call, Throwable t) {
+                Log.e("aa","更新教师个人简介异常失败"+t.toString());
+            }
+        });
+
+
+    }
 
 
     //更新教师特长

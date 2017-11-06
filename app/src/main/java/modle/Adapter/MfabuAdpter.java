@@ -3,14 +3,16 @@ package modle.Adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.baidu.mapapi.map.MarkerOptions;
+//import com.baidu.mapapi.map.MarkerOptions;
 import com.deguan.xuelema.androidapp.R;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -68,7 +70,7 @@ public class MfabuAdpter extends BaseAdapter {
             mfabuViewHoder.statre= (TextView) convertView.findViewById(R.id.statre);
             mfabuViewHoder.fuweuleix= (TextView) convertView.findViewById(R.id.fuweuleix);
             mfabuViewHoder.fabushijian= (TextView) convertView.findViewById(R.id.fabushijian);
-            mfabuViewHoder.myinde_usertoux= (CircleImageView) convertView.findViewById(R.id.myinde_usertoux);
+            mfabuViewHoder.myinde_usertoux= (SimpleDraweeView) convertView.findViewById(R.id.myinde_usertoux);
            convertView.setTag(mfabuViewHoder);
         }else {
             convertView.getTag();
@@ -86,15 +88,15 @@ public class MfabuAdpter extends BaseAdapter {
         if (listmap.get(position).get("service_type").equals("3")) {
             mfabuViewHoder.fuweuleix.setText("第三方");
         }
-        setbitmap(listmap.get(position).get("publisher_headimg")+"",mfabuViewHoder.myinde_usertoux);
-
+//        setbitmap(listmap.get(position).get("publisher_headimg")+"",mfabuViewHoder.myinde_usertoux);
+        mfabuViewHoder.myinde_usertoux.setImageURI(Uri.parse(listmap.get(position).get("publisher_headimg")+""));
         return convertView;
     }
 
 
 
     class MfabuViewHoder{
-        private CircleImageView myinde_usertoux;
+        private SimpleDraweeView myinde_usertoux;
         private TextView myindeusername;//昵称
         private TextView  user_xuqiu;//需求科目
         private TextView  xuqiuneiron;//需求内容

@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import org.simple.eventbus.EventBus;
@@ -18,7 +19,7 @@ import modle.user_ziliao.User_id;
  * 支付完成
  */
 
-public class Payment_tureActivty extends AutoLayoutActivity implements View.OnClickListener {
+public class Payment_tureActivty extends MyBaseActivity implements View.OnClickListener {
     private Button wancheng;
 
 
@@ -55,7 +56,7 @@ public class Payment_tureActivty extends AutoLayoutActivity implements View.OnCl
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
     }

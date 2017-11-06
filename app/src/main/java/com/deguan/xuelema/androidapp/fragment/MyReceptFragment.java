@@ -6,7 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.deguan.xuelema.androidapp.DemandDetailActivity_;
 import com.deguan.xuelema.androidapp.R;
+import com.deguan.xuelema.androidapp.SearchActivity;
 import com.deguan.xuelema.androidapp.UserxinxiActivty;
 import com.deguan.xuelema.androidapp.Xuqiuxiangx;
 import com.deguan.xuelema.androidapp.entities.TuijianEntity;
@@ -63,7 +65,7 @@ import modle.user_ziliao.User_id;
  */
 
 @EFragment(R.layout.teacher_list_fragement)
-public class MyReceptFragment  extends BaseFragment implements SimilarXuqiuView, SwipeRefreshLayout.OnRefreshListener {
+public class MyReceptFragment  extends MyBaseFragment implements SimilarXuqiuView, SwipeRefreshLayout.OnRefreshListener {
 
     private List<Map<String,Object>> list=new ArrayList<>();
     private int uid;
@@ -94,13 +96,20 @@ public class MyReceptFragment  extends BaseFragment implements SimilarXuqiuView,
                 String user_id=list.get(position).get("id")+"";
                 String fee=list.get(position).get("fee")+"";
 //                Toast.makeText(getActivity(),publisher_id,Toast.LENGTH_LONG).show();
-                Intent intent=new Intent(getActivity(), Xuqiuxiangx.class);
-                intent.putExtra("publisher_id",publisher_id);
-                intent.putExtra("user_id",user_id);
-                intent.putExtra("fee",fee);
-                intent.putExtra("course_id",list.get(position).get("course_id").toString());
-                intent.putExtra("grade_id",list.get(position).get("grade_id").toString());
-                startActivity(intent);
+//                Intent intent=new Intent(getActivity(), Xuqiuxiangx.class);
+//                intent.putExtra("publisher_id",publisher_id);
+//                intent.putExtra("user_id",user_id);
+//                intent.putExtra("fee",fee);
+//                intent.putExtra("course_id",list.get(position).get("course_id").toString());
+//                intent.putExtra("grade_id",list.get(position).get("grade_id").toString());
+//                startActivity(intent);
+                startActivity(DemandDetailActivity_.intent(getActivity())
+                        .extra("user_id",user_id)
+                        .extra("fee",fee)
+                        .extra("publisher_id",publisher_id)
+                        .extra("course_id",list.get(position).get("course_id").toString())
+                        .extra("grade_id",list.get(position).get("grade_id").toString())
+                        .get());
             }
         });
 
@@ -150,7 +159,7 @@ public class MyReceptFragment  extends BaseFragment implements SimilarXuqiuView,
                 list.clear();
             }
             for (int i = 0; i < maps.size(); i++) {
-                if ((maps.get(i).get("status")).equals("1")||maps.get(i).get("status").equals("2")){
+                if (maps.get(i).get("status").equals("2")){
                     continue;
                 }
                 list.add(maps.get(i));

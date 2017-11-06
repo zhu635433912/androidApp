@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:background="#f9f8f8"
+        android:id="@+id/grade0"
+
+        android:textSize="30px"
+        android:text="不限"
+
+        android:paddingLeft="50px"
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="100px" />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+        android:background="#f9f8f8"
+        android:id="@+id/grade1"
+        android:paddingLeft="50px"
+        android:textSize="30px"
+        android:text="男"
+
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="100px" />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <TextView
+        style="@style/teacher_choose_text"
+        android:id="@+id/grade2"
+        android:text="女"
+        />
+    <View
+        android:background="#a1a0a0"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+    <View
+        android:id="@+id/pop_cancel"
+        android:background="#e0dadada"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

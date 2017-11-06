@@ -55,11 +55,11 @@
 
     <TextView
         android:layout_marginTop="38px"
-        android:layout_marginLeft="40px"
+        android:layout_marginLeft="30px"
         android:textSize="35px"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="      拍摄您的手持二代身份证原件，请确保证件清晰、四角完整"/>
+        android:text="        拍摄您的二代身份证原件，请确保证件清晰、四角完整"/>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_marginTop="30px"
@@ -81,10 +81,10 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="330px">
-                    <ImageView
+                    <com.facebook.drawee.view.SimpleDraweeView
                         android:id="@+id/teacher_pic1"
                         android:gravity="center"
-                        android:src="@mipmap/name_example2"
+                        android:padding="4px"
                         android:background="@drawable/education_image_bg"
                         android:layout_width="match_parent"
                         android:layout_height="320px" />
@@ -112,10 +112,10 @@
                         android:layout_height="330px">
 
 
-                    <ImageView
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:padding="4px"
                         android:id="@+id/teacher_pic2"
                         android:gravity="center"
-                        android:src="@mipmap/name_example1"
                         android:background="@drawable/education_image_bg"
                         android:layout_width="match_parent"
                         android:layout_height="320px" />
@@ -150,7 +150,7 @@
         <ImageView
             android:layout_marginLeft="50px"
             android:src="@mipmap/safe_icon"
-            android:layout_width="60px"
+            android:layout_width="40px"
             android:layout_height="100px" />
         <TextView
             android:gravity="center"

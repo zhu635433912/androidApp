@@ -40,6 +40,24 @@ public class RegisterEntity {
     private String user_id;
     private String has_paypassword;
     private String errmsg;
+    private String nickname;
+    private String role;
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getHas_paypassword() {
         return has_paypassword;

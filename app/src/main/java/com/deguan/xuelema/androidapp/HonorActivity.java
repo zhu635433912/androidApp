@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -19,14 +20,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.deguan.xuelema.androidapp.init.Requirdetailed;
 import com.deguan.xuelema.androidapp.init.Student_init;
+import com.deguan.xuelema.androidapp.utils.EaseCommonUtils;
 import com.deguan.xuelema.androidapp.utils.MyBaseActivity;
+import com.deguan.xuelema.androidapp.utils.PathUtil;
 import com.deguan.xuelema.androidapp.utils.PhotoBitmapUtils;
-import com.hyphenate.chat.EMClient;
-import com.hyphenate.easeui.utils.EaseCommonUtils;
-import com.hyphenate.util.PathUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
@@ -35,6 +36,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import jiguang.chat.utils.CommonUtils;
 import kr.co.namee.permissiongen.PermissionGen;
 import modle.Teacher_Modle.Teacher;
 import modle.user_Modle.User_Realization;
@@ -54,9 +56,9 @@ public class HonorActivity extends MyBaseActivity implements View.OnClickListene
     @ViewById(R.id.honor_delete2)
     ImageView delImage2;
     @ViewById(R.id.honor_image1)
-    ImageView honorImage1;
+    SimpleDraweeView honorImage1;
     @ViewById(R.id.honor_image2)
-    ImageView honorImage2;
+    SimpleDraweeView honorImage2;
     @ViewById(R.id.honor_save)
     TextView saveTv;
 
@@ -201,20 +203,37 @@ public class HonorActivity extends MyBaseActivity implements View.OnClickListene
         }
         startActivityForResult(intent, REQUEST_CODE_LOCAL);
     }
+    public static final String CROP_FILE_NAME = "crop_file.jpg";
 
+    /**
+     * 构建uri
+     *
+     * @param activity
+     * @return
+     */
+    private Uri buildUri(Activity activity) {
+        if (CommonUtils.checkSDCard()) {
+            return Uri.fromFile(Environment.getExternalStorageDirectory()).buildUpon().appendPath(CROP_FILE_NAME).build();
+        } else {
+            return Uri.fromFile(activity.getCacheDir()).buildUpon().appendPath(CROP_FILE_NAME).build();
+        }
+    }
+    String mFilePath;
     /**
      * capture new image
      */
-    protected void selectPicFromCamera() {
+    public void selectPicFromCamera() {
+        mFilePath = Environment.getExternalStorageDirectory().getPath();// 获取SD卡路径
+        mFilePath = mFilePath + "/"+ User_id.getUid()
+                + System.currentTimeMillis() + ".jpg";// 指定路径
         if (!EaseCommonUtils.isSdcardExist()) {
-            Toast.makeText(this, com.hyphenate.easeui.R.string.sd_card_does_not_exist, Toast.LENGTH_SHORT).show();
             return;
         }
-
-        cameraFile = new File(PathUtil.getInstance().getImagePath(), EMClient.getInstance().getCurrentUser()
-                + System.currentTimeMillis() + ".jpg");
+        cameraFile = new File( mFilePath);
+//        cameraFile = new File(PathUtil.getInstance().getImagePath(), User_id.getUid()
+//                + System.currentTimeMillis() + ".jpg");
         //noinspection ResultOfMethodCallIgnored
-        cameraFile.getParentFile().mkdirs();
+//        cameraFile.getParentFile().mkdirs();
         startActivityForResult(
                 new Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(cameraFile)),
                 REQUEST_CODE_CAMERA);
@@ -257,9 +276,6 @@ public class HonorActivity extends MyBaseActivity implements View.OnClickListene
             cursor = null;
 
             if (picturePath == null || picturePath.equals("null")) {
-                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
                 return;
             }
             String filepath = PhotoBitmapUtils.amendRotatePhoto(picturePath,this);
@@ -268,9 +284,6 @@ public class HonorActivity extends MyBaseActivity implements View.OnClickListene
         } else {
             File file = new File(selectedImage.getPath());
             if (!file.exists()) {
-                Toast toast = Toast.makeText(this, com.hyphenate.easeui.R.string.cant_find_pictures, Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
                 return;
 
             }
@@ -290,12 +303,16 @@ public class HonorActivity extends MyBaseActivity implements View.OnClickListene
         if (flag == 1){
             teacher.Teacher_update3(Integer.parseInt(User_id.getUid()), listmap.get(0).get("imageurl")+"");
             other_1 = listmap.get(0).get("imageurl")+"";
-            Glide.with(getApplicationContext()).load(listmap.get(0).get("imageurl")+"").into(honorImage1);
+//            Glide.with(getApplicationContext()).load(listmap.get(0).get("imageurl")+"").
+//                    into(honorImage1);
+            honorImage1.setImageURI(Uri.parse(listmap.get(0).get("imageurl")+""));
             addImage1.setVisibility(View.GONE);
         }else {
             other_2 = listmap.get(0).get("imageurl")+"";
             teacher.Teacher_update4(Integer.parseInt(User_id.getUid()), listmap.get(0).get("imageurl")+"");
-            Glide.with(getApplicationContext()).load(listmap.get(0).get("imageurl")).into(honorImage2);
+//            Glide.with(getApplicationContext()).load(listmap.get(0).get("imageurl")).
+//                    into(honorImage2);
+            honorImage2.setImageURI(Uri.parse(listmap.get(0).get("imageurl")+""));
             addImage2.setVisibility(View.GONE);
         }
         Toast.makeText(this,"更新成功",Toast.LENGTH_LONG).show();
@@ -306,7 +323,8 @@ public class HonorActivity extends MyBaseActivity implements View.OnClickListene
     public void Updatecontent(Map<String, Object> map) {
         if (!TextUtils.isEmpty(map.get("others_3")+"")){
             other_1 = map.get("others_3")+"";
-            Glide.with(getApplicationContext()).load(map.get("others_3")+"").into(honorImage1);
+//            Glide.with(getApplicationContext()).load(map.get("others_3")+"").into(honorImage1);
+            honorImage1.setImageURI(Uri.parse(map.get("others_3")+""));
             addImage1.setVisibility(View.GONE);
             if (map.get("is_passed").equals("1")){
                 delImage1.setVisibility(View.GONE);
@@ -319,7 +337,8 @@ public class HonorActivity extends MyBaseActivity implements View.OnClickListene
         }
         if (!TextUtils.isEmpty(map.get("others_4")+"")){
             other_2 = map.get("others_4")+"";
-            Glide.with(getApplicationContext()).load(map.get("others_4")+"").into(honorImage2);
+            honorImage2.setImageURI(Uri.parse(map.get("others_4")+""));
+//            Glide.with(getApplicationContext()).load(map.get("others_4")+"").into(honorImage2);
             addImage2.setVisibility(View.GONE);
             if (map.get("is_passed").equals("1")){
                 delImage2.setVisibility(View.GONE);

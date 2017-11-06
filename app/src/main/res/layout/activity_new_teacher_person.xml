@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    tools:context="com.deguan.xuelema.androidapp.NewTeacherPersonActivity">
+    <com.deguan.xuelema.androidapp.viewimpl.FlexibleScrollView
+        android:id="@+id/flexible_scroll_vew"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadingEdge="none"
+        android:background="#ffffff"
+        android:fadingEdgeLength="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:background="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <include
+                android:id="@+id/flexible_header_view"
+                layout="@layout/flexible_header_layout" />
+
+            <TextView
+                android:id="@+id/teacher_time_tv"
+                android:textColor="#505050"
+                android:layout_marginLeft="50px"
+                android:layout_marginRight="50px"
+                android:layout_marginTop="30px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+            android:text="课程时间：  周一到周五16:00-20:00\n        周末9:00-19:00"
+            />
+
+            <LinearLayout
+                android:layout_marginLeft="50px"
+                android:layout_marginRight="50px"
+                android:layout_marginTop="30px"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textSize="30px"
+                    android:textColor="#696969"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="课程列表" />
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/teacher_course_more"
+                    android:textSize="30px"
+                    android:textColor="#696969"
+                    android:layout_gravity="right"
+                    android:text="更多>>"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <View
+                android:visibility="gone"
+                android:id="@+id/course_line1"
+                android:layout_marginTop="30px"
+                android:layout_marginLeft="50px"
+                android:layout_marginRight="50px"
+                android:background="#ece25e"
+                android:layout_width="match_parent"
+                android:layout_height="1px" />
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/teacher_one_ll"
+                android:layout_marginTop="25px"
+                android:layout_marginLeft="80px"
+                android:layout_marginRight="100px"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50px">
+                <ImageView
+                    android:layout_gravity="center"
+                    android:src="@mipmap/teacher_red_circle"
+                    android:layout_width="25px"
+                    android:layout_height="25px" />
+
+                <TextView
+                    android:id="@+id/teacher_one_course"
+                    android:layout_width="0px"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="数学     小学"
+                    android:textSize="30px" />
+
+                <TextView
+                    android:id="@+id/teacher_one_fee"
+                    android:textColor="#ff1245"
+                    android:gravity="center_vertical"
+                    android:text="100元/小时"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:visibility="gone"
+                android:id="@+id/course_line2"
+                android:layout_marginTop="25px"
+                android:layout_marginLeft="50px"
+                android:layout_marginRight="50px"
+                android:background="#ece25e"
+                android:layout_width="match_parent"
+                android:layout_height="1px" />
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/teacher_two_ll"
+                android:layout_marginTop="25px"
+                android:layout_marginLeft="80px"
+                android:layout_marginRight="100px"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50px">
+                <ImageView
+                    android:layout_gravity="center"
+                    android:src="@mipmap/teacher_red_circle"
+                    android:layout_width="25px"
+                    android:layout_height="25px" />
+                <TextView
+                    android:id="@+id/teacher_two_course"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+
+                    android:textSize="30px"
+                    android:layout_marginLeft="30px"
+                    android:gravity="center_vertical"
+                    android:text="数学   小学" />
+                <TextView
+                    android:id="@+id/teacher_two_fee"
+                    android:textColor="#ff1245"
+                    android:gravity="center_vertical"
+                    android:text="100元/小时"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:id="@+id/course_line3"
+                android:visibility="gone"
+                android:layout_marginTop="25px"
+                android:layout_marginLeft="50px"
+                android:layout_marginRight="50px"
+                android:background="#ece25e"
+                android:layout_width="match_parent"
+                android:layout_height="1px" />
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/teacher_three_ll"
+                android:layout_marginTop="25px"
+                android:layout_marginLeft="80px"
+                android:layout_marginRight="100px"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="50px">
+                <ImageView
+                    android:layout_gravity="center"
+                    android:src="@mipmap/teacher_red_circle"
+                    android:layout_width="25px"
+                    android:layout_height="25px" />
+                <TextView
+                    android:id="@+id/teacher_three_course"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:textSize="30px"
+                    android:layout_marginLeft="30px"
+                    android:gravity="center_vertical"
+                    android:text="数学   小学" />
+                <TextView
+                    android:id="@+id/teacher_three_fee"
+                    android:textColor="#ff1245"
+                    android:gravity="center_vertical"
+                    android:text="100元/小时"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_marginTop="25px"
+                android:background="#bfbfbf"
+                android:layout_width="match_parent"
+                android:layout_height="1px" />
+            <RelativeLayout
+                android:layout_marginLeft="50px"
+                android:layout_marginRight="50px"
+                android:layout_width="match_parent"
+                android:layout_height="150px">
+                <LinearLayout
+                    android:id="@+id/imagetubiao"
+                    android:layout_width="680px"
+                    android:layout_height="80px"
+                    android:layout_below="@+id/gerxxneirong"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10px">
+
+                    <ImageView
+                        android:layout_width="50px"
+                        android:layout_height="50px"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/hly28" />
+
+                    <ImageView
+                        android:layout_width="50px"
+                        android:layout_height="50px"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/hly57" />
+
+                    <ImageView
+                        android:layout_width="50px"
+                        android:layout_height="50px"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:src="@drawable/hly47" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="680px"
+                    android:layout_height="50px"
+                    android:layout_below="@+id/imagetubiao"
+                    android:layout_centerHorizontal="true">
+
+                    <TextView
+                        android:textColor="#505050"
+                        android:id="@+id/teacher_year_tv"
+                        android:layout_width="110px"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+
+                        android:textSize="30px" />
+                    <!--android:text="七年教龄"-->
+                    <TextView
+                        android:textColor="#505050"
+                        android:id="@+id/user_card_pass"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="身份认证"
+                        android:textSize="30px" />
+
+                    <TextView
+                        android:textColor="#505050"
+                        android:id="@+id/user_education_pass"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="学历认证"
+                        android:textSize="30px" />
+                </LinearLayout>
+
+            </RelativeLayout>
+            <View
+                android:layout_marginTop="5px"
+                android:background="#bfbfbf"
+                android:layout_width="match_parent"
+                android:layout_height="1px" />
+            <TextView
+                android:id="@+id/teacher_school_tv"
+                android:layout_marginTop="26px"
+                android:layout_marginLeft="50px"
+                android:layout_marginRight="50px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30px"
+                android:textColor="#505050"/>
+                <!--android:text="毕业院校:             浙江师范大学       本科" />-->
+
+            <TextView
+                android:id="@+id/teacher_like_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50px"
+                android:layout_marginRight="50px"
+                android:textSize="30px"
+                android:layout_marginTop="26px"
+                android:lineSpacingExtra="15px"
+                android:textColor="#505050" />
+            <!--android:text="兴趣爱好: 唱歌、k歌、听音乐、看电影、看韩剧、看综艺娱乐节目、看书、看小说、看杂志。"-->
+            <TextView
+                android:layout_marginTop="20px"
+                android:id="@+id/teacher_address_tv"
+                android:gravity="center"
+                android:layout_marginLeft="50px"
+                android:layout_gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="28px" />
+            <View
+                android:layout_marginTop="24px"
+                android:background="#ece25e"
+                android:layout_width="match_parent"
+                android:layout_height="1px" />
+            <LinearLayout
+                android:id="@+id/teacher_star_ll"
+                android:layout_marginTop="30px"
+                android:layout_marginLeft="50px"
+                android:layout_marginRight="50px"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="#505050"
+                    android:textSize="30px"
+                    android:text="星级评价"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <ImageView
+                    android:id="@+id/teacher_star_image"
+                    android:layout_gravity="center"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    android:layout_height="35px" />
+                <TextView
+                    android:id="@+id/teacher_star_tv"
+                    android:textColor="#505050"
+                    android:textSize="30px"
+                    android:layout_marginRight="30px"
+                    android:text="       >"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="30px"
+                android:layout_width="match_parent"
+                android:layout_height="80px"
+                android:textSize="32px"
+                android:background="#e9db95"
+                android:gravity="center_vertical"
+                android:paddingLeft="50px"
+                android:text="个人简介" />
+
+            <TextView
+                android:id="@+id/teacher_simple_tv"
+                android:layout_marginTop="15px"
+                android:layout_marginLeft="45px"
+                android:layout_marginRight="45px"
+                android:lineSpacingExtra="12px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+            />
+            <!--android:text="         个人简介。是hi发起人放弃大hi殴打hi哦啊是地哦啊手机哦大家会死哦打灰机票暑假活动沙嗲季后赛地阿基活动你啊" />-->
+
+            <LinearLayout
+                android:layout_marginTop="30px"
+                android:layout_marginLeft="45px"
+                android:layout_marginRight="45px"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="200px">
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/teacher_zone_image1"
+                    android:layout_width="0px"
+                    android:layout_weight="1"
+                    app:actualImageScaleType="focusCrop"
+                    android:layout_height="match_parent" />
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/teacher_zone_image2"
+                    android:layout_width="0px"
+                    app:actualImageScaleType="focusCrop"
+                    android:layout_marginLeft="20px"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent" />
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/teacher_zone_image3"
+                    android:layout_width="0px"
+                    app:actualImageScaleType="focusCrop"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="20px"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+            <View
+                android:layout_marginTop="24px"
+                android:background="#ece25e"
+                android:layout_width="match_parent"
+                android:layout_height="1px" />
+            <TextView
+                android:layout_marginTop="20px"
+                android:layout_marginLeft="60px"
+                android:text="教学案例"
+                android:textSize="35px"
+                android:textColor="#505050"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="60px"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/teacher_example_course"
+                    android:layout_marginTop="20px"
+                    android:layout_marginLeft="60px"
+
+                    android:textSize="25px"
+                    android:textColor="#b6b6b6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <!--android:text="2017-10-6   语文"-->
+                <TextView
+                    android:id="@+id/teacher_example_more"
+                    android:layout_marginTop="20px"
+                    android:layout_marginLeft="60px"
+                    android:text="更多>>"
+                    android:textSize="32px"
+                    android:gravity="right"
+                    android:textColor="#505050"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/teacher_example_content"
+                android:layout_marginTop="20px"
+                android:layout_marginLeft="60px"
+                android:layout_marginRight="60px"
+                android:layout_marginBottom="160px"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:lineSpacingExtra="12px"
+                android:textSize="30px"
+                android:textColor="#505050"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <!--android:text="      杜桥我不会打穷我dwqdqwdqdqw会比的确会定期会很多吧去位我会定期或DQUI维护地区为雄厚的"-->
+
+        </LinearLayout>
+
+
+
+</com.deguan.xuelema.androidapp.viewimpl.FlexibleScrollView>
+    <include
+        android:id="@+id/custom_action_bar"
+        layout="@layout/action_bar_layout" />
+    <ImageButton
+        android:layout_marginBottom="10px"
+        android:layout_marginLeft="20px"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/hly33"
+        android:layout_width="80px"
+        android:layout_height="80px"
+        android:id="@+id/imageButton" />
+
+    <ImageButton
+        android:id="@+id/bohao"
+        android:layout_marginRight="20px"
+        android:layout_marginBottom="10px"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/hly44"
+        android:layout_width="80px"
+        android:layout_height="80px" />
+
+    <ImageButton
+        android:background="@drawable/hly02"
+        android:layout_width="320px"
+        android:layout_height="100px"
+        android:layout_alignTop="@+id/imageButton"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/imageButton2" />
+</RelativeLayout>
